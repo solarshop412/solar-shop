@@ -10,11 +10,13 @@ import { reducers, metaReducers } from './reducers';
 import { provideLottieOptions } from 'ngx-lottie';
 import { playerFactory } from './shared/models/components/loader/loader.component';
 import { environment } from '../environments/environment';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
     provideStore(reducers, { metaReducers }),
     provideEffects([AuthEffects]),
     provideStoreDevtools({

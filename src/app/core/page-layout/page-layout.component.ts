@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { State } from '../../../reducers';
-import { HomeComponent } from "../../../features/home/home.component";
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { HomeComponent } from '../../features/home/home.component';
+import { State } from '../../root/root.state';
 
 @Component({
   selector: 'page-layout',

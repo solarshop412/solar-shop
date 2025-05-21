@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +24,7 @@ export class CookieService {
         return '';
     }
 
-    hasCookie(cookieName: string): any {
+    hasCookie(cookieName: string): Observable<boolean> {
         const hasCookie = !!this.getCookie(cookieName);
         return of(hasCookie);
     }
@@ -51,7 +51,7 @@ export class CookieService {
 
 
     clear(cookieName: string): void {
-        if (this.hasCookie(cookieName)) {
+        if (this.getCookie(cookieName)) {
             const expires = `expires=${new Date().toUTCString()}`;
             this.document.cookie = `${encodeURIComponent(cookieName)}=${''}; ${expires}`;
         }

@@ -5,7 +5,7 @@ import { ForgotPasswordComponent } from './core/auth/components/forgot-password/
 import { LoginComponent } from './core/auth/components/login/login.component';
 import { ResetPasswordComponent } from './core/auth/components/reset-password/reset-password.component';
 import { LoginGuard } from './core/auth/guards/login.guard';
-import { PageLayoutComponent } from './core/auth/page-layout/page-layout.component';
+import { PageLayoutComponent } from './core/page-layout/page-layout.component';
 
 export const routes: Routes = [
     {

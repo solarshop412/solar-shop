@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import * as AuthActions from '../../core/auth/store/auth.actions';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +15,5 @@ import * as AuthActions from '../../core/auth/store/auth.actions';
   `,
 })
 export class HomeComponent {
-  constructor(private store: Store) { }
 
-  logout() {
-    this.store.dispatch(AuthActions.logout());
-  }
 } 
