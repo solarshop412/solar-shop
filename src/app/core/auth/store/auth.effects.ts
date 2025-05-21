@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthEffects {
     constructor(
-        private readonly actions$: Actions,
+        private actions$: Actions,
         private authService: AuthService,
         private cookieService: CookieService,
         private router: Router

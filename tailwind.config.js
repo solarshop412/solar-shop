@@ -14,6 +14,7 @@ module.exports = {
         "second-bg": "#f4f4f4",
         "main-fg": "#0a2541",
         "second-fg": "#5D65FF",
+        "selection": "#373DACFF",
         "success": "#4BCF4B",
         "warning": "#ffcc00",
         "error": "#F8546A",
