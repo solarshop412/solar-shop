@@ -1,0 +1,56 @@
+<div class="flex justify-center items-center w-full h-dvh bg-main-bg" *ngIf="loading$ | async; else loginForm">
+    <app-loader class="h-24 w-dvw"></app-loader>
+</div>
+<ng-template #loginForm>
+    <div class="flex h-screen bg-main-bg font-sans">
+        <!-- Login form -->
+        <div class="w-2/5 bg-main-bg flex items-center justify-center p-2 flex-col">
+            <div class="flex flex-col w-3/5 justify-start">
+                <h2 class="text-3xl font-bold mb-6 text-black text-opacity-80">Sign in</h2>
+                <div class="flex items-center justify-between mb-8 w-2/3">
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="mr-3">Don't have an account?</div>
+                        <a class="text-second-fg hover:text-selection" routerLink="signup">Sign up</a>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm mb-2" for="email">
+                        Email address*
+                    </label>
+                    <input #emailInput
+                        class="shadow-sm appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
+                        id="email" type="text" placeholder="Email address">
+                </div>
+                <div class="mb-6">
+                    <div class="mb-4 relative">
+                        <label class="block text-sm mb-2" for="password">
+                            Password*
+                        </label>
+                        <input #passwordInput [type]="showPassword ? 'text' : 'password'"
+                            class="shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 text-sm mb-3 leading-tight focus:outline-none focus:shadow-outline pr-10"
+                            id="password">
+                        <!-- <ng-icon [name]="showPassword ? 'iconoirEye' : 'iconoirEyeClosed'" name="iconoirEyeClosed"
+                            class="text-second-fg hover:text-selection absolute right-3 top-1/2 cursor-pointer"
+                            size="22" (click)="showPassword = !showPassword"></ng-icon> -->
+                    </div>
+                    <div class="text-right">
+                        <a class="text-second-fg hover:text-selection text-xs"
+                            [routerLink]="['/forgot-password']">Forgot
+                            password?</a>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button
+                        class="bg-second-fg hover:bg-selection btn btn-l font-medium text-white py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
+                        (click)="onSignIn(emailInput.value, passwordInput.value)">
+                        Sign in
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Image -->
+        <div class=" bg-selection w-3/5 flex items-center justify-center">
+            <img class="h-1/2" src="./assets/confirmation.svg" alt="login image">
+        </div>
+    </div>
+</ng-template>
