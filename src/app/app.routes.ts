@@ -10,8 +10,9 @@ import { PageLayoutComponent } from './core/page-layout/page-layout.component';
 export const routes: Routes = [
     {
         path: '', component: PageLayoutComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         children: [
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             // { path: 'purchase-orders', loadChildren: () => import('./features/purchase-orders').then(m => m.PURCHASE_ORDER_ROUTES) },
             // { path: 'budgets', loadChildren: () => import('./features/budgets').then(m => m.BUDGETS_ORDER_ROUTES) },

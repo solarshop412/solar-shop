@@ -19,10 +19,37 @@ module.exports = {
         "warning": "#ffcc00",
         "error": "#F8546A",
         "info": "#5D65FF",
+        // HeyHome brand colors from Figma
+        "heyhome": {
+          "primary": "#0ACF83",
+          "primary-dark": "#09b574",
+          "dark-green": "#0A3430",
+          "medium-green": "#1C3E3B",
+          "light-green": "#0B8F5C",
+          "darker-green": "#044741",
+          "cream": "#FFFAF1",
+          "italian-green": "#009246",
+          "italian-red": "#CE2B37",
+        }
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
-      },      
+        'dm-sans': ["DM Sans", "sans-serif"],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
     },
   },
   variants: {
