@@ -2,11 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { HomeComponent } from '../../features/home/home.component';
+import { CommonModule } from '@angular/common';
 import { State } from '../../root/root.state';
-import { NavbarComponent } from "../../features/navbar/navbar.component";
-import { FooterComponent } from "../../features/footer/footer.component";
+import { NavbarComponent } from '../../features/b2c/navbar/navbar.component';
+import { FooterComponent } from '../../features/b2c/footer/footer.component';
 
 @Component({
   selector: 'page-layout',

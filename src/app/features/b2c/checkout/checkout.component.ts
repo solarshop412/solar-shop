@@ -1,0 +1,158 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as CartSelectors from '../cart/store/cart.selectors';
+import * as CartActions from '../cart/store/cart.actions';
+import { CartItem, CartSummary } from '../../../shared/models/cart.model';
+
+@Component({
+  selector: 'app-checkout',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  template: `
+    <div class="min-h-screen bg-gray-50">
+      <!-- Header -->
+      <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">Checkout</h1>
+          <p class="mt-2 text-gray-600 font-['DM_Sans']">Complete your order</p>
+        </div>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex items-center justify-center mb-8">
+          <div class="flex items-center space-x-8">
+            <!-- Step 1: Order Review -->
+            <div class="flex items-center space-x-2">
+              <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0ACF83] text-white text-sm font-semibold">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Order Review</span>
+            </div>
+
+            <!-- Connector Line -->
+            <div class="w-16 h-px bg-gray-300"></div>
+
+            <!-- Step 2: Shipping -->
+            <div class="flex items-center space-x-2">
+              <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0ACF83] text-white text-sm font-semibold">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Shipping</span>
+            </div>
+
+            <!-- Connector Line -->
+            <div class="w-16 h-px bg-gray-300"></div>
+
+            <!-- Step 3: Payment -->
+            <div class="flex items-center space-x-2">
+              <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-[#324053] bg-white">
+                <div class="w-3 h-3 rounded-full bg-[#324053]"></div>
+              </div>
+              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Payment</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkout Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Main Content -->
+          <div class="lg:col-span-2">
+            <router-outlet></router-outlet>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 font-['Poppins']">Order Summary</h3>
+              
+              <!-- Cart Items -->
+              <div class="space-y-4 mb-6">
+                <div 
+                  *ngFor="let item of cartItems$ | async; trackBy: trackByItemId"
+                  class="flex items-center space-x-3"
+                >
+                  <img 
+                    [src]="item.image" 
+                    [alt]="item.name"
+                    class="w-12 h-12 object-cover rounded-lg bg-gray-100"
+                  >
+                  <div class="flex-1 min-w-0">
+                    <h4 class="text-sm font-medium text-gray-900 truncate font-['DM_Sans']">{{ item.name }}</h4>
+                    <p class="text-sm text-gray-500 font-['DM_Sans']">x{{ item.quantity }}</p>
+                  </div>
+                  <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">
+                    {{ (item.price * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t border-gray-200 mb-4"></div>
+
+              <!-- Summary -->
+              <div class="space-y-2 text-sm mb-4">
+                <div class="flex justify-between">
+                  <span class="text-gray-600 font-['DM_Sans']">Subtotal</span>
+                  <span class="font-['DM_Sans']">{{ (cartSummary$ | async)?.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600 font-['DM_Sans']">Tax</span>
+                  <span class="font-['DM_Sans']">{{ (cartSummary$ | async)?.tax | currency:'EUR':'symbol':'1.2-2' }}</span>
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t border-gray-200 mb-4"></div>
+
+              <!-- Total -->
+              <div class="flex justify-between text-lg font-semibold">
+                <span class="font-['DM_Sans']">Total</span>
+                <span class="font-['DM_Sans']">{{ (cartSummary$ | async)?.total | currency:'EUR':'symbol':'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  styles: [`
+    /* Custom font loading */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+  `]
+})
+export class CheckoutComponent implements OnInit {
+  private store = inject(Store);
+  private router = inject(Router);
+
+  cartItems$: Observable<CartItem[]>;
+  cartSummary$: Observable<CartSummary | null>;
+
+  constructor() {
+    this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
+    this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
+  }
+
+  ngOnInit() {
+    // Load cart data
+    this.store.dispatch(CartActions.loadCart());
+
+    // Check if cart is empty and redirect if needed
+    this.store.select(CartSelectors.selectIsCartEmpty).subscribe(isEmpty => {
+      if (isEmpty) {
+        this.router.navigate(['/products']);
+      }
+    });
+  }
+
+  trackByItemId(index: number, item: CartItem): string {
+    return item.id;
+  }
+} 

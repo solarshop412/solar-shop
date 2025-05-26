@@ -6,8 +6,9 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { AuthEffects } from './core/auth/store/auth.effects';
-import { ProductListEffects } from './features/products/product-list/store/product-list.effects';
-import { ProductDetailsEffects } from './features/products/product-details/store/product-details.effects';
+import { ProductListEffects } from './features/b2c/products/product-list/store/product-list.effects';
+import { ProductDetailsEffects } from './features/b2c/products/product-details/store/product-details.effects';
+import { CartEffects } from './features/b2c/cart/store/cart.effects';
 import { reducers, metaReducers } from './reducers';
 import { provideLottieOptions } from 'ngx-lottie';
 import { playerFactory } from './shared/models/components/loader/loader.component';
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideStore(reducers, { metaReducers }),
-    provideEffects([AuthEffects, ProductListEffects, ProductDetailsEffects]),
+    provideEffects([AuthEffects, ProductListEffects, ProductDetailsEffects, CartEffects]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
