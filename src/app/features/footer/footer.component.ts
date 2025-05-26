@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FooterActions } from './store/footer.actions';
-import { selectFooterData, selectIsLoading } from './store/footer.selectors';
+import { selectFooterData } from './store/footer.selectors';
 
 export interface FooterLink {
   label: string;
@@ -205,11 +205,6 @@ export interface FooterData {
           </div>
         </div>
       </div>
-
-      <!-- Loading State -->
-      <div *ngIf="isLoading$ | async" class="absolute inset-0 bg-black/50 flex justify-center items-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#0ACF83] border-t-transparent"></div>
-      </div>
     </footer>
   `,
   styles: [`
@@ -222,12 +217,10 @@ export class FooterComponent implements OnInit {
   private store = inject(Store);
 
   footerData$: Observable<FooterData | null>;
-  isLoading$: Observable<boolean>;
   currentYear = new Date().getFullYear();
 
   constructor() {
     this.footerData$ = this.store.select(selectFooterData);
-    this.isLoading$ = this.store.select(selectIsLoading);
   }
 
   ngOnInit(): void {

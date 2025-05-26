@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HomeComponent } from '../../features/home/home.component';
 import { State } from '../../root/root.state';
+import { NavbarComponent } from "../../features/navbar/navbar.component";
+import { FooterComponent } from "../../features/footer/footer.component";
 
 @Component({
   selector: 'page-layout',
   templateUrl: './page-layout.component.html',
   styleUrls: ['./page-layout.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeComponent],
+  imports: [CommonModule, RouterModule, NavbarComponent, FooterComponent],
 })
 export class PageLayoutComponent implements OnInit, OnDestroy {
   title = 'Purchase Panda';

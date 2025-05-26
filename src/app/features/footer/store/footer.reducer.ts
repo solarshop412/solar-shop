@@ -6,18 +6,15 @@ export const footerReducer = createReducer(
     initialFooterState,
     on(FooterActions.loadFooterData, (state) => ({
         ...state,
-        isLoading: true,
         error: null,
     })),
     on(FooterActions.loadFooterDataSuccess, (state, { data }) => ({
         ...state,
         data,
-        isLoading: false,
         error: null,
     })),
     on(FooterActions.loadFooterDataFailure, (state, { error }) => ({
         ...state,
-        isLoading: false,
         error,
     })),
     on(FooterActions.subscribeNewsletter, (state) => ({

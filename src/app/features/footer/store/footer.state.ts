@@ -2,7 +2,6 @@ import { FooterData } from '../footer.component';
 
 export interface FooterState {
     data: FooterData | null;
-    isLoading: boolean;
     error: string | null;
     newsletterSubscriptionStatus: 'idle' | 'loading' | 'success' | 'error';
     newsletterMessage: string | null;
@@ -34,11 +33,10 @@ export const initialFooterState: FooterState = {
             {
                 title: 'Company',
                 links: [
-                    { label: 'About Us', url: '/company/about-us' },
-                    { label: 'Our Mission', url: '/company/mission' },
-                    { label: 'Sustainability', url: '/company/sustainability' },
-                    { label: 'Careers', url: '/company/careers' },
-                    { label: 'News & Events', url: '/company/news-events' },
+                    { label: 'About Us', url: '/company' },
+                    { label: 'Our Mission', url: '/mission' },
+                    { label: 'Offers & Promotions', url: '/offers' },
+                    { label: 'Blog & Guides', url: '/blog' },
                     { label: 'Contact', url: '/contact' },
                 ]
             }
@@ -76,7 +74,6 @@ export const initialFooterState: FooterState = {
             description: 'Get the latest news on sustainable products, energy efficiency tips and exclusive offers.'
         }
     },
-    isLoading: false,
     error: null,
     newsletterSubscriptionStatus: 'idle',
     newsletterMessage: null,

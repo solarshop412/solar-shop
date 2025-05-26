@@ -13,6 +13,10 @@ import { offersReducer } from '../features/offers/store/offers.reducer';
 import { OffersState } from '../features/offers/store/offers.state';
 import { productsReducer } from '../features/products/store/products.reducer';
 import { ProductsState } from '../features/products/store/products.state';
+import { productListReducer } from '../features/products/product-list/store/product-list.reducer';
+import { ProductListState } from '../features/products/product-list/store/product-list.reducer';
+import { productDetailsReducer } from '../features/products/product-details/store/product-details.reducer';
+import { ProductDetailsState } from '../features/products/product-details/store/product-details.reducer';
 import { sustainabilityReducer } from '../features/sustainability/store/sustainability.reducer';
 import { SustainabilityState } from '../features/sustainability/store/sustainability.state';
 import { blogReducer } from '../features/blog/store/blog.reducer';
@@ -26,6 +30,8 @@ export interface State {
   hero: HeroState;
   offers: OffersState;
   products: ProductsState;
+  productList: ProductListState;
+  productDetails: ProductDetailsState;
   sustainability: SustainabilityState;
   blog: BlogState;
   footer: FooterState;
@@ -37,6 +43,8 @@ export const reducers: ActionReducerMap<State> = {
   hero: heroReducer,
   offers: offersReducer,
   products: productsReducer,
+  productList: productListReducer,
+  productDetails: productDetailsReducer,
   sustainability: sustainabilityReducer,
   blog: blogReducer,
   footer: footerReducer,

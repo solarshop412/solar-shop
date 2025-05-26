@@ -2,7 +2,6 @@ import { SustainabilityFeature } from '../sustainability.component';
 
 export interface SustainabilityState {
     features: SustainabilityFeature[];
-    isLoading: boolean;
     error: string | null;
 }
 
@@ -37,6 +36,5 @@ export const initialSustainabilityState: SustainabilityState = {
             color: 'linear-gradient(135deg, #FF9800 0%, #FFB74D 100%)'
         }
     ],
-    isLoading: false,
     error: null,
 }; 

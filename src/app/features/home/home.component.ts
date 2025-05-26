@@ -11,15 +11,13 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, HeroComponent, OffersComponent, SustainabilityComponent, ProductsComponent, BlogComponent, FooterComponent],
+  imports: [CommonModule, HeroComponent, OffersComponent, SustainabilityComponent, ProductsComponent, BlogComponent],
   template: `
-    <app-navbar></app-navbar>
     <app-hero></app-hero>
     <app-offers></app-offers>
     <app-sustainability></app-sustainability>
     <app-products></app-products>
     <app-blog></app-blog>
-    <app-footer></app-footer>
   `,
 })
 export class HomeComponent {

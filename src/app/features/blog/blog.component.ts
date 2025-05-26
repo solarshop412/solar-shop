@@ -1,9 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { BlogActions } from './store/blog.actions';
-import { selectBlogPosts, selectIsLoading } from './store/blog.selectors';
 
 export interface BlogPost {
   id: string;
@@ -26,177 +22,266 @@ export interface BlogPost {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <!-- Blog Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-      <div class="max-w-7xl mx-auto">
-        <!-- Section Header -->
-        <div class="text-center mb-16">
-          <h2 class="text-4xl lg:text-5xl font-bold text-heyhome-dark-green font-['Poppins'] mb-4">
-            Blog & Insights
-          </h2>
-          <p class="text-xl text-gray-600 max-w-3xl mx-auto font-['DM_Sans']">
-            Discover the latest news, tips and insights on sustainable construction and energy efficiency
-          </p>
-        </div>
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-green-600 to-green-800 text-white py-20 px-4 md:px-8 lg:px-32">
+      <div class="max-w-6xl mx-auto text-center">
+        <h1 class="font-['Poppins'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
+          Blog & Guide
+        </h1>
+        <p class="font-['DM_Sans'] text-base md:text-lg max-w-4xl mx-auto opacity-80 leading-relaxed">
+          Benvenuto nella sezione Blog & Guide di HeyHome, il tuo punto di riferimento per approfondimenti, consigli pratici e informazioni utili su edilizia, impiantistica, soluzioni energetiche e sostenibilità. Qui troverai contenuti pensati per aiutarti a scegliere i prodotti giusti, pianificare i tuoi progetti e capire meglio le tecnologie e le normative del settore.
+        </p>
+      </div>
+    </section>
 
-        <!-- Featured Post -->
-        <div *ngIf="(blogPosts$ | async)?.length" class="mb-16">
-          <div class="relative h-[500px] rounded-3xl overflow-hidden group cursor-pointer shadow-2xl">
-            <img 
-              [src]="(blogPosts$ | async)![0].imageUrl" 
-              [alt]="(blogPosts$ | async)![0].title"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            >
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-            
-            <!-- Featured Badge -->
-            <div class="absolute top-6 left-6 bg-[#0ACF83] text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
-              Featured
-            </div>
-
-            <!-- Content -->
-            <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
-              <div class="max-w-4xl">
-                <div class="flex items-center gap-4 mb-4">
-                  <span class="bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full">
-                    {{ (blogPosts$ | async)![0].category }}
-                  </span>
-                  <span class="text-white/80 text-sm">
-                    {{ (blogPosts$ | async)![0].readTime }} min di lettura
-                  </span>
-                </div>
-                
-                <h3 class="text-3xl lg:text-4xl font-bold mb-4 font-['Poppins'] group-hover:text-[#0ACF83] transition-colors duration-300">
-                  {{ (blogPosts$ | async)![0].title }}
-                </h3>
-                
-                <p class="text-lg leading-relaxed mb-6 opacity-90 font-['DM_Sans'] line-clamp-2">
-                  {{ (blogPosts$ | async)![0].excerpt }}
-                </p>
-
-                <!-- Author Info -->
-                <div class="flex items-center gap-3">
-                  <img 
-                    [src]="(blogPosts$ | async)![0].author.avatar" 
-                    [alt]="(blogPosts$ | async)![0].author.name"
-                    class="w-10 h-10 rounded-full object-cover"
-                  >
-                  <div>
-                    <p class="font-semibold text-white">{{ (blogPosts$ | async)![0].author.name }}</p>
-                    <p class="text-white/80 text-sm">{{ (blogPosts$ | async)![0].publishedAt | date:'dd MMM yyyy' }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <!-- Categories Section -->
+    <section class="py-16 px-4 md:px-8 lg:px-32 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-16">
+          <button class="bg-gray-800 text-white px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider">
+            General
+          </button>
+          <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider hover:bg-gray-200 transition-colors">
+            Regulations & Benefits
+          </button>
+          <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider hover:bg-gray-200 transition-colors">
+            Technical Guides
+          </button>
+          <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider hover:bg-gray-200 transition-colors">
+            Success Stories
+          </button>
+          <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider hover:bg-gray-200 transition-colors">
+            FAQ & Video Tutorials
+          </button>
         </div>
 
         <!-- Blog Posts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <article 
-            *ngFor="let post of (blogPosts$ | async)?.slice(1); trackBy: trackByPostId"
-            class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
-          >
-            <!-- Post Image -->
-            <div class="relative h-56 bg-gray-50 overflow-hidden">
-              <img 
-                [src]="post.imageUrl" 
-                [alt]="post.title"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              >
-              <!-- Category Badge -->
-              <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-heyhome-dark-green text-sm font-medium px-3 py-1 rounded-full shadow-md">
-                {{ post.category }}
-              </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <!-- Blog Post 1 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gray-200 h-60 flex items-center justify-center">
+              <span class="text-gray-500 font-['DM_Sans']">Article Image</span>
             </div>
-
-            <!-- Post Content -->
-            <div class="p-6">
-              <!-- Meta Info -->
-              <div class="flex items-center justify-between mb-3">
-                <span class="text-gray-500 text-sm">{{ post.publishedAt | date:'dd MMM yyyy' }}</span>
-                <span class="text-gray-500 text-sm">{{ post.readTime }} min</span>
-              </div>
-
-              <!-- Title -->
-              <h3 class="text-xl font-bold text-heyhome-dark-green mb-3 font-['Poppins'] group-hover:text-[#0ACF83] transition-colors duration-300 line-clamp-2">
-                {{ post.title }}
-              </h3>
-              
-              <!-- Excerpt -->
-              <p class="text-gray-600 leading-relaxed mb-4 font-['DM_Sans'] line-clamp-3">
-                {{ post.excerpt }}
-              </p>
-
-              <!-- Author & Read More -->
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <img 
-                    [src]="post.author.avatar" 
-                    [alt]="post.author.name"
-                    class="w-8 h-8 rounded-full object-cover"
-                  >
-                  <span class="text-gray-700 text-sm font-medium">{{ post.author.name }}</span>
-                </div>
-                
-                <button class="text-[#0ACF83] font-semibold text-sm hover:text-[#09b574] transition-colors duration-300 flex items-center gap-1 group">
-                  <span>Read More</span>
-                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                   </svg>
-                </button>
+                  <span>4 min</span>
+                </div>
               </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Transforming an Office Building into a Sustainable Workplace
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
+            </div>
+          </article>
 
-              <!-- Tags -->
-              <div class="flex flex-wrap gap-2 mt-4">
-                <span 
-                  *ngFor="let tag of post.tags.slice(0, 3)" 
-                  class="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full hover:bg-[#0ACF83] hover:text-white transition-colors duration-300 cursor-pointer"
-                >
-                  {{ tag }}
-                </span>
+          <!-- Blog Post 2 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gradient-to-br from-blue-200 to-blue-300 h-60 flex items-center justify-center">
+              <span class="text-blue-700 font-['DM_Sans']">Article Image</span>
+            </div>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>4 min</span>
+                </div>
               </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Renovation Success Stories: From Vision to Reality
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Blog Post 3 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gradient-to-br from-orange-200 to-orange-300 h-60 flex items-center justify-center">
+              <span class="text-orange-700 font-['DM_Sans']">Article Image</span>
+            </div>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>4 min</span>
+                </div>
+              </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Breaking Down Photovoltaic Systems: Myths vs. Facts
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Blog Post 4 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gradient-to-br from-blue-200 to-blue-300 h-60 flex items-center justify-center">
+              <span class="text-blue-700 font-['DM_Sans']">Article Image</span>
+            </div>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>4 min</span>
+                </div>
+              </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Renovation Success Stories: From Vision to Reality
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Blog Post 5 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gradient-to-br from-orange-200 to-orange-300 h-60 flex items-center justify-center">
+              <span class="text-orange-700 font-['DM_Sans']">Article Image</span>
+            </div>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>4 min</span>
+                </div>
+              </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Breaking Down Photovoltaic Systems: Myths vs. Facts
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
+            </div>
+          </article>
+
+          <!-- Blog Post 6 -->
+          <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="bg-gray-200 h-60 flex items-center justify-center">
+              <span class="text-gray-500 font-['DM_Sans']">Article Image</span>
+            </div>
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-sm text-gray-500 font-['DM_Sans']">
+                <span>Apr 21, 2024</span>
+                <div class="flex items-center gap-1">
+                  <svg class="w-4 h-4 opacity-30" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>4 min</span>
+                </div>
+              </div>
+              <h3 class="font-['DM_Sans'] font-semibold text-xl text-gray-800 leading-tight">
+                Transforming an Office Building into a Sustainable Workplace
+              </h3>
+              <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
+                Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+              </p>
             </div>
           </article>
         </div>
 
-        <!-- View All Posts Button -->
-        <div class="text-center mt-16">
-          <button class="bg-[#0ACF83] text-white font-semibold text-lg px-8 py-4 rounded-xl hover:bg-[#09b574] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            View All Articles
+        <!-- See More Button -->
+        <div class="text-center">
+          <button class="inline-flex items-center gap-2 text-gray-800 font-['DM_Sans'] font-semibold text-lg hover:text-green-600 transition-colors">
+            See more
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
           </button>
         </div>
+      </div>
+    </section>
 
-        <!-- Loading State -->
-        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
-          <div class="animate-spin rounded-full h-12 w-12 border-4 border-heyhome-primary border-t-transparent"></div>
+    <!-- What You'll Find Section -->
+    <section class="py-16 px-4 md:px-8 lg:px-32 bg-gray-50">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Left Column -->
+          <div class="space-y-8">
+            <h2 class="font-['Poppins'] font-semibold text-2xl text-gray-800 leading-tight">
+              Cosa troverai in questa sezione?
+            </h2>
+            
+            <div class="space-y-6">
+              <div class="space-y-2">
+                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">Guide Tecniche</h3>
+                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
+                  Passo dopo passo, impara a installare pannelli solari, sostituire un pavimento o migliorare l'isolamento termico di casa tua. Le nostre guide sono scritte in modo chiaro e comprensibile, ideali sia per i professionisti che per chi è alle prime armi.
+                </p>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">Approfondimenti su Normative e Agevolazioni</h3>
+                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
+                  Rimani aggiornato sulle detrazioni fiscali, sulle normative ambientali e sugli incentivi per la riqualificazione energetica. Scopri come ottenere il massimo dalla tua ristrutturazione, risparmiando tempo, soldi ed energia.
+                </p>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">Consigli per la Sostenibilità</h3>
+                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
+                  Consigli pratici per rendere la tua abitazione più efficiente e rispettosa dell'ambiente. Dall'uso di materiali riciclati alle tecnologie più innovative, troverai idee e ispirazioni per contribuire a un futuro più verde.
+                </p>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">Case Studies e Storie di Successo</h3>
+                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
+                  Dai uno sguardo a progetti realizzati con i nostri prodotti, scopri come altri clienti hanno trasformato i loro spazi, e lasciati ispirare da soluzioni che coniugano funzionalità, estetica ed efficienza energetica.
+                </p>
+              </div>
+              
+              <div class="space-y-2">
+                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">FAQ e Tutorial Video</h3>
+                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
+                  Trova risposte rapide ai tuoi dubbi più comuni. Grazie ai video tutorial potrai comprendere meglio i passaggi chiave di una ristrutturazione o l'installazione di un impianto, imparando tecniche e buone pratiche direttamente dagli esperti.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right Column -->
+          <div class="space-y-8">
+            <h2 class="font-['Poppins'] font-semibold text-2xl text-gray-800 leading-tight">
+              Il vostro partner di fiducia
+            </h2>
+            
+            <p class="font-['DM_Sans'] text-base text-gray-800 leading-relaxed">
+              Il nostro obiettivo è quello di fornirvi informazioni chiare, affidabili e aggiornate, aiutandovi a fare scelte consapevoli per migliorare la qualità e il comfort del vostro ambiente. Che stiate iniziando una piccola ristrutturazione o affrontando un progetto complesso, qui troverete tutto il supporto di cui avete bisogno, senza termini troppo tecnici o complicati.
+              <br><br>
+              Esplorate il blog e le guide di HeyHome, lasciatevi ispirare e contattateci se avete bisogno di ulteriori informazioni o di una consulenza personalizzata. Con noi, costruire e ristrutturare diventa più facile, sostenibile e conveniente.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   `,
   styles: [`
-    :host {
-      display: block;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
   `]
 })
-export class BlogComponent implements OnInit {
-  private store = inject(Store);
-
-  blogPosts$: Observable<BlogPost[]>;
-  isLoading$: Observable<boolean>;
-
-  constructor() {
-    this.blogPosts$ = this.store.select(selectBlogPosts);
-    this.isLoading$ = this.store.select(selectIsLoading);
-  }
-
-  ngOnInit(): void {
-    this.store.dispatch(BlogActions.loadBlogPosts());
-  }
-
-  trackByPostId(index: number, post: BlogPost): string {
-    return post.id;
-  }
+export class BlogComponent {
 } 

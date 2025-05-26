@@ -6,6 +6,12 @@ import { LoginComponent } from './core/auth/components/login/login.component';
 import { ResetPasswordComponent } from './core/auth/components/reset-password/reset-password.component';
 import { LoginGuard } from './core/auth/guards/login.guard';
 import { PageLayoutComponent } from './core/page-layout/page-layout.component';
+import { ProductListComponent } from './features/products/product-list/product-list.component';
+import { ProductDetailsComponent } from './features/products/product-details/product-details.component';
+import { OffersPageComponent } from './features/offers/offers-page.component';
+import { MissionComponent } from './features/mission/mission.component';
+import { CompanyComponent } from './features/company/company.component';
+import { BlogComponent } from './features/blog/blog.component';
 
 export const routes: Routes = [
     {
@@ -14,6 +20,12 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
+            { path: 'products', component: ProductListComponent },
+            { path: 'products/:id', component: ProductDetailsComponent },
+            { path: 'offers', component: OffersPageComponent },
+            { path: 'mission', component: MissionComponent },
+            { path: 'company', component: CompanyComponent },
+            { path: 'blog', component: BlogComponent },
             // { path: 'purchase-orders', loadChildren: () => import('./features/purchase-orders').then(m => m.PURCHASE_ORDER_ROUTES) },
             // { path: 'budgets', loadChildren: () => import('./features/budgets').then(m => m.BUDGETS_ORDER_ROUTES) },
             // { path: 'projects', loadChildren: () => import('./features/projects').then(m => m.PROJECTS_ORDER_ROUTES) },

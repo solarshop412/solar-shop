@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NavbarActions } from './store/navbar.actions';
 import { selectIsMobileMenuOpen, selectCurrentLanguage } from './store/navbar.selectors';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -102,11 +103,11 @@ import { selectIsMobileMenuOpen, selectCurrentLanguage } from './store/navbar.se
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
               </svg>
             </div>
-            <a href="#" class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Offers & Promotions</a>
-            <a href="#" class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Sustainability</a>
-            <a href="#" class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors uppercase">Blog & Guides</a>
-            <a href="#" class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Company</a>
-            <a href="#" class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Contacts & Support</a>
+            <a class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors" href="/offers">Offers & Promotions</a>
+            <a class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors" href="/mission">Sustainability</a>
+            <a class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors uppercase" href="/blog">Blog & Guides</a>
+            <a class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors" href="/company">Company</a>
+            <a class="text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Contacts & Support</a>
           </div>
 
           <!-- Desktop Icons -->
@@ -167,10 +168,10 @@ import { selectIsMobileMenuOpen, selectCurrentLanguage } from './store/navbar.se
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
             </svg>
           </div>
-          <a href="#" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Offers & Promotions</a>
-          <a href="#" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Sustainability</a>
-          <a href="#" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors uppercase">Blog & Guides</a>
-          <a href="#" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Company</a>
+          <a href="/offers" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Offers & Promotions</a>
+          <a href="/mission" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Sustainability</a>
+          <a href="/blog" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors uppercase">Blog & Guides</a>
+          <a href="/company" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Company</a>
           <a href="#" class="block text-gray-900 hover:text-[#0ACF83] font-medium transition-colors">Contacts & Support</a>
         </div>
       </div>

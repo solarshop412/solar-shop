@@ -8,11 +8,6 @@ export const selectFooterData = createSelector(
     (state: FooterState) => state.data
 );
 
-export const selectIsLoading = createSelector(
-    selectFooterState,
-    (state: FooterState) => state.isLoading
-);
-
 export const selectError = createSelector(
     selectFooterState,
     (state: FooterState) => state.error

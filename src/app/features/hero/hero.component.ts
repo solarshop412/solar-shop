@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HeroActions } from './store/hero.actions';
 import { selectIsLoading } from './store/hero.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hero',
@@ -73,7 +74,7 @@ export class HeroComponent implements OnInit {
 
   isLoading$: Observable<boolean>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.isLoading$ = this.store.select(selectIsLoading);
   }
 
@@ -82,11 +83,8 @@ export class HeroComponent implements OnInit {
   }
 
   onExploreProducts(): void {
-    this.store.dispatch(HeroActions.exploreProducts());
+    // this.store.dispatch(HeroActions.exploreProducts());
 
-    // Simulate navigation or API call
-    setTimeout(() => {
-      this.store.dispatch(HeroActions.setLoading({ isLoading: false }));
-    }, 2000);
+    this.router.navigate(['/products']);
   }
 } 

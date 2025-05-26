@@ -8,11 +8,6 @@ export const selectFeatures = createSelector(
     (state: SustainabilityState) => state.features
 );
 
-export const selectIsLoading = createSelector(
-    selectSustainabilityState,
-    (state: SustainabilityState) => state.isLoading
-);
-
 export const selectError = createSelector(
     selectSustainabilityState,
     (state: SustainabilityState) => state.error

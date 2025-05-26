@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SustainabilityActions } from './store/sustainability.actions';
-import { selectFeatures, selectIsLoading } from './store/sustainability.selectors';
+import { selectFeatures } from './store/sustainability.selectors';
 
 export interface SustainabilityFeature {
   id: string;
@@ -69,11 +69,6 @@ export interface SustainabilityFeature {
             </p>
           </div>
         </div>
-
-        <!-- Loading State -->
-        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
-          <div class="animate-spin rounded-full h-12 w-12 border-4 border-heyhome-primary border-t-transparent"></div>
-        </div>
       </div>
     </section>
   `,
@@ -87,11 +82,9 @@ export class SustainabilityComponent implements OnInit {
   private store = inject(Store);
 
   features$: Observable<SustainabilityFeature[]>;
-  isLoading$: Observable<boolean>;
 
   constructor() {
     this.features$ = this.store.select(selectFeatures);
-    this.isLoading$ = this.store.select(selectIsLoading);
   }
 
   ngOnInit(): void {
