@@ -1,9 +1,10 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ProductListActions } from './store/product-list.actions';
 import {
   selectProducts,
@@ -298,6 +299,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   private store = inject(Store);
+  private route = inject(ActivatedRoute);
   private destroy$ = new Subject<void>();
 
   products$: Observable<Product[]>;
@@ -322,6 +324,21 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(ProductListActions.loadProducts());
+
+    // Handle category filtering from query parameters
+    this.route.queryParams.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(params => {
+      if (params['category']) {
+        // Clear existing filters first
+        this.store.dispatch(ProductListActions.clearFilters());
+        // Apply category filter from query parameter
+        this.store.dispatch(ProductListActions.toggleCategoryFilter({
+          category: params['category'],
+          checked: true
+        }));
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -359,8 +376,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.store.dispatch(ProductListActions.clearFilters());
   }
-
-
 
   trackByProductId(index: number, product: Product): string {
     return product.id;

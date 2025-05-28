@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { resetPasswordRequest } from '../../store/auth.actions';
 import { selectAuthError, selectAuthLoading, selectPasswordResetSuccessMessage } from '../../store/auth.selectors';
-import { LoaderComponent } from '../../../../shared/models/components/loader/loader.component';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-reset-password',

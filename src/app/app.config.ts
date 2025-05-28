@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -11,14 +11,16 @@ import { ProductDetailsEffects } from './features/b2c/products/product-details/s
 import { CartEffects } from './features/b2c/cart/store/cart.effects';
 import { reducers, metaReducers } from './reducers';
 import { provideLottieOptions } from 'ngx-lottie';
-import { playerFactory } from './shared/models/components/loader/loader.component';
+import { playerFactory } from './shared/components/loader/loader.component';
 import { environment } from '../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withInMemoryScrolling({
+      scrollPositionRestoration: 'top'
+    })),
     provideHttpClient(),
     provideStore(reducers, { metaReducers }),
     provideEffects([AuthEffects, ProductListEffects, ProductDetailsEffects, CartEffects]),

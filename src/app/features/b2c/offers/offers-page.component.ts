@@ -1,291 +1,224 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { OffersActions } from './store/offers.actions';
+import { selectOffers, selectIsLoading } from './store/offers.selectors';
+import { AddToCartButtonComponent } from '../cart/components/add-to-cart-button/add-to-cart-button.component';
+
+export interface Offer {
+  id: string;
+  title: string;
+  originalPrice: number;
+  discountedPrice: number;
+  discountPercentage: number;
+  imageUrl: string;
+  description?: string;
+  category?: string;
+}
 
 @Component({
   selector: 'app-offers-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddToCartButtonComponent],
   template: `
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-green-600 to-green-800 text-white py-20 px-4 md:px-8 lg:px-32">
-      <div class="max-w-6xl mx-auto text-center">
-        <h1 class="font-['Poppins'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
-          Offers & Promotions
-        </h1>
-        <p class="font-['DM_Sans'] text-base md:text-lg max-w-4xl mx-auto opacity-80 leading-relaxed">
-          Welcome to the Offers & Promotions section of HeyHome. Here you will find the best opportunities to save on the products you need for your construction, plumbing and energy solutions projects. Discover exclusive discounts, convenient packages and seasonal promotions designed to give you the best value.
-        </p>
-      </div>
-    </section>
-
-    <!-- Featured Deals Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-32 bg-white">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- Deal Image -->
-          <div class="order-2 lg:order-1">
-            <div class="bg-gray-200 rounded-3xl h-96 flex items-center justify-center">
-              <span class="text-gray-500 font-['DM_Sans']">Featured Deal Image</span>
-            </div>
-          </div>
-          
-          <!-- Deal Content -->
-          <div class="order-1 lg:order-2 space-y-6">
-            <h2 class="font-['Poppins'] font-semibold text-3xl md:text-4xl text-gray-800 leading-tight">
-              Our Special Offer
-            </h2>
-            <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                HeyHome nasce dall'esperienza di professionisti del settore edilizio che, unendo le proprie competenze, hanno deciso di creare un portale dove privati, artigiani e imprese potessero trovare facilmente i migliori prodotti per i loro progetti. Anno dopo anno, abbiamo arricchito la nostra offerta, selezionato i partner più affidabili e raffinato la nostra consulenza, diventando un punto di riferimento per chi cerca qualità, efficienza e trasparenza.
-            </p>
-          </div>
+    <div class="min-h-screen bg-gray-50">
+      <!-- Hero Section -->
+      <div class="bg-gradient-to-r from-[#0ACF83] to-[#0ACFAC] text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 class="text-5xl lg:text-6xl font-bold mb-6 font-['Poppins']">
+            Special Offers
+          </h1>
+          <p class="text-xl lg:text-2xl max-w-3xl mx-auto font-['DM_Sans']">
+            Discover amazing deals on our premium solar and energy-efficient products
+          </p>
         </div>
       </div>
-    </section>
 
-    <!-- Team Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-32 bg-gray-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col lg:flex-row gap-12">
-          <!-- Team Info -->
-          <div class="lg:w-1/2 space-y-6">
-            <h2 class="font-['Poppins'] font-semibold text-3xl md:text-4xl text-gray-800 text-center lg:text-left leading-tight">
-              Our Team
-            </h2>
-            <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed text-right">
-              Behind HeyHome is a group of passionate and competent people: engineers, architects, energy consultants and construction professionals, united by the desire to help you build better, more efficiently and more responsibly. Our team is at your disposal to advise and guide you towards the most suitable solutions for your needs.
-            </p>
+      <!-- Offers Grid -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Filter Bar -->
+        <div class="flex flex-wrap items-center justify-between mb-12 gap-4">
+          <div class="flex items-center space-x-4">
+            <span class="text-lg font-semibold text-[#324053] font-['Poppins']">Filter by:</span>
+            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0ACF83] focus:border-transparent font-['DM_Sans']">
+              <option value="">All Categories</option>
+              <option value="solar-panels">Solar Panels</option>
+              <option value="inverters">Inverters</option>
+              <option value="batteries">Batteries</option>
+              <option value="accessories">Accessories</option>
+            </select>
           </div>
-          
-          <!-- Team Grid -->
-          <div class="lg:w-1/2">
-            <!-- First Row -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">Michael Harrington</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Founder & CEO</p>
-                </div>
+          <div class="text-sm text-gray-600 font-['DM_Sans']">
+            {{ (offers$ | async)?.length || 0 }} offers available
+          </div>
+        </div>
+
+        <!-- Offers Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div 
+            *ngFor="let offer of offers$ | async; trackBy: trackByOfferId"
+            class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
+            (click)="navigateToProduct(offer.id)"
+          >
+            <!-- Product Image -->
+            <div class="relative h-64 bg-gray-50 overflow-hidden">
+              <img 
+                [src]="offer.imageUrl" 
+                [alt]="offer.title"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              >
+              <!-- Discount Badge -->
+              <div class="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-bold px-3 py-2 rounded-full shadow-lg">
+                -{{ offer.discountPercentage }}%
               </div>
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">James O'Connor</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Technical Consultant</p>
-                </div>
-              </div>
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">Ralph Edwards</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Senior Project Manager</p>
-                </div>
-              </div>
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">Liam Evans</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Head of Technical Solutions</p>
-                </div>
+              <!-- Sale Badge -->
+              <div class="absolute top-4 right-4 bg-[#0ACF83] text-white text-xs font-bold px-2 py-1 rounded-full">
+                SALE
               </div>
             </div>
-            
-            <!-- Second Row -->
-            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">Sophia Martinez</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Lead Architect</p>
-                </div>
+
+            <!-- Product Info -->
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-[#324053] mb-3 font-['Poppins'] line-clamp-2 group-hover:text-[#0ACF83] transition-colors">
+                {{ offer.title }}
+              </h3>
+              
+              <p *ngIf="offer.description" class="text-gray-600 text-sm mb-4 font-['DM_Sans'] line-clamp-2">
+                {{ offer.description }}
+              </p>
+              
+              <!-- Pricing -->
+              <div class="flex items-center gap-3 mb-6">
+                <span class="text-lg text-gray-400 line-through font-medium font-['DM_Sans']">
+                  {{ offer.originalPrice | currency:'EUR':'symbol':'1.2-2' }}
+                </span>
+                <span class="text-2xl font-bold text-[#324053] font-['DM_Sans']">
+                  {{ offer.discountedPrice | currency:'EUR':'symbol':'1.2-2' }}
+                </span>
               </div>
-              <div class="text-center space-y-3">
-                <div class="bg-gray-300 rounded-2xl h-32 w-full"></div>
-                <div>
-                  <h3 class="font-['DM_Sans'] font-bold text-sm text-gray-800">James O'Connor</h3>
-                  <p class="font-['DM_Sans'] font-light text-xs text-gray-600">Technical Consultant</p>
-                </div>
+
+              <!-- Savings -->
+              <div class="bg-green-50 text-green-800 text-sm font-semibold px-3 py-2 rounded-lg mb-4 text-center">
+                You save {{ (offer.originalPrice - offer.discountedPrice) | currency:'EUR':'symbol':'1.2-2' }}
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="space-y-3">
+                <app-add-to-cart-button 
+                  [productId]="offer.id" 
+                  [quantity]="1" 
+                  buttonText="Add To Cart"
+                  [fullWidth]="true"
+                  size="md"
+                  variant="primary"
+                  (click)="$event.stopPropagation()">
+                </app-add-to-cart-button>
+                
+                <button 
+                  (click)="navigateToProduct(offer.id); $event.stopPropagation()"
+                  class="w-full px-4 py-2 bg-white text-[#324053] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-['DM_Sans']"
+                >
+                  View Details
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Mission & Values Section -->
-    <section class="relative py-16 px-4 md:px-8 lg:px-32 bg-orange-50">
-      <!-- Background Decorative Element -->
-      <div class="absolute top-0 right-0 w-80 h-80 opacity-20">
-        <div class="w-full h-full bg-orange-200 rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
-      </div>
-      
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-12">
-          <h2 class="font-['Poppins'] font-semibold text-3xl md:text-4xl text-gray-800 mb-8 leading-tight">
-            Mission & Values
+        <!-- Loading State -->
+        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#0ACF83] border-t-transparent"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!(isLoading$ | async) && (offers$ | async)?.length === 0" class="text-center py-20">
+          <div class="text-gray-400 mb-6">
+            <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 font-['Poppins']">No offers available</h3>
+          <p class="text-gray-600 mb-8 font-['DM_Sans']">Check back later for amazing deals on our products.</p>
+          <button 
+            (click)="navigateToProducts()"
+            class="px-8 py-3 bg-[#0ACF83] text-white font-semibold rounded-lg hover:bg-[#09b574] transition-colors font-['DM_Sans']"
+          >
+            Browse All Products
+          </button>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-20 bg-gradient-to-r from-[#0ACF83] to-[#0ACFAC] rounded-3xl p-12 text-center text-white">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
+            Don't Miss Out!
           </h2>
-          
-          <!-- Values Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- First Row -->
-            <div class="flex items-start space-x-4 text-left">
-              <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800 mb-2">Quality</h3>
-                <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
-                  We offer only tested and certified products, selected from the most reliable brands in the market.
-                </p>
-              </div>
-            </div>
-            
-            <div class="flex items-start space-x-4 text-left">
-              <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800 mb-2">Innovation</h3>
-                <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
-                  We focus on the latest technologies and materials of the latest generation, to ensure efficient and durable solutions.
-                </p>
-              </div>
-            </div>
-            
-            <!-- Second Row -->
-            <div class="flex items-start space-x-4 text-left">
-              <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012-2v-1a2 2 0 012-2h1.945M11 6.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800 mb-2">Sustainability</h3>
-                <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
-                  We respect the planet, choosing environmentally friendly materials, encouraging the use of renewable energies and promoting responsible construction practices.
-                </p>
-              </div>
-            </div>
-            
-            <div class="flex items-start space-x-4 text-left">
-              <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800 mb-2">Support</h3>
-                <p class="font-['DM_Sans'] text-sm text-gray-600 leading-relaxed">
-                  We accompany you in every phase, from product selection to post-sale assistance, with a team of experts always ready to listen to your needs.
-                </p>
-              </div>
-            </div>
+          <p class="text-xl mb-8 max-w-2xl mx-auto font-['DM_Sans']">
+            Subscribe to our newsletter and be the first to know about new offers and exclusive deals.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="Enter your email"
+              class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white font-['DM_Sans']"
+            >
+            <button class="px-8 py-3 bg-white text-[#0ACF83] font-semibold rounded-lg hover:bg-gray-100 transition-colors font-['DM_Sans']">
+              Subscribe
+            </button>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Partners Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-32 bg-white">
-      <div class="max-w-6xl mx-auto text-center">
-        <h2 class="font-['Poppins'] font-semibold text-3xl md:text-4xl text-gray-800 mb-6 leading-tight">
-          Suppliers and Partners
-        </h2>
-        <p class="font-['DM_Sans'] text-base text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-          We collaborate with the most established brands and specialized companies, thus ensuring a wide, updated and high-quality catalog. Thanks to these solid partnerships, we can offer you competitive prices, cutting-edge products and a reliable and transparent distribution chain.
-        </p>
-        
-        <!-- Partners Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          <div class="bg-orange-50 rounded-2xl p-6 text-center">
-            <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">
-              <span class="text-gray-500 text-xs">Logo</span>
-            </div>
-            <h3 class="font-['DM_Sans'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>
-            <p class="font-['DM_Sans'] text-xs text-gray-600 leading-relaxed">
-              Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
-            </p>
-          </div>
-          
-          <div class="bg-orange-50 rounded-2xl p-6 text-center">
-            <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">
-              <span class="text-gray-500 text-xs">Logo</span>
-            </div>
-            <h3 class="font-['DM_Sans'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>
-            <p class="font-['DM_Sans'] text-xs text-gray-600 leading-relaxed">
-              Description dolor in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
-            </p>
-          </div>
-          
-          <div class="bg-orange-50 rounded-2xl p-6 text-center">
-            <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">
-              <span class="text-gray-500 text-xs">Logo</span>
-            </div>
-            <h3 class="font-['DM_Sans'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>
-            <p class="font-['DM_Sans'] text-xs text-gray-600 leading-relaxed">
-              Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
-            </p>
-          </div>
-          
-          <div class="bg-orange-50 rounded-2xl p-6 text-center">
-            <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">
-              <span class="text-gray-500 text-xs">Logo</span>
-            </div>
-            <h3 class="font-['DM_Sans'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>
-            <p class="font-['DM_Sans'] text-xs text-gray-600 leading-relaxed">
-              Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
-            </p>
-          </div>
-          
-          <div class="bg-orange-50 rounded-2xl p-6 text-center">
-            <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">
-              <span class="text-gray-500 text-xs">Logo</span>
-            </div>
-            <h3 class="font-['DM_Sans'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>
-            <p class="font-['DM_Sans'] text-xs text-gray-600 leading-relaxed">
-              Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Responsibility Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-32 bg-white">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <!-- Content -->
-          <div class="space-y-6">
-            <h2 class="font-['Poppins'] font-semibold text-3xl md:text-4xl text-gray-800 leading-tight">
-              Social and Environmental Responsibility
-            </h2>
-            <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-              Our commitment is not limited to the product. We commit to promoting the culture of sustainability, energy efficiency and respect for the territory. We invest in research, training and awareness, because we believe that every small gesture can contribute to a better future.
-              <br><br>
-              Choosing HeyHome means trusting a reality that combines experience, professionalism and passion. Browse our sections, discover our products and our advice, and do not hesitate to contact us for any request. We are here to help you build, renew and improve the spaces where you live, with the certainty of making smart and sustainable choices.
-            </p>
-          </div>
-          
-          <!-- Image -->
-          <div class="relative">
-            <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-3xl h-96 flex items-center justify-center relative overflow-hidden">
-              <!-- Logo placeholder -->
-              <div class="bg-white rounded-lg p-8">
-                <div class="w-32 h-12 bg-gray-200 rounded"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   `,
   styles: [`
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+    /* Custom font loading */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap');
+    
+    :host {
+      display: block;
+    }
+
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   `]
 })
-export class OffersPageComponent {
+export class OffersPageComponent implements OnInit {
+  private store = inject(Store);
+  private router = inject(Router);
+
+  offers$: Observable<Offer[]>;
+  isLoading$: Observable<boolean>;
+
+  constructor() {
+    this.offers$ = this.store.select(selectOffers);
+    this.isLoading$ = this.store.select(selectIsLoading);
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(OffersActions.loadOffers());
+  }
+
+  trackByOfferId(index: number, offer: Offer): string {
+    return offer.id;
+  }
+
+  navigateToProduct(productId: string): void {
+    this.router.navigate(['/products', productId]);
+  }
+
+  navigateToProducts(): void {
+    this.router.navigate(['/products']);
+  }
 } 

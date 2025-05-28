@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { State } from '../../../../reducers';
 import { sendResetPasswordEmail } from '../../store/auth.actions';
-import { LoaderComponent } from '../../../../shared/models/components/loader/loader.component';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-forgot-password',

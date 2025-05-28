@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ProductsActions } from './store/products.actions';
@@ -12,6 +13,7 @@ export interface ProductCategory {
   description: string;
   imageUrl: string;
   backgroundGradient: string;
+  slug?: string;
 }
 
 @Component({
@@ -37,6 +39,7 @@ export interface ProductCategory {
           <div 
             *ngFor="let category of productCategories$ | async; trackBy: trackByCategoryId"
             class="relative h-[500px] rounded-3xl overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+            (click)="navigateToProductList(category)"
           >
             <!-- Background Image -->
             <div class="absolute inset-0">
@@ -61,8 +64,11 @@ export interface ProductCategory {
                 </p>
                 
                 <!-- Learn More Button -->
-                <button class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#0ACF83] transition-all duration-300 group-hover:bg-[#0ACF83] border border-white/30">
-                  <span>Learn More</span>
+                <button 
+                  class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#0ACF83] transition-all duration-300 group-hover:bg-[#0ACF83] border border-white/30"
+                  (click)="navigateToProductList(category); $event.stopPropagation()"
+                >
+                  <span>Explore Products</span>
                   <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                   </svg>
@@ -76,6 +82,33 @@ export interface ProductCategory {
         <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
           <div class="animate-spin rounded-full h-12 w-12 border-4 border-heyhome-primary border-t-transparent"></div>
         </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!(isLoading$ | async) && (productCategories$ | async)?.length === 0" class="text-center py-20">
+          <div class="text-gray-400 mb-6">
+            <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4 font-['Poppins']">No product categories available</h3>
+          <p class="text-gray-600 font-['DM_Sans']">Check back later for our product categories.</p>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-20 bg-gradient-to-r from-[#0ACF83] to-[#0ACFAC] rounded-3xl p-12 text-center text-white">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
+            Need Help Choosing?
+          </h2>
+          <p class="text-xl mb-8 max-w-2xl mx-auto font-['DM_Sans']">
+            Our experts are here to help you find the perfect products for your project. Get personalized recommendations today.
+          </p>
+          <button 
+            (click)="navigateToContact()"
+            class="px-8 py-3 bg-white text-[#0ACF83] font-semibold rounded-lg hover:bg-gray-100 transition-colors font-['DM_Sans']"
+          >
+            Contact Our Experts
+          </button>
+        </div>
       </div>
     </section>
   `,
@@ -83,10 +116,18 @@ export interface ProductCategory {
     :host {
       display: block;
     }
+
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
   `]
 })
 export class ProductsComponent implements OnInit {
   private store = inject(Store);
+  private router = inject(Router);
 
   productCategories$: Observable<ProductCategory[]>;
   isLoading$: Observable<boolean>;
@@ -102,5 +143,16 @@ export class ProductsComponent implements OnInit {
 
   trackByCategoryId(index: number, category: ProductCategory): string {
     return category.id;
+  }
+
+  navigateToProductList(category: ProductCategory): void {
+    // Navigate to product list with category filter
+    this.router.navigate(['/products'], {
+      queryParams: { category: category.slug || category.id }
+    });
+  }
+
+  navigateToContact(): void {
+    this.router.navigate(['/contact']);
   }
 } 

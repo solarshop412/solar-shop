@@ -35,7 +35,7 @@ import { BlogPost } from '../../../shared/models/blog.model';
               <span class="text-green-100">{{ blogPost?.publishedAt | date:'MMM dd, yyyy' }}</span>
             </div>
             
-            <h1 class="text-4xl md:text-5xl font-bold font-poppins mb-6 leading-tight">
+            <h1 class="text-4xl md:text-5xl font-bold font-['Poppins'] mb-6 leading-tight">
               {{ blogPost?.title }}
             </h1>
             
@@ -71,7 +71,7 @@ import { BlogPost } from '../../../shared/models/blog.model';
         </div>
 
         <!-- Article Body -->
-        <div class="prose prose-lg max-w-none">
+        <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-semibold prose-headings:mt-8 prose-headings:mb-4 prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6 prose-ul:mb-6 prose-ul:pl-6 prose-li:mb-2 prose-blockquote:border-l-4 prose-blockquote:border-green-500 prose-blockquote:pl-4 prose-blockquote:my-8 prose-blockquote:italic prose-blockquote:text-gray-600 prose-img:rounded-lg prose-img:my-8 prose-a:text-green-600 prose-a:underline hover:prose-a:text-green-500">
           <div [innerHTML]="blogPost?.htmlContent || blogPost?.content" class="text-gray-700 leading-relaxed">
           </div>
         </div>
@@ -92,7 +92,7 @@ import { BlogPost } from '../../../shared/models/blog.model';
         <!-- Social Sharing -->
         <div class="mt-8 pt-8 border-t border-gray-200">
           <h3 class="text-lg font-semibold mb-4">Share this article</h3>
-          <div class="flex space-x-4">
+          <div class="flex flex-wrap gap-4">
             <button 
               (click)="shareOnFacebook()"
               class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -206,53 +206,6 @@ import { BlogPost } from '../../../shared/models/blog.model';
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
-    .prose {
-      color: #374151;
-    }
-    
-    .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-      color: #111827;
-      font-weight: 600;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-    
-    .prose p {
-      margin-bottom: 1.5rem;
-      line-height: 1.75;
-    }
-    
-    .prose ul, .prose ol {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-    }
-    
-    .prose li {
-      margin-bottom: 0.5rem;
-    }
-    
-    .prose blockquote {
-      border-left: 4px solid #10b981;
-      padding-left: 1rem;
-      margin: 2rem 0;
-      font-style: italic;
-      color: #6b7280;
-    }
-    
-    .prose img {
-      border-radius: 0.5rem;
-      margin: 2rem 0;
-    }
-    
-    .prose a {
-      color: #10b981;
-      text-decoration: underline;
-    }
-    
-    .prose a:hover {
-      color: #059669;
-    }
   `]
 })
 export class BlogDetailComponent implements OnInit {
@@ -270,6 +223,8 @@ export class BlogDetailComponent implements OnInit {
       if (this.postId) {
         this.loadBlogPost(this.postId);
         this.loadRelatedPosts(this.postId);
+        // Scroll to top when navigating to a new blog post
+        window.scrollTo(0, 0);
       }
     });
   }

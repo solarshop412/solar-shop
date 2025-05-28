@@ -4,8 +4,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NavbarActions } from './store/navbar.actions';
 import { selectIsMobileMenuOpen, selectCurrentLanguage } from './store/navbar.selectors';
+import { selectIsAuthenticated, selectCurrentUser, selectUserAvatar } from '../../../core/auth/store/auth.selectors';
 import { RouterModule, Router } from '@angular/router';
 import { CartButtonComponent } from '../cart/components/cart-button/cart-button.component';
+import * as AuthActions from '../../../core/auth/store/auth.actions';
+import { User } from '../../../shared/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -120,11 +123,70 @@ import { CartButtonComponent } from '../cart/components/cart-button/cart-button.
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
             </button>
-            <button class="p-2 text-gray-600 hover:text-green-600 transition-colors">
-              <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-              </svg>
-            </button>
+            
+            <!-- Authentication Icon -->
+            <div class="relative">
+              <!-- Login Icon (when not authenticated) -->
+              <button 
+                *ngIf="!(isAuthenticated$ | async)"
+                (click)="navigateToLogin()"
+                class="p-2 text-gray-600 hover:text-green-600 transition-colors"
+                title="Sign In">
+                <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                </svg>
+              </button>
+
+              <!-- Profile Icon (when authenticated) -->
+              <div *ngIf="isAuthenticated$ | async" class="relative">
+                <button 
+                  (click)="toggleProfileMenu()"
+                  class="p-2 text-gray-600 hover:text-green-600 transition-colors flex items-center space-x-2"
+                  title="Profile">
+                  <!-- User Avatar or Default Profile Icon -->
+                  <div *ngIf="(userAvatar$ | async); else defaultProfileIcon" class="w-8 h-8 rounded-full overflow-hidden">
+                    <img [src]="userAvatar$ | async" [alt]="(currentUser$ | async)?.firstName" class="w-full h-full object-cover">
+                  </div>
+                  <ng-template #defaultProfileIcon>
+                    <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                  </ng-template>
+                </button>
+
+                <!-- Profile Dropdown Menu -->
+                <div 
+                  *ngIf="showProfileMenu"
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                  <div class="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                    <div class="font-medium">{{ (currentUser$ | async)?.firstName }} {{ (currentUser$ | async)?.lastName }}</div>
+                    <div class="text-gray-500">{{ (currentUser$ | async)?.email }}</div>
+                  </div>
+                  <a 
+                    routerLink="/profile" 
+                    (click)="closeProfileMenu()"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    <div class="flex items-center space-x-2">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                      </svg>
+                      <span>Profile</span>
+                    </div>
+                  </a>
+                  <button 
+                    (click)="logout()"
+                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                    <div class="flex items-center space-x-2">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                      </svg>
+                      <span>Sign Out</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
             <app-cart-button></app-cart-button>
           </div>
 
@@ -135,11 +197,26 @@ import { CartButtonComponent } from '../cart/components/cart-button/cart-button.
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
               </svg>
             </button>
-            <button class="p-2 text-gray-600 hover:text-green-600 transition-colors">
+            
+            <!-- Mobile Authentication Icon -->
+            <button 
+              *ngIf="!(isAuthenticated$ | async)"
+              (click)="navigateToLogin()"
+              class="p-2 text-gray-600 hover:text-green-600 transition-colors">
+              <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+              </svg>
+            </button>
+            
+            <button 
+              *ngIf="isAuthenticated$ | async"
+              (click)="navigateToProfile()"
+              class="p-2 text-gray-600 hover:text-green-600 transition-colors">
               <svg class="w-6 h-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
               </svg>
             </button>
+            
             <app-cart-button></app-cart-button>
             <button 
               class="p-2 text-gray-600 hover:text-green-600 transition-colors"
@@ -168,6 +245,12 @@ import { CartButtonComponent } from '../cart/components/cart-button/cart-button.
           <a routerLink="/blog" class="block text-gray-900 hover:text-green-600 font-medium transition-colors">Blog & Guides</a>
           <a routerLink="/company" class="block text-gray-900 hover:text-green-600 font-medium transition-colors">Company</a>
           <a routerLink="/contact" class="block text-gray-900 hover:text-green-600 font-medium transition-colors">Contacts & Support</a>
+          
+          <!-- Mobile Authentication Links -->
+          <div class="border-t border-gray-200 pt-4 mt-4" *ngIf="isAuthenticated$ | async">
+            <a routerLink="/profile" class="block text-gray-900 hover:text-green-600 font-medium transition-colors mb-2">Profile</a>
+            <button (click)="logout()" class="block text-gray-900 hover:text-green-600 font-medium transition-colors">Sign Out</button>
+          </div>
         </div>
       </div>
     </nav>
@@ -184,16 +267,31 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isMobileMenuOpen$: Observable<boolean>;
   currentLanguage$: Observable<string>;
+  isAuthenticated$: Observable<boolean>;
+  currentUser$: Observable<User | null>;
+  userAvatar$: Observable<string | null>;
   isScrolled = false;
+  showProfileMenu = false;
 
   constructor() {
     this.isMobileMenuOpen$ = this.store.select(selectIsMobileMenuOpen);
     this.currentLanguage$ = this.store.select(selectCurrentLanguage);
+    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
+    this.currentUser$ = this.store.select(selectCurrentUser);
+    this.userAvatar$ = this.store.select(selectUserAvatar);
   }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     this.isScrolled = window.pageYOffset > 10;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.relative')) {
+      this.showProfileMenu = false;
+    }
   }
 
   ngOnInit(): void {
@@ -210,5 +308,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   toggleLanguage(): void {
     this.store.dispatch(NavbarActions.toggleLanguage());
+  }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToProfile(): void {
+    this.router.navigate(['/profile']);
+  }
+
+  toggleProfileMenu(): void {
+    this.showProfileMenu = !this.showProfileMenu;
+  }
+
+  closeProfileMenu(): void {
+    this.showProfileMenu = false;
+  }
+
+  logout(): void {
+    this.store.dispatch(AuthActions.logout());
+    this.showProfileMenu = false;
+    this.router.navigate(['/']);
   }
 } 

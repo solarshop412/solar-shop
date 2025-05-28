@@ -23,9 +23,30 @@ export class AuthEffects {
                 this.authService.login(loginRequest).pipe(
                     map(response => {
                         this.cookieService.setCookie('accessToken', response.accessToken);
-                        return AuthActions.loginSuccess({ token: response.accessToken });
+                        return AuthActions.loginSuccess({
+                            token: response.accessToken,
+                            user: response.user
+                        });
                     }),
                     catchError(error => of(AuthActions.loginFailure({ error })))
+                )
+            )
+        )
+    );
+
+    register$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.register),
+            mergeMap(({ registerRequest }) =>
+                this.authService.register(registerRequest).pipe(
+                    map(response => {
+                        this.cookieService.setCookie('accessToken', response.accessToken);
+                        return AuthActions.registerSuccess({
+                            token: response.accessToken,
+                            user: response.user
+                        });
+                    }),
+                    catchError(error => of(AuthActions.registerFailure({ error })))
                 )
             )
         )
@@ -34,7 +55,15 @@ export class AuthEffects {
     loginSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AuthActions.loginSuccess),
-            tap(() => this.router.navigate(['/home']))
+            tap(() => this.router.navigate(['/']))
+        ),
+        { dispatch: false }
+    );
+
+    registerSuccess$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.registerSuccess),
+            tap(() => this.router.navigate(['/']))
         ),
         { dispatch: false }
     );
@@ -47,6 +76,53 @@ export class AuthEffects {
                 this.router.navigate(['/login']);
             }),
             map(() => AuthActions.logoutSuccess())
+        )
+    );
+
+    loadUserProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.loadUserProfile),
+            mergeMap(() =>
+                this.authService.getUserProfile().pipe(
+                    map(user => AuthActions.loadUserProfileSuccess({ user })),
+                    catchError(error => of(AuthActions.loadUserProfileFailure({ error })))
+                )
+            )
+        )
+    );
+
+    updateUserProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.updateUserProfile),
+            mergeMap(({ user }) =>
+                this.authService.updateUserProfile(user).pipe(
+                    map(updatedUser => AuthActions.updateUserProfileSuccess({ user: updatedUser })),
+                    catchError(error => of(AuthActions.updateUserProfileFailure({ error })))
+                )
+            )
+        )
+    );
+
+    checkAuthToken$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.checkAuthToken),
+            mergeMap(() => {
+                const token = this.cookieService.getCookie('accessToken');
+                if (token) {
+                    return this.authService.validateToken(token).pipe(
+                        map(response => AuthActions.loginSuccess({
+                            token,
+                            user: response.user
+                        })),
+                        catchError(() => {
+                            this.cookieService.clear('accessToken');
+                            return of(AuthActions.clearAuthToken());
+                        })
+                    );
+                } else {
+                    return of(AuthActions.clearAuthToken());
+                }
+            })
         )
     );
 

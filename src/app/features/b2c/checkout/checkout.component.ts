@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import * as CartSelectors from '../cart/store/cart.selectors';
 import * as CartActions from '../cart/store/cart.actions';
 import { CartItem, CartSummary } from '../../../shared/models/cart.model';
@@ -27,36 +28,71 @@ import { CartItem, CartSummary } from '../../../shared/models/cart.model';
           <div class="flex items-center space-x-8">
             <!-- Step 1: Order Review -->
             <div class="flex items-center space-x-2">
-              <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0ACF83] text-white text-sm font-semibold">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <div class="flex items-center justify-center w-8 h-8 rounded-full" 
+                   [ngClass]="{
+                     'bg-[#0ACF83] text-white': currentStep >= 1,
+                     'border-2 border-gray-300 bg-white text-gray-400': currentStep < 1
+                   }">
+                <svg *ngIf="currentStep > 1" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                 </svg>
+                <span *ngIf="currentStep <= 1" class="text-sm font-semibold">1</span>
               </div>
-              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Order Review</span>
+              <span class="text-sm font-medium font-['DM_Sans']" 
+                    [ngClass]="{
+                      'text-[#0ACF83]': currentStep >= 1,
+                      'text-gray-400': currentStep < 1
+                    }">Order Review</span>
             </div>
 
             <!-- Connector Line -->
-            <div class="w-16 h-px bg-gray-300"></div>
+            <div class="w-16 h-px" [ngClass]="{
+              'bg-[#0ACF83]': currentStep > 1,
+              'bg-gray-300': currentStep <= 1
+            }"></div>
 
             <!-- Step 2: Shipping -->
             <div class="flex items-center space-x-2">
-              <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0ACF83] text-white text-sm font-semibold">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <div class="flex items-center justify-center w-8 h-8 rounded-full" 
+                   [ngClass]="{
+                     'bg-[#0ACF83] text-white': currentStep >= 2,
+                     'border-2 border-gray-300 bg-white text-gray-400': currentStep < 2
+                   }">
+                <svg *ngIf="currentStep > 2" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                 </svg>
+                <span *ngIf="currentStep <= 2" class="text-sm font-semibold">2</span>
               </div>
-              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Shipping</span>
+              <span class="text-sm font-medium font-['DM_Sans']" 
+                    [ngClass]="{
+                      'text-[#0ACF83]': currentStep >= 2,
+                      'text-gray-400': currentStep < 2
+                    }">Shipping</span>
             </div>
 
             <!-- Connector Line -->
-            <div class="w-16 h-px bg-gray-300"></div>
+            <div class="w-16 h-px" [ngClass]="{
+              'bg-[#0ACF83]': currentStep > 2,
+              'bg-gray-300': currentStep <= 2
+            }"></div>
 
             <!-- Step 3: Payment -->
             <div class="flex items-center space-x-2">
-              <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-[#324053] bg-white">
-                <div class="w-3 h-3 rounded-full bg-[#324053]"></div>
+              <div class="flex items-center justify-center w-8 h-8 rounded-full" 
+                   [ngClass]="{
+                     'bg-[#0ACF83] text-white': currentStep >= 3,
+                     'border-2 border-gray-300 bg-white text-gray-400': currentStep < 3
+                   }">
+                <svg *ngIf="currentStep > 3" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                <span *ngIf="currentStep <= 3" class="text-sm font-semibold">3</span>
               </div>
-              <span class="text-sm font-medium text-[#324053] font-['DM_Sans']">Payment</span>
+              <span class="text-sm font-medium font-['DM_Sans']" 
+                    [ngClass]="{
+                      'text-[#0ACF83]': currentStep >= 3,
+                      'text-gray-400': currentStep < 3
+                    }">Payment</span>
             </div>
           </div>
         </div>
@@ -134,6 +170,7 @@ export class CheckoutComponent implements OnInit {
 
   cartItems$: Observable<CartItem[]>;
   cartSummary$: Observable<CartSummary | null>;
+  currentStep = 1;
 
   constructor() {
     this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
@@ -150,6 +187,27 @@ export class CheckoutComponent implements OnInit {
         this.router.navigate(['/products']);
       }
     });
+
+    // Update current step based on route
+    this.updateCurrentStep();
+
+    // Listen to route changes to update step
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.updateCurrentStep();
+    });
+  }
+
+  private updateCurrentStep() {
+    const url = this.router.url;
+    if (url.includes('/checkout/order-review')) {
+      this.currentStep = 1;
+    } else if (url.includes('/checkout/shipping')) {
+      this.currentStep = 2;
+    } else if (url.includes('/checkout/payment')) {
+      this.currentStep = 3;
+    }
   }
 
   trackByItemId(index: number, item: CartItem): string {

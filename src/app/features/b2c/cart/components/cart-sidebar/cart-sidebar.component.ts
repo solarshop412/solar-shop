@@ -325,7 +325,8 @@ export class CartSidebarComponent implements OnInit {
   }
 
   proceedToCheckout() {
-    // Close the cart sidebar and navigate to checkout
+    // Reset cart step to first step and close the cart sidebar
+    this.store.dispatch(CartActions.setCartStep({ step: 'cart' }));
     this.store.dispatch(CartActions.closeCart());
     // Navigate to the first step of checkout
     this.router.navigate(['/checkout/order-review']);

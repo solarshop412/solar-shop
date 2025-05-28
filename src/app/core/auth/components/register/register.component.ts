@@ -1,0 +1,124 @@
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { State } from '../../../../reducers';
+import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+
+@Component({
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    standalone: true,
+    schemas: [NO_ERRORS_SCHEMA],
+    imports: [CommonModule, RouterModule, LoaderComponent, ReactiveFormsModule],
+    providers: [],
+})
+export class RegisterComponent {
+    showPassword = false;
+    showConfirmPassword = false;
+    loading$: Observable<boolean>;
+    registerForm: FormGroup;
+
+    constructor(
+        private store: Store<State>,
+        private fb: FormBuilder
+    ) {
+        this.loading$ = this.store.pipe(select(state => state.auth.loading));
+
+        this.registerForm = this.fb.group({
+            email: ['', [Validators.required, Validators.email]],
+            firstName: ['', [Validators.required, Validators.minLength(2)]],
+            lastName: ['', [Validators.required, Validators.minLength(2)]],
+            phoneNumber: ['', [Validators.required, Validators.pattern(/^[\+]?[1-9][\d]{0,15}$/)]],
+            address: ['', [Validators.required, Validators.minLength(10)]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirmPassword: ['', [Validators.required]]
+        }, { validators: this.passwordMatchValidator });
+    }
+
+    // Custom validator to check if passwords match
+    passwordMatchValidator(form: FormGroup) {
+        const password = form.get('password');
+        const confirmPassword = form.get('confirmPassword');
+
+        if (password && confirmPassword && password.value !== confirmPassword.value) {
+            confirmPassword.setErrors({ passwordMismatch: true });
+            return { passwordMismatch: true };
+        }
+
+        if (confirmPassword?.errors?.['passwordMismatch']) {
+            delete confirmPassword.errors['passwordMismatch'];
+            if (Object.keys(confirmPassword.errors).length === 0) {
+                confirmPassword.setErrors(null);
+            }
+        }
+
+        return null;
+    }
+
+    register(userData: any): void {
+        // TODO: Implement register action
+        console.log('Register user:', userData);
+        // this.store.dispatch(AuthActions.register({ registerRequest: userData }));
+    }
+
+    onSubmit(): void {
+        if (this.registerForm.valid) {
+            const formData = this.registerForm.value;
+            // Remove confirmPassword from the data sent to the server
+            const { confirmPassword, ...userData } = formData;
+            this.register(userData);
+        } else {
+            // Mark all fields as touched to show validation errors
+            this.registerForm.markAllAsTouched();
+            console.error('Please fill in all required fields correctly');
+        }
+    }
+
+    // Helper methods for form validation
+    isFieldInvalid(fieldName: string): boolean {
+        const field = this.registerForm.get(fieldName);
+        return !!(field && field.invalid && (field.dirty || field.touched));
+    }
+
+    getFieldError(fieldName: string): string {
+        const field = this.registerForm.get(fieldName);
+        if (field && field.errors && (field.dirty || field.touched)) {
+            if (field.errors['required']) {
+                return `${this.getFieldDisplayName(fieldName)} is required`;
+            }
+            if (field.errors['email']) {
+                return 'Please enter a valid email address';
+            }
+            if (field.errors['minlength']) {
+                const requiredLength = field.errors['minlength'].requiredLength;
+                return `${this.getFieldDisplayName(fieldName)} must be at least ${requiredLength} characters long`;
+            }
+            if (field.errors['pattern']) {
+                if (fieldName === 'phoneNumber') {
+                    return 'Please enter a valid phone number';
+                }
+            }
+            if (field.errors['passwordMismatch']) {
+                return 'Passwords do not match';
+            }
+        }
+        return '';
+    }
+
+    private getFieldDisplayName(fieldName: string): string {
+        const displayNames: { [key: string]: string } = {
+            email: 'Email',
+            firstName: 'First name',
+            lastName: 'Last name',
+            phoneNumber: 'Phone number',
+            address: 'Address',
+            password: 'Password',
+            confirmPassword: 'Confirm password'
+        };
+        return displayNames[fieldName] || fieldName;
+    }
+} 

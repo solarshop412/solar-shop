@@ -1,56 +1,132 @@
-<div class="flex justify-center items-center w-full h-dvh bg-main-bg" *ngIf="loading$ | async; else loginForm">
+<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading$ | async; else loginTemplate">
     <app-loader class="h-24 w-dvw"></app-loader>
 </div>
-<ng-template #loginForm>
-    <div class="flex h-screen bg-main-bg font-sans">
-        <!-- Login form -->
-        <div class="w-2/5 bg-main-bg flex items-center justify-center p-2 flex-col">
-            <div class="flex flex-col w-3/5 justify-start">
-                <h2 class="text-3xl font-bold mb-6 text-black text-opacity-80">Sign in</h2>
-                <div class="flex items-center justify-between mb-8 w-2/3">
-                    <div class="flex items-center justify-between text-sm">
-                        <div class="mr-3">Don't have an account?</div>
-                        <a class="text-second-fg hover:text-selection" routerLink="signup">Sign up</a>
+<ng-template #loginTemplate>
+    <div class="flex h-screen bg-white font-sans">
+        <!-- Login form - Left side -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
+            <div class="w-full max-w-md">
+                <!-- Logo/Brand -->
+                <div class="mb-8">
+                    <h1 class="text-2xl lg:text-3xl font-bold text-[#222529] font-['Poppins']">Welcome to HeyHome</h1>
+                    <p class="text-[#324053] text-sm mt-2 font-['DM_Sans']">Sign in to your account</p>
+                </div>
+
+                <!-- Sign up link -->
+                <div class="mb-8">
+                    <p class="text-sm text-[#324053] font-['DM_Sans']">
+                        Don't have an account?
+                        <a class="text-[#0ACF83] hover:text-[#0ACF83]/80 font-medium ml-1" routerLink="/register">Sign
+                            up</a>
+                    </p>
+                </div>
+
+                <!-- Login Form -->
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                    <!-- Email Field -->
+                    <div>
+                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="email">
+                            Email address*
+                        </label>
+                        <input formControlName="email"
+                            class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0ACF83] focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                            [class.border-red-500]="isFieldInvalid('email')"
+                            [class.border-gray-300]="!isFieldInvalid('email')" id="email" type="email"
+                            placeholder="Enter your email address" autocomplete="email">
+                        <div *ngIf="isFieldInvalid('email')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
+                            {{ getFieldError('email') }}
+                        </div>
                     </div>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm mb-2" for="email">
-                        Email address*
-                    </label>
-                    <input #emailInput
-                        class="shadow-sm appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
-                        id="email" type="text" placeholder="Email address">
-                </div>
-                <div class="mb-6">
-                    <div class="mb-4 relative">
-                        <label class="block text-sm mb-2" for="password">
+
+                    <!-- Password Field -->
+                    <div>
+                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="password">
                             Password*
                         </label>
-                        <input #passwordInput [type]="showPassword ? 'text' : 'password'"
-                            class="shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 text-sm mb-3 leading-tight focus:outline-none focus:shadow-outline pr-10"
-                            id="password">
-                        <!-- <ng-icon [name]="showPassword ? 'iconoirEye' : 'iconoirEyeClosed'" name="iconoirEyeClosed"
-                            class="text-second-fg hover:text-selection absolute right-3 top-1/2 cursor-pointer"
-                            size="22" (click)="showPassword = !showPassword"></ng-icon> -->
+                        <div class="relative">
+                            <input formControlName="password" [type]="showPassword ? 'text' : 'password'"
+                                class="w-full h-12 px-4 py-3 pr-12 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0ACF83] focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                                [class.border-red-500]="isFieldInvalid('password')"
+                                [class.border-gray-300]="!isFieldInvalid('password')" id="password"
+                                placeholder="Enter your password" autocomplete="current-password">
+                            <button type="button"
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
+                                (click)="showPassword = !showPassword">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path *ngIf="!showPassword" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path *ngIf="!showPassword" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                    <path *ngIf="showPassword" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div *ngIf="isFieldInvalid('password')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
+                            {{ getFieldError('password') }}
+                        </div>
                     </div>
+
+                    <!-- Forgot Password -->
                     <div class="text-right">
-                        <a class="text-second-fg hover:text-selection text-xs"
-                            [routerLink]="['/forgot-password']">Forgot
-                            password?</a>
+                        <a class="text-sm text-[#0ACF83] hover:text-[#0ACF83]/80 font-medium font-['DM_Sans']"
+                            routerLink="/forgot-password">
+                            Forgot password?
+                        </a>
                     </div>
-                </div>
-                <div class="flex items-center justify-between">
-                    <button
-                        class="bg-second-fg hover:bg-selection btn btn-l font-medium text-white py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
-                        (click)="onSignIn(emailInput.value, passwordInput.value)">
+
+                    <!-- Login Button -->
+                    <button type="submit" [disabled]="loginForm.invalid"
+                        class="w-full h-12 bg-[#0ACF83] hover:bg-[#0ACF83]/90 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#0ACF83] focus:ring-offset-2 font-['DM_Sans']">
                         Sign in
                     </button>
-                </div>
+
+                    <!-- Go to Home Link -->
+                    <div class="text-center mt-4">
+                        <a routerLink="/"
+                            class="text-sm text-[#324053] hover:text-[#0ACF83] font-medium font-['DM_Sans'] transition-colors duration-200 inline-flex items-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Back to Home</span>
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
-        <!-- Image -->
-        <div class=" bg-selection w-3/5 flex items-center justify-center">
-            <img class="h-1/2" src="./assets/confirmation.svg" alt="login image">
+
+        <!-- Background Image - Right side -->
+        <div
+            class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#0ACF83] to-[#0ACF83]/80 items-center justify-center relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+                    <defs>
+                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" />
+                        </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#grid)" />
+                </svg>
+            </div>
+
+            <!-- Logo/Brand -->
+            <div class="relative z-10 text-center text-white">
+                <div class="mb-6">
+                    <div class="w-20 h-20 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold font-['Poppins'] mb-2">HeyHome</h2>
+                    <p class="text-white/90 font-['DM_Sans']">Your Solar Energy Solution</p>
+                </div>
+            </div>
         </div>
     </div>
 </ng-template>
