@@ -1,210 +1,248 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
-import { Product } from '../product-list.component';
+import { Observable, from, map, catchError, of } from 'rxjs';
+import { SupabaseService } from '../../../../../services/supabase.service';
+
+export interface Product {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    originalPrice?: number;
+    discount?: number;
+    imageUrl: string;
+    category: string;
+    manufacturer: string;
+    certificates: string[];
+    rating: number;
+    reviewCount: number;
+    availability: 'available' | 'limited' | 'out-of-stock';
+    featured: boolean;
+    createdAt: Date;
+}
+
+export interface ProductFilters {
+    category?: string;
+    manufacturer?: string;
+    priceRange?: { min: number; max: number };
+    rating?: number;
+    availability?: string;
+    featured?: boolean;
+    search?: string;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProductListService {
 
-    private mockProducts: Product[] = [
-        {
-            id: '1',
-            name: 'VTAC Solar Panel 3.6kW High Efficiency',
-            description: 'High-efficiency monocrystalline solar panel with 25-year warranty. Perfect for residential installations.',
-            price: 1299,
-            originalPrice: 1499,
-            discount: 13,
-            imageUrl: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=500&fit=crop',
-            category: 'Energy Solutions',
-            manufacturer: 'VTAC',
-            certificates: ['ISO 14001', 'CE Certified', 'Energy Star'],
-            rating: 4.8,
-            reviewCount: 156,
-            availability: 'available',
-            featured: true,
-            createdAt: new Date('2024-01-15')
-        },
-        {
-            id: '2',
-            name: 'Thermal Insulation Kit Premium',
-            description: 'Complete thermal insulation solution for walls and roofs. Reduces energy consumption by up to 40%.',
-            price: 899,
-            imageUrl: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=500&fit=crop',
-            category: 'Building Materials',
-            manufacturer: 'EcoTherm',
-            certificates: ['ISO 14001', 'Green Building'],
-            rating: 4.6,
-            reviewCount: 89,
-            availability: 'available',
-            featured: true,
-            createdAt: new Date('2024-01-10')
-        },
-        {
-            id: '3',
-            name: 'Eco Heat Pump Air-Water 12kW',
-            description: 'Energy-efficient heat pump system for heating and cooling. Suitable for homes up to 200m².',
-            price: 3299,
-            originalPrice: 3599,
-            discount: 8,
-            imageUrl: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=500&h=500&fit=crop',
-            category: 'Electrical Systems',
-            manufacturer: 'EcoHeat',
-            certificates: ['Energy Star', 'CE Certified'],
-            rating: 4.7,
-            reviewCount: 234,
-            availability: 'limited',
-            featured: false,
-            createdAt: new Date('2024-01-05')
-        },
-        {
-            id: '4',
-            name: 'Smart Home System Complete',
-            description: 'Comprehensive smart home automation system with energy monitoring and control features.',
-            price: 2199,
-            imageUrl: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=500&h=500&fit=crop',
-            category: 'Electrical Systems',
-            manufacturer: 'SmartTech',
-            certificates: ['CE Certified', 'IoT Certified'],
-            rating: 4.5,
-            reviewCount: 67,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-20')
-        },
-        {
-            id: '5',
-            name: 'Bamboo Flooring Sustainable Collection',
-            description: 'Premium bamboo flooring with natural finish. Eco-friendly and durable for high-traffic areas.',
-            price: 45,
-            imageUrl: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&h=500&fit=crop',
-            category: 'Finishes & Coatings',
-            manufacturer: 'BambooFloor',
-            certificates: ['FSC Certified', 'Green Building'],
-            rating: 4.4,
-            reviewCount: 123,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-12')
-        },
-        {
-            id: '6',
-            name: 'LED Lighting Kit Energy Efficient',
-            description: 'Complete LED lighting solution for homes. 80% energy savings compared to traditional bulbs.',
-            price: 299,
-            originalPrice: 399,
-            discount: 25,
-            imageUrl: 'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=500&h=500&fit=crop',
-            category: 'Electrical Systems',
-            manufacturer: 'LightTech',
-            certificates: ['Energy Star', 'CE Certified'],
-            rating: 4.9,
-            reviewCount: 445,
-            availability: 'available',
-            featured: true,
-            createdAt: new Date('2024-01-25')
-        },
-        {
-            id: '7',
-            name: 'Recycled Steel Beams Structural',
-            description: 'High-strength recycled steel beams for sustainable construction. Various sizes available.',
-            price: 189,
-            imageUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=500&fit=crop',
-            category: 'Building Materials',
-            manufacturer: 'SteelGreen',
-            certificates: ['ISO 14001', 'Recycled Content'],
-            rating: 4.3,
-            reviewCount: 78,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-08')
-        },
-        {
-            id: '8',
-            name: 'Water Filtration System Advanced',
-            description: 'Multi-stage water filtration system for clean, safe drinking water. Easy installation.',
-            price: 799,
-            imageUrl: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=500&h=500&fit=crop',
-            category: 'Electrical Systems',
-            manufacturer: 'AquaPure',
-            certificates: ['NSF Certified', 'Water Quality'],
-            rating: 4.6,
-            reviewCount: 156,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-18')
-        },
-        {
-            id: '9',
-            name: 'Cordless Drill Professional 18V',
-            description: 'High-performance cordless drill with lithium battery. Perfect for construction and DIY projects.',
-            price: 159,
-            imageUrl: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=500&h=500&fit=crop',
-            category: 'Tools & Accessories',
-            manufacturer: 'PowerTools',
-            certificates: ['CE Certified'],
-            rating: 4.7,
-            reviewCount: 289,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-22')
-        },
-        {
-            id: '10',
-            name: 'Eco Paint Low VOC Interior',
-            description: 'Low-VOC interior paint in various colors. Safe for indoor use and environmentally friendly.',
-            price: 89,
-            imageUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=500&h=500&fit=crop',
-            category: 'Finishes & Coatings',
-            manufacturer: 'EcoPaint',
-            certificates: ['Green Seal', 'Low VOC'],
-            rating: 4.2,
-            reviewCount: 167,
-            availability: 'available',
-            featured: false,
-            createdAt: new Date('2024-01-14')
-        },
-        {
-            id: '11',
-            name: 'Wind Turbine Residential 5kW',
-            description: 'Small wind turbine for residential use. Generate clean energy with minimal noise.',
-            price: 4599,
-            imageUrl: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=500&h=500&fit=crop',
-            category: 'Energy Solutions',
-            manufacturer: 'WindPower',
-            certificates: ['IEC Certified', 'Energy Star'],
-            rating: 4.1,
-            reviewCount: 45,
-            availability: 'limited',
-            featured: false,
-            createdAt: new Date('2024-01-03')
-        },
-        {
-            id: '12',
-            name: 'Smart Thermostat WiFi Enabled',
-            description: 'Programmable smart thermostat with WiFi connectivity. Save up to 23% on heating and cooling.',
-            price: 249,
-            originalPrice: 299,
-            discount: 17,
-            imageUrl: 'https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?w=500&h=500&fit=crop',
-            category: 'Electrical Systems',
-            manufacturer: 'SmartClimate',
-            certificates: ['Energy Star', 'WiFi Certified'],
-            rating: 4.8,
-            reviewCount: 312,
-            availability: 'available',
-            featured: true,
-            createdAt: new Date('2024-01-28')
-        }
-    ];
+    constructor(private supabaseService: SupabaseService) { }
 
-    getProducts(): Observable<Product[]> {
-        // Simulate API call with delay
-        return of(this.mockProducts).pipe(delay(1000));
+    getProducts(filters?: ProductFilters): Observable<Product[]> {
+        return from(this.fetchProductsFromSupabase(filters)).pipe(
+            catchError(error => {
+                console.error('Error fetching products:', error);
+                return of([]);
+            })
+        );
     }
 
-    getProductById(id: string): Observable<Product | undefined> {
-        const product = this.mockProducts.find(p => p.id === id);
-        return of(product).pipe(delay(500));
+    getProductById(id: string): Observable<Product | null> {
+        return from(this.fetchProductById(id)).pipe(
+            catchError(error => {
+                console.error('Error fetching product:', error);
+                return of(null);
+            })
+        );
+    }
+
+    getFeaturedProducts(limit: number = 6): Observable<Product[]> {
+        return from(this.fetchFeaturedProducts(limit)).pipe(
+            catchError(error => {
+                console.error('Error fetching featured products:', error);
+                return of([]);
+            })
+        );
+    }
+
+    getProductsByCategory(categoryId: string, limit?: number): Observable<Product[]> {
+        return from(this.fetchProductsByCategory(categoryId, limit)).pipe(
+            catchError(error => {
+                console.error('Error fetching products by category:', error);
+                return of([]);
+            })
+        );
+    }
+
+    searchProducts(query: string, limit?: number): Observable<Product[]> {
+        return from(this.searchProductsInSupabase(query, limit)).pipe(
+            catchError(error => {
+                console.error('Error searching products:', error);
+                return of([]);
+            })
+        );
+    }
+
+    private async fetchProductsFromSupabase(filters?: ProductFilters): Promise<Product[]> {
+        try {
+            const supabaseFilters: any = {};
+
+            if (filters?.category) {
+                // Get category ID from slug or name
+                const categories = await this.supabaseService.getCategories();
+                const category = categories.find(c =>
+                    c.slug === filters.category ||
+                    c.name.toLowerCase() === filters.category!.toLowerCase()
+                );
+                if (category) {
+                    supabaseFilters.category_id = category.id;
+                }
+            }
+
+            if (filters?.featured !== undefined) {
+                supabaseFilters.is_featured = filters.featured;
+            }
+
+            if (filters?.availability) {
+                switch (filters.availability) {
+                    case 'available':
+                        supabaseFilters.in_stock = true;
+                        break;
+                    case 'out-of-stock':
+                        supabaseFilters.in_stock = false;
+                        break;
+                }
+            }
+
+            const products = await this.supabaseService.getProducts({
+                ...supabaseFilters,
+                search: filters?.search,
+                limit: 50
+            });
+
+            return await this.convertSupabaseProductsToLocal(products);
+        } catch (error) {
+            console.error('Error in fetchProductsFromSupabase:', error);
+            return [];
+        }
+    }
+
+    private async fetchProductById(id: string): Promise<Product | null> {
+        try {
+            const product = await this.supabaseService.getTableById('products', id);
+            if (!product) return null;
+
+            return await this.convertSupabaseProductToLocal(product);
+        } catch (error) {
+            console.error('Error in fetchProductById:', error);
+            return null;
+        }
+    }
+
+    private async fetchFeaturedProducts(limit: number): Promise<Product[]> {
+        try {
+            const products = await this.supabaseService.getProducts({
+                featured: true,
+                limit
+            });
+
+            return await this.convertSupabaseProductsToLocal(products);
+        } catch (error) {
+            console.error('Error in fetchFeaturedProducts:', error);
+            return [];
+        }
+    }
+
+    private async fetchProductsByCategory(categoryId: string, limit?: number): Promise<Product[]> {
+        try {
+            const products = await this.supabaseService.getProducts({
+                categoryId,
+                limit
+            });
+
+            return await this.convertSupabaseProductsToLocal(products);
+        } catch (error) {
+            console.error('Error in fetchProductsByCategory:', error);
+            return [];
+        }
+    }
+
+    private async searchProductsInSupabase(query: string, limit?: number): Promise<Product[]> {
+        try {
+            const products = await this.supabaseService.getProducts({
+                search: query,
+                limit
+            });
+
+            return await this.convertSupabaseProductsToLocal(products);
+        } catch (error) {
+            console.error('Error in searchProductsInSupabase:', error);
+            return [];
+        }
+    }
+
+    private async convertSupabaseProductsToLocal(products: any[]): Promise<Product[]> {
+        const convertedProducts: Product[] = [];
+
+        for (const product of products) {
+            const converted = await this.convertSupabaseProductToLocal(product);
+            if (converted) {
+                convertedProducts.push(converted);
+            }
+        }
+
+        return convertedProducts;
+    }
+
+    private async convertSupabaseProductToLocal(product: any): Promise<Product | null> {
+        try {
+            // Get category name
+            const category = await this.supabaseService.getTableById('categories', product.category_id);
+            const categoryName = category?.name || 'Unknown Category';
+
+            // Get primary image
+            const imageUrl = this.getProductImage(product.images);
+
+            // Calculate discount percentage
+            const discount = product.original_price && product.original_price > product.price
+                ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
+                : undefined;
+
+            // Determine availability
+            let availability: 'available' | 'limited' | 'out-of-stock' = 'available';
+            if (!product.in_stock || product.stock_quantity === 0) {
+                availability = 'out-of-stock';
+            } else if (product.stock_status === 'low_stock' || product.stock_quantity < 10) {
+                availability = 'limited';
+            }
+
+            return {
+                id: product.id,
+                name: product.name,
+                description: product.description,
+                price: product.price,
+                originalPrice: product.original_price || undefined,
+                discount,
+                imageUrl,
+                category: categoryName,
+                manufacturer: product.brand,
+                certificates: product.certifications || [],
+                rating: product.rating_average || 0,
+                reviewCount: product.rating_count || 0,
+                availability,
+                featured: product.is_featured || false,
+                createdAt: new Date(product.created_at)
+            };
+        } catch (error) {
+            console.error('Error converting product:', error);
+            return null;
+        }
+    }
+
+    private getProductImage(images: any[]): string {
+        if (images && images.length > 0) {
+            const primaryImage = images.find(img => img.is_primary) || images[0];
+            return primaryImage.url || 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=500&fit=crop';
+        }
+        return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=500&fit=crop';
     }
 } 

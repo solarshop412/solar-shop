@@ -1,19 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { OffersActions } from './store/offers.actions';
-import { selectOffers, selectIsLoading } from './store/offers.selectors';
 import { Router } from '@angular/router';
 import { AddToCartButtonComponent } from '../cart/components/add-to-cart-button/add-to-cart-button.component';
-export interface Offer {
-  id: string;
-  title: string;
-  originalPrice: number;
-  discountedPrice: number;
-  discountPercentage: number;
-  imageUrl: string;
-}
+import { OffersService, Offer } from './services/offers.service';
 
 @Component({
   selector: 'app-offers',
@@ -84,8 +74,13 @@ export interface Offer {
         </div>
 
         <!-- Loading State -->
-        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
+        <div *ngIf="isLoading" class="flex justify-center items-center py-12">
           <div class="animate-spin rounded-full h-12 w-12 border-4 border-heyhome-primary border-t-transparent"></div>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!isLoading && (offers$ | async)?.length === 0" class="text-center py-12">
+          <div class="text-gray-500 text-lg">No offers available at the moment.</div>
         </div>
       </div>
     </section>
@@ -97,18 +92,34 @@ export interface Offer {
   `]
 })
 export class OffersComponent implements OnInit {
-  private store = inject(Store);
-
   offers$: Observable<Offer[]>;
-  isLoading$: Observable<boolean>;
+  isLoading = false;
 
-  constructor(private router: Router) {
-    this.offers$ = this.store.select(selectOffers);
-    this.isLoading$ = this.store.select(selectIsLoading);
+  constructor(
+    private router: Router,
+    private offersService: OffersService
+  ) {
+    this.offers$ = this.offersService.getFeaturedOffers(4);
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OffersActions.loadOffers());
+    this.loadOffers();
+  }
+
+  private loadOffers(): void {
+    this.isLoading = true;
+    this.offers$ = this.offersService.getFeaturedOffers(4);
+
+    // Subscribe to handle loading state
+    this.offers$.subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading offers:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   trackByOfferId(index: number, offer: Offer): string {

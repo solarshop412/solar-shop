@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginRequest } from '../../../shared/models/login.model';
+import { LoginRequest } from '../../../shared/models/auth.model';
 import { User } from '../../../shared/models/user.model';
 
 // Authentication Actions

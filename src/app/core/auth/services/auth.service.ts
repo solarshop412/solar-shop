@@ -1,9 +1,9 @@
 // core/auth/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, from, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError, from } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 import { SupabaseService } from '../../../services/supabase.service';
-import { LoginRequest, TokenResponse, RegisterRequest, RegisterResponse, ValidateTokenResponse } from '../../../shared/models/login.model';
+import { LoginRequest, RegisterRequest, AuthResponse, AuthUser, AuthSession, ResetPasswordRequest, UpdatePasswordRequest } from '../../../shared/models/auth.model';
 import { User } from '../../../shared/models/user.model';
 
 @Injectable({
@@ -12,16 +12,29 @@ import { User } from '../../../shared/models/user.model';
 export class AuthService {
   constructor(private supabase: SupabaseService) { }
 
-  login(loginRequest: LoginRequest): Observable<TokenResponse> {
-    return from(this.supabase.signIn(loginRequest.email, loginRequest.password)
-      .then(response => {
-        // Create a mock user for now - in real implementation, this would come from the backend
-        const mockUser: User = {
-          id: response.user?.id || '',
-          email: response.user?.email || loginRequest.email,
-          firstName: 'John',
-          lastName: 'Doe',
-          fullName: 'John Doe',
+  login(loginRequest: LoginRequest): Observable<AuthResponse> {
+    return from(this.supabase.signIn(loginRequest));
+  }
+
+  register(registerRequest: RegisterRequest): Observable<AuthResponse> {
+    return from(this.supabase.signUp(registerRequest));
+  }
+
+  logout(): Observable<{ error?: string }> {
+    return from(this.supabase.signOut());
+  }
+
+  getCurrentUser(): Observable<User | null> {
+    return this.supabase.getCurrentUser().pipe(
+      map((authUser: AuthUser | null) => {
+        if (!authUser) return null;
+
+        return {
+          id: authUser.id,
+          email: authUser.email,
+          firstName: authUser.user_metadata?.firstName || '',
+          lastName: authUser.user_metadata?.lastName || '',
+          fullName: authUser.user_metadata?.fullName || `${authUser.user_metadata?.firstName || ''} ${authUser.user_metadata?.lastName || ''}`.trim(),
           role: {
             id: '1',
             name: 'customer',
@@ -38,7 +51,7 @@ export class AuthService {
             language: 'en',
             timezone: 'UTC',
             currency: 'EUR',
-            theme: 'light',
+            theme: 'light' as const,
             notifications: {
               email: {
                 orderUpdates: true,
@@ -59,7 +72,7 @@ export class AuthService {
               }
             },
             privacy: {
-              profileVisibility: 'private',
+              profileVisibility: 'private' as const,
               showEmail: false,
               showPhone: false,
               allowDataCollection: true,
@@ -71,215 +84,56 @@ export class AuthService {
               allowSmsMarketing: false,
               allowPushMarketing: true,
               interests: [],
-              preferredContactTime: 'anytime'
+              preferredContactTime: 'anytime' as const
             }
           },
           addresses: [],
           paymentMethods: [],
           socialLogins: [],
-          emailVerified: true,
-          phoneVerified: false,
+          emailVerified: !!authUser.email_confirmed_at,
+          phoneVerified: !!authUser.phone_confirmed_at,
           twoFactorEnabled: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          createdAt: authUser.created_at,
+          updatedAt: authUser.updated_at
         };
-
-        return {
-          accessToken: response.session?.access_token || '',
-          user: mockUser
-        };
-      }));
-  }
-
-  register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
-    return from(this.supabase.signUp(registerRequest.email, registerRequest.password)
-      .then(response => {
-        // Create a mock user for now - in real implementation, this would come from the backend
-        const mockUser: User = {
-          id: response.user?.id || '',
-          email: response.user?.email || registerRequest.email,
-          firstName: registerRequest.firstName,
-          lastName: registerRequest.lastName,
-          fullName: `${registerRequest.firstName} ${registerRequest.lastName}`,
-          phone: registerRequest.phone,
-          role: {
-            id: '1',
-            name: 'customer',
-            permissions: [],
-            isDefault: true,
-            isActive: true
-          },
-          status: {
-            isActive: true,
-            isBlocked: false,
-            isSuspended: false
-          },
-          preferences: {
-            language: 'en',
-            timezone: 'UTC',
-            currency: 'EUR',
-            theme: 'light',
-            notifications: {
-              email: {
-                orderUpdates: true,
-                promotions: true,
-                newsletter: true,
-                security: true,
-                productUpdates: true
-              },
-              sms: {
-                orderUpdates: true,
-                security: true,
-                promotions: false
-              },
-              push: {
-                orderUpdates: true,
-                promotions: false,
-                reminders: true
-              }
-            },
-            privacy: {
-              profileVisibility: 'private',
-              showEmail: false,
-              showPhone: false,
-              allowDataCollection: true,
-              allowPersonalization: true,
-              allowThirdPartySharing: false
-            },
-            marketing: {
-              allowEmailMarketing: true,
-              allowSmsMarketing: false,
-              allowPushMarketing: true,
-              interests: [],
-              preferredContactTime: 'anytime'
-            }
-          },
-          addresses: [{
-            id: '1',
-            type: 'both',
-            isDefault: true,
-            firstName: registerRequest.firstName,
-            lastName: registerRequest.lastName,
-            addressLine1: registerRequest.address,
-            city: '',
-            state: '',
-            postalCode: '',
-            country: 'Italy',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-          }],
-          paymentMethods: [],
-          socialLogins: [],
-          emailVerified: false,
-          phoneVerified: false,
-          twoFactorEnabled: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-
-        return {
-          accessToken: response.session?.access_token || '',
-          user: mockUser
-        };
-      }));
+      })
+    );
   }
 
   getUserProfile(): Observable<User> {
-    // Mock implementation - in real app, this would fetch from backend
-    return of({
-      id: '1',
-      email: 'user@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      fullName: 'John Doe',
-      role: {
-        id: '1',
-        name: 'customer',
-        permissions: [],
-        isDefault: true,
-        isActive: true
-      },
-      status: {
-        isActive: true,
-        isBlocked: false,
-        isSuspended: false
-      },
-      preferences: {
-        language: 'en',
-        timezone: 'UTC',
-        currency: 'EUR',
-        theme: 'light',
-        notifications: {
-          email: {
-            orderUpdates: true,
-            promotions: true,
-            newsletter: true,
-            security: true,
-            productUpdates: true
-          },
-          sms: {
-            orderUpdates: true,
-            security: true,
-            promotions: false
-          },
-          push: {
-            orderUpdates: true,
-            promotions: false,
-            reminders: true
-          }
-        },
-        privacy: {
-          profileVisibility: 'private',
-          showEmail: false,
-          showPhone: false,
-          allowDataCollection: true,
-          allowPersonalization: true,
-          allowThirdPartySharing: false
-        },
-        marketing: {
-          allowEmailMarketing: true,
-          allowSmsMarketing: false,
-          allowPushMarketing: true,
-          interests: [],
-          preferredContactTime: 'anytime'
+    return this.getCurrentUser().pipe(
+      map(user => {
+        if (!user) {
+          throw new Error('No authenticated user found');
         }
-      },
-      addresses: [],
-      paymentMethods: [],
-      socialLogins: [],
-      emailVerified: true,
-      phoneVerified: false,
-      twoFactorEnabled: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    });
+        return user;
+      })
+    );
+  }
+
+  refreshToken(): Observable<AuthSession | null> {
+    return from(this.supabase.getSession());
+  }
+
+  resetPassword(email: string): Observable<{ error?: string }> {
+    return from(this.supabase.resetPassword({ email }));
+  }
+
+  updatePassword(request: UpdatePasswordRequest): Observable<{ error?: string }> {
+    return from(this.supabase.updatePassword(request.password));
+  }
+
+  validateToken(token: string): Observable<boolean> {
+    // Simple validation - check if we have a current session
+    return this.supabase.isAuthenticated();
+  }
+
+  requestResetPassword(email: string): Observable<void> {
+    return from(this.supabase.resetPassword({ email }).then(() => undefined));
   }
 
   updateUserProfile(user: Partial<User>): Observable<User> {
     // Mock implementation - in real app, this would update in backend
     return this.getUserProfile();
-  }
-
-  validateToken(token: string): Observable<ValidateTokenResponse> {
-    // Mock implementation - in real app, this would validate with backend
-    return this.getUserProfile().pipe(
-      map(user => ({ user, valid: true }))
-    );
-  }
-
-  requestResetPassword(email: string): Observable<void> {
-    return from(this.supabase.resetPassword(email).then(() => undefined));
-  }
-
-  resetPassword(email: string, token: string, newPassword: string, isNewUser: boolean): Observable<boolean> {
-    // Note: Supabase handles password reset differently
-    // This implementation might need to be adjusted based on your specific requirements
-    return from(this.supabase.signIn(email, newPassword)
-      .then(() => true)
-      .catch(() => false));
-  }
-
-  logout(): Observable<void> {
-    return from(this.supabase.signOut().then(() => undefined));
   }
 }

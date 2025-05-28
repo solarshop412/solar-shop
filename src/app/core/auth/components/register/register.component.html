@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading$ | async; else registerTemplate">
+<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading; else registerTemplate">
     <app-loader class="h-24 w-dvw"></app-loader>
 </div>
 <ng-template #registerTemplate>

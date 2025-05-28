@@ -1,11 +1,10 @@
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store, select } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { State } from '../../../../reducers';
+import { SupabaseService } from '../../../../services/supabase.service';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+import { RegisterRequest } from '../../../../shared/models/auth.model';
 
 @Component({
     selector: 'app-register',
@@ -19,21 +18,21 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
 export class RegisterComponent {
     showPassword = false;
     showConfirmPassword = false;
-    loading$: Observable<boolean>;
+    loading = false;
+    errorMessage = '';
+    successMessage = '';
     registerForm: FormGroup;
 
     constructor(
-        private store: Store<State>,
-        private fb: FormBuilder
+        private supabaseService: SupabaseService,
+        private fb: FormBuilder,
+        private router: Router
     ) {
-        this.loading$ = this.store.pipe(select(state => state.auth.loading));
-
         this.registerForm = this.fb.group({
             email: ['', [Validators.required, Validators.email]],
             firstName: ['', [Validators.required, Validators.minLength(2)]],
             lastName: ['', [Validators.required, Validators.minLength(2)]],
-            phoneNumber: ['', [Validators.required, Validators.pattern(/^[\+]?[1-9][\d]{0,15}$/)]],
-            address: ['', [Validators.required, Validators.minLength(10)]],
+            phone: ['', [Validators.pattern(/^[\+]?[1-9][\d]{0,15}$/)]],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', [Validators.required]]
         }, { validators: this.passwordMatchValidator });
@@ -59,23 +58,52 @@ export class RegisterComponent {
         return null;
     }
 
-    register(userData: any): void {
-        // TODO: Implement register action
-        console.log('Register user:', userData);
-        // this.store.dispatch(AuthActions.register({ registerRequest: userData }));
-    }
-
-    onSubmit(): void {
+    async onSubmit(): Promise<void> {
         if (this.registerForm.valid) {
+            this.loading = true;
+            this.errorMessage = '';
+            this.successMessage = '';
+
             const formData = this.registerForm.value;
-            // Remove confirmPassword from the data sent to the server
-            const { confirmPassword, ...userData } = formData;
-            this.register(userData);
+            const registerRequest: RegisterRequest = {
+                email: formData.email,
+                password: formData.password,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                phone: formData.phone
+            };
+
+            try {
+                const response = await this.supabaseService.signUp(registerRequest);
+
+                if (response.error) {
+                    this.errorMessage = response.error;
+                } else if (response.user) {
+                    if (response.session) {
+                        // User is automatically signed in
+                        this.router.navigate(['/']);
+                    } else {
+                        // Email confirmation required
+                        this.successMessage = 'Registration successful! Please check your email to confirm your account.';
+                    }
+                }
+            } catch (error: any) {
+                this.errorMessage = error.message || 'An error occurred during registration';
+            } finally {
+                this.loading = false;
+            }
         } else {
             // Mark all fields as touched to show validation errors
             this.registerForm.markAllAsTouched();
-            console.error('Please fill in all required fields correctly');
         }
+    }
+
+    togglePasswordVisibility(): void {
+        this.showPassword = !this.showPassword;
+    }
+
+    toggleConfirmPasswordVisibility(): void {
+        this.showConfirmPassword = !this.showConfirmPassword;
     }
 
     // Helper methods for form validation
@@ -98,7 +126,7 @@ export class RegisterComponent {
                 return `${this.getFieldDisplayName(fieldName)} must be at least ${requiredLength} characters long`;
             }
             if (field.errors['pattern']) {
-                if (fieldName === 'phoneNumber') {
+                if (fieldName === 'phone') {
                     return 'Please enter a valid phone number';
                 }
             }
@@ -114,8 +142,7 @@ export class RegisterComponent {
             email: 'Email',
             firstName: 'First name',
             lastName: 'Last name',
-            phoneNumber: 'Phone number',
-            address: 'Address',
+            phone: 'Phone number',
             password: 'Password',
             confirmPassword: 'Confirm password'
         };

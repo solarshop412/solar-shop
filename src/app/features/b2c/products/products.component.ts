@@ -1,20 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ProductsActions } from './store/products.actions';
-import { selectProductCategories, selectIsLoading } from './store/products.selectors';
-
-
-export interface ProductCategory {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-  backgroundGradient: string;
-  slug?: string;
-}
+import { CategoriesService, ProductCategory } from './services/categories.service';
 
 @Component({
   selector: 'app-products',
@@ -45,7 +33,7 @@ export interface ProductCategory {
             <div class="absolute inset-0">
               <img 
                 [src]="category.imageUrl" 
-                [alt]="category.title"
+                [alt]="category.name"
                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               >
               <!-- Gradient Overlay -->
@@ -56,12 +44,19 @@ export interface ProductCategory {
             <div class="relative z-10 h-full flex flex-col justify-end p-8">
               <div class="text-white">
                 <h3 class="text-3xl font-bold mb-4 font-['Poppins'] group-hover:text-[#0ACF83] transition-colors duration-300">
-                  {{ category.title }}
+                  {{ category.name }}
                 </h3>
                 
                 <p class="text-base leading-relaxed mb-6 opacity-90 font-['DM_Sans'] line-clamp-3">
-                  {{ category.description }}
+                  {{ category.description || 'Explore our ' + category.name.toLowerCase() + ' collection' }}
                 </p>
+
+                <!-- Product Count Badge -->
+                <div class="mb-4">
+                  <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full">
+                    {{ category.productCount || 0 }} Products
+                  </span>
+                </div>
                 
                 <!-- Learn More Button -->
                 <button 
@@ -79,12 +74,12 @@ export interface ProductCategory {
         </div>
 
         <!-- Loading State -->
-        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
+        <div *ngIf="isLoading" class="flex justify-center items-center py-12">
           <div class="animate-spin rounded-full h-12 w-12 border-4 border-heyhome-primary border-t-transparent"></div>
         </div>
 
         <!-- Empty State -->
-        <div *ngIf="!(isLoading$ | async) && (productCategories$ | async)?.length === 0" class="text-center py-20">
+        <div *ngIf="!isLoading && (productCategories$ | async)?.length === 0" class="text-center py-20">
           <div class="text-gray-400 mb-6">
             <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
@@ -126,19 +121,34 @@ export interface ProductCategory {
   `]
 })
 export class ProductsComponent implements OnInit {
-  private store = inject(Store);
-  private router = inject(Router);
-
   productCategories$: Observable<ProductCategory[]>;
-  isLoading$: Observable<boolean>;
+  isLoading = false;
 
-  constructor() {
-    this.productCategories$ = this.store.select(selectProductCategories);
-    this.isLoading$ = this.store.select(selectIsLoading);
+  constructor(
+    private router: Router,
+    private categoriesService: CategoriesService
+  ) {
+    this.productCategories$ = this.categoriesService.getTopLevelCategories();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(ProductsActions.loadProductCategories());
+    this.loadCategories();
+  }
+
+  private loadCategories(): void {
+    this.isLoading = true;
+    this.productCategories$ = this.categoriesService.getTopLevelCategories();
+
+    // Subscribe to handle loading state
+    this.productCategories$.subscribe({
+      next: () => {
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading categories:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   trackByCategoryId(index: number, category: ProductCategory): string {

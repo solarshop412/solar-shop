@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Cart, CartItem } from '../../../../../shared/models/cart.model';
-import { Coupon } from '../../../../../shared/models/coupon.model';
 import * as CartActions from '../../store/cart.actions';
 import * as CartSelectors from '../../store/cart.selectors';
 

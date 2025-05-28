@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading$ | async; else loginTemplate">
+<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading; else loginTemplate">
     <app-loader class="h-24 w-dvw"></app-loader>
 </div>
 <ng-template #loginTemplate>
@@ -8,7 +8,8 @@
             <div class="w-full max-w-md">
                 <!-- Logo/Brand -->
                 <div class="mb-8">
-                    <h1 class="text-2xl lg:text-3xl font-bold text-[#222529] font-['Poppins']">Welcome to HeyHome</h1>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-[#222529] font-['Poppins']">Welcome to Solar Shop
+                    </h1>
                     <p class="text-[#324053] text-sm mt-2 font-['DM_Sans']">Sign in to your account</p>
                 </div>
 
@@ -19,6 +20,11 @@
                         <a class="text-[#0ACF83] hover:text-[#0ACF83]/80 font-medium ml-1" routerLink="/register">Sign
                             up</a>
                     </p>
+                </div>
+
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p class="text-sm text-red-600 font-['DM_Sans']">{{ errorMessage }}</p>
                 </div>
 
                 <!-- Login Form -->
@@ -51,7 +57,7 @@
                                 placeholder="Enter your password" autocomplete="current-password">
                             <button type="button"
                                 class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
-                                (click)="showPassword = !showPassword">
+                                (click)="togglePasswordVisibility()">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path *ngIf="!showPassword" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -80,9 +86,20 @@
                     </div>
 
                     <!-- Login Button -->
-                    <button type="submit" [disabled]="loginForm.invalid"
+                    <button type="submit" [disabled]="loginForm.invalid || loading"
                         class="w-full h-12 bg-[#0ACF83] hover:bg-[#0ACF83]/90 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#0ACF83] focus:ring-offset-2 font-['DM_Sans']">
-                        Sign in
+                        <span *ngIf="!loading">Sign in</span>
+                        <span *ngIf="loading" class="flex items-center justify-center">
+                            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
+                            </svg>
+                            Signing in...
+                        </span>
                     </button>
 
                     <!-- Go to Home Link -->
@@ -123,7 +140,7 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
                         </svg>
                     </div>
-                    <h2 class="text-3xl font-bold font-['Poppins'] mb-2">HeyHome</h2>
+                    <h2 class="text-3xl font-bold font-['Poppins'] mb-2">Solar Shop</h2>
                     <p class="text-white/90 font-['DM_Sans']">Your Solar Energy Solution</p>
                 </div>
             </div>

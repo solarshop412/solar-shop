@@ -1,13 +1,11 @@
 // core/auth/login.component.ts
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store, select } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import * as AuthActions from '../../store/auth.actions';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { State } from '../../../../reducers';
+import { SupabaseService } from '../../../../services/supabase.service';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
+import { LoginRequest } from '../../../../shared/models/auth.model';
 
 @Component({
   selector: 'app-login',
@@ -20,45 +18,53 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
 })
 export class LoginComponent {
   showPassword = false;
-  loading$: Observable<boolean>;
+  loading = false;
+  errorMessage = '';
   loginForm: FormGroup;
 
   constructor(
-    private store: Store<State>,
-    private fb: FormBuilder
+    private supabaseService: SupabaseService,
+    private fb: FormBuilder,
+    private router: Router
   ) {
-    this.loading$ = this.store.pipe(select(state => state.auth.loading));
-
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  login(email: string, password: string): void {
-    this.store.dispatch(AuthActions.login({ loginRequest: { email, password } }));
-  }
-
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.loginForm.valid) {
-      const email = this.loginForm.get('email')?.value;
-      const password = this.loginForm.get('password')?.value;
-      this.login(email, password);
+      this.loading = true;
+      this.errorMessage = '';
+
+      const loginRequest: LoginRequest = {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      };
+
+      try {
+        const response = await this.supabaseService.signIn(loginRequest);
+
+        if (response.error) {
+          this.errorMessage = response.error;
+        } else if (response.user) {
+          // Redirect to dashboard or home page
+          this.router.navigate(['/']);
+        }
+      } catch (error: any) {
+        this.errorMessage = error.message || 'An error occurred during login';
+      } finally {
+        this.loading = false;
+      }
     } else {
       // Mark all fields as touched to show validation errors
       this.loginForm.markAllAsTouched();
-      console.error('Please fill in all required fields correctly');
     }
   }
 
-  onSignIn(email: string, password: string): void {
-    if (this.loginForm.valid) {
-      this.login(email, password);
-    } else {
-      // Mark all fields as touched to show validation errors
-      this.loginForm.markAllAsTouched();
-      console.error('Please fill in all required fields correctly');
-    }
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   // Helper methods for form validation

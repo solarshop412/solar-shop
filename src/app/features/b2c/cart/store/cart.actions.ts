@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Cart, CartItem } from '../../../../shared/models/cart.model';
-import { Coupon } from '../../../../shared/models/coupon.model';
 import { CartStep } from './cart.state';
+import { Coupon } from '../../../../shared/models/coupon.model';
 
 // Cart UI Actions
 export const openCart = createAction('[Cart] Open Cart');
@@ -113,6 +113,7 @@ export const loadAvailableCouponsSuccess = createAction(
     '[Cart] Load Available Coupons Success',
     props<{ coupons: Coupon[] }>()
 );
+
 export const loadAvailableCouponsFailure = createAction(
     '[Cart] Load Available Coupons Failure',
     props<{ error: string }>()
