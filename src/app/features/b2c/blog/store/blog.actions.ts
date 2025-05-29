@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { BlogPost } from '../blog.component';
+import { BlogPost } from '../../../../shared/models/blog.model';
 
 export const BlogActions = createActionGroup({
     source: 'Blog',

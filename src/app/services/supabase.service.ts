@@ -406,6 +406,90 @@ export class SupabaseService {
         return data;
     }
 
+    async getBlogPostById(id: string) {
+        const { data, error } = await this.supabase
+            .from('blog_posts')
+            .select(`
+                *,
+                profiles:author_id (
+                    first_name,
+                    last_name,
+                    full_name,
+                    avatar_url
+                ),
+                categories:category_id (
+                    name,
+                    slug
+                )
+            `)
+            .eq('id', id)
+            .eq('status', 'published')
+            .single();
+
+        if (error) throw error;
+        return data;
+    }
+
+    async getBlogPostBySlug(slug: string) {
+        const { data, error } = await this.supabase
+            .from('blog_posts')
+            .select(`
+                *,
+                profiles:author_id (
+                    first_name,
+                    last_name,
+                    full_name,
+                    avatar_url
+                ),
+                categories:category_id (
+                    name,
+                    slug
+                )
+            `)
+            .eq('slug', slug)
+            .eq('status', 'published')
+            .single();
+
+        if (error) throw error;
+        return data;
+    }
+
+    async getRelatedBlogPosts(categoryId?: string, excludeId?: string, limit: number = 3) {
+        let query = this.supabase
+            .from('blog_posts')
+            .select(`
+                *,
+                profiles:author_id (
+                    first_name,
+                    last_name,
+                    full_name,
+                    avatar_url
+                ),
+                categories:category_id (
+                    name,
+                    slug
+                )
+            `)
+            .eq('status', 'published')
+            .limit(limit);
+
+        if (categoryId) {
+            query = query.eq('category_id', categoryId);
+        }
+        if (excludeId) {
+            query = query.neq('id', excludeId);
+        }
+
+        const { data, error } = await query.order('published_at', { ascending: false });
+        if (error) throw error;
+        return data;
+    }
+
+    async incrementBlogPostViews(id: string) {
+        const { error } = await this.supabase.rpc('increment_blog_post_views', { post_id: id });
+        if (error) throw error;
+    }
+
     // File upload methods
     async uploadFile(file: File, bucket: string = 'documents'): Promise<string> {
         const fileExt = file.name.split('.').pop();

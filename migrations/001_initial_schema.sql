@@ -372,4 +372,14 @@ INSERT INTO public.blog_posts (
     'Top 5 Benefits of Solar Energy | Solar Shop',
     'Explore the key benefits of solar energy including cost savings, environmental impact, and energy independence.',
     5, false
-); 
+);
+
+-- Function to increment blog post view count
+CREATE OR REPLACE FUNCTION increment_blog_post_views(post_id UUID)
+RETURNS void AS $$
+BEGIN
+    UPDATE public.blog_posts 
+    SET view_count = view_count + 1
+    WHERE id = post_id AND status = 'published';
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER; 
