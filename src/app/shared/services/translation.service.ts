@@ -17,10 +17,10 @@ export class TranslationService {
             // Navigation
             nav: {
                 products: 'Proizvodi',
-                offers: 'Ponude i Promocije',
+                offers: 'Ponude',
                 sustainability: 'Održivost',
-                blog: 'Blog i Vodiči',
-                company: 'Kompanija',
+                blog: 'Blog',
+                company: 'O nama',
                 contact: 'Kontakt i Podrška',
                 searchPlaceholder: 'Traži proizvode...'
             },
@@ -127,10 +127,13 @@ export class TranslationService {
             },
             // Hero Section
             hero: {
-                mainTitle: 'Ekološki materijali za zeleniju budućnost',
-                subtitle: 'Otkrijte naš asortiman održivih građevinskih rješenja, dizajniranih za smanjenje utjecaja na okoliš uz održavanje izuzetne kvalitete i stila.',
+                mainTitle: 'Vaša destinacija za solarnu energiju',
+                subtitle: 'Kupujte visokokvalitetne solarne panele, invertere, baterije i opremu. Sve što trebate za vlastiti sustav solarne energije na jednom mjestu.',
                 exploreProducts: 'Istražite proizvode',
-                loading: 'Učitavanje...'
+                exploreOffers: 'Istražite ponude',
+                loading: 'Učitavanje...',
+                noOffersAvailable: 'Trenutno nema dostupnih ponuda',
+                primeDeal: 'Hit Ponuda'
             },
             // Products
             products: {
@@ -218,6 +221,12 @@ export class TranslationService {
                 tryAgain: 'Pokušaj ponovno',
                 featured: 'Istaknuto',
                 loadMore: 'Učitaj više',
+                noPosts: 'Nema članaka',
+                noPostsText: 'Trenutno nema dostupnih članaka. Provjerite kasnije.',
+                readMore: 'Čitaj više',
+                viewAllPosts: 'Pogledaj sve članke',
+                recentProjects: 'Najnoviji projekti i uvidi',
+                recentProjectsSubtitle: 'Otkrijte najnovije solar projekte, tehnične uvide i stručne savjete našeg tima',
                 whatYouFind: 'Što ćete pronaći',
                 technicalGuides: 'Tehnički vodiči',
                 technicalGuidesText: 'Detaljni vodiči za instalaciju, održavanje i optimizaciju solarnih sustava.',
@@ -284,9 +293,9 @@ export class TranslationService {
             checkout: {
                 title: 'Naplata',
                 completeOrder: 'Dovršite svoju narudžbu',
-                step1: 'Informacije o dostavi',
-                step2: 'Način plaćanja',
-                step3: 'Pregled narudžbe',
+                step1: 'Pregled narudžbe',
+                step2: 'Informacije o dostavi',
+                step3: 'Način plaćanja',
                 orderSummary: 'Sažetak narudžbe',
                 subtotal: 'Međuzbroj',
                 tax: 'Porez',
@@ -312,8 +321,8 @@ export class TranslationService {
                 processing: 'Obrađujemo...',
                 orderPlaced: 'Narudžba je uspješno poslana!',
                 orderNumber: 'Broj narudžbe: {{number}}',
-                backToStep: 'Nazad na {{step}}',
-                nextStep: 'Sljedeći korak'
+                backStep: 'Nazad na',
+                nextStep: 'Nastavi na'
             },
             // Footer
             footer: {
@@ -349,6 +358,13 @@ export class TranslationService {
                 solidProduct: 'Solidan proizvod',
                 outstandingService: 'Izvanredna korisnička služba'
             },
+            // Search
+            search: {
+                searchProducts: 'Pretraži proizvode',
+                search: 'Pretraži',
+                placeholder: 'Unesite naziv ili opis proizvoda...',
+                searchByName: 'Pretraži po nazivu ili opisu...'
+            },
             // Contact & Support
             contactSupport: {
                 title: 'Kontakti i pomoć',
@@ -368,7 +384,7 @@ export class TranslationService {
                 installationGuidance: 'Voditi vas u ugradnji ili korištenju materijala.',
                 issueResolution: 'Pomoći vam s bilo kojim problemima, osiguravajući brza i učinkovita rješenja.',
                 technicalSupport: 'Tehnička podrška i izložbeni salon',
-                technicalSupportText: 'Ako želite direktniji kontakt, ili ako vaš projekt zahtijeva specifičnu tehničku podršku, možete posjetiti jedan od naših izložbenih salona ili centara za pomoć, gdje možete razgovarati s našim stručnjacima i vidjeti proizvode izbliza.',
+                technicalSupportText: 'Ako želite direktniji kontakt, ili ako vaš projekt zahtijeva specifičnu tehničku podršku, možete posjetiti jedan od naših centara za pomoć, gdje možete razgovarati s našim stručnjacima i vidjeti proizvode izbliza.',
                 viewNearestPoint: 'Pogledajte najbliže mjesto',
                 returnsShipping: 'Politika povrata i dostave',
                 returnsShippingText: 'Konzultirajte naš odjel posvećen Politici povrata i dostave da biste saznali o postupcima povrata, rokovima dostave i uvjetima za bilo kakve povrate novca. Uvijek smo transparentni, tako da možete kupovati s povjerenjem znajući da se možete osloniti na nas u slučaju promjena ili problema.',
@@ -451,11 +467,11 @@ export class TranslationService {
             // Navigation
             nav: {
                 products: 'Products',
-                offers: 'Offers & Promotions',
+                offers: 'Deals',
                 sustainability: 'Sustainability',
-                blog: 'Blog & Guides',
-                company: 'Company',
-                contact: 'Contacts & Support',
+                blog: 'Blog',
+                company: 'About us',
+                contact: 'Contact & Support',
                 searchPlaceholder: 'Search products...'
             },
             // Authentication
@@ -561,10 +577,13 @@ export class TranslationService {
             },
             // Hero Section
             hero: {
-                mainTitle: 'Eco-Friendly Materials For A Greener Tomorrow',
-                subtitle: 'Discover our range of sustainable building solutions, designed to reduce environmental impact while maintaining exceptional quality and style.',
+                mainTitle: 'Your Destination for Solar Energy',
+                subtitle: 'Shop high-quality solar panels, inverters, batteries and equipment. Everything you need for your own solar energy system in one place.',
                 exploreProducts: 'Explore Products',
-                loading: 'Loading...'
+                exploreOffers: 'Explore Offers',
+                loading: 'Loading...',
+                noOffersAvailable: 'No offers available at the moment',
+                primeDeal: 'Prime Deal'
             },
             // Products
             products: {
@@ -652,6 +671,12 @@ export class TranslationService {
                 tryAgain: 'Try Again',
                 featured: 'Featured',
                 loadMore: 'Load More',
+                noPosts: 'No articles',
+                noPostsText: 'Currently no articles available. Check back later.',
+                readMore: 'Read more',
+                viewAllPosts: 'View all articles',
+                recentProjects: 'Latest projects and insights',
+                recentProjectsSubtitle: 'Discover the latest solar projects, technical insights and expert advice from our team',
                 whatYouFind: 'What you\'ll find',
                 technicalGuides: 'Technical Guides',
                 technicalGuidesText: 'Detailed guides for installation, maintenance and optimization of solar systems.',
@@ -718,9 +743,9 @@ export class TranslationService {
             checkout: {
                 title: 'Checkout',
                 completeOrder: 'Complete your order',
-                step1: 'Shipping Information',
-                step2: 'Payment Method',
-                step3: 'Order Review',
+                step1: 'Order Review',
+                step2: 'Shipping Information',
+                step3: 'Payment Method',
                 orderSummary: 'Order Summary',
                 subtotal: 'Subtotal',
                 tax: 'Tax',
@@ -746,8 +771,8 @@ export class TranslationService {
                 processing: 'Processing...',
                 orderPlaced: 'Order placed successfully!',
                 orderNumber: 'Order number: {{number}}',
-                backToStep: 'Back to {{step}}',
-                nextStep: 'Next Step'
+                backStep: 'Back to',
+                nextStep: 'Continue to'
             },
             // Footer
             footer: {
@@ -782,6 +807,13 @@ export class TranslationService {
                 highlyRecommended: 'Highly recommended!',
                 solidProduct: 'Solid product',
                 outstandingService: 'Outstanding customer service'
+            },
+            // Search
+            search: {
+                searchProducts: 'Search products',
+                search: 'Search',
+                placeholder: 'Enter product name or description...',
+                searchByName: 'Search by name or description...'
             },
             // Contact & Support
             contactSupport: {

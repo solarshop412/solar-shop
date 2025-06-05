@@ -1,11 +1,19 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Subject, from, takeUntil, catchError, of, finalize } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { BlogPost } from '../../../shared/models/blog.model';
-import { SupabaseService } from '../../../services/supabase.service';
-import { BlogDataMapperService, SupabaseBlogPost } from '../../../services/blog-data-mapper.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { BlogActions } from './store/blog.actions';
+import {
+  selectBlogPosts,
+  selectBlogIsLoading,
+  selectBlogError,
+  selectFilteredPosts,
+  selectPostCategories,
+  selectFilteredCategory
+} from './store/blog.selectors';
 
 @Component({
   selector: 'app-blog',
@@ -14,7 +22,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   template: `
     <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-green-600 to-green-800 text-white py-20 px-4 md:px-8 lg:px-32">
+    <section class="relative bg-gradient-to-br from-solar-600 to-solar-800 text-white py-20 px-4 md:px-8 lg:px-32">
       <div class="max-w-6xl mx-auto text-center">
         <h1 class="font-['Poppins'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
           {{ 'blog.title' | translate }}
@@ -32,43 +40,43 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
         <div class="flex flex-wrap justify-center gap-3 mb-16">
           <button 
             (click)="filterByCategory(null)"
-            [class]="selectedCategory === null ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            [class]="(selectedCategory$ | async) === null ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
             class="px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider transition-colors">
             {{ 'blog.allPosts' | translate }}
           </button>
           <button 
-            *ngFor="let category of categories"
+            *ngFor="let category of categories$ | async"
             (click)="filterByCategory(category.id)"
-            [class]="selectedCategory === category.id ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
+            [class]="(selectedCategory$ | async) === category.id ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-800 hover:bg-gray-200'"
             class="px-4 py-2 rounded-full text-sm font-medium font-['DM_Sans'] uppercase tracking-wider transition-colors">
             {{ category.name }}
           </button>
         </div>
 
         <!-- Loading State -->
-        <div *ngIf="loading" class="flex justify-center items-center py-20">
+        <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-20">
           <div class="flex flex-col items-center space-y-4">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600"></div>
             <p class="text-gray-600">{{ 'blog.loading' | translate }}</p>
           </div>
         </div>
 
         <!-- Error State -->
-        <div *ngIf="error && !loading" class="text-center py-20">
+        <div *ngIf="error$ | async as error" class="text-center py-20">
           <div class="text-red-600 text-6xl mb-4">📝</div>
           <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ 'blog.unableToLoad' | translate }}</h2>
           <p class="text-gray-600 mb-6">{{ error }}</p>
           <button 
             (click)="loadBlogPosts()"
-            class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+            class="bg-solar-600 text-white px-6 py-3 rounded-lg hover:bg-solar-700 transition-colors">
             {{ 'blog.tryAgain' | translate }}
           </button>
         </div>
 
         <!-- Blog Posts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" *ngIf="!loading && !error">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" *ngIf="!(isLoading$ | async) && !(error$ | async)">
           <article 
-            *ngFor="let post of displayedPosts"
+            *ngFor="let post of filteredPosts$ | async"
             class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer"
             (click)="navigateToPost(post.id)"
           >
@@ -90,7 +98,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                 </div>
               </div>
               <div class="flex items-center justify-between mb-2">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                <span class="bg-solar-100 text-solar-800 px-2 py-1 rounded text-xs font-medium">
                   {{ post.category.name }}
                 </span>
                 <span *ngIf="post.featured" class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs font-medium">
@@ -115,83 +123,16 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
           </article>
         </div>
 
-        <!-- Load More Button -->
-        <div class="text-center" *ngIf="!loading && !error && hasMorePosts">
-          <button 
-            (click)="loadMorePosts()"
-            [disabled]="loadingMore"
-            class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-            <span *ngIf="!loadingMore">{{ 'blog.loadMore' | translate }}</span>
-            <span *ngIf="loadingMore" class="flex items-center space-x-2">
-              <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              <span>{{ 'common.loading' | translate }}</span>
-            </span>
-          </button>
+        <!-- Empty State -->
+        <div *ngIf="!(isLoading$ | async) && !(error$ | async) && (filteredPosts$ | async)?.length === 0" class="text-center py-20">
+          <div class="text-gray-400 text-6xl mb-4">📝</div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ 'blog.noPosts' | translate }}</h2>
+          <p class="text-gray-600 mb-6">{{ 'blog.noPostsText' | translate }}</p>
         </div>
       </div>
     </section>
 
-    <!-- What You'll Find Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-32 bg-gray-50">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <!-- Left Column -->
-          <div class="space-y-8">
-            <h2 class="font-['Poppins'] font-semibold text-2xl text-gray-800 leading-tight">
-              {{ 'blog.whatYouFind' | translate }}
-            </h2>
-            
-            <div class="space-y-6">
-              <div class="space-y-2">
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">{{ 'blog.technicalGuides' | translate }}</h3>
-                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                  {{ 'blog.technicalGuidesText' | translate }}
-                </p>
-              </div>
-              
-              <div class="space-y-2">
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">{{ 'blog.regulationsInsights' | translate }}</h3>
-                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                  {{ 'blog.regulationsText' | translate }}
-                </p>
-              </div>
-              
-              <div class="space-y-2">
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">{{ 'blog.sustainabilityTips' | translate }}</h3>
-                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                  {{ 'blog.sustainabilityText' | translate }}
-                </p>
-              </div>
-              
-              <div class="space-y-2">
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">{{ 'blog.caseStudies' | translate }}</h3>
-                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                  {{ 'blog.caseStudiesText' | translate }}
-                </p>
-              </div>
-              
-              <div class="space-y-2">
-                <h3 class="font-['DM_Sans'] font-semibold text-lg text-gray-800">{{ 'blog.faqTutorials' | translate }}</h3>
-                <p class="font-['DM_Sans'] text-base text-gray-600 leading-relaxed">
-                  {{ 'blog.faqText' | translate }}
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Right Column -->
-          <div class="space-y-8">
-            <h2 class="font-['Poppins'] font-semibold text-2xl text-gray-800 leading-tight">
-              {{ 'blog.trustedPartner' | translate }}
-            </h2>
-            
-            <p class="font-['DM_Sans'] text-base text-gray-800 leading-relaxed">
-              {{ 'blog.partnerText' | translate }}
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+
     </div>
   `,
   styles: [`
@@ -213,23 +154,28 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 })
 export class BlogComponent implements OnInit, OnDestroy {
   private router = inject(Router);
-  private supabaseService = inject(SupabaseService);
-  private blogMapper = inject(BlogDataMapperService);
+  private store = inject(Store);
   private destroy$ = new Subject<void>();
 
-  blogPosts: BlogPost[] = [];
-  displayedPosts: BlogPost[] = [];
-  categories: any[] = [];
-  selectedCategory: string | null = null;
-  loading = true;
-  loadingMore = false;
-  error: string | null = null;
-  hasMorePosts = true;
-  currentPage = 0;
-  postsPerPage = 9;
+  // NgRx Observables
+  blogPosts$: Observable<BlogPost[]>;
+  filteredPosts$: Observable<BlogPost[]>;
+  categories$: Observable<any[]>;
+  isLoading$: Observable<boolean>;
+  error$: Observable<string | null>;
+  selectedCategory$: Observable<string | null>;
+
+  constructor() {
+    // Initialize observables from store
+    this.blogPosts$ = this.store.select(selectBlogPosts);
+    this.filteredPosts$ = this.store.select(selectFilteredPosts);
+    this.categories$ = this.store.select(selectPostCategories);
+    this.isLoading$ = this.store.select(selectBlogIsLoading);
+    this.error$ = this.store.select(selectBlogError);
+    this.selectedCategory$ = this.store.select(selectFilteredCategory);
+  }
 
   ngOnInit() {
-    this.loadCategories();
     this.loadBlogPosts();
   }
 
@@ -238,94 +184,21 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadCategories() {
-    from(this.supabaseService.getCategories()).pipe(
-      catchError((error: any) => {
-        console.error('Error loading categories:', error);
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any[]) => {
-      this.categories = data;
-    });
-  }
-
   loadBlogPosts() {
-    this.loading = true;
-    this.error = null;
-    this.currentPage = 0;
-
-    from(this.supabaseService.getBlogPosts({
-      limit: this.postsPerPage,
-      offset: 0
-    })).pipe(
-      catchError((error: any) => {
-        console.error('Error loading blog posts:', error);
-        this.error = 'Unable to load articles. Please try again later.';
-        return of([]);
-      }),
-      finalize(() => this.loading = false),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any[]) => {
-      this.blogPosts = this.blogMapper.mapSupabaseToBlogPosts(data as SupabaseBlogPost[]);
-      this.applyFilters();
-      this.hasMorePosts = data.length === this.postsPerPage;
-    });
-  }
-
-  loadMorePosts() {
-    if (this.loadingMore || !this.hasMorePosts) return;
-
-    this.loadingMore = true;
-    this.currentPage++;
-
-    from(this.supabaseService.getBlogPosts({
-      categoryId: this.selectedCategory || undefined,
-      limit: this.postsPerPage,
-      offset: this.currentPage * this.postsPerPage
-    })).pipe(
-      catchError((error: any) => {
-        console.error('Error loading more posts:', error);
-        this.currentPage--; // Revert page increment on error
-        return of([]);
-      }),
-      finalize(() => this.loadingMore = false),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any[]) => {
-      const newPosts = this.blogMapper.mapSupabaseToBlogPosts(data as SupabaseBlogPost[]);
-      this.blogPosts.push(...newPosts);
-      this.applyFilters();
-      this.hasMorePosts = data.length === this.postsPerPage;
-    });
+    console.log('BlogComponent: Dispatching loadBlogPosts action');
+    this.store.dispatch(BlogActions.loadBlogPosts());
   }
 
   filterByCategory(categoryId: string | null) {
-    this.selectedCategory = categoryId;
-    this.currentPage = 0;
-    this.loadingMore = false;
-
-    from(this.supabaseService.getBlogPosts({
-      categoryId: categoryId || undefined,
-      limit: this.postsPerPage,
-      offset: 0
-    })).pipe(
-      catchError((error: any) => {
-        console.error('Error filtering posts:', error);
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any[]) => {
-      this.blogPosts = this.blogMapper.mapSupabaseToBlogPosts(data as SupabaseBlogPost[]);
-      this.applyFilters();
-      this.hasMorePosts = data.length === this.postsPerPage;
-    });
+    this.store.dispatch(BlogActions.filterByCategory({ category: categoryId || '' }));
   }
 
-  private applyFilters() {
-    this.displayedPosts = [...this.blogPosts];
+  searchPosts(query: string) {
+    this.store.dispatch(BlogActions.searchPosts({ query }));
   }
 
   navigateToPost(postId: string) {
+    this.store.dispatch(BlogActions.selectPost({ postId }));
     this.router.navigate(['/blog', postId]);
   }
 

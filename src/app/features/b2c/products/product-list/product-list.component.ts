@@ -14,7 +14,8 @@ import {
   selectSortOption,
   selectCategories,
   selectManufacturers,
-  selectCertificates
+  selectCertificates,
+  selectSearchQuery
 } from './store/product-list.selectors';
 import { AddToCartButtonComponent } from '../../cart/components/add-to-cart-button/add-to-cart-button.component';
 import * as CartActions from '../../cart/store/cart.actions';
@@ -68,6 +69,25 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sticky top-8">
               <h3 class="text-lg font-semibold text-gray-900 mb-6 font-['Poppins']">{{ 'productList.filters' | translate }}</h3>
               
+              <!-- Search Bar -->
+              <div class="mb-6">
+                <h4 class="text-sm font-medium text-gray-900 mb-3 font-['DM_Sans']">{{ 'search.search' | translate }}</h4>
+                <div class="relative">
+                  <input 
+                    type="text"
+                    [(ngModel)]="currentSearchQuery"
+                    (ngModelChange)="onSearchChange($event)"
+                    [placeholder]="'search.searchByName' | translate"
+                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-md text-sm focus:ring-solar-500 focus:border-solar-500 font-['DM_Sans']"
+                  >
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
               <!-- Categories Filter -->
               <div class="mb-6">
                 <h4 class="text-sm font-medium text-gray-900 mb-3 font-['DM_Sans']">{{ 'productList.categories' | translate }}</h4>
@@ -78,7 +98,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                       [value]="category"
                       [checked]="(filters$ | async)?.categories?.includes(category) || false"
                       (change)="onCategoryChange(category, $event)"
-                      class="rounded border-gray-300 text-[#0ACF83] focus:ring-[#0ACF83]"
+                      class="rounded border-gray-300 text-solar-600 focus:ring-solar-500"
                     >
                     <span class="ml-2 text-sm text-gray-700 font-['DM_Sans']">{{ category }}</span>
                   </label>
@@ -95,7 +115,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                       [placeholder]="'productList.min' | translate"
                       [value]="(filters$ | async)?.priceRange?.min || 0"
                       (input)="onPriceRangeChange('min', $event)"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-[#0ACF83] focus:border-[#0ACF83]"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-solar-500 focus:border-solar-500"
                     >
                     <span class="text-gray-500">-</span>
                     <input 
@@ -103,7 +123,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                       [placeholder]="'productList.max' | translate"
                       [value]="(filters$ | async)?.priceRange?.max || 0"
                       (input)="onPriceRangeChange('max', $event)"
-                      class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-[#0ACF83] focus:border-[#0ACF83]"
+                      class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-solar-500 focus:border-solar-500"
                     >
                   </div>
                 </div>
@@ -119,7 +139,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                       [value]="certificate"
                       [checked]="(filters$ | async)?.certificates?.includes(certificate) || false"
                       (change)="onCertificateChange(certificate, $event)"
-                      class="rounded border-gray-300 text-[#0ACF83] focus:ring-[#0ACF83]"
+                      class="rounded border-gray-300 text-solar-600 focus:ring-solar-500"
                     >
                     <span class="ml-2 text-sm text-gray-700 font-['DM_Sans']">{{ certificate }}</span>
                   </label>
@@ -136,7 +156,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                       [value]="manufacturer"
                       [checked]="(filters$ | async)?.manufacturers?.includes(manufacturer) || false"
                       (change)="onManufacturerChange(manufacturer, $event)"
-                      class="rounded border-gray-300 text-[#0ACF83] focus:ring-[#0ACF83]"
+                      class="rounded border-gray-300 text-solar-600 focus:ring-solar-500"
                     >
                     <span class="ml-2 text-sm text-gray-700 font-['DM_Sans']">{{ manufacturer }}</span>
                   </label>
@@ -165,7 +185,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                 <select 
                   [value]="sortOption$ | async"
                   (change)="onSortChange($event)"
-                  class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-[#0ACF83] focus:border-[#0ACF83] font-['DM_Sans']"
+                  class="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-solar-500 focus:border-solar-500 font-['DM_Sans']"
                 >
                   <option value="featured">{{ 'productList.featured' | translate }}</option>
                   <option value="newest">{{ 'productList.newestArrivals' | translate }}</option>
@@ -194,7 +214,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
                   <!-- Discount Badge -->
                   <div 
                     *ngIf="product.discount" 
-                    class="absolute top-3 left-3 bg-[#0ACF83] text-white px-2 py-1 rounded-full text-xs font-semibold"
+                    class="absolute top-3 left-3 bg-solar-500 text-white px-2 py-1 rounded-full text-xs font-semibold"
                   >
                     -{{ product.discount }}%
                   </div>
@@ -265,7 +285,7 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
 
             <!-- Loading State -->
             <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-12">
-              <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#0ACF83] border-t-transparent"></div>
+              <div class="animate-spin rounded-full h-12 w-12 border-4 border-solar-500 border-t-transparent"></div>
             </div>
 
             <!-- Empty State -->
@@ -311,6 +331,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   categories$: Observable<string[]>;
   manufacturers$: Observable<string[]>;
   certificates$: Observable<string[]>;
+  searchQuery$: Observable<string>;
+
+  currentSearchQuery = '';
 
   constructor() {
     this.products$ = this.store.select(selectProducts);
@@ -321,15 +344,25 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.categories$ = this.store.select(selectCategories);
     this.manufacturers$ = this.store.select(selectManufacturers);
     this.certificates$ = this.store.select(selectCertificates);
+    this.searchQuery$ = this.store.select(selectSearchQuery);
   }
 
   ngOnInit(): void {
     this.store.dispatch(ProductListActions.loadProducts());
 
-    // Handle category filtering from query parameters
+    // Handle query parameters
     this.route.queryParams.pipe(
       takeUntil(this.destroy$)
     ).subscribe(params => {
+      // Handle search from navbar
+      if (params['search']) {
+        this.currentSearchQuery = params['search'];
+        this.store.dispatch(ProductListActions.searchProducts({
+          query: params['search']
+        }));
+      }
+
+      // Handle category filtering from query parameters
       if (params['category']) {
         // Clear existing filters first
         this.store.dispatch(ProductListActions.clearFilters());
@@ -340,11 +373,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
         }));
       }
     });
+
+    // Subscribe to search query changes from store to update local state
+    this.searchQuery$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(query => {
+      this.currentSearchQuery = query || '';
+    });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  onSearchChange(query: string): void {
+    this.store.dispatch(ProductListActions.searchProducts({ query }));
   }
 
   onCategoryChange(category: string, event: Event): void {
@@ -376,6 +420,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   clearFilters(): void {
     this.store.dispatch(ProductListActions.clearFilters());
+    this.currentSearchQuery = '';
+    this.store.dispatch(ProductListActions.searchProducts({ query: '' }));
   }
 
   trackByProductId(index: number, product: Product): string {
