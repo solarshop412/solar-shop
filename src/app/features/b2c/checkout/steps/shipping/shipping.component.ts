@@ -222,16 +222,12 @@ export class ShippingComponent {
   }
 
   onSubmit() {
-    if (this.shippingForm.valid) {
-      // Save shipping information
-      console.log('Shipping form data:', this.shippingForm.value);
-      this.router.navigate(['/checkout/payment']);
-    } else {
-      // Mark all fields as touched to show validation errors
-      Object.keys(this.shippingForm.controls).forEach(key => {
-        this.shippingForm.get(key)?.markAsTouched();
-      });
-    }
+    // Save shipping information to localStorage for payment step
+    const shippingData = this.shippingForm.value;
+    localStorage.setItem('shippingInfo', JSON.stringify(shippingData));
+
+    console.log('Shipping form data saved:', shippingData);
+    this.router.navigate(['/checkout/payment']);
   }
 
   goBack() {
