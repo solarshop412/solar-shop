@@ -20,6 +20,12 @@ import { PrivacyPolicyComponent } from './features/b2c/privacy-policy/privacy-po
 import { TermsOfServiceComponent } from './features/b2c/terms-of-service/terms-of-service.component';
 import { CookiePolicyComponent } from './features/b2c/cookie-policy/cookie-policy.component';
 import { PartnersComponent } from './features/b2b/partners/partners.component';
+import { PartnersRegisterComponent } from './features/b2b/partners/register/partners-register.component';
+import { PartnersProductsComponent } from './features/b2b/partners/products/partners-products.component';
+import { PartnersOffersComponent } from './features/b2b/partners/offers/partners-offers.component';
+import { PartnersOfferDetailsComponent } from './features/b2b/partners/offers/partners-offer-details.component';
+import { PartnersContactComponent } from './features/b2b/partners/contact/partners-contact.component';
+import { B2bLayoutComponent } from './features/b2b/shared/layout/b2b-layout.component';
 import { CheckoutComponent } from './features/b2c/checkout/checkout.component';
 import { OrderReviewComponent } from './features/b2c/checkout/steps/order-review/order-review.component';
 import { ShippingComponent } from './features/b2c/checkout/steps/shipping/shipping.component';
@@ -34,6 +40,11 @@ import { AdminOffersComponent } from './features/admin/offers/admin-offers.compo
 import { AdminUsersComponent } from './features/admin/users/admin-users.component';
 import { AdminOrdersComponent } from './features/admin/orders/admin-orders.component';
 import { AdminReviewsComponent } from './features/admin/reviews/admin-reviews.component';
+import { AdminCompanyPricingComponent } from './features/admin/company-pricing/admin-company-pricing.component';
+import { CompanyPricingFormComponent } from './features/admin/company-pricing/company-pricing-form/company-pricing-form.component';
+import { CompanyPricingDetailsComponent } from './features/admin/company-pricing/company-pricing-details/company-pricing-details.component';
+import { AdminCompaniesComponent } from './features/admin/companies/admin-companies.component';
+import { AdminWishlistComponent } from './features/admin/wishlist/admin-wishlist.component';
 import { CategoryFormComponent } from './features/admin/categories/category-form/category-form.component';
 import { ProductFormComponent } from './features/admin/products/product-form/product-form.component';
 import { OfferFormComponent } from './features/admin/offers/offer-form/offer-form.component';
@@ -41,6 +52,9 @@ import { BlogFormComponent } from './features/admin/blog/blog-form/blog-form.com
 import { UserFormComponent } from './features/admin/users/user-form/user-form.component';
 import { OrderFormComponent } from './features/admin/orders/order-form/order-form.component';
 import { OrderDetailsComponent } from './features/b2c/order-details/order-details.component';
+// Import admin detail components
+import { OfferDetailsComponent as AdminOfferDetailsComponent } from './features/admin/offers/offer-details/offer-details.component';
+import { OrderDetailsComponent as AdminOrderDetailsComponent } from './features/admin/orders/order-details/order-details.component';
 
 export const routes: Routes = [
     // Authentication routes (no layout) - no guards needed, Supabase handles auth state
@@ -67,7 +81,7 @@ export const routes: Routes = [
             { path: 'privacy', component: PrivacyPolicyComponent },
             { path: 'terms', component: TermsOfServiceComponent },
             { path: 'cookies', component: CookiePolicyComponent },
-            { path: 'partners', component: PartnersComponent },
+
 
             // Protected routes
             { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
@@ -84,6 +98,20 @@ export const routes: Routes = [
                     { path: 'payment', component: PaymentComponent }
                 ]
             }
+        ]
+    },
+
+    // B2B routes (with B2B layout)
+    {
+        path: 'partners',
+        component: B2bLayoutComponent,
+        children: [
+            { path: '', component: PartnersComponent },
+            { path: 'register', component: PartnersRegisterComponent },
+            { path: 'products', component: PartnersProductsComponent },
+            { path: 'offers', component: PartnersOffersComponent },
+            { path: 'offers/:id', component: PartnersOfferDetailsComponent },
+            { path: 'contact', component: PartnersContactComponent },
         ]
     },
 
@@ -114,6 +142,7 @@ export const routes: Routes = [
             { path: 'offers', component: AdminOffersComponent },
             { path: 'offers/create', component: OfferFormComponent },
             { path: 'offers/edit/:id', component: OfferFormComponent },
+            { path: 'offers/details/:id', component: AdminOfferDetailsComponent },
 
             // Users
             { path: 'users', component: AdminUsersComponent },
@@ -124,6 +153,19 @@ export const routes: Routes = [
             { path: 'orders', component: AdminOrdersComponent },
             { path: 'orders/create', component: OrderFormComponent },
             { path: 'orders/edit/:id', component: OrderFormComponent },
+            { path: 'orders/details/:id', component: AdminOrderDetailsComponent },
+
+            // Company Pricing
+            { path: 'company-pricing', component: AdminCompanyPricingComponent },
+            { path: 'company-pricing/create', component: CompanyPricingFormComponent },
+            { path: 'company-pricing/edit/:id', component: CompanyPricingFormComponent },
+            { path: 'company-pricing/company/:companyId', component: CompanyPricingDetailsComponent },
+
+            // Companies
+            { path: 'companies', component: AdminCompaniesComponent },
+
+            // Wishlist
+            { path: 'wishlist', component: AdminWishlistComponent },
 
             // Reviews
             { path: 'reviews', component: AdminReviewsComponent }

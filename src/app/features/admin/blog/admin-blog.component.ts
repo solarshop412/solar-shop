@@ -10,16 +10,18 @@ import { DataTableComponent, TableConfig } from '../shared/data-table/data-table
     standalone: true,
     imports: [CommonModule, DataTableComponent],
     template: `
-    <div class="space-y-6">
+    <div class="w-full">
+      <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
       <!-- Page Header -->
-      <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">Blog Posts</h1>
-          <p class="mt-2 text-gray-600">Manage blog content and articles</p>
+        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+          <div class="min-w-0 flex-1">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate">Blog Posts</h1>
+            <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">Manage blog content and articles</p>
         </div>
       </div>
 
-      <!-- Data Table -->
+        <!-- Data Table Container -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <app-data-table
         title="Blog Posts"
         [data]="(posts$ | async) || []"
@@ -30,6 +32,8 @@ import { DataTableComponent, TableConfig } from '../shared/data-table/data-table
         (rowClicked)="onRowClick($event)"
         (csvImported)="onCsvImported($event)">
       </app-data-table>
+        </div>
+      </div>
     </div>
   `,
     styles: [`
@@ -65,20 +69,6 @@ export class AdminBlogComponent implements OnInit {
                 searchable: true
             },
             {
-                key: 'slug',
-                label: 'Slug',
-                type: 'text',
-                sortable: true,
-                searchable: true
-            },
-            {
-                key: 'category_id',
-                label: 'Category',
-                type: 'text',
-                sortable: true,
-                searchable: true
-            },
-            {
                 key: 'status',
                 label: 'Status',
                 type: 'status',
@@ -89,24 +79,18 @@ export class AdminBlogComponent implements OnInit {
                 label: 'Published',
                 type: 'date',
                 sortable: true
-            },
-            {
-                key: 'created_at',
-                label: 'Created',
-                type: 'date',
-                sortable: true
             }
         ],
         actions: [
             {
                 label: 'Edit',
-                icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>',
+                icon: 'edit',
                 action: 'edit',
                 class: 'text-blue-600 hover:text-blue-900'
             },
             {
                 label: 'Delete',
-                icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>',
+                icon: 'trash2',
                 action: 'delete',
                 class: 'text-red-600 hover:text-red-900'
             }

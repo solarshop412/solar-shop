@@ -1,8 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { takeUntil, filter, map, take } from 'rxjs/operators';
 import { Product } from '../../../product-list/product-list.component';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
+import { ToastService } from '../../../../../../shared/services/toast.service';
+import { TranslationService } from '../../../../../../shared/services/translation.service';
+import * as WishlistActions from '../../../../../b2c/wishlist/store/wishlist.actions';
+import {
+  selectIsProductInWishlist,
+  selectAddingToWishlist,
+  selectRemovingFromWishlist
+} from '../../../../../b2c/wishlist/store/wishlist.selectors';
+import { selectCurrentUser } from '../../../../../../core/auth/store/auth.selectors';
 
 @Component({
   selector: 'app-product-info',
@@ -47,19 +59,30 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
               'bg-red-100 text-red-800': product.availability === 'out-of-stock'
             }"
           >
-            {{ getAvailabilityText(product.availability) }}
+            {{ getAvailabilityText(product.availability) | translate }}
           </span>
         </div>
       </div>
 
       <!-- Price -->
       <div class="border-t border-gray-200 pt-6">
-        <div class="flex items-center space-x-4 mb-4">
+        <!-- Company Pricing Badge -->
+        <div *ngIf="isCompanyPricing" class="mb-4">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-solar-100 text-solar-800">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            {{ 'b2b.products.partnerPrice' | translate }}
+          </span>
+        </div>
+
+        <!-- Regular Pricing -->
+        <div *ngIf="!isCompanyPricing" class="flex items-center space-x-4 mb-4">
           <span class="text-3xl font-bold text-gray-900 font-['DM_Sans']">
             €{{ product.price.toLocaleString() }}
           </span>
           <span 
-            *ngIf="product.originalPrice" 
+            *ngIf="product.originalPrice && product.originalPrice !== product.price" 
             class="text-xl text-gray-500 line-through font-['DM_Sans']"
           >
             €{{ product.originalPrice.toLocaleString() }}
@@ -71,6 +94,34 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
             -{{ product.discount }}%
           </span>
         </div>
+
+        <!-- Company Pricing -->
+        <div *ngIf="isCompanyPricing" class="space-y-3 mb-4">
+          <!-- Retail Price -->
+          <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+            <span class="text-sm text-gray-600 font-['DM_Sans']">{{ 'b2b.products.retailPrice' | translate }}:</span>
+            <span class="text-lg text-gray-500 line-through font-['DM_Sans']">
+              €{{ product.price.toLocaleString() }}
+            </span>
+          </div>
+          
+          <!-- Company Price -->
+          <div class="flex items-center justify-between bg-solar-50 p-4 rounded-lg border-2 border-solar-200">
+            <span class="text-base font-semibold text-solar-700 font-['DM_Sans']">{{ 'b2b.products.partnerPrice' | translate }}:</span>
+            <span class="text-3xl font-bold text-solar-600 font-['DM_Sans']">
+              €{{ getCompanyPrice().toLocaleString() }}
+            </span>
+          </div>
+          
+          <!-- Savings -->
+          <div class="flex items-center justify-between bg-green-50 p-3 rounded-lg">
+            <span class="text-sm font-medium text-green-700 font-['DM_Sans']">{{ 'b2b.products.savings' | translate }}:</span>
+            <span class="text-lg font-bold text-green-600 font-['DM_Sans']">
+              €{{ getCompanySavings().toLocaleString() }} ({{ COMPANY_DISCOUNT_PERCENTAGE }}% off)
+            </span>
+          </div>
+        </div>
+
         <p class="text-sm text-gray-600 font-['DM_Sans']">
           {{ 'productDetails.priceIncludesVat' | translate }}
         </p>
@@ -161,13 +212,41 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
           </button>
           
           <button 
-            (click)="addToWishlist()"
-            class="w-full px-6 py-3 bg-white text-gray-700 font-semibold border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-['DM_Sans']"
+            (click)="toggleWishlist()"
+            [disabled]="(wishlistState$ | async)?.addingToWishlist || (wishlistState$ | async)?.removingFromWishlist === product.id"
+            class="w-full px-6 py-3 font-semibold border rounded-lg transition-colors font-['DM_Sans']"
+            [ngClass]="{
+              'bg-red-50 text-red-700 border-red-300 hover:bg-red-100': (wishlistState$ | async)?.isInWishlist,
+              'bg-white text-gray-700 border-gray-300 hover:bg-gray-50': !(wishlistState$ | async)?.isInWishlist,
+              'opacity-50 cursor-not-allowed': (wishlistState$ | async)?.addingToWishlist || (wishlistState$ | async)?.removingFromWishlist === product.id
+            }"
           >
-            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Loading spinner when adding/removing -->
+            <svg 
+              *ngIf="(wishlistState$ | async)?.addingToWishlist || (wishlistState$ | async)?.removingFromWishlist === product.id" 
+              class="w-5 h-5 inline mr-2 animate-spin" 
+              fill="none" 
+              viewBox="0 0 24 24"
+            >
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            
+            <!-- Heart icon -->
+            <svg 
+              *ngIf="!((wishlistState$ | async)?.addingToWishlist || (wishlistState$ | async)?.removingFromWishlist === product.id)"
+              class="w-5 h-5 inline mr-2" 
+              [class.fill-current]="(wishlistState$ | async)?.isInWishlist"
+              [class.text-red-500]="(wishlistState$ | async)?.isInWishlist"
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
             </svg>
-            {{ 'productDetails.addToWishlist' | translate }}
+            
+            <span *ngIf="(wishlistState$ | async)?.isInWishlist">{{ 'productDetails.removeFromWishlist' | translate }}</span>
+            <span *ngIf="!(wishlistState$ | async)?.isInWishlist">{{ 'productDetails.addToWishlist' | translate }}</span>
           </button>
         </div>
 
@@ -203,10 +282,50 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
     }
   `]
 })
-export class ProductInfoComponent {
+export class ProductInfoComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
+  @Input() isCompanyPricing: boolean = false;
 
   quantity: number = 1;
+
+  // Partner discount percentage (additional discount for company pricing)
+  readonly COMPANY_DISCOUNT_PERCENTAGE = 15;
+
+  private store = inject(Store);
+  private toastService = inject(ToastService);
+  private translationService = inject(TranslationService);
+
+  private destroy$ = new Subject<void>();
+
+  // Combined wishlist state observable for template
+  wishlistState$!: Observable<{
+    isInWishlist: boolean;
+    addingToWishlist: boolean;
+    removingFromWishlist: string | null;
+  }>;
+
+  ngOnInit(): void {
+    // Create combined observable for template
+    this.wishlistState$ = combineLatest([
+      this.store.select(selectIsProductInWishlist(this.product.id)),
+      this.store.select(selectAddingToWishlist),
+      this.store.select(selectRemovingFromWishlist)
+    ]).pipe(
+      map(([isInWishlist, addingToWishlist, removingFromWishlist]) => ({
+        isInWishlist,
+        addingToWishlist,
+        removingFromWishlist
+      }))
+    );
+
+    // Load wishlist data
+    this.store.dispatch(WishlistActions.loadWishlist());
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   getStarArray(rating: number): number[] {
     return Array(5).fill(0).map((_, i) => i < Math.floor(rating) ? 1 : 0);
@@ -238,8 +357,35 @@ export class ProductInfoComponent {
     console.log('Add to cart:', this.product, 'Quantity:', this.quantity);
   }
 
-  addToWishlist(): void {
-    // TODO: Implement add to wishlist functionality
-    console.log('Add to wishlist:', this.product);
+  toggleWishlist(): void {
+    // Check authentication first
+    this.store.select(selectCurrentUser).pipe(
+      takeUntil(this.destroy$),
+      take(1)
+    ).subscribe(user => {
+      if (!user) {
+        this.toastService.showError('Please log in to use wishlist');
+        return;
+      }
+
+      // Get current wishlist state and toggle
+      this.store.select(selectIsProductInWishlist(this.product.id)).pipe(
+        take(1)
+      ).subscribe(isInWishlist => {
+        if (isInWishlist) {
+          this.store.dispatch(WishlistActions.removeFromWishlist({ productId: this.product.id }));
+        } else {
+          this.store.dispatch(WishlistActions.addToWishlist({ productId: this.product.id }));
+        }
+      });
+    });
+  }
+
+  getCompanyPrice(): number {
+    return this.product.price * (1 - this.COMPANY_DISCOUNT_PERCENTAGE / 100);
+  }
+
+  getCompanySavings(): number {
+    return this.product.price - this.getCompanyPrice();
   }
 } 
