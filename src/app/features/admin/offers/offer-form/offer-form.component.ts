@@ -5,15 +5,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { AdminFormComponent } from '../../shared/admin-form/admin-form.component';
 import { SupabaseService } from '../../../../services/supabase.service';
+import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
+import { TranslationService } from '../../../../shared/services/translation.service';
 
 @Component({
   selector: 'app-offer-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent],
+  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent, TranslatePipe],
   template: `
     <app-admin-form
-      [title]="isEditMode ? 'Edit Offer' : 'Create Offer'"
-      [subtitle]="isEditMode ? 'Update offer information' : 'Create a new promotional offer'"
+      [title]="isEditMode ? translationService.translate('admin.offersForm.editOffer') : translationService.translate('admin.offersForm.createOffer')"
+      [subtitle]="isEditMode ? translationService.translate('admin.offersForm.updateOfferInformation') : translationService.translate('admin.offersForm.createNewOffer')"
       [form]="offerForm"
       [isEditMode]="isEditMode"
       [isSubmitting]="isSubmitting"
@@ -27,7 +29,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
             <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
             </svg>
-            Basic Information
+            {{ 'admin.basicInformation' | translate }}
           </h3>
           
           <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -40,13 +42,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 placeholder="Offer Title"
               >
               <label for="title" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Offer Title *
+                {{ 'admin.offersForm.offerTitle' | translate }} *
               </label>
               <div *ngIf="offerForm.get('title')?.invalid && offerForm.get('title')?.touched" class="mt-2 text-sm text-red-600 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-              Title is required
+              {{ 'admin.offersForm.offerTitleRequired' | translate }}
             </div>
           </div>
 
@@ -56,20 +58,20 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 formControlName="type"
                 class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 bg-white"
               >
-                <option value="">Select offer type</option>
-                <option value="percentage">Percentage Discount</option>
-                <option value="fixed">Fixed Amount</option>
-                <option value="bogo">Buy One Get One</option>
-                <option value="bundle">Bundle Deal</option>
+                <option value="">{{ 'admin.offersForm.selectOfferType' | translate }}</option>
+                <option value="percentage">{{ 'admin.offersForm.percentageDiscount' | translate }}</option>
+                <option value="fixed">{{ 'admin.offersForm.fixedAmount' | translate }}</option>
+                <option value="bogo">{{ 'admin.offersForm.buyOneGetOne' | translate }}</option>
+                <option value="bundle">{{ 'admin.offersForm.bundleDeal' | translate }}</option>
               </select>
               <label for="type" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                Offer Type *
+                {{ 'admin.offersForm.offerType' | translate }} *
               </label>
               <div *ngIf="offerForm.get('type')?.invalid && offerForm.get('type')?.touched" class="mt-2 text-sm text-red-600 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-                Offer type is required
+                {{ 'admin.offersForm.offerTypeRequired' | translate }}
               </div>
             </div>
         </div>
@@ -84,7 +86,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 placeholder="Offer Description"
           ></textarea>
               <label for="description" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Description
+                {{ 'admin.offersForm.description' | translate }}
               </label>
             </div>
           </div>
@@ -96,7 +98,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
             <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
             </svg>
-            Discount Configuration
+            {{ 'admin.offersForm.discountConfiguration' | translate }}
           </h3>
           
           <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -106,18 +108,18 @@ import { SupabaseService } from '../../../../services/supabase.service';
               formControlName="discount_type"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 bg-white"
             >
-              <option value="">Select discount type</option>
-              <option value="percentage">Percentage (%)</option>
-              <option value="amount">Fixed Amount (€)</option>
+              <option value="">{{ 'admin.offersForm.selectDiscountType' | translate }}</option>
+              <option value="percentage">{{ 'admin.offersForm.percentageDiscount' | translate }}</option>
+              <option value="amount">{{ 'admin.offersForm.fixedAmount' | translate }}</option>
             </select>
               <label class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                Discount Type *
+                {{ 'admin.offersForm.discountType' | translate }} *
               </label>
               <div *ngIf="offerForm.get('discount_type')?.invalid && offerForm.get('discount_type')?.touched" class="mt-2 text-sm text-red-600 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-              Discount type is required
+              {{ 'admin.offersForm.discountTypeRequired' | translate }}
             </div>
           </div>
 
@@ -132,13 +134,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
               [placeholder]="offerForm.get('discount_type')?.value === 'percentage' ? '10' : '50.00'"
             >
               <label for="discount_value" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Discount Value *
+                {{ 'admin.offersForm.discountValue' | translate }} *
               </label>
               <div *ngIf="offerForm.get('discount_value')?.invalid && offerForm.get('discount_value')?.touched" class="mt-2 text-sm text-red-600 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-              Discount value is required
+              {{ 'admin.offersForm.discountValueRequired' | translate }}
             </div>
           </div>
 
@@ -156,7 +158,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
               placeholder="0.00"
             >
               <label for="minimum_purchase" class="absolute left-10 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Minimum Purchase (€)
+                {{ 'admin.offersForm.minimumPurchase' | translate }} (€)
               </label>
             </div>
           </div>
@@ -168,7 +170,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
             <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
-            Validity Period
+            {{ 'admin.offersForm.validityPeriod' | translate }}
           </h3>
           
           <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -180,13 +182,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200"
               >
               <label for="start_date" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                Start Date *
+                {{ 'admin.offersForm.startDate' | translate }} *
               </label>
               <div *ngIf="offerForm.get('start_date')?.invalid && offerForm.get('start_date')?.touched" class="mt-2 text-sm text-red-600 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
-              Start date is required
+              {{ 'admin.offersForm.startDateRequired' | translate }}
             </div>
           </div>
 
@@ -198,7 +200,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200"
             >
               <label for="end_date" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                End Date
+                {{ 'admin.offersForm.endDate' | translate }}
               </label>
             </div>
           </div>
@@ -210,7 +212,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
             <svg class="w-5 h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
             </svg>
-            Usage Configuration
+            {{ 'admin.offersForm.usageConfiguration' | translate }}
           </h3>
           
           <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -224,13 +226,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
               placeholder="Unlimited"
             >
               <label for="usage_limit" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Usage Limit
+                {{ 'admin.offersForm.usageLimit' | translate }}
               </label>
               <p class="mt-2 text-sm text-gray-500 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                Leave empty for unlimited usage
+                {{ 'admin.offersForm.leaveEmptyForUnlimitedUsage' | translate }}
               </p>
           </div>
 
@@ -244,13 +246,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
               placeholder="0"
             >
               <label for="priority" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                Priority
+                {{ 'admin.offersForm.priority' | translate }}
               </label>
               <p class="mt-2 text-sm text-gray-500 flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                Higher numbers = higher priority
+                {{ 'admin.offersForm.higherNumbersHigherPriority' | translate }}
               </p>
             </div>
           </div>
@@ -272,13 +274,13 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 formControlName="status"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 bg-white"
               >
-                <option value="draft">Draft</option>
-                <option value="active">Active</option>
-                <option value="paused">Paused</option>
-                <option value="expired">Expired</option>
+                <option value="draft">{{ 'admin.offersForm.draft' | translate }}</option>
+                <option value="active">{{ 'admin.offersForm.active' | translate }}</option>
+                <option value="paused">{{ 'admin.offersForm.paused' | translate }}</option>
+                <option value="expired">{{ 'admin.offersForm.expired' | translate }}</option>
               </select>
               <label class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                Status *
+                {{ 'admin.offersForm.status' | translate }} *
               </label>
             </div>
 
@@ -298,7 +300,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                     </svg>
                   </span>
-                  <span class="text-sm font-medium text-gray-700">Active</span>
+                  <span class="text-sm font-medium text-gray-700">{{ 'admin.offersForm.active' | translate }}</span>
                 </span>
               </label>
             </div>
@@ -314,6 +316,7 @@ export class OfferFormComponent implements OnInit {
   private router = inject(Router);
   private supabaseService = inject(SupabaseService);
   private title = inject(Title);
+  translationService = inject(TranslationService);
 
   offerForm!: FormGroup;
   isEditMode = false;
