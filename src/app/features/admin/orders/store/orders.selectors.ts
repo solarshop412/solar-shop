@@ -42,3 +42,29 @@ export const selectOrderById = (orderId: string) => createSelector(
     selectOrders,
     (orders) => orders.find(order => order.id === orderId)
 );
+
+export const selectUserOrders = createSelector(
+    selectOrdersState,
+    (state: OrdersState) => state.userOrders
+);
+
+export const selectUserOrdersLoading = createSelector(
+    selectOrdersState,
+    (state: OrdersState) => state.loadingUserOrders
+);
+
+// B2C Order creation selectors
+export const selectB2COrderCreating = createSelector(
+    selectOrdersState,
+    (state: OrdersState) => state.loading
+);
+
+export const selectB2COrderCreated = createSelector(
+    selectOrdersState,
+    (state: OrdersState) => state.currentOrder
+);
+
+export const selectB2COrderError = createSelector(
+    selectOrdersState,
+    (state: OrdersState) => state.error
+);

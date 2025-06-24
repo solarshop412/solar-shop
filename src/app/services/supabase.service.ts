@@ -258,6 +258,8 @@ export class SupabaseService {
         id: string,
         record: Database['public']['Tables'][T]['Update']
     ): Promise<Database['public']['Tables'][T]['Row'] | null> {
+        console.log(`Updating ${tableName} record with id: ${id}`, record);
+
         const { data, error } = await this.supabase
             .from(tableName)
             .update(record)
@@ -265,7 +267,18 @@ export class SupabaseService {
             .select()
             .single();
 
-        if (error) throw error;
+        if (error) {
+            console.error(`Error updating ${tableName} record:`, error);
+            console.error(`Update attempted on ID: ${id} with data:`, record);
+            throw new Error(`Failed to update ${tableName}: ${error.message} (Code: ${error.code})`);
+        }
+
+        if (!data) {
+            console.error(`No data returned after updating ${tableName} with ID: ${id}`);
+            throw new Error(`Update operation completed but no data was returned for ${tableName} with ID: ${id}`);
+        }
+
+        console.log(`Successfully updated ${tableName} record:`, data);
         return data as Database['public']['Tables'][T]['Row'];
     }
 
@@ -279,6 +292,46 @@ export class SupabaseService {
             .eq('id', id);
 
         if (error) throw error;
+    }
+
+    // Admin-specific delete method that provides more detailed error logging
+    async adminDeleteRecord<T extends keyof Database['public']['Tables']>(
+        tableName: T,
+        id: string
+    ): Promise<void> {
+        console.log(`Admin attempting to delete ${tableName} record with id: ${id}`);
+
+        // First check if the record exists
+        const { data: existingRecord, error: fetchError } = await this.supabase
+            .from(tableName)
+            .select('id')
+            .eq('id', id)
+            .single();
+
+        if (fetchError) {
+            console.error(`Error fetching ${tableName} record for deletion:`, fetchError);
+            throw new Error(`Failed to find ${tableName} record: ${fetchError.message}`);
+        }
+
+        if (!existingRecord) {
+            console.error(`Record not found: ${tableName} with id ${id}`);
+            throw new Error(`Record not found: ${tableName} with id ${id}`);
+        }
+
+        console.log(`Record found, proceeding with deletion...`);
+
+        // Attempt the deletion
+        const { error } = await this.supabase
+            .from(tableName)
+            .delete()
+            .eq('id', id);
+
+        if (error) {
+            console.error(`Error deleting ${tableName} record:`, error);
+            throw new Error(`Failed to delete ${tableName}: ${error.message} (Code: ${error.code})`);
+        }
+
+        console.log(`Successfully deleted ${tableName} record with id: ${id}`);
     }
 
     // Specific business logic methods
@@ -722,5 +775,178 @@ export class SupabaseService {
     // Getter for direct client access (for special operations)
     get client(): SupabaseClient<Database> {
         return this.supabase;
+    }
+
+    // Method to find user by email using database function
+    async findAuthUserByEmail(email: string): Promise<{ id: string; email: string; profile?: any } | null> {
+        try {
+            const { data, error } = await this.supabase
+                .rpc('find_user_by_email', { user_email: email });
+
+            if (error) {
+                console.error('Error calling find_user_by_email function:', error);
+                return null;
+            }
+
+            if (data && data.length > 0) {
+                const user = data[0];
+                return {
+                    id: user.user_id,
+                    email: user.email,
+                    profile: {
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        full_name: user.full_name,
+                        role: user.role
+                    }
+                };
+            }
+
+            return null;
+        } catch (error) {
+            console.error('Error finding auth user by email:', error);
+            return null;
+        }
+    }
+
+    // Stock Management Methods
+    async decrementProductStock(productId: string, quantity: number): Promise<boolean> {
+        try {
+            console.log(`Decrementing stock for product ${productId} by ${quantity}`);
+
+            // First check current stock
+            const product = await this.getTableById('products', productId);
+            if (!product) {
+                console.error(`Product ${productId} not found`);
+                return false;
+            }
+
+            const currentStock = product.stock_quantity;
+            if (currentStock < quantity) {
+                console.error(`Insufficient stock for product ${productId}. Available: ${currentStock}, Requested: ${quantity}`);
+                return false;
+            }
+
+            const newStock = currentStock - quantity;
+
+            // Update stock quantity
+            const { data, error } = await this.supabase
+                .from('products')
+                .update({
+                    stock_quantity: newStock,
+                    stock_status: this.calculateStockStatus(newStock, (product as any).stock_threshold || 5),
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', productId)
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error updating product stock:', error);
+                return false;
+            }
+
+            console.log(`Stock updated successfully for product ${productId}: ${currentStock} -> ${newStock}`);
+            return true;
+        } catch (error) {
+            console.error('Error in decrementProductStock:', error);
+            return false;
+        }
+    }
+
+    async incrementProductStock(productId: string, quantity: number): Promise<boolean> {
+        try {
+            console.log(`Incrementing stock for product ${productId} by ${quantity}`);
+
+            // Get current product
+            const product = await this.getTableById('products', productId);
+            if (!product) {
+                console.error(`Product ${productId} not found`);
+                return false;
+            }
+
+            const currentStock = product.stock_quantity;
+            const newStock = currentStock + quantity;
+
+            // Update stock quantity
+            const { data, error } = await this.supabase
+                .from('products')
+                .update({
+                    stock_quantity: newStock,
+                    stock_status: this.calculateStockStatus(newStock, (product as any).stock_threshold || 5),
+                    updated_at: new Date().toISOString()
+                })
+                .eq('id', productId)
+                .select()
+                .single();
+
+            if (error) {
+                console.error('Error updating product stock:', error);
+                return false;
+            }
+
+            console.log(`Stock updated successfully for product ${productId}: ${currentStock} -> ${newStock}`);
+            return true;
+        } catch (error) {
+            console.error('Error in incrementProductStock:', error);
+            return false;
+        }
+    }
+
+    async processOrderStockAdjustment(orderItems: any[], decrement: boolean = true): Promise<boolean> {
+        try {
+            console.log(`Processing stock adjustment for ${orderItems.length} items (decrement: ${decrement})`);
+
+            const stockAdjustments: { productId: string; quantity: number; success: boolean }[] = [];
+
+            for (const item of orderItems) {
+                if (!item.product_id && !item.productId) {
+                    console.log(`Skipping stock adjustment for item without product_id: ${item.product_name || item.name}`);
+                    continue;
+                }
+
+                const productId = item.product_id || item.productId;
+                const quantity = item.quantity;
+
+                const success = decrement
+                    ? await this.decrementProductStock(productId, quantity)
+                    : await this.incrementProductStock(productId, quantity);
+
+                stockAdjustments.push({
+                    productId: productId,
+                    quantity: quantity,
+                    success
+                });
+
+                if (!success && decrement) {
+                    // If any stock decrement fails, we need to rollback
+                    console.error(`Stock adjustment failed for product ${productId}`);
+
+                    // Rollback previous adjustments
+                    for (const adjustment of stockAdjustments) {
+                        if (adjustment.success && adjustment.productId !== productId) {
+                            await this.incrementProductStock(adjustment.productId, adjustment.quantity);
+                        }
+                    }
+                    return false;
+                }
+            }
+
+            console.log('Stock adjustments completed successfully');
+            return true;
+        } catch (error) {
+            console.error('Error in processOrderStockAdjustment:', error);
+            return false;
+        }
+    }
+
+    private calculateStockStatus(quantity: number, threshold: number): 'in_stock' | 'low_stock' | 'out_of_stock' {
+        if (quantity === 0) {
+            return 'out_of_stock';
+        } else if (quantity <= threshold) {
+            return 'low_stock';
+        } else {
+            return 'in_stock';
+        }
     }
 } 

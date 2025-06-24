@@ -14,6 +14,22 @@ export const loadOrdersFailure = createAction(
     props<{ error: string }>()
 );
 
+// Load user orders by email actions
+export const loadUserOrders = createAction(
+    '[User Orders] Load User Orders',
+    props<{ userEmail: string }>()
+);
+
+export const loadUserOrdersSuccess = createAction(
+    '[User Orders] Load User Orders Success',
+    props<{ orders: Order[] }>()
+);
+
+export const loadUserOrdersFailure = createAction(
+    '[User Orders] Load User Orders Failure',
+    props<{ error: string }>()
+);
+
 // Load single order actions
 export const loadOrder = createAction(
     '[Admin Orders] Load Order',
@@ -96,3 +112,22 @@ export const deleteOrderFailure = createAction(
 
 // Clear current order
 export const clearCurrentOrder = createAction('[Admin Orders] Clear Current Order');
+
+// B2C Order creation actions
+export const createB2COrder = createAction(
+    '[B2C Orders] Create Order',
+    props<{ orderData: any; cartItems: any[] }>()
+);
+
+export const createB2COrderSuccess = createAction(
+    '[B2C Orders] Create Order Success',
+    props<{ order: Order; orderNumber: string }>()
+);
+
+export const createB2COrderFailure = createAction(
+    '[B2C Orders] Create Order Failure',
+    props<{ error: string }>()
+);
+
+// Clear B2C order state
+export const clearB2COrderState = createAction('[B2C Orders] Clear Order State');
