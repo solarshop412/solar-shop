@@ -387,6 +387,7 @@ export class TranslationService {
             },
             // Admin Panel
             admin: {
+
                 welcome: 'Dobrodošli',
                 viewSite: 'Pogledaj stranicu',
                 logout: 'Odjavi se',
@@ -399,8 +400,8 @@ export class TranslationService {
                 users: 'Korisnici',
                 orders: 'Narudžbe',
                 reviews: 'Recenzije',
-                companyPricing: 'Cijene za tvrtke',
-                companies: 'Tvrtke',
+                companyPricing: 'Cjenovnik',
+                companies: 'Partneri',
                 contacts: 'Poruke',
                 wishlist: 'Lista želja',
                 totalProducts: 'Ukupno proizvoda',
@@ -514,6 +515,11 @@ export class TranslationService {
                     categoryDeletedSuccessfully: 'Kategorija uspješno obrisana',
                     errorDeletingCategory: 'Greška prilikom brisanja kategorije',
                     categoryAlreadyExists: 'Kategorija {{name}} već postoji',
+                    confirmCategoryDeletion: 'Jeste li sigurni da želite obrisati kategoriju "{{name}}"?',
+                    categoryHasRelatedProducts: 'Kategorija se ne može obrisati jer sadrži povezane proizvode. Prvo uklonite sve proizvode iz ove kategorije.',
+                    success: 'Uspjeh',
+                    error: 'Greška',
+                    longTitle: 'Kategorije - Solar Shop Admin'
                 },
                 blogForm: {
                     title: 'Blog postovi',
@@ -547,13 +553,13 @@ export class TranslationService {
                     archived: 'Arhivirano',
                 },
                 companiesForm: {
-                    title: 'Tvrtke',
-                    longTitle: 'Companies - Solar Shop Admin',
+                    title: 'Partneri',
+                    longTitle: 'Partneri - Solar Shop Admin',
                     subtitle: 'Upravljajte zahtjevima za partnerstvo',
-                    editCompany: 'Uredi tvrtku',
-                    createCompany: 'Dodaj tvrtku',
-                    updateCompanyInformation: 'Ažuriraj informacije o tvrtki',
-                    createNewCompany: 'Dodaj novu tvrtku',
+                    editCompany: 'Uredi partnera',
+                    createCompany: 'Dodaj partnera',
+                    updateCompanyInformation: 'Ažuriraj informacije o partneru',
+                    createNewCompany: 'Dodaj novog partnera',
                     company: 'Tvrtka',
                     companyName: 'Naziv tvrtke',
                     companyNameRequired: 'Naziv tvrtke je obavezan',
@@ -629,7 +635,7 @@ export class TranslationService {
                     errorImportingCompanies: 'Greška prilikom učitavanja tvrtki. Molimo provjerite format CSV datoteke.',
                 },
                 companyPricingForm: {
-                    title: 'Cijene za tvrtke',
+                    title: 'Cjenovnik',
                     subtitle: 'Upravljajte prilagođenim cijenama za partnerske tvrtke',
                     editPricing: 'Uredi cijenu',
                     createPricing: 'Dodaj cijenu',
@@ -1004,6 +1010,9 @@ export class TranslationService {
                     noTemplateAvailable: 'Nema dostupnih podataka za preuzimanje CSV uzorka',
                     getStartedByCreating: 'Započnite s kreiranjem sada...',
                     noResults: 'Nema rezultata',
+                    confirmDeletion: 'Potvrdi brisanje',
+                    confirmDeleteMessage: 'Jeste li sigurni da želite obrisati "{{itemName}}"? Ova radnja se ne može poništiti.',
+                    thisItem: 'ovu stavku',
                 },
             },
             // Admin Users
@@ -1069,7 +1078,15 @@ export class TranslationService {
                 loadMoreReviews: 'Učitaj više recenzija',
                 noReviewsYet: 'Još nema recenzija',
                 beFirstToReview: 'Budite prvi koji će recenzirati ovaj proizvod',
-                writeFirstReview: 'Napiši prvu recenziju'
+                writeFirstReview: 'Napiši prvu recenziju',
+                // Error and success messages
+                cannotWriteReview: 'Ne možete pisati recenziju',
+                mustPurchaseFirst: 'Možete pisati recenzije samo za proizvode koje ste kupili i primili.',
+                mustBeLoggedIn: 'Morate biti prijavljeni da biste napisali recenziju.',
+                reviewSubmitted: 'Recenzija je poslana!',
+                reviewSubmittedMessage: 'Hvala vam na recenziji. Bit će objavljena nakon odobrenja administratora.',
+                reviewError: 'Greška',
+                reviewErrorMessage: 'Neuspješno slanje recenzije. Molimo pokušajte ponovno.'
             },
             // Profile
             profile: {
@@ -1212,7 +1229,7 @@ export class TranslationService {
             },
             // Products
             products: {
-                title: 'Proizvodi',
+                title: 'Kategorije',
                 subtitle: 'Otkrijte naš široki asortiman proizvoda za održivu i energetski učinkovitu gradnju',
                 exploreProducts: 'Istražite proizvode',
                 productsCount: '{{count}} proizvoda',
@@ -2372,6 +2389,11 @@ export class TranslationService {
                     categoryDeletedSuccessfully: 'Category deleted successfully',
                     errorDeletingCategory: 'Error deleting category',
                     categoryAlreadyExists: 'Category {{name}} already exists',
+                    confirmCategoryDeletion: 'Are you sure you want to delete the category "{{name}}"?',
+                    categoryHasRelatedProducts: 'Category cannot be deleted because it contains related products. Please remove all products from this category first.',
+                    success: 'Success',
+                    error: 'Error',
+                    longTitle: 'Categories - Solar Shop Admin'
                 },
                 blogForm: {
                     title: 'Blog Posts',
@@ -2841,6 +2863,9 @@ export class TranslationService {
                     noTemplateAvailable: 'No template available for this entity',
                     getStartedByCreating: 'Get started by creating now...',
                     noResults: 'No results found',
+                    confirmDeletion: 'Confirm Deletion',
+                    confirmDeleteMessage: 'Are you sure you want to delete "{{itemName}}"? This action cannot be undone.',
+                    thisItem: 'this item',
                 },
             },
             // Admin Users
@@ -2906,7 +2931,15 @@ export class TranslationService {
                 loadMoreReviews: 'Load More Reviews',
                 noReviewsYet: 'No reviews yet',
                 beFirstToReview: 'Be the first to review this product',
-                writeFirstReview: 'Write First Review'
+                writeFirstReview: 'Write First Review',
+                // Error and success messages
+                cannotWriteReview: 'Cannot Write Review',
+                mustPurchaseFirst: 'You can only write reviews for products you have purchased and received.',
+                mustBeLoggedIn: 'You must be logged in to write a review.',
+                reviewSubmitted: 'Review Submitted!',
+                reviewSubmittedMessage: 'Thank you for your review. It will be published after admin approval.',
+                reviewError: 'Error',
+                reviewErrorMessage: 'Failed to submit review. Please try again.'
             },
             // Profile
             profile: {
@@ -3049,7 +3082,7 @@ export class TranslationService {
             },
             // Products
             products: {
-                title: 'Products',
+                title: 'Categories',
                 subtitle: 'Discover our wide range of products for sustainable and energy-efficient construction',
                 exploreProducts: 'Explore Products',
                 productsCount: '{{count}} Products',
