@@ -31,6 +31,12 @@ import { companiesReducer } from '../features/admin/companies/store/companies.re
 import { CompaniesState } from '../features/admin/companies/store/companies.state';
 import { ordersReducer } from '../features/admin/orders/store/orders.reducer';
 import { OrdersState } from '../features/admin/orders/store/orders.state';
+import { companyPricingReducer } from '../features/admin/company-pricing/store/company-pricing.reducer';
+import { AdminCompanyPricingState } from '../features/admin/store/admin.state';
+import { productsReducer as b2bProductsReducer } from '../features/b2b/shared/store/products.reducer';
+import { ProductsState as B2BProductsState } from '../features/b2b/shared/store/products.reducer';
+import { b2bCartReducer } from '../features/b2b/cart/store/b2b-cart.reducer';
+import { B2BCartState } from '../features/b2b/cart/models/b2b-cart.model';
 import { reviewsReducer } from '../features/admin/reviews/store/reviews.reducer';
 import { ReviewsState } from '../features/admin/reviews/store/reviews.state';
 
@@ -49,6 +55,9 @@ export interface State {
   wishlist: WishlistState;
   companies: CompaniesState;
   adminOrders: OrdersState;
+  companyPricing: AdminCompanyPricingState;
+  b2bProducts: B2BProductsState;
+  b2bCart: B2BCartState;
   reviews: ReviewsState;
 }
 
@@ -67,6 +76,9 @@ export const reducers: ActionReducerMap<State> = {
   wishlist: wishlistReducer,
   companies: companiesReducer,
   adminOrders: ordersReducer,
+  companyPricing: companyPricingReducer,
+  b2bProducts: b2bProductsReducer,
+  b2bCart: b2bCartReducer,
   reviews: reviewsReducer,
 };
 

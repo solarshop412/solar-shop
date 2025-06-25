@@ -22,11 +22,16 @@ import { CookiePolicyComponent } from './features/b2c/cookie-policy/cookie-polic
 import { PartnersComponent } from './features/b2b/partners/partners.component';
 import { PartnersRegisterComponent } from './features/b2b/partners/register/partners-register.component';
 import { PartnersProductsComponent } from './features/b2b/partners/products/partners-products.component';
+import { PartnersProductDetailsComponent } from './features/b2b/partners/products/partners-product-details.component';
 import { PartnersOffersComponent } from './features/b2b/partners/offers/partners-offers.component';
 import { PartnersOfferDetailsComponent } from './features/b2b/partners/offers/partners-offer-details.component';
 import { PartnersContactComponent } from './features/b2b/partners/contact/partners-contact.component';
 import { PartnerProfileComponent } from './features/b2b/partners/profile/partner-profile.component';
 import { B2bLayoutComponent } from './features/b2b/shared/layout/b2b-layout.component';
+import { B2bCheckoutComponent } from './features/b2b/checkout/b2b-checkout.component';
+import { B2bOrderReviewComponent } from './features/b2b/checkout/steps/b2b-order-review/b2b-order-review.component';
+import { B2bShippingComponent } from './features/b2b/checkout/steps/b2b-shipping/b2b-shipping.component';
+import { B2bPaymentComponent } from './features/b2b/checkout/steps/b2b-payment/b2b-payment.component';
 import { CompanyApprovedGuard } from './guards/company-approved.guard';
 import { CheckoutComponent } from './features/b2c/checkout/checkout.component';
 import { OrderReviewComponent } from './features/b2c/checkout/steps/order-review/order-review.component';
@@ -45,7 +50,7 @@ import { AdminOrdersPartnersComponent } from './features/admin/orders-partners/a
 import { AdminReviewsComponent } from './features/admin/reviews/admin-reviews.component';
 import { AdminCompanyPricingComponent } from './features/admin/company-pricing/admin-company-pricing.component';
 import { CompanyPricingFormComponent } from './features/admin/company-pricing/company-pricing-form/company-pricing-form.component';
-import { CompanyPricingDetailsComponent } from './features/admin/company-pricing/company-pricing-details/company-pricing-details.component';
+
 import { AdminCompaniesComponent } from './features/admin/companies/admin-companies.component';
 import { AdminWishlistComponent } from './features/admin/wishlist/admin-wishlist.component';
 import { AdminContactsComponent } from './features/admin/contacts/admin-contacts.component';
@@ -113,10 +118,24 @@ export const routes: Routes = [
             { path: '', component: PartnersComponent },
             { path: 'register', component: PartnersRegisterComponent },
             { path: 'products', component: PartnersProductsComponent, canActivate: [CompanyApprovedGuard] },
+            { path: 'products/:id', component: PartnersProductDetailsComponent, canActivate: [CompanyApprovedGuard] },
             { path: 'offers', component: PartnersOffersComponent, canActivate: [CompanyApprovedGuard] },
             { path: 'offers/:id', component: PartnersOfferDetailsComponent, canActivate: [CompanyApprovedGuard] },
             { path: 'profile', component: PartnerProfileComponent, canActivate: [AuthGuard] },
             { path: 'contact', component: PartnersContactComponent },
+
+            // B2B Checkout routes
+            {
+                path: 'checkout',
+                component: B2bCheckoutComponent,
+                canActivate: [CompanyApprovedGuard],
+                children: [
+                    { path: '', redirectTo: 'order-review', pathMatch: 'full' },
+                    { path: 'order-review', component: B2bOrderReviewComponent },
+                    { path: 'shipping', component: B2bShippingComponent },
+                    { path: 'payment', component: B2bPaymentComponent }
+                ]
+            }
         ]
     },
 
@@ -167,7 +186,6 @@ export const routes: Routes = [
             { path: 'company-pricing', component: AdminCompanyPricingComponent },
             { path: 'company-pricing/create', component: CompanyPricingFormComponent },
             { path: 'company-pricing/edit/:id', component: CompanyPricingFormComponent },
-            { path: 'company-pricing/company/:companyId', component: CompanyPricingDetailsComponent },
 
             // Companies
             { path: 'companies', component: AdminCompaniesComponent },
