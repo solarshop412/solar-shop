@@ -85,7 +85,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
       <div *ngIf="product && !(loading$ | async)" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- Product Images -->
-          <div class="lg:sticky lg:top-8">
+          <div class="lg:sticky lg:top-8 space-y-6">
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
               <div class="aspect-w-1 aspect-h-1 bg-gray-50 flex items-center justify-center min-h-[400px]">
                 <img *ngIf="hasProductImage(product)" 
@@ -93,14 +93,11 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                      [alt]="product.name" 
                      class="w-full h-96 object-cover"
                      (error)="onImageError($event)">
-                <!-- Fallback Icon -->
-                <div *ngIf="!hasProductImage(product)" class="text-gray-500 text-center py-12">
-                  <svg class="w-32 h-32 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                  </svg>
-                  <p class="text-xl font-medium text-gray-600 mb-2">{{ product.category || ('b2b.products.product' | translate) }}</p>
-                  <p class="text-sm text-gray-500">{{ 'b2b.products.noImageAvailable' | translate }}</p>
-                </div>
+                <!-- Fallback placeholder -->
+                <img *ngIf="!hasProductImage(product)" 
+                     src="assets/images/product-placeholder.jpg" 
+                     [alt]="product.name" 
+                     class="w-full h-96 object-cover">
               </div>
               <!-- Additional Images (if available) -->
               <div *ngIf="product.images && product.images.length > 1" class="p-4">
@@ -113,10 +110,28 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                          class="w-full h-full object-cover rounded"
                          (error)="onImageError($event)">
                     <!-- Fallback for gallery images -->
-                    <svg *ngIf="!image.url" class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
+                    <img *ngIf="!image.url" 
+                         src="assets/images/product-placeholder.svg" 
+                         [alt]="product.name"
+                         class="w-full h-full object-cover rounded">
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Information -->
+            <div class="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ 'b2b.products.orderInformation' | translate }}</h3>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">{{ 'b2b.products.minimumOrder' | translate }}:</span>
+                  <span class="font-medium">{{ getMinimumOrder(product) }} {{ 'b2b.products.pieces' | translate }}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600">{{ 'b2b.products.availability' | translate }}:</span>
+                  <span class="font-medium" [class]="product.in_stock ? 'text-green-600' : 'text-red-600'">
+                    {{ product.in_stock ? ('b2b.products.inStock' | translate) : ('b2b.products.outOfStock' | translate) }}
+                  </span>
                 </div>
               </div>
             </div>
@@ -144,7 +159,6 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                 <span class="text-sm text-gray-400">{{ product.sku }}</span>
               </div>
               <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">{{ product.name }}</h1>
-              <p class="mt-4 text-lg text-gray-600 font-['DM_Sans']">{{ product.description }}</p>
             </div>
 
             <!-- Status Badges -->
@@ -185,10 +199,35 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               </div>
 
               <div *ngIf="isAuthenticated" class="space-y-4">
-                <!-- Company Specific Price -->
-                <div *ngIf="product.company_price && isCompanyContact" class="flex items-center justify-between">
-                  <span class="text-lg font-medium text-green-700">{{ 'b2b.products.yourCompanyPrice' | translate }}:</span>
-                  <span class="text-2xl font-bold text-green-600">€{{ product.company_price | number:'1.2-2' }}</span>
+                <!-- Company Specific Price with Quantity Tiers -->
+                <div *ngIf="product.company_price && isCompanyContact">
+                  <!-- Show lowest price prominently -->
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-lg font-medium text-green-700">{{ 'b2b.products.yourCompanyPrice' | translate }}:</span>
+                    <div class="text-right">
+                      <span class="text-2xl font-bold text-green-600">€{{ product.company_price | number:'1.2-2' }}</span>
+                      <div *ngIf="product.company_pricing_tiers && product.company_pricing_tiers.length > 1" class="text-xs text-gray-500">
+                        {{ 'b2b.products.lowestPrice' | translate }}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Show pricing tiers if available -->
+                  <div *ngIf="product.company_pricing_tiers && product.company_pricing_tiers.length > 1" 
+                       class="bg-gray-50 rounded-lg p-3 space-y-2">
+                    <h4 class="text-sm font-semibold text-gray-700 mb-2">{{ 'b2b.products.quantityPricing' | translate }}:</h4>
+                    <div *ngFor="let tier of product.company_pricing_tiers" 
+                         class="flex items-center justify-between text-sm">
+                      <span class="text-gray-600">
+                        <span class="font-medium">{{ tier.quantity }}+</span> {{ 'b2b.products.pieces' | translate }}
+                      </span>
+                      <span class="font-medium" 
+                            [class.text-green-600]="tier.price === product.company_price"
+                            [class.text-gray-900]="tier.price !== product.company_price">
+                        €{{ tier.price | number:'1.2-2' }}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Partner Price -->
@@ -220,22 +259,79 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               </div>
             </div>
 
-            <!-- Order Information -->
+            <!-- Product Details & Specifications -->
             <div class="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ 'b2b.products.orderInformation' | translate }}</h3>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-600">{{ 'b2b.products.minimumOrder' | translate }}:</span>
-                  <span class="font-medium">{{ getMinimumOrder(product) }} {{ 'b2b.products.pieces' | translate }}</span>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">{{ 'b2b.products.productDetails' | translate }}</h3>
+              </div>
+              
+              <!-- Description Section -->
+              <div class="mb-6">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.description' | translate }}</h4>
+                  <button 
+                    (click)="toggleDescription()"
+                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
+                    [attr.aria-expanded]="isDescriptionExpanded"
+                    [attr.aria-label]="isDescriptionExpanded ? 'Collapse description' : 'Expand description'"
+                  >
+                    <svg 
+                      class="w-4 h-4 transition-transform duration-200"
+                      [class.rotate-180]="isDescriptionExpanded"
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </button>
                 </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-600">{{ 'b2b.products.availability' | translate }}:</span>
-                  <span class="font-medium" [class]="product.in_stock ? 'text-green-600' : 'text-red-600'">
-                    {{ product.in_stock ? ('b2b.products.inStock' | translate) : ('b2b.products.outOfStock' | translate) }}
-                  </span>
+                <div 
+                  class="overflow-hidden transition-all duration-300 ease-in-out"
+                  [class.max-h-0]="!isDescriptionExpanded"
+                  [class.max-h-screen]="isDescriptionExpanded"
+                >
+                  <p class="text-gray-600 font-['DM_Sans'] leading-relaxed">{{ product.description }}</p>
+                </div>
+              </div>
+              
+              <!-- Specifications Section -->
+              <div *ngIf="product.specifications" class="border-t border-gray-200 pt-6">
+                <div class="flex items-center justify-between mb-3">
+                  <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.specifications' | translate }}</h4>
+                  <button 
+                    (click)="toggleSpecifications()"
+                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
+                    [attr.aria-expanded]="isSpecificationsExpanded"
+                    [attr.aria-label]="isSpecificationsExpanded ? 'Collapse specifications' : 'Expand specifications'"
+                  >
+                    <svg 
+                      class="w-4 h-4 transition-transform duration-200"
+                      [class.rotate-180]="isSpecificationsExpanded"
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </button>
+                </div>
+                <div 
+                  class="overflow-hidden transition-all duration-300 ease-in-out"
+                  [class.max-h-0]="!isSpecificationsExpanded"
+                  [class.max-h-screen]="isSpecificationsExpanded"
+                >
+                  <dl class="space-y-3">
+                    <div *ngFor="let spec of getSpecifications(product.specifications)" class="flex justify-between">
+                      <dt class="text-gray-600">{{ spec.key }}:</dt>
+                      <dd class="font-medium text-gray-900">{{ spec.value }}</dd>
+                    </div>
+                  </dl>
                 </div>
               </div>
             </div>
+
+            
 
             <!-- Actions -->
             <div class="space-y-3">
@@ -269,38 +365,55 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               </div>
             </div>
 
-            <!-- Specifications -->
-            <div *ngIf="product.specifications" class="bg-white rounded-lg border border-gray-200 p-6">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">{{ 'b2b.products.specifications' | translate }}</h3>
-                <button 
-                  (click)="toggleSpecifications()"
-                  class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
-                  [attr.aria-expanded]="isSpecificationsExpanded"
-                  [attr.aria-label]="isSpecificationsExpanded ? 'Collapse specifications' : 'Expand specifications'"
-                >
-                  <svg 
-                    class="w-5 h-5 transition-transform duration-200"
-                    [class.rotate-180]="isSpecificationsExpanded"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                  </svg>
-                </button>
+            
+
+          </div>
+        </div>
+        
+        <!-- Suggested Products Section -->
+        <div class="mt-16" *ngIf="suggestedProducts.length > 0">
+          <h2 class="text-2xl font-bold text-gray-900 mb-8 font-['Poppins']">
+            {{ 'b2b.products.suggestedProducts' | translate }}
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div *ngFor="let suggested of suggestedProducts" 
+                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                 (click)="navigateToProduct(suggested.id)">
+              <!-- Product Image -->
+              <div class="aspect-w-1 aspect-h-1 bg-gray-100">
+                <img *ngIf="hasProductImage(suggested)" 
+                     [src]="getProductImageUrl(suggested)" 
+                     [alt]="suggested.name" 
+                     class="w-full h-48 object-cover">
+                <img *ngIf="!hasProductImage(suggested)" 
+                     src="assets/images/product-placeholder.svg" 
+                     [alt]="suggested.name" 
+                     class="w-full h-48 object-cover">
               </div>
-              <div 
-                class="overflow-hidden transition-all duration-300 ease-in-out"
-                [class.max-h-0]="!isSpecificationsExpanded"
-                [class.max-h-screen]="isSpecificationsExpanded"
-              >
-                <dl class="space-y-3">
-                  <div *ngFor="let spec of getSpecifications(product.specifications)" class="flex justify-between">
-                    <dt class="text-gray-600">{{ spec.key }}:</dt>
-                    <dd class="font-medium text-gray-900">{{ spec.value }}</dd>
+              
+              <!-- Product Info -->
+              <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ suggested.name }}</h3>
+                <p class="text-sm text-gray-500 mb-3">{{ suggested.category || 'Product' }}</p>
+                
+                <!-- Pricing -->
+                <div *ngIf="isCompanyContact && suggested.company_price" class="space-y-1">
+                  <div class="text-lg font-bold text-green-600">
+                    €{{ suggested.company_price | number:'1.2-2' }}
+                    <span *ngIf="suggested.company_pricing_tiers && suggested.company_pricing_tiers.length > 1" 
+                          class="text-xs font-normal text-gray-500">
+                      ({{ 'b2b.products.from' | translate }})
+                    </span>
                   </div>
-                </dl>
+                  <div class="text-sm text-gray-500 line-through">
+                    €{{ suggested.price | number:'1.2-2' }}
+                  </div>
+                </div>
+                
+                <div *ngIf="!isCompanyContact || !suggested.company_price" class="text-lg font-bold text-gray-900">
+                  €{{ suggested.price | number:'1.2-2' }}
+                </div>
               </div>
             </div>
           </div>
@@ -351,9 +464,11 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   product: ProductWithPricing | null = null;
   loading = true;
   error: string | null = null;
+  suggestedProducts: ProductWithPricing[] = [];
 
-  // Collapsible specifications state
-  isSpecificationsExpanded = true;
+  // Collapsible state
+  isDescriptionExpanded = true;
+  isSpecificationsExpanded = false;
 
   products$: Observable<ProductWithPricing[]>;
   loading$: Observable<boolean>;
@@ -402,6 +517,8 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
           if (foundProduct) {
             this.product = foundProduct;
             this.error = null;
+            // Load suggested products
+            this.loadSuggestedProducts(foundProduct.id);
           } else if (!this.loading) {
             // Only set error if we're not still loading
             this.error = 'Product not found';
@@ -518,8 +635,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      // Hide the broken image and let the fallback icon show
-      img.style.display = 'none';
+      img.src = 'assets/images/product-placeholder.svg';
     }
   }
 
@@ -531,7 +647,81 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/partners/register']);
   }
 
+  toggleDescription(): void {
+    this.isDescriptionExpanded = !this.isDescriptionExpanded;
+  }
+
   toggleSpecifications(): void {
     this.isSpecificationsExpanded = !this.isSpecificationsExpanded;
+  }
+
+  private async loadSuggestedProducts(productId: string): Promise<void> {
+    try {
+      // Load product relationships
+      const { data: relationships, error } = await this.supabaseService.client
+        .from('product_relationships')
+        .select(`
+          *,
+          related_product_id,
+          related_category_id
+        `)
+        .eq('product_id', productId)
+        .eq('is_active', true)
+        .order('sort_order');
+
+      if (error) throw error;
+
+      if (relationships && relationships.length > 0) {
+        // Get related product IDs
+        const relatedProductIds = relationships
+          .filter(r => r.related_product_id)
+          .map(r => r.related_product_id);
+
+        // Get products from related categories
+        const relatedCategoryIds = relationships
+          .filter(r => r.related_category_id)
+          .map(r => r.related_category_id);
+
+        // Use the existing products from store and filter
+        this.products$
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(products => {
+            this.suggestedProducts = products.filter(p => {
+              // Don't suggest the current product
+              if (p.id === productId) return false;
+
+              // Include if it's a directly related product
+              if (relatedProductIds.includes(p.id)) return true;
+
+              // Include if it's from a related category
+              if (relatedCategoryIds.includes(p.category_id)) return true;
+
+              return false;
+            }).slice(0, 4); // Limit to 4 suggested products
+          });
+      } else {
+        // If no relationships defined, show products from same category
+        if (this.product?.category_id) {
+          this.products$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(products => {
+              this.suggestedProducts = products
+                .filter(p => p.id !== productId && p.category_id === this.product?.category_id)
+                .slice(0, 4);
+            });
+        }
+      }
+    } catch (error) {
+      console.error('Error loading suggested products:', error);
+      this.suggestedProducts = [];
+    }
+  }
+
+  navigateToProduct(productId: string): void {
+    // Navigate to the new product and reload
+    this.router.navigate(['/partners/products', productId]).then(() => {
+      // Force component reload by scrolling to top
+      window.scrollTo(0, 0);
+    });
   }
 } 

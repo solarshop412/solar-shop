@@ -1,13 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeUntil, switchMap, map } from 'rxjs/operators';
+import { Observable, Subject, combineLatest, from, of } from 'rxjs';
+import { takeUntil, switchMap, map, catchError } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { OffersService } from './services/offers.service';
 import { AddToCartButtonComponent } from '../cart/components/add-to-cart-button/add-to-cart-button.component';
 import { SupabaseService } from '../../../services/supabase.service';
 import { Offer } from '../../../shared/models/offer.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { addToCart, addAllToCartFromOffer } from '../cart/store/cart.actions';
+import { ToastService } from '../../../shared/services/toast.service';
+import { TranslationService } from '../../../shared/services/translation.service';
 
 @Component({
   selector: 'app-offer-details',
@@ -55,7 +59,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                   </span>
                 </div>
                 <div class="text-lg text-white/90">
-                  You save {{ (offer.originalPrice - offer.discountedPrice) | currency:'EUR':'symbol':'1.2-2' }}
+                  {{ 'offers.youSave' | translate }} {{ (offer.originalPrice - offer.discountedPrice) | currency:'EUR':'symbol':'1.2-2' }}
                 </div>
               </div>
 
@@ -63,14 +67,14 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
               <div *ngIf="offer.couponCode" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-6">
                 <div class="flex items-center justify-between">
                   <div>
-                    <span class="text-sm text-white/70">Coupon Code:</span>
+                    <span class="text-sm text-white/70">{{ 'offers.couponCode' | translate }}:</span>
                     <div class="text-xl font-bold text-white font-mono">{{ offer.couponCode }}</div>
                   </div>
                   <button 
                     (click)="copyCouponCode(offer.couponCode!)"
                     class="bg-white text-solar-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                   >
-                    {{ copiedCoupon ? 'Copied!' : 'Copy' }}
+                    {{ copiedCoupon ? ('offers.copied' | translate) : ('offers.copy' | translate) }}
                   </button>
                 </div>
               </div>
@@ -82,7 +86,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                     <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V5z"/>
                   </svg>
                   <span class="text-white font-semibold">
-                    Offer expires: {{ offer.endDate | date:'medium' }}
+                    {{ 'offers.expires' | translate }}: {{ offer.endDate | date:'medium' }}
                   </span>
                 </div>
               </div>
@@ -97,8 +101,17 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
           {{ 'offers.productsIncluded' | translate }}
         </h2>
 
-        <!-- Product Cards --> 
-        <!-- TODO: Only show products that are in the offer or the category if full category is in the offer --> 
+        <!-- Add All to Cart Button -->
+        <div *ngIf="(relatedProducts$ | async)?.length" class="mb-8">
+          <button 
+            (click)="addAllToCart()"
+            class="w-full md:w-auto px-8 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans'] mb-6"
+          >
+            {{ 'offers.addAllToCart' | translate }}
+          </button>
+        </div>
+
+        <!-- Product Cards -->
         <div *ngIf="relatedProducts$ | async as products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div 
             *ngFor="let product of products; trackBy: trackByProductId"
@@ -113,7 +126,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
               >
               <!-- Offer Badge -->
               <div class="absolute top-4 left-4 bg-solar-600 text-white text-sm font-bold px-3 py-2 rounded-full">
-                Special Offer
+                {{ 'offers.specialOffer' | translate }}
               </div>
             </div>
 
@@ -142,7 +155,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                   [availability]="product.availability"
                   [productId]="product.id" 
                   [quantity]="1" 
-                  buttonText="Add to Cart"
+                  buttonText="{{ 'offers.addToCart' | translate }}"
                   [fullWidth]="true"
                   size="md">
                 </app-add-to-cart-button>
@@ -151,7 +164,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                   (click)="navigateToProduct(product.id)"
                   class="w-full px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-['DM_Sans']"
                 >
-                  View Details
+                  {{ 'offers.viewDetails' | translate }}
                 </button>
               </div>
             </div>
@@ -166,13 +179,13 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Poppins']">General Offer</h3>
-            <p class="text-gray-600 font-['DM_Sans']">This offer applies to multiple products. Browse our catalog to find eligible items.</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Poppins']">{{ 'offers.generalOffer' | translate }}</h3>
+            <p class="text-gray-600 font-['DM_Sans']">{{ 'offers.generalOfferDescription' | translate }}</p>
             <button 
               (click)="navigateToProducts()"
               class="mt-6 px-6 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
             >
-              Browse Products
+              {{ 'offers.browseProducts' | translate }}
             </button>
           </div>
         </div>
@@ -185,46 +198,13 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             <!-- Offer Description -->
             <div class="lg:col-span-2">
               <h2 class="text-3xl font-bold text-gray-900 mb-6 font-['Poppins']">
-                About This Offer
+                {{ 'offers.aboutThisOffer' | translate }}
               </h2>
               <div class="prose prose-lg max-w-none">
                 <p class="text-gray-600 leading-relaxed font-['DM_Sans']">
-                  {{ offer.description || 'Take advantage of this limited-time offer to get amazing savings on premium solar and energy products. Our special promotions are designed to help you start your journey toward sustainable energy while saving money.' }}
+                  {{ offer.description || ('offers.defaultDescription' | translate) }}
                 </p>
               </div>
-            </div>
-
-            <!-- Offer Highlights -->
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-bold text-gray-900 mb-4 font-['Poppins']">
-                Offer Highlights
-              </h3>
-              <ul class="space-y-3">
-                <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-solar-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                  </svg>
-                  <span class="text-gray-700 font-['DM_Sans']">{{ offer.discountPercentage }}% Discount</span>
-                </li>
-                <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-solar-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                  </svg>
-                  <span class="text-gray-700 font-['DM_Sans']">Limited Time Only</span>
-                </li>
-                <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-solar-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                  </svg>
-                  <span class="text-gray-700 font-['DM_Sans']">Premium Quality Products</span>
-                </li>
-                <li class="flex items-center gap-3">
-                  <svg class="w-5 h-5 text-solar-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                  </svg>
-                  <span class="text-gray-700 font-['DM_Sans']">Free Shipping Available</span>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -236,7 +216,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
       <div class="min-h-screen bg-gray-50 flex items-center justify-center">
         <div class="text-center">
           <div class="animate-spin rounded-full h-12 w-12 border-4 border-solar-600 border-t-transparent mx-auto mb-4"></div>
-          <p class="text-gray-600 font-['DM_Sans']">Loading offer details...</p>
+          <p class="text-gray-600 font-['DM_Sans']">{{ 'offers.loadingDetails' | translate }}</p>
         </div>
       </div>
     </ng-template>
@@ -265,12 +245,16 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
   relatedProducts$: Observable<any[]>;
   copiedCoupon = false;
   private destroy$ = new Subject<void>();
+  private currentProducts: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private offersService: OffersService,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private store: Store,
+    private toastService: ToastService,
+    private translationService: TranslationService
   ) {
     this.offer$ = this.route.params.pipe(
       switchMap(params => this.offersService.getOfferById(params['id'])),
@@ -281,6 +265,10 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
       switchMap(offer => {
         if (!offer) return [];
         return this.getRelatedProducts(offer);
+      }),
+      map(products => {
+        this.currentProducts = products;
+        return products;
       }),
       takeUntil(this.destroy$)
     );
@@ -297,20 +285,66 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
   }
 
   private getRelatedProducts(offer: Offer): Observable<any[]> {
-    // For now, we'll get a few featured products as related products
-    // In a real app, you might have specific product mappings for offers
-    return new Observable(observer => {
-      this.supabaseService.getProducts({ featured: true, limit: 3 })
-        .then(products => {
-          observer.next(products || []);
-          observer.complete();
-        })
-        .catch(error => {
+    return from(
+      this.supabaseService.client
+        .from('offer_products')
+        .select(`
+          *,
+          products (
+            id,
+            name,
+            description,
+            price,
+            sku,
+            stock_quantity,
+            images,
+            category_id,
+            categories (
+              name
+            )
+          )
+        `)
+        .eq('offer_id', offer.id)
+        .eq('is_active', true)
+        .order('sort_order')
+    ).pipe(
+      switchMap(({ data: offerProducts, error }) => {
+        if (error) {
           console.error('Error fetching related products:', error);
-          observer.next([]);
-          observer.complete();
-        });
-    });
+          // Fallback to featured products on error
+          return from(this.supabaseService.getProducts({ featured: true, limit: 3 }));
+        }
+
+        if (offerProducts && offerProducts.length > 0) {
+          // Map offer products to the expected format
+          const products = offerProducts.map((op: any) => ({
+            id: op.products.id,
+            name: op.products.name,
+            description: op.products.description,
+            price: op.products.price,
+            availability: this.getProductAvailability(op.products.stock_quantity),
+            images: op.products.images || [],
+            category: op.products.categories?.name,
+            stock_quantity: op.products.stock_quantity || 0
+          }));
+          return of(products);
+        } else {
+          // If no specific products, fallback to featured products
+          return from(this.supabaseService.getProducts({ featured: true, limit: 6 }));
+        }
+      }),
+      map(products => products || []),
+      catchError((error: any) => {
+        console.error('Error fetching fallback products:', error);
+        return of([]);
+      })
+    );
+  }
+
+  private getProductAvailability(stockQuantity: number): string {
+    if (stockQuantity > 10) return 'in_stock';
+    if (stockQuantity > 0) return 'low_stock';
+    return 'out_of_stock';
   }
 
 
@@ -319,7 +353,7 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     if (product.images && Array.isArray(product.images) && product.images.length > 0) {
       return product.images[0].url || product.images[0];
     }
-    return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=500&fit=crop';
+    return 'assets/images/product-placeholder.svg';
   }
 
   calculateDiscountedPrice(originalPrice: number, discountPercentage: number): number {
@@ -337,7 +371,7 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  trackByProductId(index: number, product: any): string {
+  trackByProductId(_index: number, product: any): string {
     return product.id;
   }
 
@@ -347,5 +381,60 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
 
   navigateToProducts(): void {
     this.router.navigate(['/products']);
+  }
+
+  async addAllToCart(): Promise<void> {
+    if (!this.currentProducts || this.currentProducts.length === 0) {
+      this.toastService.showWarning(this.translationService.translate('offers.noProductsToAdd'));
+      return;
+    }
+
+    // Get current offer to pass offer information
+    this.offer$.pipe(takeUntil(this.destroy$)).subscribe(offer => {
+      if (!offer) {
+        this.toastService.showError(this.translationService.translate('offers.offerNotFound'));
+        return;
+      }
+
+      // Filter out out-of-stock products
+      const availableProducts = this.currentProducts.filter(product => 
+        product.availability !== 'out_of_stock' && product.stock_quantity > 0
+      );
+
+      if (availableProducts.length === 0) {
+        this.toastService.showWarning(this.translationService.translate('offers.allProductsOutOfStock'));
+        return;
+      }
+
+      // Prepare products for the action
+      const products = availableProducts.map(product => ({
+        productId: product.id,
+        quantity: 1,
+        variantId: undefined
+      }));
+
+      // Dispatch the offer-based add all to cart action
+      this.store.dispatch(addAllToCartFromOffer({
+        products,
+        offerId: offer.id,
+        offerName: offer.title,
+        offerType: offer.discount_type as 'percentage' | 'fixed_amount' | 'buy_x_get_y' | 'bundle',
+        offerDiscount: offer.discountPercentage || 0,
+        offerValidUntil: offer.endDate
+      }));
+
+      // Show success message
+      this.toastService.showSuccess(
+        this.translationService.translate('offers.addedProductsToCart', { count: availableProducts.length })
+      );
+
+      // Show warning for out-of-stock products if any
+      const outOfStockCount = this.currentProducts.length - availableProducts.length;
+      if (outOfStockCount > 0) {
+        this.toastService.showWarning(
+          this.translationService.translate('offers.productsOutOfStock', { count: outOfStockCount })
+        );
+      }
+    });
   }
 } 

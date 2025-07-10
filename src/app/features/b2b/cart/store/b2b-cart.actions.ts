@@ -6,6 +6,7 @@ import {
     RemoveFromB2BCartPayload,
     B2BShippingInfo
 } from '../models/b2b-cart.model';
+import { Coupon } from '../../../../shared/models/coupon.model';
 
 // Load cart
 export const loadB2BCart = createAction(
@@ -132,4 +133,91 @@ export const openB2BCartSidebar = createAction(
 
 export const closeB2BCartSidebar = createAction(
     '[B2B Cart] Close Sidebar'
+);
+
+// Coupon Actions
+export const applyB2BCoupon = createAction(
+    '[B2B Cart] Apply Coupon',
+    props<{ code: string; companyId: string }>()
+);
+
+export const applyB2BCouponSuccess = createAction(
+    '[B2B Cart] Apply Coupon Success',
+    props<{ coupon: Coupon; discount: number }>()
+);
+
+export const applyB2BCouponFailure = createAction(
+    '[B2B Cart] Apply Coupon Failure',
+    props<{ error: string }>()
+);
+
+export const removeB2BCoupon = createAction(
+    '[B2B Cart] Remove Coupon',
+    props<{ couponId: string }>()
+);
+
+export const removeB2BCouponSuccess = createAction(
+    '[B2B Cart] Remove Coupon Success',
+    props<{ couponId: string }>()
+);
+
+export const removeB2BCouponFailure = createAction(
+    '[B2B Cart] Remove Coupon Failure',
+    props<{ error: string }>()
+);
+
+export const clearB2BCouponError = createAction(
+    '[B2B Cart] Clear Coupon Error'
+);
+
+// Partner Offer Actions
+export const addToB2BCartFromOffer = createAction(
+    '[B2B Cart] Add To Cart From Partner Offer',
+    props<{ 
+        productId: string; 
+        quantity: number; 
+        companyId: string;
+        partnerOfferId: string;
+        partnerOfferName: string;
+        partnerOfferType: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle';
+        partnerOfferDiscount: number;
+        partnerOfferOriginalPrice: number;
+        partnerOfferValidUntil?: string;
+    }>()
+);
+
+export const addToB2BCartFromOfferSuccess = createAction(
+    '[B2B Cart] Add To Cart From Partner Offer Success',
+    props<{ item: B2BCartItem }>()
+);
+
+export const addToB2BCartFromOfferFailure = createAction(
+    '[B2B Cart] Add To Cart From Partner Offer Failure',
+    props<{ error: string }>()
+);
+
+export const addAllToB2BCartFromOffer = createAction(
+    '[B2B Cart] Add All To Cart From Partner Offer',
+    props<{ 
+        products: Array<{
+            productId: string; 
+            quantity: number;
+        }>;
+        companyId: string;
+        partnerOfferId: string;
+        partnerOfferName: string;
+        partnerOfferType: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle';
+        partnerOfferDiscount: number;
+        partnerOfferValidUntil?: string;
+    }>()
+);
+
+export const addAllToB2BCartFromOfferSuccess = createAction(
+    '[B2B Cart] Add All To Cart From Partner Offer Success',
+    props<{ items: B2BCartItem[]; addedCount: number; skippedCount: number }>()
+);
+
+export const addAllToB2BCartFromOfferFailure = createAction(
+    '[B2B Cart] Add All To Cart From Partner Offer Failure',
+    props<{ error: string }>()
 ); 

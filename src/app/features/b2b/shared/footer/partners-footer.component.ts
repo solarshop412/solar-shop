@@ -15,7 +15,7 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
           <!-- Company Info -->
           <div class="space-y-4">
             <div class="flex items-center space-x-2">
-              <img src="assets/images/logo.svg" alt="SolarShop" class="h-8 w-auto">
+              <img src="assets/images/logo.png" alt="SolarShop" class="h-8 w-auto">
               <span class="px-2 py-1 bg-solar-600 text-white text-xs font-medium rounded-full">B2B</span>
             </div>
             <p class="text-gray-300 text-sm font-['DM_Sans']">
@@ -85,7 +85,7 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
         <div class="border-t border-gray-800 mt-12 pt-8">
           <div class="flex flex-col md:flex-row justify-between items-center">
             <div class="text-sm text-gray-400 font-['DM_Sans']">
-              {{ 'footer.copyright' | translate }} {{ currentYear }} SolarShop B2B. {{ 'footer.allRightsReserved' | translate }}
+              {{ 'footer.copyright' | translate }} {{ currentYear }} SolarShop. {{ 'footer.allRightsReserved' | translate }}
             </div>
           </div>
         </div>
