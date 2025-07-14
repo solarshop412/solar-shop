@@ -68,16 +68,16 @@ import { selectNewsletterState } from '../footer/store/footer.selectors';
               <!-- Pricing -->
               <div class="flex items-center gap-3 mb-6">
                 <span class="text-lg text-gray-400 line-through font-medium font-['DM_Sans']">
-                  {{ offer.originalPrice | currency:'EUR':'symbol':'1.2-2' }}
+                  {{ (offer.originalPrice || 0) | currency:'EUR':'symbol':'1.2-2' }}
                 </span>
                 <span class="text-2xl font-bold text-[#324053] font-['DM_Sans']">
-                  {{ offer.discountedPrice | currency:'EUR':'symbol':'1.2-2' }}
+                  {{ (offer.discountedPrice || 0) | currency:'EUR':'symbol':'1.2-2' }}
                 </span>
               </div>
 
               <!-- Savings -->
               <div class="bg-solar-50 text-solar-800 text-sm font-semibold px-3 py-2 rounded-lg mb-4 text-center">
-                {{ 'offers.youSave' | translate:{ amount: getSavingsAmount(offer) } }}
+                {{ 'offers.youSave' | translate }} {{ ((offer.originalPrice || 0) - (offer.discountedPrice || 0)) | currency:'EUR':'symbol':'1.2-2' }}
               </div>
 
               <!-- Action Buttons -->
@@ -224,7 +224,39 @@ export class OffersPageComponent implements OnInit {
   }
 
   getSavingsAmount(offer: Offer): string {
-    const savingsAmount = offer.originalPrice - offer.discountedPrice;
+    const savingsAmount = (offer.originalPrice || 0) - (offer.discountedPrice || 0);
     return savingsAmount.toFixed(2);
+  }
+
+  getSavingsAmountFormatted(offer: Offer): string {
+    const originalPrice = Number(offer.originalPrice) || 0;
+    const discountedPrice = Number(offer.discountedPrice) || 0;
+    const savingsAmount = originalPrice - discountedPrice;
+    
+    console.log('Debug savings calculation:', {
+      offer: offer.title,
+      originalPrice,
+      discountedPrice,
+      savingsAmount
+    });
+    
+    if (savingsAmount <= 0) {
+      return '0,00 €';
+    }
+    
+    try {
+      const formatted = new Intl.NumberFormat('hr-HR', { 
+        style: 'currency', 
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(savingsAmount);
+      console.log('Formatted result:', formatted);
+      return formatted;
+    } catch (error) {
+      // Fallback formatting if Intl fails
+      console.log('Intl formatting failed, using fallback');
+      return `${savingsAmount.toFixed(2)} €`;
+    }
   }
 } 

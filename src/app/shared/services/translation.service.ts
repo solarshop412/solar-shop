@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { Save } from 'lucide-angular';
 import { BehaviorSubject, Observable, subscribeOn } from 'rxjs';
 
 export type SupportedLanguage = 'hr' | 'en';
@@ -31,6 +32,7 @@ export class TranslationService {
                 products: 'Proizvodi',
                 offers: 'Ponude',
                 about: 'O nama',
+                partners: 'Partneri',
                 contact: 'Kontakt',
                 signIn: 'Prijavite se',
                 getStarted: 'Počnite',
@@ -186,27 +188,80 @@ export class TranslationService {
                 about: {
                     title: 'O partnerstvu',
                     subtitle: 'Zašto se pridružiti SolarShop partneru',
+                    heroTitle: 'Postanite SolarShop partner',
+                    heroSubtitle: 'Otkrijte ekskluzivne prednosti, posebne cijene i podršku za vaš biznis u solarnoj industriji',
                     benefits: 'Prednosti partnerstva',
                     exclusivePricing: 'Ekskluzivne cijene',
                     exclusivePricingText: 'Pristup posebnim cijenama i popustima za partnere.',
+                    pricingTitle: 'Posebne cijene za partnere',
+                    pricingSubtitle: 'Ostvarite značajne uštede s našim partnerskim cijenama',
+                    pricingDescription: 'Kao naš partner, dobivate pristup ekskluzivnim cijenama nižim od standardnih cijena. Vaše uštede se povećavaju s volumenom narudžbi.',
+                    pricingBenefits: {
+                        volumeDiscounts: 'Popusti na količinu',
+                        volumeDiscountsText: 'Veći popusti za veće narudžbe',
+                        tierPricing: 'Cjenovni razredi',
+                        tierPricingText: 'Posebni cjenovni razredi ovisno o statusu partnera',
+                        earlyAccess: 'Rani pristup',
+                        earlyAccessText: 'Prva mogućnost kupnje novih proizvoda',
+                        specialOffers: 'Posebne ponude',
+                        specialOffersText: 'Ekskluzivne ponude samo za partnere'
+                    },
                     dedicatedSupport: 'Posvećena podrška',
                     dedicatedSupportText: 'Osobni account manager i tehnička podrška.',
+                    supportTitle: 'Superiorna podrška za partnere',
+                    supportSubtitle: 'Dobivate prioritetnu podršku i osobni pristup',
+                    supportDescription: 'Naš tim stručnjaka je dostupan 24/7 za sve vaše potrebe. Od tehničkih pitanja do pomoći s narudžbama, tu smo za vas.',
+                    supportBenefits: {
+                        personalManager: 'Osobni account manager',
+                        personalManagerText: 'Posvećeni kontakt za sve vaše potrebe',
+                        technicalSupport: 'Tehnička podrška',
+                        technicalSupportText: '24/7 tehnička podrška od stručnjaka',
+                        priorityService: 'Prioritetno servisiranje',
+                        priorityServiceText: 'Brži odgovor na vaše zahtjeve',
+                        onlinePortal: 'Partner portal',
+                        onlinePortalText: 'Pristup ekskluzivnom online portalu'
+                    },
                     marketingSupport: 'Marketing podrška',
                     marketingSupportText: 'Materijali za marketing i podrška u promociji.',
+                    marketingTitle: 'Marketing i edukacija',
+                    marketingSubtitle: 'Proširite svoj biznis s našom podrškom',
+                    marketingDescription: 'Pružamo vam sve potrebne materijale i obuku za uspješno predstavljanje naših proizvoda vašim kupcima.',
+                    marketingBenefits: {
+                        marketingMaterials: 'Marketing materijali',
+                        marketingMaterialsText: 'Brošure, katalozi i promotivni materijali',
+                        training: 'Obuka i edukacija',
+                        trainingText: 'Redovite obuke o proizvodima i tehnologijama',
+                        certification: 'Certifikacija',
+                        certificationText: 'Certifikat ovlaštenog SolarShop partnera',
+                        events: 'Događanja',
+                        eventsText: 'Pristup ekskluzivnim partnerskim događanjima'
+                    },
                     training: 'Obuka i edukacija',
                     trainingText: 'Redovite obuke o proizvodima i tehnologijama.',
                     requirements: 'Uvjeti za partnerstvo',
                     requirementsText: 'Saznajte što trebate za postajanje našeg partnera.',
+                    requirementsTitle: 'Uvjeti za partnerstvo',
+                    requirementsSubtitle: 'Jednostavan proces postajanja partnera',
+                    requirementsDescription: 'Naš proces partnerstva je osmišljen da bude jednostavan i transparentan. Evo što trebate:',
                     businessExperience: 'Iskustvo u poslovanju',
-                    businessExperienceText: 'Minimalno 2 godine iskustva u solarnoj industriji.',
+                    businessExperienceText: 'Minimalno 1 godina poslovanja.',
                     financialStability: 'Financijska stabilnost',
-                    financialStabilityText: 'Dokazana financijska stabilnost i kreditna sposobnost.',
-                    technicalCapability: 'Tehnička sposobnost',
-                    technicalCapabilityText: 'Kvalificirani tim za instalaciju i održavanje.',
+                    financialStabilityText: 'Dokazana financijska stabilnost.',
                     commitment: 'Predanost kvaliteti',
                     commitmentText: 'Predanost pružanju visokokvalitetnih usluga kupcima.',
+                    applicationProcess: 'Proces prijave',
+                    applicationProcessText: 'Jednostavan proces u 3 koraka',
+                    stepOne: 'Korak 1: Prijava',
+                    stepOneText: 'Ispunite online formu za prijavu',
+                    stepTwo: 'Korak 2: Pregled',
+                    stepTwoText: 'Naš tim će pregledati vašu prijavu',
+                    stepThree: 'Korak 3: Odobrenje',
+                    stepThreeText: 'Dobivate pristup partnerskim pogodnostima',
                     readyToJoin: 'Spremni ste se pridružiti našoj mreži partnera?',
-                    startApplicationToday: 'Počnite s prijavljením danas i otključajte ekskluzivne prednosti za vaš biznis.'
+                    startApplicationToday: 'Počnite s prijavljeniem danas i otključajte ekskluzivne prednosti za vaš biznis.',
+                    applyNow: 'Prijavite se sada',
+                    learnMore: 'Saznajte više',
+                    contactUs: 'Kontaktirajte nas'
                 },
                 contact: {
                     title: 'Kontakt za partnere',
@@ -226,18 +281,18 @@ export class TranslationService {
                     enterCompany: 'Unesite naziv tvrtke',
                     enterMessage: 'Unesite svoju poruku',
                     partnerSupport: 'Podrška za partnere',
-                    phone: '+385 1 234 5678',
+                    phone: '01 6407 715',
                     salesTeam: 'Prodajni tim',
                     salesTeamText: 'Naš prodajni tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    salesTeamEmail: 'sales@solarshop.hr',
-                    salesTeamPhone: '+385 1 234 5679',
+                    salesTeamEmail: 'prodaja@solarni-paneli.hr',
+                    salesTeamPhone: '01 6407 715',
                     technicalSupport: 'Tehnička podrška',
                     technicalSupportText: 'Naš tehnički tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    technicalSupportEmail: 'tech@solarshop.hr',
-                    technicalSupportPhone: '+385 1 234 5680',
+                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportPhone: '01 6407 715',
                     supportEmail: 'partners@solarshop.hr',
-                    officeAddress: 'Ilica 1, 10000 Zagreb, Croatia',
-                    address: 'Ilica 1, 10000 Zagreb, Croatia',
+                    officeAddress: 'Bani ul. 73, 10010, Buzin, Hrvatska',
+                    address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     businessHours: 'Radno vrijeme: Pon-Pet 8:00-17:00',
                     mondayFriday: 'Pon-Pet',
                     saturday: 'Sub',
@@ -1094,6 +1149,9 @@ export class TranslationService {
                     productAlreadyAdded: 'Ovaj proizvod je već dodan u ponudu.',
                     alreadyAdded: ' (Već dodano)',
                     totalDiscount: 'Ukupni popust',
+                    globalDiscount: 'Globalni popust',
+                    applyGlobalDiscountToAll: 'Primijeni globalni popust na sve',
+                    applyToAllProducts: 'Primijeni na sve proizvode',
                 },
                 reviewsForm: {
                     title: 'Recenzije',
@@ -1141,18 +1199,18 @@ export class TranslationService {
                     enterCompany: 'Unesite naziv tvrtke',
                     enterMessage: 'Unesite svoju poruku',
                     partnerSupport: 'Podrška za partnere',
-                    phone: '+385 1 234 5678',
+                    phone: '01 6407 715',
                     salesTeam: 'Prodajni tim',
                     salesTeamText: 'Naš prodajni tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    salesTeamEmail: 'sales@solarshop.hr',
+                    salesTeamEmail: 'prodaja@solarni-paneli.hr',
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Tehnička podrška',
                     technicalSupportText: 'Naš tehnički tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    technicalSupportEmail: 'tech@solarshop.hr',
-                    technicalSupportPhone: '+385 1 234 5680',
+                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportPhone: '01 6407 715',
                     supportEmail: 'partners@solarshop.hr',
-                    officeAddress: 'Ilica 1, 10000 Zagreb, Croatia',
-                    address: 'Ilica 1, 10000 Zagreb, Croatia',
+                    officeAddress: 'Bani ul. 73, 10010, Buzin, Hrvatska',
+                    address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     businessHours: 'Radno vrijeme: Pon-Pet 8:00-17:00',
                     mondayFriday: 'Pon-Pet',
                     saturday: 'Sub',
@@ -1622,8 +1680,8 @@ export class TranslationService {
             },
             // Contact Information
             contact: {
-                phone: '+385 1 234 5678',
-                email: 'info@solarshop.hr'
+                phone: '01 6407 715',
+                email: 'info@solarni-paneli.hr'
             },
             // Language
             language: {
@@ -1637,14 +1695,15 @@ export class TranslationService {
                 exploreOffers: 'Istražite ponude',
                 loading: 'Učitavanje...',
                 noOffersAvailable: 'Trenutno nema dostupnih ponuda',
-                primeDeal: 'Hit Ponuda'
+                primeDeal: 'Hit Ponuda',
+                off: 'SNIŽENJE'
             },
             // Products
             products: {
                 title: 'Kategorije',
                 subtitle: 'Otkrijte naš široki asortiman proizvoda za održivu i energetski učinkovitu gradnju',
                 exploreProducts: 'Istražite proizvode',
-                productsCount: '{{count}} proizvoda',
+                productsCount: 'Broj proizvoda: {{count}}',
                 needHelp: 'Trebate pomoć u odabiru?',
                 needHelpText: 'Naši stručnjaci su tu da vam pomognu pronaći savršene proizvode za vaš projekt. Zatražite personalizirane preporuke već danas.',
                 contactExperts: 'Kontaktirajte naše stručnjake',
@@ -1735,6 +1794,8 @@ export class TranslationService {
             },
             // Blog
             blog: {
+                home: 'Početna',
+                blog: 'Blog',
                 title: 'Blog i članci',
                 subtitle: 'Najnovije vijesti, savjeti i uvidi iz svijeta solarne energije',
                 allPosts: 'Svi postovi',
@@ -1752,6 +1813,7 @@ export class TranslationService {
                 relatedArticles: 'Povezani članci',
                 stayUpdated: 'Ostanite u toku',
                 newsletterText: 'Pretplatite se na naš newsletter i budite prvi koji će saznati o najnovijim člancima i solarnim rješenjima.',
+                loadingArticle: 'Učitavanje članka...',
                 articleNotFound: 'Članak nije pronađen',
                 backToBlog: 'Natrag na blog',
                 whatYouFind: 'Što ćete pronaći',
@@ -1766,17 +1828,25 @@ export class TranslationService {
                 faqTutorials: 'FAQ i tutorijali',
                 faqText: 'Odgovori na najčešća pitanja i korak-po-korak tutorijali.',
                 trustedPartner: 'Vaš pouzdani partner',
-                partnerText: 'Više od 10 godina iskustva u solarnoj industriji. Naš tim stručnjaka dijeli znanje kroz informativne članke koji vam pomažu donijeti prave odluke.'
+                partnerText: 'Više od 10 godina iskustva u solarnoj industriji. Naš tim stručnjaka dijeli znanje kroz informativne članke koji vam pomažu donijeti prave odluke.',
+                // Date and time formatting
+                minutesRead: 'min čitanja',
+                minRead: 'min',
+                tags: 'Oznake',
+                publishedOn: 'Objavljeno',
+                readingTime: 'Vrijeme čitanja'
             },
             // Company
             company: {
                 title: 'Naša kompanija',
                 subtitle: 'Dobrodošli u sekciju posvećenu našoj kompaniji. Ovdje možete saznati više o nama, našoj povijesti, vrijednostima i timu.',
                 whoWeAre: 'Tko smo mi',
-                whoWeAreText: 'SolarShop je nastao iz iskustva profesionalaca u građevinskom sektoru koji su, kombiniranjem svojih vještina, odlučili stvoriti portal.',
-                mission: 'Naša misija je jednostavna: učiniti dostupnim svima najnovija rješenja za održivu gradnju.',
-                ourTeam: 'Naš tim',
-                teamText: 'Iza SolarShop-a je grupa strastvenih i kompetentnih ljudi: inženjeri, arhitekti, energetski savjetnici i građevinski profesionalci.',
+                whoWeAreText: 'Tvrtka Hvaljen budi d.o.o. je osnovana 2011. godine u Zagrebu i od tada posluje pod brendom SolarShop. Od samog početka definirali smo i obilježili područje naše djelatnosti, potpuno se posvećujući solarnoj energiji, obnovljivim izvorima i zelenoj tranziciji. Pozicionirali smo se kao tržišni lideri i postali konkurentan pružatelj solarnih oprema, nudeći najširi asortiman svih potrebnih komponenti za fotonaponske elektrane.',
+                mission: 'Naša misija je jednostavna: učiniti dostupnim svima najnovija rješenja za proizvodnju el. energije iz obnovljivih izvora, s naglaskom na solarnu energiju. Naš cilj je omogućiti svakome da postane energetski neovisan i doprinese smanjenju emisije CO2.',
+                ourTeam: 'Cilj',
+                teamText1: 'Odlučniji smo nego ikad da održimo postavljene ciljeve, da tržištu predstavimo koncept solarne energije i da instaliramo solarne elektrane na što više krovova, kako za pojedince tako i za pravne subjekte, poput tvornica, skladišta, crkava i drugih javnih i društveno korisnih ustanova.',
+                teamText2: 'Sinergijom kvalitetnih proizvoda, uvijek birajući provjerene i renomirane proizvođače, i stalnim proširivanjem našeg asortimana komplementarnim proizvodima, zajedno s brzom, profesionalnom i efikasnom uslugom instalacije, postali smo neophodan i poželjan partner za svakoga tko želi proizvoditi električnu energiju. Kontinuiranim zapošljavanjem kvalificiranog osoblja i ulaganjem u postojeće, osiguravamo da smo u korak s tehnologijom i pružamo našim kupcima i korisnicima 24-satnu tehničku podršku i uslugu.',
+                teamText3: 'Danas, zbog svega navedenog, možemo ponuditi rješenja "ključ u ruke", bez obzira radi li se o jednostavnim kućnim solarnim elektranama, elektranama na proizvodnim objektima, trgovačkim centrima, tvornicama ili elektranama na tlu, poznatim i kao solarna polja. Naš tim preuzima cijeli proces: od razvoja projekta, isporuke komponenti, instalacije elektrane, upravljanja svom dokumentacijom, komunikacije s relevantnim tijelima, do, konačno, puštanja elektrane u pogon.',
                 missionValues: 'Misija i vrijednosti',
                 quality: 'Kvaliteta',
                 qualityText: 'Nudimo samo testirane i certificirane proizvode, odabrane od najpouzdanijih marki na tržištu.',
@@ -1814,7 +1884,23 @@ export class TranslationService {
                 freeShippingProgress: 'Dodajte još {{amount}} za besplatnu dostavu!',
                 freeShippingRemaining: 'Dodajte {{amount}} za besplatnu dostavu!',
                 yourCart: 'Vaša košarica',
-                checkout: 'Naplata'
+                checkout: 'Naplata',
+                saveFromOffer: 'Ušteda od ponude',
+                couponValidationError: 'Neuspješna provjera kupona. Molimo pokušajte ponovno.',
+                couponNotFound: 'Kod kupona nije pronađen',
+                couponInactive: 'Ovaj kupon više nije aktivan',
+                couponNotYetValid: 'Ovaj kupon još nije valjan',
+                couponExpired: 'Ovaj kupon je istekao',
+                couponUsageLimitReached: 'Ovaj kupon je dosegnuo svoj limit korištenja',
+                couponMinOrderNotMet: 'Potreban je minimalni iznos narudžbe od €{{amount}} za ovaj kupon',
+                couponMaxOrderExceeded: 'Prekoračen je maksimalni iznos narudžbe od €{{amount}} za ovaj kupon',
+                couponNotApplicableToOffers: 'Ovaj kupon se ne može primijeniti na ponude u vašoj košarici',
+                couponExcludedFromOffers: 'Ovaj kupon se ne može koristiti s ponudama u vašoj košarici',
+                couponNotApplicableToProducts: 'Ovaj kupon se ne može primijeniti na proizvode u vašoj košarici',
+                couponExcludedFromProducts: 'Ovaj kupon se ne može koristiti s nekim proizvodima u vašoj košarici',
+                couponNotApplicableToCategories: 'Ovaj kupon se ne može primijeniti na kategorije proizvoda u vašoj košarici',
+                couponExcludedFromCategories: 'Ovaj kupon se ne može koristiti s nekim kategorijama proizvoda u vašoj košarici',
+                couponDiscount: 'Popust kupona'
             },
             // Checkout
             checkout: {
@@ -1944,9 +2030,9 @@ export class TranslationService {
             // Footer
             footer: {
                 companyDescription: 'Vaša destinacija za održive građevinske materijale i rješenja energetske učinkovitosti. Izgradimo zeleniju budućnost zajedno.',
-                address: 'Ilica 1, 10000 Zagreb, Hrvatska',
-                phone: '+385 1 234 5678',
-                email: 'info@solarshop.hr',
+                address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
+                phone: '01 6407 715',
+                email: 'info@solarni-paneli.hr',
                 hours: 'Pon-Pet: 8:00-17:00',
                 followUs: 'Pratite nas:',
                 newsletter: 'Newsletter',
@@ -2032,7 +2118,7 @@ export class TranslationService {
                 returnsShipping: 'Politika povrata i dostave',
                 returnsShippingText: 'Konzultirajte naš odjel posvećen Politici povrata i dostave da biste saznali o postupcima povrata, rokovima dostave i uvjetima za bilo kakve povrate novca. Uvijek smo transparentni, tako da možete kupovati s povjerenjem znajući da se možete osloniti na nas u slučaju promjena ili problema.',
                 learnMore: 'Saznajte više',
-                faq: 'FAQ',
+                faq: 'Često postavljena pitanja',
                 faqQuestion1: 'Koje usluge nudi SolarShop?',
                 faqAnswer1: 'SolarShop nudi širok spektar usluga, uključujući energetske preglede, energetsko modeliranje, ugradnju visokoefikasnih sustava, integraciju obnovljive energije, poboljšanja omotača zgrade, nadogradnje mehaničkih sustava, nadogradnje električnih sustava, nadogradnje vodovodnih sustava i sveobuhvatno upravljanje projektima.',
                 faqQuestion2: 'Za koga su namijenjene vaše usluge?',
@@ -2194,11 +2280,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Telefon',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Adresa',
-                        value: 'Ilica 1, 10000 Zagreb, Hrvatska'
+                        value: 'Bani ul. 73, 10010, Buzin, Hrvatska'
                     }
                 },
                 changes: {
@@ -2284,11 +2370,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Telefon',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Adresa',
-                        value: 'Ilica 1, 10000 Zagreb, Hrvatska'
+                        value: 'Bani ul. 73, 10010, Buzin, Hrvatska'
                     }
                 },
                 changes: {
@@ -2384,11 +2470,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Telefon',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Adresa',
-                        value: 'Ilica 1, 10000 Zagreb, Hrvatska'
+                        value: 'Bani ul. 73, 10010, Buzin, Hrvatska'
                     }
                 }
             },
@@ -2427,6 +2513,7 @@ export class TranslationService {
                 home: 'Home',
                 products: 'Products',
                 offers: 'Offers',
+                partners: 'Partners',
                 about: 'About us',
                 contact: 'Contact',
                 signIn: 'Sign In',
@@ -2583,27 +2670,80 @@ export class TranslationService {
                 about: {
                     title: 'About Partnership',
                     subtitle: 'Why partner with SolarShop',
+                    heroTitle: 'Become a SolarShop Partner',
+                    heroSubtitle: 'Discover exclusive benefits, special pricing and business support in the solar industry',
                     benefits: 'Benefits of Partnership',
                     exclusivePricing: 'Exclusive Pricing',
                     exclusivePricingText: 'Access special prices and discounts for partners.',
+                    pricingTitle: 'Special Partner Pricing',
+                    pricingSubtitle: 'Achieve significant savings with our partner pricing',
+                    pricingDescription: 'As our partner, you gain access to exclusive pricing lower than standard prices. Your savings increase with order volume.',
+                    pricingBenefits: {
+                        volumeDiscounts: 'Volume Discounts',
+                        volumeDiscountsText: 'Higher discounts for larger orders',
+                        tierPricing: 'Tier Pricing',
+                        tierPricingText: 'Special pricing tiers based on partner status',
+                        earlyAccess: 'Early Access',
+                        earlyAccessText: 'First opportunity to purchase new products',
+                        specialOffers: 'Special Offers',
+                        specialOffersText: 'Exclusive offers for partners only'
+                    },
                     dedicatedSupport: 'Dedicated Support',
                     dedicatedSupportText: 'Personal account manager and technical support.',
+                    supportTitle: 'Superior Partner Support',
+                    supportSubtitle: 'Get priority support and personal attention',
+                    supportDescription: 'Our expert team is available 24/7 for all your needs. From technical questions to order assistance, we are here for you.',
+                    supportBenefits: {
+                        personalManager: 'Personal Account Manager',
+                        personalManagerText: 'Dedicated contact for all your needs',
+                        technicalSupport: 'Technical Support',
+                        technicalSupportText: '24/7 technical support from experts',
+                        priorityService: 'Priority Service',
+                        priorityServiceText: 'Faster response to your requests',
+                        onlinePortal: 'Partner Portal',
+                        onlinePortalText: 'Access to exclusive online portal'
+                    },
                     marketingSupport: 'Marketing Support',
                     marketingSupportText: 'Marketing materials and support for promotion.',
+                    marketingTitle: 'Marketing & Education',
+                    marketingSubtitle: 'Grow your business with our support',
+                    marketingDescription: 'We provide you with all the necessary materials and training to successfully present our products to your customers.',
+                    marketingBenefits: {
+                        marketingMaterials: 'Marketing Materials',
+                        marketingMaterialsText: 'Brochures, catalogs and promotional materials',
+                        training: 'Training & Education',
+                        trainingText: 'Regular training on products and technologies',
+                        certification: 'Certification',
+                        certificationText: 'Authorized SolarShop partner certificate',
+                        events: 'Events',
+                        eventsText: 'Access to exclusive partner events'
+                    },
                     training: 'Training and Education',
                     trainingText: 'Regular training on products and technologies.',
                     requirements: 'Partnership Requirements',
                     requirementsText: 'Learn what we need from you to become our partner.',
+                    requirementsTitle: 'Partnership Requirements',
+                    requirementsSubtitle: 'Simple process to become a partner',
+                    requirementsDescription: 'Our partnership process is designed to be simple and transparent. Here is what you need:',
                     businessExperience: 'Business Experience',
-                    businessExperienceText: 'Minimum 2 years of experience in the solar industry.',
+                    businessExperienceText: 'Minimum 1 year of business experience.',
                     financialStability: 'Financial Stability',
-                    financialStabilityText: 'Demonstrated financial stability and creditworthiness.',
-                    technicalCapability: 'Technical Capability',
-                    technicalCapabilityText: 'Qualified team for installation and maintenance.',
+                    financialStabilityText: 'Demonstrated financial stability.',
                     commitment: 'Commitment to Quality',
                     commitmentText: 'Commitment to providing high-quality services to our customers.',
+                    applicationProcess: 'Application Process',
+                    applicationProcessText: 'Simple 3-step process',
+                    stepOne: 'Step 1: Application',
+                    stepOneText: 'Complete the online application form',
+                    stepTwo: 'Step 2: Review',
+                    stepTwoText: 'Our team will review your application',
+                    stepThree: 'Step 3: Approval',
+                    stepThreeText: 'Gain access to partner benefits',
                     readyToJoin: 'Ready to Join Our Partner Network?',
-                    startApplicationToday: 'Start your application today and unlock exclusive benefits for your business.'
+                    startApplicationToday: 'Start your application today and unlock exclusive benefits for your business.',
+                    applyNow: 'Apply Now',
+                    learnMore: 'Learn More',
+                    contactUs: 'Contact Us'
                 },
                 contact: {
                     title: 'Partner Contact',
@@ -2623,18 +2763,18 @@ export class TranslationService {
                     enterCompany: 'Enter company name',
                     enterMessage: 'Enter your message',
                     partnerSupport: 'Partner Support',
-                    phone: '+385 1 234 5678',
+                    phone: '01 6407 715',
                     salesTeam: 'Sales Team',
                     salesTeamText: 'Our sales team is available to assist you with any questions or issues you may have.',
-                    salesTeamEmail: 'sales@solarshop.hr',
+                    salesTeamEmail: 'prodaja@solarni-paneli.hr',
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Technical Support',
                     technicalSupportText: 'Our technical support team is available to assist you with any questions or issues you may have.',
-                    technicalSupportEmail: 'tech@solarshop.hr',
-                    technicalSupportPhone: '+385 1 234 5680',
+                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportPhone: '01 6407 715',
                     supportEmail: 'partners@solarshop.hr',
-                    officeAddress: 'Ilica 1, 10000 Zagreb, Croatia',
-                    address: 'Ilica 1, 10000 Zagreb, Croatia',
+                    officeAddress: 'Bani ul. 73, 10010, Buzin, Croatia',
+                    address: 'Bani ul. 73, 10010, Buzin, Croatia',
                     businessHours: 'Business Hours: Mon-Fri 8:00-17:00',
                     mondayFriday: 'Mon-Fri',
                     saturday: 'Sat',
@@ -3396,6 +3536,9 @@ export class TranslationService {
                     productAlreadyAdded: 'This product has already been added to the offer.',
                     alreadyAdded: ' (Already Added)',
                     totalDiscount: 'Total discount',
+                    globalDiscount: 'Global discount',
+                    applyGlobalDiscountToAll: 'Apply global discount to all',
+                    applyToAllProducts: 'Apply to all products',
                 },
                 reviewsForm: {
                     title: 'Reviews',
@@ -3443,18 +3586,18 @@ export class TranslationService {
                     enterCompany: 'Enter company name',
                     enterMessage: 'Enter your message',
                     partnerSupport: 'Partner Support',
-                    phone: '+385 1 234 5678',
+                    phone: '01 6407 715',
                     salesTeam: 'Sales Team',
                     salesTeamText: 'Our sales team is available to assist you with any questions or issues you may have.',
-                    salesTeamEmail: 'sales@solarshop.hr',
+                    salesTeamEmail: 'prodaja@solarni-paneli.hr',
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Technical Support',
                     technicalSupportText: 'Our technical support team is available to assist you with any questions or issues you may have.',
-                    technicalSupportEmail: 'tech@solarshop.hr',
-                    technicalSupportPhone: '+385 1 234 5680',
+                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportPhone: '01 6407 715',
                     supportEmail: 'partners@solarshop.hr',
-                    officeAddress: 'Ilica 1, 10000 Zagreb, Croatia',
-                    address: 'Ilica 1, 10000 Zagreb, Croatia',
+                    officeAddress: 'Bani ul. 73, 10010, Buzin, Croatia',
+                    address: 'Bani ul. 73, 10010, Buzin, Croatia',
                     businessHours: 'Business Hours: Mon-Fri 8:00-17:00',
                     mondayFriday: 'Mon-Fri',
                     saturday: 'Sat',
@@ -3907,8 +4050,8 @@ export class TranslationService {
             },
             // Contact Information
             contact: {
-                phone: '+385 1 234 5678',
-                email: 'info@solarshop.hr'
+                phone: '01 6407 715',
+                email: 'info@solarni-paneli.hr'
             },
             // Language
             language: {
@@ -3922,14 +4065,15 @@ export class TranslationService {
                 exploreOffers: 'Explore Offers',
                 loading: 'Loading...',
                 noOffersAvailable: 'No offers available at the moment',
-                primeDeal: 'Prime Deal'
+                primeDeal: 'Prime Deal',
+                off: 'OFF'
             },
             // Products
             products: {
                 title: 'Categories',
                 subtitle: 'Discover our wide range of products for sustainable and energy-efficient construction',
                 exploreProducts: 'Explore Products',
-                productsCount: '{{count}} Products',
+                productsCount: 'Number of products: {{count}}',
                 needHelp: 'Need Help Choosing?',
                 needHelpText: 'Our experts are here to help you find the perfect products for your project. Get personalized recommendations today.',
                 contactExperts: 'Contact Our Experts',
@@ -4020,6 +4164,8 @@ export class TranslationService {
             },
             // Blog
             blog: {
+                home: 'Početna',
+                blog: 'Blog',
                 title: 'Blog & Articles',
                 subtitle: 'Latest news, tips and insights from the world of solar energy',
                 allPosts: 'All Posts',
@@ -4037,6 +4183,7 @@ export class TranslationService {
                 relatedArticles: 'Related Articles',
                 stayUpdated: 'Stay Updated',
                 newsletterText: 'Subscribe to our newsletter and be the first to know about new articles and solar solutions.',
+                loadingArticle: 'Loading article...',
                 articleNotFound: 'Article not found',
                 backToBlog: 'Back to Blog',
                 whatYouFind: 'What you\'ll find',
@@ -4051,7 +4198,13 @@ export class TranslationService {
                 faqTutorials: 'FAQ and Tutorials',
                 faqText: 'Answers to frequently asked questions and step-by-step tutorials.',
                 trustedPartner: 'Your trusted partner',
-                partnerText: 'Over 10 years of experience in the solar industry. Our team of experts shares knowledge through informative articles that help you make the right decisions.'
+                partnerText: 'Over 10 years of experience in the solar industry. Our team of experts shares knowledge through informative articles that help you make the right decisions.',
+                // Date and time formatting
+                minutesRead: 'min read',
+                minRead: 'min',
+                tags: 'Tags',
+                publishedOn: 'Published',
+                readingTime: 'Reading time'
             },
             // Company
             company: {
@@ -4060,8 +4213,10 @@ export class TranslationService {
                 whoWeAre: 'Who We Are',
                 whoWeAreText: 'SolarShop was born from the experience of professionals in the construction sector who, by combining their skills, decided to create a portal.',
                 mission: 'Our mission is simple: to make accessible to everyone the most innovative solutions for sustainable construction.',
-                ourTeam: 'Our Team',
-                teamText: 'Behind SolarShop is a group of passionate and competent people: engineers, architects, energy consultants and construction professionals.',
+                ourTeam: 'Our Goal',
+                teamText1: 'We are more determined than ever to uphold our set goals, to introduce the concept of solar energy to the market, and to install solar power plants on as many rooftops as possible — for both individuals and legal entities, such as factories, warehouses, churches, and other public and socially beneficial institutions.',
+                teamText2: 'Through the synergy of high-quality products—always selecting proven and renowned manufacturers—and by constantly expanding our range with complementary products, along with fast, professional, and efficient installation services, we have become an essential and desirable partner for anyone who wants to produce electricity. By continuously hiring qualified personnel and investing in our existing staff, we ensure that we stay up to date with technology and provide our customers and users with 24-hour technical support and service.',
+                teamText3: 'Today, because of all the above, we are able to offer turnkey solutions, whether it involves simple home solar power plants, installations on production facilities, shopping centers, factories, or ground-mounted power plants, also known as solar fields. Our team takes over the entire process: from project development, delivery of components, installation of the power plant, handling all documentation, and communication with relevant authorities, to finally commissioning the power plant.',
                 missionValues: 'Mission and Values',
                 quality: 'Quality',
                 qualityText: 'We offer only tested and certified products, selected from the most reliable brands on the market.',
@@ -4099,7 +4254,23 @@ export class TranslationService {
                 freeShippingProgress: 'Add {{amount}} more for free shipping!',
                 freeShippingRemaining: 'Add {{amount}} for free shipping!',
                 yourCart: 'Your cart',
-                checkout: 'Checkout'
+                checkout: 'Checkout',
+                saveFromOffer: 'Save from offer',
+                couponValidationError: 'Unable to validate coupon. Please try again.',
+                couponNotFound: 'Coupon code not found',
+                couponInactive: 'This coupon is no longer active',
+                couponNotYetValid: 'This coupon is not yet valid',
+                couponExpired: 'This coupon has expired',
+                couponUsageLimitReached: 'This coupon has reached its usage limit',
+                couponMinOrderNotMet: 'Minimum order amount of €{{amount}} required for this coupon',
+                couponMaxOrderExceeded: 'Maximum order amount of €{{amount}} exceeded for this coupon',
+                couponNotApplicableToOffers: 'This coupon is not applicable to the offers in your cart',
+                couponExcludedFromOffers: 'This coupon cannot be used with the offers in your cart',
+                couponNotApplicableToProducts: 'This coupon is not applicable to the products in your cart',
+                couponExcludedFromProducts: 'This coupon cannot be used with some products in your cart',
+                couponNotApplicableToCategories: 'This coupon is not applicable to the product categories in your cart',
+                couponExcludedFromCategories: 'This coupon cannot be used with some product categories in your cart',
+                couponDiscount: 'Coupon discount'
             },
             // Checkout
             checkout: {
@@ -4229,9 +4400,9 @@ export class TranslationService {
             // Footer
             footer: {
                 companyDescription: 'Your destination for sustainable building materials and energy efficiency solutions. Let\'s build a greener future together.',
-                address: 'Ilica 1, 10000 Zagreb, Croatia',
-                phone: '+385 1 234 5678',
-                email: 'info@solarshop.hr',
+                address: 'Bani ul. 73, 10010, Buzin, Croatia',
+                phone: '01 6407 715',
+                email: 'info@solarni-paneli.hr',
                 hours: 'Mon-Fri: 8:00-17:00',
                 followUs: 'Follow us:',
                 newsletter: 'Newsletter',
@@ -4480,11 +4651,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Phone',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Address',
-                        value: 'Ilica 1, 10000 Zagreb, Croatia'
+                        value: 'Bani ul. 73, 10010, Buzin, Croatia'
                     }
                 },
                 changes: {
@@ -4570,11 +4741,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Phone',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Address',
-                        value: 'Ilica 1, 10000 Zagreb, Croatia'
+                        value: 'Bani ul. 73, 10010, Buzin, Croatia'
                     }
                 },
                 changes: {
@@ -4670,11 +4841,11 @@ export class TranslationService {
                     },
                     phone: {
                         label: 'Phone',
-                        value: '+385 1 234 5678'
+                        value: '01 6407 715'
                     },
                     address: {
                         label: 'Address',
-                        value: 'Ilica 1, 10000 Zagreb, Croatia'
+                        value: 'Bani ul. 73, 10010, Buzin, Croatia'
                     }
                 }
             },
