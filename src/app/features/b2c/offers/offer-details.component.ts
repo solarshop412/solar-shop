@@ -32,7 +32,8 @@ import { TranslationService } from '../../../shared/services/translation.service
               >
               <!-- Discount Badge -->
               <div class="absolute top-6 left-6 bg-accent-500 text-white text-lg font-bold px-4 py-3 rounded-full shadow-lg">
-                -{{ offer.discountPercentage }}%
+                <span *ngIf="offer.discount_type === 'percentage' || !offer.discount_type">-{{ offer.discountPercentage }}%</span>
+                <span *ngIf="offer.discount_type === 'fixed_amount'">-{{ offer.discount_value | currency:'EUR':'symbol':'1.0-2' }}</span>
               </div>
             </div>
 
@@ -55,11 +56,11 @@ import { TranslationService } from '../../../shared/services/translation.service
                     {{ getTotalOriginalPrice() | currency:'EUR':'symbol':'1.2-2' }}
                   </span>
                   <span class="text-4xl font-bold text-white">
-                    {{ getTotalDiscountedPrice(offer.discountPercentage) | currency:'EUR':'symbol':'1.2-2' }}
+                    {{ calculateTotalDiscountedPrice(offer) | currency:'EUR':'symbol':'1.2-2' }}
                   </span>
                 </div>
                 <div class="text-lg text-white/90">
-                  {{ 'offers.youSave' | translate }} {{ getTotalSavings(offer.discountPercentage) | currency:'EUR':'symbol':'1.2-2' }}
+                  {{ 'offers.youSave' | translate }} {{ getTotalSavings(offer) | currency:'EUR':'symbol':'1.2-2' }}
                 </div>
               </div>
 
@@ -145,7 +146,7 @@ import { TranslationService } from '../../../shared/services/translation.service
                   {{ product.price | currency:'EUR':'symbol':'1.2-2' }}
                 </span>
                 <span class="text-xl font-bold text-solar-600">
-                  {{ calculateDiscountedPrice(product.price, offer.discountPercentage) | currency:'EUR':'symbol':'1.2-2' }}
+                  {{ calculateDiscountedPrice(product.price, offer, product) | currency:'EUR':'symbol':'1.2-2' }}
                 </span>
               </div>
 
@@ -305,7 +306,6 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
           )
         `)
         .eq('offer_id', offer.id)
-        .eq('is_active', true)
         .order('sort_order')
     ).pipe(
       switchMap(({ data: offerProducts, error }) => {
@@ -316,17 +316,25 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
         }
 
         if (offerProducts && offerProducts.length > 0) {
-          // Map offer products to the expected format
-          const products = offerProducts.map((op: any) => ({
-            id: op.products.id,
-            name: op.products.name,
-            description: op.products.description,
-            price: op.products.price,
-            availability: this.getProductAvailability(op.products.stock_quantity),
-            images: op.products.images || [],
-            category: op.products.categories?.name,
-            stock_quantity: op.products.stock_quantity || 0
-          }));
+          // Map offer products to the expected format including discount information
+          const products = offerProducts.map((op: any) => {
+            // Determine discount type based on which field has a value
+            const discountType = (op.discount_amount && op.discount_amount > 0) ? 'fixed_amount' : 'percentage';
+            
+            return {
+              id: op.products.id,
+              name: op.products.name,
+              description: op.products.description,
+              price: op.products.price,
+              availability: this.getProductAvailability(op.products.stock_quantity),
+              images: op.products.images || [],
+              category: op.products.categories?.name,
+              stock_quantity: op.products.stock_quantity || 0,
+              discount_percentage: op.discount_percentage || 0,
+              discount_amount: op.discount_amount || 0,
+              discount_type: discountType
+            };
+          });
           return of(products);
         } else {
           // If no specific products, fallback to featured products
@@ -356,8 +364,37 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     return 'assets/images/product-placeholder.svg';
   }
 
-  calculateDiscountedPrice(originalPrice: number, discountPercentage: number): number {
-    return originalPrice * (1 - discountPercentage / 100);
+  calculateDiscountedPrice(originalPrice: number, offer: Offer, product?: any): number {
+    // If we have product-specific discount information, use that
+    if (product && (product.discount_percentage > 0 || product.discount_amount > 0)) {
+      if (product.discount_type === 'fixed_amount') {
+        return Math.max(0, originalPrice - (product.discount_amount || 0));
+      } else {
+        return originalPrice * (1 - (product.discount_percentage || 0) / 100);
+      }
+    }
+    
+    // Fallback to offer-level discount calculation
+    if (!offer.discount_type || offer.discount_type === 'percentage') {
+      const discountPercentage = offer.discountPercentage || 0;
+      return originalPrice * (1 - discountPercentage / 100);
+    } else if (offer.discount_type === 'fixed_amount') {
+      // For fixed amount discounts, calculate proportional discount per product
+      const totalOriginalPrice = this.getTotalOriginalPrice();
+      const fixedDiscountAmount = offer.discount_value || 0;
+      if (totalOriginalPrice > 0) {
+        const proportionalDiscount = (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
+        return Math.max(0, originalPrice - proportionalDiscount);
+      }
+    }
+    return originalPrice;
+  }
+
+  calculateTotalDiscountedPrice(offer: Offer): number {
+    // Calculate total using individual product discounts
+    return this.currentProducts.reduce((total, product) => {
+      return total + this.calculateDiscountedPrice(product.price, offer, product);
+    }, 0);
   }
 
   copyCouponCode(code: string): void {
@@ -376,25 +413,20 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
   }
 
   navigateToProduct(productId: string): void {
-    this.router.navigate(['/products', productId]);
+    this.router.navigate(['/proizvodi', productId]);
   }
 
   navigateToProducts(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/proizvodi']);
   }
 
   getTotalOriginalPrice(): number {
     return this.currentProducts.reduce((total, product) => total + product.price, 0);
   }
 
-  getTotalDiscountedPrice(discountPercentage: number): number {
-    return this.currentProducts.reduce((total, product) => {
-      return total + this.calculateDiscountedPrice(product.price, discountPercentage);
-    }, 0);
-  }
 
-  getTotalSavings(discountPercentage: number): number {
-    return this.getTotalOriginalPrice() - this.getTotalDiscountedPrice(discountPercentage);
+  getTotalSavings(offer: Offer): number {
+    return this.getTotalOriginalPrice() - this.calculateTotalDiscountedPrice(offer);
   }
 
   async addAllToCart(): Promise<void> {
@@ -404,7 +436,7 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Get current offer to pass offer information
-    this.offer$.pipe(takeUntil(this.destroy$)).subscribe(offer => {
+    this.offer$.pipe(takeUntil(this.destroy$)).subscribe(async offer => {
       if (!offer) {
         this.toastService.showError(this.translationService.translate('offers.offerNotFound'));
         return;
@@ -427,13 +459,24 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
         variantId: undefined
       }));
 
+      // Get the original offer from database to get discount_value
+      let discountValue = offer.discountPercentage || 0;
+      try {
+        const originalOffer = await this.supabaseService.getTableById('offers', offer.id);
+        if (originalOffer) {
+          discountValue = originalOffer.discount_value || offer.discountPercentage || 0;
+        }
+      } catch (error) {
+        console.error('Error fetching original offer data:', error);
+      }
+
       // Dispatch the offer-based add all to cart action
       this.store.dispatch(addAllToCartFromOffer({
         products,
         offerId: offer.id,
         offerName: offer.title,
-        offerType: offer.discount_type as 'percentage' | 'fixed_amount' | 'buy_x_get_y' | 'bundle',
-        offerDiscount: offer.discountPercentage || 0,
+        offerType: (offer.discount_type || 'percentage') as 'percentage' | 'fixed_amount' | 'buy_x_get_y' | 'bundle',
+        offerDiscount: discountValue,
         offerValidUntil: offer.endDate
       }));
 

@@ -27,7 +27,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
             <ol class="flex items-center space-x-4">
               <li>
                 <div>
-                  <a [routerLink]="['/partners']" class="text-gray-400 hover:text-gray-500 font-['DM_Sans']">
+                  <a [routerLink]="['/partneri']" class="text-gray-400 hover:text-gray-500 font-['DM_Sans']">
                     {{ 'b2bNav.home' | translate }}
                   </a>
                 </div>
@@ -37,7 +37,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                   <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
                   </svg>
-                  <a [routerLink]="['/partners/products']" class="ml-4 text-gray-400 hover:text-gray-500 font-['DM_Sans']">
+                  <a [routerLink]="['/partneri/proizvodi']" class="ml-4 text-gray-400 hover:text-gray-500 font-['DM_Sans']">
                     {{ 'b2bNav.products' | translate }}
                   </a>
                 </div>
@@ -73,7 +73,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
           <h3 class="text-lg font-medium text-gray-900 mb-2 font-['Poppins']">{{ 'b2b.products.productNotFound' | translate }}</h3>
           <p class="text-gray-600 mb-6 font-['DM_Sans']">{{ error }}</p>
           <button 
-            [routerLink]="['/partners/products']"
+            [routerLink]="['/partneri/proizvodi']"
             class="px-6 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
           >
             {{ 'b2b.products.backToProducts' | translate }}
@@ -87,33 +87,62 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
           <!-- Product Images -->
           <div class="lg:sticky lg:top-8 space-y-6">
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <div class="aspect-w-1 aspect-h-1 bg-gray-50 flex items-center justify-center min-h-[400px]">
-                <img *ngIf="hasProductImage(product)" 
-                     [src]="getProductImageUrl(product)" 
+              <div class="aspect-w-1 aspect-h-1 bg-gray-50 flex items-center justify-center min-h-[400px] relative">
+                <!-- Show actual image if available -->
+                <img *ngIf="getProductImages().length > 0" 
+                     [src]="getCurrentImageUrl()" 
                      [alt]="product.name" 
                      class="w-full h-96 object-cover"
                      (error)="onImageError($event)">
-                <!-- Fallback placeholder -->
-                <img *ngIf="!hasProductImage(product)" 
-                     src="assets/images/product-placeholder.jpg" 
+                
+                <!-- Show placeholder if no images -->
+                <img *ngIf="getProductImages().length === 0" 
+                     src="assets/images/product-placeholder.svg" 
                      [alt]="product.name" 
                      class="w-full h-96 object-cover">
+                
+                <!-- Navigation arrows for multiple images -->
+                <div *ngIf="hasMultipleImages()" class="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4">
+                  <button 
+                    (click)="previousImage()" 
+                    class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
+                    [disabled]="currentImageIndex === 0"
+                    [class.opacity-50]="currentImageIndex === 0"
+                  >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                  </button>
+                  <button 
+                    (click)="nextImage()" 
+                    class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
+                    [disabled]="currentImageIndex === getImageCount() - 1"
+                    [class.opacity-50]="currentImageIndex === getImageCount() - 1"
+                  >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </button>
+                </div>
+                
+                <!-- Image counter -->
+                <div *ngIf="hasMultipleImages()" class="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+                  {{ currentImageIndex + 1 }} / {{ getImageCount() }}
+                </div>
               </div>
-              <!-- Additional Images (if available) -->
-              <div *ngIf="product.images && product.images.length > 1" class="p-4">
+              <!-- Thumbnail Images (if available) -->
+              <div *ngIf="hasMultipleImages()" class="p-4">
                 <div class="flex space-x-2 overflow-x-auto">
-                  <div *ngFor="let image of product.images" 
-                       class="w-16 h-16 bg-gray-100 rounded border border-gray-200 cursor-pointer hover:opacity-75 flex items-center justify-center flex-shrink-0">
-                    <img *ngIf="image.url" 
-                         [src]="image.url" 
-                         [alt]="image.alt || product.name"
-                         class="w-full h-full object-cover rounded"
-                         (error)="onImageError($event)">
-                    <!-- Fallback for gallery images -->
-                    <img *ngIf="!image.url" 
-                         src="assets/images/product-placeholder.svg" 
+                  <div *ngFor="let image of getProductImages(); let i = index" 
+                       class="w-16 h-16 bg-gray-100 rounded border border-gray-200 cursor-pointer hover:opacity-75 flex items-center justify-center flex-shrink-0"
+                       [class.border-solar-500]="i === currentImageIndex"
+                       [class.border-2]="i === currentImageIndex"
+                       (click)="selectImage(i)">
+                    <img 
+                         [src]="image" 
                          [alt]="product.name"
-                         class="w-full h-full object-cover rounded">
+                         class="w-full h-full object-cover rounded"
+                         (error)="onThumbnailImageError($event, i)">
                   </div>
                 </div>
               </div>
@@ -155,7 +184,32 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
             <!-- Product Header -->
             <div>
               <div class="flex items-center space-x-2 mb-2">
-                <span class="text-sm font-medium text-gray-500 uppercase">{{ product.category || 'Product' }}</span>
+                <!-- Multiple Categories Display -->
+                <div *ngIf="product.categories && product.categories.length > 0" class="flex flex-wrap items-center gap-1">
+                  <button 
+                    *ngFor="let category of product.categories; let last = last"
+                    (click)="navigateToCategory(category.name)"
+                    class="text-sm font-medium text-solar-600 hover:text-solar-700 hover:underline uppercase transition-colors"
+                    [class.font-bold]="category.isPrimary"
+                    [title]="category.isPrimary ? 'Primary category' : ''"
+                  >
+                    {{ category.name }}{{ !last ? ',' : '' }}
+                  </button>
+                </div>
+                <!-- Fallback to single category for legacy products -->
+                <button 
+                  *ngIf="(!product.categories || product.categories.length === 0) && product.category"
+                  (click)="navigateToCategory(product.category)"
+                  class="text-sm font-medium text-solar-600 hover:text-solar-700 hover:underline uppercase transition-colors"
+                >
+                  {{ product.category }}
+                </button>
+                <span 
+                  *ngIf="(!product.categories || product.categories.length === 0) && !product.category"
+                  class="text-sm font-medium text-gray-500 uppercase"
+                >
+                  Product
+                </span>
                 <span class="text-sm text-gray-400">{{ product.sku }}</span>
               </div>
               <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">{{ product.name }}</h1>
@@ -382,20 +436,27 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                  (click)="navigateToProduct(suggested.id)">
               <!-- Product Image -->
               <div class="aspect-w-1 aspect-h-1 bg-gray-100">
-                <img *ngIf="hasProductImage(suggested)" 
-                     [src]="getProductImageUrl(suggested)" 
+                <img 
+                     [src]="getSuggestedProductImageUrl(suggested)" 
                      [alt]="suggested.name" 
-                     class="w-full h-48 object-cover">
-                <img *ngIf="!hasProductImage(suggested)" 
-                     src="assets/images/product-placeholder.svg" 
-                     [alt]="suggested.name" 
-                     class="w-full h-48 object-cover">
+                     class="w-full h-48 object-cover"
+                     (error)="onSuggestedImageError($event)">
               </div>
               
               <!-- Product Info -->
               <div class="p-4">
                 <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ suggested.name }}</h3>
-                <p class="text-sm text-gray-500 mb-3">{{ suggested.category || 'Product' }}</p>
+                <!-- Multiple Categories Display -->
+                <div *ngIf="suggested.categories && suggested.categories.length > 0" class="text-sm text-gray-500 mb-3">
+                  <span *ngFor="let category of suggested.categories; let last = last" 
+                        [class.font-semibold]="category.isPrimary">
+                    {{ category.name }}{{ !last ? ', ' : '' }}
+                  </span>
+                </div>
+                <!-- Fallback to single category for legacy products -->
+                <p *ngIf="(!suggested.categories || suggested.categories.length === 0)" class="text-sm text-gray-500 mb-3">
+                  {{ suggested.category || 'Product' }}
+                </p>
                 
                 <!-- Pricing -->
                 <div *ngIf="isCompanyContact && suggested.company_price" class="space-y-1">
@@ -469,6 +530,9 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   // Collapsible state
   isDescriptionExpanded = true;
   isSpecificationsExpanded = false;
+  
+  // Image carousel state
+  currentImageIndex = 0;
 
   products$: Observable<ProductWithPricing[]>;
   loading$: Observable<boolean>;
@@ -596,7 +660,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   requestQuote(product: ProductWithPricing): void {
-    this.router.navigate(['/partners/contact'], {
+    this.router.navigate(['/partneri/kontakt'], {
       queryParams: {
         subject: 'pricingInquiry',
         productId: product.id,
@@ -638,13 +702,109 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
       img.src = 'assets/images/product-placeholder.svg';
     }
   }
+  
+  onThumbnailImageError(event: Event, index: number): void {
+    const img = event.target as HTMLImageElement;
+    if (img) {
+      img.src = 'assets/images/product-placeholder.svg';
+    }
+  }
+  
+  onSuggestedImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (img) {
+      img.src = 'assets/images/product-placeholder.svg';
+    }
+  }
+  
+  getCurrentImageUrl(): string {
+    const images = this.getProductImages();
+    if (images.length > 0 && this.currentImageIndex < images.length) {
+      return images[this.currentImageIndex];
+    }
+    return 'assets/images/product-placeholder.svg';
+  }
+  
+  getProductImages(): string[] {
+    if (!this.product) return [];
+    
+    const images: string[] = [];
+    
+    // Add primary image from image_url if available and not empty
+    if (this.product.image_url && this.product.image_url.trim()) {
+      images.push(this.product.image_url);
+    }
+    
+    // Add images from images array
+    if (this.product.images && Array.isArray(this.product.images)) {
+      this.product.images.forEach(img => {
+        if (img.url && img.url.trim() && !images.includes(img.url)) {
+          images.push(img.url);
+        }
+      });
+    }
+    
+    // Only return images if we found valid ones, otherwise return empty array
+    return images;
+  }
+  
+  hasMultipleImages(): boolean {
+    const images = this.getProductImages();
+    return images.length > 1;
+  }
+  
+  getImageCount(): number {
+    return this.getProductImages().length;
+  }
+  
+  previousImage(): void {
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+    }
+  }
+  
+  nextImage(): void {
+    const imageCount = this.getImageCount();
+    if (this.currentImageIndex < imageCount - 1) {
+      this.currentImageIndex++;
+    }
+  }
+  
+  selectImage(index: number): void {
+    this.currentImageIndex = index;
+  }
+  
+  getSuggestedProductImageUrl(product: ProductWithPricing): string {
+    // If image_url is available and not empty, use it
+    if (product.image_url && product.image_url.trim()) {
+      return product.image_url;
+    }
+
+    // Extract from images array - use first image
+    if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+      // Find primary image first
+      const primaryImage = product.images.find(img => img.is_primary && img.url && img.url.trim());
+      if (primaryImage) {
+        return primaryImage.url;
+      }
+
+      // Fallback to first image with valid url
+      const firstImageWithUrl = product.images.find(img => img.url && img.url.trim());
+      if (firstImageWithUrl) {
+        return firstImageWithUrl.url;
+      }
+    }
+
+    // Return placeholder if no valid image available
+    return 'assets/images/product-placeholder.svg';
+  }
 
   navigateToLogin(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/prijava']);
   }
 
   navigateToRegister(): void {
-    this.router.navigate(['/partners/register']);
+    this.router.navigate(['/partneri/registracija']);
   }
 
   toggleDescription(): void {
@@ -657,6 +817,9 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
 
   private async loadSuggestedProducts(productId: string): Promise<void> {
     try {
+      // Reset image carousel when loading new product
+      this.currentImageIndex = 0;
+      
       // Load product relationships
       const { data: relationships, error } = await this.supabaseService.client
         .from('product_relationships')
@@ -719,9 +882,15 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
 
   navigateToProduct(productId: string): void {
     // Navigate to the new product and reload
-    this.router.navigate(['/partners/products', productId]).then(() => {
+    this.router.navigate(['/partneri/proizvodi', productId]).then(() => {
       // Force component reload by scrolling to top
       window.scrollTo(0, 0);
+    });
+  }
+
+  navigateToCategory(category: string): void {
+    this.router.navigate(['/partneri/proizvodi'], {
+      queryParams: { category: category }
     });
   }
 } 

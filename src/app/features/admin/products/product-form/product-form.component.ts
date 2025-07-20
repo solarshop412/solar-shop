@@ -37,7 +37,7 @@ interface ProductRelationship {
       [form]="productForm"
       [isEditMode]="isEditMode"
       [isSubmitting]="isSubmitting"
-      [backRoute]="'/admin/products'"
+      [backRoute]="'/admin/proizvodi'"
       (formSubmit)="onSubmit($event)"
     >
       <div [formGroup]="productForm" class="space-y-8">
@@ -50,13 +50,13 @@ interface ProductRelationship {
             {{ 'admin.basicInformation' | translate }}
           </h3>
           
-          <!-- Product UUID (only shown in edit mode) -->
+          <!-- Product UUID and Actions (only shown in edit mode) -->
           <div *ngIf="isEditMode && productId" class="mb-6">
             <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 ID (UUID)
               </label>
-              <div class="flex items-center">
+              <div class="flex items-center mb-3">
                 <input
                   type="text"
                   [value]="productId"
@@ -72,6 +72,19 @@ interface ProductRelationship {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                   </svg>
                 </button>
+              </div>
+              <!-- View as User Link -->
+              <div class="flex items-center">
+                <a
+                  [href]="'/proizvodi/' + productId"
+                  target="_blank"
+                  class="inline-flex items-center px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm transition-colors"
+                  [title]="'admin.viewProduct' | translate">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M7 7h10v10M15 3h6v6m-6 0l6-6"/>
+                  </svg>
+                  {{ 'adminWishlist.viewProduct' | translate }}
+                </a>
               </div>
             </div>
           </div>
@@ -189,18 +202,38 @@ interface ProductRelationship {
             </div>
 
             <div class="relative">
-              <select
-                id="category_id"
-                formControlName="category_id"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 bg-white"
-              >
-                <option value="">{{ 'admin.selectCategory' | translate }}</option>
-                <option *ngFor="let category of categories" [value]="category.id">
-                  {{ category.name }}
-                </option>
-              </select>
+              <div class="border-2 border-gray-200 rounded-lg p-3 min-h-[120px] max-h-[240px] overflow-y-auto bg-white">
+                <div class="space-y-2">
+                  <div *ngFor="let category of categories" class="flex items-center">
+                    <input
+                      type="checkbox"
+                      [id]="'category_' + category.id"
+                      [value]="category.id"
+                      (change)="onCategorySelectionChange(category.id, $event)"
+                      [checked]="selectedCategoryIds.includes(category.id)"
+                      class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    >
+                    <label [for]="'category_' + category.id" class="ml-2 text-sm text-gray-700 cursor-pointer">
+                      {{ category.name }}
+                    </label>
+                    <button
+                      *ngIf="selectedCategoryIds.includes(category.id)"
+                      type="button"
+                      (click)="setPrimaryCategory(category.id)"
+                      [class.bg-blue-600]="primaryCategoryId === category.id"
+                      [class.text-white]="primaryCategoryId === category.id"
+                      [class.bg-gray-200]="primaryCategoryId !== category.id"
+                      [class.text-gray-600]="primaryCategoryId !== category.id"
+                      class="ml-auto px-2 py-1 text-xs rounded transition-colors"
+                      [title]="primaryCategoryId === category.id ? 'Primary category' : 'Set as primary'"
+                    >
+                      {{ primaryCategoryId === category.id ? 'Primary' : 'Set Primary' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
               <label class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700">
-                {{ 'admin.productCategory' | translate }}
+                {{ 'admin.productCategory' | translate }} (Select multiple)
               </label>
             </div>
           </div>
@@ -212,11 +245,11 @@ interface ProductRelationship {
                 id="specifications"
                 formControlName="specifications"
                 rows="6"
-                class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 placeholder-transparent resize-none font-mono text-sm"
-                placeholder='{"frequency": "50Hz", "ac_voltage": "230V", "efficiency": "97.6%"}'
+                class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 placeholder-transparent resize-none"
+                placeholder="Frequency: 50Hz&#10;AC Voltage: 230V&#10;Efficiency: 97.6%"
               ></textarea>
               <label for="specifications" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
-                {{ 'admin.productSpecifications' | translate }} (JSON)
+                {{ 'admin.productSpecifications' | translate }}
               </label>
             </div>
             <p class="mt-3 text-sm text-gray-500 flex items-center">
@@ -246,6 +279,28 @@ interface ProductRelationship {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               {{ 'admin.productFeaturesHelp' | translate }}
+            </p>
+          </div>
+
+          <!-- Certifications -->
+          <div class="mt-6">
+            <div class="relative">
+              <textarea
+                id="certifications"
+                formControlName="certifications"
+                rows="4"
+                class="peer w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-0 transition-colors duration-200 placeholder-transparent resize-none"
+                placeholder="CE Certification&#10;RoHS Compliance&#10;ISO 9001&#10;IEC 61215"
+              ></textarea>
+              <label for="certifications" class="absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-blue-600">
+                {{ 'admin.productCertifications' | translate }}
+              </label>
+            </div>
+            <p class="mt-3 text-sm text-gray-500 flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              {{ 'admin.productCertificationsHelp' | translate }}
             </p>
           </div>
         </div>
@@ -641,6 +696,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   relationships: ProductRelationship[] = [];
   availableProducts: Product[] = [];
+  selectedCategoryIds: string[] = [];
+  primaryCategoryId: string | null = null;
   newRelationship: Partial<ProductRelationship> = {
     relationship_type: 'suggested',
     related_product_id: undefined,
@@ -677,7 +734,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       sku: ['', [Validators.required]],
       brand: [''],
       model: [''],
-      category_id: [''],
+      categories: [[]],
+      primary_category_id: [''],
       images: [''],
       stock_quantity: [0, [Validators.required, Validators.min(0)]],
       weight: [null],
@@ -686,7 +744,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       is_featured: [false],
       is_on_sale: [false],
       specifications: [''],
-      features: ['']
+      features: [''],
+      certifications: ['']
     });
   }
 
@@ -735,7 +794,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
           sku: data.sku || '',
           brand: data.brand || '',
           model: data.model || '',
-          category_id: data.category_id || '',
+          categories: [],
+          primary_category_id: '',
           stock_quantity: Number(data.stock_quantity) || 0,
           weight: data.weight ? Number(data.weight) : null,
           dimensions: data.dimensions || '',
@@ -744,10 +804,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
           is_on_sale: data.is_on_sale !== undefined ? Boolean(data.is_on_sale) : false,
           images: this.formatImages(data),
           specifications: this.formatSpecifications(data.specifications),
-          features: this.formatFeatures(data.features)
+          features: this.formatFeatures(data.features),
+          certifications: this.formatCertifications(data.certifications)
         };
 
         this.productForm.patchValue(formData);
+        this.loadProductCategories();
         this.updateAvailableProducts();
       }
     } catch (error) {
@@ -776,9 +838,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         return specifications;
       }
 
-      // If it's an object, convert to JSON string
+      // If it's an object, convert to line-separated format
       if (typeof specifications === 'object') {
-        return JSON.stringify(specifications, null, 2);
+        return Object.entries(specifications)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join('\n');
       }
 
       return '';
@@ -807,6 +871,29 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       return '';
     } catch (error) {
       console.error('Error formatting features:', error);
+      return '';
+    }
+  }
+
+  private formatCertifications(certifications: any): string {
+    if (!certifications) {
+      return '';
+    }
+
+    try {
+      // If it's already a string, return it
+      if (typeof certifications === 'string') {
+        return certifications;
+      }
+
+      // If it's an array, join with newlines
+      if (Array.isArray(certifications)) {
+        return certifications.join('\n');
+      }
+
+      return '';
+    } catch (error) {
+      console.error('Error formatting certifications:', error);
       return '';
     }
   }
@@ -840,13 +927,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         type: index === 0 ? 'main' : 'gallery'
       }));
 
-      // Parse specifications JSON string to object
-      let specificationsObj = {};
+      // Parse specifications line-separated format to object
+      let specificationsObj: { [key: string]: string } = {};
       if (formValue.specifications && formValue.specifications.trim()) {
         try {
-          specificationsObj = JSON.parse(formValue.specifications.trim());
+          const specs = formValue.specifications.trim().split('\n');
+          specs.forEach((spec: string) => {
+            const [key, ...valueParts] = spec.split(':');
+            if (key && valueParts.length > 0) {
+              const value = valueParts.join(':').trim();
+              if (value) {
+                specificationsObj[key.trim()] = value;
+              }
+            }
+          });
         } catch (error) {
-          console.error('Error parsing specifications JSON:', error);
+          console.error('Error parsing specifications:', error);
           // Continue with empty specifications if parsing fails
         }
       }
@@ -857,6 +953,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         featuresArray = formValue.features.split('\n')
           .map((feature: string) => feature.trim())
           .filter((feature: string) => feature.length > 0);
+      }
+
+      // Parse certifications string to array
+      let certificationsArray: string[] = [];
+      if (formValue.certifications && formValue.certifications.trim()) {
+        certificationsArray = formValue.certifications.split('\n')
+          .map((certification: string) => certification.trim())
+          .filter((certification: string) => certification.length > 0);
       }
 
       // Map form fields to database fields
@@ -870,7 +974,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         sku: formValue.sku,
         brand: formValue.brand,
         model: formValue.model,
-        category_id: formValue.category_id || undefined,
+        // category_id will be handled via product_categories table
         stock_quantity: Number(formValue.stock_quantity),
         weight: formValue.weight ? Number(formValue.weight) : undefined,
         dimensions: formValue.dimensions || '',
@@ -880,7 +984,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         images: imagesArray, // Use JSONB array format
         specifications: specificationsObj,
         features: featuresArray,
-        certifications: [], // Default empty certifications
+        certifications: certificationsArray,
         tags: [], // Default empty tags
         stock_status: Number(formValue.stock_quantity) > 0 ? 'in_stock' as const : 'out_of_stock' as const,
         updated_at: new Date().toISOString()
@@ -893,14 +997,23 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         productData.original_price = null; // Explicitly set to null to clear the field
       }
 
+      let savedProductId: string;
       if (this.isEditMode && this.productId) {
         await this.supabaseService.updateRecord('products', this.productId, productData);
+        savedProductId = this.productId;
       } else {
         (productData as any).created_at = new Date().toISOString();
-        await this.supabaseService.createRecord('products', productData);
+        const result = await this.supabaseService.createRecord('products', productData);
+        if (!result) {
+          throw new Error('Failed to create product - no result returned');
+        }
+        savedProductId = result.id;
       }
 
-      this.router.navigate(['/admin/products']);
+      // Save product categories
+      await this.saveProductCategories(savedProductId);
+
+      this.router.navigate(['/admin/proizvodi']);
     } catch (error) {
       console.error('Error saving product:', error);
     } finally {
@@ -1126,4 +1239,93 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       console.error('Failed to copy UUID: ', err);
     });
   }
-} 
+
+  // Category selection methods
+  onCategorySelectionChange(categoryId: string, event: any): void {
+    const isChecked = event.target.checked;
+    
+    if (isChecked) {
+      if (!this.selectedCategoryIds.includes(categoryId)) {
+        this.selectedCategoryIds.push(categoryId);
+        // Set as primary if it's the first category
+        if (this.selectedCategoryIds.length === 1) {
+          this.primaryCategoryId = categoryId;
+        }
+      }
+    } else {
+      const index = this.selectedCategoryIds.indexOf(categoryId);
+      if (index > -1) {
+        this.selectedCategoryIds.splice(index, 1);
+        // If removing primary category, set new primary
+        if (this.primaryCategoryId === categoryId) {
+          this.primaryCategoryId = this.selectedCategoryIds.length > 0 ? this.selectedCategoryIds[0] : null;
+        }
+      }
+    }
+
+    // Update form control
+    this.productForm.patchValue({ categories: this.selectedCategoryIds });
+  }
+
+  setPrimaryCategory(categoryId: string): void {
+    if (this.selectedCategoryIds.includes(categoryId)) {
+      this.primaryCategoryId = categoryId;
+      this.productForm.patchValue({ primary_category_id: categoryId });
+    }
+  }
+
+  private async loadProductCategories(): Promise<void> {
+    if (!this.productId) return;
+
+    try {
+      const { data, error } = await this.supabaseService.client
+        .from('product_categories')
+        .select('category_id, is_primary')
+        .eq('product_id', this.productId);
+
+      if (error) {
+        console.error('Error loading product categories:', error);
+        return;
+      }
+
+      if (data && data.length > 0) {
+        this.selectedCategoryIds = data.map(pc => pc.category_id);
+        const primaryCategory = data.find(pc => pc.is_primary);
+        this.primaryCategoryId = primaryCategory ? primaryCategory.category_id : this.selectedCategoryIds[0];
+        
+        this.productForm.patchValue({
+          categories: this.selectedCategoryIds,
+          primary_category_id: this.primaryCategoryId
+        });
+      }
+    } catch (error) {
+      console.error('Error loading product categories:', error);
+    }
+  }
+
+  private async saveProductCategories(productId: string): Promise<void> {
+    try {
+      // First, delete existing product categories
+      await this.supabaseService.client
+        .from('product_categories')
+        .delete()
+        .eq('product_id', productId);
+
+      // Then insert new product categories
+      if (this.selectedCategoryIds.length > 0) {
+        const productCategories = this.selectedCategoryIds.map(categoryId => ({
+          product_id: productId,
+          category_id: categoryId,
+          is_primary: categoryId === this.primaryCategoryId
+        }));
+
+        await this.supabaseService.client
+          .from('product_categories')
+          .insert(productCategories);
+      }
+    } catch (error) {
+      console.error('Error saving product categories:', error);
+      throw error;
+    }
+  }
+}

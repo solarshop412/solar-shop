@@ -33,6 +33,7 @@ export interface Product {
   discount?: number;
   imageUrl: string;
   category: string;
+  categories?: Array<{ name: string; isPrimary: boolean }>;
   manufacturer: string;
   model?: string;
   weight?: number;
@@ -45,6 +46,9 @@ export interface Product {
   availability: 'available' | 'limited' | 'out-of-stock';
   featured: boolean;
   createdAt: Date;
+  sku?: string;
+  isOnSale?: boolean;
+  images?: any[];
 }
 
 export interface ProductFilters {
@@ -193,36 +197,40 @@ export type SortOption = 'featured' | 'newest' | 'name-asc' | 'name-desc' | 'pri
               <div 
                 *ngFor="let product of filteredProducts$ | async; trackBy: trackByProductId"
                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 group cursor-pointer"
-                [routerLink]="['/products', product.id]"
+                [routerLink]="['/proizvodi', product.id]"
               >
                 <!-- Product Image -->
                 <div class="relative aspect-square overflow-hidden">
                   <img 
-                    [src]="product.imageUrl" 
+                    [src]="getProductImageUrl(product)" 
                     [alt]="product.name"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    (error)="onProductImageError($event)"
                   >
-                  <!-- Featured Badge -->
+                  <!-- Featured Badge - Top Left -->
                   <div 
                     *ngIf="product.featured" 
                     class="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg"
                   >
                     {{ 'productList.featured' | translate }}
                   </div>
-                  <!-- Discount Badge -->
+                  <!-- On Sale Badge - Bottom Left -->
+                  <div 
+                    *ngIf="product.isOnSale" 
+                    class="absolute bottom-3 left-3 px-2 py-1 rounded-full text-xs font-semibold bg-red-500 text-white"
+                  >
+                    {{ 'productDetails.onSale' | translate }}
+                  </div>
+                  <!-- Discount Badge - Top Right -->
                   <div 
                     *ngIf="product.discount" 
-                    class="absolute px-2 py-1 rounded-full text-xs font-semibold bg-solar-500 text-white"
-                    [ngClass]="{
-                      'top-3 left-3': !product.featured,
-                      'top-12 left-3': product.featured
-                    }"
+                    class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold bg-solar-500 text-white"
                   >
                     -{{ product.discount }}%
                   </div>
-                  <!-- Availability Badge -->
+                  <!-- Availability Badge - Bottom Right -->
                   <div 
-                    class="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-semibold"
+                    class="absolute bottom-3 right-3 px-2 py-1 rounded-full text-xs font-semibold"
                     [ngClass]="{
                       'bg-green-100 text-green-800': product.availability === 'available',
                       'bg-yellow-100 text-yellow-800': product.availability === 'limited',
@@ -540,5 +548,33 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     return stars;
+  }
+  
+  getProductImageUrl(product: Product): string {
+    // First check if product has images array with valid URLs
+    if (product.images && product.images.length > 0) {
+      const firstImage = product.images[0];
+      // Check if it's a string URL or an object with url property
+      if (typeof firstImage === 'string' && firstImage.trim()) {
+        return firstImage;
+      } else if (typeof firstImage === 'object' && firstImage.url && firstImage.url.trim()) {
+        return firstImage.url;
+      }
+    }
+    
+    // Fallback to imageUrl if it exists and is not empty
+    if (product.imageUrl && product.imageUrl.trim()) {
+      return product.imageUrl;
+    }
+    
+    // Only return placeholder if no valid image found
+    return 'assets/images/product-placeholder.svg';
+  }
+  
+  onProductImageError(event: Event): void {
+    const target = event.target as HTMLImageElement;
+    if (target) {
+      target.src = 'assets/images/product-placeholder.svg';
+    }
   }
 } 

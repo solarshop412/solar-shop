@@ -143,7 +143,9 @@ export class OffersService {
                 couponCode: offer.code,
                 startDate: offer.start_date,
                 endDate: offer.end_date,
-                featured: offer.featured
+                featured: offer.featured,
+                discount_type: offer.discount_type,
+                discount_value: offer.discount_value
             };
         } catch (error) {
             console.error('Error converting offer:', error);
@@ -164,8 +166,7 @@ export class OffersService {
                         price
                     )
                 `)
-                .eq('offer_id', offer.id)
-                .eq('is_active', true);
+                .eq('offer_id', offer.id);
 
             if (error || !offerProducts || offerProducts.length === 0) {
                 // If no products, use placeholder values for general offers

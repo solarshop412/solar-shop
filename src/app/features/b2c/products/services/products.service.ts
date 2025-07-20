@@ -1,34 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Observable, from, map, catchError, of } from 'rxjs';
-import { SupabaseService } from '../../../../../services/supabase.service';
-import { Product } from '../product-list.component';
-
-export interface ProductFilters {
-    category?: string;
-    manufacturer?: string;
-    priceRange?: { min: number; max: number };
-    rating?: number;
-    availability?: string;
-    featured?: boolean;
-    search?: string;
-}
+import { SupabaseService } from '../../../../services/supabase.service';
+import { Product } from '../product-list/product-list.component';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProductListService {
+export class ProductsService {
 
     constructor(private supabaseService: SupabaseService) { }
 
-    getProducts(filters?: ProductFilters): Observable<Product[]> {
-        return from(this.fetchProductsFromSupabase(filters)).pipe(
+    /**
+     * Get products by multiple category names, excluding a specific product
+     * @param categoryNames Array of category names to filter by
+     * @param excludeProductId Product ID to exclude from results
+     * @param limit Maximum number of products to return
+     */
+    getProductsByCategories(categoryNames: string[], excludeProductId?: string, limit: number = 10): Observable<Product[]> {
+        return from(this.fetchProductsByCategories(categoryNames, excludeProductId, limit)).pipe(
             catchError(error => {
-                console.error('Error fetching products:', error);
+                console.error('Error fetching products by categories:', error);
                 return of([]);
             })
         );
     }
 
+    /**
+     * Get a single product by ID
+     */
     getProductById(id: string): Observable<Product | null> {
         return from(this.fetchProductById(id)).pipe(
             catchError(error => {
@@ -38,6 +37,9 @@ export class ProductListService {
         );
     }
 
+    /**
+     * Get featured products
+     */
     getFeaturedProducts(limit: number = 6): Observable<Product[]> {
         return from(this.fetchFeaturedProducts(limit)).pipe(
             catchError(error => {
@@ -47,63 +49,44 @@ export class ProductListService {
         );
     }
 
-    getProductsByCategory(categoryId: string, limit?: number): Observable<Product[]> {
-        return from(this.fetchProductsByCategory(categoryId, limit)).pipe(
-            catchError(error => {
-                console.error('Error fetching products by category:', error);
-                return of([]);
-            })
-        );
-    }
-
-    searchProducts(query: string, limit?: number): Observable<Product[]> {
-        return from(this.searchProductsInSupabase(query, limit)).pipe(
-            catchError(error => {
-                console.error('Error searching products:', error);
-                return of([]);
-            })
-        );
-    }
-
-    private async fetchProductsFromSupabase(filters?: ProductFilters): Promise<Product[]> {
+    private async fetchProductsByCategories(categoryNames: string[], excludeProductId?: string, limit: number = 10): Promise<Product[]> {
         try {
-            const supabaseFilters: any = {};
+            // Get category IDs from category names
+            const categories = await this.supabaseService.getCategories();
+            const categoryIds = categories
+                .filter(category => categoryNames.includes(category.name))
+                .map(category => category.id);
 
-            if (filters?.category) {
-                // Get category ID from slug or name
-                const categories = await this.supabaseService.getCategories();
-                const category = categories.find(c =>
-                    c.slug === filters.category ||
-                    c.name.toLowerCase() === filters.category!.toLowerCase()
-                );
-                if (category) {
-                    supabaseFilters.category_id = category.id;
-                }
+            if (categoryIds.length === 0) {
+                return [];
             }
 
-            if (filters?.featured !== undefined) {
-                supabaseFilters.is_featured = filters.featured;
+            // Build query to find products in any of these categories
+            let query = this.supabaseService.client
+                .from('products')
+                .select(`
+                    *,
+                    product_categories!inner(category_id),
+                    categories!inner(name, slug)
+                `)
+                .in('product_categories.category_id', categoryIds)
+                .limit(limit);
+
+            // Exclude the specified product if provided
+            if (excludeProductId) {
+                query = query.neq('id', excludeProductId);
             }
 
-            if (filters?.availability) {
-                if (filters.availability === 'available') {
-                    supabaseFilters.stock_status = 'in_stock';
-                } else if (filters.availability === 'limited') {
-                    supabaseFilters.stock_status = 'low_stock';
-                } else if (filters.availability === 'out-of-stock') {
-                    supabaseFilters.stock_status = 'out_of_stock';
-                }
+            const { data: products, error } = await query;
+
+            if (error) {
+                console.error('Supabase error:', error);
+                return [];
             }
 
-            const products = await this.supabaseService.getProducts({
-                ...supabaseFilters,
-                search: filters?.search,
-                limit: 50
-            });
-
-            return await this.convertSupabaseProductsToLocal(products);
+            return await this.convertSupabaseProductsToLocal(products || []);
         } catch (error) {
-            console.error('Error in fetchProductsFromSupabase:', error);
+            console.error('Error in fetchProductsByCategories:', error);
             return [];
         }
     }
@@ -130,34 +113,6 @@ export class ProductListService {
             return await this.convertSupabaseProductsToLocal(products);
         } catch (error) {
             console.error('Error in fetchFeaturedProducts:', error);
-            return [];
-        }
-    }
-
-    private async fetchProductsByCategory(categoryId: string, limit?: number): Promise<Product[]> {
-        try {
-            const products = await this.supabaseService.getProducts({
-                categoryId,
-                limit
-            });
-
-            return await this.convertSupabaseProductsToLocal(products);
-        } catch (error) {
-            console.error('Error in fetchProductsByCategory:', error);
-            return [];
-        }
-    }
-
-    private async searchProductsInSupabase(query: string, limit?: number): Promise<Product[]> {
-        try {
-            const products = await this.supabaseService.getProducts({
-                search: query,
-                limit
-            });
-
-            return await this.convertSupabaseProductsToLocal(products);
-        } catch (error) {
-            console.error('Error in searchProductsInSupabase:', error);
             return [];
         }
     }
@@ -266,4 +221,4 @@ export class ProductListService {
         }
         return 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=500&h=500&fit=crop';
     }
-} 
+}

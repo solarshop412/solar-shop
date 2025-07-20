@@ -94,7 +94,13 @@ export class AdminOffersComponent implements OnInit {
         label: this.translationService.translate('admin.offersForm.discountValue'),
         type: 'number',
         sortable: true,
-        format: (value) => value ? `${value}%` : ''
+        format: (value: any, item: any) => {
+          if (!value) return '';
+          if (item?.discount_type === 'fixed_amount') {
+            return `€${value}`;
+          }
+          return `${value}%`;
+        }
       },
       {
         key: 'is_b2b',
@@ -153,10 +159,10 @@ export class AdminOffersComponent implements OnInit {
 
     switch (action) {
       case 'edit':
-        this.router.navigate(['/admin/offers/edit', item.id]);
+        this.router.navigate(['/admin/ponude/uredi', item.id]);
         break;
       case 'details':
-        this.router.navigate(['/admin/offers/details', item.id]);
+        this.router.navigate(['/admin/ponude/detalji', item.id]);
         break;
       case 'delete':
         this.deleteOffer(item);
@@ -165,11 +171,11 @@ export class AdminOffersComponent implements OnInit {
   }
 
   onRowClick(item: any): void {
-    this.router.navigate(['/admin/offers/details', item.id]);
+    this.router.navigate(['/admin/ponude/detalji', item.id]);
   }
 
   onAddOffer(): void {
-    this.router.navigate(['/admin/offers/create']);
+    this.router.navigate(['/admin/ponude/kreiraj']);
   }
 
   async onCsvImported(csvData: any[]): Promise<void> {
@@ -194,8 +200,7 @@ export class AdminOffersComponent implements OnInit {
         max_order_amount: row.max_order_amount ? parseFloat(row.max_order_amount) : undefined,
         start_date: row.start_date || row['Start Date'] || undefined,
         end_date: row.end_date || row['End Date'] || undefined,
-        image_url: row.image_url || row['Image URL'] || undefined,
-        is_active: (row.is_active || row['Is Active'] || 'true').toLowerCase() === 'true'
+        image_url: row.image_url || row['Image URL'] || undefined
       }));
 
       // Import offers one by one

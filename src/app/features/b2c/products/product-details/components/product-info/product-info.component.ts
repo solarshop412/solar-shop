@@ -2,6 +2,7 @@ import { Component, Input, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable, Subject, combineLatest } from 'rxjs';
 import { takeUntil, filter, map, take } from 'rxjs/operators';
 import { Product } from '../../../product-list/product-list.component';
@@ -30,9 +31,18 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
     <div class="space-y-6">
       <!-- Product Title and Rating -->
       <div>
-        <h1 class="text-3xl font-bold text-gray-900 font-['Poppins'] mb-4">
-          {{ product.name }}
-        </h1>
+        <div class="flex items-center gap-3 mb-4">
+          <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">
+            {{ product.name }}
+          </h1>
+          <!-- On Sale Badge -->
+          <div 
+            *ngIf="product.isOnSale" 
+            class="px-3 py-1 bg-red-500 text-white text-sm font-semibold rounded-full"
+          >
+            {{ 'productDetails.onSale' | translate }}
+          </div>
+        </div>
         
         <!-- Rating and Reviews -->
         <div class="flex items-center mb-4">
@@ -195,8 +205,29 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
         <div id="product-details-content" *ngIf="productDetailsOpen" class="mt-4">
         <dl class="grid grid-cols-1 gap-4">
           <div class="flex justify-between">
-            <dt class="text-sm font-medium text-gray-500 font-['DM_Sans']">{{ 'productDetails.category' | translate }}:</dt>
-            <dd class="text-sm text-gray-900 font-['DM_Sans']">{{ product.category }}</dd>
+            <dt class="text-sm font-medium text-gray-500 font-['DM_Sans']">{{ 'productList.categories' | translate }}:</dt>
+            <dd class="text-sm font-['DM_Sans']">
+              <div *ngIf="product.categories && product.categories.length > 0" class="flex flex-wrap gap-1">
+                <button 
+                  *ngFor="let category of product.categories; let last = last"
+                  (click)="navigateToCategory(category.name)"
+                  class="text-solar-600 hover:text-solar-700 hover:underline transition-colors"
+                  [class.font-semibold]="category.isPrimary"
+                  [title]="category.isPrimary ? 'Primary category' : ''"
+                >
+                  {{ category.name }}{{ !last ? ',' : '' }}
+                </button>
+              </div>
+              <!-- Fallback to single category for legacy products -->
+              <button 
+                *ngIf="(!product.categories || product.categories.length === 0) && product.category"
+                (click)="navigateToCategory(product.category)"
+                class="text-solar-600 hover:text-solar-700 hover:underline transition-colors"
+              >
+                {{ product.category }}
+              </button>
+              <span *ngIf="(!product.categories || product.categories.length === 0) && !product.category" class="text-gray-500">-</span>
+            </dd>
           </div>
           <div class="flex justify-between">
             <dt class="text-sm font-medium text-gray-500 font-['DM_Sans']">{{ 'productDetails.manufacturer' | translate }}:</dt>
@@ -208,7 +239,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
           </div>
           <div class="flex justify-between">
             <dt class="text-sm font-medium text-gray-500 font-['DM_Sans']">{{ 'productDetails.sku' | translate }}:</dt>
-            <dd class="text-sm text-gray-900 font-['DM_Sans']">{{ product.id.toUpperCase() }}</dd>
+            <dd class="text-sm text-gray-900 font-['DM_Sans']">{{ product.sku }}</dd>
           </div>
           <div class="flex justify-between" *ngIf="product.weight">
             <dt class="text-sm font-medium text-gray-500 font-['DM_Sans']">{{ 'productDetails.weight' | translate }}:</dt>
@@ -392,12 +423,6 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
             </div>
             <div class="flex items-center">
               <svg class="w-4 h-4 mr-2 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span class="font-['DM_Sans']">{{ 'productDetails.twoYearWarranty' | translate }}</span>
-            </div>
-            <div class="flex items-center">
-              <svg class="w-4 h-4 mr-2 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
               </svg>
               <span class="font-['DM_Sans']">{{ 'productDetails.easyReturns' | translate }}</span>
@@ -429,6 +454,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
   readonly ShoppingCartIcon = ShoppingCart;
 
   private store = inject(Store);
+  private router = inject(Router);
   private toastService = inject(ToastService);
   private translationService = inject(TranslationService);
 
@@ -606,5 +632,11 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
         block: 'start'
       });
     }
+  }
+
+  navigateToCategory(categoryName: string) {
+    this.router.navigate(['/proizvodi'], {
+      queryParams: { category: categoryName }
+    });
   }
 } 
