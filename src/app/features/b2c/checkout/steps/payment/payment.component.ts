@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
@@ -13,6 +13,8 @@ import * as CartActions from '../../../cart/store/cart.actions';
 import * as OrdersActions from '../../../../admin/orders/store/orders.actions';
 import { selectB2COrderCreating, selectB2COrderCreated, selectB2COrderError } from '../../../../admin/orders/store/orders.selectors';
 import { TranslationService } from '../../../../../shared/services/translation.service';
+import { MonriPaymentService, MonriPaymentRequest } from '../../../../../shared/services/monri-payment.service';
+import * as CartSelectors from '../../../cart/store/cart.selectors';
 
 @Component({
   selector: 'app-payment',
@@ -27,7 +29,7 @@ import { TranslationService } from '../../../../../shared/services/translation.s
         <div class="mb-8">
           <div class="space-y-3">
             <!-- Credit Card -->
-            <!-- <label class="flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer">
+            <label class="flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer">
               <input
                 type="radio"
                 name="paymentMethod"
@@ -43,7 +45,7 @@ import { TranslationService } from '../../../../../shared/services/translation.s
                   <span class="font-medium text-blue-900 font-['DM_Sans']">{{ 'checkout.creditCard' | translate }}</span>
                 </div>
               </div>
-            </label> -->
+            </label>
 
             <!-- Pay on Delivery -->
             <label class="flex items-center p-4 border-2 border-green-200 bg-green-50 rounded-lg cursor-pointer">
@@ -69,48 +71,17 @@ import { TranslationService } from '../../../../../shared/services/translation.s
             </label>
           </div>
           
-          <!-- Credit Card Form -->
-          <div *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'" class="mt-6 p-4 bg-gray-50 rounded-lg">
-            <h4 class="text-lg font-semibold text-gray-900 mb-4 font-['Poppins']">Card Details</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="md:col-span-2">
-                <label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-2 font-['DM_Sans']">{{ 'checkout.cardNumber' | translate }}</label>
-                <input
-                  type="text"
-                  id="cardNumber"
-                  formControlName="cardNumber"
-                  placeholder="1234 5678 9012 3456"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['DM_Sans']"
-                >
-                <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" class="mt-1 text-sm text-red-600">
-                  Card number is required
-                </div>
-              </div>
+          <!-- Credit Card Notice -->
+          <div *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-center space-x-3">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
               <div>
-                <label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-2 font-['DM_Sans']">{{ 'checkout.expiryDate' | translate }}</label>
-                <input
-                  type="text"
-                  id="expiryDate"
-                  formControlName="expiryDate"
-                  placeholder="MM/YY"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['DM_Sans']"
-                >
-                <div *ngIf="paymentForm.get('expiryDate')?.invalid && paymentForm.get('expiryDate')?.touched" class="mt-1 text-sm text-red-600">
-                  Expiry date is required
-                </div>
-              </div>
-              <div>
-                <label for="cvv" class="block text-sm font-medium text-gray-700 mb-2 font-['DM_Sans']">{{ 'checkout.cvv' | translate }}</label>
-                <input
-                  type="text"
-                  id="cvv"
-                  formControlName="cvv"
-                  placeholder="123"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['DM_Sans']"
-                >
-                <div *ngIf="paymentForm.get('cvv')?.invalid && paymentForm.get('cvv')?.touched" class="mt-1 text-sm text-red-600">
-                  CVV is required
-                </div>
+                <h4 class="text-lg font-semibold text-blue-900 mb-2 font-['Poppins']">{{ 'checkout.securePayment' | translate }}</h4>
+                <p class="text-sm text-blue-800 font-['DM_Sans']">
+                  {{ 'checkout.securePaymentDescription' | translate }}
+                </p>
               </div>
             </div>
           </div>
@@ -246,6 +217,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   private store = inject(Store);
   private supabaseService = inject(SupabaseService);
   private translationService = inject(TranslationService);
+  private monriPaymentService = inject(MonriPaymentService);
 
   paymentForm: FormGroup;
   isProcessing = false;
@@ -253,6 +225,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   currentUser$: Observable<User | null>;
   isCompanyUser$: Observable<boolean>;
   orderCreationError$ = new BehaviorSubject<string | null>(null);
+  cartSummary$: Observable<any>;
   private subscriptions = new Subscription();
 
   constructor() {
@@ -260,36 +233,14 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this.isCompanyUser$ = this.currentUser$.pipe(
       map((user: User | null) => user?.companyId != null)
     );
+    this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
 
     this.paymentForm = this.fb.group({
       paymentMethod: ['cash_on_delivery', [Validators.required]],
-      cardNumber: [''],
-      expiryDate: [''],
-      cvv: [''],
       isB2BOrder: [false],
       acceptTerms: [false, [Validators.requiredTrue]]
     });
 
-    // Add conditional validators for credit card fields
-    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(method => {
-      const cardNumber = this.paymentForm.get('cardNumber');
-      const expiryDate = this.paymentForm.get('expiryDate');
-      const cvv = this.paymentForm.get('cvv');
-
-      if (method === 'credit_card') {
-        cardNumber?.setValidators([Validators.required]);
-        expiryDate?.setValidators([Validators.required]);
-        cvv?.setValidators([Validators.required]);
-      } else {
-        cardNumber?.clearValidators();
-        expiryDate?.clearValidators();
-        cvv?.clearValidators();
-      }
-
-      cardNumber?.updateValueAndValidity();
-      expiryDate?.updateValueAndValidity();
-      cvv?.updateValueAndValidity();
-    });
   }
 
   ngOnInit(): void {
@@ -347,7 +298,13 @@ export class PaymentComponent implements OnInit, OnDestroy {
     // Clear any previous order state
     this.store.dispatch(OrdersActions.clearB2COrderState());
 
-    await this.createOrder();
+    const paymentMethod = this.paymentForm.get('paymentMethod')?.value;
+
+    if (paymentMethod === 'credit_card') {
+      await this.processMonriPayment();
+    } else {
+      await this.createOrder();
+    }
   }
 
   private async createOrder() {
@@ -446,6 +403,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
     // Get B2B flag from form
     const isB2BOrder = this.paymentForm.get('isB2BOrder')?.value || false;
 
+    // Get payment method from form
+    const paymentMethod = this.paymentForm.get('paymentMethod')?.value || 'cash_on_delivery';
+
     // Create order object
     const orderData = {
       order_number: this.orderNumber,
@@ -463,9 +423,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
       // Order details
       status: 'pending' as const,
-      payment_status: 'pending' as const,
+      payment_status: paymentMethod === 'credit_card' ? 'pending' : 'pending',
       shipping_status: 'not_shipped' as const,
-      payment_method: 'cash_on_delivery' as const,
+      payment_method: paymentMethod as 'cash_on_delivery' | 'credit_card',
       is_b2b: isB2BOrder,
 
       // Addresses as JSON
@@ -484,6 +444,70 @@ export class PaymentComponent implements OnInit, OnDestroy {
       orderData,
       cartItems
     }));
+  }
+
+  /**
+   * Process Monri payment for credit card transactions
+   */
+  private async processMonriPayment() {
+    try {
+      // Get current user
+      const currentUser = await this.store.select(selectCurrentUser).pipe(take(1)).toPromise();
+      
+      // Get cart summary
+      const cartSummary = await this.cartSummary$.pipe(take(1)).toPromise();
+      
+      if (!cartSummary) {
+        throw new Error('Cart summary not available');
+      }
+
+      // Get shipping info
+      const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo') || '{}');
+      
+      // Generate order number for payment
+      this.orderNumber = 'ORD-' + Date.now();
+
+      // Prepare payment data for Monri
+      const paymentData: MonriPaymentRequest = {
+        order_number: this.orderNumber,
+        amount: this.monriPaymentService.formatAmountToCents(cartSummary.subtotal), // Convert to cents
+        currency: 'EUR',
+        order_info: `Solar Shop Order ${this.orderNumber}`,
+        ch_full_name: `${shippingInfo.firstName || ''} ${shippingInfo.lastName || ''}`.trim(),
+        ch_address: shippingInfo.address || '',
+        ch_city: shippingInfo.city || '',
+        ch_zip: shippingInfo.postalCode || '',
+        ch_country: shippingInfo.country || 'HR',
+        ch_phone: shippingInfo.phone || '',
+        ch_email: currentUser?.email || shippingInfo.email || '',
+        language: 'hr',
+        transaction_type: 'purchase'
+      };
+
+      // Store order data temporarily for after payment completion
+      localStorage.setItem('pendingOrderData', JSON.stringify({
+        currentUser: currentUser || {
+          id: null,
+          email: shippingInfo.email,
+          firstName: shippingInfo.firstName,
+          lastName: shippingInfo.lastName,
+          phone: shippingInfo.phone
+        },
+        orderNumber: this.orderNumber,
+        paymentMethod: 'credit_card'
+      }));
+
+      // Create form parameters and submit to Monri
+      const formParams = await this.monriPaymentService.createPaymentRequest(paymentData);
+      
+      // Submit payment form to Monri
+      this.monriPaymentService.submitPaymentForm(formParams);
+      
+    } catch (error) {
+      console.error('Error processing Monri payment:', error);
+      this.isProcessing = false;
+      this.orderCreationError$.next('Error processing payment. Please try again.');
+    }
   }
 
   private handleOrderSuccess() {
