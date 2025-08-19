@@ -875,6 +875,8 @@ export class TranslationService {
                     categoryAlreadyExists: 'Kategorija {{name}} već postoji',
                     confirmCategoryDeletion: 'Jeste li sigurni da želite obrisati kategoriju "{{name}}"?',
                     categoryHasRelatedProducts: 'Kategorija se ne može obrisati jer sadrži povezane proizvode. Prvo uklonite sve proizvode iz ove kategorije.',
+                    parentCategory: 'Nadkategorija',
+                    selectParentCategory: 'Odaberite nadkategoriju',
                     success: 'Uspjeh',
                     error: 'Greška',
                     longTitle: 'Kategorije - Solar Shop Admin'
@@ -2278,6 +2280,11 @@ export class TranslationService {
                 itemsPerPage: 'Stavki po stranici',
                 showingResults: 'Prikazuje se {{start}} - {{end}} od {{total}} rezultata'
             },
+            // Pagination
+            pagination: {
+                previous: 'Prethodna',
+                next: 'Sljedeća'
+            },
             // Product Details
             productDetails: {
                 home: 'Početna',
@@ -2293,7 +2300,7 @@ export class TranslationService {
                 inStock: 'Na stanju',
                 limitedStock: 'Ograničeno na stanju',
                 outOfStock: 'Nema na stanju',
-                priceIncludesVat: 'Cijena uključuje PDV. Besplatna dostava za narudžbe preko €500.',
+                priceIncludesVat: 'Cijena uključuje PDV.',
                 description: 'Opis',
                 specifications: 'Specifikacije',
                 features: 'Značajke',
@@ -3382,6 +3389,8 @@ export class TranslationService {
                     categoryAlreadyExists: 'Category {{name}} already exists',
                     confirmCategoryDeletion: 'Are you sure you want to delete the category "{{name}}"?',
                     categoryHasRelatedProducts: 'Category cannot be deleted because it contains related products. Please remove all products from this category first.',
+                    parentCategory: 'Parent Category',
+                    selectParentCategory: 'Select parent category',
                     success: 'Success',
                     error: 'Error',
                     longTitle: 'Categories - Solar Shop Admin'
@@ -4768,6 +4777,11 @@ export class TranslationService {
                 itemsPerPage: 'Items per page',
                 showingResults: 'Showing {{start}} - {{end}} of {{total}} results'
             },
+            // Pagination
+            pagination: {
+                previous: 'Previous',
+                next: 'Next'
+            },
             // Product Details
             productDetails: {
                 home: 'Home',
@@ -4783,7 +4797,7 @@ export class TranslationService {
                 inStock: 'In Stock',
                 limitedStock: 'Limited Stock',
                 outOfStock: 'Out of Stock',
-                priceIncludesVat: 'Price includes VAT. Free shipping on orders over €500.',
+                priceIncludesVat: 'Price includes VAT.',
                 description: 'Description',
                 specifications: 'Specifications',
                 features: 'Features',

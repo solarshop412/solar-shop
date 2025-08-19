@@ -64,14 +64,31 @@ export interface ProductWithPricing extends Product {
     }[];
 }
 
-// Load products
+// Load products with pagination and filters
+export interface ProductsQuery {
+    page?: number;
+    itemsPerPage?: number;
+    searchQuery?: string;
+    categories?: string[];
+    availability?: string;
+    sortBy?: string;
+}
+
+export interface ProductsResponse {
+    products: Product[];
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+}
+
 export const loadProducts = createAction(
-    '[B2B Products] Load Products'
+    '[B2B Products] Load Products',
+    props<{ query?: ProductsQuery }>()
 );
 
 export const loadProductsSuccess = createAction(
     '[B2B Products] Load Products Success',
-    props<{ products: Product[] }>()
+    props<{ response: ProductsResponse }>()
 );
 
 export const loadProductsFailure = createAction(
@@ -138,4 +155,60 @@ export const loadCategoriesSuccess = createAction(
 export const loadCategoriesFailure = createAction(
     '[B2B Products] Load Categories Failure',
     props<{ error: string }>()
+);
+
+// Load nested categories
+export const loadNestedCategories = createAction(
+    '[B2B Products] Load Nested Categories'
+);
+
+export const loadNestedCategoriesSuccess = createAction(
+    '[B2B Products] Load Nested Categories Success',
+    props<{ nestedCategories: any[] }>()
+);
+
+export const loadNestedCategoriesFailure = createAction(
+    '[B2B Products] Load Nested Categories Failure',
+    props<{ error: string }>()
+);
+
+// Product Filtering Actions
+export const setSearchQuery = createAction(
+    '[B2B Products] Set Search Query',
+    props<{ query: string }>()
+);
+
+export const toggleCategoryFilter = createAction(
+    '[B2B Products] Toggle Category Filter',
+    props<{ category: string; checked: boolean }>()
+);
+
+export const setAvailabilityFilter = createAction(
+    '[B2B Products] Set Availability Filter',
+    props<{ availability: string }>()
+);
+
+export const setSortOption = createAction(
+    '[B2B Products] Set Sort Option',
+    props<{ sortBy: string }>()
+);
+
+export const clearFilters = createAction(
+    '[B2B Products] Clear Filters'
+);
+
+// Pagination Actions
+export const setCurrentPage = createAction(
+    '[B2B Products] Set Current Page',
+    props<{ page: number }>()
+);
+
+export const setItemsPerPage = createAction(
+    '[B2B Products] Set Items Per Page',
+    props<{ itemsPerPage: number }>()
+);
+
+export const updatePaginationInfo = createAction(
+    '[B2B Products] Update Pagination Info',
+    props<{ totalItems: number; totalPages: number }>()
 ); 

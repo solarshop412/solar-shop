@@ -98,8 +98,87 @@ export const selectProductsWithPricing = createSelector(
     }
 );
 
+// Filter selectors
+export const selectFilters = createSelector(
+    selectProductsFeature,
+    (state: ProductsState) => state.filters
+);
+
+export const selectSearchQuery = createSelector(
+    selectFilters,
+    (filters) => filters.searchQuery
+);
+
+export const selectCategoryFilters = createSelector(
+    selectFilters,
+    (filters) => filters.categories
+);
+
+export const selectAvailabilityFilter = createSelector(
+    selectFilters,
+    (filters) => filters.availability
+);
+
+export const selectSortBy = createSelector(
+    selectFilters,
+    (filters) => filters.sortBy
+);
+
+// Filtered products selector - now just returns products with pricing since filtering is done server-side
+export const selectFilteredProducts = createSelector(
+    selectProductsWithPricing,
+    (products) => products
+);
+
 // Get product by ID with pricing
 export const selectProductById = (productId: string) => createSelector(
     selectProductsWithPricing,
     (products: ProductWithPricing[]) => products.find(p => p.id === productId)
+);
+
+// Pagination selectors
+export const selectPagination = createSelector(
+    selectProductsFeature,
+    (state: ProductsState) => state.pagination
+);
+
+export const selectCurrentPage = createSelector(
+    selectPagination,
+    (pagination) => pagination.currentPage
+);
+
+export const selectItemsPerPage = createSelector(
+    selectPagination,
+    (pagination) => pagination.itemsPerPage
+);
+
+export const selectTotalItems = createSelector(
+    selectPagination,
+    (pagination) => pagination.totalItems
+);
+
+export const selectTotalPages = createSelector(
+    selectPagination,
+    (pagination) => pagination.totalPages
+);
+
+// Paginated products selector - now just returns all products since server-side pagination is handled
+export const selectPaginatedProducts = createSelector(
+    selectProductsWithPricing,
+    (products) => products
+);
+
+// Pagination info selector (for displaying pagination details)
+export const selectPaginationInfo = createSelector(
+    selectPagination,
+    (pagination) => {
+        const startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage + 1;
+        const endIndex = Math.min(pagination.currentPage * pagination.itemsPerPage, pagination.totalItems);
+        
+        return {
+            ...pagination,
+            startIndex,
+            endIndex
+        };
+    }
 ); 
