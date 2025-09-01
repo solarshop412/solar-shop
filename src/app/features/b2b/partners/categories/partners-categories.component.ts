@@ -4,7 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CategoriesService } from '../../../b2c/products/services/categories.service';
+import { CategoriesService, ProductCategory } from '../../../b2c/products/services/categories.service';
 
 interface CategoryItem {
   id: string;
@@ -61,6 +61,7 @@ export class PartnersCategoriesComponent implements OnInit {
   private categoriesService = inject(CategoriesService);
 
   categories: CategoryItem[] = [];
+  nestedCategories: ProductCategory[] = [];
 
   // Sample categories data with icons
   private sampleCategories: CategoryItem[] = [
@@ -136,6 +137,9 @@ export class PartnersCategoriesComponent implements OnInit {
     // Use CategoriesService to load nested categories for consistency
     this.categoriesService.getNestedCategories().subscribe(nestedCategories => {
       if (nestedCategories && nestedCategories.length > 0) {
+        // Store the nested categories for later reference
+        this.nestedCategories = nestedCategories;
+        
         // Map ProductCategory to CategoryItem interface
         this.categories = nestedCategories
           .slice(0, 8)
@@ -155,9 +159,32 @@ export class PartnersCategoriesComponent implements OnInit {
   }
 
   navigateToProducts(categorySlug: string): void {
+    // Find the category to check if it has subcategories
+    const category = this.categories.find(cat => cat.slug === categorySlug);
+    if (!category) {
+      // Navigate to products page with category filter applied
+      this.router.navigate(['/partneri/proizvodi'], {
+        queryParams: { category: categorySlug }
+      });
+      return;
+    }
+
+    // Build category filter array - include parent and all subcategories from nested categories
+    let categoryNames: string[] = [category.name];
+    
+    // Find the corresponding nested category to get subcategories
+    const nestedCategory = this.nestedCategories.find((nc: ProductCategory) => nc.name === category.name);
+    if (nestedCategory && nestedCategory.subcategories && nestedCategory.subcategories.length > 0) {
+      const subCategoryNames = nestedCategory.subcategories.map((sub: ProductCategory) => sub.name);
+      categoryNames = categoryNames.concat(subCategoryNames);
+    }
+
     // Navigate to products page with category filter applied
     this.router.navigate(['/partneri/proizvodi'], {
-      queryParams: { category: categorySlug }
+      queryParams: { 
+        category: categorySlug,
+        categories: categoryNames.join(',') // Pass parent + subcategories
+      }
     });
   }
 
