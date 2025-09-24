@@ -4,7 +4,8 @@ import {
     AddToB2BCartPayload,
     UpdateB2BCartItemPayload,
     RemoveFromB2BCartPayload,
-    B2BShippingInfo
+    B2BShippingInfo,
+    B2BAppliedCoupon
 } from '../models/b2b-cart.model';
 import { Coupon } from '../../../../shared/models/coupon.model';
 
@@ -16,7 +17,7 @@ export const loadB2BCart = createAction(
 
 export const loadB2BCartSuccess = createAction(
     '[B2B Cart] Load Cart Success',
-    props<{ items: B2BCartItem[]; companyId: string; companyName: string }>()
+    props<{ items: B2BCartItem[]; companyId: string; companyName: string; appliedCoupons: B2BAppliedCoupon[]; couponDiscount: number }>()
 );
 
 export const loadB2BCartFailure = createAction(
@@ -49,6 +50,11 @@ export const updateB2BCartItem = createAction(
 export const updateB2BCartItemSuccess = createAction(
     '[B2B Cart] Update Cart Item Success',
     props<{ productId: string; quantity: number }>()
+);
+
+export const updateB2BCartItemWithPricing = createAction(
+    '[B2B Cart] Update Cart Item With Pricing',
+    props<{ updatedItem: B2BCartItem }>()
 );
 
 export const updateB2BCartItemFailure = createAction(
@@ -158,7 +164,7 @@ export const removeB2BCoupon = createAction(
 
 export const removeB2BCouponSuccess = createAction(
     '[B2B Cart] Remove Coupon Success',
-    props<{ couponId: string }>()
+    props<{ couponId: string; couponCode?: string }>()
 );
 
 export const removeB2BCouponFailure = createAction(
@@ -198,10 +204,13 @@ export const addToB2BCartFromOfferFailure = createAction(
 
 export const addAllToB2BCartFromOffer = createAction(
     '[B2B Cart] Add All To Cart From Partner Offer',
-    props<{ 
+    props<{
         products: Array<{
-            productId: string; 
+            productId: string;
             quantity: number;
+            individualDiscount?: number;
+            individualDiscountType?: 'percentage' | 'fixed_amount';
+            originalPrice?: number;
         }>;
         companyId: string;
         partnerOfferId: string;

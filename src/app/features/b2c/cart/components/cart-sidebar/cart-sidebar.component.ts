@@ -105,13 +105,13 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                       <span class="text-sm font-semibold text-gray-900">
                         {{ item.price | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
-                      <span 
+                      <span
                         *ngIf="item.offerOriginalPrice && item.offerOriginalPrice > item.price"
                         class="text-xs text-gray-500 line-through"
                       >
                         {{ item.offerOriginalPrice | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
-                      <span 
+                      <span
                         *ngIf="!item.offerOriginalPrice && item.originalPrice && item.originalPrice > item.price"
                         class="text-xs text-gray-500 line-through"
                       >
@@ -132,7 +132,13 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                     <!-- Offer Savings -->
                     <div *ngIf="item.offerSavings && item.offerSavings > 0" class="mt-1">
                       <span class="text-xs text-green-600 font-medium">
-                        {{ 'cart.saveFromOffer' | translate }}: {{ item.offerSavings | currency:'EUR':'symbol':'1.2-2' }}
+                        {{ 'cart.saveFromOffer' | translate }}:
+                        <ng-container *ngIf="item.offerType === 'percentage'">
+                          {{ item.offerDiscount }}% ({{ item.offerSavings | currency:'EUR':'symbol':'1.2-2' }})
+                        </ng-container>
+                        <ng-container *ngIf="item.offerType === 'fixed_amount'">
+                          {{ item.offerSavings | currency:'EUR':'symbol':'1.2-2' }}
+                        </ng-container>
                       </span>
                     </div>
 
@@ -180,12 +186,23 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                 
                 <!-- Applied Coupons -->
                 <div *ngIf="appliedCoupons$ | async as coupons" class="mb-3">
-                  <div 
+                  <div
                     *ngFor="let coupon of coupons"
                     class="flex items-center justify-between p-2 bg-green-100 text-green-800 rounded text-sm"
                   >
-                    <span>{{ coupon.code }} (-{{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }})</span>
-                    <button 
+                    <span>
+                      {{ coupon.code }} -
+                      <ng-container *ngIf="coupon.type === 'percentage'">
+                        {{ coupon.value }}% ({{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }})
+                      </ng-container>
+                      <ng-container *ngIf="coupon.type === 'fixed_amount'">
+                        {{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }}
+                      </ng-container>
+                      <ng-container *ngIf="coupon.type === 'free_shipping'">
+                        {{ 'cart.freeShipping' | translate }}
+                      </ng-container>
+                    </span>
+                    <button
                       (click)="removeCoupon(coupon.id)"
                       class="text-green-600 hover:text-green-800"
                     >
@@ -225,23 +242,32 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 
             <!-- Cart Summary -->
             <div class="border-t border-gray-200 p-4 flex-shrink-0">
-              <div class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">{{ 'cart.subtotal' | translate }}</span>
-                  <span>{{ (cartSummary$ | async)?.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
+              <ng-container *ngIf="cartSummary$ | async as summary">
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-gray-600">{{ 'cart.subtotal' | translate }}</span>
+                    <span>{{ summary.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
+                  <div
+                    *ngIf="summary.shipping && summary.shipping > 0"
+                    class="flex justify-between text-gray-600"
+                  >
+                    <span>{{ 'cart.shipping' | translate }}</span>
+                    <span>{{ summary.shipping | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
+                  <div
+                    *ngIf="summary.discount && summary.discount > 0"
+                    class="flex justify-between text-green-600"
+                  >
+                    <span>{{ 'cart.discount' | translate }}</span>
+                    <span>-{{ summary.discount | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
+                  <div class="flex justify-between font-semibold text-lg border-t pt-2">
+                    <span>{{ 'cart.total' | translate }}</span>
+                    <span>{{ summary.total | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
                 </div>
-                <div 
-                  *ngIf="(cartSummary$ | async)?.discount && (cartSummary$ | async)!.discount > 0"
-                  class="flex justify-between text-green-600"
-                >
-                  <span>{{ 'cart.discount' | translate }}</span>
-                  <span>-{{ (cartSummary$ | async)?.discount | currency:'EUR':'symbol':'1.2-2' }}</span>
-                </div>
-                <div class="flex justify-between font-semibold text-lg border-t pt-2">
-                  <span>{{ 'cart.total' | translate }}</span>
-                  <span>{{ (((cartSummary$ | async)?.subtotal || 0) - ((cartSummary$ | async)?.discount || 0)) | currency:'EUR':'symbol':'1.2-2' }}</span>
-                </div>
-              </div>
+              </ng-container>
 
 
               <!-- Checkout Button -->

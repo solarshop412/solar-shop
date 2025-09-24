@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, take, map } from 'rxjs/operators';
-import { B2BCartItem, B2BCartSummary } from '../../models/b2b-cart.model';
+import { B2BCartItem, B2BCartSummary, B2BAppliedCoupon } from '../../models/b2b-cart.model';
 import * as B2BCartSelectors from '../../store/b2b-cart.selectors';
 import * as B2BCartActions from '../../store/b2b-cart.actions';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
@@ -14,7 +15,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 @Component({
   selector: 'app-b2b-cart-sidebar',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslatePipe, LucideAngularModule],
+  imports: [CommonModule, FormsModule, RouterModule, TranslatePipe, LucideAngularModule],
   template: `
     <!-- Cart Overlay -->
     <div 
@@ -123,22 +124,30 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                       <span class="text-sm font-semibold text-gray-900">
                         {{ item.unitPrice | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
-                      <span 
+                      <span
                         *ngIf="item.partnerOfferOriginalPrice && item.partnerOfferOriginalPrice > item.unitPrice"
                         class="text-xs text-gray-500 line-through"
                       >
                         {{ item.partnerOfferOriginalPrice | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
-                      <span 
+                      <span
                         *ngIf="!item.partnerOfferOriginalPrice && item.retailPrice && item.retailPrice > item.unitPrice"
                         class="text-xs text-gray-500 line-through"
                       >
                         {{ item.retailPrice | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
-                      <span *ngIf="item.savings && item.savings > 0" 
+                      <span *ngIf="item.savings && item.savings > 0"
                             class="text-xs text-green-600 font-medium">
                         {{ 'b2bCart.save' | translate }} {{ (item.savings / item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
                       </span>
+                    </div>
+
+                    <!-- Next Tier Hint -->
+                    <div *ngIf="getNextTierHint(item)" class="mt-1 text-xs text-amber-600">
+                      <svg class="w-3 h-3 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      {{ getNextTierHint(item) }}
                     </div>
 
                     <!-- Partner Offer Badge -->
@@ -203,11 +212,65 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                     </div>
                   </div>
                 </div>
+            </div>
+          </div>
+
+          <!-- Coupon Section -->
+          <div class="mt-4 p-3 bg-gray-50 rounded-lg mx-4">
+            <h4 class="text-sm font-medium text-gray-900 mb-3">{{ 'cart.discountCode' | translate }}</h4>
+
+            <div *ngIf="appliedCoupons$ | async as coupons">
+              <div
+                *ngFor="let coupon of coupons"
+                class="flex items-center justify-between p-2 bg-blue-50 text-blue-800 rounded text-sm mb-2 last:mb-0"
+              >
+                <span>
+                  {{ coupon.code }} -
+                  <ng-container *ngIf="coupon.type === 'percentage'">
+                    {{ coupon.value }}% ({{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }})
+                  </ng-container>
+                  <ng-container *ngIf="coupon.type === 'fixed_amount'">
+                    {{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }}
+                  </ng-container>
+                  <ng-container *ngIf="coupon.type === 'free_shipping'">
+                    {{ 'cart.freeShipping' | translate }}
+                  </ng-container>
+                </span>
+                <button
+                  (click)="removeCoupon(coupon.id)"
+                  class="text-blue-600 hover:text-blue-800"
+                  aria-label="Remove coupon"
+                >
+                  ×
+                </button>
               </div>
             </div>
 
-            <!-- Cart Summary -->
-            <div class="border-t border-gray-200 p-4 flex-shrink-0">
+            <div class="flex space-x-2">
+              <input
+                type="text"
+                [(ngModel)]="couponCode"
+                [placeholder]="'cart.enterDiscountCode' | translate"
+                class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-solar-500"
+                [disabled]="(isCouponLoading$ | async) || false"
+              >
+              <button
+                (click)="applyCoupon()"
+                [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"
+                class="px-4 py-2 bg-solar-600 text-white rounded-lg text-sm hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span *ngIf="!(isCouponLoading$ | async)">{{ 'cart.apply' | translate }}</span>
+                <span *ngIf="isCouponLoading$ | async">...</span>
+              </button>
+            </div>
+
+            <div *ngIf="couponError$ | async as error" class="mt-2 text-sm text-red-600">
+              {{ error }}
+            </div>
+          </div>
+
+          <!-- Cart Summary -->
+          <div class="border-t border-gray-200 p-4 flex-shrink-0">
               <div class="space-y-2 text-sm">
                 <div class="flex justify-between">
                   <span class="text-gray-600">{{ 'cart.subtotal' | translate }}</span>
@@ -352,9 +415,18 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
   companyInfo$: Observable<{ companyId: string | null; companyName: string | null }>;
   sidebarOpen$: Observable<boolean>;
   hasMinimumOrderViolations$: Observable<boolean>;
+  appliedCoupons$: Observable<B2BAppliedCoupon[]>;
+  couponError$: Observable<string | null>;
+  isCouponLoading$: Observable<boolean>;
+
+  couponCode = '';
 
   // Lucide Icons
   readonly ShoppingCartIcon = ShoppingCart;
+
+  get isApplyButtonDisabled(): boolean {
+    return !this.couponCode.trim();
+  }
 
   constructor(private store: Store, private router: Router, private translationService: TranslationService) {
     this.cartItems$ = this.store.select(B2BCartSelectors.selectB2BCartItems);
@@ -363,6 +435,9 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
     this.isEmpty$ = this.store.select(B2BCartSelectors.selectB2BCartIsEmpty);
     this.companyInfo$ = this.store.select(B2BCartSelectors.selectB2BCartCompanyInfo);
     this.sidebarOpen$ = this.store.select(B2BCartSelectors.selectB2BCartSidebarOpen);
+    this.appliedCoupons$ = this.store.select(B2BCartSelectors.selectB2BCartAppliedCoupons);
+    this.couponError$ = this.store.select(B2BCartSelectors.selectB2BCartCouponError);
+    this.isCouponLoading$ = this.store.select(B2BCartSelectors.selectB2BCartIsCouponLoading);
     this.hasMinimumOrderViolations$ = this.cartItems$.pipe(
       takeUntil(this.destroy$),
       // Check if any item has quantity below minimum order
@@ -386,6 +461,31 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
 
   closeSidebar(): void {
     this.store.dispatch(B2BCartActions.closeB2BCartSidebar());
+  }
+
+  applyCoupon(): void {
+    const code = this.couponCode.trim();
+    if (!code) {
+      return;
+    }
+
+    this.companyInfo$.pipe(take(1)).subscribe(info => {
+      if (!info.companyId) {
+        this.store.dispatch(
+          B2BCartActions.applyB2BCouponFailure({
+            error: this.translationService.translate('b2b.auth.companyIdNotFound')
+          })
+        );
+        return;
+      }
+
+      this.store.dispatch(B2BCartActions.applyB2BCoupon({ code, companyId: info.companyId }));
+      this.couponCode = '';
+    });
+  }
+
+  removeCoupon(couponId: string): void {
+    this.store.dispatch(B2BCartActions.removeB2BCoupon({ couponId }));
   }
 
   onOverlayClick(event: MouseEvent) {
@@ -500,5 +600,36 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
 
     // Suppress console errors by preventing default behavior
     event.preventDefault();
+  }
+
+  getNextTierHint(item: B2BCartItem): string {
+    if (!item.priceTier1) {
+      return '';
+    }
+
+    // Check if there's a next tier available
+    if (item.appliedTier === 1 && item.quantityTier2 && item.priceTier2) {
+      const neededQty = item.quantityTier2 - item.quantity;
+      if (neededQty > 0 && neededQty <= 5) {
+        const savings = ((item.unitPrice - item.priceTier2) * item.quantityTier2).toFixed(2);
+        return this.translationService.translate('b2bCart.addMoreForTier', {
+          qty: neededQty,
+          price: item.priceTier2.toFixed(2),
+          savings: savings
+        });
+      }
+    } else if (item.appliedTier === 2 && item.quantityTier3 && item.priceTier3) {
+      const neededQty = item.quantityTier3 - item.quantity;
+      if (neededQty > 0 && neededQty <= 10) {
+        const savings = ((item.unitPrice - item.priceTier3) * item.quantityTier3).toFixed(2);
+        return this.translationService.translate('b2bCart.addMoreForTier', {
+          qty: neededQty,
+          price: item.priceTier3.toFixed(2),
+          savings: savings
+        });
+      }
+    }
+
+    return '';
   }
 } 

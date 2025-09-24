@@ -1,3 +1,5 @@
+import { AppliedCoupon } from '../../../../shared/models/cart.model';
+
 export interface B2BCartItem {
     id: string;
     productId: string;
@@ -18,12 +20,26 @@ export interface B2BCartItem {
     // Partner offer pricing fields
     partnerOfferId?: string;
     partnerOfferName?: string;
-    partnerOfferType?: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle';
+    partnerOfferType?: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle' | 'buy_x_get_y';
     partnerOfferDiscount?: number;
     partnerOfferOriginalPrice?: number;
     partnerOfferValidUntil?: string;
     partnerOfferAppliedAt?: Date;
     additionalSavings?: number;
+    // Pricing tier fields
+    priceTier1?: number;
+    quantityTier1?: number;
+    priceTier2?: number;
+    quantityTier2?: number;
+    priceTier3?: number;
+    quantityTier3?: number;
+    originalUnitPrice?: number; // Store the original price before tier adjustment
+    appliedTier?: 1 | 2 | 3; // Which tier is currently applied
+}
+
+export interface B2BAppliedCoupon extends AppliedCoupon {
+    title?: string;
+    description?: string;
 }
 
 export interface B2BCartState {
@@ -38,7 +54,7 @@ export interface B2BCartState {
     lastUpdated: Date | null;
     sidebarOpen: boolean; // Sidebar visibility state
     // Coupon state
-    appliedCoupons: any[]; // Applied coupons
+    appliedCoupons: B2BAppliedCoupon[]; // Applied coupons
     couponDiscount: number; // Total discount from coupons
     couponError: string | null;
     isCouponLoading: boolean;

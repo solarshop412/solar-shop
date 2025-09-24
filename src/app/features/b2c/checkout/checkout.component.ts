@@ -1,18 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as CartSelectors from '../cart/store/cart.selectors';
 import * as CartActions from '../cart/store/cart.actions';
-import { CartItem, CartSummary } from '../../../shared/models/cart.model';
+import { AppliedCoupon, CartItem, CartSummary } from '../../../shared/models/cart.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslatePipe],
+  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   template: `
     <div class="min-h-screen bg-gray-50">
       <!-- Header -->
@@ -130,9 +131,90 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                     </a>
                     <p class="text-sm text-gray-500 font-['DM_Sans']">x{{ item.quantity }}</p>
                   </div>
-                  <span class="text-sm font-medium text-gray-900 font-['DM_Sans']">
-                    {{ (item.price * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
-                  </span>
+                  <div class="text-right">
+                    <span class="text-sm font-medium text-gray-900 font-['DM_Sans'] block">
+                      {{ (item.price * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
+                    </span>
+                    <span 
+                      *ngIf="item.offerOriginalPrice && item.offerOriginalPrice > item.price"
+                      class="text-xs text-gray-500 line-through font-['DM_Sans'] block"
+                    >
+                      {{ ((item.offerOriginalPrice || item.price) * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}
+                    </span>
+                    <span 
+                      *ngIf="item.offerSavings && item.offerSavings > 0"
+                      class="text-xs text-green-600 font-medium font-['DM_Sans'] block"
+                    >
+                      {{ 'cart.saveFromOffer' | translate }}:
+                      <ng-container *ngIf="item.offerType === 'percentage'">
+                        {{ item.offerDiscount }}% ({{ item.offerSavings | currency:'EUR':'symbol':'1.2-2' }})
+                      </ng-container>
+                      <ng-container *ngIf="item.offerType === 'fixed_amount'">
+                        {{ item.offerSavings | currency:'EUR':'symbol':'1.2-2' }}
+                      </ng-container>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Coupon Section -->
+              <div class="mb-6">
+                <h4 class="text-sm font-medium text-gray-900 font-['DM_Sans'] mb-2">{{ 'cart.discountCode' | translate }}</h4>
+
+                <ng-container *ngIf="appliedCoupons$ | async as coupons">
+                  <div *ngIf="coupons.length > 0" class="space-y-2 mb-3">
+                    <div
+                      *ngFor="let coupon of coupons"
+                      class="flex items-center justify-between px-3 py-2 rounded bg-green-50 text-green-700 text-sm font-['DM_Sans']"
+                    >
+                      <span>
+                        {{ coupon.code }} -
+                        <ng-container *ngIf="coupon.type === 'percentage'">
+                          {{ coupon.value }}% ({{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }})
+                        </ng-container>
+                        <ng-container *ngIf="coupon.type === 'fixed_amount'">
+                          {{ coupon.discountAmount | currency:'EUR':'symbol':'1.2-2' }}
+                        </ng-container>
+                        <ng-container *ngIf="coupon.type === 'free_shipping'">
+                          {{ 'cart.freeShipping' | translate }}
+                        </ng-container>
+                      </span>
+                      <button
+                        type="button"
+                        (click)="removeCoupon(coupon.id)"
+                        class="text-green-600 hover:text-green-800 text-lg leading-none"
+                        [attr.aria-label]="'cart.remove' | translate"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+
+                <div class="flex space-x-2">
+                  <input
+                    type="text"
+                    [(ngModel)]="couponCode"
+                    [placeholder]="'cart.enterDiscountCode' | translate"
+                    class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm font-['DM_Sans'] focus:outline-none focus:ring-2 focus:ring-solar-500"
+                    [disabled]="(isCouponLoading$ | async) || false"
+                  >
+                  <button
+                    type="button"
+                    (click)="applyCoupon()"
+                    [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"
+                    class="px-4 py-2 bg-solar-600 text-white rounded-lg text-sm font-['DM_Sans'] hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <span *ngIf="!(isCouponLoading$ | async)">{{ 'cart.apply' | translate }}</span>
+                    <span *ngIf="isCouponLoading$ | async">...</span>
+                  </button>
+                </div>
+
+                <div
+                  *ngIf="couponError$ | async as error"
+                  class="mt-2 text-sm text-red-600 font-['DM_Sans']"
+                >
+                  {{ error }}
                 </div>
               </div>
 
@@ -140,21 +222,30 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
               <div class="border-t border-gray-200 mb-4"></div>
 
               <!-- Summary -->
-              <div class="space-y-2 text-sm mb-4">
-                <div class="flex justify-between">
-                  <span class="text-gray-600 font-['DM_Sans']">{{ 'checkout.subtotal' | translate }}</span>
-                  <span class="font-['DM_Sans']">{{ (cartSummary$ | async)?.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
+              <ng-container *ngIf="cartSummary$ | async as summary">
+                <div class="space-y-2 text-sm mb-4">
+                  <div class="flex justify-between">
+                    <span class="text-gray-600 font-['DM_Sans']">{{ 'checkout.subtotal' | translate }}</span>
+                    <span class="font-['DM_Sans']">{{ summary.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
+                  <div 
+                    *ngIf="summary.discount && summary.discount > 0"
+                    class="flex justify-between text-green-600"
+                  >
+                    <span class="font-['DM_Sans']">{{ 'cart.discount' | translate }}</span>
+                    <span class="font-['DM_Sans']">-{{ summary.discount | currency:'EUR':'symbol':'1.2-2' }}</span>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Divider -->
-              <div class="border-t border-gray-200 mb-4"></div>
+                <!-- Divider -->
+                <div class="border-t border-gray-200 mb-4"></div>
 
-              <!-- Total -->
-              <div class="flex justify-between text-lg font-semibold">
-                <span class="font-['DM_Sans']">{{ 'checkout.total' | translate }}</span>
-                <span class="font-['DM_Sans']">{{ (cartSummary$ | async)?.subtotal | currency:'EUR':'symbol':'1.2-2' }}</span>
-              </div>
+                <!-- Total -->
+                <div class="flex justify-between text-lg font-semibold">
+                  <span class="font-['DM_Sans']">{{ 'checkout.total' | translate }}</span>
+                  <span class="font-['DM_Sans']">{{ summary.total | currency:'EUR':'symbol':'1.2-2' }}</span>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -171,15 +262,23 @@ export class CheckoutComponent implements OnInit {
   private router = inject(Router);
 
   cartItems$: Observable<CartItem[]>;
-  cartSummary$: Observable<CartSummary | null>;
+  cartSummary$: Observable<CartSummary>;
+  appliedCoupons$: Observable<AppliedCoupon[]>;
+  couponError$: Observable<string | null>;
+  isCouponLoading$: Observable<boolean>;
+  couponCode = '';
   currentStep = 1;
 
   constructor() {
     this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
     this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
+    this.appliedCoupons$ = this.store.select(CartSelectors.selectAppliedCoupons);
+    this.couponError$ = this.store.select(CartSelectors.selectCouponError);
+    this.isCouponLoading$ = this.store.select(CartSelectors.selectIsCouponLoading);
   }
 
   ngOnInit() {
+    this.store.dispatch(CartActions.resetCouponError());
     // Cart is already loaded by the cart sidebar in the page layout
     // No need to dispatch loadCart here as it would be redundant
 
@@ -199,6 +298,24 @@ export class CheckoutComponent implements OnInit {
     ).subscribe(() => {
       this.updateCurrentStep();
     });
+  }
+
+  get isApplyButtonDisabled(): boolean {
+    return !this.couponCode.trim();
+  }
+
+  applyCoupon() {
+    const trimmedCode = this.couponCode.trim();
+    if (!trimmedCode) {
+      return;
+    }
+
+    this.store.dispatch(CartActions.applyCoupon({ code: trimmedCode }));
+    this.couponCode = '';
+  }
+
+  removeCoupon(couponId: string) {
+    this.store.dispatch(CartActions.removeCoupon({ couponId }));
   }
 
   private updateCurrentStep() {

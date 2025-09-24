@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SupabaseService } from '../../../services/supabase.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { TranslationService } from '../../../shared/services/translation.service';
 import { Order } from '../../../shared/models/order.model';
 
 @Component({
@@ -18,7 +19,7 @@ import { Order } from '../../../shared/models/order.model';
             <div>
               <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">{{ 'orderDetails.title' | translate }}</h1>
               <p class="mt-2 text-gray-600 font-['DM_Sans']" *ngIf="order">
-                {{ 'orderDetails.orderPlacedOn' | translate }} {{ order.orderDate | date:'fullDate' }}
+                {{ 'orderDetails.orderPlacedOn' | translate }} {{ getFormattedDate(order.orderDate) }}
               </p>
             </div>
             <button 
@@ -226,6 +227,7 @@ import { Order } from '../../../shared/models/order.model';
 export class B2bOrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private supabaseService = inject(SupabaseService);
+  private translationService = inject(TranslationService);
 
   order: Order | null = null;
   loading = true;
@@ -374,5 +376,15 @@ export class B2bOrderDetailsComponent implements OnInit {
       // Hide the broken image and let the fallback icon show
       img.style.display = 'none';
     }
+  }
+
+  getFormattedDate(date: string): string {
+    const currentLanguage = this.translationService.getCurrentLanguage();
+    const locale = currentLanguage === 'hr' ? 'hr-HR' : 'en-US';
+    return new Date(date).toLocaleDateString(locale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
 }

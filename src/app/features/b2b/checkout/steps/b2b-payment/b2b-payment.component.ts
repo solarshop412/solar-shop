@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil, combineLatest } from 'rxjs';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
+import { TranslationService } from '../../../../../shared/services/translation.service';
 import { selectCurrentUser } from '../../../../../core/auth/store/auth.selectors';
 import { SupabaseService } from '../../../../../services/supabase.service';
 import { User } from '../../../../../shared/models/user.model';
@@ -16,7 +17,7 @@ import { B2BCartItem } from '../../../cart/models/b2b-cart.model';
 @Component({
   selector: 'app-b2b-payment',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, TranslatePipe],
   template: `
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
       <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Poppins']">{{ 'b2bCheckout.paymentMethod' | translate }}</h2>
@@ -52,17 +53,6 @@ import { B2BCartItem } from '../../../cart/models/b2b-cart.model';
                   </div>
                 </label>
               </div>
-            </div>
-
-            <!-- Special Instructions -->
-            <div class="mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4 font-['Poppins']">{{ 'b2bCheckout.specialInstructions' | translate }}</h3>
-              <textarea
-                formControlName="specialInstructions"
-                rows="4"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-solar-500 focus:border-transparent font-['DM_Sans']"
-                [placeholder]="'b2bCheckout.specialInstructionsPlaceholder' | translate"
-              ></textarea>
             </div>
 
             <!-- Terms and Conditions -->
@@ -127,7 +117,12 @@ import { B2BCartItem } from '../../../cart/models/b2b-cart.model';
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class="text-sm font-medium text-gray-900 truncate">{{ item.name }}</p>
+                  <a
+                    [routerLink]="['/partneri/proizvodi', item.productId]"
+                    class="text-sm font-medium text-gray-900 hover:text-solar-600 transition-colors cursor-pointer truncate block"
+                  >
+                    {{ item.name }}
+                  </a>
                   <p class="text-xs text-gray-500">{{ 'b2bCheckout.quantity' | translate }}: {{ item.quantity }}</p>
                 </div>
                 <div class="text-sm font-medium text-gray-900">
@@ -174,6 +169,7 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private store = inject(Store);
   private supabaseService = inject(SupabaseService);
+  private translationService = inject(TranslationService);
   private destroy$ = new Subject<void>();
 
   paymentForm: FormGroup;
@@ -270,16 +266,18 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
       const subtotal = this.cartTotal;
       const totalAmount = subtotal; // No tax for B2B
 
-      // Generate order number
-      const orderNumber = 'B2B-' + Date.now() + '-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+      // Generate order number (max 20 chars)
+      const timestamp = Date.now().toString().slice(-8); // Last 8 digits of timestamp
+      const randomId = Math.random().toString(36).substr(2, 4).toUpperCase(); // 4 char random
+      const orderNumber = `B2B${timestamp}${randomId}`; // Format: B2B12345678ABCD (15 chars)
 
       // Create order
       const orderData = {
         order_number: orderNumber,
         user_id: this.currentUser.id,
         customer_email: this.currentUser.email,
-        customer_name: `${this.currentUser.firstName} ${this.currentUser.lastName}`,
-        customer_phone: this.currentUser.phone || '',
+        customer_name: `${this.currentUser.firstName} ${this.currentUser.lastName}`.substring(0, 50), // Limit to 50 chars
+        customer_phone: (this.currentUser.phone || '').substring(0, 20), // Limit to 20 chars
         total_amount: totalAmount,
         subtotal: subtotal,
         tax_amount: 0,
@@ -287,28 +285,28 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
         discount_amount: 0,
         status: 'pending',
         payment_status: paymentData.paymentMethod === 'credit_30_days' ? 'pending' : 'pending',
-        payment_method: paymentData.paymentMethod,
+        payment_method: paymentData.paymentMethod === 'payment_upon_collection' ? 'cash_on_delivery' : (paymentData.paymentMethod || '').substring(0, 20),
         shipping_address: {
-          contactName: shippingInfo.contactName || '',
-          contactEmail: shippingInfo.contactEmail || '',
-          contactPhone: shippingInfo.contactPhone || '',
-          address: shippingInfo.deliveryAddress || '',
-          city: shippingInfo.deliveryCity || '',
-          postalCode: shippingInfo.deliveryPostalCode || '',
-          country: shippingInfo.deliveryCountry || '',
-          shippingMethod: shippingInfo.shippingMethod || 'standard',
-          deliveryInstructions: shippingInfo.deliveryInstructions || '',
-          purchaseOrderNumber: shippingInfo.purchaseOrderNumber || ''
+          contactName: (shippingInfo.contactName || '').substring(0, 100),
+          contactEmail: (shippingInfo.contactEmail || '').substring(0, 100),
+          contactPhone: (shippingInfo.contactPhone || '').substring(0, 20),
+          address: (shippingInfo.deliveryAddress || '').substring(0, 200),
+          city: (shippingInfo.deliveryCity || '').substring(0, 50),
+          postalCode: (shippingInfo.deliveryPostalCode || '').substring(0, 20),
+          country: (shippingInfo.deliveryCountry || '').substring(0, 50),
+          shippingMethod: (shippingInfo.shippingMethod || 'standard').substring(0, 20),
+          deliveryInstructions: (shippingInfo.deliveryInstructions || '').substring(0, 500),
+          purchaseOrderNumber: (shippingInfo.purchaseOrderNumber || '').substring(0, 50)
         },
         billing_address: {
           companyId: this.company.id,
-          companyName: this.company.companyName,
-          address: this.company.companyAddress,
-          email: this.company.companyEmail,
-          phone: this.company.companyPhone,
-          taxNumber: this.company.taxNumber
+          companyName: (this.company.companyName || '').substring(0, 100),
+          address: (this.company.companyAddress || '').substring(0, 200),
+          email: (this.company.companyEmail || '').substring(0, 100),
+          phone: (this.company.companyPhone || '').substring(0, 20),
+          taxNumber: (this.company.taxNumber || '').substring(0, 50)
         },
-        notes: paymentData.specialInstructions || '',
+        notes: (paymentData.specialInstructions || '').substring(0, 1000),
         is_b2b: true,
         order_date: new Date().toISOString()
       };
@@ -329,12 +327,12 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
       const orderItems = this.cartItems.map(item => ({
         order_id: order.id,
         product_id: item.productId,
-        product_name: item.name,
-        product_sku: item.sku || '',
+        product_name: (item.name || '').substring(0, 200),
+        product_sku: (item.sku || '').substring(0, 50),
         quantity: item.quantity,
         unit_price: item.unitPrice,
         total_price: item.unitPrice * item.quantity,
-        product_image_url: item.imageUrl || '',
+        product_image_url: (item.imageUrl || '').substring(0, 500),
         product_specifications: {}
       }));
 
@@ -356,9 +354,9 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
       // Show success message and redirect
       this.showSuccessToast();
 
-      // Redirect to order confirmation or profile
+      // Redirect to products page after successful order
       setTimeout(() => {
-        this.router.navigate(['/partneri/profil'], {
+        this.router.navigate(['/partneri/proizvodi'], {
           queryParams: { orderSuccess: true, orderNumber: orderNumber }
         });
       }, 2000);
@@ -372,6 +370,7 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
 
   private showSuccessToast(): void {
     // Create and show success toast
+    const successMessage = this.translationService.translate('b2bCheckout.orderPlacedSuccessfully');
     const toast = document.createElement('div');
     toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
     toast.innerHTML = `
@@ -379,7 +378,7 @@ export class B2bPaymentComponent implements OnInit, OnDestroy {
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                 </svg>
-                <span>Order placed successfully!</span>
+                <span>${successMessage}</span>
             </div>
         `;
 

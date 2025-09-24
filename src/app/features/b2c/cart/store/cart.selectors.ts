@@ -138,18 +138,30 @@ export const selectCartSummary = createSelector(
     selectCartDiscount,
     selectCartTotal,
     selectCartCurrency,
-    (itemCount, uniqueItemCount, subtotal, tax, shipping, discount, total, currency) => ({
-        itemCount,
-        uniqueItemCount,
-        subtotal,
-        tax,
-        shipping,
-        discount,
-        total,
-        currency,
-        freeShippingThreshold: 100, // This could come from config
-        freeShippingRemaining: Math.max(0, 100 - subtotal)
-    })
+    (itemCount, uniqueItemCount, subtotal, tax, shipping, discount, total, currency) => {
+        // Always calculate total here for consistency - don't trust service calculation
+        const calculatedTotal = subtotal + shipping - discount;
+
+        console.log('🧮 SELECTOR CALCULATION DEBUG:');
+        console.log('Subtotal:', subtotal.toFixed(2));
+        console.log('Shipping:', shipping.toFixed(2));
+        console.log('Discount:', discount.toFixed(2));
+        console.log('Service total (ignored):', total.toFixed(2));
+        console.log('Selector calculated total:', calculatedTotal.toFixed(2));
+
+        return {
+            itemCount,
+            uniqueItemCount,
+            subtotal,
+            tax,
+            shipping,
+            discount,
+            total: Math.max(calculatedTotal, 0),
+            currency,
+            freeShippingThreshold: 100, // This could come from config
+            freeShippingRemaining: Math.max(0, 100 - subtotal)
+        };
+    }
 );
 
 export const selectCartItemById = (itemId: string) => createSelector(

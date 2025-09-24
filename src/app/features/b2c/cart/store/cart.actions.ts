@@ -137,16 +137,18 @@ export const previousStep = createAction('[Cart] Previous Step');
 // Offer Actions
 export const addToCartFromOffer = createAction(
     '[Cart] Add To Cart From Offer',
-    props<{ 
-        productId: string; 
-        quantity: number; 
-        variantId?: string; 
+    props<{
+        productId: string;
+        quantity: number;
+        variantId?: string;
         offerId: string;
         offerName: string;
         offerType: 'percentage' | 'fixed_amount' | 'buy_x_get_y' | 'bundle';
         offerDiscount: number;
         offerOriginalPrice: number;
         offerValidUntil?: string;
+        individualDiscount?: number;
+        individualDiscountType?: 'percentage' | 'fixed_amount';
     }>()
 );
 
@@ -162,11 +164,14 @@ export const addToCartFromOfferFailure = createAction(
 
 export const addAllToCartFromOffer = createAction(
     '[Cart] Add All To Cart From Offer',
-    props<{ 
+    props<{
         products: Array<{
-            productId: string; 
-            quantity: number; 
+            productId: string;
+            quantity: number;
             variantId?: string;
+            individualDiscount?: number;
+            individualDiscountType?: 'percentage' | 'fixed_amount';
+            originalPrice?: number;
         }>;
         offerId: string;
         offerName: string;
