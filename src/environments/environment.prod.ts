@@ -10,8 +10,8 @@ export const environment = {
 
     // Monri Payment Gateway Configuration (Production)
     monri: {
-        key: 'YOUR_PRODUCTION_MONRI_KEY', // Update with production Monri key
-        authenticityToken: 'YOUR_PRODUCTION_MONRI_TOKEN', // Update with production Monri token
+        key: 'key-f909fd217f04ecdace0d565c9a65cdb8', // Update with production Monri key
+        authenticityToken: '2e438f62bff6e2862703bf155a361341958607ed', // Update with production Monri token
         endpoint: 'https://ipg.monri.com', // Production endpoint
         formEndpoint: 'https://ipg.monri.com/v2/form',
         debug: false, // Disable debug in production
