@@ -2,15 +2,22 @@
  * ERP Proxy - Vercel Serverless Function
  *
  * This proxy bypasses SSL certificate issues by making the request from the server side.
- * The server doesn't enforce strict SSL validation like browsers do.
+ * We use https.Agent with rejectUnauthorized: false to bypass invalid SSL certificates.
  *
  * Endpoints:
  * GET /api/erp-proxy?artikl=XXX - Get stock by SKU
  * GET /api/erp-proxy?artikl=XXX&radjed=YY - Get stock by SKU and unit
  */
 
+const https = require('https');
+
 const ERP_BASE_URL = 'https://hb-server2012.ddns.net:65399';
 const ERP_AUTH_TOKEN = 'xcbd41b04c329chkjkj59f98454545';
+
+// Create HTTPS agent that bypasses SSL certificate validation
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false // This allows self-signed or invalid certificates
+});
 
 module.exports = async function handler(req, res) {
   // Set CORS headers to allow requests from your frontend
@@ -46,12 +53,13 @@ module.exports = async function handler(req, res) {
 
     console.log('[ERP Proxy] Fetching from:', url.replace(ERP_AUTH_TOKEN, '***'));
 
-    // Fetch with native Node.js fetch (available in Node 18+)
+    // Use fetch with custom agent to bypass SSL validation
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
       },
+      agent: httpsAgent // Use our custom agent that bypasses SSL
     });
 
     if (!response.ok) {
