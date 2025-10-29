@@ -1,5 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 /**
  * ERP Proxy - Vercel Serverless Function
  *
@@ -14,7 +12,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 const ERP_BASE_URL = 'https://hb-server2012.ddns.net:65399';
 const ERP_AUTH_TOKEN = 'xcbd41b04c329chkjkj59f98454545';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   // Set CORS headers to allow requests from your frontend
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -48,15 +46,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     console.log('[ERP Proxy] Fetching from:', url.replace(ERP_AUTH_TOKEN, '***'));
 
-    // Fetch with Node.js https module (bypasses strict SSL in browser)
-    // Using native fetch in Node 18+ which Vercel uses
+    // Fetch with native Node.js fetch (available in Node 18+)
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
       },
-      // @ts-ignore - Node 18+ fetch supports this
-      agent: undefined, // Let Node handle SSL
     });
 
     if (!response.ok) {
@@ -73,7 +68,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json(data);
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('[ERP Proxy] Error:', error);
 
     // Provide helpful error messages
