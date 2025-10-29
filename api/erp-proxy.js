@@ -12,7 +12,7 @@
 const ERP_BASE_URL = 'https://hb-server2012.ddns.net:65399';
 const ERP_AUTH_TOKEN = 'xcbd41b04c329chkjkj59f98454545';
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Set CORS headers to allow requests from your frontend
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
