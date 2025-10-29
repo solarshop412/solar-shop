@@ -18,5 +18,27 @@ export const environment = {
         cancelUrl: 'http://localhost:4200/payment-callback?status=cancelled',
         redirectToSuccessUrl: true, // Enable redirect to success URL
         terminalRedirectToSuccessUrl: true
+    },
+
+    // ERP Integration Configuration
+    // OPTION 1: Use production proxy for testing (works immediately)
+    erp: {
+        baseUrl: 'https://solar-shop-rose.vercel.app/api/erp-proxy',
+        authToken: '', // Auth handled by proxy
+        enabled: true
     }
+
+    // OPTION 2: Use local proxy (requires running vercel dev)
+    // erp: {
+    //     baseUrl: 'http://localhost:3000/api/erp-proxy',
+    //     authToken: '',
+    //     enabled: true
+    // }
+
+    // OPTION 3: Direct connection (requires valid SSL certificate)
+    // erp: {
+    //     baseUrl: 'https://hb-server2012.ddns.net:65399',
+    //     authToken: 'xcbd41b04c329chkjkj59f98454545',
+    //     enabled: true
+    // }
 }; 

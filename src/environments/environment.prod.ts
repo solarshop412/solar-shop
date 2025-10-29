@@ -20,5 +20,13 @@ export const environment = {
         cancelUrl: 'https://solar-shop-rose.vercel.app/payment-callback?status=cancelled',
         redirectToSuccessUrl: true,
         terminalRedirectToSuccessUrl: true
+    },
+
+    // ERP Integration Configuration
+    // Using Vercel serverless proxy to bypass SSL certificate issues
+    erp: {
+        baseUrl: 'https://solar-shop-rose.vercel.app/api/erp-proxy',
+        authToken: '', // Auth handled by proxy
+        enabled: true
     }
 }; 

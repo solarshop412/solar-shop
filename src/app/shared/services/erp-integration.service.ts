@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 /**
  * ERP Stock Item as returned from the API
@@ -37,8 +38,10 @@ export interface ErpStockResponse {
   providedIn: 'root'
 })
 export class ErpIntegrationService {
-  private readonly ERP_BASE_URL = 'http://hb-server2012.ddns.net:65399';
+  private readonly ERP_BASE_URL = environment.erp.baseUrl;
   private readonly STOCK_ENDPOINT = '/zaliha';
+  private readonly AUTH_TOKEN = environment.erp.authToken;
+  private readonly ERP_ENABLED = environment.erp.enabled;
 
   constructor(private http: HttpClient) {}
 
@@ -49,7 +52,25 @@ export class ErpIntegrationService {
    * @returns Observable of stock data
    */
   getStock(sku?: string, unitId?: string): Observable<ErpStockResponse> {
+    // Check if ERP integration is enabled
+    if (!this.ERP_ENABLED) {
+      console.warn('[ERP] Integration is disabled in this environment');
+      return of({
+        success: false,
+        error: 'ERP integracija nije dostupna u ovom okruženju.'
+      });
+    }
+
+    // Check if we're using a proxy (no /zaliha endpoint in URL)
+    const isProxy = this.ERP_BASE_URL.includes('/api/erp-proxy');
+
+    // Build query parameters
     let params = new HttpParams();
+
+    // Only add auth token if NOT using proxy (proxy handles auth internally)
+    if (!isProxy && this.AUTH_TOKEN) {
+      params = params.set('auth', this.AUTH_TOKEN);
+    }
 
     if (sku) {
       params = params.set('artikl', sku);
@@ -59,7 +80,9 @@ export class ErpIntegrationService {
       params = params.set('radjed', unitId);
     }
 
-    const url = `${this.ERP_BASE_URL}${this.STOCK_ENDPOINT}`;
+    // Build URL - proxy doesn't need /zaliha endpoint
+    const url = isProxy ? this.ERP_BASE_URL : `${this.ERP_BASE_URL}${this.STOCK_ENDPOINT}`;
+    console.log('[ERP] Fetching from:', isProxy ? 'proxy' : 'direct', url);
 
     return this.http.get<ErpStockItem[]>(url, { params }).pipe(
       map(response => {
@@ -80,9 +103,30 @@ export class ErpIntegrationService {
       }),
       catchError(error => {
         console.error('ERP Stock fetch failed:', error);
+
+        // Provide user-friendly error messages based on error type
+        let errorMessage = 'Greška pri povezivanju s ERP sustavom';
+
+        if (error.status === 0) {
+          // Network error, CORS, or SSL certificate issue
+          errorMessage = 'Nije moguće povezati se s ERP serverom. Mogući uzroci:\n' +
+            '• SSL certifikat servera nije valjan\n' +
+            '• CORS politika blokira zahtjev\n' +
+            '• Server nije dostupan\n' +
+            '• Provjerite mrežnu vezu';
+        } else if (error.status === 401 || error.status === 403) {
+          errorMessage = 'Autentifikacija neuspješna. Molimo provjerite auth token.';
+        } else if (error.status === 404) {
+          errorMessage = 'ERP endpoint nije pronađen.';
+        } else if (error.status === 500) {
+          errorMessage = 'Greška na ERP serveru. Pokušajte ponovno kasnije.';
+        } else if (error.message && !error.message.includes('Http failure')) {
+          errorMessage = error.message;
+        }
+
         return of({
           success: false,
-          error: error.message || 'Failed to fetch stock from ERP'
+          error: errorMessage
         });
       })
     );

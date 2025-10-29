@@ -519,12 +519,34 @@ interface ProductRelationship {
           </div>
 
           <!-- Error Message -->
-          <div *ngIf="erpStockError$ | async as error" class="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
-            <div class="flex items-center">
-              <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-              </svg>
-              <span class="text-red-800 text-sm">{{ error }}</span>
+          <div *ngIf="erpStockError$ | async as error" class="mb-4 bg-red-50 border-l-4 border-red-400 rounded-lg p-4 shadow-sm">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="ml-3 flex-1">
+                <h3 class="text-sm font-semibold text-red-800 mb-1">Greška pri učitavanju zaliha</h3>
+                <p class="text-sm text-red-700 whitespace-pre-line">{{ error }}</p>
+                <div class="mt-3 flex gap-2">
+                  <button
+                    type="button"
+                    (click)="loadErpStock()"
+                    class="inline-flex items-center px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-800 text-sm font-medium rounded-md transition-colors">
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                    Pokušaj Ponovo
+                  </button>
+                  <button
+                    type="button"
+                    (click)="clearErpStockError()"
+                    class="inline-flex items-center px-3 py-1.5 bg-white hover:bg-gray-50 text-red-800 text-sm font-medium rounded-md border border-red-200 transition-colors">
+                    Zatvori
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1573,6 +1595,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.productForm.patchValue({ stock_quantity: totalStock });
       this.toastService.showSuccess(`Zaliha sinkronizirana iz ERP sustava: ${totalStock} jedinica`);
     }).unsubscribe();
+  }
+
+  clearErpStockError(): void {
+    this.store.dispatch(clearErpStock());
   }
 
   // Category selection methods
