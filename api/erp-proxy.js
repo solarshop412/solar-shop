@@ -2,7 +2,7 @@
  * ERP Proxy - Vercel Serverless Function
  *
  * This proxy bypasses SSL certificate issues by making the request from the server side.
- * We use https.Agent with rejectUnauthorized: false to bypass invalid SSL certificates.
+ * We use https module directly with rejectUnauthorized: false to bypass invalid SSL certificates.
  *
  * Endpoints:
  * GET /api/erp-proxy?artikl=XXX - Get stock by SKU
@@ -10,14 +10,11 @@
  */
 
 const https = require('https');
+const { URL } = require('url');
 
 const ERP_BASE_URL = 'https://hb-server2012.ddns.net:65399';
 const ERP_AUTH_TOKEN = 'xcbd41b04c329chkjkj59f98454545';
-
-// Create HTTPS agent that bypasses SSL certificate validation
-const httpsAgent = new https.Agent({
-  rejectUnauthorized: false // This allows self-signed or invalid certificates
-});
+const ERP_API_KEY = '535D36080ECFB0C831735780DF11608E';
 
 module.exports = async function handler(req, res) {
   // Set CORS headers to allow requests from your frontend
@@ -49,28 +46,55 @@ module.exports = async function handler(req, res) {
       params.append('radjed', String(radjed));
     }
 
-    const url = `${ERP_BASE_URL}/zaliha?${params.toString()}`;
+    const fullUrl = `${ERP_BASE_URL}/zaliha?${params.toString()}`;
+    console.log('[ERP Proxy] Fetching from:', fullUrl.replace(ERP_AUTH_TOKEN, '***'));
 
-    console.log('[ERP Proxy] Fetching from:', url.replace(ERP_AUTH_TOKEN, '***'));
+    // Use https.get with rejectUnauthorized: false to bypass SSL validation
+    const urlObj = new URL(fullUrl);
 
-    // Use fetch with custom agent to bypass SSL validation
-    const response = await fetch(url, {
+    const options = {
+      hostname: urlObj.hostname,
+      port: urlObj.port,
+      path: urlObj.pathname + urlObj.search,
       method: 'GET',
       headers: {
         'Accept': 'application/json',
+        'x-api-key': ERP_API_KEY
       },
-      agent: httpsAgent // Use our custom agent that bypasses SSL
+      rejectUnauthorized: false // This allows self-signed or invalid certificates
+    };
+
+    const result = await new Promise((resolve, reject) => {
+      https.get(options, (response) => {
+        let body = '';
+
+        response.on('data', (chunk) => {
+          body += chunk;
+        });
+
+        response.on('end', () => {
+          try {
+            const jsonData = JSON.parse(body);
+            resolve({ statusCode: response.statusCode, data: jsonData });
+          } catch (e) {
+            // If not JSON, return raw body
+            resolve({ statusCode: response.statusCode, data: body });
+          }
+        });
+      }).on('error', (error) => {
+        reject(error);
+      });
     });
 
-    if (!response.ok) {
-      console.error('[ERP Proxy] ERP server error:', response.status, response.statusText);
-      return res.status(response.status).json({
-        error: `ERP server error: ${response.statusText}`,
-        status: response.status
+    const { statusCode, data } = result;
+
+    if (statusCode !== 200) {
+      console.error('[ERP Proxy] ERP server error:', statusCode);
+      return res.status(statusCode).json({
+        error: `ERP server error: ${statusCode}`,
+        status: statusCode
       });
     }
-
-    const data = await response.json();
 
     console.log('[ERP Proxy] Success, items returned:', Array.isArray(data) ? data.length : 'unknown');
 
@@ -102,4 +126,4 @@ module.exports = async function handler(req, res) {
       details: error.message
     });
   }
-}
+};
