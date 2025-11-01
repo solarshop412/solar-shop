@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeUntil, filter, map, take } from 'rxjs/operators';
+import { takeUntil, map, take } from 'rxjs/operators';
 import { Product } from '../../../product-list/product-list.component';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../../../shared/services/toast.service';
 import { TranslationService } from '../../../../../../shared/services/translation.service';
-import { ErpIntegrationService, StockItem } from '../../../../../../shared/services/erp-integration.service';
+import { StockItem } from '../../../../../../shared/services/erp-integration.service';
 import * as WishlistActions from '../../../../../b2c/wishlist/store/wishlist.actions';
 import {
   selectIsProductInWishlist,
@@ -548,6 +548,8 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
 export class ProductInfoComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
   @Input() isCompanyPricing: boolean = false;
+  @Input() erpStock: StockItem[] = []; // Receive ERP stock from parent component
+  @Input() erpStockLoading: boolean = false; // Receive loading state from parent
 
   quantity: number = 1;
 
@@ -562,7 +564,6 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private toastService = inject(ToastService);
   private translationService = inject(TranslationService);
-  private erpService = inject(ErpIntegrationService);
 
   private destroy$ = new Subject<void>();
 
@@ -586,10 +587,6 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
   technicalSheetOpen = false;
   stockInformationOpen = false;
 
-  // ERP stock information
-  erpStock: StockItem[] = [];
-  erpStockLoading = false;
-
   ngOnInit(): void {
     // Create combined observable for template
     this.wishlistState$ = combineLatest([
@@ -606,40 +603,6 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
 
     // Load wishlist data
     this.store.dispatch(WishlistActions.loadWishlist());
-
-    // Load ERP stock information
-    this.loadErpStock();
-  }
-
-  /**
-   * Load ERP stock information for the current product
-   */
-  private loadErpStock(): void {
-    if (!this.product.sku) {
-      console.warn('[Product Info] No SKU available for product');
-      return;
-    }
-
-    this.erpStockLoading = true;
-    this.erpService.getStockBySku(this.product.sku)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (response) => {
-          if (response.success && response.data) {
-            this.erpStock = response.data;
-            console.log('[Product Info] ERP stock loaded:', this.erpStock);
-          } else {
-            console.warn('[Product Info] Failed to load ERP stock:', response.error);
-            this.erpStock = [];
-          }
-          this.erpStockLoading = false;
-        },
-        error: (error) => {
-          console.error('[Product Info] Error loading ERP stock:', error);
-          this.erpStock = [];
-          this.erpStockLoading = false;
-        }
-      });
   }
 
   /**

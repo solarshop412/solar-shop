@@ -100,7 +100,12 @@ import { ErpIntegrationService, StockItem } from '../../../../shared/services/er
 
           <!-- Product Info -->
           <div>
-            <app-product-info [product]="product" [isCompanyPricing]="isCompanyPricing"></app-product-info>
+            <app-product-info
+              [product]="product"
+              [isCompanyPricing]="isCompanyPricing"
+              [erpStock]="erpStock || []"
+              [erpStockLoading]="erpStockLoading">
+            </app-product-info>
 
             <!-- ERP Stock Information -->
             <div *ngIf="erpStock && erpStock.length > 0" class="mt-6 bg-white rounded-lg border border-gray-200 p-6">
