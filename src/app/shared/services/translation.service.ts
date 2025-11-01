@@ -403,7 +403,12 @@ export class TranslationService {
                     tierPricing: 'Cijena po razini',
                     // Status labels
                     pendingApproval: 'Čeka odobrenje',
-                    rejected: 'Odbačeno'
+                    rejected: 'Odbačeno',
+                    // Stock information
+                    stockByLocation: 'Zalihe po lokaciji',
+                    stockAvailability: 'Dostupnost zaliha',
+                    showStoreAvailability: 'Prikaži dostupnost u poslovnicama',
+                    hideStoreAvailability: 'Sakrij dostupnost u poslovnicama'
                 },
                 orders: {
                     pending: 'Na čekanju',
@@ -774,6 +779,8 @@ export class TranslationService {
                 companies: 'Partneri',
                 contacts: 'Poruke',
                 wishlist: 'Lista želja',
+                paymentSettings: 'Postavke plaćanja',
+                creditCardPayment: 'Plaćanje karticom',
                 totalProducts: 'Proizvodi',
                 manageProducts: 'Upravljanje proizvodima',
                 totalCategories: 'Kategorije',
@@ -833,6 +840,15 @@ export class TranslationService {
                 goBack: 'Idi natrag',
                 // Product management
                 manageYourProductCatalog: 'Upravljajte svojim katalogom proizvoda',
+                syncErpStock: 'Sinkroniziraj ERP stanje',
+                lastUpdate: 'Zadnje ažuriranje',
+                erpSyncStarted: 'ERP sinkronizacija započeta',
+                erpSyncInProgress: 'ERP sinkronizacija u tijeku',
+                erpSyncCompleted: 'ERP sinkronizacija završena',
+                erpSyncFailed: 'ERP sinkronizacija neuspjela',
+                processingProducts: 'Obrađujem proizvode',
+                processingBatch: 'Obrađujem seriju',
+                productsUpdated: 'proizvoda ažurirano',
                 basicInformation: 'Osnovne informacije',
                 productName: 'Naziv proizvoda',
                 productNameRequired: 'Naziv proizvoda je obavezan',
@@ -2454,7 +2470,12 @@ export class TranslationService {
                 freeInstallationOffer: 'Besplatna instalacija',
                 freeInstallationOfferDescription: 'Profesionalna instalacija uključena u cijenu. Limitirana ponuda za prvih 50 kupaca.',
                 freeInstallation: 'Besplatna instalacija',
-                worthValue: 'vrijednost'
+                worthValue: 'vrijednost',
+                // Stock Information
+                stockInformation: 'Informacije o zalihama',
+                units: 'jedinica',
+                totalStock: 'Ukupno na stanju',
+                loadingStockInformation: 'Učitavanje informacija o zalihama...'
             },
             // Privacy Policy
             privacyPolicy: {
@@ -3126,7 +3147,12 @@ export class TranslationService {
                     tierPricing: 'Tier pricing',
                     // Status labels
                     pendingApproval: 'Pending Approval',
-                    rejected: 'Rejected'
+                    rejected: 'Rejected',
+                    // Stock information
+                    stockByLocation: 'Stock by Location',
+                    stockAvailability: 'Stock Availability',
+                    showStoreAvailability: 'Show availability in stores',
+                    hideStoreAvailability: 'Hide availability in stores'
                 },
                 orders: {
                     pending: 'Pending',
@@ -3402,6 +3428,8 @@ export class TranslationService {
                 companies: 'Companies',
                 contacts: 'Contacts',
                 wishlist: 'Wishlist',
+                paymentSettings: 'Payment Settings',
+                creditCardPayment: 'Credit Card Payment',
                 totalProducts: 'Products',
                 manageProducts: 'Manage products',
                 totalCategories: 'Total categories',
@@ -3461,6 +3489,15 @@ export class TranslationService {
                 goBack: 'Go Back',
                 // Product management
                 manageYourProductCatalog: 'Manage your product catalog',
+                syncErpStock: 'Sync ERP Stock',
+                lastUpdate: 'Last Update',
+                erpSyncStarted: 'ERP sync started',
+                erpSyncInProgress: 'ERP sync in progress',
+                erpSyncCompleted: 'ERP sync completed',
+                erpSyncFailed: 'ERP sync failed',
+                processingProducts: 'Processing products',
+                processingBatch: 'Processing batch',
+                productsUpdated: 'products updated',
                 basicInformation: 'Basic Information',
                 productName: 'Product Name',
                 productNameRequired: 'Product name is required',
@@ -5065,7 +5102,12 @@ export class TranslationService {
                 freeInstallationOffer: 'Free Installation',
                 freeInstallationOfferDescription: 'Professional installation included in price. Limited offer for first 50 customers.',
                 freeInstallation: 'Free Installation',
-                worthValue: 'worth'
+                worthValue: 'worth',
+                // Stock Information
+                stockInformation: 'Stock Information',
+                units: 'units',
+                totalStock: 'Total Stock',
+                loadingStockInformation: 'Loading stock information...'
             },
             // Privacy Policy
             privacyPolicy: {
