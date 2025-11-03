@@ -561,6 +561,7 @@ export class ProductsEffects {
                             const stockItems: ProductsActions.ErpStockItem[] = (response.data || []).map(item => ({
                                 sku: item.sku,
                                 unitId: item.unitId,
+                                unitName: item.unitName, // Include unit name from RADJEDNAZIV
                                 quantity: item.quantity,
                                 wholesalePrice: item.wholesalePrice,
                                 retailPrice: item.retailPrice

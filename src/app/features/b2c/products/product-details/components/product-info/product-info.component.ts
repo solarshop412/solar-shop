@@ -10,6 +10,7 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../../../shared/services/toast.service';
 import { TranslationService } from '../../../../../../shared/services/translation.service';
 import { StockItem } from '../../../../../../shared/services/erp-integration.service';
+import { getUnitName } from '../../../../../../shared/utils/erp-unit-names';
 import * as WishlistActions from '../../../../../b2c/wishlist/store/wishlist.actions';
 import {
   selectIsProductInWishlist,
@@ -118,10 +119,10 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
             <div id="stock-information-content" *ngIf="stockInformationOpen" class="mt-3 space-y-2">
               <div *ngFor="let stock of erpStock" class="flex items-center justify-between text-sm">
                 <span class="text-blue-700 font-['DM_Sans']">
-                  {{ stock.unitName || stock.unitId }}:
+                  {{ getUnitDisplayName(stock.unitId, stock.unitName) }}:
                 </span>
                 <span class="font-medium text-blue-900 font-['DM_Sans']">
-                  {{ stock.quantity }} {{ 'productDetails.units' | translate }}
+                  {{ stock.quantity }}
                 </span>
               </div>
               <div class="pt-2 mt-2 border-t border-blue-200 flex items-center justify-between">
@@ -129,7 +130,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
                   {{ 'productDetails.totalStock' | translate }}:
                 </span>
                 <span class="text-base font-bold text-blue-900 font-['DM_Sans']">
-                  {{ getTotalStock() }} {{ 'productDetails.units' | translate }}
+                  {{ getTotalStock() }}
                 </span>
               </div>
             </div>
@@ -610,6 +611,13 @@ export class ProductInfoComponent implements OnInit, OnDestroy {
    */
   getTotalStock(): number {
     return this.erpStock.reduce((total, stock) => total + stock.quantity, 0);
+  }
+
+  /**
+   * Get display name for a unit ID
+   */
+  getUnitDisplayName(unitId: string | undefined, unitName?: string): string {
+    return getUnitName(unitId, unitName);
   }
 
   ngOnDestroy(): void {

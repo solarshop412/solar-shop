@@ -15,6 +15,7 @@ import { OffersService } from '../../offers/services/offers.service';
 import { Offer } from '../../../../shared/models/offer.model';
 import { ProductsService } from '../services/products.service';
 import { ErpIntegrationService, StockItem } from '../../../../shared/services/erp-integration.service';
+import { getUnitName } from '../../../../shared/utils/erp-unit-names';
 
 @Component({
   selector: 'app-product-details',
@@ -133,7 +134,7 @@ import { ErpIntegrationService, StockItem } from '../../../../shared/services/er
                     {{ 'productDetails.totalStock' | translate }}:
                   </span>
                   <span class="text-xl font-bold text-[#0ACF83] font-['DM_Sans']">
-                    {{ getTotalErpStock() }} {{ 'productDetails.units' | translate }}
+                    {{ getTotalErpStock() }}
                   </span>
                 </div>
               </div>
@@ -142,10 +143,10 @@ import { ErpIntegrationService, StockItem } from '../../../../shared/services/er
               <div *ngIf="showStockByUnit" class="space-y-3">
                 <div *ngFor="let stock of erpStock" class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
                   <span class="text-gray-700 font-medium font-['DM_Sans']">
-                    {{ stock.unitName || stock.unitId }}
+                    {{ getUnitDisplayName(stock.unitId, stock.unitName) }}
                   </span>
                   <span class="text-lg font-bold text-[#0ACF83] font-['DM_Sans']">
-                    {{ stock.quantity }} {{ 'productDetails.units' | translate }}
+                    {{ stock.quantity }}
                   </span>
                 </div>
                 <div class="pt-3 mt-3 border-t border-gray-200 flex items-center justify-between">
@@ -153,7 +154,7 @@ import { ErpIntegrationService, StockItem } from '../../../../shared/services/er
                     {{ 'productDetails.totalStock' | translate }}:
                   </span>
                   <span class="text-xl font-bold text-[#0ACF83] font-['DM_Sans']">
-                    {{ getTotalErpStock() }} {{ 'productDetails.units' | translate }}
+                    {{ getTotalErpStock() }}
                   </span>
                 </div>
               </div>
@@ -628,6 +629,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
    */
   getTotalErpStock(): number {
     return this.erpStock.reduce((total, stock) => total + stock.quantity, 0);
+  }
+
+  /**
+   * Get display name for a unit ID
+   */
+  getUnitDisplayName(unitId: string | undefined, unitName?: string): string {
+    return getUnitName(unitId, unitName);
   }
 
   public getStarArray(rating: number): number[] {

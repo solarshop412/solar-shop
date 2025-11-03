@@ -12,6 +12,7 @@ import { User } from '../../../../shared/models/user.model';
 import { Company } from '../../../../shared/models/company.model';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { ErpIntegrationService, StockItem } from '../../../../shared/services/erp-integration.service';
+import { getUnitName } from '../../../../shared/utils/erp-unit-names';
 import * as ProductsActions from '../../shared/store/products.actions';
 import { selectProductsWithPricing, selectProductsLoading } from '../../shared/store/products.selectors';
 import { ProductWithPricing } from '../../shared/store/products.actions';
@@ -194,7 +195,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                     {{ 'productDetails.totalStock' | translate }}:
                   </span>
                   <span class="text-xl font-bold text-solar-600">
-                    {{ getTotalErpStock() }} {{ 'productDetails.units' | translate }}
+                    {{ getTotalErpStock() }}
                   </span>
                 </div>
               </div>
@@ -203,10 +204,10 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               <div *ngIf="showStockByUnit" class="space-y-3">
                 <div *ngFor="let stock of erpStock" class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
                   <span class="text-gray-700 font-medium">
-                    {{ stock.unitName || stock.unitId }}
+                    {{ getUnitDisplayName(stock.unitId, stock.unitName) }}
                   </span>
                   <span class="text-lg font-medium text-solar-600">
-                    {{ stock.quantity }} {{ 'productDetails.units' | translate }}
+                    {{ stock.quantity }}
                   </span>
                 </div>
                 <div class="pt-3 mt-3 border-t border-gray-200 flex items-center justify-between">
@@ -214,7 +215,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                     {{ 'productDetails.totalStock' | translate }}:
                   </span>
                   <span class="text-xl font-bold text-solar-600">
-                    {{ getTotalErpStock() }} {{ 'productDetails.units' | translate }}
+                    {{ getTotalErpStock() }}
                   </span>
                 </div>
               </div>
@@ -1167,5 +1168,12 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
    */
   getTotalErpStock(): number {
     return this.erpStock.reduce((total, stock) => total + stock.quantity, 0);
+  }
+
+  /**
+   * Get display name for a unit ID
+   */
+  getUnitDisplayName(unitId: string | undefined, unitName?: string): string {
+    return getUnitName(unitId, unitName);
   }
 } 

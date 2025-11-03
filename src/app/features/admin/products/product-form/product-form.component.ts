@@ -11,6 +11,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../shared/services/toast.service';
+import { getUnitName } from '../../../../shared/utils/erp-unit-names';
 import {
   loadProducts,
   loadCategories,
@@ -618,6 +619,9 @@ interface ProductRelationship {
                         Šifra RJ
                       </th>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Naziv Radne Jedinice
+                      </th>
+                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Zaliha
                       </th>
                       <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -634,6 +638,9 @@ interface ProductRelationship {
                         [class.bg-green-50]="stock.quantity > 0">
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {{ stock.unitId }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        {{ getUnitDisplayName(stock.unitId, stock.unitName) }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm">
                         <span class="px-2 py-1 rounded-full text-xs font-semibold"
@@ -1608,6 +1615,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   clearErpStockError(): void {
     this.store.dispatch(clearErpStock());
+  }
+
+  /**
+   * Get display name for a unit ID
+   */
+  getUnitDisplayName(unitId: string | undefined, unitName?: string): string {
+    return getUnitName(unitId, unitName);
+  }
+
+  /**
+   * Get display with both unit ID and name
+   */
+  getUnitDisplayWithId(unitId: string | undefined, unitName?: string): string {
+    if (!unitId) return unitName || '';
+    const displayName = getUnitName(unitId, unitName);
+    return `${unitId} - ${displayName}`;
   }
 
   // Category selection methods

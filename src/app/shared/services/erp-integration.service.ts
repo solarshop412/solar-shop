@@ -89,14 +89,21 @@ export class ErpIntegrationService {
     return this.http.get<ErpStockItem[]>(url, { params }).pipe(
       map(response => {
         const rawData = Array.isArray(response) ? response : [response];
-        const normalizedData: StockItem[] = rawData.map(item => ({
-          sku: item.ARTIKL,
-          unitId: item.RADJED,
-          unitName: item.RADJEDNAZIV || item.RADJED, // Fallback to unit ID if name not available
-          quantity: item.ZALIHA,
-          wholesalePrice: item.VEL_CIJENA,
-          retailPrice: item.MAL_CIJENA
-        }));
+        const normalizedData: StockItem[] = rawData.map(item => {
+          // Log items without RADJEDNAZIV for debugging
+          if (!item.RADJEDNAZIV) {
+            console.log(`[ERP] Unit ${item.RADJED} missing RADJEDNAZIV. Full item:`, item);
+          }
+
+          return {
+            sku: item.ARTIKL,
+            unitId: item.RADJED,
+            unitName: item.RADJEDNAZIV || item.RADJED, // Fallback to unit ID if name not available
+            quantity: item.ZALIHA,
+            wholesalePrice: item.VEL_CIJENA,
+            retailPrice: item.MAL_CIJENA
+          };
+        });
 
         return {
           success: true,

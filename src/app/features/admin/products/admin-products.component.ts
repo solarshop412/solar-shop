@@ -202,11 +202,11 @@ export class AdminProductsComponent implements OnInit {
         ]
     };
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.title.setTitle('Products - Solar Shop Admin');
         this.loadLastSyncTime();
-        this.loadProducts();
-        // Check if we need to run automatic daily sync
+        await this.loadProducts();
+        // Check if we need to run automatic daily sync (after products are loaded)
         this.checkAndRunAutomaticSync();
     }
 

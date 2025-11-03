@@ -285,6 +285,7 @@ export const loadManufacturerCountsFailure = createAction(
 export interface ErpStockItem {
     sku: string;           // Šifra artikla
     unitId: string;        // Šifra radne jedinice
+    unitName?: string;     // Naziv radne jedinice (RADJEDNAZIV)
     quantity: number;      // Količina
     wholesalePrice: number; // Veleprodajna cijena
     retailPrice: number;   // Maloprodajna cijena
