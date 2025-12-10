@@ -101,7 +101,7 @@ export interface FooterData {
                 <svg class="w-5 h-5 text-solar-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
-                <a href="mailto:info@solarni-paneli.hr" class="text-gray-300 text-sm hover:text-solar-400 transition-colors duration-300">
+                <a href="mailto:webshop@solarno.hr" class="text-gray-300 text-sm hover:text-solar-400 transition-colors duration-300">
                   {{ 'footer.email' | translate }}
                 </a>
               </div>
