@@ -296,9 +296,9 @@ export class TranslationService {
                     salesTeamPhone: '+385 (1) 6407 715',
                     technicalSupport: 'Tehnička podrška',
                     technicalSupportText: 'Naš tehnički tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportEmail: 'webshop@solarno.hr',
                     technicalSupportPhone: '+385 (1) 6407 715',
-                    supportEmail: 'info@solarni-paneli.hr',
+                    supportEmail: 'webshop@solarno.hr',
                     officeAddress: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     businessHours: 'Radno vrijeme: Pon-Pet 8:00-17:00',
@@ -1344,9 +1344,9 @@ export class TranslationService {
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Tehnička podrška',
                     technicalSupportText: 'Naš tehnički tim je dostupan da vam pomogne s bilo kojim pitanjima ili problemima.',
-                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportEmail: 'webshop@solarno.hr',
                     technicalSupportPhone: '+385 (1) 6407 715',
-                    supportEmail: 'info@solarni-paneli.hr',
+                    supportEmail: 'webshop@solarno.hr',
                     officeAddress: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                     businessHours: 'Radno vrijeme: Pon-Pet 8:00-17:00',
@@ -1900,7 +1900,7 @@ export class TranslationService {
             // Contact Information
             contact: {
                 phone: '+385 (1) 6407 715',
-                email: 'info@solarni-paneli.hr'
+                email: 'webshop@solarno.hr'
             },
             // Language
             language: {
@@ -2299,7 +2299,7 @@ export class TranslationService {
                 companyDescription: 'Mi smo Solar Shop, tvrtka specijalizirana za moderna i pouzdana solarna rješenja. Pružamo prodaju i ugradnju kvalitetnih solarnih sustava te stručno savjetovanje. Naš cilj je omogućiti klijentima jednostavan prelazak na čistu energiju i dugoročne uštede.',
                 address: 'Bani ul. 73, 10010, Buzin, Hrvatska',
                 phone: '+385 (1) 6407 715',
-                email: 'info@solarni-paneli.hr',
+                email: 'webshop@solarno.hr',
                 hours: 'Pon-Pet: 8:00-17:00',
                 followUs: 'Pratite nas:',
                 newsletter: 'Newsletter',
@@ -3138,9 +3138,9 @@ export class TranslationService {
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Technical Support',
                     technicalSupportText: 'Our technical support team is available to assist you with any questions or issues you may have.',
-                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportEmail: 'webshop@solarno.hr',
                     technicalSupportPhone: '+385 (1) 6407 715',
-                    supportEmail: 'info@solarni-paneli.hr',
+                    supportEmail: 'webshop@solarno.hr',
                     officeAddress: 'Bani ul. 73, 10010, Buzin, Croatia',
                     address: 'Bani ul. 73, 10010, Buzin, Croatia',
                     businessHours: 'Business Hours: Mon-Fri 8:00-17:00',
@@ -4092,9 +4092,9 @@ export class TranslationService {
                     salesTeamPhone: '+385 1 234 5679',
                     technicalSupport: 'Technical Support',
                     technicalSupportText: 'Our technical support team is available to assist you with any questions or issues you may have.',
-                    technicalSupportEmail: 'info@solarni-paneli.hr',
+                    technicalSupportEmail: 'webshop@solarno.hr',
                     technicalSupportPhone: '+385 (1) 6407 715',
-                    supportEmail: 'info@solarni-paneli.hr',
+                    supportEmail: 'webshop@solarno.hr',
                     officeAddress: 'Bani ul. 73, 10010, Buzin, Croatia',
                     address: 'Bani ul. 73, 10010, Buzin, Croatia',
                     businessHours: 'Business Hours: Mon-Fri 8:00-17:00',
@@ -4631,7 +4631,7 @@ export class TranslationService {
             // Contact Information
             contact: {
                 phone: '+385 (1) 6407 715',
-                email: 'info@solarni-paneli.hr'
+                email: 'webshop@solarno.hr'
             },
             // Language
             language: {
@@ -5029,7 +5029,7 @@ export class TranslationService {
                 companyDescription: 'We are Solar Shop, a company specialized in modern and reliable solar solutions. We provide the sale and installation of high-quality solar systems, as well as professional consulting. Our goal is to enable clients to make a simple transition to clean energy and achieve long-term savings.',
                 address: 'Bani ul. 73, 10010, Buzin, Croatia',
                 phone: '+385 (1) 6407 715',
-                email: 'info@solarni-paneli.hr',
+                email: 'webshop@solarno.hr',
                 hours: 'Mon-Fri: 8:00-17:00',
                 followUs: 'Follow us:',
                 newsletter: 'Newsletter',
