@@ -133,8 +133,8 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
               {{ 'safetyPayment.contact.content' | translate }}
             </p>
             <div class="mt-4 flex flex-col sm:flex-row gap-4">
-              <a href="mailto:info@solarni-paneli.hr" 
-                 class="inline-flex items-center px-4 py-2 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors duration-300">
+              <a href="mailto:webshop@solarno.hr" 
+                 class="inline-flex items-center px-4 py-2 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors duration-300">
                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
