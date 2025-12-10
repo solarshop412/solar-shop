@@ -194,7 +194,7 @@ import { LucideAngularModule, Search, User as UserIcon, CircleUserRound, Mail, P
               </lucide-angular>
               <span>{{ 'contact.phone' | translate }}</span>
             </a>
-            <a href="mailto:info@solarni-paneli.hr" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
+            <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
               <lucide-angular 
                 name="mail" 
                 class="w-4 h-4 opacity-70"
@@ -236,7 +236,7 @@ import { LucideAngularModule, Search, User as UserIcon, CircleUserRound, Mail, P
               </svg>
               <span class="whitespace-nowrap">{{ 'contact.phone' | translate }}</span>
             </a>
-            <a href="mailto:info@solarni-paneli.hr" class="flex items-center space-x-1">
+            <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-1">
               <svg class="w-3 h-3 opacity-50" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
