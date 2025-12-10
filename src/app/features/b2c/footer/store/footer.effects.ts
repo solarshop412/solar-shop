@@ -73,7 +73,7 @@ export class FooterEffects {
                     contactInfo: {
                         address: 'Zagreb, Croatia',
                         phone: '+385 (1) 6407 715',
-                        email: 'info@solarni-paneli.hr',
+                        email: 'webshop@solarno.hr',
                         hours: 'Mon-Fri: 8:00-18:00, Sat: 9:00-13:00'
                     },
                     newsletter: {
