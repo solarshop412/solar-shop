@@ -52,10 +52,6 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                     {{ category.name }}
                   </h3>
                   
-                  <p class="text-base leading-relaxed mb-6 opacity-90 font-['DM_Sans'] line-clamp-3">
-                    {{ category.description || ('Explore our ' + category.name.toLowerCase() + ' collection') }}
-                  </p>
-
                   <!-- Product Count Badge -->
                   <div class="mb-4">
                     <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full">
