@@ -18,6 +18,7 @@ interface ShopLocation {
   address: string;
   phone: string;
   phoneLink: string;
+  mobile: string;
   email?: string;
   workingHours: string;
   latitude: number;
@@ -204,6 +205,16 @@ interface ShopLocation {
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 4.5A2.25 2.25 0 014.25 2h1.372c.51 0 .954.343 1.087.835l1.105 4.104a1.125 1.125 0 01-.417 1.2l-1.152.864a1.125 1.125 0 00-.417 1.2c.78 2.885 3.054 5.16 5.939 5.939a1.125 1.125 0 001.2-.417l.864-1.152a1.125 1.125 0 011.2-.417l4.104 1.105c.492.133.835.577.835 1.087V19.5A2.25 2.25 0 0119.5 21.75h-1.125C9.988 21.75 2.25 14.012 2.25 4.125V3.75A1.75 1.75 0 012 4.5z" />
                     </svg>
                     <span>{{ location.phone }}</span>
+                  </a>
+                  <a
+                    *ngIf="location.mobile"
+                    [href]="'tel:' + location.mobile"
+                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 font-medium font-['DM_Sans']"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 4.5A2.25 2.25 0 014.25 2h1.372c.51 0 .954.343 1.087.835l1.105 4.104a1.125 1.125 0 01-.417 1.2l-1.152.864a1.125 1.125 0 00-.417 1.2c.78 2.885 3.054 5.16 5.939 5.939a1.125 1.125 0 001.2-.417l.864-1.152a1.125 1.125 0 011.2-.417l4.104 1.105c.492.133.835.577.835 1.087V19.5A2.25 2.25 0 0119.5 21.75h-1.125C9.988 21.75 2.25 14.012 2.25 4.125V3.75A1.75 1.75 0 012 4.5z" />
+                    </svg>
+                    <span>{{ location.mobile }}</span>
                   </a>
                   <a
                     *ngIf="location.email"
@@ -426,6 +437,7 @@ export class ContactComponent implements OnInit {
       address: 'Ul. B. J. Jelačića 11, 32100 Vinkovci',
       phone: '+385 32 778 741',
       phoneLink: '+38532778741',
+      mobile: '091 278 7876',
       email: 'vinkovci@solarno.hr',
       workingHours: 'PON-PET 9-17',
       latitude: 45.2883,
@@ -437,6 +449,7 @@ export class ContactComponent implements OnInit {
       address: 'Ul. Franje Tuđmana 28, 10450 Jastrebarsko',
       phone: '+385 1 2135 241',
       phoneLink: '+38512135241',
+      mobile: '091 278 7877',
       email: 'jastrebarsko@solarno.hr',
       workingHours: 'PON, UTO, ČET 8-16 | SRI, PET 8-12/16-18 | SUB 8-12',
       latitude: 45.6688,
@@ -459,6 +472,7 @@ export class ContactComponent implements OnInit {
       address: 'Vukovarska 226G (kod Strojarske)',
       phone: '+385 1 7791 210',
       phoneLink: '+38517791210',
+      mobile: '091 6122 156',
       email: 'solarshop@solarno.hr',
       workingHours: 'PON-PET 09-18 | SUBOTA 09-12',
       latitude: 45.8047,
@@ -470,6 +484,7 @@ export class ContactComponent implements OnInit {
       address: 'Mavrinci 34, Kukuljanovo (skretanje za Mavrince prije Vulkala)',
       phone: '+385 51 215 437',
       phoneLink: '+38551215437',
+      mobile: '091 278 7873',
       email: 'rijeka@solarno.hr',
       workingHours: 'PON-PET 8-19',
       latitude: 45.3753,
@@ -481,6 +496,7 @@ export class ContactComponent implements OnInit {
       address: 'Julija Knifera 2 Središće (preko puta Muzeja Suv.Umj.)',
       phone: '+385 1 6521 634',
       phoneLink: '+38516521634',
+      mobile: '091 278 7870',
       email: 'info@solarno.hr',
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
       latitude: 45.8276,
@@ -492,6 +508,7 @@ export class ContactComponent implements OnInit {
       address: 'Sesvetska cesta 100 (stara Dugoselska)',
       phone: '+385 1 2316 240',
       phoneLink: '+38512316240',
+      mobile: '091 278 7871',
       email: 'zagreb@solarno.hr',
       workingHours: 'PON-PET 09-16 | SUBOTA 09-12',
       latitude: 45.8311,
@@ -525,6 +542,7 @@ export class ContactComponent implements OnInit {
       address: 'Lovački put 1A, Split',
       phone: '+385 21 374 865',
       phoneLink: '+38521374865',
+      mobile: '091 278 7874',
       email: 'split@solarno.hr',
       workingHours: 'PON-PET 8-19 | SUBOTA 8-12',
       latitude: 43.5147,
@@ -536,6 +554,7 @@ export class ContactComponent implements OnInit {
       address: 'Gavranova 11c, Šibenik',
       phone: '+385 22 642 221',
       phoneLink: '+38522642221',
+      mobile: '091 612 2156',
       email: 'sibenik@solarno.hr',
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
       latitude: 43.7234,
@@ -547,6 +566,7 @@ export class ContactComponent implements OnInit {
       address: 'Vlatka Mačeka 26, Zadar',
       phone: '+385 23 390 436',
       phoneLink: '+38523390436',
+      mobile: '091 278 7875',
       email: 'zadar@solarno.hr',
       workingHours: 'UTO, SRI, PET 08-16 | PON, ČET 10-18',
       latitude: 44.1194,
@@ -558,6 +578,7 @@ export class ContactComponent implements OnInit {
       address: 'Medulinska cesta 28C, Pula',
       phone: '+385 52 212 386',
       phoneLink: '+38552212386',
+      mobile: '091 6122 156',
       email: 'pula@solarno.hr',
       workingHours: 'PON-PET 08:30-19 | SUBOTA 08:30-13',
       latitude: 44.8666,
@@ -580,6 +601,7 @@ export class ContactComponent implements OnInit {
       address: 'Hercegovačka ul.1, Varaždin',
       phone: '+385 42 303 858',
       phoneLink: '+38542303858',
+      mobile: '098 9357 888',
       email: 'varazdin@beren.hr',
       workingHours: 'PON-PET 08-20 | SUBOTA 08-13',
       latitude: 46.3044,
