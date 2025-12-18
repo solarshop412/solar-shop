@@ -419,8 +419,8 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38516407715',
       email: 'prodaja1@solarni-paneli.hr',
       workingHours: 'PON-PET 08-16',
-      latitude: 45.7517,
-      longitude: 16.0069,
+      latitude: 45.74670375615193,
+      longitude: 15.999660253975113,
       isFranchise: false
     },
     {
