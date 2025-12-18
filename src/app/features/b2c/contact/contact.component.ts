@@ -207,7 +207,7 @@ interface ShopLocation {
                     <span>{{ location.phone }}</span>
                   </a>
                   <a
-                    *ngIf="location.mobile"
+                    *ngIf="location.mobile!='nema'"
                     [href]="'tel:' + location.mobile"
                     class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 font-medium font-['DM_Sans']"
                   >
@@ -415,6 +415,7 @@ export class ContactComponent implements OnInit {
       address: 'Bani 73, Buzin, Zagreb',
       phone: '+385 1 6407 715',
       phoneLink: '+38516407715',
+      mobile: 'nema',
       email: 'prodaja1@solarni-paneli.hr',
       workingHours: 'PON-PET 08-16',
       latitude: 45.7517,
@@ -426,6 +427,7 @@ export class ContactComponent implements OnInit {
       address: 'Ulica 41 broj 15, 20270 Vela Luka',
       phone: '+385 20 813 218',
       phoneLink: '+38520813218',
+      mobile: 'nema',
       email: 'steu-piccolo@post.t-com.hr',
       workingHours: 'PON-PET 08-12, 17-19:30',
       latitude: 42.9608,
@@ -461,6 +463,7 @@ export class ContactComponent implements OnInit {
       address: 'Zrinska 65, 34000 Požega',
       phone: '+385 34 550 650',
       phoneLink: '+38534550650',
+      mobile: 'nema',
       email: 'pozega@solarno.hr',
       workingHours: 'PON-PET 9-16 | SUBOTA 8-13',
       latitude: 45.3403,
@@ -520,6 +523,7 @@ export class ContactComponent implements OnInit {
       address: 'Ul. Slavka Kolara 101, V. GORICA',
       phone: '+385 91 723 6136',
       phoneLink: '+38591723616',
+      mobile: 'nema',
       email: 'info@agramsolar.hr',
       workingHours: 'PON-PET 08-17 | SUB 8-12',
       latitude: 45.7125,
@@ -531,6 +535,7 @@ export class ContactComponent implements OnInit {
       address: 'Ćira Carića 1, Babin kuk, Dubrovnik',
       phone: '+385 20 311 081',
       phoneLink: '+38520311081',
+      mobile: 'nema',
       email: 'solarshop@ragusa-solar.hr',
       workingHours: 'PON-PET 8-16 | SUBOTA zatvoreno',
       latitude: 42.6507,
@@ -590,6 +595,7 @@ export class ContactComponent implements OnInit {
       address: 'Strosmajerova 296, Osijek',
       phone: '+385 31 629 190',
       phoneLink: '+38531629190',
+      mobile: 'nema',
       email: 'info@luminous.hr',
       workingHours: 'PON-PET 09-16 | SUB 09-12',
       latitude: 45.5550,
@@ -613,6 +619,7 @@ export class ContactComponent implements OnInit {
       address: 'Put za Imotski bb, 88240 Posušje',
       phone: '+387 39 682 493',
       phoneLink: '+38739682493',
+      mobile: 'nema',
       email: 'info@energo-shop.ba',
       workingHours: 'PON-PET 8-15 | SUB 8-12',
       latitude: 43.4666,
@@ -624,6 +631,7 @@ export class ContactComponent implements OnInit {
       address: 'Ukmarjeva ulica 6, 1000 Ljubljana, Slovenija',
       phone: '+386 1 292 66 56',
       phoneLink: '+38612926656',
+      mobile: 'nema',
       email: 'info@soncnelektrarne.si',
       workingHours: 'PON-PET 8-16',
       latitude: 46.0569,
