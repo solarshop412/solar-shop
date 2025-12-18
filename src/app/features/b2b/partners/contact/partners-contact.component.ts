@@ -56,7 +56,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                     </p>
                     <p class="text-sm text-gray-600">
                       <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:partners@solarshop.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.supportEmail' | translate }}</a>
+                      <a href="mailto:prodaja1@solarni-paneli.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.supportEmail' | translate }}</a>
                     </p>
                   </div>
                 </div>
