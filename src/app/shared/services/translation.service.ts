@@ -2520,8 +2520,8 @@ export class TranslationService {
                 relatedProductsComingSoon: 'Povezani proizvodi uskoro...',
                 // Product Info
                 availability: 'Dostupnost',
-                inStock: 'Na stanju',
-                limitedStock: 'Ograničeno na stanju',
+                inStock: 'Dostupno',
+                limitedStock: 'Ograničena količina',
                 outOfStock: 'Nema na stanju',
                 priceIncludesVat: 'Cijena uključuje PDV.',
                 description: 'Opis',
