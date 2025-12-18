@@ -45,14 +45,14 @@ interface ShopLocation {
           
           <!-- Contact Info -->
           <div class="mt-8 flex justify-center space-x-8">
-            <a href="mailto:prodaja1@solarni-paneli.hr" class="flex items-center space-x-4 hover:text-solar-200 transition-colors duration-200">
+            <a href="mailto:prodaja2@solarni-paneli.hr" class="flex items-center space-x-4 hover:text-solar-200 transition-colors duration-200">
               <div class="w-5 h-5 flex-shrink-0">
                 <svg fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
                 </svg>
               </div>
-              <span class="font-['DM_Sans']">prodaja1&#64;solarni-paneli.hr</span>
+              <span class="font-['DM_Sans']">prodaja2&#64;solarni-paneli.hr</span>
             </a>
             <a href="tel:+38516407715" class="flex items-center space-x-4 hover:text-solar-200 transition-colors duration-200">
               <div class="w-5 h-5 flex-shrink-0">
