@@ -52,68 +52,11 @@ import { SupabaseService } from '../../../../services/supabase.service';
                   </p>
                   <div class="space-y-1">
                     <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.phone' | translate }}</a>
+                      <a href="tel:+385 (1) 6407 715" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.phone' | translate }}</a>
                     </p>
                     <p class="text-sm text-gray-600">
                       <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:partners@solarshop.hr" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.supportEmail' | translate }}</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Sales Team -->
-              <div class="flex items-start space-x-4">
-                <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-lg font-semibold text-gray-900 mb-2 font-['Poppins']">
-                    {{ 'b2b.contact.salesTeam' | translate }}
-                  </h3>
-                  <p class="text-gray-600 mb-2 font-['DM_Sans']">
-                    {{ 'b2b.contact.salesTeamText' | translate }}
-                  </p>
-                  <div class="space-y-1">
-                    <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.salesTeamPhone' | translate }}</a>
-                    </p>
-                    <p class="text-sm text-gray-600">
-                      <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:sales@solarshop.hr" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.salesTeamEmail' | translate }}</a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Technical Support -->
-              <div class="flex items-start space-x-4">
-                <div class="flex-shrink-0">
-                  <div class="w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 class="text-lg font-semibold text-gray-900 mb-2 font-['Poppins']">
-                    {{ 'b2b.contact.technicalSupport' | translate }}
-                  </h3>
-                  <p class="text-gray-600 mb-2 font-['DM_Sans']">
-                    {{ 'b2b.contact.technicalSupportText' | translate }}
-                  </p>
-                  <div class="space-y-1">
-                    <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600"> {{ 'b2b.contact.technicalSupportPhone' | translate }}</a>
-                    </p>
-                    <p class="text-sm text-gray-600">
-                      <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:webshop@solarno.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.technicalSupportEmail' | translate }}</a>
+                      <a href="mailto:partners@solarshop.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.supportEmail' | translate }}</a>
                     </p>
                   </div>
                 </div>
@@ -295,7 +238,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 <div class="mt-6">
                   <button type="submit" 
                           [disabled]="contactForm.invalid || isSubmitting"
-                          class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                          class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                     <span *ngIf="!isSubmitting">{{ 'b2b.contact.sendMessage' | translate }}</span>
                     <span *ngIf="isSubmitting">{{ 'b2b.contact.sendingMessage' | translate }}</span>
                   </button>
