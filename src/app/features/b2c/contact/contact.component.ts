@@ -421,7 +421,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 08-16',
       latitude: 45.7517,
       longitude: 16.0069,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'vela-luka',
@@ -433,7 +433,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 08-12, 17-19:30',
       latitude: 42.9608,
       longitude: 16.7206,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'vinkovci',
@@ -446,7 +446,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 9-17',
       latitude: 45.2883,
       longitude: 18.8047,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'jastrebarsko',
@@ -459,7 +459,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON, UTO, ČET 8-16 | SRI, PET 8-12/16-18 | SUB 8-12',
       latitude: 45.6688,
       longitude: 15.6511,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'pozega',
@@ -471,7 +471,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 9-16 | SUBOTA 8-13',
       latitude: 45.3403,
       longitude: 17.6852,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'vukovarska',
@@ -484,7 +484,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 09-18 | SUBOTA 09-12',
       latitude: 45.8047,
       longitude: 15.9087,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'rijeka',
@@ -497,7 +497,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 8-19',
       latitude: 45.3753,
       longitude: 14.4615,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'zagreb-centar',
@@ -510,7 +510,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
       latitude: 45.8276,
       longitude: 15.9969,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'sesvete',
@@ -523,7 +523,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 09-16 | SUBOTA 09-12',
       latitude: 45.8311,
       longitude: 16.1161,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'velika-gorica',
@@ -535,7 +535,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 08-17 | SUB 8-12',
       latitude: 45.7125,
       longitude: 16.0753,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'dubrovnik',
@@ -547,7 +547,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 8-16 | SUBOTA zatvoreno',
       latitude: 42.6507,
       longitude: 18.0944,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'split',
@@ -560,7 +560,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 8-19 | SUBOTA 8-12',
       latitude: 43.5147,
       longitude: 16.4435,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'sibenik',
@@ -573,7 +573,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
       latitude: 43.7234,
       longitude: 15.9059,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'zadar',
@@ -586,7 +586,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'UTO, SRI, PET 08-16 | PON, ČET 10-18',
       latitude: 44.1194,
       longitude: 15.2314,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'pula',
@@ -599,7 +599,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 08:30-19 | SUBOTA 08:30-13',
       latitude: 44.8666,
       longitude: 13.8496,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'osijek',
@@ -611,7 +611,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 09-16 | SUB 09-12',
       latitude: 45.5550,
       longitude: 18.6955,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'varazdin',
@@ -624,7 +624,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 08-20 | SUBOTA 08-13',
       latitude: 46.3044,
       longitude: 16.3378,
-      isFranchise: true;
+      isFranchise: true
     },
     {
       id: 'posusje',
@@ -636,7 +636,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 8-15 | SUB 8-12',
       latitude: 43.4666,
       longitude: 17.3275,
-      isFranchise: false;
+      isFranchise: false
     },
     {
       id: 'ljubljana',
@@ -648,7 +648,7 @@ export class ContactComponent implements OnInit {
       workingHours: 'PON-PET 8-16',
       latitude: 46.0569,
       longitude: 14.5058,
-      isFranchise: true;
+      isFranchise: true
     }
   ];
 
