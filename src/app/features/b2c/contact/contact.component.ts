@@ -419,33 +419,71 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38516407715',
       email: 'prodaja1@solarni-paneli.hr',
       workingHours: 'PON-PET 08-16',
-      latitude: 45.74670375615193,
-      longitude: 15.999660253975113,
+      latitude: 45.746312459217116,
+      longitude: 16.000339126187583,
       isFranchise: false
     },
     {
-      id: 'vela-luka',
-      name: 'SolarShop VELA LUKA',
-      address: 'Ulica 41 broj 15, 20270 Vela Luka',
-      phone: '+385 20 813 218',
-      phoneLink: '+38520813218',
-      email: 'steu-piccolo@post.t-com.hr',
-      workingHours: 'PON-PET 08-12, 17-19:30',
-      latitude: 42.9608,
-      longitude: 16.7206,
+      id: 'cakovec',
+      name: 'SolarShop ČAKOVEC',
+      address: 'Čakovečka 70, 40305 Nedelišće',
+      phone: '+385 40 600 062',
+      phoneLink: '+38540600062',
+      email: 'cakovec@solarno.hr',
+      workingHours: 'PON-PET 09-16 | SUB 09-12',
+      latitude: 46.37902296589094,
+      longitude: 16.397300257022263,
+      isFranchise: false
+    },
+    {
+      id: 'zadar2',
+      name: 'SolarShop ZADAR',
+      address: 'Ulica Franka Lisice 42',
+      phone: '+385 91 4454 005',
+      phoneLink: '+385914454005',
+      email: 'solarshop.zadar@gmail.com',
+      workingHours: 'PON-PET 08-16 | SUB 08-13',
+      latitude: 44.10486255549483,
+      longitude: 15.25450900000269,
       isFranchise: true
+    },
+    {
+      id: 'rijeka',
+      name: 'SolarShop RIJEKA',
+      address: 'Mavrinci 34, Kukuljanovo (skretanje za Mavrince prije Vulkala)',
+      phone: '+385 51 215 437',
+      phoneLink: '+38551215437',
+      mobile: '091 278 7873',
+      email: 'rijeka@solarno.hr',
+      workingHours: 'PON-PET 08-19 | SUB 09-13',
+      latitude: 45.34328220259474,
+      longitude: 14.5043404720233,
+      isFranchise: false
+    },
+    {
+      id: 'split',
+      name: 'SolarShop SPLIT',
+      address: 'Lovački put 1A, Split',
+      phone: '+385 21 374 865',
+      phoneLink: '+38521374865',
+      mobile: '091 278 7874',
+      email: 'split@solarno.hr',
+      workingHours: 'PON-PET 08-19 | SUBOTA 08-12',
+      latitude: 43.51315382802771,
+      longitude: 16.48438132827455,
+      isFranchise: false
     },
     {
       id: 'vinkovci',
       name: 'SolarShop VINKOVCI',
-      address: 'Ul. B. J. Jelačića 11, 32100 Vinkovci',
+      address: 'Ul. B. J. Jelačića 174, 32100 Vinkovci',
       phone: '+385 32 778 741',
       phoneLink: '+38532778741',
       mobile: '091 278 7876',
       email: 'vinkovci@solarno.hr',
-      workingHours: 'PON-PET 9-17',
-      latitude: 45.2883,
-      longitude: 18.8047,
+      workingHours: 'PON-PET 08-16',
+      latitude: 45.28300882124237,
+      longitude: 18.82279535465716,
       isFranchise: true
     },
     {
@@ -456,9 +494,9 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38512135241',
       mobile: '091 278 7877',
       email: 'jastrebarsko@solarno.hr',
-      workingHours: 'PON, UTO, ČET 8-16 | SRI, PET 8-12/16-18 | SUB 8-12',
-      latitude: 45.6688,
-      longitude: 15.6511,
+      workingHours: 'PON, UTO, ČET 08-16 | SRI, PET 08-12/16-18 | SUB 08-12',
+      latitude: 45.669638140997606,
+      longitude: 15.648653262481549,
       isFranchise: false
     },
     {
@@ -468,9 +506,9 @@ export class ContactComponent implements OnInit {
       phone: '+385 34 550 650',
       phoneLink: '+38534550650',
       email: 'pozega@solarno.hr',
-      workingHours: 'PON-PET 9-16 | SUBOTA 8-13',
-      latitude: 45.3403,
-      longitude: 17.6852,
+      workingHours: 'PON-PET 09-16 | SUBOTA 08-13',
+      latitude: 45.340495080961986,
+      longitude: 17.674627135021957,
       isFranchise: true
     },
     {
@@ -482,22 +520,9 @@ export class ContactComponent implements OnInit {
       mobile: '091 6122 156',
       email: 'solarshop@solarno.hr',
       workingHours: 'PON-PET 09-18 | SUBOTA 09-12',
-      latitude: 45.8047,
-      longitude: 15.9087,
+      latitude: 45.800531595275054,
+      longitude: 15.992057426017094,
       isFranchise: true
-    },
-    {
-      id: 'rijeka',
-      name: 'SolarShop RIJEKA',
-      address: 'Mavrinci 34, Kukuljanovo (skretanje za Mavrince prije Vulkala)',
-      phone: '+385 51 215 437',
-      phoneLink: '+38551215437',
-      mobile: '091 278 7873',
-      email: 'rijeka@solarno.hr',
-      workingHours: 'PON-PET 8-19',
-      latitude: 45.3753,
-      longitude: 14.4615,
-      isFranchise: false
     },
     {
       id: 'zagreb-centar',
@@ -508,8 +533,8 @@ export class ContactComponent implements OnInit {
       mobile: '091 278 7870',
       email: 'info@solarno.hr',
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
-      latitude: 45.8276,
-      longitude: 15.9969,
+      latitude: 45.77882393947436,
+      longitude: 15.983652099913593,
       isFranchise: false
     },
     {
@@ -521,8 +546,8 @@ export class ContactComponent implements OnInit {
       mobile: '091 278 7871',
       email: 'zagreb@solarno.hr',
       workingHours: 'PON-PET 09-16 | SUBOTA 09-12',
-      latitude: 45.8311,
-      longitude: 16.1161,
+      latitude: 45.824582484113215,
+      longitude: 16.138620475752692,
       isFranchise: false
     },
     {
@@ -532,9 +557,9 @@ export class ContactComponent implements OnInit {
       phone: '+385 91 723 6136',
       phoneLink: '+38591723616',
       email: 'info@agramsolar.hr',
-      workingHours: 'PON-PET 08-17 | SUB 8-12',
-      latitude: 45.7125,
-      longitude: 16.0753,
+      workingHours: 'PON-PET 08-17 | SUB 08-12',
+      latitude: 45.70244153409543,
+      longitude: 16.063331326462137,
       isFranchise: true
     },
     {
@@ -544,23 +569,10 @@ export class ContactComponent implements OnInit {
       phone: '+385 20 311 081',
       phoneLink: '+38520311081',
       email: 'solarshop@ragusa-solar.hr',
-      workingHours: 'PON-PET 8-16 | SUBOTA zatvoreno',
-      latitude: 42.6507,
-      longitude: 18.0944,
+      workingHours: 'PON-PET 08-16',
+      latitude: 42.65965546428944,
+      longitude: 18.07568950011369,
       isFranchise: true
-    },
-    {
-      id: 'split',
-      name: 'SolarShop SPLIT',
-      address: 'Lovački put 1A, Split',
-      phone: '+385 21 374 865',
-      phoneLink: '+38521374865',
-      mobile: '091 278 7874',
-      email: 'split@solarno.hr',
-      workingHours: 'PON-PET 8-19 | SUBOTA 8-12',
-      latitude: 43.5147,
-      longitude: 16.4435,
-      isFranchise: false
     },
     {
       id: 'sibenik',
@@ -571,8 +583,8 @@ export class ContactComponent implements OnInit {
       mobile: '091 612 2156',
       email: 'sibenik@solarno.hr',
       workingHours: 'PON-PET 09-17 | SUBOTA 09-12',
-      latitude: 43.7234,
-      longitude: 15.9059,
+      latitude: 43.748112494684335,
+      longitude: 15.883857029305762,
       isFranchise: true
     },
     {
@@ -583,9 +595,9 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38523390436',
       mobile: '091 278 7875',
       email: 'zadar@solarno.hr',
-      workingHours: 'UTO, SRI, PET 08-16 | PON, ČET 10-18',
-      latitude: 44.1194,
-      longitude: 15.2314,
+      workingHours: 'PON-PET 08-14',
+      latitude: 44.104042818005006,
+      longitude: 15.24548113988031,
       isFranchise: false
     },
     {
@@ -597,8 +609,8 @@ export class ContactComponent implements OnInit {
       mobile: '091 6122 156',
       email: 'pula@solarno.hr',
       workingHours: 'PON-PET 08:30-19 | SUBOTA 08:30-13',
-      latitude: 44.8666,
-      longitude: 13.8496,
+      latitude: 44.8592055529575,
+      longitude: 13.871455050682288,
       isFranchise: true
     },
     {
@@ -609,8 +621,8 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38531629190',
       email: 'info@luminous.hr',
       workingHours: 'PON-PET 09-16 | SUB 09-12',
-      latitude: 45.5550,
-      longitude: 18.6955,
+      latitude: 45.565045522222995,
+      longitude: 18.642983994078506,
       isFranchise: true
     },
     {
@@ -622,8 +634,8 @@ export class ContactComponent implements OnInit {
       mobile: '098 9357 888',
       email: 'varazdin@beren.hr',
       workingHours: 'PON-PET 08-20 | SUBOTA 08-13',
-      latitude: 46.3044,
-      longitude: 16.3378,
+      latitude: 46.315776039192464,
+      longitude: 16.335185274408307,
       isFranchise: true
     },
     {
@@ -634,9 +646,21 @@ export class ContactComponent implements OnInit {
       phoneLink: '+38739682493',
       email: 'info@energo-shop.ba',
       workingHours: 'PON-PET 8-15 | SUB 8-12',
-      latitude: 43.4666,
-      longitude: 17.3275,
+      latitude: 43.46283969150864,
+      longitude: 17.290031815860104,
       isFranchise: false
+    },
+    {
+      id: 'vela-luka',
+      name: 'SolarShop VELA LUKA',
+      address: 'Ulica 41 broj 15, 20270 Vela Luka',
+      phone: '+385 20 813 218',
+      phoneLink: '+38520813218',
+      email: 'steu-piccolo@post.t-com.hr',
+      workingHours: 'PON-PET 08-12, 17-19:30',
+      latitude: 42.96033930851418,
+      longitude: 16.7174783829205,
+      isFranchise: true
     },
     {
       id: 'ljubljana',
@@ -645,9 +669,9 @@ export class ContactComponent implements OnInit {
       phone: '+386 1 292 66 56',
       phoneLink: '+38612926656',
       email: 'info@soncnelektrarne.si',
-      workingHours: 'PON-PET 8-16',
-      latitude: 46.0569,
-      longitude: 14.5058,
+      workingHours: 'PON-PET 08-16',
+      latitude: 46.02128877581493,
+      longitude: 14.539274873819013,
       isFranchise: true
     }
   ];
