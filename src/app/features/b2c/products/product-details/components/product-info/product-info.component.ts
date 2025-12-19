@@ -517,24 +517,6 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
             <span *ngIf="!(wishlistState$ | async)?.isInWishlist">{{ 'productDetails.addToWishlist' | translate }}</span>
           </button>
         </div>
-
-        <!-- Additional Info -->
-        <div class="mt-6 pt-6 border-t border-gray-200">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
-            <div class="flex items-center">
-              <svg class="w-4 h-4 mr-2 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              <span class="font-['DM_Sans']">{{ 'productDetails.freeShipping' | translate }}</span>
-            </div>
-            <div class="flex items-center">
-              <svg class="w-4 h-4 mr-2 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
-              </svg>
-              <span class="font-['DM_Sans']">{{ 'productDetails.easyReturns' | translate }}</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   `,
