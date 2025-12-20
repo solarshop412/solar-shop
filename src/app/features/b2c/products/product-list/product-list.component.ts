@@ -238,7 +238,7 @@ export type SortOption = string;
               <div class="mb-6">
                 <h4 class="text-sm font-medium text-gray-900 mb-3 font-['DM_Sans']">{{ 'productList.manufacturer' | translate }}</h4>
                 <div class="space-y-2">
-                  <label *ngFor="let manufacturer of allManufacturers$ | async" class="flex items-center">
+                  <label *ngFor="let manufacturer of allManufacturers$ | async" *ngIf="((manufacturerCounts$ | async)?.[manufacturer] || 0)!=0" class="flex items-center">
                     <input 
                       type="checkbox" 
                       [value]="manufacturer"
