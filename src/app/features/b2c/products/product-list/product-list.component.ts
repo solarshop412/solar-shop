@@ -238,20 +238,21 @@ export type SortOption = string;
               <div class="mb-6">
                 <h4 class="text-sm font-medium text-gray-900 mb-3 font-['DM_Sans']">{{ 'productList.manufacturer' | translate }}</h4>
                 <div class="space-y-2">
-                  <label *ngFor="let manufacturer of allManufacturers$ | async" class="flex items-center">
-                    <input 
-                      *ngIf="((manufacturerCounts$ | async)?.[manufacturer] || 0)!=0"
-                      type="checkbox" 
-                      [value]="manufacturer"
-                      [checked]="(filters$ | async)?.manufacturers?.includes(manufacturer) || false"
-                      (change)="onManufacturerChange(manufacturer, $event)"
-                      class="rounded border-gray-300 text-solar-600 focus:ring-solar-500"
-                    >
-                    <span *ngIf="((manufacturerCounts$ | async)?.[manufacturer] || 0)!=0" class="ml-2 text-sm text-gray-700 font-['DM_Sans']">{{ manufacturer }}</span>
-                    <span *ngIf="((manufacturerCounts$ | async)?.[manufacturer] || 0)!=0" class="ml-2 text-xs text-gray-500">
-                      ({{ (manufacturerCounts$ | async)?.[manufacturer] || 0 }})
-                    </span>
-                  </label>
+                  <div *ngFor="let manufacturer of allManufacturers$ | async">
+                    <label *ngIf="((manufacturerCounts$ | async)?.[manufacturer] || 0)!=0" class="flex items-center">
+                      <input 
+                        type="checkbox" 
+                        [value]="manufacturer"
+                        [checked]="(filters$ | async)?.manufacturers?.includes(manufacturer) || false"
+                        (change)="onManufacturerChange(manufacturer, $event)"
+                        class="rounded border-gray-300 text-solar-600 focus:ring-solar-500"
+                      >
+                      <span class="ml-2 text-sm text-gray-700 font-['DM_Sans']">{{ manufacturer }}</span>
+                      <span class="ml-2 text-xs text-gray-500">
+                        ({{ (manufacturerCounts$ | async)?.[manufacturer] || 0 }})
+                      </span>
+                    </label>
+                  </div>
                 </div>
               </div>
 
