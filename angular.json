@@ -50,6 +50,7 @@
               "src/assets",
               "src/sitemap.xml",
               "src/robots.txt",
+              "src/google766ccc9a22c33010.html",
               {
                 "glob": "**/*",
                 "input": "public"
@@ -128,6 +129,7 @@
               "src/assets",
               "src/sitemap.xml",
               "src/robots.txt",
+              "src/google766ccc9a22c33010.html",
               {
                 "glob": "**/*",
                 "input": "public"
