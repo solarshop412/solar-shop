@@ -146,13 +146,13 @@ export class AddToCartButtonComponent {
     const variantClasses = {
       primary: this.isOutOfStock
         ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-        : 'bg-solar-600 text-white hover:bg-solar-700 focus:ring-2 focus:ring-solar-500 focus:ring-offset-2',
+        : 'bg-solar-500 text-white hover:bg-solar-500 focus:ring-2 focus:ring-solar-500 focus:ring-offset-2',
       secondary: this.isOutOfStock
         ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
         : 'bg-gray-600 text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
       outline: this.isOutOfStock
         ? 'border-2 border-gray-400 text-gray-600 cursor-not-allowed'
-        : 'border-2 border-solar-600 text-solar-600 hover:bg-solar-600 hover:text-white focus:ring-2 focus:ring-solar-500 focus:ring-offset-2'
+        : 'border-2 border-solar-500 text-solar-500 hover:bg-solar-500 hover:text-white focus:ring-2 focus:ring-solar-500 focus:ring-offset-2'
     };
 
     // Width classes

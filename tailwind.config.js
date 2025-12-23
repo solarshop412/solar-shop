@@ -13,16 +13,16 @@ module.exports = {
         "main-bg": "#ffffff",
         "second-bg": "#f4f4f4",
         "main-fg": "#0a2541",
-        "second-fg": "#f47424",
-        "selection": "#f47424",
+        "second-fg": "#ff6803",
+        "selection": "#ff6803",
         "success": "#4BCF4B",
         "warning": "#ffcc00",
         "error": "#F8546A",
-        "info": "#f47424",
+        "info": "#ff6803",
         // SolarShop brand colors - Updated with orange/red theme
         "heyhome": {
-          "primary": "#f47424",           // Main orange
-          "primary-dark": "#e05d1a",      // Darker orange
+          "primary": "#ff6803",           // Main orange
+          "primary-dark": "#e55e03",      // Darker orange
           "dark-green": "#8B2635",        // Dark red-brown
           "medium-green": "#A63446",      // Medium red-brown
           "light-green": "#D2691E",       // Light orange-brown
@@ -33,17 +33,17 @@ module.exports = {
         },
         // Additional orange/red color palette
         "solar": {
-          "50": "#fef7ed",               // Very light orange
-          "100": "#fdedd3",              // Light orange
-          "200": "#fbd6a5",              // Light orange
-          "300": "#f8b76d",              // Medium light orange
-          "400": "#f47424",              // Primary orange
-          "500": "#f47424",              // Primary orange (same as 400)
-          "600": "#e05d1a",              // Darker orange
-          "700": "#c9490f",              // Dark orange
-          "800": "#a0390c",              // Very dark orange
-          "900": "#7c2d0a",              // Darkest orange
-          "950": "#431508",              // Almost black orange
+          "50": "#fff6eb",               // Very light orange
+          "100": "#ffe8cc",              // Light orange
+          "200": "#ffce99",              // Light orange
+          "300": "#ffb05c",              // Medium light orange
+          "400": "#ff6803",              // Primary orange
+          "500": "#ff6803",              // Primary orange (same as 400)
+          "600": "#e55e03",              // Darker orange (hover)
+          "700": "#cc5303",              // Dark orange
+          "800": "#a34302",              // Very dark orange
+          "900": "#7a3202",              // Darkest orange
+          "950": "#4d2001",              // Almost black orange
         },
         // Red accent colors
         "accent": {

@@ -52,11 +52,11 @@ import { SupabaseService } from '../../../../services/supabase.service';
                   </p>
                   <div class="space-y-1">
                     <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.phone' | translate }}</a>
+                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.phone' | translate }}</a>
                     </p>
                     <p class="text-sm text-gray-600">
                       <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:partners@solarshop.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.supportEmail' | translate }}</a>
+                      <a href="mailto:partners@solarshop.hr" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.supportEmail' | translate }}</a>
                     </p>
                   </div>
                 </div>
@@ -80,11 +80,11 @@ import { SupabaseService } from '../../../../services/supabase.service';
                   </p>
                   <div class="space-y-1">
                     <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.salesTeamPhone' | translate }}</a>
+                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.salesTeamPhone' | translate }}</a>
                     </p>
                     <p class="text-sm text-gray-600">
                       <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:sales@solarshop.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.salesTeamEmail' | translate }}</a>
+                      <a href="mailto:sales@solarshop.hr" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.salesTeamEmail' | translate }}</a>
                     </p>
                   </div>
                 </div>
@@ -109,11 +109,11 @@ import { SupabaseService } from '../../../../services/supabase.service';
                   </p>
                   <div class="space-y-1">
                     <p class="text-sm text-gray-600">
-                      <a href="tel:+385 (1) 6407 715" class="text-solar-600 hover:text-solar-700"> {{ 'b2b.contact.technicalSupportPhone' | translate }}</a>
+                      <a href="tel:+385 (1) 6407 715" class="text-solar-500 hover:text-solar-600"> {{ 'b2b.contact.technicalSupportPhone' | translate }}</a>
                     </p>
                     <p class="text-sm text-gray-600">
                       <span class="font-medium">{{ 'b2b.contact.email' | translate }}: </span> 
-                      <a href="mailto:info@solarni-paneli.hr" class="text-solar-600 hover:text-solar-700">{{ 'b2b.contact.technicalSupportEmail' | translate }}</a>
+                      <a href="mailto:info@solarni-paneli.hr" class="text-solar-500 hover:text-solar-600">{{ 'b2b.contact.technicalSupportEmail' | translate }}</a>
                     </p>
                   </div>
                 </div>
@@ -295,7 +295,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 <div class="mt-6">
                   <button type="submit" 
                           [disabled]="contactForm.invalid || isSubmitting"
-                          class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                          class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                     <span *ngIf="!isSubmitting">{{ 'b2b.contact.sendMessage' | translate }}</span>
                     <span *ngIf="isSubmitting">{{ 'b2b.contact.sendingMessage' | translate }}</span>
                   </button>

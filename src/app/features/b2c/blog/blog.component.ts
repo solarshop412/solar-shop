@@ -23,7 +23,7 @@ import {
   template: `
     <div class="min-h-screen bg-gray-50">
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-solar-600 to-solar-800 text-white py-20 px-4 md:px-8 lg:px-32">
+    <section class="relative bg-solar-500 text-white py-20 px-4 md:px-8 lg:px-32">
       <div class="max-w-6xl mx-auto text-center">
         <h1 class="font-['Poppins'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
           {{ 'blog.title' | translate }}
@@ -69,7 +69,7 @@ import {
           <p class="text-gray-600 mb-6">{{ error }}</p>
           <button 
             (click)="loadBlogPosts()"
-            class="bg-solar-600 text-white px-6 py-3 rounded-lg hover:bg-solar-700 transition-colors">
+            class="bg-solar-500 text-white px-6 py-3 rounded-lg hover:bg-solar-500 transition-colors">
             {{ 'blog.tryAgain' | translate }}
           </button>
         </div>

@@ -60,7 +60,7 @@ interface PartnerProduct {
   template: `
     <div class="min-h-screen bg-gray-50" *ngIf="offer; else loadingTemplate">
       <!-- Hero Section -->
-      <div class="relative bg-gradient-to-r from-solar-600 to-solar-800 text-white py-20">
+      <div class="relative bg-solar-500 text-white py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Offer Image -->
@@ -265,7 +265,7 @@ interface PartnerProduct {
         <div *ngIf="products.length && hasPartnerPricing" class="mb-8">
           <button
             (click)="addAllToCart()"
-            class="w-full md:w-auto px-8 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans'] mb-6"
+            class="w-full md:w-auto px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans'] mb-6"
           >
             {{ 'offers.addAllToCart' | translate }}
           </button>
@@ -299,7 +299,7 @@ interface PartnerProduct {
                 class="w-full h-full object-cover"
               >
               <!-- Partner Exclusive Badge -->
-              <div class="absolute top-4 left-4 bg-solar-600 text-white text-xs font-bold px-3 py-2 rounded-full">
+              <div class="absolute top-4 left-4 bg-solar-500 text-white text-xs font-bold px-3 py-2 rounded-full">
                 {{ 'offers.specialOffer' | translate }}
               </div>
               <!-- Discount Badge -->
@@ -390,7 +390,7 @@ interface PartnerProduct {
                 <button
                   *ngIf="product.has_partner_pricing"
                   (click)="addToCart(product)"
-                  class="w-full px-4 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans']"
+                  class="w-full px-4 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-500 transition-colors font-semibold font-['DM_Sans']"
                 >
                   {{ 'b2b.offers.addToCartPartnerPrice' | translate }}
                 </button>
@@ -423,7 +423,7 @@ interface PartnerProduct {
             <p class="text-gray-600 font-['DM_Sans']">{{ 'b2b.offers.generalOfferDescription' | translate }}</p>
             <button
               (click)="navigateToProducts()"
-              class="mt-6 px-6 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
+              class="mt-6 px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']"
             >
               {{ 'b2b.offers.browseProducts' | translate }}
             </button>

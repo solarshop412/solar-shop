@@ -282,7 +282,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
               <div class="mt-6">
                 <button 
                   (click)="proceedToCheckout()"
-                  class="w-full px-6 py-4 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-['DM_Sans']"
+                  class="w-full px-6 py-4 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-['DM_Sans']"
                 >
                   {{ 'cart.checkout' | translate }}
                 </button>

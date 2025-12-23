@@ -32,7 +32,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             <div class="flex items-center space-x-2">
               <div class="flex items-center justify-center w-8 h-8 rounded-full" 
                    [ngClass]="{
-                     'bg-solar-600 text-white': currentStep >= 1,
+                     'bg-solar-500 text-white': currentStep >= 1,
                      'border-2 border-gray-300 bg-white text-gray-400': currentStep < 1
                    }">
                 <svg *ngIf="currentStep > 1" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -49,7 +49,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
             <!-- Connector Line -->
             <div class="w-16 h-px" [ngClass]="{
-              'bg-solar-600': currentStep > 1,
+              'bg-solar-500': currentStep > 1,
               'bg-gray-300': currentStep <= 1
             }"></div>
 
@@ -57,7 +57,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             <div class="flex items-center space-x-2">
               <div class="flex items-center justify-center w-8 h-8 rounded-full" 
                    [ngClass]="{
-                     'bg-solar-600 text-white': currentStep >= 2,
+                     'bg-solar-500 text-white': currentStep >= 2,
                      'border-2 border-gray-300 bg-white text-gray-400': currentStep < 2
                    }">
                 <svg *ngIf="currentStep > 2" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -74,7 +74,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
             <!-- Connector Line -->
             <div class="w-16 h-px" [ngClass]="{
-              'bg-solar-600': currentStep > 2,
+              'bg-solar-500': currentStep > 2,
               'bg-gray-300': currentStep <= 2
             }"></div>
 
@@ -82,7 +82,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
             <div class="flex items-center space-x-2">
               <div class="flex items-center justify-center w-8 h-8 rounded-full" 
                    [ngClass]="{
-                     'bg-solar-600 text-white': currentStep >= 3,
+                     'bg-solar-500 text-white': currentStep >= 3,
                      'border-2 border-gray-300 bg-white text-gray-400': currentStep < 3
                    }">
                 <svg *ngIf="currentStep > 3" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -203,7 +203,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
                     type="button"
                     (click)="applyCoupon()"
                     [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"
-                    class="px-4 py-2 bg-solar-600 text-white rounded-lg text-sm font-['DM_Sans'] hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="px-4 py-2 bg-solar-500 text-white rounded-lg text-sm font-['DM_Sans'] hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <span *ngIf="!(isCouponLoading$ | async)">{{ 'cart.apply' | translate }}</span>
                     <span *ngIf="isCouponLoading$ | async">...</span>

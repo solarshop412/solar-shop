@@ -19,7 +19,7 @@ import { SupabaseService } from '../../../services/supabase.service';
   template: `
     <div class="min-h-screen bg-gray-50">
       <!-- Hero Section -->
-      <div class="bg-gradient-to-r from-solar-600 to-solar-800 text-white py-20">
+      <div class="bg-solar-500 text-white py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 class="text-5xl lg:text-6xl font-bold mb-6 font-['Poppins']">
             {{ 'offers.title' | translate }}
@@ -51,7 +51,7 @@ import { SupabaseService } from '../../../services/supabase.service';
                 {{ getDiscountDisplay(offer) }} {{ 'hero.off' | translate }}
               </div>
               <!-- Sale Badge -->
-              <div class="absolute top-4 right-4 bg-solar-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+              <div class="absolute top-4 right-4 bg-solar-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                 {{ 'offers.sale' | translate }}
               </div>
             </div>
@@ -110,14 +110,14 @@ import { SupabaseService } from '../../../services/supabase.service';
           <p class="text-gray-600 mb-8 font-['DM_Sans']">{{ 'offers.noOffersText' | translate }}</p>
           <button 
             (click)="navigateToProducts()"
-            class="px-8 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
+            class="px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']"
           >
             {{ 'offers.browseAllProducts' | translate }}
           </button>
         </div>
 
         <!-- Call to Action -->
-        <div class="mt-20 bg-gradient-to-r from-solar-600 to-solar-800 rounded-3xl p-12 text-center text-white">
+        <div class="mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white">
           <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
             {{ 'offers.dontMissOut' | translate }}
           </h2>

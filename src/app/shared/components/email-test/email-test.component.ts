@@ -90,7 +90,7 @@ import { EmailService } from '../../../services/email.service';
             <button 
               type="submit" 
               [disabled]="testForm.invalid || isSending"
-              class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
               <span *ngIf="!isSending">Send Test Email</span>
               <span *ngIf="isSending">Sending...</span>

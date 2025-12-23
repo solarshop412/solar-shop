@@ -50,12 +50,12 @@ import { User } from '../../../../shared/models/user.model';
             </div>
             <button *ngIf="!isAuthenticated" 
                     (click)="navigateToLogin()" 
-                    class="bg-solar-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                    class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors">
               {{ 'b2b.offers.loginToViewOffers' | translate }}
             </button>
             <button *ngIf="isAuthenticated && !hasCompanyId" 
                     (click)="navigateToPartnerRegistration()" 
-                    class="bg-solar-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                    class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors">
               {{ 'b2b.auth.becomePartner' | translate }}
             </button>
           </div>
@@ -90,7 +90,7 @@ import { User } from '../../../../shared/models/user.model';
 
               <!-- Partner Only Badge -->
               <div class="absolute top-4 right-4 flex flex-col gap-2 items-end">
-                <span class="bg-solar-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                <span class="bg-solar-500 text-white px-3 py-1 rounded-full text-xs font-medium">
                   {{ 'b2b.offers.partnerOnly' | translate }}
                 </span>
                 <!-- Bundle Badge -->
@@ -189,7 +189,7 @@ import { User } from '../../../../shared/models/user.model';
                       <span class="ml-2 font-mono font-bold text-solar-600">{{ offer.couponCode }}</span>
                     </div>
                     <button (click)="copyCouponCode(offer.couponCode)" 
-                            class="text-solar-600 hover:text-solar-700 text-sm font-medium">
+                            class="text-solar-500 hover:text-solar-600 text-sm font-medium">
                       {{ 'b2b.offers.copy' | translate }}
                     </button>
                   </div>
@@ -204,7 +204,7 @@ import { User } from '../../../../shared/models/user.model';
                 <button *ngIf="isAuthenticated && hasCompanyId && (!offer.hasProducts || offer.hasAllPartnerPricing)"
                         (click)="claimOffer(offer)"
                         [disabled]="isOfferExpired(offer.endDate)"
-                        class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                        class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                   <span *ngIf="!isOfferExpired(offer.endDate)">{{ 'b2b.offers.claimOffer' | translate }}</span>
                   <span *ngIf="isOfferExpired(offer.endDate)">{{ 'b2b.offers.expired' | translate }}</span>
                 </button>
@@ -218,13 +218,13 @@ import { User } from '../../../../shared/models/user.model';
 
                 <button *ngIf="!isAuthenticated"
                         (click)="navigateToLogin()"
-                        class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 transition-colors">
+                        class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors">
                   {{ 'b2b.offers.signInToClaim' | translate }}
                 </button>
 
                 <button *ngIf="isAuthenticated && !hasCompanyId"
                         (click)="navigateToPartnerRegistration()"
-                        class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 transition-colors">
+                        class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors">
                   {{ 'b2b.offers.claimOffer' | translate }}
                 </button>
 

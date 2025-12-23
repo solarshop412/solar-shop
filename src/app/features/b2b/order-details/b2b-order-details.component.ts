@@ -104,7 +104,7 @@ import { Order } from '../../../shared/models/order.model';
                   <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide font-['DM_Sans']">{{ 'orderDetails.trackingNumber' | translate }}</h3>
                   <p class="mt-1 text-sm font-medium text-gray-900">{{ order.trackingNumber }}</p>
                 </div>
-                <button class="text-solar-600 hover:text-solar-700 text-sm font-medium">
+                <button class="text-solar-500 hover:text-solar-600 text-sm font-medium">
                   {{ 'orderDetails.trackPackage' | translate }}
                 </button>
               </div>

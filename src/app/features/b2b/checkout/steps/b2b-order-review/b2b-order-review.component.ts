@@ -114,7 +114,7 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
         <button 
           (click)="continueToShipping()"
           [disabled]="(cartItems$ | async)?.length === 0"
-          class="w-full px-6 py-4 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
+          class="w-full px-6 py-4 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {{ 'b2bCheckout.nextStep' | translate }} {{ 'b2bCheckout.step2' | translate }}
         </button>

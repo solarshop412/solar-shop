@@ -32,7 +32,7 @@ interface ShopLocation {
     <!-- Contact Page -->
     <div class="min-h-screen bg-white">
       <!-- Hero Section -->
-      <section class="relative bg-gradient-to-br from-solar-600 to-solar-800 text-white py-20 px-4 md:px-8 lg:px-32">
+      <section class="relative bg-solar-500 text-white py-20 px-4 md:px-8 lg:px-32">
         <div class="max-w-6xl mx-auto text-center">
           <h1 class="font-['Poppins'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">
             {{ 'contactSupport.title' | translate }}
@@ -142,7 +142,7 @@ interface ShopLocation {
                 <button
                   type="submit"
                   [disabled]="contactForm.invalid || isSubmitting"
-                  class="inline-flex items-center px-8 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-['DM_Sans'] uppercase tracking-wide"
+                  class="inline-flex items-center px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-['DM_Sans'] uppercase tracking-wide"
                 >
                   <span *ngIf="!isSubmitting">{{ 'contactSupport.sendMessage' | translate }}</span>
                   <span *ngIf="isSubmitting">{{ 'contactSupport.sending' | translate }}</span>
@@ -198,7 +198,7 @@ interface ShopLocation {
                 <div class="pt-2 space-y-2">
                   <a
                     [href]="getPhoneHref(location)"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 font-medium font-['DM_Sans']"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 font-medium font-['DM_Sans']"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 4.5A2.25 2.25 0 014.25 2h1.372c.51 0 .954.343 1.087.835l1.105 4.104a1.125 1.125 0 01-.417 1.2l-1.152.864a1.125 1.125 0 00-.417 1.2c.78 2.885 3.054 5.16 5.939 5.939a1.125 1.125 0 001.2-.417l.864-1.152a1.125 1.125 0 011.2-.417l4.104 1.105c.492.133.835.577.835 1.087V19.5A2.25 2.25 0 0119.5 21.75h-1.125C9.988 21.75 2.25 14.012 2.25 4.125V3.75A1.75 1.75 0 012 4.5z" />
@@ -208,7 +208,7 @@ interface ShopLocation {
                   <a
                     *ngIf="location.email"
                     [href]="'mailto:' + location.email"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 font-medium font-['DM_Sans']"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 font-medium font-['DM_Sans']"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
@@ -219,7 +219,7 @@ interface ShopLocation {
                     [href]="getMapLink(location)"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 font-medium font-['DM_Sans']"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 font-medium font-['DM_Sans']"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-4.5-4.364-7.5-7.795-7.5-11.25a7.5 7.5 0 1115 0C19.5 13.205 16.5 16.636 12 21z" />

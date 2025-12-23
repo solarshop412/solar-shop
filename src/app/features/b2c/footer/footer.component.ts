@@ -214,7 +214,7 @@ export interface FooterData {
               </div>
               <button 
                 type="submit"
-                [class]="(newsletterState$ | async)?.success ? 'w-full bg-green-500 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg' : 'w-full bg-solar-500 text-white font-semibold py-3 rounded-xl hover:bg-solar-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'"
+                [class]="(newsletterState$ | async)?.success ? 'w-full bg-green-500 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-lg' : 'w-full bg-solar-500 text-white font-semibold py-3 rounded-xl hover:bg-solar-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'"
                 [disabled]="(newsletterState$ | async)?.loading || !newsletterForm.valid"
               >
                 {{ (newsletterState$ | async)?.success ? ('footer.subscribed' | translate) : ('footer.subscribe' | translate) }}

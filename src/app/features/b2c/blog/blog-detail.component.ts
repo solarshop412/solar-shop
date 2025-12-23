@@ -29,7 +29,7 @@ import { TranslationService } from '../../../shared/services/translation.service
         <p class="text-gray-600 mt-4 mb-8 font-['DM_Sans']">{{ error }}</p>
         <button 
           (click)="router.navigate(['/blog'])"
-          class="bg-solar-600 text-white px-6 py-3 rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans'] font-medium">
+          class="bg-solar-500 text-white px-6 py-3 rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans'] font-medium">
           {{ 'blog.backToBlog' | translate }}
         </button>
       </div>
@@ -37,8 +37,8 @@ import { TranslationService } from '../../../shared/services/translation.service
       <!-- Content -->
       <div *ngIf="blogPost && !loading">
         <!-- Hero Section -->
-        <section class="relative bg-gradient-to-br from-solar-600 to-solar-800 text-white py-20">
-          <div class="absolute inset-0 bg-black/20"></div>
+        <section class="relative bg-solar-500 text-white py-20">
+          <div class="absolute inset-0"></div>
           <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumb -->
             <nav class="mb-8">
@@ -137,7 +137,7 @@ import { TranslationService } from '../../../shared/services/translation.service
         </section>
 
         <!-- Newsletter Signup -->
-        <section class="bg-gradient-to-r from-solar-600 to-solar-700 py-16">
+        <section class="bg-solar-500 py-16">
           <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold text-white mb-4 font-['Poppins']">{{ 'blog.stayUpdated' | translate }}</h2>
             <p class="text-solar-100 mb-8 text-lg font-['DM_Sans']">

@@ -78,7 +78,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
           <p class="text-gray-600 mb-6 font-['DM_Sans']">{{ error }}</p>
           <button 
             [routerLink]="['/partneri/proizvodi']"
-            class="px-6 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
+            class="px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']"
           >
             {{ 'b2b.products.backToProducts' | translate }}
           </button>
@@ -177,7 +177,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                 </h3>
                 <button
                   (click)="showStockByUnit = !showStockByUnit"
-                  class="text-sm text-solar-600 hover:text-solar-700 font-medium flex items-center gap-2 transition-colors">
+                  class="text-sm text-solar-500 hover:text-solar-600 font-medium flex items-center gap-2 transition-colors">
                   <svg *ngIf="!showStockByUnit" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                   </svg>
@@ -255,7 +255,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                   <button 
                     *ngFor="let category of product.categories; let last = last"
                     (click)="navigateToCategory(category.name)"
-                    class="text-sm font-medium text-solar-600 hover:text-solar-700 hover:underline uppercase transition-colors"
+                    class="text-sm font-medium text-solar-500 hover:text-solar-600 hover:underline uppercase transition-colors"
                     [class.font-bold]="category.isPrimary"
                     [title]="category.isPrimary ? 'Primary category' : ''"
                   >
@@ -266,7 +266,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                 <button 
                   *ngIf="(!product.categories || product.categories.length === 0) && product.category"
                   (click)="navigateToCategory(product.category)"
-                  class="text-sm font-medium text-solar-600 hover:text-solar-700 hover:underline uppercase transition-colors"
+                  class="text-sm font-medium text-solar-500 hover:text-solar-600 hover:underline uppercase transition-colors"
                 >
                   {{ product.category }}
                 </button>
@@ -313,7 +313,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                 </svg>
                 <p class="text-gray-500 font-medium">{{ 'b2b.products.signInToViewPricing' | translate }}</p>
                 <button (click)="navigateToLogin()" 
-                        class="mt-4 bg-solar-600 text-white px-6 py-2 rounded-lg hover:bg-solar-700 transition-colors">
+                        class="mt-4 bg-solar-500 text-white px-6 py-2 rounded-lg hover:bg-solar-700 transition-colors">
                   {{ 'b2b.products.signIn' | translate }}
                 </button>
               </div>
@@ -391,7 +391,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                   <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.description' | translate }}</h4>
                   <button 
                     (click)="toggleDescription()"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
                     [attr.aria-expanded]="isDescriptionExpanded"
                     [attr.aria-label]="isDescriptionExpanded ? 'Collapse description' : 'Expand description'"
                   >
@@ -421,7 +421,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                   <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.specifications' | translate }}</h4>
                   <button 
                     (click)="toggleSpecifications()"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
                     [attr.aria-expanded]="isSpecificationsExpanded"
                     [attr.aria-label]="isSpecificationsExpanded ? 'Collapse specifications' : 'Expand specifications'"
                   >
@@ -456,7 +456,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                   <h4 class="text-md font-medium text-gray-700">{{ 'admin.productTechnicalSheet' | translate }}</h4>
                   <button 
                     (click)="toggleTechnicalSheet()"
-                    class="flex items-center space-x-2 text-solar-600 hover:text-solar-700 transition-colors duration-200"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
                     [attr.aria-expanded]="isTechnicalSheetExpanded"
                     [attr.aria-label]="isTechnicalSheetExpanded ? 'Collapse technical sheet' : 'Expand technical sheet'"
                   >
@@ -481,7 +481,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
                       [href]="getFullTechnicalSheetUrl(product.technical_sheet || '')" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      class="inline-flex items-center px-6 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors duration-200 font-medium"
+                      class="inline-flex items-center px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors duration-200 font-medium"
                     >
                       {{ 'b2b.products.downloadTechnicalSheet' | translate }}
                       <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -539,7 +539,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               <!-- Add to Cart Button -->
               <button *ngIf="isCompanyContact && product.in_stock && hasB2BPrice(product)"
                       (click)="addToCart(product)"
-                      class="w-full bg-solar-600 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
+                      class="w-full bg-solar-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
                 <span class="flex items-center justify-center space-x-2">
                   <lucide-angular
                     name="shopping-cart"
@@ -561,7 +561,7 @@ import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
               <!-- Sign In / Apply Buttons -->
               <div *ngIf="!isAuthenticated" class="space-y-2">
                 <button (click)="navigateToLogin()"
-                        class="w-full bg-solar-600 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
+                        class="w-full bg-solar-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
                   {{ 'b2b.products.signInToOrder' | translate }}
                 </button>
               </div>

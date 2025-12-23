@@ -14,7 +14,7 @@ import { TranslationService } from '../../services/translation.service';
           <div class="flex-1">
             <p class="text-sm text-gray-700 font-['DM_Sans']">
               {{ 'cookieBanner.message' | translate }}
-              <a href="/kolacici" class="text-solar-600 hover:text-solar-700 underline ml-1">
+              <a href="/kolacici" class="text-solar-500 hover:text-solar-600 underline ml-1">
                 {{ 'cookieBanner.learnMore' | translate }}
               </a>
             </p>
@@ -28,7 +28,7 @@ import { TranslationService } from '../../services/translation.service';
             </button>
             <button
               (click)="acceptCookies()"
-              class="px-4 py-2 text-sm font-medium text-white bg-solar-600 hover:bg-solar-700 rounded-lg transition-colors font-['DM_Sans']"
+              class="px-4 py-2 text-sm font-medium text-white bg-solar-500 hover:bg-solar-700 rounded-lg transition-colors font-['DM_Sans']"
             >
               {{ 'cookieBanner.accept' | translate }}
             </button>

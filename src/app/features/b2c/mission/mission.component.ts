@@ -278,7 +278,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
               placeholder="Email address"
               class="flex-1 px-4 py-3 border border-[#EEE8D0] rounded-lg bg-white text-sm focus:ring-2 focus:ring-solar-500 focus:border-transparent font-['DM_Sans'] placeholder-gray-400"
             >
-            <button class="bg-solar-600 text-white px-5 py-3 rounded-lg font-semibold hover:bg-solar-700 transition-colors font-['DM_Sans']">
+            <button class="bg-solar-500 text-white px-5 py-3 rounded-lg font-semibold hover:bg-solar-700 transition-colors font-['DM_Sans']">
               {{ 'mission.subscribe' | translate }}
             </button>
           </div>

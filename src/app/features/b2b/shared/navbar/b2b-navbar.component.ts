@@ -71,7 +71,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                 {{ 'b2bNav.signIn' | translate }}
               </a>
               <a routerLink="/partneri/registracija" 
-                 class="bg-solar-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                 class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
                 {{ 'b2bNav.getStarted' | translate }}
               </a>
               <div class="h-6 w-px bg-gray-300 mx-2"></div>
@@ -137,7 +137,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                 </lucide-angular>
                 <!-- Cart Items Count Badge -->
                 <span *ngIf="(cartItemsCount$ | async) && (cartItemsCount$ | async)! > 0" 
-                      class="absolute -top-1 -right-1 bg-solar-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium min-w-[1.25rem]">
+                      class="absolute -top-1 -right-1 bg-solar-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium min-w-[1.25rem]">
                   {{ cartItemsCount$ | async }}
                 </span>
               </button>
@@ -210,7 +210,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
                 </a>
                 <a routerLink="/partneri/registracija" 
                    (click)="closeMobileMenu()"
-                   class="block px-3 py-2 text-base font-medium bg-solar-600 text-white rounded-md hover:bg-solar-700">
+                   class="block px-3 py-2 text-base font-medium bg-solar-500 text-white rounded-md hover:bg-solar-700">
                   {{ 'b2bNav.getStarted' | translate }}
                 </a>
                 <a routerLink="/" 

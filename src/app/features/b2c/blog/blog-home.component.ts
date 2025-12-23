@@ -48,7 +48,7 @@ import {
           <p class="text-gray-600 mb-4 font-['DM_Sans']">{{ error }}</p>
           <button 
             (click)="loadBlogPosts()"
-            class="bg-solar-600 text-white px-4 py-2 rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']">
+            class="bg-solar-500 text-white px-4 py-2 rounded-lg hover:bg-solar-700 transition-colors font-['DM_Sans']">
             {{ 'blog.tryAgain' | translate }}
           </button>
         </div>
@@ -132,7 +132,7 @@ import {
         <div class="text-center mt-12" *ngIf="!(isLoading$ | async) && !(error$ | async) && (displayPosts$ | async)?.length">
           <button 
             (click)="navigateToBlog()"
-            class="inline-flex items-center gap-2 bg-solar-600 text-white font-medium px-8 py-3 rounded-lg hover:bg-solar-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-['DM_Sans'] whitespace-nowrap"
+            class="inline-flex items-center gap-2 bg-solar-500 text-white font-medium px-8 py-3 rounded-lg hover:bg-solar-500 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-['DM_Sans'] whitespace-nowrap"
           >
             <span>{{ 'blog.viewAllPosts' | translate }}</span>
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

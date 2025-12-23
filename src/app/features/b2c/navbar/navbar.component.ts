@@ -94,7 +94,7 @@ import { LucideAngularModule, Search, User as UserIcon, CircleUserRound, Mail, P
                 <button 
                   type="submit"
                   [disabled]="!searchQuery.trim()"
-                  class="p-1.5 sm:p-2 text-white bg-solar-600 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg"
+                  class="p-1.5 sm:p-2 text-white bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors rounded-lg"
                   [title]="'search.search' | translate">
                   <lucide-angular 
                     name="search" 
@@ -273,21 +273,21 @@ import { LucideAngularModule, Search, User as UserIcon, CircleUserRound, Mail, P
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.products' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
             
             <a routerLink="/ponude" 
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.offers' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
 
             <a routerLink="/blog" 
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.blog' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
             
 
@@ -296,21 +296,21 @@ import { LucideAngularModule, Search, User as UserIcon, CircleUserRound, Mail, P
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.company' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
             
             <a routerLink="/kontakt" 
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.contact' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
             
             <a routerLink="/partneri" 
                routerLinkActive="text-solar-600 font-semibold" 
                class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group">
               <span>{{ 'nav.partners' | translate }}</span>
-              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-600 transition-all duration-300 group-hover:w-full"></div>
+              <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"></div>
             </a>
           </div>
 

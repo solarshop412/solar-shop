@@ -32,7 +32,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
             </div>
             <div class="flex space-x-4">
               <button (click)="navigateToProducts()" 
-                      class="bg-solar-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors">
+                      class="bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors">
                 {{ 'b2b.profile.viewProducts' | translate }}
               </button>
               <button (click)="navigateToOffers()" 
@@ -83,7 +83,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
               <nav class="space-y-2">
                 <button
                   (click)="setActiveTab('company-info')"
-                  [class]="activeTab === 'company-info' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'company-info' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m11 0a2 2 0 01-2 2H7a2 2 0 01-2-2m2 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2"/>
@@ -93,7 +93,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 
                 <button
                   (click)="setActiveTab('company-orders')"
-                  [class]="activeTab === 'company-orders' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'company-orders' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
@@ -252,7 +252,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                   <button
                     type="submit"
                     [disabled]="companyInfoForm.invalid || updating"
-                    class="px-6 py-3 bg-solar-600 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
+                    class="px-6 py-3 bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
                     <span *ngIf="!updating">{{ 'b2b.profile.saveChanges' | translate }}</span>
                     <span *ngIf="updating" class="flex items-center space-x-2">
                       <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
@@ -342,7 +342,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                     </div>
                     <div class="flex space-x-2">
                       <button (click)="viewOrderDetails(order)" 
-                              class="text-solar-600 hover:text-solar-700 text-xs font-medium">
+                              class="text-solar-500 hover:text-solar-600 text-xs font-medium">
                         {{ 'b2b.profile.viewDetails' | translate }}
                       </button>
                       <button *ngIf="order.status === 'delivered'" 
@@ -363,7 +363,7 @@ import { SupabaseService } from '../../../../services/supabase.service';
                 <h3 class="text-lg font-medium text-gray-900 mb-2">{{ 'b2b.profile.noOrdersFound' | translate }}</h3>
                 <p class="text-gray-600 mb-4">{{ 'b2b.profile.noOrdersFoundMessage' | translate }}</p>
                 <button (click)="navigateToProducts()" 
-                        class="bg-solar-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors">
+                        class="bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors">
                   {{ 'b2b.profile.startShopping' | translate }}
                 </button>
               </div>

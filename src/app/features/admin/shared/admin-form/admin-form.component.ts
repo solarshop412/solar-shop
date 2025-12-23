@@ -47,7 +47,7 @@ import { TranslationService } from '../../../../shared/services/translation.serv
             <button
               type="submit"
               [disabled]="form.invalid || isSubmitting"
-              class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-solar-600 hover:bg-solar-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
+              class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-solar-500 hover:bg-solar-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               <span *ngIf="!isSubmitting">{{ isEditMode ? translationService.translate('common.update') : translationService.translate('common.create') }}</span>
               <span *ngIf="isSubmitting" class="flex items-center">

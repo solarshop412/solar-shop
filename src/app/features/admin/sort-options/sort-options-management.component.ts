@@ -23,7 +23,7 @@ import { ToastService } from '../../../shared/services/toast.service';
           </div>
           <button
             (click)="openAddModal()"
-            class="inline-flex items-center px-4 py-2 bg-solar-600 text-white text-sm font-medium rounded-lg hover:bg-solar-700 transition-colors">
+            class="inline-flex items-center px-4 py-2 bg-solar-500 text-white text-sm font-medium rounded-lg hover:bg-solar-700 transition-colors">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
             </svg>
@@ -339,7 +339,7 @@ import { ToastService } from '../../../shared/services/toast.service';
               <button
                 type="submit"
                 [disabled]="!sortOptionForm.valid || saving"
-                class="px-4 py-2 text-sm font-medium text-white bg-solar-600 rounded-md hover:bg-solar-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
+                class="px-4 py-2 text-sm font-medium text-white bg-solar-500 rounded-md hover:bg-solar-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
                 <span *ngIf="!saving">{{ editingOption ? ('common.save' | translate) : ('common.create' | translate) }}</span>
                 <span *ngIf="saving" class="flex items-center">
                   <svg class="w-4 h-4 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">

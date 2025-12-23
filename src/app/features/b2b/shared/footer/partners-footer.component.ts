@@ -18,7 +18,7 @@ import { Subject, takeUntil, switchMap, from, catchError, of } from 'rxjs';
           <div class="space-y-4">
             <div class="flex items-center space-x-2">
               <img src="assets/images/logo.png" alt="SolarShop" class="h-8 w-auto">
-              <span class="px-2 py-1 bg-solar-600 text-white text-xs font-medium rounded-full">B2B</span>
+              <span class="px-2 py-1 bg-solar-500 text-white text-xs font-medium rounded-full">B2B</span>
             </div>
             <p class="text-gray-300 text-sm font-['DM_Sans']">
               {{ 'b2bFooter.joinThousands' | translate }}

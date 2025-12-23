@@ -59,7 +59,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
               <nav class="space-y-2">
                 <button
                   (click)="setActiveTab('user-info')"
-                  [class]="activeTab === 'user-info' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'user-info' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
@@ -69,7 +69,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                 
                 <button
                   (click)="setActiveTab('billing-shipping')"
-                  [class]="activeTab === 'billing-shipping' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'billing-shipping' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -80,7 +80,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
 
                 <button
                   (click)="setActiveTab('my-orders')"
-                  [class]="activeTab === 'my-orders' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'my-orders' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
@@ -90,7 +90,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
 
                 <button
                   (click)="setActiveTab('my-wishlist')"
-                  [class]="activeTab === 'my-wishlist' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'my-wishlist' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
@@ -100,7 +100,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
 
                 <button
                   (click)="setActiveTab('my-reviews')"
-                  [class]="activeTab === 'my-reviews' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'my-reviews' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
@@ -110,7 +110,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
 
                 <button
                   (click)="setActiveTab('account')"
-                  [class]="activeTab === 'account' ? 'bg-solar-600 text-white' : 'text-gray-700 hover:bg-gray-50'"
+                  [class]="activeTab === 'account' ? 'bg-solar-500 text-white' : 'text-gray-700 hover:bg-gray-50'"
                   class="w-full text-left px-4 py-3 rounded-lg font-['DM_Sans'] font-medium transition-colors duration-200 flex items-center space-x-3">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -146,7 +146,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     </ng-template>
                   </div>
                   <div>
-                    <button type="button" class="px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                    <button type="button" class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                       {{ 'profile.changePhoto' | translate }}
                     </button>
                     <p class="text-sm text-gray-600 mt-1 font-['DM_Sans']">{{ 'profile.photoRequirements' | translate }}</p>
@@ -239,7 +239,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   <button
                     type="submit"
                     [disabled]="userInfoForm.invalid || (loading$ | async)"
-                    class="px-6 py-3 bg-solar-600 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
+                    class="px-6 py-3 bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
                     <span *ngIf="!(loading$ | async)">{{ 'profile.saveChanges' | translate }}</span>
                     <span *ngIf="loading$ | async" class="flex items-center space-x-2">
                       <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
@@ -264,7 +264,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   </div>
                   <button
                     (click)="addNewAddress()"
-                    class="px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors flex items-center space-x-2">
+                    class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors flex items-center space-x-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
@@ -279,7 +279,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     class="border border-gray-200 rounded-lg p-4 hover:border-solar-600 transition-colors">
                     <div class="flex justify-between items-start mb-3">
                       <div class="flex items-center space-x-2">
-                        <span class="px-2 py-1 bg-solar-600 text-white text-xs rounded-full font-['DM_Sans'] font-medium">
+                        <span class="px-2 py-1 bg-solar-500 text-white text-xs rounded-full font-['DM_Sans'] font-medium">
                           {{ address.type | titlecase }}
                         </span>
                         <span *ngIf="address.isDefault" class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-['DM_Sans'] font-medium">
@@ -287,7 +287,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                         </span>
                       </div>
                       <div class="flex space-x-2">
-                        <button class="text-solar-600 hover:text-solar-700 text-sm font-['DM_Sans']">{{ 'profile.edit' | translate }}</button>
+                        <button class="text-solar-500 hover:text-solar-600 text-sm font-['DM_Sans']">{{ 'profile.edit' | translate }}</button>
                         <button class="text-red-500 hover:text-red-600 text-sm font-['DM_Sans']">{{ 'profile.delete' | translate }}</button>
                       </div>
                     </div>
@@ -312,7 +312,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     <p class="text-gray-600 font-['DM_Sans'] mb-4">{{ 'profile.addFirstAddress' | translate }}</p>
                     <button
                       (click)="addNewAddress()"
-                      class="px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                      class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                       {{ 'profile.addAddress' | translate }}
                     </button>
                   </div>
@@ -328,7 +328,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   </div>
                   <button
                     (click)="addNewPaymentMethod()"
-                    class="px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors flex items-center space-x-2">
+                    class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors flex items-center space-x-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
@@ -361,7 +361,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                         </span>
                       </div>
                       <div class="flex space-x-2">
-                        <button class="text-solar-600 hover:text-solar-700 text-sm font-['DM_Sans']">{{ 'profile.edit' | translate }}</button>
+                        <button class="text-solar-500 hover:text-solar-600 text-sm font-['DM_Sans']">{{ 'profile.edit' | translate }}</button>
                         <button class="text-red-500 hover:text-red-600 text-sm font-['DM_Sans']">{{ 'profile.delete' | translate }}</button>
                       </div>
                     </div>
@@ -377,7 +377,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     <p class="text-gray-600 font-['DM_Sans'] mb-4">{{ 'profile.addFirstPayment' | translate }}</p>
                     <button
                       (click)="addNewPaymentMethod()"
-                      class="px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                      class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                       {{ 'profile.addPaymentMethod' | translate }}
                     </button>
                   </div>
@@ -455,7 +455,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   <div class="flex space-x-3 pt-4 border-t border-gray-200">
                     <button 
                       (click)="viewOrderDetails(order.id)"
-                      class="text-solar-600 hover:text-solar-700 text-sm font-medium font-['DM_Sans']">
+                      class="text-solar-500 hover:text-solar-600 text-sm font-medium font-['DM_Sans']">
                       {{ 'profile.viewDetails' | translate }}
                     </button>
                     
@@ -472,7 +472,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                       <!-- No reviews written -->
                       <button *ngIf="getOrderReviewStatus(order.id) === 'no-reviews'" 
                               (click)="writeReviewForOrder(order.id)"
-                              class="text-solar-600 hover:text-solar-700 text-sm font-medium font-['DM_Sans']">
+                              class="text-solar-500 hover:text-solar-600 text-sm font-medium font-['DM_Sans']">
                         {{ 'profile.writeReview' | translate }}
                       </button>
                       
@@ -485,7 +485,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     </div>
                     
                     <button *ngIf="order.trackingNumber" 
-                            class="text-solar-600 hover:text-solar-700 text-sm font-medium font-['DM_Sans']">
+                            class="text-solar-500 hover:text-solar-600 text-sm font-medium font-['DM_Sans']">
                       {{ 'profile.trackOrder' | translate }}
                     </button>
                   </div>
@@ -501,7 +501,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   <p class="text-gray-600 font-['DM_Sans'] mb-6">{{ 'profile.startShopping' | translate }}</p>
                   <button
                     (click)="router.navigate(['/proizvodi'])"
-                    class="px-6 py-3 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                    class="px-6 py-3 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                     {{ 'profile.browseProducts' | translate }}
                   </button>
                 </div>
@@ -582,7 +582,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     <div class="space-y-2">
                       <button 
                         (click)="viewProductDetails(item.product?.id)"
-                        class="w-full px-4 py-2 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                        class="w-full px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                         {{ 'profile.viewDetails' | translate }}
                       </button>
                       
@@ -605,7 +605,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   <p class="text-gray-600 font-['DM_Sans'] mb-6">{{ 'profile.startAddingToWishlist' | translate }}</p>
                   <button
                     (click)="router.navigate(['/proizvodi'])"
-                    class="px-6 py-3 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                    class="px-6 py-3 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                     {{ 'profile.browseProducts' | translate }}
                   </button>
                 </div>
@@ -689,7 +689,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
 
                       <!-- Actions -->
                       <!-- <div class="flex space-x-3 mt-4">
-                        <button class="text-solar-600 hover:text-solar-700 text-sm font-medium font-['DM_Sans']">
+                        <button class="text-solar-500 hover:text-solar-600 text-sm font-medium font-['DM_Sans']">
                           {{ 'profile.editReview' | translate }}
                         </button>
                         <button class="text-red-600 hover:text-red-700 text-sm font-medium font-['DM_Sans']">
@@ -710,7 +710,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                   <p class="text-gray-600 font-['DM_Sans'] mb-6">{{ 'profile.writeFirstReview' | translate }}</p>
                   <button
                     (click)="router.navigate(['/proizvodi'])"
-                    class="px-6 py-3 bg-solar-600 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
+                    class="px-6 py-3 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors">
                     {{ 'profile.browseProducts' | translate }}
                   </button>
                 </div>
@@ -786,7 +786,7 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
                     <button
                       type="submit"
                       [disabled]="passwordForm.invalid"
-                      class="px-6 py-3 bg-solar-600 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
+                      class="px-6 py-3 bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-['DM_Sans']">
                       {{ 'profile.updatePassword' | translate }}
                     </button>
                   </div>

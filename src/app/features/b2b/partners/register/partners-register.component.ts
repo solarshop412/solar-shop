@@ -29,7 +29,7 @@ import { PartnerRegistrationService } from '../services/partner-registration.ser
             <div class="flex items-center">
               <!-- Step 1 -->
               <div class="flex items-center">
-                <div [class]="currentStep === 1 ? 'bg-solar-600 text-white' : (currentStep > 1 ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600')" 
+                <div [class]="currentStep === 1 ? 'bg-solar-500 text-white' : (currentStep > 1 ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600')" 
                      class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium">
                   <span *ngIf="currentStep <= 1">1</span>
                   <svg *ngIf="currentStep > 1" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -44,7 +44,7 @@ import { PartnerRegistrationService } from '../services/partner-registration.ser
               
               <!-- Step 2 -->
               <div class="flex items-center">
-                <div [class]="currentStep === 2 ? 'bg-solar-600 text-white' : (currentStep > 2 ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600')" 
+                <div [class]="currentStep === 2 ? 'bg-solar-500 text-white' : (currentStep > 2 ? 'bg-green-600 text-white' : 'bg-gray-300 text-gray-600')" 
                      class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium">
                   <span *ngIf="currentStep <= 2">2</span>
                   <svg *ngIf="currentStep > 2" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -308,7 +308,7 @@ import { PartnerRegistrationService } from '../services/partner-registration.ser
               <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ 'partnersRegister.applicationSubmitted' | translate }}</h2>
               <p class="text-gray-600 mb-6">{{ 'partnersRegister.applicationMessage' | translate }}</p>
               <button (click)="router.navigate(['/'])" 
-                      class="bg-solar-600 text-white px-6 py-3 rounded-lg hover:bg-solar-700 transition-colors">
+                      class="bg-solar-500 text-white px-6 py-3 rounded-lg hover:bg-solar-700 transition-colors">
                 {{ 'forgotPassword.backToHome' | translate }}
               </button>
             </div>
@@ -323,13 +323,13 @@ import { PartnerRegistrationService } from '../services/partner-registration.ser
               
               <button *ngIf="currentStep === 1" type="button" (click)="nextStep()"
                       [disabled]="!isStep1Valid()"
-                      class="px-6 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                      class="px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                 {{ 'partnersRegister.nextStep' | translate }}
               </button>
               
               <button *ngIf="currentStep === 2" type="submit" 
                       [disabled]="!registrationForm.valid || isSubmitting"
-                      class="px-6 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                      class="px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
                 <span *ngIf="!isSubmitting">{{ 'partnersRegister.submitApplication' | translate }}</span>
                 <span *ngIf="isSubmitting">{{ 'partnersRegister.submittingApplication' | translate }}</span>
               </button>

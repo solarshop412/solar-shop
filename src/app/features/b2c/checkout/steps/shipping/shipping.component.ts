@@ -179,7 +179,7 @@ import { User } from '../../../../../shared/models/user.model';
           <button 
             type="submit"
             [disabled]="shippingForm.invalid"
-            class="flex-1 px-6 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
+            class="flex-1 px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {{ 'checkout.nextStep' | translate }} {{ 'checkout.step3' | translate }}
           </button>

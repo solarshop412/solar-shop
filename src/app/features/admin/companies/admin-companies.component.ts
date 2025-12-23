@@ -190,7 +190,7 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
                 <div *ngIf="selectedCompany.website">
                   <label class="block text-sm font-medium text-gray-700">{{ 'admin.companiesForm.website' | translate }}</label>
                   <p class="mt-1 text-sm text-gray-900">
-                    <a [href]="selectedCompany.website" target="_blank" class="text-solar-600 hover:text-solar-700">
+                    <a [href]="selectedCompany.website" target="_blank" class="text-solar-500 hover:text-solar-600">
                       {{ selectedCompany.website }}
                     </a>
                   </p>

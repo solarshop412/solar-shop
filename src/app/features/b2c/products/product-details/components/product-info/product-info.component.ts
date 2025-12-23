@@ -72,7 +72,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
           <span class="mx-2 text-gray-300">|</span>
           <button 
             (click)="scrollToReviews()"
-            class="text-sm text-solar-600 hover:text-solar-700 font-['DM_Sans'] cursor-pointer"
+            class="text-sm text-solar-500 hover:text-solar-600 font-['DM_Sans'] cursor-pointer"
           >
             {{ (reviewCount$ | async) || 0 }} {{ 'productList.reviews' | translate }}
           </button>
@@ -175,7 +175,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
           </span>
           <span 
             *ngIf="product.discount" 
-            class="bg-solar-600 text-white px-2 py-1 rounded-full text-sm font-semibold"
+            class="bg-solar-500 text-white px-2 py-1 rounded-full text-sm font-semibold"
           >
             -{{ product.discount }}%
           </span>
@@ -269,7 +269,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
                 <button 
                   *ngFor="let category of product.categories; let last = last"
                   (click)="navigateToCategory(category.name)"
-                  class="text-solar-600 hover:text-solar-700 hover:underline transition-colors"
+                  class="text-solar-500 hover:text-solar-600 hover:underline transition-colors"
                   [class.font-semibold]="category.isPrimary"
                   [title]="category.isPrimary ? 'Primary category' : ''"
                 >
@@ -280,7 +280,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
               <button 
                 *ngIf="(!product.categories || product.categories.length === 0) && product.category"
                 (click)="navigateToCategory(product.category)"
-                class="text-solar-600 hover:text-solar-700 hover:underline transition-colors"
+                class="text-solar-500 hover:text-solar-600 hover:underline transition-colors"
               >
                 {{ product.category }}
               </button>
@@ -469,7 +469,7 @@ import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angula
           <button 
             (click)="addToCart()"
             [disabled]="product.availability === 'out-of-stock'"
-            class="w-full px-6 py-3 bg-solar-600 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-['DM_Sans']"
+            class="w-full px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-['DM_Sans']"
           >
             <lucide-angular 
               name="shopping-cart" 

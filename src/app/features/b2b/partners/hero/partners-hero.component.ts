@@ -12,7 +12,7 @@ import { selectCurrentUser } from '../../../../core/auth/store/auth.selectors';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   template: `
-    <section class="relative bg-orange-600 py-24 text-center">
+    <section class="relative bg-orange-500 py-24 text-center">
       <div class="absolute inset-0"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-['Poppins']">

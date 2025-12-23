@@ -59,7 +59,7 @@ interface HighlightOffer {
               
               <!-- Partner Only Badge -->
               <div class="absolute bottom-3 left-3">
-                <span class="bg-solar-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                <span class="bg-solar-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                   {{ 'b2b.offers.partnerOnly' | translate }}
                 </span>
               </div>

@@ -122,7 +122,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
         </div>
 
         <!-- Call to Action -->
-        <div class="mt-20 bg-gradient-to-r from-solar-500 to-solar-600 rounded-3xl p-12 text-center text-white">
+        <div class="mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white">
           <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
             {{ 'products.needHelp' | translate }}
           </h2>

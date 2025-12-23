@@ -60,7 +60,7 @@ import { B2BProductsUrlStateService, B2BProductListUrlState } from './services/b
               </div>
             </div>
             <button (click)="navigateToLogin()" 
-                    class="bg-solar-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                    class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
               {{ 'b2b.products.loginToViewPrices' | translate }}
             </button>
           </div>
@@ -277,22 +277,22 @@ import { B2BProductsUrlStateService, B2BProductListUrlState } from './services/b
                   <div class="flex items-center space-x-2">
                     <span class="text-sm font-medium text-gray-700 font-['DM_Sans']">{{ 'b2b.products.view' | translate }}:</span>
                     <button (click)="toggleGridView()" 
-                            [class.bg-solar-600]="gridView === 'grid'"
+                            [class.bg-solar-500]="gridView === 'grid'"
                             [class.text-white]="gridView === 'grid'"
                             [class.bg-gray-100]="gridView !== 'grid'"
                             [class.text-gray-600]="gridView !== 'grid'"
-                            class="p-2 rounded-md hover:bg-solar-600 hover:text-white transition-colors" 
+                            class="p-2 rounded-md hover:bg-solar-500 hover:text-white transition-colors" 
                             [title]="'b2b.products.gridView' | translate">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                       </svg>
                     </button>
                     <button (click)="toggleListView()" 
-                            [class.bg-solar-600]="gridView === 'list'"
+                            [class.bg-solar-500]="gridView === 'list'"
                             [class.text-white]="gridView === 'list'"
                             [class.bg-gray-100]="gridView !== 'list'"
                             [class.text-gray-600]="gridView !== 'list'"
-                            class="p-2 rounded-md hover:bg-solar-600 hover:text-white transition-colors"
+                            class="p-2 rounded-md hover:bg-solar-500 hover:text-white transition-colors"
                             [title]="'b2b.products.listView' | translate">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
@@ -447,7 +447,7 @@ import { B2BProductsUrlStateService, B2BProductListUrlState } from './services/b
                         <!-- Add to Cart Button - only show if has B2B price and in stock -->
                         <button *ngIf="isCompanyContact && product.in_stock && hasB2BPrice(product)" 
                                 (click)="addToCart(product, $event)"
-                                class="w-full bg-solar-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                                class="w-full bg-solar-500 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
                           {{ 'b2b.products.addToCart' | translate }}
                         </button>
                         
@@ -461,7 +461,7 @@ import { B2BProductsUrlStateService, B2BProductListUrlState } from './services/b
                         <!-- Sign In Button -->
                         <button *ngIf="!isAuthenticated" 
                                 (click)="navigateToLogin()"
-                                class="w-full bg-solar-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
+                                class="w-full bg-solar-500 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors">
                           {{ 'b2b.products.signInToOrder' | translate }}
                         </button>
                         
@@ -526,7 +526,7 @@ import { B2BProductsUrlStateService, B2BProductListUrlState } from './services/b
                             </button>
                             <button *ngIf="isCompanyContact && product.in_stock && hasB2BPrice(product)" 
                                     (click)="addToCart(product)"
-                                    class="px-3 py-1 bg-solar-600 text-white rounded text-sm hover:bg-solar-700">
+                                    class="px-3 py-1 bg-solar-500 text-white rounded text-sm hover:bg-solar-700">
                               {{ 'b2b.products.addToCart' | translate }}
                             </button>
                             <button *ngIf="isCompanyContact && (!hasB2BPrice(product) || !product.in_stock)" 

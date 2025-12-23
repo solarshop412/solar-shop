@@ -79,9 +79,9 @@ import { SettingsService } from '../../../../../shared/services/settings.service
                 >
                 <span class="text-sm text-gray-700 font-['DM_Sans']">
                   {{ 'b2bCheckout.acceptTermsText' | translate }}
-                  <a href="/uvjeti" target="_blank" class="text-solar-600 hover:text-solar-700 underline">{{ 'b2bCheckout.termsAndConditions' | translate }}</a>
+                  <a href="/uvjeti" target="_blank" class="text-solar-500 hover:text-solar-600 underline">{{ 'b2bCheckout.termsAndConditions' | translate }}</a>
                   {{ 'b2bCheckout.and' | translate }}
-                  <a href="/privatnost" target="_blank" class="text-solar-600 hover:text-solar-700 underline">{{ 'b2bCheckout.privacyPolicy' | translate }}</a>
+                  <a href="/privatnost" target="_blank" class="text-solar-500 hover:text-solar-600 underline">{{ 'b2bCheckout.privacyPolicy' | translate }}</a>
                 </span>
               </label>
             </div>
@@ -98,7 +98,7 @@ import { SettingsService } from '../../../../../shared/services/settings.service
               <button
                 type="submit"
                 [disabled]="paymentForm.invalid || processing || !orderingEnabled"
-                class="flex-1 px-6 py-3 bg-solar-600 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
+                class="flex-1 px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span *ngIf="!processing">{{ 'b2bCheckout.placeOrder' | translate }}</span>
                 <span *ngIf="processing" class="flex items-center justify-center space-x-2">

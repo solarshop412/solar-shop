@@ -17,7 +17,7 @@
                 <div class="mb-8">
                     <p class="text-sm text-[#324053] font-['DM_Sans']">
                         {{ 'register.alreadyHaveAccount' | translate }}
-                        <a class="text-solar-600 hover:text-solar-700 font-medium ml-1" routerLink="/prijava">{{
+                        <a class="text-solar-500 hover:text-solar-600 font-medium ml-1" routerLink="/prijava">{{
                             'register.signIn' | translate }}</a>
                     </p>
                 </div>
@@ -187,7 +187,7 @@
 
                     <!-- Register Button -->
                     <button type="submit" [disabled]="registerForm.invalid || (loading$ | async)"
-                        class="w-full h-12 bg-solar-500 hover:bg-solar-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 font-['DM_Sans'] flex items-center justify-center">
+                        class="w-full h-12 bg-solar-500 hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 font-['DM_Sans'] flex items-center justify-center">
 
                         <app-loader *ngIf="loading$ | async" class="w-5 h-5 mr-2"></app-loader>
 

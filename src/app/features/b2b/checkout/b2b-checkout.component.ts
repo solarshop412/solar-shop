@@ -125,7 +125,7 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
     if (this.currentStep > step) {
       return 'bg-green-600 text-white'; // Completed
     } else if (this.currentStep === step) {
-      return 'bg-solar-600 text-white'; // Current
+      return 'bg-solar-500 text-white'; // Current
     } else {
       return 'bg-gray-300 text-gray-600'; // Upcoming
     }
