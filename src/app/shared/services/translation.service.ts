@@ -1903,8 +1903,8 @@ export class TranslationService {
             },
             // Hero Section
             hero: {
-                mainTitle: 'Solarni Paneli, Inverteri i Baterije',
-                subtitle: 'Fronius, Huawei, GoodWe - vrhunski brendovi solarne opreme. Brza dostava u Hrvatskoj.',
+                mainTitle: 'Solarne Elektrane, Solarni Paneli, Hibridni Sustavi',
+                subtitle: 'Fronius, Huawei, GoodWe - vrhunski brendovi solarne opreme.',
                 exploreProducts: 'Istražite proizvode',
                 exploreOffers: 'Istražite ponude',
                 loading: 'Učitavanje...',
