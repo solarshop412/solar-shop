@@ -41,6 +41,7 @@ import { selectProductCategories } from '../store/products.selectors';
 import { ProductsActions } from '../store/products.actions';
 import { SearchSuggestionsService } from '../../../../shared/services/search-suggestions.service';
 import { SortOptionsService, SortOptionDisplay } from '../../../../shared/services/sort-options.service';
+import { SeoService } from '../../../../shared/services/seo.service';
 
 export interface Product {
   id: string;
@@ -551,6 +552,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private urlStateService = inject(ProductListUrlStateService);
+  private seoService = inject(SeoService);
   private destroy$ = new Subject<void>();
   private urlUpdateSubject = new Subject<void>();
 
@@ -618,6 +620,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Set SEO for products list page
+    this.seoService.setCategoryPage(
+      'Proizvodi',
+      'Pregledajte našu ponudu solarnih panela, invertera, baterija i opreme za solarne elektrane. Fronius, Huawei, GoodWe i drugi vodeći proizvođači.'
+    );
+
     this.store.dispatch(ProductsActions.loadProductCategories());
 
     // Load all manufacturers for filter sidebar
@@ -701,6 +709,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
     // Clear filters when leaving the product list page to ensure clean state
     this.store.dispatch(ProductListActions.clearFilters());
     this.store.dispatch(ProductListActions.searchProducts({ query: '' }));
+
+    // Reset SEO to defaults
+    this.seoService.resetToDefaults();
 
     this.destroy$.next();
     this.destroy$.complete();

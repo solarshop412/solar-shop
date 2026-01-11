@@ -9,12 +9,11 @@ export const environment = {
     adminEmail: 'adminshop@sharklasers.com',
 
     // Monri Payment Gateway Configuration (Production)
-    // IMPORTANT: For now, use TEST endpoint until you get production credentials from Monri
     monri: {
-        key: 'key-f909fd217f04ecdace0d565c9a65cdb8', // This is a TEST key - get production key from Monri
-        authenticityToken: '2e438f62bff6e2862703bf155a361341958607ed', // This is a TEST token - get production token from Monri
-        endpoint: 'https://ipgtest.monri.com', // Use TEST endpoint for now
-        formEndpoint: 'https://ipgtest.monri.com/v2/form', // Use TEST form endpoint for now
+        key: 'key-f25071b2cc293b8308d5b6497a0ebbbc', // This is a TEST key - get production key from Monri
+        authenticityToken: 'e37b555f1dfc10efaf075be6b1bce2cae6ecb571', // This is a TEST token - get production token from Monri
+        endpoint: 'https://ipg.monri.com', // Use TEST endpoint for now
+        formEndpoint: 'https://ipg.monri.com/v2/form', // Use TEST form endpoint for now
         debug: false, // Keep debug off in production
         successUrl: 'https://solar-shop-rose.vercel.app/payment-callback?status=approved',
         cancelUrl: 'https://solar-shop-rose.vercel.app/payment-callback?status=cancelled',

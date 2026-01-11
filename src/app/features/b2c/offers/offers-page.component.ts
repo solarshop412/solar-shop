@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { Offer } from '../../../shared/models/offer.model';
 import { FooterActions } from '../footer/store/footer.actions';
 import { selectNewsletterState } from '../footer/store/footer.selectors';
 import { SupabaseService } from '../../../services/supabase.service';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-offers-page',
@@ -174,10 +175,11 @@ import { SupabaseService } from '../../../services/supabase.service';
     }
   `]
 })
-export class OffersPageComponent implements OnInit {
+export class OffersPageComponent implements OnInit, OnDestroy {
   private store = inject(Store);
   private router = inject(Router);
   private supabaseService = inject(SupabaseService);
+  private seoService = inject(SeoService);
 
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
   @ViewChild('newsletterForm') newsletterForm!: NgForm;
@@ -194,6 +196,12 @@ export class OffersPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Set SEO for offers list page
+    this.seoService.setCategoryPage(
+      'Ponude',
+      'Pregledajte naše posebne ponude i akcije na solarne panele, invertere i opremu za solarne elektrane. Uštedite na kvalitetnoj solarnoj opremi.'
+    );
+
     this.store.dispatch(OffersActions.loadOffers());
 
     // Load product data for accurate pricing calculations
@@ -202,6 +210,10 @@ export class OffersPageComponent implements OnInit {
         await this.loadOfferProducts(offers);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.seoService.resetToDefaults();
   }
 
   private async loadOfferProducts(offers: Offer[]): Promise<void> {

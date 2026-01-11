@@ -1595,7 +1595,12 @@ export class TranslationService {
                     of: 'od',
                     results: 'rezultata',
                     previous: 'Prethodna',
-                    next: 'Sljedeća'
+                    next: 'Sljedeća',
+                    categoryImage: 'Slika kategorije',
+                    clickToUpload: 'Kliknite za prijenos',
+                    orDragAndDrop: 'ili povucite i ispustite',
+                    upTo: 'do',
+                    uploading: 'Prijenos u tijeku'
                 },
                 parentCategories: 'Nadkategorije',
                 childCategories: 'Podkategorije'
@@ -4321,7 +4326,12 @@ export class TranslationService {
                     of: 'of',
                     results: 'results',
                     previous: 'Previous',
-                    next: 'Next'
+                    next: 'Next',
+                    categoryImage: 'Category Image',
+                    clickToUpload: 'Click to upload',
+                    orDragAndDrop: 'or drag and drop',
+                    upTo: 'up to',
+                    uploading: 'Uploading'
                 },
                 parentCategories: 'Parent Categories',
                 childCategories: 'Child Categories'

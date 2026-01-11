@@ -16,6 +16,7 @@ import { Offer } from '../../../../shared/models/offer.model';
 import { ProductsService } from '../services/products.service';
 import { ErpIntegrationService, StockItem } from '../../../../shared/services/erp-integration.service';
 import { getUnitName } from '../../../../shared/utils/erp-unit-names';
+import { SeoService } from '../../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-product-details',
@@ -413,6 +414,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   private offersService = inject(OffersService);
   private productsService = inject(ProductsService);
   private erpService = inject(ErpIntegrationService);
+  private seoService = inject(SeoService);
   private destroy$ = new Subject<void>();
 
   product$: Observable<Product | null>;
@@ -463,13 +465,19 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Subscribe to product changes to load ERP stock
+    // Subscribe to product changes to load ERP stock and set SEO
     this.product$.pipe(
       filter(product => !!product),
       takeUntil(this.destroy$)
     ).subscribe(product => {
-      if (product && product.sku) {
-        this.loadErpStock(product);
+      if (product) {
+        // Set SEO for product page
+        this.setProductSeo(product);
+
+        // Load ERP stock if SKU available
+        if (product.sku) {
+          this.loadErpStock(product);
+        }
       }
     });
   }
@@ -478,6 +486,49 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
     this.store.dispatch(ProductDetailsActions.clearProduct());
+    this.seoService.resetToDefaults();
+  }
+
+  /**
+   * Set SEO tags for the product page
+   */
+  private setProductSeo(product: Product): void {
+    // Get product images
+    const images: string[] = [];
+    if (product.images && product.images.length > 0) {
+      product.images.forEach(img => {
+        if (typeof img === 'string' && img.trim()) {
+          images.push(img);
+        } else if (typeof img === 'object' && img.url && img.url.trim()) {
+          images.push(img.url);
+        }
+      });
+    } else if (product.imageUrl && product.imageUrl.trim()) {
+      images.push(product.imageUrl);
+    }
+
+    // Set product page SEO
+    this.seoService.setProductPage({
+      name: product.name,
+      description: product.description || `Kupite ${product.name} na Solarno.hr`,
+      sku: product.sku,
+      brand: product.manufacturer,
+      price: product.price,
+      currency: 'EUR',
+      availability: product.availability === 'available' ? 'InStock' :
+                    product.availability === 'limited' ? 'LimitedAvailability' : 'OutOfStock',
+      images: images.length > 0 ? images : undefined,
+      ratingValue: product.rating,
+      reviewCount: product.reviewCount,
+      category: product.category
+    });
+
+    // Set breadcrumbs schema
+    this.seoService.setBreadcrumbs([
+      { name: 'Početna', url: '/' },
+      { name: 'Proizvodi', url: '/proizvodi' },
+      { name: product.name }
+    ]);
   }
 
   toggleBundlesOffers(): void {

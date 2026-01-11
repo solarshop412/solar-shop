@@ -7,6 +7,7 @@ import { SupabaseService } from '../../../services/supabase.service';
 import { BlogDataMapperService, SupabaseBlogPost } from '../../../services/blog-data-mapper.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -186,6 +187,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   private supabaseService = inject(SupabaseService);
   private blogMapper = inject(BlogDataMapperService);
   private translationService = inject(TranslationService);
+  private seoService = inject(SeoService);
   private destroy$ = new Subject<void>();
 
   blogPost: BlogPost | null = null;
@@ -210,6 +212,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.seoService.resetToDefaults();
   }
 
   private loadBlogPost(id: string) {
@@ -228,6 +231,9 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       if (data) {
         this.blogPost = this.blogMapper.mapSupabaseToBlogPost(data as SupabaseBlogPost);
         this.loadRelatedPosts(this.blogPost.category.id, this.blogPost.id);
+
+        // Set SEO for blog post
+        this.setBlogPostSeo(this.blogPost);
 
         // Increment view count
         from(this.supabaseService.incrementBlogPostViews(id)).subscribe({
@@ -256,11 +262,33 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   formatDate(date: string | Date, format: 'full' | 'short' = 'full'): string {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const currentLang = this.translationService.getCurrentLanguage();
-    
-    const options: Intl.DateTimeFormatOptions = format === 'short' 
+
+    const options: Intl.DateTimeFormatOptions = format === 'short'
       ? { month: 'short', day: 'numeric' }
       : { year: 'numeric', month: 'short', day: 'numeric' };
-    
+
     return dateObj.toLocaleDateString(currentLang === 'hr' ? 'hr-HR' : 'en-US', options);
+  }
+
+  /**
+   * Set SEO tags for the blog post page
+   */
+  private setBlogPostSeo(post: BlogPost): void {
+    // Set blog post page SEO
+    this.seoService.setBlogPostPage({
+      title: post.title,
+      description: post.excerpt || post.title,
+      image: post.imageUrl,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt || undefined,
+      tags: post.tags?.map(tag => tag.name)
+    });
+
+    // Set breadcrumbs schema
+    this.seoService.setBreadcrumbs([
+      { name: 'Početna', url: '/' },
+      { name: 'Blog', url: '/blog' },
+      { name: post.title }
+    ]);
   }
 } 

@@ -113,19 +113,6 @@ export class MonriPaymentService {
    * Submit payment form to Monri
    */
   submitPaymentForm(formParams: MonriFormParams): void {
-    // Log parameters for debugging (remove in production)
-    console.log('🔍 MONRI FORM SUBMISSION DEBUG:');
-    console.log('📝 All form parameters:', formParams);
-    console.log('🔗 Redirect URLs being sent:', {
-      success_url: formParams.success_url,
-      cancel_url: formParams.cancel_url,
-      success_redirect: formParams.success_redirect,
-      cancel_redirect: formParams.cancel_redirect,
-      return_url: formParams.return_url,
-      callback_url: formParams.callback_url
-    });
-    console.log('🎯 Form endpoint:', this.monriConfig.formEndpoint);
-    
     // Create a hidden form and submit it to Monri
     const form = document.createElement('form');
     form.method = 'POST';
@@ -136,22 +123,19 @@ export class MonriPaymentService {
     Object.entries(formParams).forEach(([key, value]) => {
       // Skip digest if it's empty, undefined, or null
       if (key === 'digest' && (!value || value === '')) {
-        console.log('Skipping empty digest field');
         return;
       }
-      
+
       if (value !== undefined && value !== null) {
         const input = document.createElement('input');
         input.type = 'hidden';
         input.name = key;
         input.value = value.toString();
         form.appendChild(input);
-        console.log(`Adding form field: ${key} = ${value}`);
       }
     });
 
     document.body.appendChild(form);
-    console.log('Submitting form to:', form.action);
     form.submit();
     document.body.removeChild(form);
   }
@@ -161,27 +145,20 @@ export class MonriPaymentService {
    * Note: In production, this should be done on the server side for security
    */
   private async generateDigest(params: MonriFormParams): Promise<string> {
-    console.log('Generating Monri digest with available credentials...');
-    
     // Simple digest method: Just the required parameters (as shown in docs example)
     // digest = SHA512(key + order_number + amount + currency)
     const message = `${params.key}${params.order_number}${params.amount}${params.currency}`;
-    console.log('Using digest method (key + order_number + amount + currency):', message);
-    
+
     try {
       const encoder = new TextEncoder();
       const messageData = encoder.encode(message);
       const hashBuffer = await crypto.subtle.digest('SHA-512', messageData);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      
-      console.log('Generated SHA-512 digest:', hashHex);
+
       return hashHex;
     } catch (error) {
       console.error('Error generating digest:', error);
-      
-      // Fallback: return empty string
-      console.log('Digest generation failed, trying without digest...');
       return '';
     }
   }

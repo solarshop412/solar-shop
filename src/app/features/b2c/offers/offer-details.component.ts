@@ -12,6 +12,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { addAllToCartFromOffer } from '../cart/store/cart.actions';
 import { ToastService } from '../../../shared/services/toast.service';
 import { TranslationService } from '../../../shared/services/translation.service';
+import { SeoService } from '../../../shared/services/seo.service';
 
 @Component({
   selector: 'app-offer-details',
@@ -273,7 +274,8 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     private supabaseService: SupabaseService,
     private store: Store,
     private toastService: ToastService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private seoService: SeoService
   ) {
     this.offer$ = this.route.params.pipe(
       switchMap(params => this.offersService.getOfferById(params['id'])),
@@ -302,20 +304,14 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
       if (offer) {
         this.currentOffer = offer;
 
+        // Set SEO for offer page
+        this.setOfferSeo(offer);
+
         // Fetch full offer details from database to get bundle flag
         try {
           const fullOffer = await this.supabaseService.getTableById('offers', offer.id);
           if (fullOffer) {
             this.isBundle = fullOffer.bundle || false;
-            console.log('Offer Details - Loaded offer:', {
-              id: offer.id,
-              title: offer.title,
-              discount_type: offer.discount_type,
-              discount_value: offer.discount_value,
-              discountPercentage: offer.discountPercentage,
-              code: (offer as any).code,
-              isBundle: this.isBundle
-            });
           }
         } catch (error) {
           console.error('Error loading full offer details:', error);
@@ -327,6 +323,7 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    this.seoService.resetToDefaults();
   }
 
   private getRelatedProducts(offer: Offer): Observable<any[]> {
@@ -596,5 +593,33 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
         );
       }
     });
+  }
+
+  /**
+   * Set SEO tags for the offer page
+   */
+  private setOfferSeo(offer: Offer): void {
+    // Calculate discounted price for SEO
+    const originalPrice = this.getTotalOriginalPrice() || offer.originalPrice || 0;
+    const discountedPrice = offer.discountedPrice || this.calculateTotalDiscountedPrice(offer);
+
+    // Set offer page SEO
+    this.seoService.setOfferPage({
+      name: offer.title,
+      description: offer.description || offer.shortDescription || `Posebna ponuda: ${offer.title}`,
+      image: offer.imageUrl,
+      price: discountedPrice,
+      originalPrice: originalPrice,
+      currency: 'EUR',
+      validFrom: offer.startDate ? new Date(offer.startDate).toISOString() : undefined,
+      validThrough: offer.endDate ? new Date(offer.endDate).toISOString() : undefined
+    });
+
+    // Set breadcrumbs schema
+    this.seoService.setBreadcrumbs([
+      { name: 'Početna', url: '/' },
+      { name: 'Ponude', url: '/ponude' },
+      { name: offer.title }
+    ]);
   }
 } 

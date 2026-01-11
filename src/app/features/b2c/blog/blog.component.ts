@@ -6,6 +6,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { BlogPost } from '../../../shared/models/blog.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
+import { SeoService } from '../../../shared/services/seo.service';
 import { BlogActions } from './store/blog.actions';
 import {
   selectBlogPosts,
@@ -149,6 +150,7 @@ export class BlogComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private store = inject(Store);
   private translationService = inject(TranslationService);
+  private seoService = inject(SeoService);
   private destroy$ = new Subject<void>();
 
   // NgRx Observables
@@ -175,12 +177,19 @@ export class BlogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    // Set SEO for blog list page
+    this.seoService.setCategoryPage(
+      'Blog',
+      'Pročitajte najnovije vijesti i savjete o solarnim elektranama, energetskoj učinkovitosti i obnovljivim izvorima energije.'
+    );
+
     this.loadBlogPosts();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.seoService.resetToDefaults();
   }
 
   loadBlogPosts() {
