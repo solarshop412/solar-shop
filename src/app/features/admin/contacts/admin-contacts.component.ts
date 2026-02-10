@@ -11,60 +11,8 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
   selector: 'app-admin-contacts',
   standalone: true,
   imports: [CommonModule, DataTableComponent, TranslatePipe],
-  template: `
-    <div class="w-full max-w-full overflow-hidden">
-      <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
-        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-          <div class="min-w-0 flex-1">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate">{{ 'admin.contactsForm.title' | translate }}</h1>
-            <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">{{ 'admin.contactsForm.subtitle' | translate }}</p>
-          </div>
-        </div>
-
-        <div class="w-full overflow-hidden">
-          <app-data-table
-            [title]="'admin.contactsForm.title' | translate"
-            [data]="(contacts$ | async) || []"
-            [config]="tableConfig"
-            [loading]="(loading$ | async) || false"
-            (actionClicked)="onTableAction($event)"
-            (rowClicked)="onRowClick($event)">
-          </app-data-table>
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="selectedContact" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-      <div class="relative top-10 mx-auto p-5 border w-11/12 md:w-2/3 lg:w-1/2 shadow-lg rounded-md bg-white">
-        <div class="mt-3 space-y-4">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-lg font-semibold text-gray-900">{{ 'admin.contactsForm.viewContact' | translate }}</h3>
-            <button (click)="closeModal()" class="text-gray-400 hover:text-gray-600">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-          <div class="space-y-2 text-sm">
-            <p><strong>{{ 'admin.contactsForm.contactName' | translate }}:</strong> {{ selectedContact.first_name }} {{ selectedContact.last_name }}</p>
-            <p><strong>{{ 'admin.contactsForm.contactEmail' | translate }}:</strong> {{ selectedContact.email }}</p>
-            <p *ngIf="selectedContact.phone"><strong>{{ 'profile.phoneNumber' | translate }}:</strong> {{ selectedContact.phone }}</p>
-            <p *ngIf="selectedContact.company"><strong>{{ 'partnersRegister.companyName' | translate }}:</strong> {{ selectedContact.company }}</p>
-            <p *ngIf="selectedContact.subject"><strong>{{ 'admin.contactsForm.contactSubject' | translate }}:</strong> {{ selectedContact.subject }}</p>
-            <p><strong>{{ 'footer.newsletter' | translate }}:</strong> {{ selectedContact.is_newsletter ? ('common.yes' | translate) : ('common.no' | translate) }}</p>
-            <p><strong>{{ 'admin.contactsForm.contactMessage' | translate }}:</strong></p>
-            <p class="whitespace-pre-line">{{ selectedContact.message }}</p>
-          </div>
-          <div class="pt-4 text-right">
-            <button (click)="closeModal()" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">{{ 'common.close' | translate }}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `,
-  styles: [`
-    :host { display: block; }
-  `]
+  templateUrl: './admin-contacts.component.html',
+  styleUrls: ['./admin-contacts.component.scss']
 })
 export class AdminContactsComponent implements OnInit {
   private supabaseService = inject(SupabaseService);

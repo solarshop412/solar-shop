@@ -10,15 +10,16 @@ import { PartnersCtaComponent } from './cta/partners-cta.component';
 @Component({
   selector: 'app-partners',
   standalone: true,
-  imports: [CommonModule, RouterModule, PartnersHeroComponent, PartnersHighlightsComponent, PartnersCategoriesComponent, PartnersBrandsComponent, PartnersCtaComponent],
-  template: `
-    <div class="min-h-screen bg-b2b-gray-50">
-      <app-partners-hero></app-partners-hero>
-      <app-partners-highlights></app-partners-highlights>
-      <app-partners-categories></app-partners-categories>
-      <app-partners-brands></app-partners-brands>
-      <app-partners-cta></app-partners-cta>
-    </div>
-  `,
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    PartnersHeroComponent, 
+    PartnersHighlightsComponent, 
+    PartnersCategoriesComponent, 
+    PartnersBrandsComponent, 
+    PartnersCtaComponent
+  ],
+  templateUrl: './partners.component.html',
+  styleUrls: ['./partners.component.scss']
 })
 export class PartnersComponent {}

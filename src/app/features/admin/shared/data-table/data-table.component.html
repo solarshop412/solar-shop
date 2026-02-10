@@ -1,0 +1,298 @@
+<div class="bg-white rounded-lg shadow-sm border border-gray-200">
+    <!-- Table Header -->
+    <div class="px-6 py-4 border-b border-gray-200">
+    <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+        <h2 class="text-lg font-semibold text-gray-900">{{ title }}</h2>
+        <span class="text-sm text-gray-500">({{ filteredData.length }} {{ 'admin.common.items' | translate }})</span>
+        </div>
+        
+        <!-- Actions -->
+        <div class="flex items-center space-x-3">
+        <!-- Search -->
+        <div *ngIf="config.searchable" class="relative">
+            <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearch()"
+            placeholder="{{ 'common.searchPlaceholder' | translate }}"
+            class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <lucide-angular 
+            name="search" 
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+            [img]="SearchIcon">
+            </lucide-angular>
+        </div>
+        
+        <!-- CSV Import -->
+        <div *ngIf="config.allowCsvImport" class="relative">
+            <input
+            #fileInput
+            type="file"
+            accept=".csv"
+            (change)="onFileSelected($event)"
+            class="hidden">
+            <button
+            (click)="fileInput.click()"
+            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+            <lucide-angular 
+                name="upload" 
+                class="w-4 h-4 inline-block mr-2"
+                [img]="UploadIcon">
+            </lucide-angular>
+            {{ 'common.importCSV' | translate }}
+            </button>
+        </div>
+        
+        <!-- CSV Template -->
+        <div *ngIf="config.allowCsvImport" class="relative">
+            <button
+            (click)="downloadCsvTemplate()"
+            class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+            <lucide-angular 
+                name="download" 
+                class="w-4 h-4 inline-block mr-2"
+                [img]="DownloadIcon">
+            </lucide-angular>
+            CSV Template
+            </button>
+        </div>
+        
+        <!-- Export -->
+        <button
+            *ngIf="config.allowExport"
+            (click)="onExport()"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <lucide-angular 
+            name="download" 
+            class="w-4 h-4 inline-block mr-2"
+            [img]="DownloadIcon">
+            </lucide-angular>
+            {{ 'common.export' | translate }}
+        </button>
+        
+        <!-- Add New -->
+        <button
+            (click)="onAdd()"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <lucide-angular 
+            name="plus" 
+            class="w-4 h-4 inline-block mr-2"
+            [img]="PlusIcon">
+            </lucide-angular>
+            {{ 'common.addNew' | translate }}
+        </button>
+        </div>
+    </div>
+    </div>
+
+    <!-- CSV Import Progress -->
+    <div *ngIf="importing" class="px-6 py-4 bg-blue-50 border-b border-blue-200">
+    <div class="flex items-center space-x-3">
+        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+        <span class="text-sm text-blue-800">{{ 'common.importing' | translate }}</span>
+    </div>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+    <table class="min-w-full table-fixed divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+        <tr>
+            <th *ngFor="let column of config.columns"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                [class.cursor-default]="!column.sortable"
+                [style.width]="column.width || 'auto'"
+                [style.min-width]="column.minWidth || 'auto'"
+                [style.max-width]="column.maxWidth || 'auto'"
+                (click)="onSort(column)">
+            <div class="flex items-center space-x-1">
+                <span>{{ column.label }}</span>
+                <svg *ngIf="column.sortable && sortColumn === column.key" 
+                    class="w-4 h-4 text-gray-400"
+                    [class.rotate-180]="sortDirection === 'desc'"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                </svg>
+            </div>
+            </th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider" style="width: 120px; min-width: 120px;">
+            {{ 'common.actions' | translate }}
+            </th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+
+        <!-- Loading state -->
+        <tr *ngIf="loading" class="text-center">
+            <td [attr.colspan]="config.columns.length + 1" class="px-6 py-12">
+            <div class="flex items-center justify-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <span class="ml-3 text-gray-600">{{ 'common.loading' | translate }}</span>
+            </div>
+            </td>
+        </tr>
+
+        <!-- Data rows -->
+        <tr *ngFor="let item of paginatedData; let i = index" 
+            class="hover:bg-gray-50 transition-colors"
+            [class.cursor-pointer]="config.rowClickable !== false"
+            (click)="onRowClick(item)">
+            <td *ngFor="let column of config.columns" 
+                class="px-6 py-4 text-sm text-gray-900"
+                [style.width]="column.width || 'auto'"
+                [style.min-width]="column.minWidth || 'auto'"
+                [style.max-width]="column.maxWidth || 'auto'">
+            <ng-container [ngSwitch]="column.type">
+                <!-- Image -->
+                <div *ngSwitchCase="'image'" class="flex items-center">
+                <img *ngIf="getColumnValue(item, column.key)" 
+                        [src]="getColumnValue(item, column.key)" 
+                        [alt]="column.label"
+                        class="h-10 w-10 rounded-lg object-cover">
+                <span *ngIf="!getColumnValue(item, column.key)" 
+                        class="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-gray-200 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </span>
+                </div>
+                
+                <!-- Boolean -->
+                <span *ngSwitchCase="'boolean'" 
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium truncate"
+                    [class.bg-green-100]="getColumnValue(item, column.key)"
+                    [class.text-green-800]="getColumnValue(item, column.key)"
+                    [class.bg-red-100]="!getColumnValue(item, column.key)"
+                    [class.text-red-800]="!getColumnValue(item, column.key)"
+                    [title]="column.format ? column.format(getColumnValue(item, column.key), item) : (getColumnValue(item, column.key) ? 'Yes' : 'No')">
+                {{ column.format ? column.format(getColumnValue(item, column.key), item) : (getColumnValue(item, column.key) ? 'Yes' : 'No') }}
+                </span>
+                
+                <!-- Status -->
+                <span *ngSwitchCase="'status'" 
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium truncate"
+                    [ngClass]="getStatusClass(getColumnValue(item, column.key))"
+                    [title]="column.format ? column.format(getColumnValue(item, column.key), item) : getColumnValue(item, column.key)">
+                {{ column.format ? column.format(getColumnValue(item, column.key), item) : getColumnValue(item, column.key) }}
+                </span>
+                
+                <!-- Array -->
+                <div *ngSwitchCase="'array'" class="flex flex-wrap gap-1 overflow-hidden">
+                <span *ngFor="let tag of (getColumnValue(item, column.key) || []).slice(0, 3)" 
+                        class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800 truncate"
+                        [title]="tag">
+                    {{ tag }}
+                </span>
+                <span *ngIf="(getColumnValue(item, column.key) || []).length > 3"
+                        class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600"
+                        [title]="'And ' + ((getColumnValue(item, column.key) || []).length - 3) + ' more'">
+                    +{{ (getColumnValue(item, column.key) || []).length - 3 }}
+                </span>
+                </div>
+                
+                <!-- Date -->
+                <span *ngSwitchCase="'date'" class="block truncate" [title]="formatDate(getColumnValue(item, column.key))">
+                {{ formatDate(getColumnValue(item, column.key)) }}
+                </span>
+
+                <!-- Editable Number -->
+                <div *ngSwitchCase="'editable-number'" class="flex items-center space-x-1" (click)="$event.stopPropagation()">
+                <input
+                    type="number"
+                    [value]="getColumnValue(item, column.key)"
+                    (blur)="onCellValueChange(item, column.key, $event)"
+                    (keydown.enter)="onCellValueChange(item, column.key, $event)"
+                    (click)="$event.stopPropagation()"
+                    class="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    min="0"
+                    step="1">
+                </div>
+
+                <!-- Default (text/number) -->
+                <span *ngSwitchDefault class="block truncate" [title]="column.format ? column.format(getColumnValue(item, column.key), item) : getColumnValue(item, column.key)">
+                {{ column.format ? column.format(getColumnValue(item, column.key), item) : getColumnValue(item, column.key) }}
+                </span>
+            </ng-container>
+            </td>
+            
+            <!-- Actions -->
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium" style="width: 120px; min-width: 120px;">
+            <div class="flex items-center justify-end space-x-2">
+                <ng-container *ngFor="let action of config.actions">
+                <button *ngIf="!action.condition || action.condition(item)"
+                        (click)="onAction(action.action, item, $event)"
+                        [class]="action.class || 'text-blue-600 hover:text-blue-900'"
+                        class="p-1 rounded hover:bg-gray-100 transition-colors"
+                        [title]="action.label">
+                    <lucide-angular 
+                    [name]="action.icon" 
+                    class="w-4 h-4"
+                    [img]="getIconForAction(action.icon)">
+                    </lucide-angular>
+                    <span class="sr-only">{{ action.label }}</span>
+                </button>
+                </ng-container>
+            </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="config.paginated && totalPages > 1" 
+        class="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+    <div class="text-sm text-gray-700">
+        {{ 'admin.common.showing' | translate }} {{ (currentPage - 1) * pageSize + 1 }} {{ 'admin.common.to' | translate }} {{ Math.min(currentPage * pageSize, filteredData.length) }} 
+        {{ 'admin.common.of' | translate }} {{ filteredData.length }} {{ 'admin.common.results' | translate }}
+    </div>
+    <div class="flex space-x-2">
+        <button (click)="goToPage(currentPage - 1)"
+                [disabled]="currentPage === 1"
+                class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+        {{ 'admin.common.previous' | translate }}
+        </button>
+        <button *ngFor="let page of getPageNumbers()"
+                (click)="goToPage(page)"
+                [class.bg-blue-600]="page === currentPage"
+                [class.text-white]="page === currentPage"
+                [class.text-blue-600]="page !== currentPage"
+                class="px-3 py-1 border border-gray-300 rounded-md text-sm hover:bg-gray-50">
+        {{ page }}
+        </button>
+        <button (click)="goToPage(currentPage + 1)"
+                [disabled]="currentPage === totalPages"
+                class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50">
+        {{ 'admin.common.next' | translate }}
+        </button>
+    </div>
+    </div>      <!-- Empty State -->
+    <div *ngIf="filteredData.length === 0" class="text-center py-12">
+    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m8-8V3a1 1 0 00-1-1H9a1 1 0 00-1 1v2m4 0h0"/>
+    </svg>
+    <h3 class="mt-2 text-sm font-medium text-gray-900">{{ 'admin.common.noResults' | translate }}</h3>
+    <p class="mt-1 text-sm text-gray-500">{{ 'admin.common.getStartedByCreating' | translate }}</p>
+    <div class="mt-6">
+        <button (click)="onAdd()" 
+                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+        <lucide-angular 
+            name="plus" 
+            class="w-4 h-4 mr-2"
+            [img]="PlusIcon">
+        </lucide-angular>
+        {{ 'common.add' | translate }}
+        </button>
+    </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<app-delete-confirmation-modal
+    [isOpen]="showDeleteModal"
+    [title]="deleteModalTitle"
+    [message]="deleteModalMessage"
+    (confirmed)="onDeleteConfirmed()"
+    (cancelled)="onDeleteCancelled()"
+></app-delete-confirmation-modal>

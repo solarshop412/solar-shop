@@ -19,40 +19,8 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
     selector: 'app-admin-orders-partners',
     standalone: true,
     imports: [CommonModule, DataTableComponent, SuccessModalComponent, TranslatePipe],
-    template: `
-    <div class="space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">{{ 'admin.partnerOrdersForm.title' | translate }}</h1>
-          <p class="mt-2 text-gray-600">{{ 'admin.partnerOrdersForm.subtitle' | translate }}</p>
-        </div>
-      </div>
-      <app-data-table
-        [title]="'admin.partnerOrdersForm.b2bOrders' | translate"
-        [data]="(filteredOrders$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)">
-      </app-data-table>
-    </div>
-
-    <!-- Success Modal -->
-    <app-success-modal
-      [isOpen]="showSuccessModal"
-      [title]="successModalTitle"
-      [message]="successModalMessage"
-      (closed)="onSuccessModalClosed()"
-    ></app-success-modal>
-
-
-  `,
-    styles: [`
-    :host {
-      display: block;
-    }
-  `]
+    templateUrl: './admin-orders-partners.component.html',
+    styleUrls: ['./admin-orders-partners.component.scss']
 })
 export class AdminOrdersPartnersComponent implements OnInit {
     private store = inject(Store);

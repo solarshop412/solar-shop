@@ -17,73 +17,17 @@ import { LucideAngularModule, ChevronUp, ChevronDown } from 'lucide-angular';
 @Component({
     selector: 'app-admin-products',
     standalone: true,
-    imports: [CommonModule, FormsModule, DataTableComponent, SuccessModalComponent, TranslatePipe, SortOptionsManagementComponent, LucideAngularModule],
-    template: `
-    <div class="w-full max-w-full overflow-hidden">
-      <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
-      <!-- Page Header -->
-        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-          <div class="min-w-0 flex-1">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate"> {{ 'admin.products' | translate }}</h1>
-            <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600"> {{ 'admin.manageYourProductCatalog' | translate }}</p>
-          </div>
-
-          <!-- ERP Sync Button and Last Update -->
-          <div class="flex flex-col items-end space-y-2">
-            <button
-              (click)="manualErpSync()"
-              [disabled]="erpSyncInProgress"
-              class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200">
-              <svg *ngIf="!erpSyncInProgress" class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-              </svg>
-              <svg *ngIf="erpSyncInProgress" class="w-4 h-4 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              {{ 'admin.syncErpStock' | translate }}
-            </button>
-            <span *ngIf="lastErpSyncTime" class="text-xs text-gray-500">
-              {{ 'admin.lastUpdate' | translate }}: {{ lastErpSyncTime | date:'dd.MM.yyyy HH:mm' }}
-            </span>
-          </div>
-        </div>
-
-        <!-- Sort Options Management Section -->
-        <app-sort-options-management
-          (sortOptionsChanged)="onSortOptionsChanged()">
-        </app-sort-options-management>
-
-        <!-- Data Table Container -->
-        <div class="w-full overflow-hidden">
-      <app-data-table
-        title="{{ 'admin.products' | translate }}"
-        [data]="(products$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (addClicked)="onAddProduct()"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)"
-        (cellValueChanged)="onDisplayOrderChanged($event)">
-      </app-data-table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Success Modal -->
-    <app-success-modal
-      [isOpen]="showSuccessModal"
-      [title]="successModalTitle"
-      [message]="successModalMessage"
-      (closed)="onSuccessModalClosed()"
-    ></app-success-modal>
-  `,
-    styles: [`
-    :host {
-      display: block;
-    }
-  `]
+    imports: [
+        CommonModule, 
+        FormsModule, 
+        DataTableComponent, 
+        SuccessModalComponent, 
+        TranslatePipe, 
+        SortOptionsManagementComponent, 
+        LucideAngularModule
+    ],
+    templateUrl: './admin-products.component.html',
+    styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit {
     private supabaseService = inject(SupabaseService);

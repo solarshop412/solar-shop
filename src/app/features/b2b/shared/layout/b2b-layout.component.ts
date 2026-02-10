@@ -8,23 +8,14 @@ import { B2BCartSidebarComponent } from '../../cart/components/b2b-cart-sidebar/
 @Component({
   selector: 'app-b2b-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, B2bNavbarComponent, PartnersFooterComponent, B2BCartSidebarComponent],
-  template: `
-    <div class="min-h-screen flex flex-col">
-      <!-- B2B Navbar -->
-      <app-b2b-navbar></app-b2b-navbar>
-      
-      <!-- Main Content -->
-      <main class="flex-1">
-        <router-outlet></router-outlet>
-      </main>
-      
-      <!-- Partners Footer -->
-      <app-partners-footer></app-partners-footer>
-      
-      <!-- B2B Cart Sidebar -->
-      <app-b2b-cart-sidebar></app-b2b-cart-sidebar>
-    </div>
-  `,
+  imports: [
+    CommonModule, 
+    RouterOutlet, 
+    B2bNavbarComponent, 
+    PartnersFooterComponent, 
+    B2BCartSidebarComponent
+  ],
+  templateUrl: './b2b-layout.component.html',
+  styleUrls: ['./b2b-layout.component.scss']
 })
 export class B2bLayoutComponent { } 

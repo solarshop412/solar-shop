@@ -13,46 +13,8 @@ import { TranslationService } from '../../../shared/services/translation.service
     selector: 'app-admin-categories',
     standalone: true,
     imports: [CommonModule, DataTableComponent, SuccessModalComponent, TranslatePipe],
-    template: `
-    <div class="w-full">
-      <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
-      <!-- Page Header -->
-        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-          <div class="min-w-0 flex-1">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate"> {{ 'admin.categoriesForm.title' | translate }}</h1>
-            <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600"> {{ 'admin.categoriesForm.subtitle' | translate }}</p>
-        </div>
-      </div>
-
-        <!-- Data Table Container -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <app-data-table
-        title="{{ 'admin.categoriesForm.title' | translate }}"
-        [data]="(categories$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (addClicked)="onAddCategory()"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)">
-      </app-data-table>
-                </div>
-      </div>
-    </div>
-
-    <!-- Success/Error Modal -->
-    <app-success-modal
-      [isOpen]="showModal"
-      [title]="modalTitle"
-      [message]="modalMessage"
-      (closed)="onModalClosed()"
-    ></app-success-modal>
-  `,
-    styles: [`
-    :host {
-      display: block;
-    }
-  `]
+    templateUrl: './admin-categories.component.html',
+    styleUrls: ['./admin-categories.component.scss']
 })
 export class AdminCategoriesComponent implements OnInit {
     private supabaseService = inject(SupabaseService);

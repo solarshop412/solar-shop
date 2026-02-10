@@ -1,0 +1,227 @@
+<div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">
+        {{ 'b2b.offers.title' | translate }}
+        </h1>
+        <p class="mt-2 text-lg text-gray-600 font-['DM_Sans']">
+        {{ 'b2b.offers.subtitle' | translate }}
+        </p>
+    </div>
+    </div>
+
+    <!-- Login Required Banner (for non-authenticated users) -->
+    <div *ngIf="!isAuthenticated || !hasCompanyId" class="bg-solar-50 border-b border-solar-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <svg class="w-6 h-6 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            <div>
+            <p class="text-sm font-medium text-solar-800">
+                <span *ngIf="!isAuthenticated">{{ 'b2b.offers.loginRequired' | translate }}</span>
+                <span *ngIf="isAuthenticated && !hasCompanyId">{{ 'b2b.auth.partnerVerificationRequired' | translate }}</span>
+            </p>
+            </div>
+        </div>
+        <button *ngIf="!isAuthenticated" 
+                (click)="navigateToLogin()" 
+                class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors">
+            {{ 'b2b.offers.loginToViewOffers' | translate }}
+        </button>
+        <button *ngIf="isAuthenticated && !hasCompanyId" 
+                (click)="navigateToPartnerRegistration()" 
+                class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors">
+            {{ 'b2b.auth.becomePartner' | translate }}
+        </button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Offers Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex items-center justify-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600"></div>
+        <span class="ml-3 text-lg text-gray-600">{{ 'b2b.offers.loadingOffers' | translate }}</span>
+    </div>
+
+    <!-- Offers Grid -->
+    <div *ngIf="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let offer of b2bOffers" 
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        
+        <!-- Offer Image -->
+        <div class="relative">
+            <img [src]="offer.imageUrl" [alt]="offer.title" 
+                class="w-full h-48 object-cover">
+            
+            <!-- Discount Badge -->
+            <div class="absolute top-4 left-4">
+            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                <span *ngIf="offer.discount_type === 'percentage' || !offer.discount_type">-{{ offer.discountPercentage }}%</span>
+                <span *ngIf="offer.discount_type === 'fixed_amount'">{{ offer.discount_value | currency:'EUR':'symbol':'1.0-2' }} {{ 'hero.off' | translate }}</span>
+            </span>
+            </div>
+
+            <!-- Partner Only Badge -->
+            <div class="absolute top-4 right-4 flex flex-col gap-2 items-end">
+            <span class="bg-solar-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                {{ 'b2b.offers.partnerOnly' | translate }}
+            </span>
+            <!-- Bundle Badge -->
+            <span *ngIf="offer.bundle" class="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium">
+                {{ 'b2b.offers.bundleOffer' | translate }}
+            </span>
+            </div>
+
+            <!-- Expiry Date -->
+            <div *ngIf="offer.endDate" class="absolute bottom-4 right-4">
+            <span class="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                {{ 'b2b.offers.expires' | translate }}: {{ formatDate(offer.endDate) }}
+            </span>
+            </div>
+        </div>
+
+        <!-- Offer Content -->
+        <div class="p-6">
+            <!-- Title -->
+            <h3 class="text-xl font-bold text-gray-900 mb-2 font-['Poppins']">
+            {{ offer.title }}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-gray-600 mb-4 font-['DM_Sans'] line-clamp-3">
+            {{ offer.description }}
+            </p>
+
+            <!-- Pricing for offers with products and full partner pricing -->
+            <div *ngIf="isAuthenticated && hasCompanyId && offer.hasProducts && offer.hasAllPartnerPricing" class="mb-4">
+            <div class="flex items-center justify-between">
+                <div>
+                <span class="text-2xl font-bold text-solar-600">
+                    €{{ offer.discountedPrice | number:'1.2-2' }}
+                </span>
+                <span class="text-lg text-gray-500 line-through ml-2">
+                    €{{ offer.originalPrice | number:'1.2-2' }}
+                </span>
+                </div>
+                <div class="text-right">
+                <div class="text-sm text-gray-500">{{ 'b2b.offers.savings' | translate }}</div>
+                <div class="text-lg font-bold text-green-600">
+                    €{{ (offer.originalPrice - offer.discountedPrice) | number:'1.2-2' }}
+                </div>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500 mt-1">
+                {{ 'b2b.offers.sumOfPartnerPrices' | translate }} ({{ offer.productCount }} {{ 'b2b.offers.products' | translate }})
+            </div>
+            <!-- Bundle Notice -->
+            <div *ngIf="offer.bundle" class="mt-2 p-2 bg-purple-50 border border-purple-200 rounded-lg">
+                <p class="text-xs text-purple-700 flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                </svg>
+                {{ 'b2b.offers.bundleRequiresAllProductsInCart' | translate }}
+                </p>
+            </div>
+            </div>
+
+            <!-- Pricing for offers with products but missing partner pricing -->
+            <div *ngIf="isAuthenticated && hasCompanyId && offer.hasProducts && !offer.hasAllPartnerPricing" class="mb-4 text-center py-4 bg-orange-50 border border-orange-200 rounded-lg">
+            <svg class="w-8 h-8 text-orange-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+            </svg>
+            <p class="text-sm text-orange-700 font-medium mb-1">{{ 'b2b.offers.incompletePricing' | translate }}</p>
+            <p class="text-xs text-orange-600">{{ 'b2b.offers.contactSupportForPricing' | translate }}</p>
+            </div>
+
+            <!-- Pricing for general offers (no products) -->
+            <div *ngIf="isAuthenticated && hasCompanyId && !offer.hasProducts" class="mb-4 text-center py-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="text-lg font-bold text-blue-800 mb-1">
+                <span *ngIf="offer.discount_type === 'percentage'">{{ offer.discount_value }}% {{ 'b2b.offers.discount' | translate }}</span>
+                <span *ngIf="offer.discount_type === 'fixed_amount'">€{{ offer.discount_value | number:'1.2-2' }} {{ 'b2b.offers.discount' | translate }}</span>
+            </div>
+            <p class="text-xs text-blue-600">{{ 'b2b.offers.generalOffer' | translate }}</p>
+            </div>
+
+            <!-- Login Required Pricing -->
+            <div *ngIf="!isAuthenticated || !hasCompanyId" class="mb-4 text-center py-4 bg-gray-50 rounded-lg">
+            <svg class="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            <p class="text-sm text-gray-500 font-medium">
+                <span *ngIf="!isAuthenticated">{{ 'b2b.offers.loginToViewPrices' | translate }}</span>
+                <span *ngIf="isAuthenticated && !hasCompanyId">{{ 'b2b.auth.partnerVerificationRequiredPricing' | translate }}</span>
+            </p>
+            </div>
+
+            <!-- Coupon Code -->
+            <div *ngIf="offer.couponCode && isAuthenticated && hasCompanyId" class="mb-4">
+            <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-sm text-gray-600">{{ 'b2b.offers.couponCode' | translate }}:</span>
+                    <span class="ml-2 font-mono font-bold text-solar-600">{{ offer.couponCode }}</span>
+                </div>
+                <button (click)="copyCouponCode(offer.couponCode)" 
+                        class="text-solar-500 hover:text-solar-600 text-sm font-medium">
+                    {{ 'b2b.offers.copy' | translate }}
+                </button>
+                </div>
+            </div>
+            </div>
+
+
+
+            <!-- Actions -->
+            <div class="space-y-2">
+            <!-- Claim offer button - only show if authenticated, has company, and either no products OR has all partner pricing -->
+            <button *ngIf="isAuthenticated && hasCompanyId && (!offer.hasProducts || offer.hasAllPartnerPricing)"
+                    (click)="claimOffer(offer)"
+                    [disabled]="isOfferExpired(offer.endDate)"
+                    class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+                <span *ngIf="!isOfferExpired(offer.endDate)">{{ 'b2b.offers.claimOffer' | translate }}</span>
+                <span *ngIf="isOfferExpired(offer.endDate)">{{ 'b2b.offers.expired' | translate }}</span>
+            </button>
+
+            <!-- Contact support button - show when authenticated, has company, has products, but missing partner pricing -->
+            <button *ngIf="isAuthenticated && hasCompanyId && offer.hasProducts && !offer.hasAllPartnerPricing"
+                    (click)="navigateToPartnerContact()"
+                    class="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors">
+                {{ 'b2b.offers.contactSupport' | translate }}
+            </button>
+
+            <button *ngIf="!isAuthenticated"
+                    (click)="navigateToLogin()"
+                    class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors">
+                {{ 'b2b.offers.signInToClaim' | translate }}
+            </button>
+
+            <button *ngIf="isAuthenticated && !hasCompanyId"
+                    (click)="navigateToPartnerRegistration()"
+                    class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors">
+                {{ 'b2b.offers.claimOffer' | translate }}
+            </button>
+
+            <button (click)="viewOfferDetails(offer)"
+                    class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                {{ 'b2b.offers.viewDetails' | translate }}
+            </button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- No Offers Available -->
+    <div *ngIf="!loading && b2bOffers.length === 0" class="text-center py-12">
+        <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        </svg>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">{{ 'b2b.offers.noOffers' | translate }}</h3>
+        <p class="text-gray-600">{{ 'b2b.offers.noOffersText' | translate }}</p>
+    </div>
+    </div>
+</div>

@@ -9,35 +9,8 @@ import { TranslatePipe } from "../../../../../shared/pipes/translate.pipe";
   selector: 'app-cart-notification',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
-  template: `
-    <div 
-      *ngIf="showNotification"
-      class="fixed top-4 right-4 bg-orange-500 text-white px-4 py-3 rounded-lg shadow-lg z-50 flex items-center space-x-2 cart-notification"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-      </svg>
-      <span>{{ 'cart.itemAddedToCart' | translate }}</span>
-    </div>
-  `,
-  styles: [`
-    .cart-notification {
-      animation: slideInDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, opacity;
-      backface-visibility: hidden;
-    }
-
-    @keyframes slideInDown {
-      from {
-        opacity: 0;
-        transform: translate3d(0, -100%, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
-    }
-  `]
+  templateUrl: './cart-notification.component.html',
+  styleUrls: ['./cart-notification.component.scss']
 })
 export class CartNotificationComponent implements OnInit, OnDestroy {
   private store = inject(Store);

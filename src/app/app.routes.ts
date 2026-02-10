@@ -69,11 +69,11 @@ export const routes: Routes = [
             // Offers - Lazy loaded
             {
                 path: 'ponude',
-                loadComponent: () => import('./features/b2c/offers/offers-page.component').then(m => m.OffersPageComponent)
+                loadComponent: () => import('./features/b2c/offers/offers-page/offers-page.component').then(m => m.OffersPageComponent)
             },
             {
                 path: 'ponude/:id',
-                loadComponent: () => import('./features/b2c/offers/offer-details.component').then(m => m.OfferDetailsComponent)
+                loadComponent: () => import('./features/b2c/offers/offer-details/offer-details.component').then(m => m.OfferDetailsComponent)
             },
 
             // Blog - Lazy loaded
@@ -83,7 +83,7 @@ export const routes: Routes = [
             },
             {
                 path: 'blog/:id',
-                loadComponent: () => import('./features/b2c/blog/blog-detail.component').then(m => m.BlogDetailComponent)
+                loadComponent: () => import('./features/b2c/blog/blog-detail/blog-detail.component').then(m => m.BlogDetailComponent)
             },
 
             // Company/About - Lazy loaded
@@ -170,22 +170,22 @@ export const routes: Routes = [
             },
             {
                 path: 'proizvodi',
-                loadComponent: () => import('./features/b2b/partners/products/partners-products.component').then(m => m.PartnersProductsComponent),
+                loadComponent: () => import('./features/b2b/partners/products/partners-products/partners-products.component').then(m => m.PartnersProductsComponent),
                 canActivate: [CompanyApprovedGuard]
             },
             {
                 path: 'proizvodi/:id',
-                loadComponent: () => import('./features/b2b/partners/products/partners-product-details.component').then(m => m.PartnersProductDetailsComponent),
+                loadComponent: () => import('./features/b2b/partners/products/partners-product-details/partners-product-details.component').then(m => m.PartnersProductDetailsComponent),
                 canActivate: [CompanyApprovedGuard]
             },
             {
                 path: 'ponude',
-                loadComponent: () => import('./features/b2b/partners/offers/partners-offers.component').then(m => m.PartnersOffersComponent),
+                loadComponent: () => import('./features/b2b/partners/offers/partners-offers/partners-offers.component').then(m => m.PartnersOffersComponent),
                 canActivate: [CompanyApprovedGuard]
             },
             {
                 path: 'ponude/:id',
-                loadComponent: () => import('./features/b2b/partners/offers/partners-offer-details.component').then(m => m.PartnersOfferDetailsComponent),
+                loadComponent: () => import('./features/b2b/partners/offers/partners-offer-details/partners-offer-details.component').then(m => m.PartnersOfferDetailsComponent),
                 canActivate: [CompanyApprovedGuard]
             },
             {
@@ -373,19 +373,19 @@ export const routes: Routes = [
             // Companies
             {
                 path: 'tvrtke',
-                loadComponent: () => import('./features/admin/companies/admin-companies.component').then(m => m.AdminCompaniesComponent)
+                loadComponent: () => import('./features/admin/companies/admin-companies/admin-companies.component').then(m => m.AdminCompaniesComponent)
             },
             {
                 path: 'tvrtke/kreiraj',
-                loadComponent: () => import('./features/admin/companies/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
+                loadComponent: () => import('./features/admin/companies/admin-company-edit/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
             },
             {
                 path: 'tvrtke/uredi/:id',
-                loadComponent: () => import('./features/admin/companies/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
+                loadComponent: () => import('./features/admin/companies/admin-company-edit/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
             },
             {
                 path: 'tvrtke/detalji/:id',
-                loadComponent: () => import('./features/admin/companies/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
+                loadComponent: () => import('./features/admin/companies/admin-company-edit/admin-company-edit.component').then(m => m.AdminCompanyEditComponent)
             },
 
             // Contacts

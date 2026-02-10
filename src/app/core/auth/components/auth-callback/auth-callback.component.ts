@@ -11,14 +11,8 @@ import * as AuthActions from '../../store/auth.actions';
   selector: 'app-auth-callback',
   standalone: true,
   imports: [CommonModule],
-  template: `
-    <div class="min-h-screen flex items-center justify-center bg-gray-50">
-      <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-4 border-solar-500 border-t-transparent mx-auto mb-4"></div>
-        <p class="text-gray-600">{{ message }}</p>
-      </div>
-    </div>
-  `
+  templateUrl: './auth-callback.component.html',
+  styleUrls: ['./auth-callback.component.scss']
 })
 export class AuthCallbackComponent implements OnInit {
   private router = inject(Router);

@@ -1,0 +1,152 @@
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Poppins']">{{ 'b2bCheckout.paymentMethod' | translate }}</h2>
+
+    <!-- Ordering Disabled Notice -->
+    <div *ngIf="!orderingEnabled" class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+    <div class="flex items-center space-x-3">
+        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <div>
+        <h4 class="text-lg font-semibold text-amber-900 font-['Poppins']">{{ 'checkout.orderingDisabled' | translate }}</h4>
+        <p class="text-sm text-amber-800 font-['DM_Sans']">{{ 'checkout.orderingDisabledDescription' | translate }}</p>
+        </div>
+    </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Payment Form -->
+    <div class="lg:col-span-1">
+        <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+        <!-- Payment Methods -->
+        <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4 font-['Poppins']">{{ 'b2bCheckout.selectPaymentMethod' | translate }}</h3>
+            <div class="space-y-3">
+            
+            <!-- Payment upon collection -->
+            <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
+                <input
+                type="radio"
+                name="paymentMethod"
+                value="payment_upon_collection"
+                formControlName="paymentMethod"
+                class="mt-1 text-solar-600 focus:ring-solar-500"
+                checked
+                readonly
+                >
+                <div class="ml-3 flex-1">
+                <div class="flex items-center justify-between">
+                    <span class="font-medium text-gray-900 font-['DM_Sans']">{{ 'b2bCheckout.paymentUponCollection' | translate }}</span>
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <p class="text-sm text-gray-600 font-['DM_Sans'] mt-1">{{ 'b2bCheckout.paymentUponCollectionDescription' | translate }}</p>
+                </div>
+            </label>
+            </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="mb-8">
+            <label class="flex items-start space-x-3">
+            <input
+                type="checkbox"
+                formControlName="acceptTerms"
+                class="mt-1 rounded border-gray-300 text-solar-600 focus:ring-solar-500"
+            >
+            <span class="text-sm text-gray-700 font-['DM_Sans']">
+                {{ 'b2bCheckout.acceptTermsText' | translate }}
+                <a href="/uvjeti" target="_blank" class="text-solar-500 hover:text-solar-600 underline">{{ 'b2bCheckout.termsAndConditions' | translate }}</a>
+                {{ 'b2bCheckout.and' | translate }}
+                <a href="/privatnost" target="_blank" class="text-solar-500 hover:text-solar-600 underline">{{ 'b2bCheckout.privacyPolicy' | translate }}</a>
+            </span>
+            </label>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex space-x-4 pt-6 border-t border-gray-200">
+            <button 
+            type="button"
+            (click)="goBack()"
+            class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium font-['DM_Sans']"
+            >
+            {{ 'b2bCheckout.backStep' | translate }} {{ 'b2bCheckout.step2' | translate }}
+            </button>
+            <button
+            type="submit"
+            [disabled]="paymentForm.invalid || processing || !orderingEnabled"
+            class="flex-1 px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+            <span *ngIf="!processing">{{ 'b2bCheckout.placeOrder' | translate }}</span>
+            <span *ngIf="processing" class="flex items-center justify-center space-x-2">
+                <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>{{ 'b2bCheckout.processing' | translate }}</span>
+            </span>
+            </button>
+        </div>
+        </form>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="lg:col-span-1">
+        <div class="bg-gray-50 rounded-lg p-6 sticky top-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4 font-['Poppins']">{{ 'b2bCheckout.orderSummary' | translate }}</h3>
+        
+        <!-- Cart Items -->
+        <div class="space-y-3 mb-4">
+            <div *ngFor="let item of cartItems" class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-white rounded border flex-shrink-0 flex items-center justify-center">
+                                <img *ngIf="item.imageUrl"
+                    [src]="item.imageUrl"
+                    [alt]="item.name"
+                    class="w-full h-full object-cover rounded">
+                <svg *ngIf="!item.imageUrl" class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+                <a
+                [routerLink]="['/partneri/proizvodi', item.productId]"
+                class="text-sm font-medium text-gray-900 hover:text-solar-600 transition-colors cursor-pointer truncate block"
+                >
+                {{ item.name }}
+                </a>
+                <p class="text-xs text-gray-500">{{ 'b2bCheckout.quantity' | translate }}: {{ item.quantity }}</p>
+            </div>
+            <div class="text-sm font-medium text-gray-900">
+                €{{ (item.unitPrice * item.quantity) | number:'1.2-2' }}
+            </div>
+            </div>
+        </div>
+
+        <!-- Totals -->
+        <div class="border-t border-gray-200 pt-4 space-y-2">
+            <div class="flex justify-between text-sm">
+            <span class="text-gray-600">{{ 'b2bCheckout.subtotal' | translate }}</span>
+            <span class="font-medium">€{{ cartTotal | number:'1.2-2' }}</span>
+            </div>
+            <div class="border-t border-gray-200 pt-2">
+            <div class="flex justify-between">
+                <span class="text-base font-semibold text-gray-900">{{ 'b2bCheckout.total' | translate }}</span>
+                <span class="text-base font-semibold text-gray-900">€{{ cartTotal | number:'1.2-2' }}</span>
+            </div>
+            </div>
+        </div>
+
+        <!-- Company Info -->
+        <div *ngIf="company" class="mt-6 pt-4 border-t border-gray-200">
+            <h4 class="text-sm font-medium text-gray-900 mb-2">{{ 'b2bCheckout.billingTo' | translate }}</h4>
+            <div class="text-xs text-gray-600 space-y-1">
+            <p class="font-medium">{{ company.companyName }}</p>
+            <p>{{ company.companyAddress }}</p>
+            <p>{{ company.taxNumber }}</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>

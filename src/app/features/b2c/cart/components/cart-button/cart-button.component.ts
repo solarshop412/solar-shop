@@ -9,33 +9,8 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
   selector: 'app-cart-button',
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
-  template: `
-    <button 
-      (click)="openCart()"
-      class="relative p-2 text-gray-600 hover:text-solar-500 transition-all duration-300 hover:scale-110 hover:bg-solar-50 rounded-full"
-      aria-label="Open cart"
-    >
-      <!-- Cart Icon -->
-      <lucide-angular 
-        name="shopping-cart" 
-        class="w-6 h-6"
-        [img]="ShoppingCartIcon">
-      </lucide-angular>
-      
-      <!-- Item Count Badge -->
-      <span 
-        *ngIf="(cartItemCount$ | async) && (cartItemCount$ | async)! > 0"
-        class="absolute -top-1 -right-1 bg-solar-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium"
-      >
-        {{ cartItemCount$ | async }}
-      </span>
-    </button>
-  `,
-  styles: [`
-    :host {
-      display: inline-block;
-    }
-  `]
+  templateUrl: './cart-button.component.html',
+  styleUrls: ['./cart-button.component.scss']
 })
 export class CartButtonComponent {
   private store = inject(Store);

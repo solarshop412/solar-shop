@@ -22,86 +22,8 @@ interface CompanyPricingSummary {
   selector: 'app-admin-company-pricing',
   standalone: true,
   imports: [CommonModule, FormsModule, DataTableComponent, TranslatePipe],
-  template: `
-    <div class="space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">{{ 'admin.companyPricingForm.title' | translate }}</h1>
-          <p class="mt-2 text-gray-600">{{ 'admin.companyPricingForm.subtitle' | translate }}</p>
-        </div>
-        <div class="flex items-center space-x-4">
-          <button
-            (click)="toggleGlobalBulkPricing()"
-            class="px-4 py-2 text-sm font-medium text-purple-700 bg-purple-100 border border-purple-300 rounded-md hover:bg-purple-200 transition-colors">
-            <div class="flex items-center space-x-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
-              </svg>
-              <span>{{ 'admin.companyPricingForm.bulkPricing' | translate }}</span>
-            </div>
-          </button>
-        </div>
-      </div>
-      <app-data-table
-        [title]="'admin.companyPricingForm.companyPrices' | translate"
-        [data]="(companyPricing$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (addClicked)="onAdd()"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)"
-        (exportClicked)="onExport()">
-      </app-data-table>
-
-      <!-- Global Bulk Pricing Modal -->
-      <div *ngIf="showGlobalBulkPricing" class="mt-6 bg-purple-50 border border-purple-200 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-purple-900 mb-4">{{ 'admin.companyPricingForm.bulkPricing' | translate }}</h3>
-
-        <div class="bg-purple-100 border border-purple-300 rounded-lg p-4">
-          <h4 class="text-sm font-semibold text-purple-900 mb-3">{{ 'admin.companyPricingForm.applyBulkDiscount' | translate }}</h4>
-          <div class="flex items-end space-x-4 mb-4">
-            <div class="flex-1">
-              <label class="block text-sm font-medium text-purple-700 mb-2">
-                {{ 'admin.companyPricingForm.discountPercentage' | translate }}
-              </label>
-              <input
-                type="number"
-                [(ngModel)]="globalBulkDiscountPercentage"
-                min="0"
-                max="100"
-                step="0.1"
-                class="w-full px-3 py-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                placeholder="0.0">
-            </div>
-          </div>
-
-          <!-- Preset Buttons -->
-          <div class="flex flex-wrap gap-2 mb-4">
-            <button
-              *ngFor="let preset of [5, 10, 15, 20, 25, 30]"
-              (click)="applyGlobalPresetDiscount(preset)"
-              class="px-3 py-1 bg-purple-200 hover:bg-purple-300 text-purple-800 rounded text-sm transition-colors">
-              -{{ preset }}% {{ 'admin.companyPricingForm.discount' | translate }}
-            </button>
-          </div>
-
-          <div class="flex space-x-3 mb-4">
-            <button
-              (click)="applyGlobalBulkDiscountToAll()"
-              [disabled]="!globalBulkDiscountPercentage || globalBulkDiscountPercentage <= 0 || globalBulkDiscountPercentage > 100"
-              class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:bg-gray-300 disabled:cursor-not-allowed">
-              {{ 'admin.companyPricingForm.applyToAll' | translate }}
-            </button>
-          </div>
-
-          <p class="text-xs text-purple-600 mb-4">
-            {{ 'admin.companyPricingForm.bulkDiscountHint' | translate }}
-          </p>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './admin-company-pricing.component.html',
+  styleUrls: ['./admin-company-pricing.component.scss']
 })
 export class AdminCompanyPricingComponent implements OnInit {
   private supabase = inject(SupabaseService);

@@ -14,42 +14,8 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
     selector: 'app-admin-users',
     standalone: true,
     imports: [CommonModule, DataTableComponent, SuccessModalComponent, TranslatePipe],
-    template: `
-    <div class="space-y-6">
-      <!-- Page Header -->
-      <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-3xl font-bold text-gray-900">{{ 'adminUsers.title' | translate }}</h1>
-          <p class="mt-2 text-gray-600">{{ 'adminUsers.subtitle' | translate }}</p>
-        </div>
-      </div>
-
-      <!-- Data Table -->
-      <app-data-table
-        [title]="'adminUsers.title' | translate"
-        [data]="(users$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (addClicked)="onAddUser()"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)">
-      </app-data-table>
-    </div>
-
-    <!-- Success Modal -->
-    <app-success-modal
-      [isOpen]="showSuccessModal"
-      [title]="successModalTitle"
-      [message]="successModalMessage"
-      (closed)="onSuccessModalClosed()"
-    ></app-success-modal>
-  `,
-    styles: [`
-    :host {
-      display: block;
-    }
-  `]
+    templateUrl: './admin-users.component.html',
+    styleUrls: ['./admin-users.component.scss']
 })
 export class AdminUsersComponent implements OnInit {
     private supabaseService = inject(SupabaseService);

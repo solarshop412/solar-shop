@@ -3,20 +3,22 @@ import { CommonModule } from '@angular/common';
 import { HeroComponent } from '../hero/hero.component';
 import { ProductsComponent } from '../products/products.component';
 import { SustainabilityComponent } from '../sustainability/sustainability.component';
-import { BlogHomeComponent } from '../blog/blog-home.component';
+import { BlogHomeComponent } from '../blog/blog-home/blog-home.component';
 import { SeoService } from '../../../shared/services/seo.service';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HeroComponent, SustainabilityComponent, ProductsComponent, BlogHomeComponent],
-  template: `
-    <app-hero></app-hero>
-    <app-products></app-products>
-    <app-blog-home></app-blog-home>
-    <app-sustainability></app-sustainability>
-  `,
+  imports: [
+    CommonModule, 
+    HeroComponent, 
+    SustainabilityComponent, 
+    ProductsComponent, 
+    BlogHomeComponent
+  ],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);

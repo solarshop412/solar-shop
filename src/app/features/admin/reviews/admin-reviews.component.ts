@@ -19,45 +19,8 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
     selector: 'app-admin-reviews',
     standalone: true,
     imports: [CommonModule, DataTableComponent, SuccessModalComponent, TranslatePipe],
-    template: `
-    <div class="w-full max-w-full overflow-hidden">
-      <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
-      <!-- Page Header -->
-        <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-          <div class="min-w-0 flex-1">
-            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate">{{ 'admin.reviewsForm.title' | translate }}</h1>
-            <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">{{ 'admin.reviewsForm.subtitle' | translate }}</p>
-        </div>
-      </div>
-
-        <!-- Data Table Container -->
-        <div class="w-full overflow-hidden">
-      <app-data-table
-        [title]="'admin.reviewsForm.title' | translate"
-        [data]="(reviews$ | async) || []"
-        [config]="tableConfig"
-        [loading]="(loading$ | async) || false"
-        (actionClicked)="onTableAction($event)"
-        (addClicked)="onAddReview()"
-        (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)">
-      </app-data-table>        </div>
-      </div>
-    </div>
-
-    <!-- Success Modal -->
-    <app-success-modal
-      [isOpen]="showSuccessModal"
-      [title]="successModalTitle"
-      [message]="successModalMessage"
-      (closed)="onSuccessModalClosed()"
-    ></app-success-modal>
-  `,
-    styles: [`
-    :host {
-      display: block;
-    }
-  `]
+    templateUrl: './admin-reviews.component.html',
+    styleUrls: ['./admin-reviews.component.scss']
 })
 export class AdminReviewsComponent implements OnInit {
     private store = inject(Store);
