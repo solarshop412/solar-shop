@@ -215,7 +215,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     const half = Math.floor(maxPages / 2);
 
     let start = Math.max(1, this.currentPage - half);
-    let end = Math.min(this.totalPages, start + maxPages - 1);
+    const end = Math.min(this.totalPages, start + maxPages - 1);
 
     if (end - start + 1 < maxPages) {
       start = Math.max(1, end - maxPages + 1);

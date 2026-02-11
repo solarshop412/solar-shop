@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { User } from '../../../../shared/models/user.model';
@@ -16,7 +16,6 @@ import * as AuthActions from '../../store/auth.actions';
 })
 export class AuthCallbackComponent implements OnInit {
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   private store = inject(Store);
   private supabaseService = inject(SupabaseService);
   private translationService = inject(TranslationService);

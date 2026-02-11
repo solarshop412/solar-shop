@@ -199,6 +199,8 @@
                 <!-- Editable Number -->
                 <div *ngSwitchCase="'editable-number'" 
                     class="flex items-center space-x-1" 
+                    role="button"
+                    tabindex="0"
                     (keydown.enter)="$event.stopPropagation()"
                     (keydown.space)="$event.stopPropagation()"
                     (click)="$event.stopPropagation()">

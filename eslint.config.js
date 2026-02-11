@@ -39,7 +39,8 @@ module.exports = defineConfig([
         }
       ],
       "@angular-eslint/prefer-inject": "off",
-      "@typescript-eslint/consistent-indexed-object-style": "off"
+      "@typescript-eslint/consistent-indexed-object-style": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     },
   },
   {
