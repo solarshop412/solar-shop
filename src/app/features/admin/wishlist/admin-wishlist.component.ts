@@ -8,24 +8,8 @@ import { DataTableComponent, TableConfig } from '../shared/data-table/data-table
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { AdminNotificationsService } from '../shared/services/admin-notifications.service';
-
-interface UserWishlistSummary {
-    id: string;
-    userId: string;
-    userName: string;
-    userEmail: string;
-    itemCount: number;
-    lastUpdated: string;
-}
-
-interface WishlistItemDetail {
-    id: string;
-    productId: string;
-    productName: string;
-    productPrice: number;
-    productImage: string;
-    addedAt: string;
-}
+import { UserWishlistSummary } from '../../../shared/models/user-wishlist-summary.model';
+import { WishlistItemDetail } from '../../../shared/models/wishlist-item-detail.model';
 
 @Component({
     selector: 'app-admin-wishlist',

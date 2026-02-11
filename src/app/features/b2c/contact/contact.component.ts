@@ -4,27 +4,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } 
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { SupabaseService } from '../../../services/supabase.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-  isOpen: boolean;
-}
-
-interface ShopLocation {
-  id: string;
-  name: string;
-  address: string;
-  phone: string;
-  phoneLink: string;
-  mobile?: string;
-  email?: string;
-  workingHours: string;
-  latitude: number;
-  longitude: number;
-  isFranchise: boolean;
-}
+import { ShopLocation } from '../../../shared/models/shop-location.model';
+import { FAQItem } from '../../../shared/models/faq-item.model';
 
 @Component({
   selector: 'app-contact',

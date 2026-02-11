@@ -8,15 +8,7 @@ import { DataTableComponent, TableConfig } from '../shared/data-table/data-table
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { ToastService } from '../../../shared/services/toast.service';
-
-interface CompanyPricingSummary {
-  id: string;
-  company_id: string;
-  company_name: string;
-  product_count: number;
-  created_at: string;
-  updated_at: string;
-}
+import { CompanyPricingSummary } from '../../../shared/models/company-pricing-summary.model';
 
 @Component({
   selector: 'app-admin-company-pricing',

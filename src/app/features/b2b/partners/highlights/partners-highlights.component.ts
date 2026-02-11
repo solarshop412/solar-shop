@@ -3,22 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
-
-interface HighlightOffer {
-  id: string;
-  title: string;
-  description: string;
-  shortDescription: string;
-  imageUrl: string;
-  originalPrice: number;
-  discountedPrice: number;
-  discountPercentage: number;
-  type: string;
-  status: string;
-  featured: boolean;
-  isB2B: boolean;
-  endDate?: string;
-}
+import { HighlightOffer } from '../../../../shared/models/highlight-offer.model';
 
 @Component({
   selector: 'app-partners-highlights',

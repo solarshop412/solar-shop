@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../../shared/models/user.model';
+import { PersistedAuthState } from '../models/persisted-auth-state.model';
 
-interface PersistedAuthState {
-    token: string;
-    user: User;
-    loggedIn: boolean;
-    timestamp: number;
-}
 
 @Injectable({
     providedIn: 'root'

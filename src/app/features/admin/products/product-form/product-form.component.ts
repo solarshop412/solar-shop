@@ -29,17 +29,8 @@ import {
   selectErpStock
 } from '../../../b2b/shared/store/products.selectors';
 import { Product, Category } from '../../../b2b/shared/store/products.actions';
+import { ProductRelationship } from '../../../../shared/models/product-relationship.model';
 
-
-interface ProductRelationship {
-  id?: string;
-  product_id: string;
-  related_product_id?: string;
-  related_category_id?: string;
-  relationship_type: string;
-  sort_order: number;
-  is_active: boolean;
-}
 
 @Component({
   selector: 'app-product-form',

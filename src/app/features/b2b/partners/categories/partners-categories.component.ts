@@ -5,15 +5,8 @@ import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CategoriesService, ProductCategory } from '../../../b2c/products/services/categories.service';
+import { CategoryItem } from '../../../../shared/models/category-item.model';
 
-interface CategoryItem {
-  id: string;
-  name: string;
-  slug: string;
-  imageUrl: string;
-  icon: string;
-  productCount?: number;
-}
 
 @Component({
   selector: 'app-partners-categories',

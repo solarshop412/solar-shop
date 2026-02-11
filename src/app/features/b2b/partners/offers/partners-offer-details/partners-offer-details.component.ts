@@ -13,45 +13,8 @@ import { selectB2BCartHasCompanyId, selectB2BCartCompanyId } from '../../../cart
 import { ToastService } from '../../../../../shared/services/toast.service';
 import { TranslationService } from '../../../../../shared/services/translation.service';
 import { B2BCartService } from '../../../cart/services/b2b-cart.service';
-
-interface PartnerOffer {
-  id: string;
-  title: string;
-  originalPrice: number;
-  discountedPrice: number;
-  discountPercentage: number;
-  discount_type?: 'percentage' | 'fixed_amount';
-  discount_value?: number;
-  imageUrl: string;
-  description: string;
-  shortDescription: string;
-  type: string;
-  status: string;
-  couponCode?: string;
-  startDate: string;
-  endDate: string;
-  featured: boolean;
-  isB2B: boolean;
-  applicable_category_ids?: string[];
-  bundle?: boolean;
-}
-
-interface PartnerProduct {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  price: number;
-  category: string;
-  sku: string;
-  stock_quantity?: number;
-  discount_percentage?: number;
-  discount_amount?: number;
-  has_partner_pricing?: boolean;
-  partner_price?: number;
-  partner_discounted_price?: number;
-  partner_savings?: number;
-}
+import { PartnerOffer } from '../../../../../shared/models/partner-offer.model';
+import { PartnerProduct } from '../../../../../shared/models/partner-product.model';
 
 @Component({
   selector: 'app-partners-offer-details',

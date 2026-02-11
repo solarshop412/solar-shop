@@ -12,19 +12,8 @@ import { TranslationService } from '../../../../shared/services/translation.serv
 import * as CompanyPricingActions from '../store/company-pricing.actions';
 import * as CompanyPricingSelectors from '../store/company-pricing.selectors';
 import { Company, Product } from '../store/company-pricing.actions';
+import { ProductWithCustomPrice } from '../../../../shared/models/product-with-custom-price.model';
 
-interface ProductWithCustomPrice extends Product {
-  customPrice: number;
-  hasCustomPrice: boolean;
-  minimumOrder: number;
-  // Quantity-based pricing tiers
-  quantityTier1: number;
-  priceTier1: number;
-  quantityTier2?: number;
-  priceTier2?: number;
-  quantityTier3?: number;
-  priceTier3?: number;
-}
 
 @Component({
   selector: 'app-company-pricing-form',

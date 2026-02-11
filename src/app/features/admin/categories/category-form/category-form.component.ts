@@ -7,19 +7,8 @@ import { AdminFormComponent } from '../../shared/admin-form/admin-form.component
 import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../shared/services/translation.service';
+import { Category } from '../../../../shared/models/category.model';
 
-interface Category {
-  id?: string;
-  name: string;
-  slug: string;
-  description?: string;
-  image_url?: string;
-  sort_order: number;
-  is_active: boolean;
-  parent_id?: string;
-  created_at?: string;
-  updated_at?: string;
-}
 
 @Component({
   selector: 'app-category-form',

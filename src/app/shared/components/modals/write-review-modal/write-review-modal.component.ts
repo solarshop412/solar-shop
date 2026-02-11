@@ -4,24 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } fr
 import { SupabaseService } from '../../../../services/supabase.service';
 import { Review, ReviewStatus } from '../../../models/review.model';
 import { TranslatePipe } from '../../../pipes/translate.pipe';
-
-interface OrderItem {
-  id: string;
-  product_id: string;
-  product_name: string;
-  product_image_url?: string;
-  quantity: number;
-  unit_price: number;
-  hasReview: boolean;
-}
-
-interface UserOrder {
-  id: string;
-  order_number: string;
-  order_date: string;
-  status: string;
-  items: OrderItem[];
-}
+import { UserOrder } from '../../../models/user-order.model';
 
 @Component({
   selector: 'app-write-review-modal',

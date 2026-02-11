@@ -5,15 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { SupabaseService } from '../../../services/supabase.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { Observable, from } from 'rxjs';
-interface DashboardStats {
-  totalProducts: number;
-  totalCategories: number;
-  totalBlogPosts: number;
-  totalOffers: number;
-  totalUsers: number;
-  totalOrders: number;
-  recentOrders: any[];
-}
+import { DashboardStats } from '../../../shared/models/dashboard-stats.model';
 
 @Component({
   selector: 'app-admin-dashboard',

@@ -8,19 +8,7 @@ import { CouponValidationService } from '../../../../shared/services/coupon-vali
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { CartItem } from '../../../../shared/models/cart.model';
 import { Coupon, CouponValidationResult } from '../../../../shared/models/coupon.model';
-
-interface AddToCartOptions {
-    partnerOfferId?: string;
-    partnerOfferName?: string;
-    partnerOfferType?: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle' | 'buy_x_get_y';
-    partnerOfferDiscount?: number;
-    partnerOfferValidUntil?: string;
-    individualDiscount?: number;
-    individualDiscountType?: 'percentage' | 'fixed_amount';
-    originalPrice?: number;
-    isBundle?: boolean;
-    bundleProductIds?: string[];
-}
+import { AddToCartOptions } from '../../../../shared/models/add-to-cart-options.model';
 
 @Injectable({
     providedIn: 'root'
