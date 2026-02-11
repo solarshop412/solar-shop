@@ -1,4 +1,4 @@
-import { OrderItem } from "./order.model";
+import { OrderItem } from "./order-item.model";
 
 export interface UserOrder {
   id: string;
