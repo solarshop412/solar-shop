@@ -57,10 +57,12 @@
 
 /* Search overlay enhancements */
 .backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
 
 .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 

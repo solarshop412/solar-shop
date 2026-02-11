@@ -3,6 +3,7 @@
 }
 
 .cart-overlay {
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     pointer-events: auto;
 }
