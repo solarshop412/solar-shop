@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { BlogActions } from './blog.actions';
-import { BlogState, initialBlogState } from './blog.state';
+import { initialBlogState } from './blog.state';
 
 export const blogReducer = createReducer(
     initialBlogState,

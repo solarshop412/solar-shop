@@ -1,4 +1,4 @@
-import { Cart, CartItem, AppliedCoupon } from '../../../../shared/models/cart.model';
+import { Cart } from '../../../../shared/models/cart.model';
 import { Coupon } from '../../../../shared/models/coupon.model';
 
 export interface CartState {

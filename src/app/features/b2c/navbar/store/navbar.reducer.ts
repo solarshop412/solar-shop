@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { NavbarActions } from './navbar.actions';
-import { NavbarState, initialNavbarState } from './navbar.state';
+import { initialNavbarState } from './navbar.state';
 
 export const navbarReducer = createReducer(
     initialNavbarState,

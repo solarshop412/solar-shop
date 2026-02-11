@@ -1,9 +1,9 @@
 // core/auth/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, throwError, from, of } from 'rxjs';
-import { map, catchError, tap, switchMap } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { SupabaseService } from '../../../services/supabase.service';
-import { LoginRequest, AuthResponse, AuthUser, AuthSession, ResetPasswordRequest, UpdatePasswordRequest } from '../../../shared/models/auth.model';
+import { LoginRequest, AuthResponse, AuthUser, AuthSession, UpdatePasswordRequest } from '../../../shared/models/auth.model';
 import { RegisterRequest as SupabaseRegisterRequest } from '../../../shared/models/auth.model';
 import { RegisterRequest } from '../store/auth.actions';
 import { User } from '../../../shared/models/user.model';

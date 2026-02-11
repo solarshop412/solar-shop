@@ -1,6 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, from } from 'rxjs';
-import { map, tap, catchError } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { SupabaseService } from '../../services/supabase.service';
 
 export interface AppSettings {

@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { tap, switchMap, delay, take } from 'rxjs/operators';
-import { of } from 'rxjs';
 import { NavbarActions } from './navbar.actions';
 import { selectCurrentLanguage } from './navbar.selectors';
 import { TranslationService } from '../../../../shared/services/translation.service';

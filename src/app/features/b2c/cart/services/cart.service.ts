@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, from, map, catchError, of, take, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, from, map, catchError, of, switchMap } from 'rxjs';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { CartItem, Cart, AppliedCoupon } from '../../../../shared/models/cart.model';
 import { Coupon, CouponValidationResult } from '../../../../shared/models/coupon.model';

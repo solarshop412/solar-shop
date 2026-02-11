@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter, inject, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SupabaseService } from '../../../../services/supabase.service';
-import { Review, ReviewStatus } from '../../../models/review.model';
+import { ReviewStatus } from '../../../models/review.model';
 import { TranslatePipe } from '../../../pipes/translate.pipe';
 import { UserOrder } from '../../../models/user-order.model';
 

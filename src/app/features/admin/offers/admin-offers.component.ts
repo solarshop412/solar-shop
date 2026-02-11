@@ -7,7 +7,7 @@ import { SupabaseService } from '../../../services/supabase.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { DataTableComponent, TableConfig } from '../shared/data-table/data-table.component';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-offers',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
-import { ProductFilters, SortOption, PaginationState } from '../product-list.component';
+import { ProductFilters, SortOption } from '../product-list.component';
 
 export interface ProductListUrlState {
   filters: ProductFilters;

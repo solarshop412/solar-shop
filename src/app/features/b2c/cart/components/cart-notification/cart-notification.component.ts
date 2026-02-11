@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Subject, takeUntil, filter, delay, distinctUntilChanged } from 'rxjs';
+import { Subject, takeUntil, filter, distinctUntilChanged } from 'rxjs';
 import * as CartSelectors from '../../store/cart.selectors';
 import { TranslatePipe } from "../../../../../shared/pipes/translate.pipe";
 

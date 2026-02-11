@@ -4,7 +4,7 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeUntil, debounceTime, distinctUntilChanged, filter, map, take, skip, startWith } from 'rxjs/operators';
+import { takeUntil, debounceTime, distinctUntilChanged, map, take, skip } from 'rxjs/operators';
 import { ProductListUrlStateService, ProductListUrlState } from './services/product-list-url-state.service';
 import { ProductListActions } from './store/product-list.actions';
 import {
@@ -14,11 +14,9 @@ import {
   selectIsLoading,
   selectFilters,
   selectSortOption,
-  selectCategories,
   selectManufacturers,
   selectCertificates,
   selectSearchQuery,
-  selectPagination,
   selectPaginationInfo,
   selectCurrentPage,
   selectItemsPerPage,
@@ -33,10 +31,8 @@ import {
   selectManufacturerCountsLoading
 } from './store/product-list.selectors';
 import { AddToCartButtonComponent } from '../../cart/components/add-to-cart-button/add-to-cart-button.component';
-import * as CartActions from '../../cart/store/cart.actions';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { ProductCategory, CategoriesService } from '../services/categories.service';
-import { CategoryCountFilters, ManufacturerCountFilters } from './services/product-list.service';
 import { selectProductCategories } from '../store/products.selectors';
 import { ProductsActions } from '../store/products.actions';
 import { SearchSuggestionsService } from '../../../../shared/services/search-suggestions.service';

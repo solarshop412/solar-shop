@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { OffersActions } from './offers.actions';
-import { OffersState, initialOffersState } from './offers.state';
+import { initialOffersState } from './offers.state';
 
 export const offersReducer = createReducer(
     initialOffersState,

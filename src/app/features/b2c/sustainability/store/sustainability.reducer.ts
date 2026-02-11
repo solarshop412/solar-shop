@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { SustainabilityActions } from './sustainability.actions';
-import { SustainabilityState, initialSustainabilityState } from './sustainability.state';
+import { initialSustainabilityState } from './sustainability.state';
 
 export const sustainabilityReducer = createReducer(
     initialSustainabilityState,

@@ -9,7 +9,7 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { SuccessModalComponent } from '../../../../shared/components/modals/success-modal/success-modal.component';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
-import { of, fromEvent, merge, EMPTY, from } from 'rxjs';
+import { EMPTY, from } from 'rxjs';
 
 @Component({
   selector: 'app-order-form',

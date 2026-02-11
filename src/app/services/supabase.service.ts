@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient, User, Session } from '@supabase/supabase-js';
-import { BehaviorSubject, Observable, from, map, catchError, of } from 'rxjs';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Database } from '../shared/models/database.model';
 import {

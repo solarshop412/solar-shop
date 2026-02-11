@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from, map, catchError, of } from 'rxjs';
+import { Observable, from, catchError, of } from 'rxjs';
 import { SupabaseService } from '../../../../../services/supabase.service';
-import { Product, SortOption } from '../product-list.component';
+import { Product } from '../product-list.component';
 import { ProductsQuery, ProductsResponse } from '../store/product-list.actions';
 import { SortOptionsService } from '../../../../../shared/services/sort-options.service';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, map, catchError, of } from 'rxjs';
+import { Observable, from, catchError, of } from 'rxjs';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { OfferFilters, Offer } from '../../../../shared/models/offer.model';
 @Injectable({

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable, Subject, catchError, finalize, of, takeUntil, from } from 'rxjs';
+import { Subject, catchError, finalize, of, takeUntil, from } from 'rxjs';
 import { BlogPost } from '../../../../shared/models/blog.model';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { BlogDataMapperService, SupabaseBlogPost } from '../../../../services/blog-data-mapper.service';

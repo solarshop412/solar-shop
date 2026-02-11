@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable, from, switchMap, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HeroActions } from './store/hero.actions';
 import { selectIsLoading } from './store/hero.selectors';
 import { Router } from '@angular/router';

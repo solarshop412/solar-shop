@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../../../shared/services/translation.service';
 import { SuccessModalComponent } from '../../../../../../shared/components/modals/success-modal/success-modal.component';

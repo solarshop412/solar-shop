@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Product, ProductFilters, SortOption } from '../product-list.component';
+import { Product, SortOption } from '../product-list.component';
 import { CategoryCountFilters, ManufacturerCountFilters } from '../services/product-list.service';
 
 export interface ProductsQuery {

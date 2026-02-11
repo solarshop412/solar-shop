@@ -6,7 +6,6 @@ import { SupabaseService } from '../../../services/supabase.service';
 import { CartService } from '../cart/services/cart.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
-import * as CartActions from '../cart/store/cart.actions';
 
 import { Order } from '../../../shared/models/order.model';
 

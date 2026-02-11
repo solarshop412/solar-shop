@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Cart, CartItem } from '../../../../../shared/models/cart.model';
+import { CartItem } from '../../../../../shared/models/cart.model';
 import * as CartActions from '../../store/cart.actions';
 import * as CartSelectors from '../../store/cart.selectors';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';

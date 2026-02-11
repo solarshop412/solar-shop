@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { AdminCompanyPricingState, initialAdminCompanyPricingState } from '../../store/admin.state';
+import { initialAdminCompanyPricingState } from '../../store/admin.state';
 import * as CompanyPricingActions from './company-pricing.actions';
 
 export const companyPricingReducer = createReducer(

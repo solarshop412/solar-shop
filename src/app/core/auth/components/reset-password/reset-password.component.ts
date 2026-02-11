@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../store/auth.state';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { resetPasswordRequest } from '../../store/auth.actions';
 import { selectAuthError, selectAuthLoading, selectPasswordResetSuccessMessage } from '../../store/auth.selectors';

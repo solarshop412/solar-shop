@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Cart, CartItem } from '../../../../shared/models/cart.model';
+import { Cart } from '../../../../shared/models/cart.model';
 import { CartStep } from './cart.state';
 import { Coupon } from '../../../../shared/models/coupon.model';
 

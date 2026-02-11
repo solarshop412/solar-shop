@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { ProductDetailsActions, ProductReview } from './product-details.actions';
 import { ProductListService } from '../../product-list/services/product-list.service';
 import { SupabaseService } from '../../../../../services/supabase.service';

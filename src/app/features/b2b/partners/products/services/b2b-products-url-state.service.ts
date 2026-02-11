@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
-import { ProductFilters, PaginationState } from '../../../shared/store/products.reducer';
+import { ProductFilters } from '../../../shared/store/products.reducer';
 
 export interface B2BProductListUrlState {
   filters: ProductFilters;

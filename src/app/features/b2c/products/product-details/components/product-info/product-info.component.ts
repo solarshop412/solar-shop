@@ -10,7 +10,7 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../../../shared/services/toast.service';
 import { TranslationService } from '../../../../../../shared/services/translation.service';
 import { StockItem } from '../../../../../../shared/services/erp-integration.service';
-import { getUnitName, filterAndCombineErpStock, FilteredStockItem } from '../../../../../../shared/utils/erp-unit-names';
+import { filterAndCombineErpStock, FilteredStockItem } from '../../../../../../shared/utils/erp-unit-names';
 import * as WishlistActions from '../../../../../b2c/wishlist/store/wishlist.actions';
 import {
   selectIsProductInWishlist,

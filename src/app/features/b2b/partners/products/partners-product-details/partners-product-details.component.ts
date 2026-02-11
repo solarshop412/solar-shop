@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, switchMap, map } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 import { selectCurrentUser } from '../../../../../core/auth/store/auth.selectors';
