@@ -38,7 +38,7 @@ export class CartService {
     private couponValidationService = inject(CouponValidationService);
     private translationService = inject(TranslationService);
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     // Generate translated coupon name
     private getCouponOfferName(couponCode: string): string {

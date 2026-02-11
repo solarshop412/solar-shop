@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, from, catchError, of } from 'rxjs';
 import { SupabaseService } from '../../../../services/supabase.service';
 
@@ -30,7 +30,7 @@ export interface CategoryFilters {
 })
 export class CategoriesService {
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     getCategories(filters?: CategoryFilters): Observable<ProductCategory[]> {
         return from(this.fetchCategoriesFromSupabase(filters)).pipe(

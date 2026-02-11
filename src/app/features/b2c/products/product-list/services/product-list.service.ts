@@ -34,8 +34,7 @@ export interface ManufacturerCountFilters {
 })
 export class ProductListService {
     private sortOptionsService = inject(SortOptionsService);
-
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     getProducts(filters?: ProductFilters): Observable<Product[]> {
         return from(this.fetchProductsFromSupabase(filters)).pipe(

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { switchMap, tap } from 'rxjs/operators';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -12,13 +12,11 @@ import { Review } from '../../../../shared/models/review.model';
 @Injectable()
 export class OrdersEffects {
 
-    constructor(
-        private actions$: Actions,
-        private supabaseService: SupabaseService,
-        private toastService: ToastService,
-        private translationService: TranslationService,
-        private emailService: EmailService
-    ) { }
+    private actions$ = inject(Actions);
+    private supabaseService = inject(SupabaseService);
+    private toastService = inject(ToastService);
+    private translationService = inject(TranslationService);
+    private emailService = inject(EmailService);
 
     loadOrders$ = createEffect(() =>
         this.actions$.pipe(

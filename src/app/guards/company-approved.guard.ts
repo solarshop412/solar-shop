@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
 import { Observable, from, of } from 'rxjs';
@@ -8,7 +8,8 @@ import { switchMap, map, catchError } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class CompanyApprovedGuard implements CanActivate {
-    constructor(private supabase: SupabaseService, private router: Router) { }
+    private supabase = inject(SupabaseService);
+    private router = inject(Router);
 
     canActivate(): Observable<boolean | UrlTree> {
         // First check if we have a stored session, then wait for auth state

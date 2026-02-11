@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable, of, combineLatest } from 'rxjs';
 import { map, catchError, take, filter, switchMap } from 'rxjs/operators';
@@ -10,10 +10,8 @@ import { selectHasAdminPrivileges, selectIsAuthenticated, selectAuthLoading } fr
 })
 export class AdminGuard implements CanActivate {
 
-    constructor(
-        private store: Store,
-        private router: Router
-    ) { }
+    private store = inject(Store);
+    private router = inject(Router);
 
     canActivate(): Observable<boolean> {
         // Wait for auth state to be initialized (not loading)

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of, forkJoin } from 'rxjs';
@@ -13,13 +13,11 @@ import * as B2BCartSelectors from './b2b-cart.selectors';
 @Injectable()
 export class B2BCartEffects {
 
-    constructor(
-        private actions$: Actions,
-        private store: Store,
-        private b2bCartService: B2BCartService,
-        private toastService: ToastService,
-        private translationService: TranslationService
-    ) { }
+    private actions$ = inject(Actions);
+    private store = inject(Store);
+    private b2bCartService = inject(B2BCartService);
+    private toastService = inject(ToastService);
+    private translationService = inject(TranslationService);
 
     // Load cart effect
     loadB2BCart$ = createEffect(() =>

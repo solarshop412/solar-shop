@@ -44,7 +44,7 @@ export class PartnersOffersComponent implements OnInit, OnDestroy {
   // B2B offers loaded from database
   b2bOffers: any[] = [];
 
-  constructor(private router: Router) { }
+  private router = inject(Router);
 
   ngOnInit(): void {
     // Subscribe to auth state

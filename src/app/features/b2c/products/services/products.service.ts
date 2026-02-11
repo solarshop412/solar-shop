@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, from, catchError, of } from 'rxjs';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { Product } from '../product-list/product-list.component';
@@ -8,7 +8,7 @@ import { Product } from '../product-list/product-list.component';
 })
 export class ProductsService {
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     /**
      * Get products by multiple category names, excluding a specific product

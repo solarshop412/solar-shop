@@ -107,7 +107,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   private urlStateService = inject(ProductListUrlStateService);
   private seoService = inject(SeoService);
   private destroy$ = new Subject<void>();
-  private urlUpdateSubject = new Subject<void>();
 
   products$: Observable<Product[]>;
   filteredProducts$: Observable<Product[]>;

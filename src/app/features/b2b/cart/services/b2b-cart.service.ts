@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of, from } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { firstValueFrom } from 'rxjs';
@@ -17,11 +17,9 @@ export class B2BCartService {
     private readonly STORAGE_KEY = 'b2b_cart_';
     private readonly COUPON_STORAGE_KEY = 'b2b_cart_coupons_';
 
-    constructor(
-        private supabaseService: SupabaseService,
-        private couponValidationService: CouponValidationService,
-        private translationService: TranslationService
-    ) { }
+    private supabaseService = inject(SupabaseService);
+    private couponValidationService = inject(CouponValidationService);
+    private translationService = inject(TranslationService);
 
     /**
      * Load cart for a specific company

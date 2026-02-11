@@ -23,7 +23,7 @@ export class AdminFormComponent {
 
   @Output() formSubmit = new EventEmitter<any>();
 
-  constructor(private router: Router) { }
+  private router = inject(Router);
 
   onSubmit(): void {
     if (this.form.valid) {

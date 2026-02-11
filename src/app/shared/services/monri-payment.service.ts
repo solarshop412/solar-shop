@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -62,8 +62,7 @@ export interface MonriFormParams {
 })
 export class MonriPaymentService {
   private readonly monriConfig = environment.monri;
-
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   /**
    * Create payment request and get form parameters for Monri

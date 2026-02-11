@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -25,12 +25,9 @@ export class ResetPasswordComponent implements OnInit {
   passwordResetSuccessMessage$!: Observable<string | null>;
   error$!: Observable<any>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private store: Store<AuthState>
-  ) {
-  }
+  private route = inject(ActivatedRoute);
+  private fb = inject(FormBuilder);
+  private store = inject(Store<AuthState>);
 
   ngOnInit(): void {
     this.loading$ = this.store.select(selectAuthLoading);

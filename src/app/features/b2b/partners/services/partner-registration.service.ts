@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { CompanyRegistrationData } from '../../../../shared/models/company.model';
 
@@ -6,7 +6,7 @@ import { CompanyRegistrationData } from '../../../../shared/models/company.model
     providedIn: 'root'
 })
 export class PartnerRegistrationService {
-    constructor(private supabase: SupabaseService) { }
+    private supabase = inject(SupabaseService);
 
     async registerPartner(data: CompanyRegistrationData): Promise<{ error?: string }> {
         try {

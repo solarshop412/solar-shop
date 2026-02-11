@@ -16,8 +16,6 @@ export class CookieBannerComponent implements OnInit {
   private readonly COOKIE_CONSENT_ACCEPTED = 'accepted';
   private readonly COOKIE_CONSENT_REJECTED = 'rejected';
 
-  constructor(private translationService: TranslationService) {}
-
   ngOnInit(): void {
     this.checkCookieConsent();
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -25,7 +25,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
   templateUrl: './b2b-cart-sidebar.component.html',
   styleUrls: ['./b2b-cart-sidebar.component.scss']
 })
-export class B2BCartSidebarComponent implements OnInit, OnDestroy {
+export class B2BCartSidebarComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
   private imageErrors = new Set<string>();
 
@@ -51,7 +51,11 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
     return !this.couponCode.trim();
   }
 
-  constructor(private store: Store, private router: Router, private translationService: TranslationService) {
+  constructor(
+    private store: Store, 
+    private router: Router, 
+    private translationService: TranslationService
+  ) {
     this.cartItems$ = this.store.select(B2BCartSelectors.selectB2BCartItems);
     this.cartSummary$ = this.store.select(B2BCartSelectors.selectB2BCartSummary);
     this.loading$ = this.store.select(B2BCartSelectors.selectB2BCartLoading);
@@ -67,10 +71,6 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
       // Check if any item has quantity below minimum order
       map((items: B2BCartItem[]) => items.some(item => item.quantity < item.minimumOrder))
     );
-  }
-
-  ngOnInit(): void {
-    // Component initialization
   }
 
   ngOnDestroy(): void {

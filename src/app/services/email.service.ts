@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { SupabaseService } from './supabase.service';
 
@@ -67,7 +67,7 @@ export class EmailService {
     private readonly supabaseUrl = environment.supabaseUrl;
     private readonly supabaseKey = environment.supabaseKey;
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     /**
      * Send order confirmation email

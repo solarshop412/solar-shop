@@ -1,5 +1,5 @@
 // core/auth/services/auth.service.ts
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { SupabaseService } from '../../../services/supabase.service';
@@ -12,7 +12,7 @@ import { User } from '../../../shared/models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private supabase: SupabaseService) { }
+  private supabase = inject(SupabaseService);
 
   login(loginRequest: LoginRequest): Observable<AuthResponse> {
     return from(this.supabase.signIn(loginRequest));

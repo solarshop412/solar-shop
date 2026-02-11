@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of, from } from 'rxjs';
@@ -102,10 +102,7 @@ export class FooterEffects {
         )
     );
 
-    constructor(
-        private actions$: Actions,
-        private store: Store,
-        private supabaseService: SupabaseService,
-        private translationService: TranslationService
-    ) { }
+    private actions$ = inject(Actions);
+    private supabaseService = inject(SupabaseService);
+    private translationService = inject(TranslationService);
 }

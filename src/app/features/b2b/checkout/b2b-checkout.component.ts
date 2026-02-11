@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -16,10 +16,8 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
   currentStep = 1;
   private destroy$ = new Subject<void>();
 
-  constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) { }
+  private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     // Listen to route changes to update current step

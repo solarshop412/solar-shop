@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, map, take, filter, switchMap } from 'rxjs';
@@ -8,10 +8,8 @@ import { selectIsAuthenticated, selectAuthLoading } from '../core/auth/store/aut
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    constructor(
-        private store: Store,
-        private router: Router
-    ) { }
+    private store = inject(Store);
+    private router = inject(Router);
 
     canActivate(): Observable<boolean | UrlTree> {
         // Wait for auth state to be initialized (not loading)

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -45,7 +45,7 @@ export class ErpIntegrationService {
   private readonly AUTH_TOKEN = environment.erp.authToken;
   private readonly ERP_ENABLED = environment.erp.enabled;
 
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
   /**
    * Get all stock information from ERP system

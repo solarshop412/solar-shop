@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of, from } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -13,14 +13,12 @@ import { EmailService } from '../../../services/email.service';
 
 @Injectable()
 export class AuthEffects {
-    constructor(
-        private actions$: Actions,
-        private authService: AuthService,
-        private authPersistence: AuthPersistenceService,
-        private router: Router,
-        private supabaseService: SupabaseService,
-        private emailService: EmailService
-    ) { }
+    private actions$ = inject(Actions);
+    private authService = inject(AuthService);
+    private authPersistence = inject(AuthPersistenceService);
+    private router = inject(Router);
+    private supabaseService = inject(SupabaseService);
+    private emailService = inject(EmailService);
 
     login$ = createEffect(() =>
         this.actions$.pipe(

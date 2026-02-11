@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,10 +16,8 @@ export class ProductsComponent implements OnInit {
   productCategories$!: Observable<ProductCategory[]>;
   isLoading = false;
 
-  constructor(
-    private router: Router,
-    private categoriesService: CategoriesService
-  ) {}
+  private router = inject(Router);
+  private categoriesService = inject(CategoriesService);
 
   ngOnInit(): void {
     this.loadCategories();

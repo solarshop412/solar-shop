@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, from, catchError, of } from 'rxjs';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { OfferFilters, Offer } from '../../../../shared/models/offer.model';
@@ -7,7 +7,7 @@ import { OfferFilters, Offer } from '../../../../shared/models/offer.model';
 })
 export class OffersService {
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     getOffers(filters?: OfferFilters): Observable<Offer[]> {
         return from(this.fetchOffersFromSupabase(filters)).pipe(

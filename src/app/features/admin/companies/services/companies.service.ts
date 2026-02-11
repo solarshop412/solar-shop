@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -9,7 +9,7 @@ import { Company } from '../../../../shared/models/company.model';
 })
 export class CompaniesService {
 
-    constructor(private supabaseService: SupabaseService) { }
+    private supabaseService = inject(SupabaseService);
 
     getCompanies(): Observable<Company[]> {
         return from(

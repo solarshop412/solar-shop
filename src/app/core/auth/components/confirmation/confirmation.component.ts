@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -23,12 +23,10 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
     resendCooldown = 0;
     private cooldownInterval?: any;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private supabaseService: SupabaseService,
-        private translateService: TranslationService
-    ) { }
+    private router = inject(Router);
+    private route = inject(ActivatedRoute);
+    private supabaseService = inject(SupabaseService);
+    private translateService = inject(TranslationService);
 
     ngOnInit(): void {
         // Get email from query params

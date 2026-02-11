@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -7,10 +7,8 @@ import * as CompanyPricingActions from './company-pricing.actions';
 
 @Injectable()
 export class CompanyPricingEffects {
-    constructor(
-        private actions$: Actions,
-        private supabaseService: SupabaseService
-    ) { }
+    private actions$ = inject(Actions);
+    private supabaseService = inject(SupabaseService);
 
     loadCompanies$ = createEffect(() =>
         this.actions$.pipe(
