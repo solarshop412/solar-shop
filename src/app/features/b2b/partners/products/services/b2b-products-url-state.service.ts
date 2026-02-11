@@ -155,13 +155,14 @@ export class B2BProductsUrlStateService {
       const value = params[key];
       if (value !== null && value !== undefined && value !== '') {
         switch (key) {
-          case 'search':
+          case 'search': {
             if (typeof value === 'string' && value.trim()) {
               cleanParams[key] = value.trim();
             }
             break;
+          }
           case 'categories':
-          case 'manufacturers':
+          case 'manufacturers': {
             if (typeof value === 'string' && value.trim()) {
               const items = this.parseCommaSeparatedString(value);
               if (items.length > 0) {
@@ -169,28 +170,33 @@ export class B2BProductsUrlStateService {
               }
             }
             break;
-          case 'availability':
+          }
+          case 'availability': {
             if (this.validateAvailability(value)) {
               cleanParams[key] = value;
             }
             break;
-          case 'sort':
+          }
+          case 'sort': {
             if (this.validateSortOption(value)) {
               cleanParams[key] = value;
             }
             break;
-          case 'page':
+          }
+          case 'page': {
             const page = this.parseNumber(value);
             if (page !== null && page >= 1) {
               cleanParams[key] = page.toString();
             }
             break;
-          case 'itemsPerPage':
+          }
+          case 'itemsPerPage': {
             const itemsPerPage = this.parseNumber(value);
             if (itemsPerPage !== null && this.validateItemsPerPage(itemsPerPage)) {
               cleanParams[key] = itemsPerPage.toString();
             }
             break;
+          }
         }
       }
     });

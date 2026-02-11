@@ -17,7 +17,7 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 })
 export class ForgotPasswordComponent {
   loading$: Observable<boolean>;
-  resetPasswordRequestSent: boolean = false;
+  resetPasswordRequestSent = false;
   resetPasswordMessage: string | null = null;
   errorMessage: string | null = null;
 

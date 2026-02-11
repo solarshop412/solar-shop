@@ -30,7 +30,7 @@ export class AdminCompanyPricingComponent implements OnInit {
 
   // Global bulk pricing properties
   showGlobalBulkPricing = false;
-  globalBulkDiscountPercentage: number = 0;
+  globalBulkDiscountPercentage = 0;
 
   tableConfig: TableConfig = {
     columns: [

@@ -57,10 +57,10 @@ export interface TableConfig {
   styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent implements OnInit, OnChanges {
-  @Input() title: string = '';
+  @Input() title = '';
   @Input() data: any[] = [];
   @Input() config!: TableConfig;
-  @Input() loading: boolean = false;
+  @Input() loading = false;
   @Output() actionClicked = new EventEmitter<{ action: string, item: any }>();
   @Output() addClicked = new EventEmitter<void>();
   @Output() csvImported = new EventEmitter<any[]>();
@@ -91,16 +91,16 @@ export class DataTableComponent implements OnInit, OnChanges {
   readonly ChevronUpIcon = ChevronUp;
   readonly ChevronDownIcon = ChevronDown;
 
-  searchTerm: string = '';
-  sortColumn: string = '';
+  searchTerm = '';
+  sortColumn = '';
   sortDirection: 'asc' | 'desc' = 'asc';
-  currentPage: number = 1;
-  pageSize: number = 10;
-  importing: boolean = false;
+  currentPage = 1;
+  pageSize = 10;
+  importing = false;
 
   filteredData: any[] = [];
   paginatedData: any[] = [];
-  totalPages: number = 0;
+  totalPages = 0;
 
   Math = Math;
 

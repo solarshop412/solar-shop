@@ -125,53 +125,55 @@
     </div>
 
     <div *ngIf="stats$ | async as stats">
-    <div *ngIf="stats.recentOrders && stats.recentOrders.length > 0" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <div class="flex justify-between items-center mb-6">
-        <h2 class="text-lg font-semibold text-gray-900">Recent Orders</h2>
-        <a routerLink="/admin/narudzbe" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
-            View All Orders →
-        </a>
-        </div>
-        
-        <div class="space-y-4">
-        <div 
-            *ngFor="let order of stats.recentOrders" 
-            (click)="viewOrderDetails(order.id)"
-            class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 cursor-pointer transition-all duration-200">
-            <div class="flex-1">
-            <div class="flex items-center space-x-4">
-                <div>
-                <h3 class="font-medium text-gray-900">{{ order.order_number }}</h3>
-                <p class="text-sm text-gray-600">{{ order.customer_name || order.customer_email }}</p>
+        <div *ngIf="stats.recentOrders && stats.recentOrders.length > 0" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex justify-between items-center mb-6">
+            <h2 class="text-lg font-semibold text-gray-900">Recent Orders</h2>
+            <a routerLink="/admin/narudzbe" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                View All Orders →
+            </a>
+            </div>
+            
+            <div class="space-y-4">
+                <div 
+                    *ngFor="let order of stats.recentOrders" 
+                    (click)="viewOrderDetails(order.id)"
+                    (keydown.enter)="viewOrderDetails(order.id)"
+                    (keydown.space)="viewOrderDetails(order.id)"
+                    class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 cursor-pointer transition-all duration-200">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-4">
+                            <div>
+                            <h3 class="font-medium text-gray-900">{{ order.order_number }}</h3>
+                            <p class="text-sm text-gray-600">{{ order.customer_name || order.customer_email }}</p>
+                            </div>
+                            <div class="text-center">
+                            <p class="text-lg font-semibold text-gray-900">\${{ order.total_amount?.toFixed(2) }}</p>
+                            <p class="text-xs text-gray-500">{{ order.created_at | date:'shortDate' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full"
+                                [ngClass]="{
+                                'bg-yellow-100 text-yellow-800': order.status === 'pending',
+                                'bg-blue-100 text-blue-800': order.status === 'confirmed',
+                                'bg-purple-100 text-purple-800': order.status === 'processing',
+                                'bg-indigo-100 text-indigo-800': order.status === 'shipped',
+                                'bg-green-100 text-green-800': order.status === 'delivered',
+                                'bg-red-100 text-red-800': order.status === 'cancelled'
+                                }">
+                            {{ getOrderStatusLabel(order.status) }}
+                        </span>
+                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="text-center">
-                <p class="text-lg font-semibold text-gray-900">\${{ order.total_amount?.toFixed(2) }}</p>
-                <p class="text-xs text-gray-500">{{ order.created_at | date:'shortDate' }}</p>
-                </div>
-            </div>
-            </div>
-            <div class="flex items-center space-x-3">
-            <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full"
-                    [ngClass]="{
-                    'bg-yellow-100 text-yellow-800': order.status === 'pending',
-                    'bg-blue-100 text-blue-800': order.status === 'confirmed',
-                    'bg-purple-100 text-purple-800': order.status === 'processing',
-                    'bg-indigo-100 text-indigo-800': order.status === 'shipped',
-                    'bg-green-100 text-green-800': order.status === 'delivered',
-                    'bg-red-100 text-red-800': order.status === 'cancelled'
-                    }">
-                {{ getOrderStatusLabel(order.status) }}
-            </span>
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
             </div>
         </div>
-        </div>
-    </div>
     </div>
 
-    <div *ngIf="!(stats$ | async)" class="flex items-center justify-center h-64">
+    <div *ngIf="(stats$ | async) === null" class="flex items-center justify-center h-64">
     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
     </div>
 </div>

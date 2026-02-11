@@ -231,6 +231,8 @@ export class AdminWishlistComponent implements OnInit {
                     }
                 } catch (productError) {
                     console.warn('Could not load product details for:', wishlistItem.product_id);
+                    console.error(productError);
+
                     // Add item even if product details couldn't be loaded
                     itemDetails.push({
                         id: wishlistItem.id,

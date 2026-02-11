@@ -112,7 +112,7 @@ export class B2BCartSidebarComponent implements OnDestroy {
     this.store.dispatch(B2BCartActions.removeB2BCoupon({ couponId }));
   }
 
-  onOverlayClick(event: MouseEvent) {
+  onOverlayClick(event: Event) {
     // Close cart if clicking on the overlay (not the sidebar content)
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;

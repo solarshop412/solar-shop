@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, HostListener } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,7 @@ import { SettingsService } from '../../../shared/services/settings.service';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent {
   private store = inject(Store);
   private router = inject(Router);
   private translationService = inject(TranslationService);
@@ -43,8 +43,6 @@ export class AdminLayoutComponent implements OnInit {
       this.orderingEnabled = settings.ordering_enabled;
     });
   }
-
-  ngOnInit(): void { }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {

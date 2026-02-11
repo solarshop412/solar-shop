@@ -205,13 +205,13 @@ export const addToB2BCartFromOfferFailure = createAction(
 export const addAllToB2BCartFromOffer = createAction(
     '[B2B Cart] Add All To Cart From Partner Offer',
     props<{
-        products: Array<{
+        products: {
             productId: string;
             quantity: number;
             individualDiscount?: number;
             individualDiscountType?: 'percentage' | 'fixed_amount';
             originalPrice?: number;
-        }>;
+        }[];
         companyId: string;
         partnerOfferId: string;
         partnerOfferName: string;

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
     templateUrl: './admin-orders.component.html',
     styleUrls: ['./admin-orders.component.scss']
 })
-export class AdminOrdersComponent implements OnInit {
+export class AdminOrdersComponent implements OnInit, OnDestroy {
     private store = inject(Store);
     private router = inject(Router);
     private title = inject(Title);

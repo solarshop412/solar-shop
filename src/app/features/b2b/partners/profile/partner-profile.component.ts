@@ -353,6 +353,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
       'approved': 'b2b.profile.approvedPartner',
       'rejected': 'b2b.profile.applicationRejected'
     };
+    
     return statusMap[status] || status;
   }
 

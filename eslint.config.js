@@ -37,7 +37,8 @@ module.exports = defineConfig([
           "argsIgnorePattern": "^_",
           "varsIgnorePattern": "^_"
         }
-      ]
+      ],
+      "@angular-eslint/prefer-inject": "off"
     },
   },
   {
@@ -47,7 +48,8 @@ module.exports = defineConfig([
       angular.configs.templateAccessibility,
     ],
     rules: {
-      "@angular-eslint/template/prefer-control-flow": "off"
+      "@angular-eslint/template/prefer-control-flow": "off",
+      "@angular-eslint/template/label-has-associated-control": "off"
     },
   }
 ]);

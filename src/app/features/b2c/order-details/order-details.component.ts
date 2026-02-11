@@ -1,9 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { SupabaseService } from '../../../services/supabase.service';
-import { CartService } from '../cart/services/cart.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
 
@@ -19,8 +17,6 @@ import { Order } from '../../../shared/models/order.model';
 export class OrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private supabaseService = inject(SupabaseService);
-  private store = inject(Store);
-  private cartService = inject(CartService);
   private translationService = inject(TranslationService);
 
   order: Order | null = null;

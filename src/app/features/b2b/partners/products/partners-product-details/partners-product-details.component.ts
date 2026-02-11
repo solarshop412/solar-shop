@@ -183,7 +183,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     return product.minimum_order || 1;
   }
 
-  getSpecifications(specs: Record<string, string>): Array<{ key: string, value: string }> {
+  getSpecifications(specs: Record<string, string>): { key: string, value: string }[] {
     return Object.entries(specs).map(([key, value]) => ({ key, value }));
   }
 

@@ -2,9 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
-import { B2BShippingInfo } from '../../../cart/models/b2b-cart.model';
 import { selectCurrentUser } from '../../../../../core/auth/store/auth.selectors';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 

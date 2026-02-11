@@ -12,7 +12,7 @@
     </div>
 
     <!-- Statistics Cards -->
-    <div *ngIf="!(loading$ | async)" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div *ngIf="(loading$ | async) === false" class="grid grid-cols-1 md:grid-cols-4 gap-4">
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
         <div class="flex items-center">
         <div class="flex-shrink-0">

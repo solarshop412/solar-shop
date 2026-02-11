@@ -1,39 +1,39 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Breadcrumb -->
     <div class="bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <nav class="flex" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-4">
-            <li>
-            <div>
-                <a [routerLink]="['/partneri']" class="text-gray-400 hover:text-gray-500 font-['DM_Sans']">
-                {{ 'b2bNav.home' | translate }}
-                </a>
-            </div>
-            </li>
-            <li>
-            <div class="flex items-center">
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <a [routerLink]="['/partneri/proizvodi']" class="ml-4 text-gray-400 hover:text-gray-500 font-['DM_Sans']">
-                {{ 'b2bNav.products' | translate }}
-                </a>
-            </div>
-            </li>
-            <li>
-            <div class="flex items-center">
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span class="ml-4 text-gray-500 font-['DM_Sans']">
-                {{ product?.name || 'Product Details' }}
-                </span>
-            </div>
-            </li>
-        </ol>
-        </nav>
-    </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="flex" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-4">
+                <li>
+                    <div>
+                        <a [routerLink]="['/partneri']" class="text-gray-400 hover:text-gray-500 font-['DM_Sans']">
+                            {{ 'b2bNav.home' | translate }}
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <a [routerLink]="['/partneri/proizvodi']" class="ml-4 text-gray-400 hover:text-gray-500 font-['DM_Sans']">
+                            {{ 'b2bNav.products' | translate }}
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="ml-4 text-gray-500 font-['DM_Sans']">
+                            {{ product?.name || 'Product Details' }}
+                        </span>
+                    </div>
+                </li>
+            </ol>
+            </nav>
+        </div>
     </div>
 
     <!-- Loading State -->
@@ -61,7 +61,8 @@
     </div>
 
     <!-- Product Details -->
-    <div *ngIf="product && !(loading$ | async)" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div *ngIf="product && (loading$ | async) === false" 
+         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <!-- Product Images -->
         <div class="lg:sticky lg:top-8 space-y-6">
@@ -83,24 +84,28 @@
             <!-- Navigation arrows for multiple images -->
             <div *ngIf="hasMultipleImages()" class="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4">
                 <button 
-                (click)="previousImage()" 
-                class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
-                [disabled]="currentImageIndex === 0"
-                [class.opacity-50]="currentImageIndex === 0"
+                    (click)="previousImage()" 
+                    (keydown.space)="previousImage()" 
+                    (keydown.enter)="previousImage()" 
+                    class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
+                    [disabled]="currentImageIndex === 0"
+                    [class.opacity-50]="currentImageIndex === 0"
                 >
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    </svg>
                 </button>
                 <button 
-                (click)="nextImage()" 
-                class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
-                [disabled]="currentImageIndex === getImageCount() - 1"
-                [class.opacity-50]="currentImageIndex === getImageCount() - 1"
+                    (click)="nextImage()" 
+                    (keydown.space)="nextImage()" 
+                    (keydown.enter)="nextImage()" 
+                    class="bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-opacity"
+                    [disabled]="currentImageIndex === getImageCount() - 1"
+                    [class.opacity-50]="currentImageIndex === getImageCount() - 1"
                 >
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
                 </button>
             </div>
             
@@ -365,10 +370,12 @@
             <div class="flex items-center justify-between mb-3">
                 <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.description' | translate }}</h4>
                 <button 
-                (click)="toggleDescription()"
-                class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
-                [attr.aria-expanded]="isDescriptionExpanded"
-                [attr.aria-label]="isDescriptionExpanded ? 'Collapse description' : 'Expand description'"
+                    (click)="toggleDescription()"
+                    (keydown.enter)="toggleDescription()"
+                    (keydown.space)="toggleDescription()"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
+                    [attr.aria-expanded]="isDescriptionExpanded"
+                    [attr.aria-label]="isDescriptionExpanded ? 'Collapse description' : 'Expand description'"
                 >
                 <svg 
                     class="w-4 h-4 transition-transform duration-200"
@@ -396,6 +403,8 @@
                 <h4 class="text-md font-medium text-gray-700">{{ 'b2b.products.specifications' | translate }}</h4>
                 <button 
                 (click)="toggleSpecifications()"
+                (keydown.enter)="toggleSpecifications()"
+                (keydown.space)="toggleSpecifications()"
                 class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
                 [attr.aria-expanded]="isSpecificationsExpanded"
                 [attr.aria-label]="isSpecificationsExpanded ? 'Collapse specifications' : 'Expand specifications'"
@@ -430,10 +439,12 @@
             <div class="flex items-center justify-between mb-3">
                 <h4 class="text-md font-medium text-gray-700">{{ 'admin.productTechnicalSheet' | translate }}</h4>
                 <button 
-                (click)="toggleTechnicalSheet()"
-                class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
-                [attr.aria-expanded]="isTechnicalSheetExpanded"
-                [attr.aria-label]="isTechnicalSheetExpanded ? 'Collapse technical sheet' : 'Expand technical sheet'"
+                    (click)="toggleTechnicalSheet()"
+                    (keydown.enter)="toggleTechnicalSheet()"
+                    (keydown.space)="toggleTechnicalSheet()"
+                    class="flex items-center space-x-2 text-solar-500 hover:text-solar-600 transition-colors duration-200"
+                    [attr.aria-expanded]="isTechnicalSheetExpanded"
+                    [attr.aria-label]="isTechnicalSheetExpanded ? 'Collapse technical sheet' : 'Expand technical sheet'"
                 >
                 <svg 
                     class="w-4 h-4 transition-transform duration-200"
@@ -478,27 +489,31 @@
             <div class="flex items-center space-x-4">
             <div class="flex items-center border border-gray-300 rounded-lg">
                 <button
-                (click)="decreaseQuantity()"
-                class="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors rounded-l-lg"
+                    (click)="decreaseQuantity()"
+                    (keydown.enter)="decreaseQuantity()"
+                    (keydown.space)="decreaseQuantity()"
+                    lass="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors rounded-l-lg"
                 >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
-                </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                    </svg>
                 </button>
                 <input
-                type="number"
-                [(ngModel)]="selectedQuantity"
-                (change)="onQuantityChange($event)"
-                min="1"
-                class="w-20 px-3 py-2 text-center border-x border-gray-300 focus:outline-none focus:ring-2 focus:ring-solar-500"
+                    type="number"
+                    [(ngModel)]="selectedQuantity"
+                    (change)="onQuantityChange($event)"
+                    min="1"
+                    class="w-20 px-3 py-2 text-center border-x border-gray-300 focus:outline-none focus:ring-2 focus:ring-solar-500"
                 >
                 <button
-                (click)="increaseQuantity()"
-                class="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors rounded-r-lg"
+                    (click)="increaseQuantity()"
+                    (keydown.enter)="increaseQuantity()"
+                    (keydown.space)="increaseQuantity()"
+                    class="px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors rounded-r-lg"
                 >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                </svg>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
                 </button>
             </div>
             <div class="text-sm text-gray-600">
@@ -514,6 +529,8 @@
             <!-- Add to Cart Button -->
             <button *ngIf="isCompanyContact && product.in_stock && hasB2BPrice(product)"
                     (click)="addToCart(product)"
+                    (keydown.enter)="addToCart(product)"
+                    (keydown.space)="addToCart(product)"
                     class="w-full bg-solar-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
             <span class="flex items-center justify-center space-x-2">
                 <lucide-angular
@@ -529,6 +546,8 @@
             <!-- Request Quote Button -->
             <button *ngIf="isCompanyContact && (!hasB2BPrice(product) || !product.in_stock)" 
                     (click)="requestQuote(product)"
+                    (keydown.enter)="requestQuote(product)"
+                    (keydown.space)="requestQuote(product)"
                     class="w-full bg-yellow-600 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-yellow-700 transition-colors">
             {{ 'b2b.products.requestQuote' | translate }}
             </button>
@@ -536,6 +555,8 @@
             <!-- Sign In / Apply Buttons -->
             <div *ngIf="!isAuthenticated" class="space-y-2">
             <button (click)="navigateToLogin()"
+                    (keydown.enter)="navigateToLogin()"
+                    (keydown.space)="navigateToLogin()"
                     class="w-full bg-solar-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
                 {{ 'b2b.products.signInToOrder' | translate }}
             </button>
@@ -543,6 +564,8 @@
             
             <div *ngIf="isAuthenticated && !isCompanyContact" class="space-y-2">
             <button (click)="navigateToRegister()"
+                    (keydown.enter)="navigateToRegister()"
+                    (keydown.space)="navigateToRegister()"
                     class="w-full bg-yellow-600 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-yellow-700 transition-colors">
                 {{ 'b2b.products.applyForPartnership' | translate }}
             </button>
@@ -563,7 +586,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div *ngFor="let suggested of suggestedProducts" 
                 class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                (click)="navigateToProduct(suggested.id)">
+                (click)="navigateToProduct(suggested.id)"
+                (keydown.enter)="navigateToProduct(suggested.id)"
+                (keydown.space)="navigateToProduct(suggested.id)">
             <!-- Product Image -->
             <div class="aspect-w-1 aspect-h-1 bg-gray-100">
             <img 

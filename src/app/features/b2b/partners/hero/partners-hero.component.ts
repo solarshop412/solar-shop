@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { selectCurrentUser } from '../../../../core/auth/store/auth.selectors';
   templateUrl: './partners-hero.component.html',
   styleUrls: ['./partners-hero.component.scss']
 })
-export class PartnersHeroComponent implements OnInit {
+export class PartnersHeroComponent {
   private router = inject(Router);
   private store = inject(Store);
   private supabaseService = inject(SupabaseService);
@@ -43,10 +43,6 @@ export class PartnersHeroComponent implements OnInit {
         );
       })
     );
-  }
-
-  ngOnInit(): void {
-    // Component initialization if needed
   }
 
   navigateToRegister(): void {

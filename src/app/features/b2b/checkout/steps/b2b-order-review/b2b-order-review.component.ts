@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
     templateUrl: './b2b-order-review.component.html',
     styleUrls: ['./b2b-order-review.component.scss']
 })
-export class B2bOrderReviewComponent implements OnInit {
+export class B2bOrderReviewComponent {
     private store = inject(Store);
     private router = inject(Router);
 
@@ -24,10 +24,6 @@ export class B2bOrderReviewComponent implements OnInit {
 
     constructor() {
         this.cartItems$ = this.store.select(selectB2BCartItems);
-    }
-
-    ngOnInit() {
-        // Cart is already loaded by the B2B layout
     }
 
     trackByItemId(index: number, item: B2BCartItem): string {

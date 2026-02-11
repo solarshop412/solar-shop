@@ -346,7 +346,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       }));
 
       // Parse specifications line-separated format to object
-      let specificationsObj: { [key: string]: string } = {};
+      const specificationsObj: { [key: string]: string } = {};
       if (formValue.specifications && formValue.specifications.trim()) {
         try {
           const specs = formValue.specifications.trim().split('\n');

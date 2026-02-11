@@ -8,7 +8,7 @@ import { CartSidebarComponent } from '../../features/b2c/cart/components/cart-si
 import { CartNotificationComponent } from '../../features/b2c/cart/components/cart-notification/cart-notification.component';
 
 @Component({
-  selector: 'page-layout',
+  selector: 'app-page-layout',
   templateUrl: './page-layout.component.html',
   styleUrls: ['./page-layout.component.scss'],
   standalone: true,

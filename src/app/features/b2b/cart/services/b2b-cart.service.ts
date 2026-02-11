@@ -316,7 +316,7 @@ export class B2BCartService {
     private saveCartItem(companyId: string, newItem: B2BCartItem): void {
         const storageKey = this.STORAGE_KEY + companyId;
         const storedCart = localStorage.getItem(storageKey);
-        let items: B2BCartItem[] = storedCart ? JSON.parse(storedCart) : [];
+        const items: B2BCartItem[] = storedCart ? JSON.parse(storedCart) : [];
 
         const existingIndex = items.findIndex(item => item.productId === newItem.productId);
         if (existingIndex >= 0) {

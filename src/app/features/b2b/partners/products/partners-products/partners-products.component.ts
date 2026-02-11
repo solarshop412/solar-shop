@@ -69,8 +69,8 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
 
   // Dynamic sort options
   enabledSortOptions$: Observable<SortOptionDisplay[]>;
-  defaultSortCode: string = ''; // No default sort - use display_order from admin
-  currentSortBy: string = '';
+  defaultSortCode = ''; // No default sort - use display_order from admin
+  currentSortBy = '';
 
   isAuthenticated = false;
   isCompanyContact = false;
@@ -85,7 +85,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   // Category expansion state
   categoryExpansionState: { [categoryId: string]: boolean } = {};
   nestedCategories: ProductCategory[] = [];
-  searchQuery: string = '';
+  searchQuery = '';
 
   private searchSubject = new Subject<string>();
 
@@ -663,7 +663,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     combineLatest([this.currentPage$, this.totalPages$]).pipe(
       takeUntil(this.destroy$),
       take(1)
-    ).subscribe(([currentPage, totalPages]) => {
+    ).subscribe(([currentPage]) => {
       if (currentPage > 1) {
         this.onPageChange(currentPage - 1);
       }

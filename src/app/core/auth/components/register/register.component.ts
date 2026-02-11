@@ -39,7 +39,7 @@ export class RegisterComponent {
             email: ['', [Validators.required, Validators.email]],
             firstName: ['', [Validators.required, Validators.minLength(2)]],
             lastName: ['', [Validators.required, Validators.minLength(2)]],
-            phoneNumber: ['', [Validators.pattern(/^[\+]?[1-9][\d]{0,15}$/)]],
+            phoneNumber: ['', [Validators.pattern(/^[+]?[1-9][\d]{0,15}$/)]],
             address: ['', [Validators.minLength(10)]],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', [Validators.required]]
@@ -135,6 +135,7 @@ export class RegisterComponent {
             password: this.translateService.translate('register.password'),
             confirmPassword: this.translateService.translate('register.confirmPassword')
         };
+        
         return displayNames[fieldName] || fieldName;
     }
 } 

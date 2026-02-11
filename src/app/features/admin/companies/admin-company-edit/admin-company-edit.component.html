@@ -27,7 +27,7 @@
             </svg>
             {{ 'common.saving' | translate }}
         </span>
-        <span *ngIf="!(loading$ | async)">{{ 'common.save' | translate }}</span>
+        <span *ngIf="(loading$ | async) === false">{{ 'common.save' | translate }}</span>
         </button>
     </div>
     </div>

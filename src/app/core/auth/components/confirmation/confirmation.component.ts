@@ -15,7 +15,7 @@ import { TranslationService } from '../../../../shared/services/translation.serv
     providers: [TranslationService]
 })
 export class ConfirmationComponent implements OnInit, OnDestroy {
-    email: string = '';
+    email = '';
     loading = false;
     resendLoading = false;
     successMessage = '';

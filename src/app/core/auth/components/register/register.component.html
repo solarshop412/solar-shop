@@ -191,7 +191,7 @@
 
                         <app-loader *ngIf="loading$ | async" class="w-5 h-5 mr-2"></app-loader>
 
-                        <span *ngIf="!(loading$ | async)">{{ 'register.createAccount' | translate }}</span>
+                        <span *ngIf="(loading$ | async) === false">{{ 'register.createAccount' | translate }}</span>
                         <span *ngIf="loading$ | async">{{ 'register.creatingAccount' | translate }}</span>
                     </button>
                 </form>

@@ -99,7 +99,7 @@
 
                         <app-loader *ngIf="loading$ | async" class="w-5 h-5 mr-2"></app-loader>
 
-                        <span *ngIf="!(loading$ | async)">{{ 'auth.signInButton' | translate }}</span>
+                        <span *ngIf="(loading$ | async) === false">{{ 'auth.signInButton' | translate }}</span>
                         <span *ngIf="loading$ | async">{{ 'auth.signingIn' | translate }}</span>
                     </button>
 

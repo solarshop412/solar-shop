@@ -40,15 +40,15 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   companies: Company[] = [];
   products: Product[] = [];
   filteredProducts: ProductWithCustomPrice[] = [];
-  selectedCompanyId: string = '';
+  selectedCompanyId = '';
   selectedCompany: Company | null = null;
-  productSearchTerm: string = '';
+  productSearchTerm = '';
   selectedCategories: string[] = [];
   availableCategories: string[] = [];
-  showCategoryDropdown: boolean = false;
+  showCategoryDropdown = false;
   existingPricing: any[] = [];
-  bulkDiscountPercentage: number = 0;
-  showBulkPricing: boolean = false;
+  bulkDiscountPercentage = 0;
+  showBulkPricing = false;
 
   ngOnInit(): void {
     console.log('Company Pricing Form: ngOnInit called');
@@ -356,7 +356,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     if (!this.selectedCompany) return;
 
     const productsToSave = this.getProductsWithCustomPricing();
-    const existingProductIds = this.existingPricing.map(p => p.product_id);
+    // const existingProductIds = this.existingPricing.map(p => p.product_id);
 
     try {
       // Create new pricing records

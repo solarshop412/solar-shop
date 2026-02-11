@@ -453,7 +453,7 @@ export class B2BCartEffects {
             ofType(B2BCartActions.loadB2BCartSuccess),
             switchMap(({ companyId }) => {
                 // Create interval that syncs every 5 minutes
-                return new Promise(resolve => {
+                return new Promise(() => {
                     setInterval(() => {
                         this.store.dispatch(B2BCartActions.syncB2BCart({ companyId }));
                     }, 5 * 60 * 1000); // 5 minutes

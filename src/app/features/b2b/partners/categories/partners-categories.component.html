@@ -1,33 +1,40 @@
 <section class="py-16 bg-b2b-gray-50" *ngIf="categories.length">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-b2b-gray-900 mb-12 text-center font-['Poppins']">{{ 'b2b.products.productCategories' | translate }}</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div *ngFor="let category of categories" 
-            (click)="navigateToProducts(category.slug)"
-            class="text-center group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
-        
-        <!-- Category Icon/Image Container -->
-        <div class="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-solar-100 to-solar-200 rounded-full flex items-center justify-center group-hover:from-solar-200 group-hover:to-solar-300 transition-all duration-300 shadow-lg">
+        <h2 class="text-3xl font-bold text-b2b-gray-900 mb-12 text-center font-['Poppins']">
+            {{ 'b2b.products.productCategories' | translate }}
+        </h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div *ngFor="let category of categories" 
+                (click)="navigateToProducts(category.slug)"
+                (keydown.enter)="navigateToProducts(category.slug)"
+                (keydown.space)="navigateToProducts(category.slug)"
+                class="text-center group cursor-pointer transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
             
-            <!-- Category Icon -->
-            <div class="text-solar-600 group-hover:text-solar-700 transition-colors duration-300" [innerHTML]="getCategoryIcon(category.icon)">
-            </div>
-            
-            <!-- Product Count Badge -->
-            <div *ngIf="category.productCount" 
-                class="absolute -top-2 -right-2 bg-accent-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md">
-            {{ category.productCount }}
+                <!-- Category Icon/Image Container -->
+                <div class="relative w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-solar-100 to-solar-200 rounded-full flex items-center justify-center group-hover:from-solar-200 group-hover:to-solar-300 transition-all duration-300 shadow-lg">
+                    
+                    <!-- Category Icon -->
+                    <div class="text-solar-600 group-hover:text-solar-700 transition-colors duration-300" 
+                         [innerHTML]="getCategoryIcon(category.icon)">
+                    </div>
+                    
+                    <!-- Product Count Badge -->
+                    <div *ngIf="category.productCount" 
+                        class="absolute -top-2 -right-2 bg-accent-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-md">
+                        {{ category.productCount }}
+                    </div>
+                </div>
+                
+                <!-- Category Name -->
+                <h3 class="font-semibold text-b2b-gray-900 group-hover:text-solar-600 transition-colors duration-300 font-['Poppins']">
+                    {{ category.name }}
+                </h3>
+                
+                <!-- Hover Indicator -->
+                <div class="mt-2 w-0 group-hover:w-8 h-1 bg-solar-500 mx-auto transition-all duration-300 rounded-full"></div>
+
             </div>
         </div>
-        
-        <!-- Category Name -->
-        <h3 class="font-semibold text-b2b-gray-900 group-hover:text-solar-600 transition-colors duration-300 font-['Poppins']">
-            {{ category.name }}
-        </h3>
-        
-        <!-- Hover Indicator -->
-        <div class="mt-2 w-0 group-hover:w-8 h-1 bg-solar-500 mx-auto transition-all duration-300 rounded-full"></div>
-        </div>
-    </div>
     </div>
 </section>
