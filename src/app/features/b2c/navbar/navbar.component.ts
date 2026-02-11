@@ -104,8 +104,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
     if (this.showSearchOverlay) {
       this.cancelSearch();
     }

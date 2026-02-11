@@ -140,8 +140,8 @@ export class CartSidebarComponent implements OnInit {
     });
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
     this.closeCart();
   }
 

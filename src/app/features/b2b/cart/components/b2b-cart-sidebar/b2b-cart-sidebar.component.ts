@@ -78,8 +78,8 @@ export class B2BCartSidebarComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(_event: KeyboardEvent) {
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
     this.closeSidebar();
   }
 
