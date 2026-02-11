@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil, filter, distinctUntilChanged } from 'rxjs';
@@ -12,7 +12,7 @@ import { TranslatePipe } from "../../../../../shared/pipes/translate.pipe";
   templateUrl: './cart-notification.component.html',
   styleUrls: ['./cart-notification.component.scss']
 })
-export class CartNotificationComponent implements OnInit, OnDestroy {
+export class CartNotificationComponent implements OnDestroy {
   private store = inject(Store);
   private destroy$ = new Subject<void>();
 
@@ -35,10 +35,6 @@ export class CartNotificationComponent implements OnInit, OnDestroy {
         }
         this.previousItemCount = count;
       });
-  }
-
-  ngOnInit() {
-    // Component initialization logic can go here if needed
   }
 
   ngOnDestroy() {

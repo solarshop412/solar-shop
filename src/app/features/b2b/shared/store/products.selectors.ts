@@ -48,7 +48,7 @@ export const selectProductsWithPricing = createSelector(
             const customPricing = companyPricing.find(p => p.product_id === product.id);
             
             // Build pricing tiers array
-            let company_pricing_tiers: { quantity: number; price: number; }[] = [];
+            const company_pricing_tiers: { quantity: number; price: number; }[] = [];
             let company_price: number | undefined;
             
             if (customPricing) {

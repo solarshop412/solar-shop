@@ -52,11 +52,15 @@
         </div>
 
         <!-- Blog Posts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" *ngIf="!(isLoading$ | async) && !(error$ | async)">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" 
+             *ngIf="(isLoading$ | async) === false && 
+                    (error$ | async) === null">
           <article 
             *ngFor="let post of filteredPosts$ | async"
             class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer"
             (click)="navigateToPost(post.id)"
+            (keydown.enter)="navigateToPost(post.id)"
+            (keydown.space)="navigateToPost(post.id)"
           >
             <div class="h-60 overflow-hidden">
               <img 
@@ -94,7 +98,10 @@
         </div>
 
         <!-- Empty State -->
-        <div *ngIf="!(isLoading$ | async) && !(error$ | async) && (filteredPosts$ | async)?.length === 0" class="text-center py-20">
+        <div *ngIf="(isLoading$ | async) === false && 
+                    (error$ | async) === null && 
+                    (filteredPosts$ | async)?.length === 0" 
+              class="text-center py-20">
           <div class="text-gray-400 text-6xl mb-4">📝</div>
           <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ 'blog.noPosts' | translate }}</h2>
           <p class="text-gray-600 mb-6">{{ 'blog.noPostsText' | translate }}</p>

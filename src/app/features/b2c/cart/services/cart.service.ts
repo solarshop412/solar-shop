@@ -55,7 +55,7 @@ export class CartService {
                     this.store.dispatch(CartActions.stopCartLoading());
                     return user;
                 }),
-                catchError((error) => {
+                catchError(() => {
                     return of(null);
                 })
             ).toPromise();
@@ -115,7 +115,7 @@ export class CartService {
             map(items => {
                 return this.createCartFromItems(items);
             }),
-            catchError(error => {
+            catchError(() => {
                 return of(this.createCartFromItems([]));
             })
         );
@@ -494,7 +494,6 @@ export class CartService {
             for (const item of supabaseCartItems) {
                 const product = await this.supabaseService.getTableById('products', item.product_id);
                 if (product) {
-                    const now = new Date().toISOString();
                     cartItems.push({
                         id: item.id,
                         productId: product.id,

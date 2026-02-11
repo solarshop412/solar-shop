@@ -22,11 +22,11 @@ export class AddToCartButtonComponent {
 
   @Input() productId!: string;
   @Input() variantId?: string;
-  @Input() quantity: number = 1;
-  @Input() buttonText: string = 'Add to Cart';
+  @Input() quantity = 1;
+  @Input() buttonText = 'Add to Cart';
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() variant: 'primary' | 'secondary' | 'outline' = 'primary';
-  @Input() fullWidth: boolean = false;
+  @Input() fullWidth = false;
   @Input() availability: 'available' | 'limited' | 'out-of-stock' = 'available';
 
   // Offer-related inputs for discounted pricing

@@ -31,7 +31,7 @@ export class CartEffects {
                             ? CartActions.loadCartSuccess({ cart })
                             : CartActions.loadCartSuccess({ cart: null as any });
                     }),
-                    catchError(error => {
+                    catchError(() => {
                         // For guest users or any error, ensure we set isLoading to false
                         return of(CartActions.loadCartSuccess({ cart: null as any }));
                     })
@@ -103,7 +103,7 @@ export class CartEffects {
             tap(action => console.debug('Cart Effect - addToCart action received:', action)),
             switchMap(({ productId, quantity, variantId }) =>
                 this.cartService.addToCart(productId, quantity, variantId).pipe(
-                    tap(cart => {
+                    tap(() => {
                     }),
                     map(cart => {
                         const successAction = CartActions.addToCartSuccess({ cart });

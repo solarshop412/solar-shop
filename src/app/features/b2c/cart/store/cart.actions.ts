@@ -165,14 +165,14 @@ export const addToCartFromOfferFailure = createAction(
 export const addAllToCartFromOffer = createAction(
     '[Cart] Add All To Cart From Offer',
     props<{
-        products: Array<{
+        products: {
             productId: string;
             quantity: number;
             variantId?: string;
             individualDiscount?: number;
             individualDiscountType?: 'percentage' | 'fixed_amount';
             originalPrice?: number;
-        }>;
+        }[];
         offerId: string;
         offerName: string;
         offerType: 'percentage' | 'fixed_amount' | 'buy_x_get_y' | 'bundle';

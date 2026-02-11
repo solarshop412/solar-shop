@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
   templateUrl: './order-review.component.html',
   styleUrls: ['./order-review.component.scss']
 })
-export class OrderReviewComponent implements OnInit {
+export class OrderReviewComponent {
   private store = inject(Store);
   private router = inject(Router);
 
@@ -35,11 +35,6 @@ export class OrderReviewComponent implements OnInit {
     this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
     this.appliedCoupons$ = this.store.select(CartSelectors.selectAppliedCoupons);
     this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
-  }
-
-  ngOnInit() {
-    // Cart is already loaded by the cart sidebar in the page layout
-    // No need to dispatch loadCart here as it would be redundant
   }
 
   trackByItemId(index: number, item: CartItem): string {

@@ -3,6 +3,8 @@
     *ngIf="isCartOpen$ | async" 
     class="fixed inset-0 z-50 overflow-hidden cart-overlay"
     (click)="onOverlayClick($event)"
+    (keydown.enter)="onOverlayClick($event)"
+    (keydown.space)="onOverlayClick($event)"
 >
     <!-- Background overlay -->
     <div 
@@ -12,16 +14,20 @@
     
     <!-- Cart sidebar -->
     <div 
-    class="absolute right-0 top-0 h-screen w-full max-w-md bg-white shadow-xl transform transition-all duration-300 ease-out flex flex-col cart-sidebar animate-slide-in-right"
-    (click)="$event.stopPropagation()"
+        class="absolute right-0 top-0 h-screen w-full max-w-md bg-white shadow-xl transform transition-all duration-300 ease-out flex flex-col cart-sidebar animate-slide-in-right"
+        (click)="$event.stopPropagation()"
+        (keydown.enter)="$event.stopPropagation()"
+        (keydown.space)="$event.stopPropagation()"
     >
     <!-- Cart Header -->
     <div class="flex items-center justify-between p-4 border-b border-gray-200">
         <h2 class="text-lg font-semibold text-gray-900">{{ 'cart.yourCart' | translate }}</h2>
         <button 
-        (click)="closeCart()"
-        class="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-        aria-label="Close cart"
+            (click)="closeCart()"
+            (keydown.enter)="closeCart()"
+            (keydown.space)="closeCart()"
+            class="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close cart"
         >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -54,7 +60,8 @@
         </div>
 
         <!-- Populated Cart State -->
-        <div *ngIf="!(isCartEmpty$ | async)" class="flex-1 flex flex-col min-h-0">
+        <div *ngIf="(isCartEmpty$ | async) === false" 
+            class="flex-1 flex flex-col min-h-0">
         <!-- Cart Items -->
         <div class="flex-1 overflow-y-auto p-4 min-h-0">
             <div class="space-y-3">
@@ -153,6 +160,8 @@
                     <div class="flex items-center space-x-1">
                     <button 
                         (click)="decreaseQuantity(item.id)"
+                        (keydown.enter)="decreaseQuantity(item.id)"
+                        (keydown.space)="decreaseQuantity(item.id)"
                         [disabled]="item.quantity <= item.minQuantity"
                         class="w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
@@ -165,6 +174,8 @@
                     
                     <button 
                         (click)="increaseQuantity(item.id)"
+                        (keydown.enter)="increaseQuantity(item.id)"
+                        (keydown.space)="increaseQuantity(item.id)"
                         [disabled]="item.quantity >= item.maxQuantity"
                         class="w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
@@ -176,10 +187,12 @@
 
                     <!-- Remove Button -->
                     <button 
-                    (click)="removeItem(item.id)"
-                    class="text-red-500 hover:text-red-700 text-sm"
+                        (click)="removeItem(item.id)"
+                        (keydown.enter)="removeItem(item.id)"
+                        (keydown.space)="removeItem(item.id)"
+                        class="text-red-500 hover:text-red-700 text-sm"
                     >
-                    {{ 'cart.remove' | translate }}
+                        {{ 'cart.remove' | translate }}
                     </button>
                 </div>
                 </div>
@@ -201,6 +214,8 @@
                 </span>
                 <button
                     (click)="removeCoupon(coupon.id)"
+                    (keydown.enter)="removeCoupon(coupon.id)"
+                    (keydown.space)="removeCoupon(coupon.id)"
                     class="text-green-600 hover:text-green-800"
                 >
                     ×
@@ -209,7 +224,8 @@
             </div>
 
             <!-- Coupon Input - Only show when no coupons are applied -->
-            <div *ngIf="!(hasCouponsApplied$ | async)" class="flex space-x-2">
+            <div *ngIf="(hasCouponsApplied$ | async) === false" 
+                 class="flex space-x-2">
                 <input
                 type="text"
                 [(ngModel)]="couponCode"
@@ -218,12 +234,16 @@
                 [disabled]="(isCouponLoading$ | async) || false"
                 >
                 <button
-                (click)="applyCoupon()"
-                [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"
-                class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    (click)="applyCoupon()"
+                    (keydown.enter)="applyCoupon()"
+                    (keydown.space)="applyCoupon()"
+                    [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                <span *ngIf="!(isCouponLoading$ | async)">{{ 'cart.apply' | translate }}</span>
-                <span *ngIf="isCouponLoading$ | async">...</span>
+                    <span *ngIf="(isCouponLoading$ | async) === false">
+                        {{ 'cart.apply' | translate }}
+                    </span>
+                    <span *ngIf="isCouponLoading$ | async">...</span>
                 </button>
             </div>
 
@@ -264,6 +284,8 @@
             <div class="mt-6">
             <button 
                 (click)="proceedToCheckout()"
+                (keydown.enter)="proceedToCheckout()"
+                (keydown.space)="proceedToCheckout()"
                 class="w-full px-6 py-4 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-['DM_Sans']"
             >
                 {{ 'cart.checkout' | translate }}

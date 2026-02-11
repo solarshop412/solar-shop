@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
@@ -14,7 +14,7 @@ import { FAQItem } from '../../../shared/models/faq-item.model';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent {
   contactForm: FormGroup;
   isSubmitting = false;
   messageSent = false;
@@ -332,12 +332,6 @@ export class ContactComponent implements OnInit {
     }
   ];
 
-
-
-  ngOnInit(): void {
-    // Component initialization
-  }
-
   onSubmit(): void {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
@@ -374,7 +368,6 @@ export class ContactComponent implements OnInit {
 
   getMapEmbedUrl(location: ShopLocation): SafeResourceUrl {
     // Using OpenStreetMap with marker - zoom level 16 for good detail
-    const zoom = 16;
     // The marker parameter ensures a red pin is displayed at the location
     const url = `https://www.openstreetmap.org/export/embed.html?bbox=${location.longitude-0.003}%2C${location.latitude-0.003}%2C${location.longitude+0.003}%2C${location.latitude+0.003}&layer=mapnik&marker=${location.latitude}%2C${location.longitude}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

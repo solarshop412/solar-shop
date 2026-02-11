@@ -105,14 +105,14 @@ export class CartSidebarComponent implements OnInit {
 
   constructor() {
     // Debug: Log cart state changes
-    this.isCartOpen$.subscribe(isOpen => {
+    this.isCartOpen$.subscribe(() => {
     });
 
-    this.cartItems$.subscribe(items => {
+    this.cartItems$.subscribe(() => {
     });
 
     // Debug: Log cart loading state
-    this.store.select(CartSelectors.selectIsCartLoading).subscribe(isLoading => {
+    this.store.select(CartSelectors.selectIsCartLoading).subscribe(() => {
     });
 
     // Debug: Log cart errors
@@ -122,7 +122,7 @@ export class CartSidebarComponent implements OnInit {
     });
 
     // Debug: Log the entire cart state
-    this.store.select(CartSelectors.selectCartState).subscribe(cartState => {
+    this.store.select(CartSelectors.selectCartState).subscribe(() => {
     });
   }
 
@@ -149,7 +149,7 @@ export class CartSidebarComponent implements OnInit {
     this.store.dispatch(CartActions.closeCart());
   }
 
-  onOverlayClick(event: MouseEvent) {
+  onOverlayClick(event: Event) {
     // Close cart if clicking on the overlay (not the sidebar content)
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;

@@ -5,11 +5,12 @@
     [disabled]="(isLoading$ | async) || isOutOfStock"
     [class]="buttonClasses"
 >
-    <span *ngIf="!(isLoading$ | async) && !isOutOfStock" class="flex items-center space-x-2">
+    <span *ngIf="(isLoading$ | async) === false && !isOutOfStock" 
+          class="flex items-center space-x-2">
         <lucide-angular 
-        name="shopping-cart" 
-        class="w-6 h-6"
-        [img]="ShoppingCartIcon">
+            name="shopping-cart" 
+            class="w-6 h-6"
+            [img]="ShoppingCartIcon">
         </lucide-angular>
     <span>{{ buttonText }}</span>
     </span>
