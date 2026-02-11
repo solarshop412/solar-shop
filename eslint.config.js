@@ -38,7 +38,8 @@ module.exports = defineConfig([
           "varsIgnorePattern": "^_"
         }
       ],
-      "@angular-eslint/prefer-inject": "off"
+      "@angular-eslint/prefer-inject": "off",
+      "@typescript-eslint/consistent-indexed-object-style": "off"
     },
   },
   {
