@@ -131,7 +131,9 @@ export class TranslationService {
                 enterEmail: 'Unesite svoj email',
                 resetPassword: 'Resetiraj lozinku',
                 sendingResetEmail: 'Šalje se email za resetiranje...',
-                backToHome: 'Natrag na početnu'
+                backToHome: 'Natrag na početnu',
+                emailRequired: 'Unesite e-mail adresu',
+                emailInvalid: 'Neispravna email adresa'
             },
             // Partners Register
             partnersRegister: {
@@ -2973,7 +2975,9 @@ export class TranslationService {
                 enterEmail: 'Enter your email',
                 resetPassword: 'Reset Password',
                 sendingResetEmail: 'Sending reset email...',
-                backToHome: 'Back to Home'
+                backToHome: 'Back to Home',
+                emailRequired: 'Enter your email',
+                emailInvalid: 'Invalid email'
             },
             // Partners Register
             partnersRegister: {

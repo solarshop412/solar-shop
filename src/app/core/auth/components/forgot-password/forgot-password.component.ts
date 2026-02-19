@@ -7,11 +7,12 @@ import { State } from '../../../../reducers';
 import { sendResetPasswordEmail } from '../../store/auth.actions';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoaderComponent, TranslatePipe],
+  imports: [CommonModule, RouterModule, LoaderComponent, TranslatePipe, ReactiveFormsModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss'
 })
@@ -20,9 +21,18 @@ export class ForgotPasswordComponent {
   resetPasswordRequestSent = false;
   resetPasswordMessage: string | null = null;
   errorMessage: string | null = null;
+  forgotPwdForm: FormGroup;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private fb: FormBuilder) {
     this.loading$ = this.store.pipe(select(state => state.auth.loading));
+
+    this.forgotPwdForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+
+  get email() {
+    return this.forgotPwdForm.get('email');
   }
 
   onResetPassword(email: string): void {
