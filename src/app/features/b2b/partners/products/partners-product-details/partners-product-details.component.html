@@ -110,7 +110,8 @@
             </div>
             
             <!-- Image counter -->
-            <div *ngIf="hasMultipleImages()" class="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
+            <div *ngIf="hasMultipleImages()" 
+                  class="absolute bottom-4 right-4 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full text-sm">
                 {{ currentImageIndex + 1 }} / {{ getImageCount() }}
             </div>
             </div>
@@ -121,6 +122,8 @@
                     class="w-16 h-16 bg-gray-100 rounded border border-gray-200 cursor-pointer hover:opacity-75 flex items-center justify-center flex-shrink-0"
                     [class.border-solar-500]="i === currentImageIndex"
                     [class.border-2]="i === currentImageIndex"
+                    (keydown.space)="selectImage(i)" 
+                    (keydown.enter)="selectImage(i)" 
                     (click)="selectImage(i)">
                 <img 
                         [src]="image" 
@@ -159,10 +162,10 @@
                 (click)="showStockByUnit = !showStockByUnit"
                 class="text-sm text-solar-500 hover:text-solar-600 font-medium flex items-center gap-2 transition-colors">
                 <svg *ngIf="!showStockByUnit" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
                 <svg *ngIf="showStockByUnit" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
                 </svg>
                 {{ showStockByUnit ? ('b2b.products.hideStoreAvailability' | translate) : ('b2b.products.showStoreAvailability' | translate) }}
             </button>
@@ -534,9 +537,9 @@
                     class="w-full bg-solar-500 text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-solar-700 transition-colors">
             <span class="flex items-center justify-center space-x-2">
                 <lucide-angular
-                name="shopping-cart"
-                class="w-6 h-6"
-                [img]="ShoppingCartIcon">
+                    name="shopping-cart"
+                    class="w-6 h-6"
+                    [img]="ShoppingCartIcon">
                 </lucide-angular>
                 <span *ngIf="selectedQuantity === 1">{{ 'b2b.products.addToCart' | translate }}</span>
                 <span *ngIf="selectedQuantity > 1">{{ 'b2b.products.addToCart' | translate }} ({{ selectedQuantity }} {{ 'b2b.products.pieces' | translate }})</span>

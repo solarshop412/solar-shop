@@ -21,6 +21,8 @@
         <div 
             class="relative h-[500px] rounded-3xl overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl transition-shadow duration-500 transform hover:-translate-y-2"
             (click)="navigateToProductList(category)"
+            (keydown.enter)="navigateToProductList(category)"
+            (keydown.space)="navigateToProductList(category)"
         >
             <!-- Background Image -->
             <div class="absolute inset-0">
@@ -49,13 +51,15 @@
                 
                 <!-- Learn More Button -->
                 <button 
-                class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-solar-500 transition-all duration-300 group-hover:bg-solar-500 border border-white/30"
-                (click)="navigateToProductList(category); $event.stopPropagation()"
+                    class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-solar-500 transition-all duration-300 group-hover:bg-solar-500 border border-white/30"
+                    (click)="navigateToProductList(category); $event.stopPropagation()"
+                    (keydown.enter)="navigateToProductList(category); $event.stopPropagation()"
+                    (keydown.space)="navigateToProductList(category); $event.stopPropagation()"
                 >
-                <span>{{ 'products.exploreProducts' | translate }}</span>
-                <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
+                    <span>{{ 'products.exploreProducts' | translate }}</span>
+                    <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
                 </button>
             </div>
             </div>
@@ -70,6 +74,8 @@
             *ngFor="let subcategory of category.subcategories; trackBy: trackByCategoryId"
             class="bg-white rounded-xl p-4 border border-gray-200 hover:border-solar-300 hover:shadow-md transition-all duration-300 cursor-pointer group"
             (click)="navigateToProductList(subcategory)"
+            (keydown.enter)="navigateToProductList(subcategory)"
+            (keydown.space)="navigateToProductList(subcategory)"
             >
             <div class="flex items-center justify-between">
                 <div class="flex-1">

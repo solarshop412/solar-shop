@@ -81,52 +81,55 @@
     </div>
 
     <!-- Empty State -->
-    <div *ngIf="!(isLoading$ | async) && (offers$ | async)?.length === 0" class="text-center py-20">
+    <div *ngIf="(isLoading$ | async) === false 
+                && (offers$ | async)?.length === 0" 
+          class="text-center py-20">
         <div class="text-gray-400 mb-6">
-        <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
-        </svg>
+            <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
+            </svg>
         </div>
         <h3 class="text-2xl font-bold text-gray-900 mb-4 font-['Poppins']">{{ 'offers.noOffers' | translate }}</h3>
         <p class="text-gray-600 mb-8 font-['DM_Sans']">{{ 'offers.noOffersText' | translate }}</p>
         <button 
-        (click)="navigateToProducts()"
-        class="px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']"
-        >
-        {{ 'offers.browseAllProducts' | translate }}
+            (click)="navigateToProducts()"
+            class="px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']">
+            {{ 'offers.browseAllProducts' | translate }}
         </button>
     </div>
 
     <!-- Call to Action -->
     <div class="mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white">
         <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
-        {{ 'offers.dontMissOut' | translate }}
+            {{ 'offers.dontMissOut' | translate }}
         </h2>
         <p class="text-xl mb-8 max-w-2xl mx-auto font-['DM_Sans']">
-        {{ 'offers.subscribeText' | translate }}
+            {{ 'offers.subscribeText' | translate }}
         </p>
-        <form #newsletterForm="ngForm" (ngSubmit)="onNewsletterSubmit($event, newsletterForm)" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-        <input 
-            type="email" 
-            name="email"
-            [placeholder]="'offers.enterEmail' | translate"
-            class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white font-['DM_Sans']"
-            required
-            #emailInput
-            ngModel
-        >
-        <button 
-            type="submit"
-            class="px-8 py-3 rounded-lg font-semibold transition-colors font-['DM_Sans']"
-            [class.bg-green-500]="(newsletterState$ | async)?.success"
-            [class.text-white]="(newsletterState$ | async)?.success"
-            [class.bg-white]="!(newsletterState$ | async)?.success"
-            [class.text-solar-600]="!(newsletterState$ | async)?.success"
-            [class.hover:bg-gray-100]="!(newsletterState$ | async)?.success"
-            [disabled]="(newsletterState$ | async)?.loading || !newsletterForm.valid"
-        >
-            {{ (newsletterState$ | async)?.success ? ('footer.subscribed' | translate) : ('offers.subscribe' | translate) }}
-        </button>
+        <form #newsletterForm="ngForm" 
+            (ngSubmit)="onNewsletterSubmit($event, newsletterForm)" 
+            class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input 
+                type="email" 
+                name="email"
+                [placeholder]="'offers.enterEmail' | translate"
+                class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white font-['DM_Sans']"
+                required
+                #emailInput
+                ngModel
+            >
+            <button 
+                type="submit"
+                class="px-8 py-3 rounded-lg font-semibold transition-colors font-['DM_Sans']"
+                [class.bg-green-500]="(newsletterState$ | async)?.success"
+                [class.text-white]="(newsletterState$ | async)?.success"
+                [class.bg-white]="!(newsletterState$ | async)?.success"
+                [class.text-solar-600]="!(newsletterState$ | async)?.success"
+                [class.hover:bg-gray-100]="!(newsletterState$ | async)?.success"
+                [disabled]="(newsletterState$ | async)?.loading || !newsletterForm.valid"
+            >
+                {{ (newsletterState$ | async)?.success ? ('footer.subscribed' | translate) : ('offers.subscribe' | translate) }}
+            </button>
         </form>
     </div>
     </div>

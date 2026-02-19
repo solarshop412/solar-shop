@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
@@ -29,7 +29,7 @@ import {
   templateUrl: './product-reviews.component.html',
   styleUrls: ['./product-reviews.component.scss']
 })
-export class ProductReviewsComponent implements OnInit, OnChanges {
+export class ProductReviewsComponent implements OnChanges {
   @Input() productId!: string;
   @Input() productName?: string;
   @Input() preselectedOrderId?: string;
@@ -61,10 +61,6 @@ export class ProductReviewsComponent implements OnInit, OnChanges {
       this.userId = user?.id || '';
       // Don't call checkIfUserCanWriteReview here - wait for productId to be available
     });
-  }
-
-  ngOnInit(): void {
-    // Reviews are loaded automatically when product is loaded via effects
   }
 
   ngOnChanges(changes: SimpleChanges): void {

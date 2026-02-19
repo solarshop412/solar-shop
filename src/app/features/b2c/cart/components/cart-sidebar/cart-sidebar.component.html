@@ -7,10 +7,10 @@
     (keydown.space)="onOverlayClick($event)"
 >
     <!-- Background overlay -->
-    <div 
-    class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
-    (click)="closeCart()"
-    ></div>
+    <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"
+         (click)="closeCart()"
+         (keydown.enter)="closeCart()"
+         (keydown.space)="closeCart()"></div>
     
     <!-- Cart sidebar -->
     <div 
@@ -53,6 +53,8 @@
         <p class="text-gray-500 mb-6">{{ 'cart.emptyText' | translate }}</p>
         <button 
             (click)="closeCart()"
+            (keydown.enter)="closeCart()"
+            (keydown.space)="closeCart()"
             class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
             {{ 'cart.continueShopping' | translate }}

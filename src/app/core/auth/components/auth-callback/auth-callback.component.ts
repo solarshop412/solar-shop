@@ -59,6 +59,7 @@ export class AuthCallbackComponent implements OnInit {
           }));
         } catch (error) {
           // Fallback if profile fetch fails
+          console.error(error);
           const userData = this.createUserFromAuthUser(user);
           this.store.dispatch(AuthActions.loginSuccess({
             token: session.access_token,

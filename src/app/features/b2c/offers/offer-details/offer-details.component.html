@@ -169,7 +169,8 @@
     </div>
 
     <!-- No Products Message -->
-    <div *ngIf="!(relatedProducts$ | async) || (relatedProducts$ | async)?.length === 0" class="text-center py-12">
+    <div *ngIf="(relatedProducts$ | async) === null || (relatedProducts$ | async)?.length === 0" 
+         class="text-center py-12">
         <div class="bg-white rounded-2xl p-12 shadow-lg">
         <div class="text-gray-400 mb-4">
             <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">

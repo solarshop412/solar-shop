@@ -9,6 +9,10 @@ import { FooterData } from '../footer.component';
 
 @Injectable()
 export class FooterEffects {
+    private actions$ = inject(Actions);
+    private supabaseService = inject(SupabaseService);
+    private translationService = inject(TranslationService);
+    
     loadFooterData$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(FooterActions.loadFooterData),
@@ -100,8 +104,4 @@ export class FooterEffects {
             )
         )
     );
-
-    private actions$ = inject(Actions);
-    private supabaseService = inject(SupabaseService);
-    private translationService = inject(TranslationService);
 }
