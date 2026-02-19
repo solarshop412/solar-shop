@@ -38,7 +38,7 @@ module.exports = {
           "200": "#ffce99",              // Light orange
           "300": "#ffb05c",              // Medium light orange
           "400": "#ff6803",              // Primary orange
-          "500": "#ff6803",              // Primary orange (same as 400)
+          "500": "#e75d01",              // Primary orange (same as 400)
           "600": "#e55e03",              // Darker orange (hover)
           "700": "#cc5303",              // Dark orange
           "800": "#a34302",              // Very dark orange
