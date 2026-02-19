@@ -11,7 +11,7 @@ import { Order } from '../../../shared/models/order.model';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './b2b-order-details.component.html',
-  styleUrls: ['./b2b-order-details.component.scss']
+  styleUrls: ['./b2b-order-details.component.scss'],
 })
 export class B2bOrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -36,7 +36,8 @@ export class B2bOrderDetailsComponent implements OnInit {
     try {
       const { data: order, error } = await this.supabaseService.client
         .from('orders')
-        .select(`
+        .select(
+          `
           *,
           order_items (
             id,
@@ -49,7 +50,8 @@ export class B2bOrderDetailsComponent implements OnInit {
             product_image_url,
             product_specifications
           )
-        `)
+        `,
+        )
         .eq('id', orderId)
         .eq('is_b2b', true)
         .single();
@@ -99,13 +101,12 @@ export class B2bOrderDetailsComponent implements OnInit {
           totalPrice: item.total_price,
           productImageUrl: item.product_image_url,
           productSpecifications: item.product_specifications,
-          createdAt: item.created_at
+          createdAt: item.created_at,
         })),
         is_b2b: order.is_b2b,
         createdAt: order.created_at,
-        updatedAt: order.updated_at
+        updatedAt: order.updated_at,
       };
-
     } catch (error) {
       console.error('Error loading order details:', error);
       this.error = true;
@@ -116,31 +117,31 @@ export class B2bOrderDetailsComponent implements OnInit {
 
   getStatusLabel(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': 'b2b.orders.pending',
-      'confirmed': 'b2b.orders.confirmed',
-      'processing': 'b2b.orders.processing',
-      'shipped': 'b2b.orders.shipped',
-      'delivered': 'b2b.orders.delivered',
-      'cancelled': 'b2b.orders.cancelled'
+      pending: 'b2b.orders.pending',
+      confirmed: 'b2b.orders.confirmed',
+      processing: 'b2b.orders.processing',
+      shipped: 'b2b.orders.shipped',
+      delivered: 'b2b.orders.delivered',
+      cancelled: 'b2b.orders.cancelled',
     };
     return statusMap[status] || status;
   }
 
   getPaymentStatusLabel(paymentStatus: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': 'b2b.orders.pending',
-      'paid': 'b2b.orders.paid',
-      'failed': 'b2b.orders.failed'
+      pending: 'b2b.orders.pending',
+      paid: 'b2b.orders.paid',
+      failed: 'b2b.orders.failed',
     };
     return statusMap[paymentStatus] || paymentStatus;
   }
 
   getPaymentMethodLabel(paymentMethod: string): string {
     const methodMap: { [key: string]: string } = {
-      'payment_upon_collection': 'b2b.orders.paymentUponCollection',
-      'bank_transfer': 'b2b.orders.bankTransfer',
-      'cash_on_delivery': 'b2b.orders.cashOnDelivery',
-      'credit_30_days': 'b2b.orders.creditTerms30Days'
+      payment_upon_collection: 'b2b.orders.paymentUponCollection',
+      bank_transfer: 'b2b.orders.bankTransfer',
+      cash_on_delivery: 'b2b.orders.cashOnDelivery',
+      credit_30_days: 'b2b.orders.creditTerms30Days',
     };
     return methodMap[paymentMethod] || paymentMethod;
   }
@@ -173,7 +174,7 @@ export class B2bOrderDetailsComponent implements OnInit {
     return new Date(date).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   }
 }

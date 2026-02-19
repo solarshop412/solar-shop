@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -10,7 +16,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, RouterOutlet, TranslatePipe],
   templateUrl: './b2b-checkout.component.html',
-  styleUrls: ['./b2b-checkout.component.scss']
+  styleUrls: ['./b2b-checkout.component.scss'],
 })
 export class B2bCheckoutComponent implements OnInit, OnDestroy {
   currentStep = 1;
@@ -21,14 +27,16 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Listen to route changes to update current step
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      takeUntil(this.destroy$)
-    ).subscribe((event: NavigationEnd) => {
-      console.log('B2B Checkout: Navigation to:', event.url);
-      this.updateCurrentStep(event.url);
-      this.cdr.detectChanges();
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((event: NavigationEnd) => {
+        console.log('B2B Checkout: Navigation to:', event.url);
+        this.updateCurrentStep(event.url);
+        this.cdr.detectChanges();
+      });
 
     // Set initial step based on current URL
     this.updateCurrentStep(this.router.url);
@@ -44,7 +52,11 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
 
     let newStep = 1; // Default to step 1
 
-    if (url.includes('/order-review') || url.endsWith('/checkout') || url.includes('/b2b-checkout')) {
+    if (
+      url.includes('/order-review') ||
+      url.endsWith('/checkout') ||
+      url.includes('/b2b-checkout')
+    ) {
       newStep = 1;
     } else if (url.includes('/shipping')) {
       newStep = 2;
@@ -53,7 +65,12 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
     }
 
     if (this.currentStep !== newStep) {
-      console.log('B2B Checkout: Step changed from', this.currentStep, 'to', newStep);
+      console.log(
+        'B2B Checkout: Step changed from',
+        this.currentStep,
+        'to',
+        newStep,
+      );
       this.currentStep = newStep;
     }
   }
@@ -85,4 +102,4 @@ export class B2bCheckoutComponent implements OnInit, OnDestroy {
       return 'bg-gray-300'; // Not completed
     }
   }
-} 
+}

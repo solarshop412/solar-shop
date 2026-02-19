@@ -66,7 +66,7 @@ export interface OfferSeoData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SeoService {
   private meta = inject(Meta);
@@ -75,11 +75,14 @@ export class SeoService {
 
   private readonly baseUrl = 'https://www.solarno.hr';
   private readonly siteName = 'Solarno.hr';
-  private readonly defaultImage = 'https://www.solarno.hr/assets/images/og-image.jpg';
+  private readonly defaultImage =
+    'https://www.solarno.hr/assets/images/og-image.jpg';
   private readonly logoUrl = 'https://www.solarno.hr/assets/images/logo.png';
 
-  private readonly defaultTitle = 'SolarShop – Solarne Elektrane, Solarni Paneli, Hibridni Sustavi';
-  private readonly defaultDescription = 'Solarne Elektrane, Solarni Paneli, Hibridni Sustavi i Baterije na Solarno.hr - Fronius, Huawei, GoodWe';
+  private readonly defaultTitle =
+    'SolarShop – Solarne Elektrane, Solarni Paneli, Hibridni Sustavi';
+  private readonly defaultDescription =
+    'Solarne Elektrane, Solarni Paneli, Hibridni Sustavi i Baterije na Solarno.hr - Fronius, Huawei, GoodWe';
 
   constructor(@Inject(DOCUMENT) private doc: Document) {}
 
@@ -142,12 +145,27 @@ export class SeoService {
    */
   setOgTags(og: OgTags): void {
     this.meta.updateTag({ property: 'og:title', content: og.title });
-    this.meta.updateTag({ property: 'og:description', content: og.description });
-    this.meta.updateTag({ property: 'og:image', content: og.image || this.defaultImage });
-    this.meta.updateTag({ property: 'og:url', content: og.url || `${this.baseUrl}${this.router.url}` });
+    this.meta.updateTag({
+      property: 'og:description',
+      content: og.description,
+    });
+    this.meta.updateTag({
+      property: 'og:image',
+      content: og.image || this.defaultImage,
+    });
+    this.meta.updateTag({
+      property: 'og:url',
+      content: og.url || `${this.baseUrl}${this.router.url}`,
+    });
     this.meta.updateTag({ property: 'og:type', content: og.type || 'website' });
-    this.meta.updateTag({ property: 'og:site_name', content: og.siteName || this.siteName });
-    this.meta.updateTag({ property: 'og:locale', content: og.locale || 'hr_HR' });
+    this.meta.updateTag({
+      property: 'og:site_name',
+      content: og.siteName || this.siteName,
+    });
+    this.meta.updateTag({
+      property: 'og:locale',
+      content: og.locale || 'hr_HR',
+    });
   }
 
   // ============================================
@@ -158,10 +176,19 @@ export class SeoService {
    * Set Twitter Card tags
    */
   setTwitterTags(twitter: TwitterTags): void {
-    this.meta.updateTag({ name: 'twitter:card', content: twitter.card || 'summary_large_image' });
+    this.meta.updateTag({
+      name: 'twitter:card',
+      content: twitter.card || 'summary_large_image',
+    });
     this.meta.updateTag({ name: 'twitter:title', content: twitter.title });
-    this.meta.updateTag({ name: 'twitter:description', content: twitter.description });
-    this.meta.updateTag({ name: 'twitter:image', content: twitter.image || this.defaultImage });
+    this.meta.updateTag({
+      name: 'twitter:description',
+      content: twitter.description,
+    });
+    this.meta.updateTag({
+      name: 'twitter:image',
+      content: twitter.image || this.defaultImage,
+    });
     if (twitter.site) {
       this.meta.updateTag({ name: 'twitter:site', content: twitter.site });
     }
@@ -214,7 +241,9 @@ export class SeoService {
    */
   setProductPage(product: ProductSeoData): void {
     const title = `${product.name} | ${this.siteName}`;
-    const description = product.description?.substring(0, 160) || `Kupite ${product.name} na Solarno.hr`;
+    const description =
+      product.description?.substring(0, 160) ||
+      `Kupite ${product.name} na Solarno.hr`;
     const url = product.url || `${this.baseUrl}${this.router.url}`;
     const image = product.images?.[0] || this.defaultImage;
 
@@ -229,14 +258,14 @@ export class SeoService {
       description,
       image,
       url,
-      type: 'product'
+      type: 'product',
     });
 
     // Set Twitter tags
     this.setTwitterTags({
       title,
       description,
-      image
+      image,
     });
 
     // Set Product JSON-LD schema
@@ -251,21 +280,21 @@ export class SeoService {
     const schema: any = {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      'name': product.name,
-      'description': product.description,
-      'image': product.images || [this.defaultImage],
-      'url': url,
-      'offers': {
+      name: product.name,
+      description: product.description,
+      image: product.images || [this.defaultImage],
+      url: url,
+      offers: {
         '@type': 'Offer',
-        'url': url,
-        'priceCurrency': product.currency || 'EUR',
-        'price': product.price,
-        'availability': `https://schema.org/${product.availability || 'InStock'}`,
-        'seller': {
+        url: url,
+        priceCurrency: product.currency || 'EUR',
+        price: product.price,
+        availability: `https://schema.org/${product.availability || 'InStock'}`,
+        seller: {
           '@type': 'Organization',
-          'name': this.siteName
-        }
-      }
+          name: this.siteName,
+        },
+      },
     };
 
     if (product.sku) {
@@ -275,17 +304,17 @@ export class SeoService {
     if (product.brand) {
       schema.brand = {
         '@type': 'Brand',
-        'name': product.brand
+        name: product.brand,
       };
     }
 
     if (product.ratingValue && product.reviewCount) {
       schema.aggregateRating = {
         '@type': 'AggregateRating',
-        'ratingValue': product.ratingValue,
-        'reviewCount': product.reviewCount,
-        'bestRating': 5,
-        'worstRating': 1
+        ratingValue: product.ratingValue,
+        reviewCount: product.reviewCount,
+        bestRating: 5,
+        worstRating: 1,
       };
     }
 
@@ -320,14 +349,14 @@ export class SeoService {
       description,
       image,
       url,
-      type: 'article'
+      type: 'article',
     });
 
     // Set Twitter tags
     this.setTwitterTags({
       title,
       description,
-      image
+      image,
     });
 
     // Set BlogPosting JSON-LD schema
@@ -342,27 +371,27 @@ export class SeoService {
     const schema: any = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
-      'headline': post.title,
-      'description': post.description,
-      'image': post.image || this.defaultImage,
-      'datePublished': post.datePublished,
-      'dateModified': post.dateModified || post.datePublished,
-      'author': {
+      headline: post.title,
+      description: post.description,
+      image: post.image || this.defaultImage,
+      datePublished: post.datePublished,
+      dateModified: post.dateModified || post.datePublished,
+      author: {
         '@type': 'Organization',
-        'name': post.authorName || this.siteName
+        name: post.authorName || this.siteName,
       },
-      'publisher': {
+      publisher: {
         '@type': 'Organization',
-        'name': this.siteName,
-        'logo': {
+        name: this.siteName,
+        logo: {
           '@type': 'ImageObject',
-          'url': this.logoUrl
-        }
+          url: this.logoUrl,
+        },
       },
-      'mainEntityOfPage': {
+      mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': url
-      }
+        '@id': url,
+      },
     };
 
     if (post.tags && post.tags.length > 0) {
@@ -381,7 +410,9 @@ export class SeoService {
    */
   setOfferPage(offer: OfferSeoData): void {
     const title = `${offer.name} | Ponude | ${this.siteName}`;
-    const description = offer.description?.substring(0, 160) || `Pogledajte ponudu: ${offer.name}`;
+    const description =
+      offer.description?.substring(0, 160) ||
+      `Pogledajte ponudu: ${offer.name}`;
     const url = offer.url || `${this.baseUrl}${this.router.url}`;
     const image = offer.image || this.defaultImage;
 
@@ -396,14 +427,14 @@ export class SeoService {
       description,
       image,
       url,
-      type: 'product'
+      type: 'product',
     });
 
     // Set Twitter tags
     this.setTwitterTags({
       title,
       description,
-      image
+      image,
     });
 
     // Set Offer JSON-LD schema
@@ -418,16 +449,16 @@ export class SeoService {
     const schema: any = {
       '@context': 'https://schema.org',
       '@type': 'Offer',
-      'name': offer.name,
-      'description': offer.description,
-      'image': offer.image || this.defaultImage,
-      'url': url,
-      'priceCurrency': offer.currency || 'EUR',
-      'price': offer.price,
-      'seller': {
+      name: offer.name,
+      description: offer.description,
+      image: offer.image || this.defaultImage,
+      url: url,
+      priceCurrency: offer.currency || 'EUR',
+      price: offer.price,
+      seller: {
         '@type': 'Organization',
-        'name': this.siteName
-      }
+        name: this.siteName,
+      },
     };
 
     if (offer.validFrom) {
@@ -452,19 +483,21 @@ export class SeoService {
     const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
-      'itemListElement': items.map((item, index) => {
+      itemListElement: items.map((item, index) => {
         const listItem: any = {
           '@type': 'ListItem',
-          'position': index + 1,
-          'name': item.name
+          position: index + 1,
+          name: item.name,
         };
 
         if (item.url) {
-          listItem.item = item.url.startsWith('http') ? item.url : `${this.baseUrl}${item.url}`;
+          listItem.item = item.url.startsWith('http')
+            ? item.url
+            : `${this.baseUrl}${item.url}`;
         }
 
         return listItem;
-      })
+      }),
     };
 
     this.setJsonLd(breadcrumbSchema, 'breadcrumb-schema');
@@ -488,12 +521,12 @@ export class SeoService {
     this.setOgTags({
       title,
       description: desc,
-      type: 'website'
+      type: 'website',
     });
 
     this.setTwitterTags({
       title,
-      description: desc
+      description: desc,
     });
   }
 
@@ -513,12 +546,12 @@ export class SeoService {
       title: this.defaultTitle,
       description: this.defaultDescription,
       url: this.baseUrl,
-      type: 'website'
+      type: 'website',
     });
 
     this.setTwitterTags({
       title: this.defaultTitle,
-      description: this.defaultDescription
+      description: this.defaultDescription,
     });
 
     // Remove all dynamic schemas

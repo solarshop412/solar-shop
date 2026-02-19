@@ -8,7 +8,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './order-confirmation.component.html',
-  styleUrls: ['./order-confirmation.component.scss']
+  styleUrls: ['./order-confirmation.component.scss'],
 })
 export class OrderConfirmationComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -17,7 +17,7 @@ export class OrderConfirmationComponent implements OnInit {
   orderNumber: string = '';
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.orderNumber = params['orderNumber'] || '';
     });
   }

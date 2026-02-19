@@ -8,13 +8,18 @@ export interface B2BProductListUrlState {
   itemsPerPage: number;
 }
 
-export type SortOption = 'newest' | 'name-asc' | 'name-desc' | 'price-low' | 'price-high' | 'featured';
+export type SortOption =
+  | 'newest'
+  | 'name-asc'
+  | 'name-desc'
+  | 'price-low'
+  | 'price-high'
+  | 'featured';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class B2BProductsUrlStateService {
-
   /**
    * Serialize the current state to URL query parameters
    */
@@ -71,7 +76,7 @@ export class B2BProductsUrlStateService {
       manufacturers: [],
       searchQuery: '',
       availability: '',
-      sortBy: 'featured'
+      sortBy: 'featured',
     };
 
     // Search query
@@ -81,7 +86,9 @@ export class B2BProductsUrlStateService {
 
     // Categories
     if (params['categories']) {
-      state.filters.categories = this.parseCommaSeparatedString(params['categories']);
+      state.filters.categories = this.parseCommaSeparatedString(
+        params['categories'],
+      );
     }
 
     // Handle legacy 'category' parameter for backwards compatibility
@@ -91,7 +98,9 @@ export class B2BProductsUrlStateService {
 
     // Manufacturers
     if (params['manufacturers']) {
-      state.filters.manufacturers = this.parseCommaSeparatedString(params['manufacturers']);
+      state.filters.manufacturers = this.parseCommaSeparatedString(
+        params['manufacturers'],
+      );
     }
 
     // Availability
@@ -140,8 +149,17 @@ export class B2BProductsUrlStateService {
    * Check if the current URL parameters represent a clean/empty state
    */
   isCleanState(params: Params): boolean {
-    const significantParams = ['search', 'categories', 'category', 'manufacturers', 'availability', 'sort', 'page', 'itemsPerPage'];
-    return !significantParams.some(param => params[param]);
+    const significantParams = [
+      'search',
+      'categories',
+      'category',
+      'manufacturers',
+      'availability',
+      'sort',
+      'page',
+      'itemsPerPage',
+    ];
+    return !significantParams.some((param) => params[param]);
   }
 
   /**
@@ -151,7 +169,7 @@ export class B2BProductsUrlStateService {
     const cleanParams: Params = {};
 
     // Only include valid, non-empty parameters
-    Object.keys(params).forEach(key => {
+    Object.keys(params).forEach((key) => {
       const value = params[key];
       if (value !== null && value !== undefined && value !== '') {
         switch (key) {
@@ -192,7 +210,10 @@ export class B2BProductsUrlStateService {
           }
           case 'itemsPerPage': {
             const itemsPerPage = this.parseNumber(value);
-            if (itemsPerPage !== null && this.validateItemsPerPage(itemsPerPage)) {
+            if (
+              itemsPerPage !== null &&
+              this.validateItemsPerPage(itemsPerPage)
+            ) {
               cleanParams[key] = itemsPerPage.toString();
             }
             break;
@@ -211,9 +232,10 @@ export class B2BProductsUrlStateService {
     if (!value || typeof value !== 'string') {
       return [];
     }
-    return value.split(',')
-      .map(item => item.trim())
-      .filter(item => item.length > 0);
+    return value
+      .split(',')
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
   }
 
   /**
@@ -234,7 +256,14 @@ export class B2BProductsUrlStateService {
    * Validate sort option
    */
   private validateSortOption(value: any): SortOption | null {
-    const validSortOptions: SortOption[] = ['featured', 'newest', 'name-asc', 'name-desc', 'price-low', 'price-high'];
+    const validSortOptions: SortOption[] = [
+      'featured',
+      'newest',
+      'name-asc',
+      'name-desc',
+      'price-low',
+      'price-high',
+    ];
     return validSortOptions.includes(value) ? value : null;
   }
 
@@ -242,7 +271,12 @@ export class B2BProductsUrlStateService {
    * Validate availability option
    */
   private validateAvailability(value: any): string | null {
-    const validAvailabilityOptions = ['', 'in-stock', 'low-stock', 'out-of-stock'];
+    const validAvailabilityOptions = [
+      '',
+      'in-stock',
+      'low-stock',
+      'out-of-stock',
+    ];
     return validAvailabilityOptions.includes(value) ? value : null;
   }
 

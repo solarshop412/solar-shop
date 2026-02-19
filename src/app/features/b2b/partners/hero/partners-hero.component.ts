@@ -12,7 +12,7 @@ import { selectCurrentUser } from '../../../../core/auth/store/auth.selectors';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './partners-hero.component.html',
-  styleUrls: ['./partners-hero.component.scss']
+  styleUrls: ['./partners-hero.component.scss'],
 })
 export class PartnersHeroComponent {
   private router = inject(Router);
@@ -24,7 +24,7 @@ export class PartnersHeroComponent {
   constructor() {
     // Initialize the observable to check if user is a company contact
     this.isCompanyContact$ = this.store.select(selectCurrentUser).pipe(
-      switchMap(user => {
+      switchMap((user) => {
         if (!user?.id) {
           return of(false);
         }
@@ -36,12 +36,12 @@ export class PartnersHeroComponent {
             .select('id, status')
             .eq('contact_person_id', user.id)
             .eq('status', 'approved')
-            .single()
+            .single(),
         ).pipe(
           catchError(() => of({ data: null, error: true })),
-          switchMap(result => of(!!result.data))
+          switchMap((result) => of(!!result.data)),
         );
-      })
+      }),
     );
   }
 

@@ -1,6 +1,20 @@
-import { Component, Input, Output, EventEmitter, inject, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { ReviewStatus } from '../../../models/review.model';
 import { TranslatePipe } from '../../../pipes/translate.pipe';
@@ -11,7 +25,7 @@ import { UserOrder } from '../../../models/user-order.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './write-review-modal.component.html',
-  styleUrls: ['./write-review-modal.component.scss']
+  styleUrls: ['./write-review-modal.component.scss'],
 })
 export class WriteReviewModalComponent implements OnInit, OnChanges {
   @Input() isOpen: boolean = false;
@@ -42,7 +56,7 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
       selectedOrderItemIds: [[], Validators.required],
       rating: [0, [Validators.required, Validators.min(1)]],
       title: ['', [Validators.required, Validators.maxLength(200)]],
-      comment: ['', [Validators.required, Validators.maxLength(1000)]]
+      comment: ['', [Validators.required, Validators.maxLength(1000)]],
     });
   }
 
@@ -64,7 +78,8 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
       // Load user's delivered orders with order items
       const { data: orders, error } = await this.supabaseService.client
         .from('orders')
-        .select(`
+        .select(
+          `
           id,
           order_number,
           order_date,
@@ -77,7 +92,8 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
             quantity,
             unit_price
           )
-        `)
+        `,
+        )
         .eq('user_id', this.userId)
         .eq('status', 'delivered')
         .order('order_date', { ascending: false });
@@ -102,19 +118,25 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
         status: order.status,
         items: order.order_items.map((item: any) => ({
           ...item,
-          hasReview: existingReviews?.some((review: any) =>
-            review.order_item_id === item.id
-          ) || false
-        }))
+          hasReview:
+            existingReviews?.some(
+              (review: any) => review.order_item_id === item.id,
+            ) || false,
+        })),
       }));
 
       console.log('User orders processed:', this.userOrders.length); // Debug log
 
       // If preselected order, set it
       if (this.preselectedOrderId) {
-        this.selectedOrder = this.userOrders.find(order => order.id === this.preselectedOrderId) || null;
+        this.selectedOrder =
+          this.userOrders.find(
+            (order) => order.id === this.preselectedOrderId,
+          ) || null;
         if (this.selectedOrder) {
-          this.reviewForm.patchValue({ selectedOrderId: this.preselectedOrderId });
+          this.reviewForm.patchValue({
+            selectedOrderId: this.preselectedOrderId,
+          });
           this.onOrderSelected({ target: { value: this.preselectedOrderId } });
         }
       }
@@ -125,20 +147,23 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
 
   onOrderSelected(event: any): void {
     const orderId = event.target.value;
-    this.selectedOrder = this.userOrders.find(order => order.id === orderId) || null;
+    this.selectedOrder =
+      this.userOrders.find((order) => order.id === orderId) || null;
     this.selectedOrderItemIds = [];
     this.allProductsSelected = false;
 
     if (this.selectedOrder) {
       // Auto-select order items that don't have reviews yet
       const availableOrderItems = this.selectedOrder.items
-        .filter(item => !item.hasReview)
-        .map(item => item.id);
+        .filter((item) => !item.hasReview)
+        .map((item) => item.id);
 
       this.selectedOrderItemIds = availableOrderItems;
       this.allProductsSelected = availableOrderItems.length > 0;
 
-      this.reviewForm.patchValue({ selectedOrderItemIds: this.selectedOrderItemIds });
+      this.reviewForm.patchValue({
+        selectedOrderItemIds: this.selectedOrderItemIds,
+      });
     }
   }
 
@@ -146,22 +171,30 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
     if (event.target.checked) {
       this.selectedOrderItemIds.push(orderItemId);
     } else {
-      this.selectedOrderItemIds = this.selectedOrderItemIds.filter(id => id !== orderItemId);
+      this.selectedOrderItemIds = this.selectedOrderItemIds.filter(
+        (id) => id !== orderItemId,
+      );
     }
-    this.allProductsSelected = this.selectedOrderItemIds.length === this.selectedOrder?.items.filter(item => !item.hasReview).length;
-    this.reviewForm.patchValue({ selectedOrderItemIds: this.selectedOrderItemIds });
+    this.allProductsSelected =
+      this.selectedOrderItemIds.length ===
+      this.selectedOrder?.items.filter((item) => !item.hasReview).length;
+    this.reviewForm.patchValue({
+      selectedOrderItemIds: this.selectedOrderItemIds,
+    });
   }
 
   toggleAllProducts(event: any): void {
     this.allProductsSelected = event.target.checked;
     if (this.allProductsSelected && this.selectedOrder) {
       this.selectedOrderItemIds = this.selectedOrder.items
-        .filter(item => !item.hasReview)
-        .map(item => item.id);
+        .filter((item) => !item.hasReview)
+        .map((item) => item.id);
     } else {
       this.selectedOrderItemIds = [];
     }
-    this.reviewForm.patchValue({ selectedOrderItemIds: this.selectedOrderItemIds });
+    this.reviewForm.patchValue({
+      selectedOrderItemIds: this.selectedOrderItemIds,
+    });
   }
 
   onBackdropClick(event: Event): void {
@@ -218,10 +251,13 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
           helpful_count: 0,
           reported_count: 0,
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         };
 
-        const createdReview = await this.supabaseService.createRecord('reviews', reviewData);
+        const createdReview = await this.supabaseService.createRecord(
+          'reviews',
+          reviewData,
+        );
         if (createdReview) {
           reviews.push(createdReview);
         }
@@ -234,7 +270,7 @@ export class WriteReviewModalComponent implements OnInit, OnChanges {
           orderItemIds,
           rating: formValue.rating,
           title: formValue.title,
-          comment: formValue.comment
+          comment: formValue.comment,
         });
         this.resetForm();
       }

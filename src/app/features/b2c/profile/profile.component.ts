@@ -4,8 +4,17 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, filter } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { selectCurrentUser, selectAuthLoading, selectAuthError } from '../../../core/auth/store/auth.selectors';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  selectCurrentUser,
+  selectAuthLoading,
+  selectAuthError,
+} from '../../../core/auth/store/auth.selectors';
 import * as AuthActions from '../../../core/auth/store/auth.actions';
 import { User } from '../../../shared/models/user.model';
 import { Actions, ofType } from '@ngrx/effects';
@@ -14,8 +23,17 @@ import { Order } from '../../../shared/models/order.model';
 import { Review } from '../../../shared/models/review.model';
 import { SupabaseService } from '../../../services/supabase.service';
 import * as WishlistActions from '../wishlist/store/wishlist.actions';
-import { selectWishlistItems, selectWishlistLoading, selectWishlistError } from '../wishlist/store/wishlist.selectors';
-import { selectUserOrders, selectUserOrdersLoading, selectUserReviews, selectUserReviewsLoading } from '../../admin/orders/store/orders.selectors';
+import {
+  selectWishlistItems,
+  selectWishlistLoading,
+  selectWishlistError,
+} from '../wishlist/store/wishlist.selectors';
+import {
+  selectUserOrders,
+  selectUserOrdersLoading,
+  selectUserReviews,
+  selectUserReviewsLoading,
+} from '../../admin/orders/store/orders.selectors';
 import * as OrdersActions from '../../admin/orders/store/orders.actions';
 import { WriteReviewModalComponent } from '../../../shared/components/modals/write-review-modal/write-review-modal.component';
 
@@ -23,14 +41,14 @@ import { WriteReviewModalComponent } from '../../../shared/components/modals/wri
   selector: 'app-profile',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    ReactiveFormsModule, 
-    TranslatePipe, 
-    WriteReviewModalComponent
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+    WriteReviewModalComponent,
   ],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   private store = inject(Store);
@@ -44,7 +62,13 @@ export class ProfileComponent implements OnInit {
   loading$: Observable<boolean>;
   error$: Observable<any>;
 
-  activeTab: 'user-info' | 'billing-shipping' | 'my-orders' | 'my-wishlist' | 'my-reviews' | 'account' = 'user-info';
+  activeTab:
+    | 'user-info'
+    | 'billing-shipping'
+    | 'my-orders'
+    | 'my-wishlist'
+    | 'my-reviews'
+    | 'account' = 'user-info';
   userInfoForm: FormGroup;
   passwordForm: FormGroup;
   showSuccessMessage = false;
@@ -52,10 +76,14 @@ export class ProfileComponent implements OnInit {
   passwordError = '';
 
   orders$: Observable<Order[]> = this.store.select(selectUserOrders);
-  ordersLoading$: Observable<boolean> = this.store.select(selectUserOrdersLoading);
+  ordersLoading$: Observable<boolean> = this.store.select(
+    selectUserOrdersLoading,
+  );
 
   reviews$: Observable<Review[]> = this.store.select(selectUserReviews);
-  reviewsLoading$: Observable<boolean> = this.store.select(selectUserReviewsLoading);
+  reviewsLoading$: Observable<boolean> = this.store.select(
+    selectUserReviewsLoading,
+  );
 
   wishlist$ = this.store.select(selectWishlistItems);
   wishlistLoading$ = this.store.select(selectWishlistLoading);
@@ -65,7 +93,10 @@ export class ProfileComponent implements OnInit {
   selectedOrderId = '';
   selectedProductId = '';
 
-  private orderReviewStatusCache = new Map<string, { status: string; missingCount: number }>();
+  private orderReviewStatusCache = new Map<
+    string,
+    { status: string; missingCount: number }
+  >();
 
   constructor() {
     this.currentUser$ = this.store.select(selectCurrentUser);
@@ -78,23 +109,27 @@ export class ProfileComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: [''],
       dateOfBirth: [''],
-      gender: ['']
+      gender: [''],
     });
 
-    this.passwordForm = this.fb.group({
-      newPassword: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: this.passwordMatchValidator });
+    this.passwordForm = this.fb.group(
+      {
+        newPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      { validators: this.passwordMatchValidator },
+    );
   }
 
   passwordMatchValidator(g: FormGroup) {
     return g.get('newPassword')?.value === g.get('confirmPassword')?.value
-      ? null : { 'mismatch': true };
+      ? null
+      : { mismatch: true };
   }
 
   ngOnInit(): void {
     // Check for tab query parameter
-    this.route.queryParams.pipe(take(1)).subscribe(params => {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
       if (params['tab']) {
         this.activeTab = params['tab'] as any;
       }
@@ -103,29 +138,43 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(AuthActions.loadUserProfile());
     this.store.dispatch(WishlistActions.loadWishlist());
 
-    this.currentUser$.pipe(
-      filter(user => !!user?.email),
-      take(1)
-    ).subscribe(user => {
-      if (user) {
-        this.store.dispatch(OrdersActions.loadUserOrders({ userEmail: user.email }));
-        this.store.dispatch(OrdersActions.loadUserReviews({ userId: user.id }));
-      }
-    });
+    this.currentUser$
+      .pipe(
+        filter((user) => !!user?.email),
+        take(1),
+      )
+      .subscribe((user) => {
+        if (user) {
+          this.store.dispatch(
+            OrdersActions.loadUserOrders({ userEmail: user.email }),
+          );
+          this.store.dispatch(
+            OrdersActions.loadUserReviews({ userId: user.id }),
+          );
+        }
+      });
 
-    this.orders$.subscribe(orders => {
-      console.log('Profile Component: User orders updated:', orders?.length || 0, orders);
+    this.orders$.subscribe((orders) => {
+      console.log(
+        'Profile Component: User orders updated:',
+        orders?.length || 0,
+        orders,
+      );
       // Update review status when orders are loaded
       this.updateOrderReviewStatus();
     });
 
-    this.reviews$.subscribe(reviews => {
-      console.log('Profile Component: User reviews updated:', reviews?.length || 0, reviews);
+    this.reviews$.subscribe((reviews) => {
+      console.log(
+        'Profile Component: User reviews updated:',
+        reviews?.length || 0,
+        reviews,
+      );
       // Update review status when reviews are loaded
       this.updateOrderReviewStatus();
     });
 
-    this.currentUser$.subscribe(user => {
+    this.currentUser$.subscribe((user) => {
       if (user) {
         this.userInfoForm.patchValue({
           firstName: user.firstName || '',
@@ -133,45 +182,61 @@ export class ProfileComponent implements OnInit {
           email: user.email || '',
           phone: user.phone || '',
           dateOfBirth: user.dateOfBirth || '',
-          gender: user.gender || ''
+          gender: user.gender || '',
         });
       }
     });
 
-    this.actions$.pipe(
-      ofType(AuthActions.updateUserProfileSuccess)
-    ).subscribe(() => {
-      this.showSuccessMessage = true;
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
-    });
+    this.actions$
+      .pipe(ofType(AuthActions.updateUserProfileSuccess))
+      .subscribe(() => {
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000);
+      });
   }
 
-  setActiveTab(tab: 'user-info' | 'billing-shipping' | 'my-orders' | 'my-wishlist' | 'my-reviews' | 'account'): void {
+  setActiveTab(
+    tab:
+      | 'user-info'
+      | 'billing-shipping'
+      | 'my-orders'
+      | 'my-wishlist'
+      | 'my-reviews'
+      | 'account',
+  ): void {
     this.activeTab = tab;
     this.showSuccessMessage = false;
     this.showPasswordSuccessMessage = false;
     this.passwordError = '';
 
     if (tab === 'my-orders') {
-      this.currentUser$.pipe(
-        filter(user => !!user?.email),
-        take(1)
-      ).subscribe(user => {
-        if (user?.email) {
-          this.store.dispatch(OrdersActions.loadUserOrders({ userEmail: user.email }));
-        }
-      });
+      this.currentUser$
+        .pipe(
+          filter((user) => !!user?.email),
+          take(1),
+        )
+        .subscribe((user) => {
+          if (user?.email) {
+            this.store.dispatch(
+              OrdersActions.loadUserOrders({ userEmail: user.email }),
+            );
+          }
+        });
     } else if (tab === 'my-reviews') {
-      this.currentUser$.pipe(
-        filter(user => !!user?.id),
-        take(1)
-      ).subscribe(user => {
-        if (user?.id) {
-          this.store.dispatch(OrdersActions.loadUserReviews({ userId: user.id }));
-        }
-      });
+      this.currentUser$
+        .pipe(
+          filter((user) => !!user?.id),
+          take(1),
+        )
+        .subscribe((user) => {
+          if (user?.id) {
+            this.store.dispatch(
+              OrdersActions.loadUserReviews({ userId: user.id }),
+            );
+          }
+        });
     } else if (tab === 'my-wishlist') {
       this.store.dispatch(WishlistActions.loadWishlist());
     }
@@ -180,11 +245,11 @@ export class ProfileComponent implements OnInit {
   updateUserInfo(): void {
     if (this.userInfoForm.valid) {
       const updatedUser = {
-        ...this.userInfoForm.value
+        ...this.userInfoForm.value,
       };
       this.store.dispatch(AuthActions.updateUserProfile({ user: updatedUser }));
     } else {
-      Object.keys(this.userInfoForm.controls).forEach(key => {
+      Object.keys(this.userInfoForm.controls).forEach((key) => {
         this.userInfoForm.get(key)?.markAsTouched();
       });
     }
@@ -209,10 +274,14 @@ export class ProfileComponent implements OnInit {
   getAvailabilityText(availability: string | undefined): string {
     if (!availability) return 'productDetails.unknown';
     switch (availability) {
-      case 'available': return 'productDetails.inStock';
-      case 'limited': return 'productDetails.limitedStock';
-      case 'out-of-stock': return 'productDetails.outOfStock';
-      default: return 'productDetails.unknown';
+      case 'available':
+        return 'productDetails.inStock';
+      case 'limited':
+        return 'productDetails.limitedStock';
+      case 'out-of-stock':
+        return 'productDetails.outOfStock';
+      default:
+        return 'productDetails.unknown';
     }
   }
 
@@ -232,7 +301,7 @@ export class ProfileComponent implements OnInit {
     this.showReviewModal = false;
     this.orderReviewStatusCache.clear();
     // Reload user reviews after submitting a new review
-    this.currentUser$.pipe(take(1)).subscribe(user => {
+    this.currentUser$.pipe(take(1)).subscribe((user) => {
       if (user?.id) {
         this.store.dispatch(OrdersActions.loadUserReviews({ userId: user.id }));
       }
@@ -258,20 +327,28 @@ export class ProfileComponent implements OnInit {
 
   private updateOrderReviewStatus(): void {
     // This method will be called when orders and reviews are loaded
-    this.orders$.pipe(take(1)).subscribe(orders => {
-      this.reviews$.pipe(take(1)).subscribe(reviews => {
-        orders.forEach(order => {
-          const orderReviews = reviews.filter((r: Review) => r.orderId === order.id);
+    this.orders$.pipe(take(1)).subscribe((orders) => {
+      this.reviews$.pipe(take(1)).subscribe((reviews) => {
+        orders.forEach((order) => {
+          const orderReviews = reviews.filter(
+            (r: Review) => r.orderId === order.id,
+          );
           const orderItems = order.items || [];
 
           if (orderReviews.length === 0) {
-            this.orderReviewStatusCache.set(order.id, { status: 'no-reviews', missingCount: orderItems.length });
+            this.orderReviewStatusCache.set(order.id, {
+              status: 'no-reviews',
+              missingCount: orderItems.length,
+            });
           } else if (orderReviews.length === orderItems.length) {
-            this.orderReviewStatusCache.set(order.id, { status: 'all-reviewed', missingCount: 0 });
+            this.orderReviewStatusCache.set(order.id, {
+              status: 'all-reviewed',
+              missingCount: 0,
+            });
           } else {
             this.orderReviewStatusCache.set(order.id, {
               status: 'partial-reviews',
-              missingCount: orderItems.length - orderReviews.length
+              missingCount: orderItems.length - orderReviews.length,
             });
           }
         });
@@ -281,7 +358,7 @@ export class ProfileComponent implements OnInit {
 
   async updatePassword(): Promise<void> {
     if (this.passwordForm.invalid) {
-      Object.keys(this.passwordForm.controls).forEach(key => {
+      Object.keys(this.passwordForm.controls).forEach((key) => {
         this.passwordForm.get(key)?.markAsTouched();
       });
       return;
@@ -292,7 +369,7 @@ export class ProfileComponent implements OnInit {
 
     try {
       const { error } = await this.supabaseService.client.auth.updateUser({
-        password: newPassword
+        password: newPassword,
       });
 
       if (error) {
@@ -308,4 +385,4 @@ export class ProfileComponent implements OnInit {
       this.passwordError = error.message || 'An error occurred';
     }
   }
-} 
+}

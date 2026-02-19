@@ -1,101 +1,146 @@
 <div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
-    <div class="bg-solar-500 text-white py-20">
+  <!-- Hero Section -->
+  <div class="bg-solar-500 text-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-5xl lg:text-6xl font-bold mb-6 font-['Poppins']">
-        {{ 'offers.title' | translate }}
-        </h1>
-        <p class="text-xl lg:text-2xl max-w-3xl mx-auto font-['DM_Sans']">
-        {{ 'offers.subtitle' | translate }}
-        </p>
+      <h1 class="text-5xl lg:text-6xl font-bold mb-6 font-['Poppins']">
+        {{ "offers.title" | translate }}
+      </h1>
+      <p class="text-xl lg:text-2xl max-w-3xl mx-auto font-['DM_Sans']">
+        {{ "offers.subtitle" | translate }}
+      </p>
     </div>
-    </div>
+  </div>
 
+  <!-- Offers Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Offers Grid -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <!-- Offers Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        <div 
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+    >
+      <div
         *ngFor="let offer of offers$ | async; trackBy: trackByOfferId"
         class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group cursor-pointer"
         (click)="navigateToOfferDetails(offer.id)"
-        >
+      >
         <!-- Product Image -->
         <div class="relative h-64 bg-gray-50 overflow-hidden">
-            <img 
-            [src]="offer.imageUrl" 
+          <img
+            [src]="offer.imageUrl"
             [alt]="offer.title"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            >
-            <!-- Discount Badge -->
-            <div class="absolute top-4 left-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white text-sm font-bold px-3 py-2 rounded-full shadow-lg">
-            {{ getDiscountDisplay(offer) }} {{ 'hero.off' | translate }}
-            </div>
-            <!-- Sale Badge -->
-            <div class="absolute top-4 right-4 bg-solar-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-            {{ 'offers.sale' | translate }}
-            </div>
+          />
+          <!-- Discount Badge -->
+          <div
+            class="absolute top-4 left-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white text-sm font-bold px-3 py-2 rounded-full shadow-lg"
+          >
+            {{ getDiscountDisplay(offer) }} {{ "hero.off" | translate }}
+          </div>
+          <!-- Sale Badge -->
+          <div
+            class="absolute top-4 right-4 bg-solar-500 text-white text-xs font-bold px-2 py-1 rounded-full"
+          >
+            {{ "offers.sale" | translate }}
+          </div>
         </div>
 
         <!-- Product Info -->
         <div class="p-6">
-            <h3 class="text-xl font-bold text-[#324053] mb-3 font-['Poppins'] line-clamp-2 group-hover:text-solar-600 transition-colors">
+          <h3
+            class="text-xl font-bold text-[#324053] mb-3 font-['Poppins'] line-clamp-2 group-hover:text-solar-600 transition-colors"
+          >
             {{ offer.title }}
-            </h3>
-            
-            <p *ngIf="offer.description" class="text-gray-600 text-sm mb-4 font-['DM_Sans'] line-clamp-2">
+          </h3>
+
+          <p
+            *ngIf="offer.description"
+            class="text-gray-600 text-sm mb-4 font-['DM_Sans'] line-clamp-2"
+          >
             {{ offer.description }}
-            </p>
-            
-            <!-- Pricing -->
-            <div class="flex items-center gap-3 mb-6">
-            <span class="text-lg text-gray-400 line-through font-medium font-['DM_Sans']">
-                {{ getTotalOriginalPrice(offer) | currency:'EUR':'symbol':'1.2-2' }}
+          </p>
+
+          <!-- Pricing -->
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="text-lg text-gray-400 line-through font-medium font-['DM_Sans']"
+            >
+              {{
+                getTotalOriginalPrice(offer)
+                  | currency: "EUR" : "symbol" : "1.2-2"
+              }}
             </span>
             <span class="text-2xl font-bold text-[#324053] font-['DM_Sans']">
-                {{ calculateTotalDiscountedPrice(offer) | currency:'EUR':'symbol':'1.2-2' }}
+              {{
+                calculateTotalDiscountedPrice(offer)
+                  | currency: "EUR" : "symbol" : "1.2-2"
+              }}
             </span>
-            </div>
+          </div>
 
-            <!-- Savings -->
-            <div class="bg-solar-50 text-solar-800 text-sm font-semibold px-3 py-2 rounded-lg mb-4 text-center">
-            {{ 'offers.youSave' | translate }} {{ getTotalSavings(offer) | currency:'EUR':'symbol':'1.2-2' }}
-            </div>
+          <!-- Savings -->
+          <div
+            class="bg-solar-50 text-solar-800 text-sm font-semibold px-3 py-2 rounded-lg mb-4 text-center"
+          >
+            {{ "offers.youSave" | translate }}
+            {{ getTotalSavings(offer) | currency: "EUR" : "symbol" : "1.2-2" }}
+          </div>
 
-            <!-- Action Buttons -->
-            <div class="space-y-3">
-            <button 
-                (click)="navigateToOfferDetails(offer.id); $event.stopPropagation()"
-                class="w-full px-4 py-2 bg-white text-[#324053] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-['DM_Sans']"
+          <!-- Action Buttons -->
+          <div class="space-y-3">
+            <button
+              (click)="
+                navigateToOfferDetails(offer.id); $event.stopPropagation()
+              "
+              class="w-full px-4 py-2 bg-white text-[#324053] border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-['DM_Sans']"
             >
-                {{ 'offers.viewDetails' | translate }}
+              {{ "offers.viewDetails" | translate }}
             </button>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
 
     <!-- Loading State -->
-    <div *ngIf="isLoading$ | async" class="flex justify-center items-center py-20">
-        <div class="animate-spin rounded-full h-12 w-12 border-4 border-solar-600 border-t-transparent"></div>
+    <div
+      *ngIf="isLoading$ | async"
+      class="flex justify-center items-center py-20"
+    >
+      <div
+        class="animate-spin rounded-full h-12 w-12 border-4 border-solar-600 border-t-transparent"
+      ></div>
     </div>
 
     <!-- Empty State -->
-    <div *ngIf="(isLoading$ | async) === false 
-                && (offers$ | async)?.length === 0" 
-          class="text-center py-20">
-        <div class="text-gray-400 mb-6">
-            <svg class="w-24 h-24 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"/>
-            </svg>
-        </div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-4 font-['Poppins']">{{ 'offers.noOffers' | translate }}</h3>
-        <p class="text-gray-600 mb-8 font-['DM_Sans']">{{ 'offers.noOffersText' | translate }}</p>
-        <button 
-            (click)="navigateToProducts()"
-            class="px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']">
-            {{ 'offers.browseAllProducts' | translate }}
-        </button>
+    <div
+      *ngIf="(isLoading$ | async) === false && (offers$ | async)?.length === 0"
+      class="text-center py-20"
+    >
+      <div class="text-gray-400 mb-6">
+        <svg
+          class="w-24 h-24 mx-auto"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"
+          />
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-gray-900 mb-4 font-['Poppins']">
+        {{ "offers.noOffers" | translate }}
+      </h3>
+      <p class="text-gray-600 mb-8 font-['DM_Sans']">
+        {{ "offers.noOffersText" | translate }}
+      </p>
+      <button
+        (click)="navigateToProducts()"
+        class="px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-500 transition-colors font-['DM_Sans']"
+      >
+        {{ "offers.browseAllProducts" | translate }}
+      </button>
     </div>
-    </div>
+  </div>
 </div>

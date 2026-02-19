@@ -12,7 +12,7 @@ import * as AuthActions from '../../store/auth.actions';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './auth-callback.component.html',
-  styleUrls: ['./auth-callback.component.scss']
+  styleUrls: ['./auth-callback.component.scss'],
 })
 export class AuthCallbackComponent implements OnInit {
   private router = inject(Router);
@@ -27,11 +27,16 @@ export class AuthCallbackComponent implements OnInit {
 
     try {
       // Get the current session (Supabase will handle the token verification from URL)
-      const { data: { session }, error } = await this.supabaseService.client.auth.getSession();
+      const {
+        data: { session },
+        error,
+      } = await this.supabaseService.client.auth.getSession();
 
       if (error) {
         console.error('Auth callback error:', error);
-        this.message = this.translationService.translate('emailVerificationFailed');
+        this.message = this.translationService.translate(
+          'emailVerificationFailed',
+        );
         setTimeout(() => {
           this.router.navigate(['/prijava']);
         }, 2000);
@@ -53,25 +58,34 @@ export class AuthCallbackComponent implements OnInit {
           const userData = this.createUserFromProfile(user, profile);
 
           // Dispatch login success with token
-          this.store.dispatch(AuthActions.loginSuccess({
-            token: session.access_token,
-            user: userData
-          }));
+          this.store.dispatch(
+            AuthActions.loginSuccess({
+              token: session.access_token,
+              user: userData,
+            }),
+          );
         } catch (error) {
           // Fallback if profile fetch fails
           console.error(error);
           const userData = this.createUserFromAuthUser(user);
-          this.store.dispatch(AuthActions.loginSuccess({
-            token: session.access_token,
-            user: userData
-          }));
+          this.store.dispatch(
+            AuthActions.loginSuccess({
+              token: session.access_token,
+              user: userData,
+            }),
+          );
         }
 
         // Show success message
-        this.message = this.translationService.translate('emailVerifiedSuccess') + ' ' + this.translationService.translate('redirecting');
+        this.message =
+          this.translationService.translate('emailVerifiedSuccess') +
+          ' ' +
+          this.translationService.translate('redirecting');
 
         // Show success toast
-        this.showSuccessToast(this.translationService.translate('emailVerifiedSuccess'));
+        this.showSuccessToast(
+          this.translationService.translate('emailVerifiedSuccess'),
+        );
 
         // Redirect to home or intended page
         setTimeout(() => {
@@ -79,7 +93,9 @@ export class AuthCallbackComponent implements OnInit {
         }, 1500);
       } else {
         // No session - might be an old or invalid link
-        this.message = this.translationService.translate('invalidVerificationLink');
+        this.message = this.translationService.translate(
+          'invalidVerificationLink',
+        );
         setTimeout(() => {
           this.router.navigate(['/prijava']);
         }, 2000);
@@ -96,7 +112,8 @@ export class AuthCallbackComponent implements OnInit {
   private showSuccessToast(message: string) {
     // Create and show a simple toast notification
     const toast = document.createElement('div');
-    toast.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-in-right';
+    toast.className =
+      'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-in-right';
     toast.textContent = message;
     document.body.appendChild(toast);
 
@@ -116,7 +133,9 @@ export class AuthCallbackComponent implements OnInit {
       email: authUser.email || '',
       firstName: profile?.first_name || '',
       lastName: profile?.last_name || '',
-      fullName: profile?.full_name || `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
+      fullName:
+        profile?.full_name ||
+        `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
       avatar: profile?.avatar_url || authUser.user_metadata?.avatar_url,
       phone: profile?.phone || authUser.user_metadata?.phone,
       role: {
@@ -124,12 +143,12 @@ export class AuthCallbackComponent implements OnInit {
         name: role,
         permissions: [],
         isDefault: role === 'customer',
-        isActive: true
+        isActive: true,
       },
       status: {
         isActive: true,
         isBlocked: false,
-        isSuspended: false
+        isSuspended: false,
       },
       preferences: this.createDefaultPreferences(),
       addresses: [],
@@ -140,7 +159,7 @@ export class AuthCallbackComponent implements OnInit {
       twoFactorEnabled: false,
       lastLoginAt: authUser.last_sign_in_at,
       createdAt: authUser.created_at,
-      updatedAt: authUser.updated_at || authUser.created_at
+      updatedAt: authUser.updated_at || authUser.created_at,
     } as User;
   }
 
@@ -150,7 +169,8 @@ export class AuthCallbackComponent implements OnInit {
       email: authUser.email || '',
       firstName: authUser.user_metadata?.firstName || '',
       lastName: authUser.user_metadata?.lastName || '',
-      fullName: `${authUser.user_metadata?.firstName || ''} ${authUser.user_metadata?.lastName || ''}`.trim(),
+      fullName:
+        `${authUser.user_metadata?.firstName || ''} ${authUser.user_metadata?.lastName || ''}`.trim(),
       avatar: authUser.user_metadata?.avatar_url,
       phone: authUser.user_metadata?.phone,
       role: {
@@ -158,12 +178,12 @@ export class AuthCallbackComponent implements OnInit {
         name: 'customer',
         permissions: [],
         isDefault: true,
-        isActive: true
+        isActive: true,
       },
       status: {
         isActive: true,
         isBlocked: false,
-        isSuspended: false
+        isSuspended: false,
       },
       preferences: this.createDefaultPreferences(),
       addresses: [],
@@ -174,7 +194,7 @@ export class AuthCallbackComponent implements OnInit {
       twoFactorEnabled: false,
       lastLoginAt: authUser.last_sign_in_at,
       createdAt: authUser.created_at,
-      updatedAt: authUser.updated_at || authUser.created_at
+      updatedAt: authUser.updated_at || authUser.created_at,
     } as User;
   }
 
@@ -190,18 +210,18 @@ export class AuthCallbackComponent implements OnInit {
           promotions: false,
           newsletter: false,
           security: true,
-          productUpdates: false
+          productUpdates: false,
         },
         sms: {
           orderUpdates: false,
           security: false,
-          promotions: false
+          promotions: false,
         },
         push: {
           orderUpdates: false,
           promotions: false,
-          reminders: false
-        }
+          reminders: false,
+        },
       },
       privacy: {
         profileVisibility: 'private' as const,
@@ -209,15 +229,15 @@ export class AuthCallbackComponent implements OnInit {
         showPhone: false,
         allowDataCollection: false,
         allowPersonalization: false,
-        allowThirdPartySharing: false
+        allowThirdPartySharing: false,
       },
       marketing: {
         allowEmailMarketing: false,
         allowSmsMarketing: false,
         allowPushMarketing: false,
         interests: [],
-        preferredContactTime: 'anytime' as const
-      }
+        preferredContactTime: 'anytime' as const,
+      },
     };
   }
 }

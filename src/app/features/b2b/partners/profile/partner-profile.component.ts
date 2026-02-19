@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,14 +22,14 @@ import { SupabaseService } from '../../../../services/supabase.service';
   selector: 'app-partner-profile',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    FormsModule, 
-    ReactiveFormsModule, 
-    TranslatePipe
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslatePipe,
   ],
   templateUrl: './partner-profile.component.html',
-  styleUrls: ['./partner-profile.component.scss']
+  styleUrls: ['./partner-profile.component.scss'],
 })
 export class PartnerProfileComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -43,7 +49,8 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
   companyOrders: Order[] = [];
   filteredOrders: Order[] = [];
   orderStatusFilter = '';
-  activeTab: 'company-info' | 'company-orders' | 'company-pricing' = 'company-info';
+  activeTab: 'company-info' | 'company-orders' | 'company-pricing' =
+    'company-info';
   showSuccessMessage = false;
 
   companyInfoForm: FormGroup;
@@ -58,7 +65,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
       website: [''],
       companyEmail: ['', [Validators.required, Validators.email]],
       companyPhone: ['', [Validators.required]],
-      companyAddress: ['', [Validators.required]]
+      companyAddress: ['', [Validators.required]],
     });
   }
 
@@ -71,9 +78,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to current user from NgRx store
-    this.currentUser$.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(user => {
+    this.currentUser$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
       console.log('NgRx user state changed:', user);
       if (user) {
         this.loadPartnerProfile(user);
@@ -93,21 +98,28 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
   private async loadPartnerProfile(currentUser: User): Promise<void> {
     try {
       this.loading = true;
-      console.log('Starting to load partner profile for user:', currentUser.id, currentUser.email);
+      console.log(
+        'Starting to load partner profile for user:',
+        currentUser.id,
+        currentUser.email,
+      );
 
       // Check if user is a company contact person
-      const { data: companies, error: companyError } = await this.supabaseService.client
-        .from('companies')
-        .select('*')
-        .eq('contact_person_id', currentUser.id)
-        .eq('status', 'approved')
-        .single();
+      const { data: companies, error: companyError } =
+        await this.supabaseService.client
+          .from('companies')
+          .select('*')
+          .eq('contact_person_id', currentUser.id)
+          .eq('status', 'approved')
+          .single();
 
       console.log('Company query result:', { companies, companyError });
 
       if (companyError) {
         if (companyError.code === 'PGRST116') {
-          console.log('No approved company found for this user (this is normal if user is not a partner)');
+          console.log(
+            'No approved company found for this user (this is normal if user is not a partner)',
+          );
         } else {
           console.error('Database error when checking company:', companyError);
         }
@@ -123,7 +135,11 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
         return;
       }
 
-      console.log('Found approved company:', companies.company_name, companies.id);
+      console.log(
+        'Found approved company:',
+        companies.company_name,
+        companies.id,
+      );
 
       // Map database response to TypeScript model
       this.company = {
@@ -143,13 +159,17 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
         description: companies.description,
         status: companies.status,
         approved: companies.approved,
-        approvedAt: companies.approved_at ? new Date(companies.approved_at) : undefined,
+        approvedAt: companies.approved_at
+          ? new Date(companies.approved_at)
+          : undefined,
         approvedBy: companies.approved_by,
-        rejectedAt: companies.rejected_at ? new Date(companies.rejected_at) : undefined,
+        rejectedAt: companies.rejected_at
+          ? new Date(companies.rejected_at)
+          : undefined,
         rejectedBy: companies.rejected_by,
         rejectionReason: companies.rejection_reason,
         createdAt: new Date(companies.created_at),
-        updatedAt: new Date(companies.updated_at)
+        updatedAt: new Date(companies.updated_at),
       };
 
       this.isCompanyContact = true;
@@ -162,12 +182,11 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
         website: this.company.website || '',
         companyEmail: this.company.companyEmail || '',
         companyPhone: this.company.companyPhone || '',
-        companyAddress: this.company.companyAddress || ''
+        companyAddress: this.company.companyAddress || '',
       });
 
       // Load company orders
       await this.loadCompanyOrders();
-
     } catch (error) {
       console.error('Error loading partner profile:', error);
       this.isCompanyContact = false;
@@ -184,11 +203,17 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
 
     try {
       this.ordersLoading = true;
-      console.log('Loading orders for company:', this.company.id, 'contactPersonId:', this.company.contactPersonId);
+      console.log(
+        'Loading orders for company:',
+        this.company.id,
+        'contactPersonId:',
+        this.company.contactPersonId,
+      );
 
       const { data: orders, error } = await this.supabaseService.client
         .from('orders')
-        .select(`
+        .select(
+          `
           *,
           order_items (
             id,
@@ -198,7 +223,8 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
             unit_price,
             total_price
           )
-        `)
+        `,
+        )
         .eq('is_b2b', true)
         .eq('user_id', this.company.contactPersonId)
         .order('created_at', { ascending: false });
@@ -211,7 +237,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
       }
 
       // Map database orders to TypeScript model
-      this.companyOrders = (orders || []).map(order => ({
+      this.companyOrders = (orders || []).map((order) => ({
         id: order.id,
         orderNumber: order.order_number,
         userId: order.user_id,
@@ -244,15 +270,19 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
           totalPrice: item.total_price,
           productImageUrl: item.product_image_url,
           productSpecifications: item.product_specifications,
-          createdAt: item.created_at
+          createdAt: item.created_at,
         })),
         is_b2b: order.is_b2b,
         createdAt: order.created_at,
-        updatedAt: order.updated_at
+        updatedAt: order.updated_at,
       }));
 
       this.filteredOrders = [...this.companyOrders];
-      console.log('Successfully loaded and mapped orders:', this.companyOrders.length, 'orders');
+      console.log(
+        'Successfully loaded and mapped orders:',
+        this.companyOrders.length,
+        'orders',
+      );
     } catch (error) {
       console.error('Error loading company orders:', error);
     } finally {
@@ -286,7 +316,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
           company_email: formData.companyEmail,
           company_phone: formData.companyPhone,
           company_address: formData.companyAddress,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
         .eq('id', this.company.id)
         .select()
@@ -305,7 +335,6 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.showSuccessMessage = false;
       }, 5000);
-
     } catch (error) {
       console.error('Error updating company info:', error);
     } finally {
@@ -317,7 +346,9 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
     if (!this.orderStatusFilter) {
       this.filteredOrders = [...this.companyOrders];
     } else {
-      this.filteredOrders = this.companyOrders.filter(order => order.status === this.orderStatusFilter);
+      this.filteredOrders = this.companyOrders.filter(
+        (order) => order.status === this.orderStatusFilter,
+      );
     }
   }
 
@@ -349,19 +380,19 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
 
   getStatusLabel(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': 'b2b.profile.pendingApproval',
-      'approved': 'b2b.profile.approvedPartner',
-      'rejected': 'b2b.profile.applicationRejected'
+      pending: 'b2b.profile.pendingApproval',
+      approved: 'b2b.profile.approvedPartner',
+      rejected: 'b2b.profile.applicationRejected',
     };
-    
+
     return statusMap[status] || status;
   }
 
   getStatusDescription(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': 'b2b.profile.pendingApprovalDescription',
-      'approved': 'b2b.profile.approvedPartnerDescription',
-      'rejected': 'b2b.profile.applicationRejectedDescription'
+      pending: 'b2b.profile.pendingApprovalDescription',
+      approved: 'b2b.profile.approvedPartnerDescription',
+      rejected: 'b2b.profile.applicationRejectedDescription',
     };
     return statusMap[status] || '';
   }
@@ -385,43 +416,47 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
 
   getOrderStatusLabel(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': 'b2b.orders.pending',
-      'processing': 'b2b.orders.processing',
-      'shipped': 'b2b.orders.shipped',
-      'delivered': 'b2b.orders.delivered',
-      'cancelled': 'b2b.orders.cancelled'
+      pending: 'b2b.orders.pending',
+      processing: 'b2b.orders.processing',
+      shipped: 'b2b.orders.shipped',
+      delivered: 'b2b.orders.delivered',
+      cancelled: 'b2b.orders.cancelled',
     };
     return statusMap[status] || status;
   }
 
   getPaymentStatusLabel(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'paid': 'b2b.orders.paid',
-      'pending': 'b2b.orders.pending',
-      'failed': 'b2b.orders.failed'
+      paid: 'b2b.orders.paid',
+      pending: 'b2b.orders.pending',
+      failed: 'b2b.orders.failed',
     };
     return statusMap[status] || status;
   }
 
   getTotalSpent(): number {
-    return this.companyOrders.reduce((total, order) => total + order.subtotal, 0);
+    return this.companyOrders.reduce(
+      (total, order) => total + order.subtotal,
+      0,
+    );
   }
 
   getActiveOrders(): number {
-    return this.companyOrders.filter(order =>
-      ['pending', 'processing', 'shipped'].includes(order.status)
+    return this.companyOrders.filter((order) =>
+      ['pending', 'processing', 'shipped'].includes(order.status),
     ).length;
   }
 
   getDeliveredOrders(): number {
-    return this.companyOrders.filter(order => order.status === 'delivered').length;
+    return this.companyOrders.filter((order) => order.status === 'delivered')
+      .length;
   }
 
   formatDate(date: Date | string): string {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     });
   }
 
@@ -457,4 +492,4 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
       this.showSuccessMessage = false;
     }, 5000);
   }
-} 
+}

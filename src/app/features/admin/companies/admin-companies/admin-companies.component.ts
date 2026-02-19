@@ -8,7 +8,10 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { Company } from '../../../../shared/models/company.model';
 import { DeleteConfirmationModalComponent } from '../../../../shared/components/modals/delete-confirmation-modal/delete-confirmation-modal.component';
 import { CompanyApprovalModalComponent } from '../../../../shared/components/modals/company-approval-modal/company-approval-modal.component';
-import { DataTableComponent, TableConfig } from '../../shared/data-table/data-table.component';
+import {
+  DataTableComponent,
+  TableConfig,
+} from '../../shared/data-table/data-table.component';
 import * as CompaniesActions from '../store/companies.actions';
 import {
   selectFilteredCompanies,
@@ -20,7 +23,7 @@ import {
   selectRejectedCompanies,
   selectCompaniesApproving,
   selectCompaniesRejecting,
-  selectCompaniesDeleting
+  selectCompaniesDeleting,
 } from '../store/companies.selectors';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { AdminNotificationsService } from '../../shared/services/admin-notifications.service';
@@ -29,16 +32,16 @@ import { AdminNotificationsService } from '../../shared/services/admin-notificat
   selector: 'app-admin-companies',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    FormsModule, 
-    DeleteConfirmationModalComponent, 
-    CompanyApprovalModalComponent, 
-    TranslatePipe, 
-    DataTableComponent
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    DeleteConfirmationModalComponent,
+    CompanyApprovalModalComponent,
+    TranslatePipe,
+    DataTableComponent,
   ],
   templateUrl: './admin-companies.component.html',
-  styleUrls: ['./admin-companies.component.scss']
+  styleUrls: ['./admin-companies.component.scss'],
 })
 export class AdminCompaniesComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -77,70 +80,76 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
         label: this.translationService.translate('admin.companiesForm.company'),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'contactPersonName',
-        label: this.translationService.translate('admin.companiesForm.contactPerson'),
+        label: this.translationService.translate(
+          'admin.companiesForm.contactPerson',
+        ),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'businessType',
-        label: this.translationService.translate('admin.companiesForm.businessType'),
+        label: this.translationService.translate(
+          'admin.companiesForm.businessType',
+        ),
         type: 'status',
         sortable: true,
-        format: (value) => this.getBusinessTypeLabel(value)
+        format: (value) => this.getBusinessTypeLabel(value),
       },
       {
         key: 'status',
         label: this.translationService.translate('admin.companiesForm.status'),
         type: 'status',
         sortable: true,
-        format: (value) => this.getStatusLabel(value)
+        format: (value) => this.getStatusLabel(value),
       },
       {
         key: 'createdAt',
-        label: this.translationService.translate('admin.companiesForm.appliedDate'),
+        label: this.translationService.translate(
+          'admin.companiesForm.appliedDate',
+        ),
         type: 'date',
         sortable: true,
-        format: (value) => this.formatDate(value)
-      }
+        format: (value) => this.formatDate(value),
+      },
     ],
     actions: [
       {
         label: this.translationService.translate('admin.companiesForm.view'),
         icon: 'eye',
         action: 'view',
-        class: 'text-blue-600 hover:text-blue-900'
+        class: 'text-blue-600 hover:text-blue-900',
       },
       {
         label: this.translationService.translate('admin.companiesForm.approve'),
         icon: 'check',
         action: 'approve',
         class: 'text-green-600 hover:text-green-900',
-        condition: (item: Company) => item.status === 'pending'
+        condition: (item: Company) => item.status === 'pending',
       },
       {
         label: this.translationService.translate('admin.companiesForm.reject'),
         icon: 'x',
         action: 'reject',
         class: 'text-orange-600 hover:text-orange-900',
-        condition: (item: Company) => item.status === 'pending'
+        condition: (item: Company) => item.status === 'pending',
       },
       {
         label: this.translationService.translate('admin.companiesForm.edit'),
         icon: 'edit',
         action: 'edit',
-        class: 'text-blue-600 hover:text-blue-900'
+        class: 'text-blue-600 hover:text-blue-900',
       },
       {
         label: this.translationService.translate('admin.companiesForm.delete'),
         icon: 'trash2',
         action: 'delete',
-        class: 'text-red-600 hover:text-red-900'
-      }
+        class: 'text-red-600 hover:text-red-900',
+      },
     ],
     searchable: true,
     sortable: true,
@@ -148,7 +157,7 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
     pageSize: 20,
     allowCsvImport: false,
     allowExport: true,
-    rowClickable: true
+    rowClickable: true,
   };
 
   constructor(private store: Store) {
@@ -181,7 +190,7 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
     this.store.dispatch(CompaniesActions.loadCompanies());
   }
 
-  onTableAction(event: { action: string, item: Company }): void {
+  onTableAction(event: { action: string; item: Company }): void {
     const { action, item } = event;
 
     switch (action) {
@@ -226,9 +235,13 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
 
   getStatusLabel(status: string): string {
     const statusMap: { [key: string]: string } = {
-      'pending': this.translationService.translate('admin.companiesForm.pending'),
-      'approved': this.translationService.translate('admin.companiesForm.approved'),
-      'rejected': this.translationService.translate('admin.companiesForm.rejected')
+      pending: this.translationService.translate('admin.companiesForm.pending'),
+      approved: this.translationService.translate(
+        'admin.companiesForm.approved',
+      ),
+      rejected: this.translationService.translate(
+        'admin.companiesForm.rejected',
+      ),
     };
     return statusMap[status] || status;
   }
@@ -252,11 +265,19 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
 
   getBusinessTypeLabel(type: string): string {
     const typeMap: { [key: string]: string } = {
-      'retailer': this.translationService.translate('admin.companiesForm.retailer'),
-      'wholesaler': this.translationService.translate('admin.companiesForm.wholesaler'),
-      'installer': this.translationService.translate('admin.companiesForm.installer'),
-      'distributor': this.translationService.translate('admin.companiesForm.distributor'),
-      'other': this.translationService.translate('admin.companiesForm.other')
+      retailer: this.translationService.translate(
+        'admin.companiesForm.retailer',
+      ),
+      wholesaler: this.translationService.translate(
+        'admin.companiesForm.wholesaler',
+      ),
+      installer: this.translationService.translate(
+        'admin.companiesForm.installer',
+      ),
+      distributor: this.translationService.translate(
+        'admin.companiesForm.distributor',
+      ),
+      other: this.translationService.translate('admin.companiesForm.other'),
     };
     return typeMap[type] || type;
   }
@@ -266,7 +287,7 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
     return new Date(date).toLocaleDateString('hr-HR', {
       year: 'numeric',
       month: '2-digit',
-      day: '2-digit'
+      day: '2-digit',
     });
   }
 
@@ -284,12 +305,18 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
   }
 
   rejectCompany(company: Company): void {
-    const reason = prompt(this.translationService.translate('admin.companiesForm.reasonForRejection'));
+    const reason = prompt(
+      this.translationService.translate(
+        'admin.companiesForm.reasonForRejection',
+      ),
+    );
     if (reason) {
-      this.store.dispatch(CompaniesActions.rejectCompany({
-        companyId: company.id,
-        reason: reason
-      }));
+      this.store.dispatch(
+        CompaniesActions.rejectCompany({
+          companyId: company.id,
+          reason: reason,
+        }),
+      );
       this.closeModal();
     }
   }
@@ -299,17 +326,23 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
   }
 
   deleteCompany(company: Company): void {
-    this.deleteModalTitle = this.translationService.translate('admin.companiesForm.confirmDeletion');
-    this.deleteModalMessage = this.translationService.translate('admin.companiesForm.confirmDeletionMessage');
+    this.deleteModalTitle = this.translationService.translate(
+      'admin.companiesForm.confirmDeletion',
+    );
+    this.deleteModalMessage = this.translationService.translate(
+      'admin.companiesForm.confirmDeletionMessage',
+    );
     this.pendingDeleteCompany = company;
     this.showDeleteModal = true;
   }
 
   onDeleteConfirmed(): void {
     if (this.pendingDeleteCompany) {
-      this.store.dispatch(CompaniesActions.deleteCompany({
-        companyId: this.pendingDeleteCompany.id
-      }));
+      this.store.dispatch(
+        CompaniesActions.deleteCompany({
+          companyId: this.pendingDeleteCompany.id,
+        }),
+      );
       this.pendingDeleteCompany = null;
       this.showDeleteModal = false;
       this.closeModal();
@@ -323,9 +356,11 @@ export class AdminCompaniesComponent implements OnInit, OnDestroy {
 
   onApprovalConfirmed(): void {
     if (this.pendingApprovalCompany) {
-      this.store.dispatch(CompaniesActions.approveCompany({
-        companyId: this.pendingApprovalCompany.id
-      }));
+      this.store.dispatch(
+        CompaniesActions.approveCompany({
+          companyId: this.pendingApprovalCompany.id,
+        }),
+      );
       this.pendingApprovalCompany = null;
       this.showApprovalModal = false;
       this.closeModal();

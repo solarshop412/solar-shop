@@ -1,6 +1,12 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -11,14 +17,18 @@ import { SupabaseService } from '../../../../services/supabase.service';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../shared/services/toast.service';
-import { getUnitName, filterAndCombineErpStock, FilteredStockItem } from '../../../../shared/utils/erp-unit-names';
+import {
+  getUnitName,
+  filterAndCombineErpStock,
+  FilteredStockItem,
+} from '../../../../shared/utils/erp-unit-names';
 import {
   loadProducts,
   loadCategories,
   loadErpStock,
   clearErpStock,
   filterErpStockByUnit,
-  ErpStockItem
+  ErpStockItem,
 } from '../../../b2b/shared/store/products.actions';
 import {
   selectProducts,
@@ -26,18 +36,23 @@ import {
   selectProductsLoading,
   selectErpStockLoading,
   selectErpStockError,
-  selectErpStock
+  selectErpStock,
 } from '../../../b2b/shared/store/products.selectors';
 import { Product, Category } from '../../../b2b/shared/store/products.actions';
 import { ProductRelationship } from '../../../../shared/models/product-relationship.model';
 
-
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, AdminFormComponent, TranslatePipe],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AdminFormComponent,
+    TranslatePipe,
+  ],
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss']
+  styleUrls: ['./product-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -69,7 +84,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     related_product_id: undefined,
     related_category_id: undefined,
     sort_order: 0,
-    is_active: true
+    is_active: true,
   };
 
   // ERP Stock Management (NgRx)
@@ -89,12 +104,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     // ERP Stock observables - Apply filtering and combining
     this.erpStockByUnit$ = this.store.select(selectErpStock);
     this.erpStockFiltered$ = this.erpStockByUnit$.pipe(
-      map(stockItems => filterAndCombineErpStock(stockItems))
+      map((stockItems) => filterAndCombineErpStock(stockItems)),
     );
     this.erpStockLoading$ = this.store.select(selectErpStockLoading);
     this.erpStockError$ = this.store.select(selectErpStockError);
     this.erpStockTotalQuantity$ = this.erpStockFiltered$.pipe(
-      map(stockItems => stockItems.reduce((total, item) => total + item.quantity, 0))
+      map((stockItems) =>
+        stockItems.reduce((total, item) => total + item.quantity, 0),
+      ),
     );
   }
 
@@ -131,7 +148,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       specifications: [''],
       features: [''],
       certifications: [''],
-      technical_sheet: ['']
+      technical_sheet: [''],
     });
   }
 
@@ -141,12 +158,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToStoreData(): void {
-    this.categories$.pipe(takeUntil(this.destroy$)).subscribe(categories => {
+    this.categories$.pipe(takeUntil(this.destroy$)).subscribe((categories) => {
       this.categories = categories;
       this.organizeCategories();
     });
 
-    this.products$.pipe(takeUntil(this.destroy$)).subscribe(products => {
+    this.products$.pipe(takeUntil(this.destroy$)).subscribe((products) => {
       this.products = products;
       this.updateAvailableProducts();
     });
@@ -154,21 +171,25 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   private organizeCategories(): void {
     // Organize categories hierarchically: parent categories first, then their children
-    const parentCategories = this.categories.filter(cat => !cat.parent_id);
-    const childCategories = this.categories.filter(cat => cat.parent_id);
-    
+    const parentCategories = this.categories.filter((cat) => !cat.parent_id);
+    const childCategories = this.categories.filter((cat) => cat.parent_id);
+
     this.organizedCategories = [];
-    
+
     // Add each parent category followed by its children
-    parentCategories.forEach(parent => {
+    parentCategories.forEach((parent) => {
       this.organizedCategories.push(parent);
-      const children = childCategories.filter(child => child.parent_id === parent.id);
+      const children = childCategories.filter(
+        (child) => child.parent_id === parent.id,
+      );
       this.organizedCategories.push(...children);
     });
-    
+
     // Add any orphaned child categories at the end
-    const parentIds = parentCategories.map(p => p.id);
-    const orphanedChildren = childCategories.filter(child => !parentIds.includes(child.parent_id || ''));
+    const parentIds = parentCategories.map((p) => p.id);
+    const orphanedChildren = childCategories.filter(
+      (child) => !parentIds.includes(child.parent_id || ''),
+    );
     this.organizedCategories.push(...orphanedChildren);
   }
 
@@ -180,14 +201,21 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.loadProductRelationships();
     }
     // Set title after determining edit mode
-    this.title.setTitle(this.isEditMode ? 'Edit Product - Solar Shop Admin' : 'Create Product - Solar Shop Admin');
+    this.title.setTitle(
+      this.isEditMode
+        ? 'Edit Product - Solar Shop Admin'
+        : 'Create Product - Solar Shop Admin',
+    );
   }
 
   private async loadProduct(): Promise<void> {
     if (!this.productId) return;
 
     try {
-      const data = await this.supabaseService.getTableById('products', this.productId);
+      const data = await this.supabaseService.getTableById(
+        'products',
+        this.productId,
+      );
 
       if (data) {
         // Map database fields to form fields
@@ -197,21 +225,25 @@ export class ProductFormComponent implements OnInit, OnDestroy {
           slug: (data as any).slug || this.generateSlug(productName),
           description: data.description || '',
           price: Number(data.price) || 0,
-          compare_at_price: (data as any).compare_at_price || data.original_price || '',
+          compare_at_price:
+            (data as any).compare_at_price || data.original_price || '',
           sku: data.sku || '',
           brand: data.brand || '',
           model: data.model || '',
           stock_quantity: Number(data.stock_quantity) || 0,
           weight: data.weight ? Number(data.weight) : null,
           dimensions: data.dimensions || '',
-          is_active: data.is_active !== undefined ? Boolean(data.is_active) : true,
-          is_featured: data.is_featured !== undefined ? Boolean(data.is_featured) : false,
-          is_on_sale: data.is_on_sale !== undefined ? Boolean(data.is_on_sale) : false,
+          is_active:
+            data.is_active !== undefined ? Boolean(data.is_active) : true,
+          is_featured:
+            data.is_featured !== undefined ? Boolean(data.is_featured) : false,
+          is_on_sale:
+            data.is_on_sale !== undefined ? Boolean(data.is_on_sale) : false,
           images: this.formatImages(data),
           specifications: this.formatSpecifications(data.specifications),
           features: this.formatFeatures(data.features),
           certifications: this.formatCertifications(data.certifications),
-          technical_sheet: data.technical_sheet || ''
+          technical_sheet: data.technical_sheet || '',
         };
 
         this.productForm.patchValue(formData);
@@ -220,7 +252,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
         // Auto-load ERP stock if SKU exists
         if (data.sku) {
-          console.log('[Product Form] Auto-loading ERP stock for SKU:', data.sku);
+          console.log(
+            '[Product Form] Auto-loading ERP stock for SKU:',
+            data.sku,
+          );
           this.store.dispatch(loadErpStock({ sku: data.sku }));
         }
       }
@@ -328,7 +363,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     // Validate that at least one category is selected
     if (this.selectedCategoryIds.length === 0) {
-      this.toastService.showError('Please select at least one category for the product.');
+      this.toastService.showError(
+        'Please select at least one category for the product.',
+      );
       return;
     }
 
@@ -336,13 +373,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     try {
       // Process images - convert from text input to JSONB array format
-      const imageUrls = formValue.images ? formValue.images.split('\n').filter((url: string) => url.trim()) : [];
+      const imageUrls = formValue.images
+        ? formValue.images.split('\n').filter((url: string) => url.trim())
+        : [];
       const imagesArray = imageUrls.map((url: string, index: number) => ({
         url: url.trim(),
         alt: `${formValue.name} - Image ${index + 1}`,
         is_primary: index === 0,
         order: index,
-        type: index === 0 ? 'main' : 'gallery'
+        type: index === 0 ? 'main' : 'gallery',
       }));
 
       // Parse specifications line-separated format to object
@@ -368,7 +407,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       // Parse features string to array
       let featuresArray: string[] = [];
       if (formValue.features && formValue.features.trim()) {
-        featuresArray = formValue.features.split('\n')
+        featuresArray = formValue.features
+          .split('\n')
           .map((feature: string) => feature.trim())
           .filter((feature: string) => feature.length > 0);
       }
@@ -376,13 +416,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       // Parse certifications string to array
       let certificationsArray: string[] = [];
       if (formValue.certifications && formValue.certifications.trim()) {
-        certificationsArray = formValue.certifications.split('\n')
+        certificationsArray = formValue.certifications
+          .split('\n')
           .map((certification: string) => certification.trim())
           .filter((certification: string) => certification.length > 0);
       }
 
       // Get current ERP stock total quantity
-      const currentErpStock = await firstValueFrom(this.erpStockTotalQuantity$.pipe(take(1)));
+      const currentErpStock = await firstValueFrom(
+        this.erpStockTotalQuantity$.pipe(take(1)),
+      );
 
       // Map form fields to database fields
       const productData: any = {
@@ -407,9 +450,12 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         certifications: certificationsArray,
         technical_sheet: formValue.technical_sheet || null,
         tags: [], // Default empty tags
-        stock_status: Number(formValue.stock_quantity) > 0 ? 'in_stock' as const : 'out_of_stock' as const,
+        stock_status:
+          Number(formValue.stock_quantity) > 0
+            ? ('in_stock' as const)
+            : ('out_of_stock' as const),
         category_id: this.primaryCategoryId, // Set primary category for legacy support
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
       // If we have ERP stock data, include it in the update
@@ -419,7 +465,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       }
 
       // Explicitly handle original_price to ensure it's always included in the payload
-      if (formValue.compare_at_price && formValue.compare_at_price !== '' && formValue.compare_at_price !== null) {
+      if (
+        formValue.compare_at_price &&
+        formValue.compare_at_price !== '' &&
+        formValue.compare_at_price !== null
+      ) {
         productData.original_price = Number(formValue.compare_at_price);
       } else {
         productData.original_price = null; // Explicitly set to null to clear the field
@@ -427,15 +477,22 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
       let savedProductId: string;
       if (this.isEditMode && this.productId) {
-        await this.supabaseService.updateRecord('products', this.productId, productData);
+        await this.supabaseService.updateRecord(
+          'products',
+          this.productId,
+          productData,
+        );
         savedProductId = this.productId;
       } else {
         (productData as any).created_at = new Date().toISOString();
         console.log('Creating product with data:', productData);
-        
-        const result = await this.supabaseService.createRecord('products', productData);
+
+        const result = await this.supabaseService.createRecord(
+          'products',
+          productData,
+        );
         console.log('Create product result:', result);
-        
+
         if (!result) {
           throw new Error('Failed to create product - no result returned');
         }
@@ -456,14 +513,16 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         code: error.code,
         details: error.details,
         hint: error.hint,
-        stack: error.stack
+        stack: error.stack,
       });
-      
+
       // Show user-friendly error message
       if (error.message) {
         this.toastService.showError(`Failed to save product: ${error.message}`);
       } else {
-        this.toastService.showError('Failed to save product. Please check the console for details.');
+        this.toastService.showError(
+          'Failed to save product. Please check the console for details.',
+        );
       }
     } finally {
       this.isSubmitting = false;
@@ -497,12 +556,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private updateAvailableProducts(): void {
     // Filter out the current product and already related products
     const relatedProductIds = this.relationships
-      .filter(r => r.related_product_id)
-      .map(r => r.related_product_id);
+      .filter((r) => r.related_product_id)
+      .map((r) => r.related_product_id);
 
-    this.availableProducts = this.products.filter(product =>
-      product.id !== this.productId &&
-      !relatedProductIds.includes(product.id)
+    this.availableProducts = this.products.filter(
+      (product) =>
+        product.id !== this.productId &&
+        !relatedProductIds.includes(product.id),
     );
   }
 
@@ -545,9 +605,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         product_id: this.productId,
         related_product_id: this.newRelationship.related_product_id || null,
         related_category_id: this.newRelationship.related_category_id || null,
-        relationship_type: this.newRelationship.relationship_type || 'suggested',
+        relationship_type:
+          this.newRelationship.relationship_type || 'suggested',
         sort_order: this.newRelationship.sort_order || 0,
-        is_active: true
+        is_active: true,
       };
 
       const { error } = await this.supabaseService.client
@@ -565,9 +626,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
           product_id: this.newRelationship.related_product_id,
           related_product_id: this.productId,
           related_category_id: null,
-          relationship_type: this.newRelationship.relationship_type || 'suggested',
+          relationship_type:
+            this.newRelationship.relationship_type || 'suggested',
           sort_order: this.newRelationship.sort_order || 0,
-          is_active: true
+          is_active: true,
         };
 
         const { error: reverseError } = await this.supabaseService.client
@@ -575,7 +637,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
           .insert(reverseRelationshipData);
 
         if (reverseError) {
-          console.error('Database error creating reverse relationship:', reverseError);
+          console.error(
+            'Database error creating reverse relationship:',
+            reverseError,
+          );
           // Don't throw here, the main relationship was already created successfully
         }
       }
@@ -586,7 +651,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         related_product_id: undefined,
         related_category_id: undefined,
         sort_order: 0,
-        is_active: true
+        is_active: true,
       };
 
       await this.loadProductRelationships();
@@ -598,10 +663,17 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       console.error('Error adding relationship:', error);
 
       // Check if it's an RLS policy error
-      if (error.message && error.message.includes('row-level security policy')) {
-        this.toastService.showError('Permission denied: You may not have sufficient privileges to add product relationships. Please contact your administrator.');
+      if (
+        error.message &&
+        error.message.includes('row-level security policy')
+      ) {
+        this.toastService.showError(
+          'Permission denied: You may not have sufficient privileges to add product relationships. Please contact your administrator.',
+        );
       } else {
-        this.toastService.showError(`Error adding relationship: ${error.message || 'Please try again.'}`);
+        this.toastService.showError(
+          `Error adding relationship: ${error.message || 'Please try again.'}`,
+        );
       }
     }
   }
@@ -624,14 +696,20 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       this.updateAvailableProducts();
 
       // Show success message
-      this.toastService.showSuccess('Product relationship removed successfully!');
+      this.toastService.showSuccess(
+        'Product relationship removed successfully!',
+      );
     } catch (error: any) {
       console.error('Error removing relationship:', error);
-      this.toastService.showError(`Error removing relationship: ${error.message || 'Please try again.'}`);
+      this.toastService.showError(
+        `Error removing relationship: ${error.message || 'Please try again.'}`,
+      );
     }
   }
 
-  async toggleRelationshipStatus(relationship: ProductRelationship): Promise<void> {
+  async toggleRelationshipStatus(
+    relationship: ProductRelationship,
+  ): Promise<void> {
     if (!relationship.id) return;
 
     try {
@@ -649,44 +727,62 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
       // Show success message
       const statusText = relationship.is_active ? 'deactivated' : 'activated';
-      this.toastService.showSuccess(`Product relationship ${statusText} successfully!`);
+      this.toastService.showSuccess(
+        `Product relationship ${statusText} successfully!`,
+      );
     } catch (error: any) {
       console.error('Error toggling relationship status:', error);
-      this.toastService.showError(`Error updating relationship status: ${error.message || 'Please try again.'}`);
+      this.toastService.showError(
+        `Error updating relationship status: ${error.message || 'Please try again.'}`,
+      );
     }
   }
 
   getRelationshipTypeLabel(type: string): string {
     const labels: { [key: string]: string } = {
-      suggested: this.translationService.translate('admin.productRelationshipsSuggested'),
-      complementary: this.translationService.translate('admin.productRelationshipsComplementary'),
-      alternative: this.translationService.translate('admin.productRelationshipsAlternative'),
-      bundle: this.translationService.translate('admin.productRelationshipsBundle')
+      suggested: this.translationService.translate(
+        'admin.productRelationshipsSuggested',
+      ),
+      complementary: this.translationService.translate(
+        'admin.productRelationshipsComplementary',
+      ),
+      alternative: this.translationService.translate(
+        'admin.productRelationshipsAlternative',
+      ),
+      bundle: this.translationService.translate(
+        'admin.productRelationshipsBundle',
+      ),
     };
     return labels[type] || type;
   }
 
   getProductName(productId: string): string {
-    const product = this.products.find(p => p.id === productId);
+    const product = this.products.find((p) => p.id === productId);
     return product ? product.name : 'Unknown Product';
   }
 
   getCategoryName(categoryId: string): string {
-    const category = this.categories.find(c => c.id === categoryId);
+    const category = this.categories.find((c) => c.id === categoryId);
     return category ? category.name : 'Unknown Category';
   }
 
-  trackByRelationshipId(index: number, relationship: ProductRelationship): string {
+  trackByRelationshipId(
+    index: number,
+    relationship: ProductRelationship,
+  ): string {
     return relationship.id || index.toString();
   }
 
   copyToClipboard(text: string): void {
-    navigator.clipboard.writeText(text).then(() => {
-      // You could show a toast notification here if you have one
-      console.log('UUID copied to clipboard');
-    }).catch(err => {
-      console.error('Failed to copy UUID: ', err);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        // You could show a toast notification here if you have one
+        console.log('UUID copied to clipboard');
+      })
+      .catch((err) => {
+        console.error('Failed to copy UUID: ', err);
+      });
   }
 
   // ERP Stock Management Methods (NgRx)
@@ -694,7 +790,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     const sku = this.productForm.get('sku')?.value;
 
     if (!sku) {
-      this.toastService.showError('Molimo unesite šifru artikla prije pretraživanja zaliha');
+      this.toastService.showError(
+        'Molimo unesite šifru artikla prije pretraživanja zaliha',
+      );
       return;
     }
 
@@ -706,10 +804,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
   syncStockFromErp(): void {
-    this.erpStockTotalQuantity$.pipe(takeUntil(this.destroy$)).subscribe(totalStock => {
-      this.productForm.patchValue({ stock_quantity: totalStock });
-      this.toastService.showSuccess(`Zaliha sinkronizirana iz ERP sustava: ${totalStock} jedinica`);
-    }).unsubscribe();
+    this.erpStockTotalQuantity$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalStock) => {
+        this.productForm.patchValue({ stock_quantity: totalStock });
+        this.toastService.showSuccess(
+          `Zaliha sinkronizirana iz ERP sustava: ${totalStock} jedinica`,
+        );
+      })
+      .unsubscribe();
   }
 
   clearErpStockError(): void {
@@ -735,24 +838,29 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   // Category selection methods
   onCategorySelectionChange(categoryId: string, event: any): void {
     const isChecked = event.target.checked;
-    
+
     if (isChecked) {
       // Add category to selected list
       if (!this.selectedCategoryIds.includes(categoryId)) {
         this.selectedCategoryIds.push(categoryId);
       }
-      
+
       // If this is the first category selected, make it primary
       if (this.selectedCategoryIds.length === 1) {
         this.primaryCategoryId = categoryId;
       }
     } else {
       // Remove category from selected list
-      this.selectedCategoryIds = this.selectedCategoryIds.filter(id => id !== categoryId);
-      
+      this.selectedCategoryIds = this.selectedCategoryIds.filter(
+        (id) => id !== categoryId,
+      );
+
       // If this was the primary category, set a new primary (first in the list)
       if (this.primaryCategoryId === categoryId) {
-        this.primaryCategoryId = this.selectedCategoryIds.length > 0 ? this.selectedCategoryIds[0] : null;
+        this.primaryCategoryId =
+          this.selectedCategoryIds.length > 0
+            ? this.selectedCategoryIds[0]
+            : null;
       }
     }
   }
@@ -763,7 +871,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     }
   }
 
-
   private async loadProductCategories(): Promise<void> {
     if (!this.productId) return;
 
@@ -771,22 +878,33 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       // Load product categories from the product_categories junction table
       const { data: productCategories } = await this.supabaseService.client
         .from('product_categories')
-        .select(`
+        .select(
+          `
           category_id,
           is_primary,
           categories!inner(id, name)
-        `)
+        `,
+        )
         .eq('product_id', this.productId);
 
       if (productCategories && productCategories.length > 0) {
-        this.selectedCategoryIds = productCategories.map((pc: any) => pc.category_id);
-        
+        this.selectedCategoryIds = productCategories.map(
+          (pc: any) => pc.category_id,
+        );
+
         // Find the primary category
-        const primaryCategory = productCategories.find((pc: any) => pc.is_primary);
-        this.primaryCategoryId = primaryCategory ? primaryCategory.category_id : this.selectedCategoryIds[0];
+        const primaryCategory = productCategories.find(
+          (pc: any) => pc.is_primary,
+        );
+        this.primaryCategoryId = primaryCategory
+          ? primaryCategory.category_id
+          : this.selectedCategoryIds[0];
       } else {
         // Fallback: check if there's a legacy category_id in the product record
-        const productData = await this.supabaseService.getTableById('products', this.productId);
+        const productData = await this.supabaseService.getTableById(
+          'products',
+          this.productId,
+        );
         if (productData && productData.category_id) {
           this.selectedCategoryIds = [productData.category_id];
           this.primaryCategoryId = productData.category_id;
@@ -811,11 +929,13 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         .eq('product_id', productId);
 
       // Then, insert new entries
-      const productCategoryEntries = this.selectedCategoryIds.map((categoryId) => ({
-        product_id: productId,
-        category_id: categoryId,
-        is_primary: categoryId === this.primaryCategoryId
-      }));
+      const productCategoryEntries = this.selectedCategoryIds.map(
+        (categoryId) => ({
+          product_id: productId,
+          category_id: categoryId,
+          is_primary: categoryId === this.primaryCategoryId,
+        }),
+      );
 
       const { error } = await this.supabaseService.client
         .from('product_categories')
@@ -825,14 +945,17 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         throw error;
       }
 
-      console.log('Successfully saved product categories:', productCategoryEntries);
+      console.log(
+        'Successfully saved product categories:',
+        productCategoryEntries,
+      );
     } catch (error: any) {
       console.error('Error saving product categories:', error);
       console.error('Product categories error details:', {
         message: error.message,
         code: error.code,
         details: error.details,
-        hint: error.hint
+        hint: error.hint,
       });
       throw error;
     }

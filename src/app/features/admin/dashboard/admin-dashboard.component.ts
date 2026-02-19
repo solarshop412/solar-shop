@@ -12,7 +12,7 @@ import { DashboardStats } from '../../../shared/models/dashboard-stats.model';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent implements OnInit {
   private supabaseService = inject(SupabaseService);
@@ -39,12 +39,12 @@ export class AdminDashboardComponent implements OnInit {
 
   getOrderStatusLabel(status: string): string {
     const statusLabels: { [key: string]: string } = {
-      'pending': 'Pending',
-      'confirmed': 'Confirmed',
-      'processing': 'Processing',
-      'shipped': 'Shipped',
-      'delivered': 'Delivered',
-      'cancelled': 'Cancelled'
+      pending: 'Pending',
+      confirmed: 'Confirmed',
+      processing: 'Processing',
+      shipped: 'Shipped',
+      delivered: 'Delivered',
+      cancelled: 'Cancelled',
     };
     return statusLabels[status] || status;
   }
@@ -52,17 +52,22 @@ export class AdminDashboardComponent implements OnInit {
   private loadStats(): Observable<DashboardStats> {
     const loadStatsAsync = async () => {
       try {
-        const [products, categories, blogPosts, offers, users] = await Promise.all([
-          this.supabaseService.getTable('products'),
-          this.supabaseService.getTable('categories'),
-          this.supabaseService.getTable('blog_posts'),
-          this.supabaseService.getTable('offers'),
-          this.supabaseService.getTable('profiles')
-        ]);
+        const [products, categories, blogPosts, offers, users] =
+          await Promise.all([
+            this.supabaseService.getTable('products'),
+            this.supabaseService.getTable('categories'),
+            this.supabaseService.getTable('blog_posts'),
+            this.supabaseService.getTable('offers'),
+            this.supabaseService.getTable('profiles'),
+          ]);
 
         const orders = await this.supabaseService.getTable('orders');
         const recentOrders = (orders || [])
-          .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+          .sort(
+            (a: any, b: any) =>
+              new Date(b.created_at).getTime() -
+              new Date(a.created_at).getTime(),
+          )
           .slice(0, 5);
 
         return {
@@ -72,7 +77,7 @@ export class AdminDashboardComponent implements OnInit {
           totalOffers: offers?.length || 0,
           totalUsers: users?.length || 0,
           totalOrders: orders?.length || 0,
-          recentOrders: recentOrders
+          recentOrders: recentOrders,
         };
       } catch (error) {
         console.error('Error loading dashboard stats:', error);
@@ -83,11 +88,11 @@ export class AdminDashboardComponent implements OnInit {
           totalOffers: 0,
           totalUsers: 0,
           totalOrders: 0,
-          recentOrders: []
+          recentOrders: [],
         };
       }
     };
 
     return from(loadStatsAsync());
   }
-} 
+}

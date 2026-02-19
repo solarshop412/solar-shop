@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +23,7 @@ import { SeoService } from '../../../../shared/services/seo.service';
   standalone: true,
   imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './offers-page.component.html',
-  styleUrls: ['./offers-page.component.scss']
+  styleUrls: ['./offers-page.component.scss'],
 })
 export class OffersPageComponent implements OnInit, OnDestroy {
   private store = inject(Store);
@@ -39,7 +46,7 @@ export class OffersPageComponent implements OnInit, OnDestroy {
     // Set SEO for offers list page
     this.seoService.setCategoryPage(
       'Ponude',
-      'Pregledajte naše posebne ponude i akcije na solarne panele, invertere i opremu za solarne elektrane. Uštedite na kvalitetnoj solarnoj opremi.'
+      'Pregledajte naše posebne ponude i akcije na solarne panele, invertere i opremu za solarne elektrane. Uštedite na kvalitetnoj solarnoj opremi.',
     );
 
     this.store.dispatch(OffersActions.loadOffers());
@@ -57,7 +64,9 @@ export class OffersPageComponent implements OnInit, OnDestroy {
   }
 
   private async loadOfferProducts(offers: Offer[]): Promise<void> {
-    const productPromises = offers.map(offer => this.getRelatedProducts(offer));
+    const productPromises = offers.map((offer) =>
+      this.getRelatedProducts(offer),
+    );
     const allProducts = await Promise.all(productPromises);
 
     offers.forEach((offer, index) => {
@@ -69,7 +78,8 @@ export class OffersPageComponent implements OnInit, OnDestroy {
     try {
       const { data: offerProducts, error } = await this.supabaseService.client
         .from('offer_products')
-        .select(`
+        .select(
+          `
           *,
           products (
             id,
@@ -84,7 +94,8 @@ export class OffersPageComponent implements OnInit, OnDestroy {
               name
             )
           )
-        `)
+        `,
+        )
         .eq('offer_id', offer.id)
         .order('sort_order');
 
@@ -95,7 +106,10 @@ export class OffersPageComponent implements OnInit, OnDestroy {
 
       if (offerProducts && offerProducts.length > 0) {
         const products = offerProducts.map((op: any) => {
-          const discountType = (op.discount_amount && op.discount_amount > 0) ? 'fixed_amount' : 'percentage';
+          const discountType =
+            op.discount_amount && op.discount_amount > 0
+              ? 'fixed_amount'
+              : 'percentage';
 
           return {
             id: op.products.id,
@@ -107,7 +121,7 @@ export class OffersPageComponent implements OnInit, OnDestroy {
             stock_quantity: op.products.stock_quantity || 0,
             discount_percentage: op.discount_percentage || 0,
             discount_amount: op.discount_amount || 0,
-            discount_type: discountType
+            discount_type: discountType,
           };
         });
         return products;
@@ -133,12 +147,22 @@ export class OffersPageComponent implements OnInit, OnDestroy {
   }
 
   getTotalSavings(offer: Offer): number {
-    return this.getTotalOriginalPrice(offer) - this.calculateTotalDiscountedPrice(offer);
+    return (
+      this.getTotalOriginalPrice(offer) -
+      this.calculateTotalDiscountedPrice(offer)
+    );
   }
 
-  calculateDiscountedPrice(originalPrice: number, offer: Offer, product?: any): number {
+  calculateDiscountedPrice(
+    originalPrice: number,
+    offer: Offer,
+    product?: any,
+  ): number {
     // If we have product-specific discount information, use that
-    if (product && (product.discount_percentage > 0 || product.discount_amount > 0)) {
+    if (
+      product &&
+      (product.discount_percentage > 0 || product.discount_amount > 0)
+    ) {
       if (product.discount_type === 'fixed_amount') {
         return Math.max(0, originalPrice - (product.discount_amount || 0));
       } else {
@@ -155,7 +179,8 @@ export class OffersPageComponent implements OnInit, OnDestroy {
       const totalOriginalPrice = this.getTotalOriginalPrice(offer);
       const fixedDiscountAmount = offer.discount_value || 0;
       if (totalOriginalPrice > 0) {
-        const proportionalDiscount = (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
+        const proportionalDiscount =
+          (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
         return Math.max(0, originalPrice - proportionalDiscount);
       }
     }
@@ -165,7 +190,9 @@ export class OffersPageComponent implements OnInit, OnDestroy {
   calculateTotalDiscountedPrice(offer: Offer): number {
     const products = this.offerProducts[offer.id] || [];
     return products.reduce((total, product) => {
-      return total + this.calculateDiscountedPrice(product.price, offer, product);
+      return (
+        total + this.calculateDiscountedPrice(product.price, offer, product)
+      );
     }, 0);
   }
 
@@ -198,7 +225,8 @@ export class OffersPageComponent implements OnInit, OnDestroy {
   }
 
   getSavingsAmount(offer: Offer): string {
-    const savingsAmount = (offer.originalPrice || 0) - (offer.discountedPrice || 0);
+    const savingsAmount =
+      (offer.originalPrice || 0) - (offer.discountedPrice || 0);
     return savingsAmount.toFixed(2);
   }
 
@@ -206,24 +234,24 @@ export class OffersPageComponent implements OnInit, OnDestroy {
     const originalPrice = Number(offer.originalPrice) || 0;
     const discountedPrice = Number(offer.discountedPrice) || 0;
     const savingsAmount = originalPrice - discountedPrice;
-    
+
     console.log('Debug savings calculation:', {
       offer: offer.title,
       originalPrice,
       discountedPrice,
-      savingsAmount
+      savingsAmount,
     });
-    
+
     if (savingsAmount <= 0) {
       return '0,00 €';
     }
-    
+
     try {
-      const formatted = new Intl.NumberFormat('hr-HR', { 
-        style: 'currency', 
+      const formatted = new Intl.NumberFormat('hr-HR', {
+        style: 'currency',
         currency: 'EUR',
         minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        maximumFractionDigits: 2,
       }).format(savingsAmount);
       console.log('Formatted result:', formatted);
       return formatted;
@@ -233,4 +261,4 @@ export class OffersPageComponent implements OnInit, OnDestroy {
       return `${savingsAmount.toFixed(2)} €`;
     }
   }
-} 
+}

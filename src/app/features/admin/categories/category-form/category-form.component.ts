@@ -1,6 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { AdminFormComponent } from '../../shared/admin-form/admin-form.component';
@@ -9,13 +14,17 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { Category } from '../../../../shared/models/category.model';
 
-
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent, TranslatePipe],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdminFormComponent,
+    TranslatePipe,
+  ],
   templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss']
+  styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -57,7 +66,7 @@ export class CategoryFormComponent implements OnInit {
       image_url: [''],
       sort_order: [0, [Validators.min(0)]],
       is_active: [true],
-      parent_id: [null]
+      parent_id: [null],
     });
   }
 
@@ -68,14 +77,21 @@ export class CategoryFormComponent implements OnInit {
       this.loadCategory();
     }
     // Set title after determining edit mode
-    this.title.setTitle(this.isEditMode ? 'Edit Category - Solar Shop Admin' : 'Create Category - Solar Shop Admin');
+    this.title.setTitle(
+      this.isEditMode
+        ? 'Edit Category - Solar Shop Admin'
+        : 'Create Category - Solar Shop Admin',
+    );
   }
 
   private async loadCategory(): Promise<void> {
     if (!this.categoryId) return;
 
     try {
-      const data = await this.supabaseService.getTableById('categories', this.categoryId);
+      const data = await this.supabaseService.getTableById(
+        'categories',
+        this.categoryId,
+      );
       if (data) {
         this.categoryForm.patchValue(data);
         // Set current image URL if exists
@@ -135,7 +151,8 @@ export class CategoryFormComponent implements OnInit {
     // Validate file type
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
     if (!allowedTypes.includes(file.type)) {
-      this.uploadError = 'Invalid file type. Please upload a JPG, PNG, WEBP, or GIF image.';
+      this.uploadError =
+        'Invalid file type. Please upload a JPG, PNG, WEBP, or GIF image.';
       return;
     }
 
@@ -159,7 +176,7 @@ export class CategoryFormComponent implements OnInit {
         .from(this.BUCKET_NAME)
         .upload(fileName, file, {
           cacheControl: '3600',
-          upsert: false
+          upsert: false,
         });
 
       if (uploadError) {
@@ -167,7 +184,9 @@ export class CategoryFormComponent implements OnInit {
       }
 
       // Get public URL
-      const { data: { publicUrl } } = this.supabaseService.client.storage
+      const {
+        data: { publicUrl },
+      } = this.supabaseService.client.storage
         .from(this.BUCKET_NAME)
         .getPublicUrl(fileName);
 
@@ -178,7 +197,8 @@ export class CategoryFormComponent implements OnInit {
       console.log('Image uploaded successfully:', publicUrl);
     } catch (error: any) {
       console.error('Error uploading image:', error);
-      this.uploadError = error.message || 'Failed to upload image. Please try again.';
+      this.uploadError =
+        error.message || 'Failed to upload image. Please try again.';
     } finally {
       this.isUploading = false;
     }
@@ -203,11 +223,15 @@ export class CategoryFormComponent implements OnInit {
     try {
       const categoryData = {
         ...formValue,
-        updated_at: new Date().toISOString()
+        updated_at: new Date().toISOString(),
       };
 
       if (this.isEditMode && this.categoryId) {
-        await this.supabaseService.updateRecord('categories', this.categoryId, categoryData);
+        await this.supabaseService.updateRecord(
+          'categories',
+          this.categoryId,
+          categoryData,
+        );
       } else {
         categoryData.created_at = new Date().toISOString();
         await this.supabaseService.createRecord('categories', categoryData);
@@ -234,7 +258,9 @@ export class CategoryFormComponent implements OnInit {
 
   getAvailableParentCategories(): Category[] {
     if (this.isEditMode && this.categoryId) {
-      return this.availableCategories.filter(cat => cat.id !== this.categoryId);
+      return this.availableCategories.filter(
+        (cat) => cat.id !== this.categoryId,
+      );
     }
     return this.availableCategories;
   }

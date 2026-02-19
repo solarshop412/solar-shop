@@ -1,6 +1,11 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
@@ -15,7 +20,7 @@ import { Company } from '../../../../../shared/models/company.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './b2b-shipping.component.html',
-  styleUrls: ['./b2b-shipping.component.scss']
+  styleUrls: ['./b2b-shipping.component.scss'],
 })
 export class B2bShippingComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -38,13 +43,14 @@ export class B2bShippingComponent implements OnInit, OnDestroy {
       deliveryPostalCode: ['', [Validators.required]],
       deliveryCountry: ['', [Validators.required]],
       deliveryInstructions: [''],
-      shippingMethod: ['pickup', [Validators.required]]
+      shippingMethod: ['pickup', [Validators.required]],
     });
   }
 
   async ngOnInit(): Promise<void> {
     // Subscribe to current user and load company information
-    this.store.select(selectCurrentUser)
+    this.store
+      .select(selectCurrentUser)
       .pipe(takeUntil(this.destroy$))
       .subscribe(async (user) => {
         this.currentUser = user;
@@ -52,9 +58,10 @@ export class B2bShippingComponent implements OnInit, OnDestroy {
           await this.loadCompanyInfo(user.id);
           // Pre-populate contact information
           this.shippingForm.patchValue({
-            contactName: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
+            contactName:
+              `${user.firstName || ''} ${user.lastName || ''}`.trim(),
             contactEmail: user.email,
-            contactPhone: user.phone || ''
+            contactPhone: user.phone || '',
           });
         }
       });
@@ -93,13 +100,17 @@ export class B2bShippingComponent implements OnInit, OnDestroy {
           description: companies.description,
           status: companies.status,
           approved: companies.approved,
-          approvedAt: companies.approved_at ? new Date(companies.approved_at) : undefined,
+          approvedAt: companies.approved_at
+            ? new Date(companies.approved_at)
+            : undefined,
           approvedBy: companies.approved_by,
-          rejectedAt: companies.rejected_at ? new Date(companies.rejected_at) : undefined,
+          rejectedAt: companies.rejected_at
+            ? new Date(companies.rejected_at)
+            : undefined,
           rejectedBy: companies.rejected_by,
           rejectionReason: companies.rejection_reason,
           createdAt: new Date(companies.created_at),
-          updatedAt: new Date(companies.updated_at)
+          updatedAt: new Date(companies.updated_at),
         };
       }
     } catch (error) {
@@ -119,7 +130,7 @@ export class B2bShippingComponent implements OnInit, OnDestroy {
     // Save shipping information to localStorage for payment step
     const shippingData = {
       ...this.shippingForm.value,
-      company: this.company
+      company: this.company,
     };
     localStorage.setItem('b2bShippingInfo', JSON.stringify(shippingData));
 
@@ -129,4 +140,4 @@ export class B2bShippingComponent implements OnInit, OnDestroy {
   goBack() {
     this.router.navigate(['/partneri/blagajna/pregled-narudzbe']);
   }
-} 
+}

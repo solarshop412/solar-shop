@@ -10,7 +10,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './cart-button.component.html',
-  styleUrls: ['./cart-button.component.scss']
+  styleUrls: ['./cart-button.component.scss'],
 })
 export class CartButtonComponent {
   private store = inject(Store);
@@ -23,4 +23,4 @@ export class CartButtonComponent {
   openCart() {
     this.store.dispatch(CartActions.openCart());
   }
-} 
+}

@@ -13,20 +13,21 @@ import { User } from '../../../../shared/models/user.model';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './partners-cta.component.html',
-  styleUrls: ['./partners-cta.component.scss']
+  styleUrls: ['./partners-cta.component.scss'],
 })
 export class PartnersCtaComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private store = inject(Store);
   private destroy$ = new Subject<void>();
-  
+
   isAuthenticated = false;
   currentUser: User | null = null;
 
   ngOnInit(): void {
-    this.store.select(selectCurrentUser)
+    this.store
+      .select(selectCurrentUser)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(user => {
+      .subscribe((user) => {
         this.currentUser = user;
         this.isAuthenticated = !!user;
       });

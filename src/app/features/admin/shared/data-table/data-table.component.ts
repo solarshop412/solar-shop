@@ -1,8 +1,31 @@
-import { Component, Input, Output, EventEmitter, OnInit, inject, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  inject,
+  OnChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { LucideAngularModule, Edit, Trash2, Upload, Download, Plus, Search, Eye, EyeOff, Check, X, Printer, ChevronUp, ChevronDown } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Edit,
+  Trash2,
+  Upload,
+  Download,
+  Plus,
+  Search,
+  Eye,
+  EyeOff,
+  Check,
+  X,
+  Printer,
+  ChevronUp,
+  ChevronDown,
+} from 'lucide-angular';
 import { DeleteConfirmationModalComponent } from '../../../../shared/components/modals/delete-confirmation-modal/delete-confirmation-modal.component';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../shared/services/translation.service';
@@ -10,7 +33,15 @@ import { TranslationService } from '../../../../shared/services/translation.serv
 export interface TableColumn {
   key: string;
   label: string;
-  type?: 'text' | 'number' | 'date' | 'boolean' | 'image' | 'status' | 'array' | 'editable-number';
+  type?:
+    | 'text'
+    | 'number'
+    | 'date'
+    | 'boolean'
+    | 'image'
+    | 'status'
+    | 'array'
+    | 'editable-number';
   sortable?: boolean;
   searchable?: boolean;
   format?: (value: any, item?: any) => string;
@@ -46,27 +77,31 @@ export interface TableConfig {
   selector: 'app-data-table',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    RouterModule, 
-    LucideAngularModule, 
-    DeleteConfirmationModalComponent, 
-    TranslatePipe
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    LucideAngularModule,
+    DeleteConfirmationModalComponent,
+    TranslatePipe,
   ],
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.scss']
+  styleUrls: ['./data-table.component.scss'],
 })
 export class DataTableComponent implements OnInit, OnChanges {
   @Input() title = '';
   @Input() data: any[] = [];
   @Input() config!: TableConfig;
   @Input() loading = false;
-  @Output() actionClicked = new EventEmitter<{ action: string, item: any }>();
+  @Output() actionClicked = new EventEmitter<{ action: string; item: any }>();
   @Output() addClicked = new EventEmitter<void>();
   @Output() csvImported = new EventEmitter<any[]>();
   @Output() rowClicked = new EventEmitter<any>();
   @Output() exportClicked = new EventEmitter<void>();
-  @Output() cellValueChanged = new EventEmitter<{ item: any, column: string, value: any }>();
+  @Output() cellValueChanged = new EventEmitter<{
+    item: any;
+    column: string;
+    value: any;
+  }>();
   translationService = inject(TranslationService);
   private router = inject(Router);
 
@@ -159,11 +194,12 @@ export class DataTableComponent implements OnInit, OnChanges {
     reader.onload = (e) => {
       const csv = e.target?.result as string;
       const lines = csv.split('\n');
-      const headers = lines[0].split(',').map(h => h.trim());
+      const headers = lines[0].split(',').map((h) => h.trim());
 
-      const data = lines.slice(1)
-        .filter(line => line.trim())
-        .map(line => {
+      const data = lines
+        .slice(1)
+        .filter((line) => line.trim())
+        .map((line) => {
           const values = line.split(',');
           const obj: any = {};
           headers.forEach((header, index) => {
@@ -187,9 +223,11 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   exportToCsv(): void {
-    const headers = this.config.columns.map(col => col.label).join(',');
-    const rows = this.data.map(item =>
-      this.config.columns.map(col => this.getColumnValue(item, col.key) || '').join(',')
+    const headers = this.config.columns.map((col) => col.label).join(',');
+    const rows = this.data.map((item) =>
+      this.config.columns
+        .map((col) => this.getColumnValue(item, col.key) || '')
+        .join(','),
     );
 
     const csv = [headers, ...rows].join('\n');
@@ -244,77 +282,80 @@ export class DataTableComponent implements OnInit, OnChanges {
     const statusMapping: { [key: string]: string } = {
       // Croatian translations
       'Na čekanju': 'pending',
-      'Potvrđeno': 'confirmed',
+      Potvrđeno: 'confirmed',
       'U obradi': 'processing',
-      'Poslano': 'shipped',
-      'Dostavljeno': 'delivered',
-      'Otkazano': 'cancelled',
-      'Povraćeno': 'refunded',
-      'Plaćeno': 'paid',
-      'Neuspješno': 'failed',
+      Poslano: 'shipped',
+      Dostavljeno: 'delivered',
+      Otkazano: 'cancelled',
+      Povraćeno: 'refunded',
+      Plaćeno: 'paid',
+      Neuspješno: 'failed',
       'Djelomično povraćeno': 'partially_refunded',
       // Blog status translations (Croatian)
-      'Skica': 'draft',
-      'Objavljeno': 'published',
-      'Arhivirano': 'archived',
+      Skica: 'draft',
+      Objavljeno: 'published',
+      Arhivirano: 'archived',
       // Review status translations (Croatian)
-      'Odobreno': 'approved',
-      'Odbaceno': 'rejected',
+      Odobreno: 'approved',
+      Odbaceno: 'rejected',
       // Offer status translations (Croatian)
-      'Aktivno': 'active',
-      'Pauzirano': 'paused',
-      'Isteklo': 'expired',
+      Aktivno: 'active',
+      Pauzirano: 'paused',
+      Isteklo: 'expired',
       // English translations
-      'Pending': 'pending',
-      'Confirmed': 'confirmed',
-      'Processing': 'processing',
-      'Shipped': 'shipped',
-      'Delivered': 'delivered',
-      'Cancelled': 'cancelled',
-      'Refunded': 'refunded',
-      'Paid': 'paid',
-      'Failed': 'failed',
+      Pending: 'pending',
+      Confirmed: 'confirmed',
+      Processing: 'processing',
+      Shipped: 'shipped',
+      Delivered: 'delivered',
+      Cancelled: 'cancelled',
+      Refunded: 'refunded',
+      Paid: 'paid',
+      Failed: 'failed',
       'Partially Refunded': 'partially_refunded',
       // Blog status translations (English)
-      'Draft': 'draft',
-      'Published': 'published',
-      'Archived': 'archived',
+      Draft: 'draft',
+      Published: 'published',
+      Archived: 'archived',
       // Review status translations (English)
-      'Approved': 'approved',
-      'Rejected': 'rejected',
+      Approved: 'approved',
+      Rejected: 'rejected',
       // Offer status translations (English)
-      'Active': 'active',
-      'Paused': 'paused',
-      'Expired': 'expired'
+      Active: 'active',
+      Paused: 'paused',
+      Expired: 'expired',
     };
 
     // Get the original status key for styling
     const originalStatus = statusMapping[status] || status;
 
     const statusClasses: { [key: string]: string } = {
-      'active': 'bg-green-100 text-green-800',
-      'inactive': 'bg-red-100 text-red-800',
-      'published': 'bg-green-100 text-green-800',
-      'draft': 'bg-yellow-100 text-yellow-800',
-      'archived': 'bg-gray-100 text-gray-800',
-      'pending': 'bg-yellow-100 text-yellow-800',
-      'confirmed': 'bg-blue-100 text-blue-800',
-      'processing': 'bg-purple-100 text-purple-800',
-      'shipped': 'bg-indigo-100 text-indigo-800',
-      'delivered': 'bg-green-100 text-green-800',
-      'cancelled': 'bg-red-100 text-red-800',
-      'refunded': 'bg-gray-100 text-gray-800',
-      'approved': 'bg-green-100 text-green-800',
-      'rejected': 'bg-red-100 text-red-800',
+      active: 'bg-green-100 text-green-800',
+      inactive: 'bg-red-100 text-red-800',
+      published: 'bg-green-100 text-green-800',
+      draft: 'bg-yellow-100 text-yellow-800',
+      archived: 'bg-gray-100 text-gray-800',
+      pending: 'bg-yellow-100 text-yellow-800',
+      confirmed: 'bg-blue-100 text-blue-800',
+      processing: 'bg-purple-100 text-purple-800',
+      shipped: 'bg-indigo-100 text-indigo-800',
+      delivered: 'bg-green-100 text-green-800',
+      cancelled: 'bg-red-100 text-red-800',
+      refunded: 'bg-gray-100 text-gray-800',
+      approved: 'bg-green-100 text-green-800',
+      rejected: 'bg-red-100 text-red-800',
       // Payment status colors
-      'paid': 'bg-green-100 text-green-800',
-      'failed': 'bg-red-100 text-red-800',
-      'partially_refunded': 'bg-orange-100 text-orange-800',
+      paid: 'bg-green-100 text-green-800',
+      failed: 'bg-red-100 text-red-800',
+      partially_refunded: 'bg-orange-100 text-orange-800',
       // Offer status colors
-      'paused': 'bg-orange-100 text-orange-800',
-      'expired': 'bg-gray-100 text-gray-800'
+      paused: 'bg-orange-100 text-orange-800',
+      expired: 'bg-gray-100 text-gray-800',
     };
-    return statusClasses[originalStatus?.toLowerCase()] || 'bg-gray-100 text-gray-800';
+    return (
+      statusClasses[originalStatus?.toLowerCase()] ||
+      'bg-gray-100 text-gray-800'
+    );
   }
 
   formatDate(date: string): string {
@@ -329,14 +370,17 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   private updateDisplayData(): void {
-    this.filteredData = this.data.filter(item => {
+    this.filteredData = this.data.filter((item) => {
       if (!this.searchTerm) return true;
 
       return this.config.columns
-        .filter(col => col.searchable !== false)
-        .some(col => {
+        .filter((col) => col.searchable !== false)
+        .some((col) => {
           const value = this.getColumnValue(item, col.key);
-          return value?.toString().toLowerCase().includes(this.searchTerm.toLowerCase());
+          return value
+            ?.toString()
+            .toLowerCase()
+            .includes(this.searchTerm.toLowerCase());
         });
     });
 
@@ -356,7 +400,10 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.totalPages = Math.ceil(this.filteredData.length / this.pageSize);
     if (this.config.paginated) {
       const startIndex = (this.currentPage - 1) * this.pageSize;
-      this.paginatedData = this.filteredData.slice(startIndex, startIndex + this.pageSize);
+      this.paginatedData = this.filteredData.slice(
+        startIndex,
+        startIndex + this.pageSize,
+      );
     } else {
       this.paginatedData = this.filteredData;
     }
@@ -399,18 +446,31 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   showDeleteConfirmation(item: any): void {
     this.pendingDeleteItem = item;
-    this.deleteModalTitle = this.translationService.translate('admin.common.confirmDeletion');
+    this.deleteModalTitle = this.translationService.translate(
+      'admin.common.confirmDeletion',
+    );
 
     // Try to get a meaningful name for the item
-    const itemName = item.name || item.title || item.first_name || item.order_number || this.translationService.translate('admin.common.thisItem');
-    this.deleteModalMessage = this.translationService.translate('admin.common.confirmDeleteMessage', { itemName });
+    const itemName =
+      item.name ||
+      item.title ||
+      item.first_name ||
+      item.order_number ||
+      this.translationService.translate('admin.common.thisItem');
+    this.deleteModalMessage = this.translationService.translate(
+      'admin.common.confirmDeleteMessage',
+      { itemName },
+    );
 
     this.showDeleteModal = true;
   }
 
   onDeleteConfirmed(): void {
     if (this.pendingDeleteItem) {
-      this.actionClicked.emit({ action: 'delete', item: this.pendingDeleteItem });
+      this.actionClicked.emit({
+        action: 'delete',
+        item: this.pendingDeleteItem,
+      });
       this.onDeleteCancelled(); // Reset state
     }
   }
@@ -446,20 +506,120 @@ export class DataTableComponent implements OnInit, OnChanges {
 
     // Define templates for different entities
     if (entityType.includes('categor')) {
-      headers = ['name', 'description', 'slug', 'image_url', 'sort_order', 'is_active'];
-      sampleData = ['Inverters', 'Inverters for solar panels', 'inverters', 'https://example.com/inverter.jpg', '1', 'true'];
+      headers = [
+        'name',
+        'description',
+        'slug',
+        'image_url',
+        'sort_order',
+        'is_active',
+      ];
+      sampleData = [
+        'Inverters',
+        'Inverters for solar panels',
+        'inverters',
+        'https://example.com/inverter.jpg',
+        '1',
+        'true',
+      ];
     } else if (entityType.includes('product')) {
-      headers = ['name', 'slug', 'description', 'short_description', 'price', 'original_price', 'sku', 'brand', 'model', 'category_name', 'stock_quantity', 'weight', 'is_active', 'is_featured', 'is_on_sale', 'images'];
-      sampleData = ['Solar Panel 100W', 'solar-panel-100w', 'High efficiency solar panel', 'High efficiency solar panel', '299.99', '399.99', 'SOLAR-100W', 'SolarTech', 'SolarTech Model', 'Solar Panels11', '100', '1', 'true', 'true', 'true', 'https://example.com/solar-panel-100w.jpg,https://example.com/solar-panel-100w-2.jpg'];
+      headers = [
+        'name',
+        'slug',
+        'description',
+        'short_description',
+        'price',
+        'original_price',
+        'sku',
+        'brand',
+        'model',
+        'category_name',
+        'stock_quantity',
+        'weight',
+        'is_active',
+        'is_featured',
+        'is_on_sale',
+        'images',
+      ];
+      sampleData = [
+        'Solar Panel 100W',
+        'solar-panel-100w',
+        'High efficiency solar panel',
+        'High efficiency solar panel',
+        '299.99',
+        '399.99',
+        'SOLAR-100W',
+        'SolarTech',
+        'SolarTech Model',
+        'Solar Panels11',
+        '100',
+        '1',
+        'true',
+        'true',
+        'true',
+        'https://example.com/solar-panel-100w.jpg,https://example.com/solar-panel-100w-2.jpg',
+      ];
     } else if (entityType.includes('offer')) {
-      headers = ['title', 'image_url', 'description', 'short_description', 'type', 'status', 'featured', 'discount_type', 'discount_value', 'start_date', 'end_date', 'min_order_amount', 'max_order_amount', 'is_active'];
-      sampleData = ['Solar Panel 100W', 'https://example.com/solar-panel-100w.jpg', 'High efficiency solar panel', 'High efficiency solar panel', 'bundle_deal', 'active', 'true', 'percentage', '10', '2025-01-01', '2025-05-01', '100', 'null', 'true'];
+      headers = [
+        'title',
+        'image_url',
+        'description',
+        'short_description',
+        'type',
+        'status',
+        'featured',
+        'discount_type',
+        'discount_value',
+        'start_date',
+        'end_date',
+        'min_order_amount',
+        'max_order_amount',
+        'is_active',
+      ];
+      sampleData = [
+        'Solar Panel 100W',
+        'https://example.com/solar-panel-100w.jpg',
+        'High efficiency solar panel',
+        'High efficiency solar panel',
+        'bundle_deal',
+        'active',
+        'true',
+        'percentage',
+        '10',
+        '2025-01-01',
+        '2025-05-01',
+        '100',
+        'null',
+        'true',
+      ];
     } else if (entityType.includes('company-pricing')) {
-      headers = ['company_id', 'product_id', 'price_tier_1', 'quantity_tier_1', 'price_tier_2', 'quantity_tier_2', 'price_tier_3', 'quantity_tier_3', 'minimum_order'];
-      sampleData = ['company-uuid-here', 'product-uuid-here', '299.99', '1', '289.99', '10', '279.99', '50', '1'];
+      headers = [
+        'company_id',
+        'product_id',
+        'price_tier_1',
+        'quantity_tier_1',
+        'price_tier_2',
+        'quantity_tier_2',
+        'price_tier_3',
+        'quantity_tier_3',
+        'minimum_order',
+      ];
+      sampleData = [
+        'company-uuid-here',
+        'product-uuid-here',
+        '299.99',
+        '1',
+        '289.99',
+        '10',
+        '279.99',
+        '50',
+        '1',
+      ];
     } else {
       // Generic template based on table columns
-      alert(this.translationService.translate('admin.common.noTemplateAvailable'));
+      alert(
+        this.translationService.translate('admin.common.noTemplateAvailable'),
+      );
       return;
     }
 

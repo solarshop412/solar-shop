@@ -1,6 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -13,7 +19,7 @@ import * as OrdersActions from '../store/orders.actions';
   selector: 'app-order-details',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
-  templateUrl: './order-details.component.html'
+  templateUrl: './order-details.component.html',
 })
 export class OrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -46,11 +52,11 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor() {
     this.orderItemsForm = this.fb.group({
-      items: this.fb.array([])
+      items: this.fb.array([]),
     });
 
     this.orderDiscountForm = this.fb.group({
-      discount_percentage: [0, [Validators.min(0), Validators.max(100)]]
+      discount_percentage: [0, [Validators.min(0), Validators.max(100)]],
     });
 
     // Subscribe to form changes
@@ -83,9 +89,11 @@ export class OrderDetailsComponent implements OnInit {
           tax_percentage: this.order.tax_percentage,
           tax_amount: this.order.tax_amount,
           shipping_cost: this.order.shipping_cost,
-          total_amount: this.order.total_amount
+          total_amount: this.order.total_amount,
         });
-        this.title.setTitle(`${this.translationService.t('orderDetails.orderNumber')} ${this.order.order_number} - ${this.translationService.t('orderDetails.title')} - Solar Shop Admin`);
+        this.title.setTitle(
+          `${this.translationService.t('orderDetails.orderNumber')} ${this.order.order_number} - ${this.translationService.t('orderDetails.title')} - Solar Shop Admin`,
+        );
         await this.loadOrderItems(orderId);
         this.loadOrderDiscount();
       } else {
@@ -102,11 +110,17 @@ export class OrderDetailsComponent implements OnInit {
       console.log(`Loading order items for order ID: ${orderId}`);
 
       // Load order items from database
-      const orderItemsData = await this.supabaseService.getTable('order_items', {
-        order_id: orderId
-      });
+      const orderItemsData = await this.supabaseService.getTable(
+        'order_items',
+        {
+          order_id: orderId,
+        },
+      );
 
-      console.log(`Loaded ${orderItemsData?.length || 0} order items:`, orderItemsData);
+      console.log(
+        `Loaded ${orderItemsData?.length || 0} order items:`,
+        orderItemsData,
+      );
 
       // Convert database order items to internal format
       this.orderItems = (orderItemsData || []).map((itemData: any) => ({
@@ -117,7 +131,7 @@ export class OrderDetailsComponent implements OnInit {
         quantity: itemData.quantity || 1,
         discount_percentage: itemData.discount_percentage || 0,
         discount_amount: itemData.discount_amount || 0,
-        total_price: itemData.total_price || 0
+        total_price: itemData.total_price || 0,
       }));
 
       // Store original items for change detection
@@ -128,12 +142,11 @@ export class OrderDetailsComponent implements OnInit {
       // Populate form array
       const itemsArray = this.orderItemsArray;
       itemsArray.clear();
-      this.orderItems.forEach(item => {
+      this.orderItems.forEach((item) => {
         itemsArray.push(this.createItemFormGroup(item));
       });
 
       console.log('Form array populated with', itemsArray.length, 'items');
-
     } catch (error) {
       console.error('Error loading order items:', error);
       this.orderItems = [];
@@ -144,7 +157,9 @@ export class OrderDetailsComponent implements OnInit {
   private loadOrderDiscount(): void {
     const discountPercentage = this.order.discount_percentage || 0;
     this.originalOrderDiscount = discountPercentage;
-    this.orderDiscountForm.patchValue({ discount_percentage: discountPercentage });
+    this.orderDiscountForm.patchValue({
+      discount_percentage: discountPercentage,
+    });
     console.log('Loaded order discount percentage:', discountPercentage);
   }
 
@@ -153,9 +168,15 @@ export class OrderDetailsComponent implements OnInit {
       id: [item?.id || ''],
       product_name: [item?.product_name || '', Validators.required],
       product_sku: [item?.product_sku || ''],
-      unit_price: [item?.unit_price || 0, [Validators.required, Validators.min(0)]],
+      unit_price: [
+        item?.unit_price || 0,
+        [Validators.required, Validators.min(0)],
+      ],
       quantity: [item?.quantity || 1, [Validators.required, Validators.min(1)]],
-      discount_percentage: [item?.discount_percentage || 0, [Validators.min(0), Validators.max(100)]]
+      discount_percentage: [
+        item?.discount_percentage || 0,
+        [Validators.min(0), Validators.max(100)],
+      ],
     });
   }
 
@@ -211,7 +232,8 @@ export class OrderDetailsComponent implements OnInit {
   getOrderDiscountAmount(): number {
     // Apply order discount to the original subtotal, not the discounted price
     const originalSubtotal = this.getSubtotal();
-    const orderDiscountPercentage = this.orderDiscountForm.get('discount_percentage')?.value || 0;
+    const orderDiscountPercentage =
+      this.orderDiscountForm.get('discount_percentage')?.value || 0;
     return originalSubtotal * (orderDiscountPercentage / 100);
   }
 
@@ -221,7 +243,10 @@ export class OrderDetailsComponent implements OnInit {
     const orderDiscount = this.getOrderDiscountAmount();
     const shipping = this.order?.shipping_cost || 0;
     const tax = this.order?.tax_amount || 0;
-    return Math.max(0, subtotal - itemDiscounts - orderDiscount + shipping + tax);
+    return Math.max(
+      0,
+      subtotal - itemDiscounts - orderDiscount + shipping + tax,
+    );
   }
 
   getTaxPercentage(): number {
@@ -243,7 +268,9 @@ export class OrderDetailsComponent implements OnInit {
     this.pendingPaymentStatusUpdate = 'paid';
     this.checkForChanges();
 
-    this.statusUpdateMessage = this.translationService.translate('admin.common.paymentStatusChangeMessage');
+    this.statusUpdateMessage = this.translationService.translate(
+      'admin.common.paymentStatusChangeMessage',
+    );
     this.statusUpdateSuccess = true;
 
     // Clear message after 3 seconds
@@ -261,10 +288,13 @@ export class OrderDetailsComponent implements OnInit {
     this.checkForChanges();
 
     const oldStatus = this.order.status;
-    this.statusUpdateMessage = this.translationService.translate('admin.common.orderStatusChangeMessage', {
-      oldStatus: this.formatStatus(oldStatus),
-      newStatus: this.formatStatus(newStatus)
-    });
+    this.statusUpdateMessage = this.translationService.translate(
+      'admin.common.orderStatusChangeMessage',
+      {
+        oldStatus: this.formatStatus(oldStatus),
+        newStatus: this.formatStatus(newStatus),
+      },
+    );
     this.statusUpdateSuccess = true;
 
     // Clear message after 3 seconds
@@ -279,71 +309,88 @@ export class OrderDetailsComponent implements OnInit {
 
   private checkForChanges(): void {
     const currentItems = this.orderItemsForm.value.items;
-    const currentDiscount = this.orderDiscountForm.get('discount_percentage')?.value || 0;
+    const currentDiscount =
+      this.orderDiscountForm.get('discount_percentage')?.value || 0;
 
-    const itemsChanged = JSON.stringify(currentItems) !== JSON.stringify(this.originalOrderItems.map(item => ({
-      id: item.id,
-      product_name: item.product_name,
-      product_sku: item.product_sku,
-      unit_price: item.unit_price,
-      quantity: item.quantity,
-      discount_percentage: item.discount_percentage
-    })));
+    const itemsChanged =
+      JSON.stringify(currentItems) !==
+      JSON.stringify(
+        this.originalOrderItems.map((item) => ({
+          id: item.id,
+          product_name: item.product_name,
+          product_sku: item.product_sku,
+          unit_price: item.unit_price,
+          quantity: item.quantity,
+          discount_percentage: item.discount_percentage,
+        })),
+      );
 
     const discountChanged = currentDiscount !== this.originalOrderDiscount;
     const statusChanged = this.pendingStatusUpdate !== null;
     const paymentStatusChanged = this.pendingPaymentStatusUpdate !== null;
 
-    this.hasChanges = itemsChanged || discountChanged || statusChanged || paymentStatusChanged;
+    this.hasChanges =
+      itemsChanged || discountChanged || statusChanged || paymentStatusChanged;
   }
 
   async saveChanges(): Promise<void> {
     if (!this.hasChanges || !this.order?.id) return;
 
     try {
-      this.statusUpdateMessage = this.translationService.translate('admin.common.savingChanges');
+      this.statusUpdateMessage = this.translationService.translate(
+        'admin.common.savingChanges',
+      );
       this.statusUpdateSuccess = true;
 
       // Handle status updates via NgRx/Supabase
       if (this.pendingStatusUpdate) {
-        this.store.dispatch(OrdersActions.updateOrderStatus({
-          orderId: this.order.id,
-          status: this.pendingStatusUpdate
-        }));
+        this.store.dispatch(
+          OrdersActions.updateOrderStatus({
+            orderId: this.order.id,
+            status: this.pendingStatusUpdate,
+          }),
+        );
         this.order.status = this.pendingStatusUpdate;
         this.pendingStatusUpdate = null;
       }
 
       if (this.pendingPaymentStatusUpdate) {
-        this.store.dispatch(OrdersActions.updatePaymentStatus({
-          orderId: this.order.id,
-          paymentStatus: this.pendingPaymentStatusUpdate
-        }));
+        this.store.dispatch(
+          OrdersActions.updatePaymentStatus({
+            orderId: this.order.id,
+            paymentStatus: this.pendingPaymentStatusUpdate,
+          }),
+        );
         this.order.payment_status = this.pendingPaymentStatusUpdate;
         this.pendingPaymentStatusUpdate = null;
       }
 
       // Handle form changes (items and discounts)
       const currentItems = this.orderItemsForm.value.items;
-      const currentDiscount = this.orderDiscountForm.get('discount_percentage')?.value || 0;
+      const currentDiscount =
+        this.orderDiscountForm.get('discount_percentage')?.value || 0;
 
       if (currentDiscount !== this.originalOrderDiscount) {
         // Update order discount in database via Supabase
         await this.supabaseService.updateRecord('orders', this.order.id, {
-          discount_percentage: currentDiscount
+          discount_percentage: currentDiscount,
         } as any);
         this.order.discount_percentage = currentDiscount;
       }
 
       // Update order items if changed
-      const itemsChanged = JSON.stringify(currentItems) !== JSON.stringify(this.originalOrderItems.map(item => ({
-        id: item.id,
-        product_name: item.product_name,
-        product_sku: item.product_sku,
-        unit_price: item.unit_price,
-        quantity: item.quantity,
-        discount_percentage: item.discount_percentage
-      })));
+      const itemsChanged =
+        JSON.stringify(currentItems) !==
+        JSON.stringify(
+          this.originalOrderItems.map((item) => ({
+            id: item.id,
+            product_name: item.product_name,
+            product_sku: item.product_sku,
+            unit_price: item.unit_price,
+            quantity: item.quantity,
+            discount_percentage: item.discount_percentage,
+          })),
+        );
 
       if (itemsChanged) {
         // In a real implementation, you would update order_items table
@@ -354,17 +401,20 @@ export class OrderDetailsComponent implements OnInit {
       this.originalOrderDiscount = currentDiscount;
       this.hasChanges = false;
 
-      this.statusUpdateMessage = this.translationService.translate('admin.common.allChangesSaved');
+      this.statusUpdateMessage = this.translationService.translate(
+        'admin.common.allChangesSaved',
+      );
       this.statusUpdateSuccess = true;
 
       // Clear message after 5 seconds
       setTimeout(() => {
         this.statusUpdateMessage = '';
       }, 5000);
-
     } catch (error) {
       console.error('Error saving order changes:', error);
-      this.statusUpdateMessage = this.translationService.translate('admin.common.errorSavingChanges');
+      this.statusUpdateMessage = this.translationService.translate(
+        'admin.common.errorSavingChanges',
+      );
       this.statusUpdateSuccess = false;
 
       // Clear message after 5 seconds
@@ -469,7 +519,9 @@ export class OrderDetailsComponent implements OnInit {
               </tr>
             </thead>
             <tbody>
-              ${currentFormItems.map((item: any, index: number) => `
+              ${currentFormItems
+                .map(
+                  (item: any, index: number) => `
                 <tr>
                   <td>${item.product_name || 'N/A'}</td>
                   <td>${item.product_sku || 'N/A'}</td>
@@ -478,7 +530,9 @@ export class OrderDetailsComponent implements OnInit {
                   <td>${item.discount_percentage || 0}%</td>
                   <td>€${this.getItemSubtotal(index).toFixed(2)}</td>
                 </tr>
-              `).join('')}
+              `,
+                )
+                .join('')}
             </tbody>
           </table>
         </div>
@@ -765,46 +819,53 @@ export class OrderDetailsComponent implements OnInit {
 
   getStatusClass(status: string): string {
     const statusClasses: { [key: string]: string } = {
-      'pending': 'bg-yellow-100 text-yellow-800 border-yellow-300',
-      'confirmed': 'bg-blue-100 text-blue-800 border-blue-300',
-      'processing': 'bg-purple-100 text-purple-800 border-purple-300',
-      'shipped': 'bg-indigo-100 text-indigo-800 border-indigo-300',
-      'delivered': 'bg-green-100 text-green-800 border-green-300',
-      'cancelled': 'bg-red-100 text-red-800 border-red-300',
-      'refunded': 'bg-gray-100 text-gray-800 border-gray-300'
+      pending: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+      confirmed: 'bg-blue-100 text-blue-800 border-blue-300',
+      processing: 'bg-purple-100 text-purple-800 border-purple-300',
+      shipped: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+      delivered: 'bg-green-100 text-green-800 border-green-300',
+      cancelled: 'bg-red-100 text-red-800 border-red-300',
+      refunded: 'bg-gray-100 text-gray-800 border-gray-300',
     };
     return statusClasses[status] || 'bg-gray-100 text-gray-800 border-gray-300';
   }
 
   getStatusDropdownClass(status: string): string {
     const statusClasses: { [key: string]: string } = {
-      'pending': 'bg-yellow-600 border-yellow-600 hover:bg-yellow-700',
-      'confirmed': 'bg-blue-600 border-blue-600 hover:bg-blue-700',
-      'processing': 'bg-purple-600 border-purple-600 hover:bg-purple-700',
-      'shipped': 'bg-indigo-600 border-indigo-600 hover:bg-indigo-700',
-      'delivered': 'bg-green-600 border-green-600 hover:bg-green-700',
-      'cancelled': 'bg-red-600 border-red-600 hover:bg-red-700',
-      'refunded': 'bg-gray-600 border-gray-600 hover:bg-gray-700'
+      pending: 'bg-yellow-600 border-yellow-600 hover:bg-yellow-700',
+      confirmed: 'bg-blue-600 border-blue-600 hover:bg-blue-700',
+      processing: 'bg-purple-600 border-purple-600 hover:bg-purple-700',
+      shipped: 'bg-indigo-600 border-indigo-600 hover:bg-indigo-700',
+      delivered: 'bg-green-600 border-green-600 hover:bg-green-700',
+      cancelled: 'bg-red-600 border-red-600 hover:bg-red-700',
+      refunded: 'bg-gray-600 border-gray-600 hover:bg-gray-700',
     };
-    return statusClasses[status] || 'bg-gray-600 border-gray-600 hover:bg-gray-700';
+    return (
+      statusClasses[status] || 'bg-gray-600 border-gray-600 hover:bg-gray-700'
+    );
   }
 
   getPaymentStatusClass(status: string): string {
     const statusClasses: { [key: string]: string } = {
-      'pending': 'bg-yellow-100 text-yellow-800',
-      'paid': 'bg-green-100 text-green-800',
-      'failed': 'bg-red-100 text-red-800',
-      'refunded': 'bg-orange-100 text-orange-800'
+      pending: 'bg-yellow-100 text-yellow-800',
+      paid: 'bg-green-100 text-green-800',
+      failed: 'bg-red-100 text-red-800',
+      refunded: 'bg-orange-100 text-orange-800',
     };
     return statusClasses[status] || 'bg-gray-100 text-gray-800';
   }
 
   formatStatus(status: string): string {
-    return this.translationService.translate(`admin.orderStatus.${status}`) || status;
+    return (
+      this.translationService.translate(`admin.orderStatus.${status}`) || status
+    );
   }
 
   formatPaymentStatus(status: string): string {
-    return this.translationService.translate(`admin.paymentStatus.${status}`) || status;
+    return (
+      this.translationService.translate(`admin.paymentStatus.${status}`) ||
+      status
+    );
   }
 
   getPaymentMethodTranslation(paymentMethod: string): string {
@@ -832,4 +893,4 @@ export class OrderDetailsComponent implements OnInit {
         return paymentMethod;
     }
   }
-} 
+}

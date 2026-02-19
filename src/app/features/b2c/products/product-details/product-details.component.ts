@@ -6,7 +6,11 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 import { Product } from '../product-list/product-list.component';
 import { ProductDetailsActions } from './store/product-details.actions';
-import { selectProduct, selectIsLoading, selectError } from './store/product-details.selectors';
+import {
+  selectProduct,
+  selectIsLoading,
+  selectError,
+} from './store/product-details.selectors';
 import { ProductPhotosComponent } from './components/product-photos/product-photos.component';
 import { ProductInfoComponent } from './components/product-info/product-info.component';
 import { ProductReviewsComponent } from './components/product-reviews/product-reviews.component';
@@ -14,7 +18,10 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { OffersService } from '../../offers/services/offers.service';
 import { Offer } from '../../../../shared/models/offer.model';
 import { ProductsService } from '../services/products.service';
-import { ErpIntegrationService, StockItem } from '../../../../shared/services/erp-integration.service';
+import {
+  ErpIntegrationService,
+  StockItem,
+} from '../../../../shared/services/erp-integration.service';
 import { getUnitName } from '../../../../shared/utils/erp-unit-names';
 import { SeoService } from '../../../../shared/services/seo.service';
 
@@ -27,10 +34,10 @@ import { SeoService } from '../../../../shared/services/seo.service';
     ProductPhotosComponent,
     ProductInfoComponent,
     ProductReviewsComponent,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.scss']
+  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
   private store = inject(Store);
@@ -71,15 +78,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Check if this is company pricing mode
-    this.route.queryParams.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(queryParams => {
-      this.isCompanyPricing = queryParams['companyPricing'] === 'true';
-    });
+    this.route.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((queryParams) => {
+        this.isCompanyPricing = queryParams['companyPricing'] === 'true';
+      });
 
-    this.route.params.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const productId = params['id'];
       if (productId) {
         this.store.dispatch(ProductDetailsActions.loadProduct({ productId }));
@@ -91,20 +96,22 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to product changes to load ERP stock and set SEO
-    this.product$.pipe(
-      filter(product => !!product),
-      takeUntil(this.destroy$)
-    ).subscribe(product => {
-      if (product) {
-        // Set SEO for product page
-        this.setProductSeo(product);
+    this.product$
+      .pipe(
+        filter((product) => !!product),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((product) => {
+        if (product) {
+          // Set SEO for product page
+          this.setProductSeo(product);
 
-        // Load ERP stock if SKU available
-        if (product.sku) {
-          this.loadErpStock(product);
+          // Load ERP stock if SKU available
+          if (product.sku) {
+            this.loadErpStock(product);
+          }
         }
-      }
-    });
+      });
   }
 
   ngOnDestroy(): void {
@@ -121,7 +128,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     // Get product images
     const images: string[] = [];
     if (product.images && product.images.length > 0) {
-      product.images.forEach(img => {
+      product.images.forEach((img) => {
         if (typeof img === 'string' && img.trim()) {
           images.push(img);
         } else if (typeof img === 'object' && img.url && img.url.trim()) {
@@ -135,24 +142,29 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     // Set product page SEO
     this.seoService.setProductPage({
       name: product.name,
-      description: product.description || `Kupite ${product.name} na Solarno.hr`,
+      description:
+        product.description || `Kupite ${product.name} na Solarno.hr`,
       sku: product.sku,
       brand: product.manufacturer,
       price: product.price,
       currency: 'EUR',
-      availability: product.availability === 'available' ? 'InStock' :
-                    product.availability === 'limited' ? 'LimitedAvailability' : 'OutOfStock',
+      availability:
+        product.availability === 'available'
+          ? 'InStock'
+          : product.availability === 'limited'
+            ? 'LimitedAvailability'
+            : 'OutOfStock',
       images: images.length > 0 ? images : undefined,
       ratingValue: product.rating,
       reviewCount: product.reviewCount,
-      category: product.category
+      category: product.category,
     });
 
     // Set breadcrumbs schema
     this.seoService.setBreadcrumbs([
       { name: 'Početna', url: '/' },
       { name: 'Proizvodi', url: '/proizvodi' },
-      { name: product.name }
+      { name: product.name },
     ]);
   }
 
@@ -166,19 +178,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private loadProductOffers(productId: string): void {
     this.offersLoading = true;
-    this.offersService.getActiveOffers(3).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (offers) => {
-        this.productOffers = offers;
-        this.offersLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading offers:', error);
-        this.productOffers = [];
-        this.offersLoading = false;
-      }
-    });
+    this.offersService
+      .getActiveOffers(3)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (offers) => {
+          this.productOffers = offers;
+          this.offersLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading offers:', error);
+          this.productOffers = [];
+          this.offersLoading = false;
+        },
+      });
   }
 
   viewOffer(offerId: string): void {
@@ -209,30 +222,35 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private loadRelatedProducts(productId: string): void {
     this.relatedProductsLoading = true;
-    
-    this.product$.pipe(
-      takeUntil(this.destroy$),
-      filter(product => product !== null)
-    ).subscribe(product => {
-      if (product) {
-        // Get products from same categories
-        const categoryNames = product.categories?.map(cat => cat.name) || [product.category];
-        
-        this.productsService.getProductsByCategories(categoryNames, productId, 4).pipe(
-          takeUntil(this.destroy$)
-        ).subscribe({
-          next: (products) => {
-            this.relatedProducts = products;
-            this.relatedProductsLoading = false;
-          },
-          error: (error) => {
-            console.error('Error loading related products:', error);
-            this.relatedProducts = [];
-            this.relatedProductsLoading = false;
-          }
-        });
-      }
-    });
+
+    this.product$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((product) => product !== null),
+      )
+      .subscribe((product) => {
+        if (product) {
+          // Get products from same categories
+          const categoryNames = product.categories?.map((cat) => cat.name) || [
+            product.category,
+          ];
+
+          this.productsService
+            .getProductsByCategories(categoryNames, productId, 4)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+              next: (products) => {
+                this.relatedProducts = products;
+                this.relatedProductsLoading = false;
+              },
+              error: (error) => {
+                console.error('Error loading related products:', error);
+                this.relatedProducts = [];
+                this.relatedProductsLoading = false;
+              },
+            });
+        }
+      });
   }
 
   public getProductImageUrl(product: Product): string {
@@ -242,16 +260,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       // Check if it's a string URL or an object with url property
       if (typeof firstImage === 'string' && firstImage.trim()) {
         return firstImage;
-      } else if (typeof firstImage === 'object' && firstImage.url && firstImage.url.trim()) {
+      } else if (
+        typeof firstImage === 'object' &&
+        firstImage.url &&
+        firstImage.url.trim()
+      ) {
         return firstImage.url;
       }
     }
-    
+
     // Fallback to imageUrl if it exists and is not empty
     if (product.imageUrl && product.imageUrl.trim()) {
       return product.imageUrl;
     }
-    
+
     // Only return placeholder if no valid image found
     return 'assets/images/product-placeholder.svg';
   }
@@ -262,10 +284,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   public getAvailabilityText(availability: string): string {
     switch (availability) {
-      case 'available': return 'productDetails.inStock';
-      case 'limited': return 'productDetails.limitedStock';
-      case 'out-of-stock': return 'productDetails.outOfStock';
-      default: return '';
+      case 'available':
+        return 'productDetails.inStock';
+      case 'limited':
+        return 'productDetails.limitedStock';
+      case 'out-of-stock':
+        return 'productDetails.outOfStock';
+      default:
+        return '';
     }
   }
 
@@ -279,24 +305,34 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.erpStockLoading = true;
-    this.erpService.getStockBySku(product.sku)
+    this.erpService
+      .getStockBySku(product.sku)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
           if (response.success && response.data) {
             this.erpStock = response.data;
-            console.log('[B2C Product Details] ERP stock loaded:', this.erpStock);
+            console.log(
+              '[B2C Product Details] ERP stock loaded:',
+              this.erpStock,
+            );
           } else {
-            console.warn('[B2C Product Details] Failed to load ERP stock:', response.error);
+            console.warn(
+              '[B2C Product Details] Failed to load ERP stock:',
+              response.error,
+            );
             this.erpStock = [];
           }
           this.erpStockLoading = false;
         },
         error: (error) => {
-          console.error('[B2C Product Details] Error loading ERP stock:', error);
+          console.error(
+            '[B2C Product Details] Error loading ERP stock:',
+            error,
+          );
           this.erpStock = [];
           this.erpStockLoading = false;
-        }
+        },
       });
   }
 
@@ -337,4 +373,4 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     return stars;
   }
-} 
+}

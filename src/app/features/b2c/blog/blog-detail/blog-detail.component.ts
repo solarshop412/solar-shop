@@ -4,7 +4,10 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Subject, catchError, finalize, of, takeUntil, from } from 'rxjs';
 import { BlogPost } from '../../../../shared/models/blog.model';
 import { SupabaseService } from '../../../../services/supabase.service';
-import { BlogDataMapperService, SupabaseBlogPost } from '../../../../services/blog-data-mapper.service';
+import {
+  BlogDataMapperService,
+  SupabaseBlogPost,
+} from '../../../../services/blog-data-mapper.service';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { SeoService } from '../../../../shared/services/seo.service';
@@ -14,7 +17,7 @@ import { SeoService } from '../../../../shared/services/seo.service';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.scss']
+  styleUrls: ['./blog-detail.component.scss'],
 })
 export class BlogDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
@@ -32,9 +35,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   error: string | null = null;
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(params => {
+    this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       this.postId = params.get('id');
       if (this.postId) {
         this.loadBlogPost(this.postId);
@@ -54,40 +55,49 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.error = null;
 
-    from(this.supabaseService.getBlogPostById(id)).pipe(
-      catchError((error: any) => {
-        console.error('Error loading blog post:', error);
-        this.error = 'Article not found or could not be loaded.';
-        return of(null);
-      }),
-      finalize(() => this.loading = false),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any) => {
-      if (data) {
-        this.blogPost = this.blogMapper.mapSupabaseToBlogPost(data as SupabaseBlogPost);
-        this.loadRelatedPosts(this.blogPost.category.id, this.blogPost.id);
+    from(this.supabaseService.getBlogPostById(id))
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error loading blog post:', error);
+          this.error = 'Article not found or could not be loaded.';
+          return of(null);
+        }),
+        finalize(() => (this.loading = false)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: any) => {
+        if (data) {
+          this.blogPost = this.blogMapper.mapSupabaseToBlogPost(
+            data as SupabaseBlogPost,
+          );
+          this.loadRelatedPosts(this.blogPost.category.id, this.blogPost.id);
 
-        // Set SEO for blog post
-        this.setBlogPostSeo(this.blogPost);
+          // Set SEO for blog post
+          this.setBlogPostSeo(this.blogPost);
 
-        // Increment view count
-        from(this.supabaseService.incrementBlogPostViews(id)).subscribe({
-          error: (error: any) => console.warn('Failed to increment view count:', error)
-        });
-      }
-    });
+          // Increment view count
+          from(this.supabaseService.incrementBlogPostViews(id)).subscribe({
+            error: (error: any) =>
+              console.warn('Failed to increment view count:', error),
+          });
+        }
+      });
   }
 
   private loadRelatedPosts(categoryId: string, excludeId: string) {
-    from(this.supabaseService.getRelatedBlogPosts(categoryId, excludeId, 3)).pipe(
-      catchError((error: any) => {
-        console.error('Error loading related posts:', error);
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    ).subscribe((data: any[]) => {
-      this.relatedPosts = this.blogMapper.mapSupabaseToBlogPosts(data as SupabaseBlogPost[]);
-    });
+    from(this.supabaseService.getRelatedBlogPosts(categoryId, excludeId, 3))
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error loading related posts:', error);
+          return of([]);
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: any[]) => {
+        this.relatedPosts = this.blogMapper.mapSupabaseToBlogPosts(
+          data as SupabaseBlogPost[],
+        );
+      });
   }
 
   navigateToPost(postId: string) {
@@ -98,11 +108,15 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const currentLang = this.translationService.getCurrentLanguage();
 
-    const options: Intl.DateTimeFormatOptions = format === 'short'
-      ? { month: 'short', day: 'numeric' }
-      : { year: 'numeric', month: 'short', day: 'numeric' };
+    const options: Intl.DateTimeFormatOptions =
+      format === 'short'
+        ? { month: 'short', day: 'numeric' }
+        : { year: 'numeric', month: 'short', day: 'numeric' };
 
-    return dateObj.toLocaleDateString(currentLang === 'hr' ? 'hr-HR' : 'en-US', options);
+    return dateObj.toLocaleDateString(
+      currentLang === 'hr' ? 'hr-HR' : 'en-US',
+      options,
+    );
   }
 
   /**
@@ -116,14 +130,14 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       image: post.imageUrl,
       datePublished: post.publishedAt,
       dateModified: post.updatedAt || undefined,
-      tags: post.tags?.map(tag => tag.name)
+      tags: post.tags?.map((tag) => tag.name),
     });
 
     // Set breadcrumbs schema
     this.seoService.setBreadcrumbs([
       { name: 'Početna', url: '/' },
       { name: 'Blog', url: '/blog' },
-      { name: post.title }
+      { name: post.title },
     ]);
   }
-} 
+}

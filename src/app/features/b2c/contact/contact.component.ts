@@ -12,17 +12,17 @@ import { FAQS } from '../../../shared/data/faqs.data';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent {
   messageSent = false;
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   locations: ShopLocation[] = SHOP_LOCATIONS;
   faqs: FAQItem[] = FAQS;
 
   toggleFaq(faqId: string): void {
-    const faq = this.faqs.find(f => f.id === faqId);
+    const faq = this.faqs.find((f) => f.id === faqId);
     if (faq) {
       faq.isOpen = !faq.isOpen;
     }
@@ -35,7 +35,7 @@ export class ContactComponent {
   getMapEmbedUrl(location: ShopLocation): SafeResourceUrl {
     // Using OpenStreetMap with marker - zoom level 16 for good detail
     // The marker parameter ensures a red pin is displayed at the location
-    const url = `https://www.openstreetmap.org/export/embed.html?bbox=${location.longitude-0.003}%2C${location.latitude-0.003}%2C${location.longitude+0.003}%2C${location.latitude+0.003}&layer=mapnik&marker=${location.latitude}%2C${location.longitude}`;
+    const url = `https://www.openstreetmap.org/export/embed.html?bbox=${location.longitude - 0.003}%2C${location.latitude - 0.003}%2C${location.longitude + 0.003}%2C${location.latitude + 0.003}&layer=mapnik&marker=${location.latitude}%2C${location.longitude}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

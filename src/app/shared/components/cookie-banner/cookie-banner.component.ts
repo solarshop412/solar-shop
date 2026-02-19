@@ -8,7 +8,7 @@ import { TranslationService } from '../../services/translation.service';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './cookie-banner.component.html',
-  styleUrls: ['./cookie-banner.component.scss']
+  styleUrls: ['./cookie-banner.component.scss'],
 })
 export class CookieBannerComponent implements OnInit {
   showBanner = false;
@@ -22,7 +22,7 @@ export class CookieBannerComponent implements OnInit {
 
   private checkCookieConsent(): void {
     const consent = localStorage.getItem(this.COOKIE_CONSENT_KEY);
-    
+
     // Show banner only if user hasn't made a choice yet
     if (!consent) {
       this.showBanner = true;
@@ -32,7 +32,7 @@ export class CookieBannerComponent implements OnInit {
   acceptCookies(): void {
     localStorage.setItem(this.COOKIE_CONSENT_KEY, this.COOKIE_CONSENT_ACCEPTED);
     this.showBanner = false;
-    
+
     // Enable analytics or other cookie-based features here
     this.enableCookies();
   }
@@ -40,7 +40,7 @@ export class CookieBannerComponent implements OnInit {
   rejectCookies(): void {
     localStorage.setItem(this.COOKIE_CONSENT_KEY, this.COOKIE_CONSENT_REJECTED);
     this.showBanner = false;
-    
+
     // Disable analytics or other cookie-based features here
     this.disableCookies();
   }
@@ -49,7 +49,7 @@ export class CookieBannerComponent implements OnInit {
     // Enable Google Analytics, Facebook Pixel, etc.
     // This is where you would initialize your tracking scripts
     console.log('Cookies accepted - enabling tracking');
-    
+
     // Example: Initialize Google Analytics
     // if (typeof gtag !== 'undefined') {
     //   gtag('consent', 'update', {
@@ -62,7 +62,7 @@ export class CookieBannerComponent implements OnInit {
   private disableCookies(): void {
     // Disable tracking scripts
     console.log('Cookies rejected - disabling tracking');
-    
+
     // Example: Disable Google Analytics
     // if (typeof gtag !== 'undefined') {
     //   gtag('consent', 'update', {

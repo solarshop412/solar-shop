@@ -9,13 +9,13 @@ import { B2BCartSidebarComponent } from '../../cart/components/b2b-cart-sidebar/
   selector: 'app-b2b-layout',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
-    B2bNavbarComponent, 
-    PartnersFooterComponent, 
-    B2BCartSidebarComponent
+    CommonModule,
+    RouterOutlet,
+    B2bNavbarComponent,
+    PartnersFooterComponent,
+    B2BCartSidebarComponent,
   ],
   templateUrl: './b2b-layout.component.html',
-  styleUrls: ['./b2b-layout.component.scss']
+  styleUrls: ['./b2b-layout.component.scss'],
 })
-export class B2bLayoutComponent { } 
+export class B2bLayoutComponent {}

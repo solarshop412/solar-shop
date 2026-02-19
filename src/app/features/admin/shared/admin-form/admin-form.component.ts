@@ -10,7 +10,7 @@ import { TranslationService } from '../../../../shared/services/translation.serv
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './admin-form.component.html',
-  styleUrls: ['./admin-form.component.scss']
+  styleUrls: ['./admin-form.component.scss'],
 })
 export class AdminFormComponent {
   @Input() title!: string;
@@ -34,4 +34,4 @@ export class AdminFormComponent {
   goBack(): void {
     this.router.navigate([this.backRoute]);
   }
-} 
+}

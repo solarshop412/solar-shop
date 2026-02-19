@@ -1,6 +1,11 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
@@ -13,7 +18,7 @@ import { User } from '../../../../../shared/models/user.model';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './shipping.component.html',
-  styleUrls: ['./shipping.component.scss']
+  styleUrls: ['./shipping.component.scss'],
 })
 export class ShippingComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -34,22 +39,23 @@ export class ShippingComponent implements OnInit, OnDestroy {
       city: ['', [Validators.required]],
       postalCode: ['', [Validators.required]],
       country: ['', [Validators.required]],
-      shippingOption: ['pickup_at_storage', [Validators.required]]
+      shippingOption: ['pickup_at_storage', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     // Subscribe to current user and pre-populate form fields if logged in
-    this.store.select(selectCurrentUser)
+    this.store
+      .select(selectCurrentUser)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(user => {
+      .subscribe((user) => {
         this.currentUser = user;
         if (user) {
           this.shippingForm.patchValue({
             firstName: user.firstName || '',
             lastName: user.lastName || '',
             email: user.email || '',
-            phone: user.phone || ''
+            phone: user.phone || '',
           });
           // Disable email field for authenticated users
           if (user.email) {
@@ -83,4 +89,4 @@ export class ShippingComponent implements OnInit, OnDestroy {
   goBack() {
     this.router.navigate(['/blagajna/pregled-narudzbe']);
   }
-} 
+}

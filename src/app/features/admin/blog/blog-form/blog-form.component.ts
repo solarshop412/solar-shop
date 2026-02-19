@@ -1,6 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { AdminFormComponent } from '../../shared/admin-form/admin-form.component';
@@ -11,9 +16,14 @@ import { TranslationService } from '../../../../shared/services/translation.serv
 @Component({
   selector: 'app-blog-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent, TranslatePipe],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdminFormComponent,
+    TranslatePipe,
+  ],
   templateUrl: './blog-form.component.html',
-  styleUrls: ['./blog-form.component.scss']
+  styleUrls: ['./blog-form.component.scss'],
 })
 export class BlogFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -51,7 +61,7 @@ export class BlogFormComponent implements OnInit {
       tags: [''],
       status: ['draft', [Validators.required]],
       published_at: [''],
-      is_featured: [false]
+      is_featured: [false],
     });
   }
 
@@ -70,19 +80,28 @@ export class BlogFormComponent implements OnInit {
       this.loadBlogPost();
     }
     // Set title after determining edit mode
-    this.title.setTitle(this.isEditMode ? 'Edit Blog Post - Solar Shop Admin' : 'Create Blog Post - Solar Shop Admin');
+    this.title.setTitle(
+      this.isEditMode
+        ? 'Edit Blog Post - Solar Shop Admin'
+        : 'Create Blog Post - Solar Shop Admin',
+    );
   }
 
   private async loadBlogPost(): Promise<void> {
     if (!this.blogId) return;
 
     try {
-      const data = await this.supabaseService.getTableById('blog_posts', this.blogId);
+      const data = await this.supabaseService.getTableById(
+        'blog_posts',
+        this.blogId,
+      );
       if (data) {
         const formData = {
           ...data,
           tags: Array.isArray(data.tags) ? data.tags.join(', ') : '',
-          published_at: data.published_at ? this.formatDateTimeLocal(new Date(data.published_at)) : ''
+          published_at: data.published_at
+            ? this.formatDateTimeLocal(new Date(data.published_at))
+            : '',
         };
         this.blogForm.patchValue(formData);
       }
@@ -126,13 +145,24 @@ export class BlogFormComponent implements OnInit {
     try {
       const blogData = {
         ...formValue,
-        tags: formValue.tags ? formValue.tags.split(',').map((tag: string) => tag.trim()).filter((tag: string) => tag) : [],
-        published_at: formValue.published_at ? new Date(formValue.published_at).toISOString() : null,
-        updated_at: new Date().toISOString()
+        tags: formValue.tags
+          ? formValue.tags
+              .split(',')
+              .map((tag: string) => tag.trim())
+              .filter((tag: string) => tag)
+          : [],
+        published_at: formValue.published_at
+          ? new Date(formValue.published_at).toISOString()
+          : null,
+        updated_at: new Date().toISOString(),
       };
 
       if (this.isEditMode && this.blogId) {
-        await this.supabaseService.updateRecord('blog_posts', this.blogId, blogData);
+        await this.supabaseService.updateRecord(
+          'blog_posts',
+          this.blogId,
+          blogData,
+        );
       } else {
         blogData.created_at = new Date().toISOString();
         await this.supabaseService.createRecord('blog_posts', blogData);
@@ -145,4 +175,4 @@ export class BlogFormComponent implements OnInit {
       this.isSubmitting = false;
     }
   }
-} 
+}

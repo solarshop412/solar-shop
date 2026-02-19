@@ -17,7 +17,7 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe, LucideAngularModule],
   templateUrl: './b2b-navbar.component.html',
-  styleUrls: ['./b2b-navbar.component.scss']
+  styleUrls: ['./b2b-navbar.component.scss'],
 })
 export class B2bNavbarComponent implements OnInit, OnDestroy {
   private router = inject(Router);
@@ -46,10 +46,11 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Initialize authentication state and user data
-    this.supabaseService.getCurrentUser()
+    this.supabaseService
+      .getCurrentUser()
       .pipe(
         takeUntil(this.destroy$),
-        switchMap(user => {
+        switchMap((user) => {
           this.isAuthenticated = !!user;
           this.currentUser = user;
 
@@ -60,13 +61,11 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
                 .from('companies')
                 .select('id, status')
                 .eq('contact_person_id', user.id)
-                .single()
-            ).pipe(
-              catchError(() => of({ data: null, error: null }))
-            );
+                .single(),
+            ).pipe(catchError(() => of({ data: null, error: null })));
           }
           return of({ data: null, error: null });
-        })
+        }),
       )
       .subscribe(({ data }) => {
         this.isCompanyContact = !!data && data.status === 'approved';
@@ -74,7 +73,9 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
 
         // Load cart items if user is company contact
         if (this.isCompanyContact && this.company) {
-          this.store.dispatch(B2BCartActions.loadB2BCart({ companyId: this.company.id }));
+          this.store.dispatch(
+            B2BCartActions.loadB2BCart({ companyId: this.company.id }),
+          );
         }
       });
   }
@@ -123,4 +124,4 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
   closeMobileMenu(): void {
     this.showMobileMenu = false;
   }
-} 
+}

@@ -1,4 +1,8 @@
-import { ApplicationConfig, provideZoneChangeDetection, LOCALE_ID } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+  LOCALE_ID,
+} from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -37,13 +41,33 @@ registerLocaleData(localeHr);
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes, withInMemoryScrolling({
-      scrollPositionRestoration: 'top'
-    })),
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+      }),
+    ),
     provideHttpClient(),
     { provide: LOCALE_ID, useValue: 'en-US' },
     provideStore(reducers, { metaReducers }),
-    provideEffects([AuthEffects, ProductListEffects, ProductDetailsEffects, ProductsEffects, CartEffects, NavbarEffects, OffersEffects, BlogEffects, WishlistEffects, CompaniesEffects, OrdersEffects, CompanyPricingEffects, FooterEffects, ReviewsEffects, B2BProductsEffects, B2BCartEffects]),
+    provideEffects([
+      AuthEffects,
+      ProductListEffects,
+      ProductDetailsEffects,
+      ProductsEffects,
+      CartEffects,
+      NavbarEffects,
+      OffersEffects,
+      BlogEffects,
+      WishlistEffects,
+      CompaniesEffects,
+      OrdersEffects,
+      CompanyPricingEffects,
+      FooterEffects,
+      ReviewsEffects,
+      B2BProductsEffects,
+      B2BCartEffects,
+    ]),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
@@ -60,10 +84,10 @@ export const appConfig: ApplicationConfig = {
         reorder: true, // drag and drop actions in the history list
         dispatch: true, // dispatch custom actions or action creators
         test: true, // generate tests for the selected actions
-      }
+      },
     }),
     provideLottieOptions({
       player: playerFactory,
     }),
-  ]
+  ],
 };

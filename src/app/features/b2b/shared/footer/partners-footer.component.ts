@@ -10,7 +10,7 @@ import { Subject, takeUntil, switchMap, from, catchError, of } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './partners-footer.component.html',
-  styleUrls: ['./partners-footer.component.scss']
+  styleUrls: ['./partners-footer.component.scss'],
 })
 export class PartnersFooterComponent implements OnInit, OnDestroy {
   private supabaseService = inject(SupabaseService);
@@ -22,10 +22,11 @@ export class PartnersFooterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Initialize authentication state and user data
-    this.supabaseService.getCurrentUser()
+    this.supabaseService
+      .getCurrentUser()
       .pipe(
         takeUntil(this.destroy$),
-        switchMap(user => {
+        switchMap((user) => {
           this.isAuthenticated = !!user;
 
           if (user?.id) {
@@ -35,13 +36,11 @@ export class PartnersFooterComponent implements OnInit, OnDestroy {
                 .from('companies')
                 .select('id, status')
                 .eq('contact_person_id', user.id)
-                .single()
-            ).pipe(
-              catchError(() => of({ data: null, error: null }))
-            );
+                .single(),
+            ).pipe(catchError(() => of({ data: null, error: null })));
           }
           return of({ data: null, error: null });
-        })
+        }),
       )
       .subscribe(({ data }) => {
         this.isCompanyContact = !!data && data.status === 'approved';
@@ -52,4 +51,4 @@ export class PartnersFooterComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-} 
+}

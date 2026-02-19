@@ -11,10 +11,9 @@ export interface ProductListUrlState {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductListUrlStateService {
-
   /**
    * Serialize the current state to URL query parameters
    */
@@ -83,12 +82,14 @@ export class ProductListUrlStateService {
       categories: [],
       manufacturers: [],
       certificates: [],
-      priceRange: { min: 0, max: 0 }
+      priceRange: { min: 0, max: 0 },
     };
 
     // Categories
     if (params['categories']) {
-      state.filters.categories = this.parseCommaSeparatedString(params['categories']);
+      state.filters.categories = this.parseCommaSeparatedString(
+        params['categories'],
+      );
     }
 
     // Handle legacy 'category' parameter for backwards compatibility
@@ -98,12 +99,16 @@ export class ProductListUrlStateService {
 
     // Manufacturers
     if (params['manufacturers']) {
-      state.filters.manufacturers = this.parseCommaSeparatedString(params['manufacturers']);
+      state.filters.manufacturers = this.parseCommaSeparatedString(
+        params['manufacturers'],
+      );
     }
 
     // Certificates
     if (params['certificates']) {
-      state.filters.certificates = this.parseCommaSeparatedString(params['certificates']);
+      state.filters.certificates = this.parseCommaSeparatedString(
+        params['certificates'],
+      );
     }
 
     // Price range
@@ -159,8 +164,19 @@ export class ProductListUrlStateService {
    * Check if the current URL parameters represent a clean/empty state
    */
   isCleanState(params: Params): boolean {
-    const significantParams = ['search', 'categories', 'category', 'manufacturers', 'certificates', 'priceMin', 'priceMax', 'sort', 'page', 'itemsPerPage'];
-    return !significantParams.some(param => params[param]);
+    const significantParams = [
+      'search',
+      'categories',
+      'category',
+      'manufacturers',
+      'certificates',
+      'priceMin',
+      'priceMax',
+      'sort',
+      'page',
+      'itemsPerPage',
+    ];
+    return !significantParams.some((param) => params[param]);
   }
 
   /**
@@ -170,7 +186,7 @@ export class ProductListUrlStateService {
     const cleanParams: Params = {};
 
     // Only include valid, non-empty parameters
-    Object.keys(params).forEach(key => {
+    Object.keys(params).forEach((key) => {
       const value = params[key];
       if (value !== null && value !== undefined && value !== '') {
         switch (key) {
@@ -209,7 +225,10 @@ export class ProductListUrlStateService {
             break;
           case 'itemsPerPage':
             const itemsPerPage = this.parseNumber(value);
-            if (itemsPerPage !== null && this.validateItemsPerPage(itemsPerPage)) {
+            if (
+              itemsPerPage !== null &&
+              this.validateItemsPerPage(itemsPerPage)
+            ) {
               cleanParams[key] = itemsPerPage.toString();
             }
             break;
@@ -227,9 +246,10 @@ export class ProductListUrlStateService {
     if (!value || typeof value !== 'string') {
       return [];
     }
-    return value.split(',')
-      .map(item => item.trim())
-      .filter(item => item.length > 0);
+    return value
+      .split(',')
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
   }
 
   /**
@@ -250,7 +270,14 @@ export class ProductListUrlStateService {
    * Validate sort option
    */
   private validateSortOption(value: any): SortOption | null {
-    const validSortOptions: SortOption[] = ['featured', 'newest', 'name-asc', 'name-desc', 'price-low', 'price-high'];
+    const validSortOptions: SortOption[] = [
+      'featured',
+      'newest',
+      'name-asc',
+      'name-desc',
+      'price-low',
+      'price-high',
+    ];
     return validSortOptions.includes(value) ? value : null;
   }
 

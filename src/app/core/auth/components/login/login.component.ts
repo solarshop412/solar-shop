@@ -1,6 +1,11 @@
 // core/auth/login.component.ts
 import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -18,7 +23,13 @@ import { TranslationService } from '../../../../shared/services/translation.serv
   styleUrls: ['./login.component.scss'],
   standalone: true,
   schemas: [NO_ERRORS_SCHEMA],
-  imports: [CommonModule, RouterModule, LoaderComponent, ReactiveFormsModule, TranslatePipe],
+  imports: [
+    CommonModule,
+    RouterModule,
+    LoaderComponent,
+    ReactiveFormsModule,
+    TranslatePipe,
+  ],
   providers: [],
 })
 export class LoginComponent {
@@ -31,14 +42,14 @@ export class LoginComponent {
     private store: Store,
     private fb: FormBuilder,
     private router: Router,
-    private translationService: TranslationService
+    private translationService: TranslationService,
   ) {
     this.loading$ = this.store.select(selectAuthLoading);
     this.error$ = this.store.select(selectAuthError);
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -46,7 +57,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const loginRequest: LoginRequest = {
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        password: this.loginForm.value.password,
       };
 
       this.store.dispatch(AuthActions.login({ loginRequest }));
@@ -71,7 +82,9 @@ export class LoginComponent {
     if (field && field.errors && (field.dirty || field.touched)) {
       if (field.errors['required']) {
         const displayName = this.getFieldDisplayName(fieldName);
-        return this.translationService.translate('auth.required', { field: displayName });
+        return this.translationService.translate('auth.required', {
+          field: displayName,
+        });
       }
       if (field.errors['email']) {
         return this.translationService.translate('auth.invalidEmail');
@@ -81,7 +94,7 @@ export class LoginComponent {
         const displayName = this.getFieldDisplayName(fieldName);
         return this.translationService.translate('auth.passwordMinLength', {
           field: displayName,
-          length: requiredLength
+          length: requiredLength,
         });
       }
     }

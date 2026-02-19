@@ -1,4 +1,4 @@
-import { Product } from "../../features/admin/company-pricing/store/company-pricing.actions";
+import { Product } from '../../features/admin/company-pricing/store/company-pricing.actions';
 
 export interface ProductWithCustomPrice extends Product {
   customPrice: number;

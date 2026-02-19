@@ -6,9 +6,15 @@ import { Observable } from 'rxjs';
 import { selectCurrentUser } from '../../../core/auth/store/auth.selectors';
 import { User } from '../../../shared/models/user.model';
 import * as AuthActions from '../../../core/auth/store/auth.actions';
-import { TranslationService, SupportedLanguage } from '../../../shared/services/translation.service';
+import {
+  TranslationService,
+  SupportedLanguage,
+} from '../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-import { AdminNotificationsService, NotificationCounts } from '../shared/services/admin-notifications.service';
+import {
+  AdminNotificationsService,
+  NotificationCounts,
+} from '../shared/services/admin-notifications.service';
 import { SettingsService } from '../../../shared/services/settings.service';
 
 @Component({
@@ -16,7 +22,7 @@ import { SettingsService } from '../../../shared/services/settings.service';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterModule, TranslatePipe],
   templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss']
+  styleUrls: ['./admin-layout.component.scss'],
 })
 export class AdminLayoutComponent {
   private store = inject(Store);
@@ -34,11 +40,12 @@ export class AdminLayoutComponent {
 
   constructor() {
     this.currentUser$ = this.store.select(selectCurrentUser);
-    this.notificationCounts$ = this.notificationsService.getNotificationCounts();
+    this.notificationCounts$ =
+      this.notificationsService.getNotificationCounts();
     this.currentLanguage = this.translationService.getCurrentLanguage();
 
     // Subscribe to settings changes
-    this.settingsService.settings$.subscribe(settings => {
+    this.settingsService.settings$.subscribe((settings) => {
       this.creditCardPaymentEnabled = settings.credit_card_payment_enabled;
       this.orderingEnabled = settings.ordering_enabled;
     });
@@ -47,7 +54,12 @@ export class AdminLayoutComponent {
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     // Show Email Test option when Shift+L is pressed
-    if (event.shiftKey && event.key === 'L' && !event.ctrlKey && !event.altKey) {
+    if (
+      event.shiftKey &&
+      event.key === 'L' &&
+      !event.ctrlKey &&
+      !event.altKey
+    ) {
       event.preventDefault();
       this.showEmailTest = !this.showEmailTest;
       console.log('Email Test visibility toggled:', this.showEmailTest);
@@ -75,7 +87,8 @@ export class AdminLayoutComponent {
 
   async toggleCreditCardPayment(): Promise<void> {
     const newValue = !this.creditCardPaymentEnabled;
-    const success = await this.settingsService.updateCreditCardPaymentEnabled(newValue);
+    const success =
+      await this.settingsService.updateCreditCardPaymentEnabled(newValue);
 
     if (success) {
       console.log('[Admin] Credit card payment toggled:', newValue);
@@ -94,4 +107,4 @@ export class AdminLayoutComponent {
       console.error('[Admin] Failed to toggle ordering');
     }
   }
-} 
+}

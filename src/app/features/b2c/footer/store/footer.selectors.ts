@@ -4,11 +4,11 @@ import { FooterState } from './footer.state';
 export const selectFooterState = createFeatureSelector<FooterState>('footer');
 
 export const selectFooterData = createSelector(
-    selectFooterState,
-    (state: FooterState) => state.data
+  selectFooterState,
+  (state: FooterState) => state.data,
 );
 
 export const selectError = createSelector(
-    selectFooterState,
-    (state: FooterState) => state.error
+  selectFooterState,
+  (state: FooterState) => state.error,
 );

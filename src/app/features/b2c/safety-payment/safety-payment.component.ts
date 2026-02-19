@@ -7,7 +7,6 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './safety-payment.component.html',
-  styleUrls: ['./safety-payment.component.scss']
+  styleUrls: ['./safety-payment.component.scss'],
 })
-export class SafetyPaymentComponent {
-}
+export class SafetyPaymentComponent {}

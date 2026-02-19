@@ -4,7 +4,15 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
-import { map, filter, takeUntil, debounceTime, distinctUntilChanged, take, skip } from 'rxjs/operators';
+import {
+  map,
+  filter,
+  takeUntil,
+  debounceTime,
+  distinctUntilChanged,
+  take,
+  skip,
+} from 'rxjs/operators';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../../shared/services/translation.service';
 import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
@@ -15,24 +23,54 @@ import { SupabaseService } from '../../../../../services/supabase.service';
 import * as B2BCartActions from '../../../cart/store/b2b-cart.actions';
 import { selectB2BCartTotalItems } from '../../../cart/store/b2b-cart.selectors';
 import * as ProductsActions from '../../../shared/store/products.actions';
-import { selectProductsWithPricing, selectProductsLoading, selectCategories, selectCategoriesLoading, selectFilteredProducts, selectFilters, selectPaginatedProducts, selectPaginationInfo, selectCurrentPage, selectItemsPerPage, selectTotalPages, selectAllManufacturers, selectCategoryCounts, selectManufacturersLoading, selectCategoryCountsLoading, selectManufacturerCounts, selectManufacturerCountsLoading } from '../../../shared/store/products.selectors';
-import { ProductWithPricing, Category } from '../../../shared/store/products.actions';
-import { ProductCategory, CategoriesService } from '../../../../b2c/products/services/categories.service';
-import { B2BProductsUrlStateService, B2BProductListUrlState } from '../services/b2b-products-url-state.service';
-import { SortOptionsService, SortOptionDisplay } from '../../../../../shared/services/sort-options.service';
+import {
+  selectProductsWithPricing,
+  selectProductsLoading,
+  selectCategories,
+  selectCategoriesLoading,
+  selectFilteredProducts,
+  selectFilters,
+  selectPaginatedProducts,
+  selectPaginationInfo,
+  selectCurrentPage,
+  selectItemsPerPage,
+  selectTotalPages,
+  selectAllManufacturers,
+  selectCategoryCounts,
+  selectManufacturersLoading,
+  selectCategoryCountsLoading,
+  selectManufacturerCounts,
+  selectManufacturerCountsLoading,
+} from '../../../shared/store/products.selectors';
+import {
+  ProductWithPricing,
+  Category,
+} from '../../../shared/store/products.actions';
+import {
+  ProductCategory,
+  CategoriesService,
+} from '../../../../b2c/products/services/categories.service';
+import {
+  B2BProductsUrlStateService,
+  B2BProductListUrlState,
+} from '../services/b2b-products-url-state.service';
+import {
+  SortOptionsService,
+  SortOptionDisplay,
+} from '../../../../../shared/services/sort-options.service';
 
 @Component({
   selector: 'app-partners-products',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    FormsModule, 
-    TranslatePipe, 
-    LucideAngularModule
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    TranslatePipe,
+    LucideAngularModule,
   ],
   templateUrl: './partners-products.component.html',
-  styleUrls: ['./partners-products.component.scss']
+  styleUrls: ['./partners-products.component.scss'],
 })
 export class PartnersProductsComponent implements OnInit, OnDestroy {
   private store = inject(Store);
@@ -92,7 +130,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   constructor(
     private categoriesService: CategoriesService,
     private urlStateService: B2BProductsUrlStateService,
-    private sortOptionsService: SortOptionsService
+    private sortOptionsService: SortOptionsService,
   ) {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.cartItemsCount$ = this.store.select(selectB2BCartTotalItems);
@@ -114,9 +152,13 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     this.allManufacturers$ = this.store.select(selectAllManufacturers);
     this.categoryCounts$ = this.store.select(selectCategoryCounts);
     this.manufacturersLoading$ = this.store.select(selectManufacturersLoading);
-    this.categoryCountsLoading$ = this.store.select(selectCategoryCountsLoading);
+    this.categoryCountsLoading$ = this.store.select(
+      selectCategoryCountsLoading,
+    );
     this.manufacturerCounts$ = this.store.select(selectManufacturerCounts);
-    this.manufacturerCountsLoading$ = this.store.select(selectManufacturerCountsLoading);
+    this.manufacturerCountsLoading$ = this.store.select(
+      selectManufacturerCountsLoading,
+    );
 
     // Initialize sort options from service
     this.enabledSortOptions$ = this.sortOptionsService.enabledSortOptions$;
@@ -131,13 +173,15 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     // Load all manufacturers and initial counts
     this.store.dispatch(ProductsActions.loadAllManufacturers());
     this.store.dispatch(ProductsActions.loadCategoryCounts({ filters: {} }));
-    this.store.dispatch(ProductsActions.loadManufacturerCounts({ filters: {} }));
+    this.store.dispatch(
+      ProductsActions.loadManufacturerCounts({ filters: {} }),
+    );
 
     // Load nested categories for hierarchical display
     this.loadNestedCategories();
 
     // Subscribe to sortBy changes to update the select binding
-    this.filters$.pipe(takeUntil(this.destroy$)).subscribe(filters => {
+    this.filters$.pipe(takeUntil(this.destroy$)).subscribe((filters) => {
       this.currentSortBy = filters.sortBy || '';
     });
 
@@ -150,149 +194,190 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
 
         // Load company pricing if user is company contact
         if (this.isCompanyContact && this.company) {
-          this.store.dispatch(ProductsActions.loadCompanyPricing({ companyId: this.company.id }));
+          this.store.dispatch(
+            ProductsActions.loadCompanyPricing({ companyId: this.company.id }),
+          );
         }
       }
     });
 
     // Handle debounced search
-    this.searchSubject.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntil(this.destroy$)
-    ).subscribe(query => {
-      this.store.dispatch(ProductsActions.setSearchQuery({ query }));
-    });
+    this.searchSubject
+      .pipe(debounceTime(300), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((query) => {
+        this.store.dispatch(ProductsActions.setSearchQuery({ query }));
+      });
 
     // Handle URL state restoration FIRST (before loading products)
-    this.activatedRoute.queryParams.pipe(
-      take(1), // Only take the initial params to avoid loops
-      takeUntil(this.destroy$)
-    ).subscribe(params => {
-      // Restore state from URL parameters
-      const urlState = this.urlStateService.deserializeFromQueryParams(params);
-      
-      if (Object.keys(urlState).length > 0) {
-        console.log('🔄 B2B Restoring state from URL:', urlState);
-        
-        // Clear existing filters first
-        this.store.dispatch(ProductsActions.clearFilters());
-        
-        // Restore filters
-        if (urlState.filters) {
-          // Apply search query
-          if (urlState.filters.searchQuery) {
-            this.store.dispatch(ProductsActions.setSearchQuery({ 
-              query: urlState.filters.searchQuery 
-            }));
-            this.searchQuery = urlState.filters.searchQuery; // Update component property
+    this.activatedRoute.queryParams
+      .pipe(
+        take(1), // Only take the initial params to avoid loops
+        takeUntil(this.destroy$),
+      )
+      .subscribe((params) => {
+        // Restore state from URL parameters
+        const urlState =
+          this.urlStateService.deserializeFromQueryParams(params);
+
+        if (Object.keys(urlState).length > 0) {
+          console.log('🔄 B2B Restoring state from URL:', urlState);
+
+          // Clear existing filters first
+          this.store.dispatch(ProductsActions.clearFilters());
+
+          // Restore filters
+          if (urlState.filters) {
+            // Apply search query
+            if (urlState.filters.searchQuery) {
+              this.store.dispatch(
+                ProductsActions.setSearchQuery({
+                  query: urlState.filters.searchQuery,
+                }),
+              );
+              this.searchQuery = urlState.filters.searchQuery; // Update component property
+            }
+
+            // Apply category filters
+            if (
+              urlState.filters.categories &&
+              urlState.filters.categories.length > 0
+            ) {
+              urlState.filters.categories.forEach((categoryName) => {
+                this.store.dispatch(
+                  ProductsActions.toggleCategoryFilter({
+                    category: categoryName,
+                    checked: true,
+                  }),
+                );
+              });
+            }
+
+            // Apply manufacturer filters
+            if (
+              urlState.filters.manufacturers &&
+              urlState.filters.manufacturers.length > 0
+            ) {
+              urlState.filters.manufacturers.forEach((manufacturer) => {
+                this.store.dispatch(
+                  ProductsActions.toggleManufacturerFilter({
+                    manufacturer: manufacturer,
+                    checked: true,
+                  }),
+                );
+              });
+            }
+
+            // Apply availability filter
+            if (urlState.filters.availability) {
+              this.store.dispatch(
+                ProductsActions.setAvailabilityFilter({
+                  availability: urlState.filters.availability,
+                }),
+              );
+            }
+
+            // Apply sort option
+            if (urlState.filters.sortBy) {
+              this.store.dispatch(
+                ProductsActions.setSortOption({
+                  sortBy: urlState.filters.sortBy,
+                }),
+              );
+            }
           }
-          
-          // Apply category filters
-          if (urlState.filters.categories && urlState.filters.categories.length > 0) {
-            urlState.filters.categories.forEach(categoryName => {
-              this.store.dispatch(ProductsActions.toggleCategoryFilter({
-                category: categoryName,
-                checked: true
-              }));
-            });
+
+          // Restore pagination
+          if (urlState.currentPage && urlState.currentPage > 1) {
+            this.store.dispatch(
+              ProductsActions.setCurrentPage({
+                page: urlState.currentPage,
+              }),
+            );
           }
-          
-          // Apply manufacturer filters
-          if (urlState.filters.manufacturers && urlState.filters.manufacturers.length > 0) {
-            urlState.filters.manufacturers.forEach(manufacturer => {
-              this.store.dispatch(ProductsActions.toggleManufacturerFilter({
-                manufacturer: manufacturer,
-                checked: true
-              }));
-            });
-          }
-          
-          // Apply availability filter
-          if (urlState.filters.availability) {
-            this.store.dispatch(ProductsActions.setAvailabilityFilter({ 
-              availability: urlState.filters.availability 
-            }));
-          }
-          
-          // Apply sort option
-          if (urlState.filters.sortBy) {
-            this.store.dispatch(ProductsActions.setSortOption({ 
-              sortBy: urlState.filters.sortBy 
-            }));
+
+          if (urlState.itemsPerPage && urlState.itemsPerPage !== 12) {
+            this.store.dispatch(
+              ProductsActions.setItemsPerPage({
+                itemsPerPage: urlState.itemsPerPage,
+              }),
+            );
           }
         }
-        
-        // Restore pagination
-        if (urlState.currentPage && urlState.currentPage > 1) {
-          this.store.dispatch(ProductsActions.setCurrentPage({ 
-            page: urlState.currentPage 
-          }));
-        }
-        
-        if (urlState.itemsPerPage && urlState.itemsPerPage !== 12) {
-          this.store.dispatch(ProductsActions.setItemsPerPage({ 
-            itemsPerPage: urlState.itemsPerPage 
-          }));
-        }
-      }
-      
-      // Handle legacy category parameter for backwards compatibility
-      if (params['category'] && !urlState.filters?.categories?.length) {
-        console.log('🏷️ B2B Legacy category param found:', params['category']);
-        
-        // Wait for categories to be loaded, then find the matching category
-        this.categories$.pipe(
-          takeUntil(this.destroy$),
-          filter((categories): categories is Category[] => categories !== null && categories.length > 0)
-        ).subscribe((categories) => {
-          const matchingCategory = categories.find((cat) =>
-            cat.slug === params['category'] ||
-            cat.id === params['category'] ||
-            cat.name.toLowerCase() === params['category'].toLowerCase()
+
+        // Handle legacy category parameter for backwards compatibility
+        if (params['category'] && !urlState.filters?.categories?.length) {
+          console.log(
+            '🏷️ B2B Legacy category param found:',
+            params['category'],
           );
 
-          if (matchingCategory) {
-            console.log('✅ B2B Applying matched category filter:', matchingCategory.name);
-            this.store.dispatch(ProductsActions.toggleCategoryFilter({
-              category: matchingCategory.name,
-              checked: true
-            }));
-          }
-        });
-      }
-      
-      // Load initial products AFTER processing query params
-      // Use setTimeout to ensure all filters are applied first
-      setTimeout(() => {
-        this.loadProductsWithCurrentState();
-      }, 0);
-    });
+          // Wait for categories to be loaded, then find the matching category
+          this.categories$
+            .pipe(
+              takeUntil(this.destroy$),
+              filter(
+                (categories): categories is Category[] =>
+                  categories !== null && categories.length > 0,
+              ),
+            )
+            .subscribe((categories) => {
+              const matchingCategory = categories.find(
+                (cat) =>
+                  cat.slug === params['category'] ||
+                  cat.id === params['category'] ||
+                  cat.name.toLowerCase() === params['category'].toLowerCase(),
+              );
+
+              if (matchingCategory) {
+                console.log(
+                  '✅ B2B Applying matched category filter:',
+                  matchingCategory.name,
+                );
+                this.store.dispatch(
+                  ProductsActions.toggleCategoryFilter({
+                    category: matchingCategory.name,
+                    checked: true,
+                  }),
+                );
+              }
+            });
+        }
+
+        // Load initial products AFTER processing query params
+        // Use setTimeout to ensure all filters are applied first
+        setTimeout(() => {
+          this.loadProductsWithCurrentState();
+        }, 0);
+      });
 
     // Subscribe to filter and pagination changes to reload products
     this.setupProductReloading();
 
     // Subscribe to filter changes to update counts
-    this.filters$.pipe(
-      skip(1),
-      debounceTime(300),
-      takeUntil(this.destroy$)
-    ).subscribe(filters => {
-      // Load dynamic counts based on current filters
-      const categoryFilters = {
-        searchQuery: filters.searchQuery,
-        manufacturers: filters.manufacturers,
-        availability: filters.availability
-      };
-      const manufacturerFilters = {
-        searchQuery: filters.searchQuery,
-        categories: filters.categories,
-        availability: filters.availability
-      };
-      
-      this.store.dispatch(ProductsActions.loadCategoryCounts({ filters: categoryFilters }));
-      this.store.dispatch(ProductsActions.loadManufacturerCounts({ filters: manufacturerFilters }));
-    });
+    this.filters$
+      .pipe(skip(1), debounceTime(300), takeUntil(this.destroy$))
+      .subscribe((filters) => {
+        // Load dynamic counts based on current filters
+        const categoryFilters = {
+          searchQuery: filters.searchQuery,
+          manufacturers: filters.manufacturers,
+          availability: filters.availability,
+        };
+        const manufacturerFilters = {
+          searchQuery: filters.searchQuery,
+          categories: filters.categories,
+          availability: filters.availability,
+        };
+
+        this.store.dispatch(
+          ProductsActions.loadCategoryCounts({ filters: categoryFilters }),
+        );
+        this.store.dispatch(
+          ProductsActions.loadManufacturerCounts({
+            filters: manufacturerFilters,
+          }),
+        );
+      });
 
     // Set up URL state synchronization - sync store state to URL
     this.setupUrlStateSynchronization();
@@ -303,31 +388,30 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
    */
   private setupUrlStateSynchronization(): void {
     // Combine relevant store selectors for state changes
-    combineLatest([
-      this.filters$,
-      this.currentPage$,
-      this.itemsPerPage$
-    ]).pipe(
-      skip(1), // Skip initial emission
-      debounceTime(300), // Debounce to avoid too many URL updates
-      takeUntil(this.destroy$)
-    ).subscribe(([filters, currentPage, itemsPerPage]) => {
-      const currentState: B2BProductListUrlState = {
-        filters,
-        currentPage: currentPage || 1,
-        itemsPerPage: itemsPerPage || 12
-      };
+    combineLatest([this.filters$, this.currentPage$, this.itemsPerPage$])
+      .pipe(
+        skip(1), // Skip initial emission
+        debounceTime(300), // Debounce to avoid too many URL updates
+        takeUntil(this.destroy$),
+      )
+      .subscribe(([filters, currentPage, itemsPerPage]) => {
+        const currentState: B2BProductListUrlState = {
+          filters,
+          currentPage: currentPage || 1,
+          itemsPerPage: itemsPerPage || 12,
+        };
 
-      // Update URL with current state
-      const queryParams = this.urlStateService.serializeToQueryParams(currentState);
-      
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams,
-        queryParamsHandling: 'merge',
-        replaceUrl: true // Use replaceUrl to avoid creating history entries
+        // Update URL with current state
+        const queryParams =
+          this.urlStateService.serializeToQueryParams(currentState);
+
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams,
+          queryParamsHandling: 'merge',
+          replaceUrl: true, // Use replaceUrl to avoid creating history entries
+        });
       });
-    });
   }
 
   ngOnDestroy(): void {
@@ -403,17 +487,18 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   }
 
   private loadNestedCategories(): void {
-    this.categoriesService.getNestedCategories().pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(categories => {
-      this.nestedCategories = categories;
-      // Initialize expansion state for parent categories (collapsed by default)
-      categories.forEach(category => {
-        if (category.subcategories && category.subcategories.length > 0) {
-          this.categoryExpansionState[category.id] = false;
-        }
+    this.categoriesService
+      .getNestedCategories()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((categories) => {
+        this.nestedCategories = categories;
+        // Initialize expansion state for parent categories (collapsed by default)
+        categories.forEach((category) => {
+          if (category.subcategories && category.subcategories.length > 0) {
+            this.categoryExpansionState[category.id] = false;
+          }
+        });
       });
-    });
   }
 
   onSearchChange(event: Event): void {
@@ -423,73 +508,105 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
 
   onCategoryChange(category: string, event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.store.dispatch(ProductsActions.toggleCategoryFilter({ category, checked: target.checked }));
+    this.store.dispatch(
+      ProductsActions.toggleCategoryFilter({
+        category,
+        checked: target.checked,
+      }),
+    );
   }
 
   onParentCategoryChange(parentCategory: ProductCategory, event: Event): void {
     const target = event.target as HTMLInputElement;
     const isChecked = target.checked;
-    
+
     if (isChecked) {
       // Always include the parent category itself
-      this.store.dispatch(ProductsActions.toggleCategoryFilter({
-        category: parentCategory.name,
-        checked: true
-      }));
+      this.store.dispatch(
+        ProductsActions.toggleCategoryFilter({
+          category: parentCategory.name,
+          checked: true,
+        }),
+      );
 
       // When parent is selected, also select all its subcategories
-      if (parentCategory.subcategories && parentCategory.subcategories.length > 0) {
-        parentCategory.subcategories.forEach(subCategory => {
-          this.store.dispatch(ProductsActions.toggleCategoryFilter({
-            category: subCategory.name,
-            checked: true
-          }));
+      if (
+        parentCategory.subcategories &&
+        parentCategory.subcategories.length > 0
+      ) {
+        parentCategory.subcategories.forEach((subCategory) => {
+          this.store.dispatch(
+            ProductsActions.toggleCategoryFilter({
+              category: subCategory.name,
+              checked: true,
+            }),
+          );
         });
       }
     } else {
       // When parent is deselected, deselect parent and all subcategories
-      this.store.dispatch(ProductsActions.toggleCategoryFilter({
-        category: parentCategory.name,
-        checked: false
-      }));
+      this.store.dispatch(
+        ProductsActions.toggleCategoryFilter({
+          category: parentCategory.name,
+          checked: false,
+        }),
+      );
 
-      if (parentCategory.subcategories && parentCategory.subcategories.length > 0) {
-        parentCategory.subcategories.forEach(subCategory => {
-          this.store.dispatch(ProductsActions.toggleCategoryFilter({
-            category: subCategory.name,
-            checked: false
-          }));
+      if (
+        parentCategory.subcategories &&
+        parentCategory.subcategories.length > 0
+      ) {
+        parentCategory.subcategories.forEach((subCategory) => {
+          this.store.dispatch(
+            ProductsActions.toggleCategoryFilter({
+              category: subCategory.name,
+              checked: false,
+            }),
+          );
         });
       }
     }
   }
 
-  onSubCategoryChange(parentCategory: ProductCategory, subCategoryName: string, event: Event): void {
+  onSubCategoryChange(
+    parentCategory: ProductCategory,
+    subCategoryName: string,
+    event: Event,
+  ): void {
     const target = event.target as HTMLInputElement;
     const isChecked = target.checked;
-    
+
     // Toggle the specific subcategory
-    this.store.dispatch(ProductsActions.toggleCategoryFilter({
-      category: subCategoryName,
-      checked: isChecked
-    }));
+    this.store.dispatch(
+      ProductsActions.toggleCategoryFilter({
+        category: subCategoryName,
+        checked: isChecked,
+      }),
+    );
   }
 
   onManufacturerChange(manufacturer: string, event: Event): void {
     const target = event.target as HTMLInputElement;
-    this.store.dispatch(ProductsActions.toggleManufacturerFilter({ manufacturer, checked: target.checked }));
+    this.store.dispatch(
+      ProductsActions.toggleManufacturerFilter({
+        manufacturer,
+        checked: target.checked,
+      }),
+    );
   }
 
   isManufacturerSelected(manufacturer: string): boolean {
     let isSelected = false;
-    this.filters$.pipe(take(1)).subscribe(filters => {
+    this.filters$.pipe(take(1)).subscribe((filters) => {
       isSelected = filters?.manufacturers?.includes(manufacturer) || false;
     });
     return isSelected;
   }
 
   onAvailabilityChange(availability: string): void {
-    this.store.dispatch(ProductsActions.setAvailabilityFilter({ availability }));
+    this.store.dispatch(
+      ProductsActions.setAvailabilityFilter({ availability }),
+    );
   }
 
   onSortChange(sortBy: string): void {
@@ -500,19 +617,22 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   isParentCategorySelected(parentCategory: ProductCategory): boolean {
     // Get current filters synchronously using store selector
     let isSelected = false;
-    this.filters$.pipe(
-      take(1)
-    ).subscribe(filters => {
-      if (parentCategory.subcategories && parentCategory.subcategories.length > 0) {
+    this.filters$.pipe(take(1)).subscribe((filters) => {
+      if (
+        parentCategory.subcategories &&
+        parentCategory.subcategories.length > 0
+      ) {
         // Parent is considered selected if the parent itself OR ANY of its subcategories are selected
-        const parentSelected = filters?.categories?.includes(parentCategory.name) || false;
-        const anySubcategorySelected = parentCategory.subcategories.some(sub => 
-          filters?.categories?.includes(sub.name) || false
+        const parentSelected =
+          filters?.categories?.includes(parentCategory.name) || false;
+        const anySubcategorySelected = parentCategory.subcategories.some(
+          (sub) => filters?.categories?.includes(sub.name) || false,
         );
         isSelected = parentSelected || anySubcategorySelected;
       } else {
         // For categories without subcategories, check if directly selected
-        isSelected = filters?.categories?.includes(parentCategory.name) || false;
+        isSelected =
+          filters?.categories?.includes(parentCategory.name) || false;
       }
     });
     return isSelected;
@@ -521,7 +641,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   getTotalProductCount(parentCategory: ProductCategory): number {
     // Get count from dynamic counts observable
     let count = 0;
-    this.categoryCounts$.pipe(take(1)).subscribe(counts => {
+    this.categoryCounts$.pipe(take(1)).subscribe((counts) => {
       count = counts?.[parentCategory.name] || 0;
     });
     return count;
@@ -529,7 +649,8 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
 
   // Legacy expansion methods (kept for compatibility)
   toggleCategoryExpansion(categoryId: string): void {
-    this.categoryExpansionState[categoryId] = !this.categoryExpansionState[categoryId];
+    this.categoryExpansionState[categoryId] =
+      !this.categoryExpansionState[categoryId];
   }
 
   isCategoryExpanded(categoryId: string): boolean {
@@ -549,11 +670,13 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
       event.stopPropagation();
     }
     if (this.isAuthenticated && this.isCompanyContact && this.company) {
-      this.store.dispatch(B2BCartActions.addToB2BCart({
-        productId: product.id,
-        quantity: 1,
-        companyId: this.company.id
-      }));
+      this.store.dispatch(
+        B2BCartActions.addToB2BCart({
+          productId: product.id,
+          quantity: 1,
+          companyId: this.company.id,
+        }),
+      );
 
       // Open cart sidebar
       this.store.dispatch(B2BCartActions.openB2BCartSidebar());
@@ -570,8 +693,8 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
         subject: 'pricingInquiry',
         productId: product.id,
         productName: product.name,
-        sku: product.sku
-      }
+        sku: product.sku,
+      },
     });
   }
 
@@ -579,27 +702,26 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     if (event) {
       event.stopPropagation();
     }
-    
-    // Get current state for URL preservation
-    combineLatest([
-      this.filters$,
-      this.currentPage$,
-      this.itemsPerPage$
-    ]).pipe(take(1)).subscribe(([filters, currentPage, itemsPerPage]) => {
-      const currentState: B2BProductListUrlState = {
-        filters,
-        currentPage: currentPage || 1,
-        itemsPerPage: itemsPerPage || 12
-      };
 
-      // Create query parameters to preserve current state
-      const queryParams = this.urlStateService.createStatePreservingParams(currentState);
-      
-      // Navigate to B2B product details with preserved state
-      this.router.navigate(['/partneri/proizvodi', product.id], {
-        queryParams
+    // Get current state for URL preservation
+    combineLatest([this.filters$, this.currentPage$, this.itemsPerPage$])
+      .pipe(take(1))
+      .subscribe(([filters, currentPage, itemsPerPage]) => {
+        const currentState: B2BProductListUrlState = {
+          filters,
+          currentPage: currentPage || 1,
+          itemsPerPage: itemsPerPage || 12,
+        };
+
+        // Create query parameters to preserve current state
+        const queryParams =
+          this.urlStateService.createStatePreservingParams(currentState);
+
+        // Navigate to B2B product details with preserved state
+        this.router.navigate(['/partneri/proizvodi', product.id], {
+          queryParams,
+        });
       });
-    });
   }
 
   toggleMobileFilters(): void {
@@ -632,15 +754,23 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     }
 
     // Extract from images array - use first image
-    if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+    if (
+      product.images &&
+      Array.isArray(product.images) &&
+      product.images.length > 0
+    ) {
       // Find primary image first
-      const primaryImage = product.images.find(img => img.is_primary && img.url && img.url.trim());
+      const primaryImage = product.images.find(
+        (img) => img.is_primary && img.url && img.url.trim(),
+      );
       if (primaryImage) {
         return primaryImage.url;
       }
 
       // Fallback to first image with valid url
-      const firstImageWithUrl = product.images.find(img => img.url && img.url.trim());
+      const firstImageWithUrl = product.images.find(
+        (img) => img.url && img.url.trim(),
+      );
       if (firstImageWithUrl) {
         return firstImageWithUrl.url;
       }
@@ -660,36 +790,33 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   }
 
   onPreviousPage(): void {
-    combineLatest([this.currentPage$, this.totalPages$]).pipe(
-      takeUntil(this.destroy$),
-      take(1)
-    ).subscribe(([currentPage]) => {
-      if (currentPage > 1) {
-        this.onPageChange(currentPage - 1);
-      }
-    });
+    combineLatest([this.currentPage$, this.totalPages$])
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe(([currentPage]) => {
+        if (currentPage > 1) {
+          this.onPageChange(currentPage - 1);
+        }
+      });
   }
 
   onNextPage(): void {
-    combineLatest([this.currentPage$, this.totalPages$]).pipe(
-      takeUntil(this.destroy$),
-      take(1)
-    ).subscribe(([currentPage, totalPages]) => {
-      if (currentPage < totalPages) {
-        this.onPageChange(currentPage + 1);
-      }
-    });
+    combineLatest([this.currentPage$, this.totalPages$])
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe(([currentPage, totalPages]) => {
+        if (currentPage < totalPages) {
+          this.onPageChange(currentPage + 1);
+        }
+      });
   }
 
   onLastPage(): void {
-    this.totalPages$.pipe(
-      takeUntil(this.destroy$),
-      take(1)
-    ).subscribe(totalPages => {
-      if (totalPages > 0) {
-        this.onPageChange(totalPages);
-      }
-    });
+    this.totalPages$
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((totalPages) => {
+        if (totalPages > 0) {
+          this.onPageChange(totalPages);
+        }
+      });
   }
 
   onItemsPerPageChange(event: Event): void {
@@ -714,99 +841,97 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
         let showLastPage = false;
         let showFirstEllipsis = false;
         let showLastEllipsis = false;
-        
+
         // Calculate visible page range (current page + 1 adjacent page on each side)
         const startPage = Math.max(1, currentPage - 1);
         const endPage = Math.min(totalPages, currentPage + 1);
-        
+
         // Add visible pages
         for (let i = startPage; i <= endPage; i++) {
           visiblePages.push(i);
         }
-        
+
         // Show first page if not in visible range
         if (startPage > 1) {
           showFirstPage = true;
           showFirstEllipsis = startPage > 2;
         }
-        
+
         // Show last page if not in visible range
         if (endPage < totalPages) {
           showLastPage = true;
           showLastEllipsis = endPage < totalPages - 1;
         }
-        
+
         return {
           visiblePages,
           showFirstPage,
           showLastPage,
           showFirstEllipsis,
           showLastEllipsis,
-          totalPages
+          totalPages,
         };
-      })
+      }),
     );
   }
 
   private loadProductsWithCurrentState(): void {
-    combineLatest([
-      this.filters$,
-      this.currentPage$,
-      this.itemsPerPage$
-    ]).pipe(
-      take(1) // Only take the initial values
-    ).subscribe(([filters, currentPage, itemsPerPage]) => {
-      const query = {
-        page: currentPage,
-        itemsPerPage: itemsPerPage,
-        searchQuery: filters.searchQuery,
-        categories: filters.categories,
-        manufacturers: filters.manufacturers,
-        availability: filters.availability,
-        sortBy: filters.sortBy
-      };
-      
-      this.store.dispatch(ProductsActions.loadProducts({ query }));
-    });
+    combineLatest([this.filters$, this.currentPage$, this.itemsPerPage$])
+      .pipe(
+        take(1), // Only take the initial values
+      )
+      .subscribe(([filters, currentPage, itemsPerPage]) => {
+        const query = {
+          page: currentPage,
+          itemsPerPage: itemsPerPage,
+          searchQuery: filters.searchQuery,
+          categories: filters.categories,
+          manufacturers: filters.manufacturers,
+          availability: filters.availability,
+          sortBy: filters.sortBy,
+        };
+
+        this.store.dispatch(ProductsActions.loadProducts({ query }));
+      });
   }
 
   private setupProductReloading(): void {
     let previousPage = 1; // Track previous page to detect page changes
-    
+
     // React to filter changes (skip initial values)
-    combineLatest([
-      this.filters$,
-      this.currentPage$,
-      this.itemsPerPage$
-    ]).pipe(
-      skip(1), // Skip initial emission
-      debounceTime(300), // Debounce rapid changes
-      takeUntil(this.destroy$)
-    ).subscribe(([filters, currentPage, itemsPerPage]: [any, number, number]) => {
-      const query = {
-        page: currentPage,
-        itemsPerPage: itemsPerPage,
-        searchQuery: filters.searchQuery,
-        categories: filters.categories,
-        manufacturers: filters.manufacturers,
-        availability: filters.availability,
-        sortBy: filters.sortBy
-      };
-      
-      this.store.dispatch(ProductsActions.loadProducts({ query }));
-      
-      // Only scroll to top when the page actually changes
-      if (currentPage !== previousPage) {
-        this.scrollToTop();
-        previousPage = currentPage;
-      }
-    });
+    combineLatest([this.filters$, this.currentPage$, this.itemsPerPage$])
+      .pipe(
+        skip(1), // Skip initial emission
+        debounceTime(300), // Debounce rapid changes
+        takeUntil(this.destroy$),
+      )
+      .subscribe(
+        ([filters, currentPage, itemsPerPage]: [any, number, number]) => {
+          const query = {
+            page: currentPage,
+            itemsPerPage: itemsPerPage,
+            searchQuery: filters.searchQuery,
+            categories: filters.categories,
+            manufacturers: filters.manufacturers,
+            availability: filters.availability,
+            sortBy: filters.sortBy,
+          };
+
+          this.store.dispatch(ProductsActions.loadProducts({ query }));
+
+          // Only scroll to top when the page actually changes
+          if (currentPage !== previousPage) {
+            this.scrollToTop();
+            previousPage = currentPage;
+          }
+        },
+      );
   }
 
   private scrollToTop(): void {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 }

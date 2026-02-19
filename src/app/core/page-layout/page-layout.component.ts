@@ -12,7 +12,14 @@ import { CartNotificationComponent } from '../../features/b2c/cart/components/ca
   templateUrl: './page-layout.component.html',
   styleUrls: ['./page-layout.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, NavbarComponent, FooterComponent, CartSidebarComponent, CartNotificationComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NavbarComponent,
+    FooterComponent,
+    CartSidebarComponent,
+    CartNotificationComponent,
+  ],
 })
 export class PageLayoutComponent implements OnDestroy {
   title = 'Purchase Panda';
@@ -24,5 +31,4 @@ export class PageLayoutComponent implements OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

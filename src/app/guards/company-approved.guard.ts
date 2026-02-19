@@ -5,49 +5,51 @@ import { Observable, from, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class CompanyApprovedGuard implements CanActivate {
-    private supabase = inject(SupabaseService);
-    private router = inject(Router);
+  private supabase = inject(SupabaseService);
+  private router = inject(Router);
 
-    canActivate(): Observable<boolean | UrlTree> {
-        // First check if we have a stored session, then wait for auth state
-        return from(this.supabase.getSession()).pipe(
-            switchMap(session => {
-                if (session?.user) {
-                    // User is authenticated, check company status
-                    return from(
-                        this.supabase.client
-                            .from('companies')
-                            .select('status')
-                            .eq('contact_person_id', session.user.id)
-                            .single()
-                    ).pipe(
-                        map(({ data, error }) => {
-                            if (error) {
-                                // No company found, redirect to register
-                                return this.router.createUrlTree(['/partneri/registracija']);
-                            }
+  canActivate(): Observable<boolean | UrlTree> {
+    // First check if we have a stored session, then wait for auth state
+    return from(this.supabase.getSession()).pipe(
+      switchMap((session) => {
+        if (session?.user) {
+          // User is authenticated, check company status
+          return from(
+            this.supabase.client
+              .from('companies')
+              .select('status')
+              .eq('contact_person_id', session.user.id)
+              .single(),
+          ).pipe(
+            map(({ data, error }) => {
+              if (error) {
+                // No company found, redirect to register
+                return this.router.createUrlTree(['/partneri/registracija']);
+              }
 
-                            if (data && data.status === 'approved') {
-                                return true;
-                            }
+              if (data && data.status === 'approved') {
+                return true;
+              }
 
-                            // Company exists but not approved
-                            return this.router.createUrlTree(['/partneri/registracija']);
-                        }),
-                        catchError(() => of(this.router.createUrlTree(['/partneri/registracija'])))
-                    );
-                } else {
-                    // No session, redirect to login
-                    return of(this.router.createUrlTree(['/prijava']));
-                }
+              // Company exists but not approved
+              return this.router.createUrlTree(['/partneri/registracija']);
             }),
-            catchError(() => {
-                // Error getting session, redirect to login
-                return of(this.router.createUrlTree(['/prijava']));
-            })
-        );
-    }
+            catchError(() =>
+              of(this.router.createUrlTree(['/partneri/registracija'])),
+            ),
+          );
+        } else {
+          // No session, redirect to login
+          return of(this.router.createUrlTree(['/prijava']));
+        }
+      }),
+      catchError(() => {
+        // Error getting session, redirect to login
+        return of(this.router.createUrlTree(['/prijava']));
+      }),
+    );
+  }
 }

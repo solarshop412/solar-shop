@@ -6,20 +6,24 @@ import { OffersService } from '../services/offers.service';
 
 @Injectable()
 export class OffersEffects {
-    private actions$ = inject(Actions);
-    private offersService = inject(OffersService);
+  private actions$ = inject(Actions);
+  private offersService = inject(OffersService);
 
-    loadOffers$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(OffersActions.loadOffers),
-            mergeMap(() =>
-                this.offersService.getOffers().pipe(
-                    map(offers => OffersActions.loadOffersSuccess({ offers })),
-                    catchError(error =>
-                        of(OffersActions.loadOffersFailure({ error: error.message || 'Failed to load offers' }))
-                    )
-                )
-            )
-        )
-    );
-} 
+  loadOffers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(OffersActions.loadOffers),
+      mergeMap(() =>
+        this.offersService.getOffers().pipe(
+          map((offers) => OffersActions.loadOffersSuccess({ offers })),
+          catchError((error) =>
+            of(
+              OffersActions.loadOffersFailure({
+                error: error.message || 'Failed to load offers',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}

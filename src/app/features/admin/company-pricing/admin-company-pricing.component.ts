@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { SupabaseService } from '../../../services/supabase.service';
-import { DataTableComponent, TableConfig } from '../shared/data-table/data-table.component';
+import {
+  DataTableComponent,
+  TableConfig,
+} from '../shared/data-table/data-table.component';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { ToastService } from '../../../shared/services/toast.service';
@@ -15,14 +18,16 @@ import { CompanyPricingSummary } from '../../../shared/models/company-pricing-su
   standalone: true,
   imports: [CommonModule, FormsModule, DataTableComponent, TranslatePipe],
   templateUrl: './admin-company-pricing.component.html',
-  styleUrls: ['./admin-company-pricing.component.scss']
+  styleUrls: ['./admin-company-pricing.component.scss'],
 })
 export class AdminCompanyPricingComponent implements OnInit {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
   private toastService = inject(ToastService);
   translationService = inject(TranslationService);
-  private companyPricingSubject = new BehaviorSubject<CompanyPricingSummary[]>([]);
+  private companyPricingSubject = new BehaviorSubject<CompanyPricingSummary[]>(
+    [],
+  );
   private loadingSubject = new BehaviorSubject<boolean>(true);
 
   companyPricing$ = this.companyPricingSubject.asObservable();
@@ -34,14 +39,56 @@ export class AdminCompanyPricingComponent implements OnInit {
 
   tableConfig: TableConfig = {
     columns: [
-      { key: 'company_name', label: this.translationService.translate('admin.companyPricingForm.companyName'), type: 'text', sortable: true, searchable: true },
-      { key: 'company_id', label: this.translationService.translate('admin.companyPricingForm.companyId'), type: 'text', sortable: true, searchable: true },
-      { key: 'product_count', label: this.translationService.translate('admin.companyPricingForm.productsWithCustomPricing'), type: 'number', sortable: true },
-      { key: 'created_at', label: this.translationService.translate('admin.companyPricingForm.firstCreated'), type: 'date', sortable: true },
-      { key: 'updated_at', label: this.translationService.translate('admin.companyPricingForm.lastUpdated'), type: 'date', sortable: true }
+      {
+        key: 'company_name',
+        label: this.translationService.translate(
+          'admin.companyPricingForm.companyName',
+        ),
+        type: 'text',
+        sortable: true,
+        searchable: true,
+      },
+      {
+        key: 'company_id',
+        label: this.translationService.translate(
+          'admin.companyPricingForm.companyId',
+        ),
+        type: 'text',
+        sortable: true,
+        searchable: true,
+      },
+      {
+        key: 'product_count',
+        label: this.translationService.translate(
+          'admin.companyPricingForm.productsWithCustomPricing',
+        ),
+        type: 'number',
+        sortable: true,
+      },
+      {
+        key: 'created_at',
+        label: this.translationService.translate(
+          'admin.companyPricingForm.firstCreated',
+        ),
+        type: 'date',
+        sortable: true,
+      },
+      {
+        key: 'updated_at',
+        label: this.translationService.translate(
+          'admin.companyPricingForm.lastUpdated',
+        ),
+        type: 'date',
+        sortable: true,
+      },
     ],
     actions: [
-      { label: this.translationService.translate('common.actions'), icon: 'trash2', action: 'delete', class: 'text-red-600 hover:text-red-900' }
+      {
+        label: this.translationService.translate('common.actions'),
+        icon: 'trash2',
+        action: 'delete',
+        class: 'text-red-600 hover:text-red-900',
+      },
     ],
     searchable: true,
     sortable: true,
@@ -52,10 +99,21 @@ export class AdminCompanyPricingComponent implements OnInit {
     rowClickable: true,
     customExportHandler: true,
     csvTemplate: [
-      'company_id', 'company_name', 'company_email', 'product_id', 'product_sku', 'product_name',
-      'price_tier_1', 'quantity_tier_1', 'price_tier_2', 'quantity_tier_2',
-      'price_tier_3', 'quantity_tier_3', 'minimum_order', 'update_mode'
-    ]
+      'company_id',
+      'company_name',
+      'company_email',
+      'product_id',
+      'product_sku',
+      'product_name',
+      'price_tier_1',
+      'quantity_tier_1',
+      'price_tier_2',
+      'quantity_tier_2',
+      'price_tier_3',
+      'quantity_tier_3',
+      'minimum_order',
+      'update_mode',
+    ],
   };
 
   ngOnInit(): void {
@@ -71,7 +129,7 @@ export class AdminCompanyPricingComponent implements OnInit {
 
   onRowClick(item: CompanyPricingSummary): void {
     this.router.navigate(['/admin/cijene-tvrtki/kreiraj'], {
-      queryParams: { companyId: item.company_id }
+      queryParams: { companyId: item.company_id },
     });
   }
 
@@ -81,7 +139,9 @@ export class AdminCompanyPricingComponent implements OnInit {
 
   async onCsvImported(csvData: any[]): Promise<void> {
     if (!csvData || csvData.length === 0) {
-      const message = this.translationService.translate('admin.companyPricingForm.noDataFoundInCsv');
+      const message = this.translationService.translate(
+        'admin.companyPricingForm.noDataFoundInCsv',
+      );
       alert(message);
       return;
     }
@@ -96,12 +156,16 @@ export class AdminCompanyPricingComponent implements OnInit {
       for (const row of csvData) {
         try {
           // Support flexible field names for company identification
-          const companyIdentifier = row.company_id || row.company_name || row.company_email;
-          const productIdentifier = row.product_id || row.product_sku || row.product_name;
+          const companyIdentifier =
+            row.company_id || row.company_name || row.company_email;
+          const productIdentifier =
+            row.product_id || row.product_sku || row.product_name;
 
           // Validate required fields
           if (!companyIdentifier || !productIdentifier || !row.price_tier_1) {
-            errors.push(`Row missing required fields (company_id/name/email, product_id/sku/name, price_tier_1): ${JSON.stringify(row)}`);
+            errors.push(
+              `Row missing required fields (company_id/name/email, product_id/sku/name, price_tier_1): ${JSON.stringify(row)}`,
+            );
             errorCount++;
             continue;
           }
@@ -113,7 +177,10 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (companiesCache.has(row.company_id)) {
               company = companiesCache.get(row.company_id);
             } else {
-              company = await this.supabase.getTableById('companies', row.company_id);
+              company = await this.supabase.getTableById(
+                'companies',
+                row.company_id,
+              );
               if (company) companiesCache.set(row.company_id, company);
             }
           } else if (row.company_name) {
@@ -121,7 +188,9 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (companiesCache.has(row.company_name)) {
               company = companiesCache.get(row.company_name);
             } else {
-              const companies = await this.supabase.getTable('companies', { company_name: row.company_name });
+              const companies = await this.supabase.getTable('companies', {
+                company_name: row.company_name,
+              });
               if (companies.length > 0) {
                 company = companies[0];
                 companiesCache.set(row.company_name, company);
@@ -132,7 +201,9 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (companiesCache.has(row.company_email)) {
               company = companiesCache.get(row.company_email);
             } else {
-              const companies = await this.supabase.getTable('companies', { email: row.company_email });
+              const companies = await this.supabase.getTable('companies', {
+                email: row.company_email,
+              });
               if (companies.length > 0) {
                 company = companies[0];
                 companiesCache.set(row.company_email, company);
@@ -153,7 +224,10 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (productsCache.has(row.product_id)) {
               product = productsCache.get(row.product_id);
             } else {
-              product = await this.supabase.getTableById('products', row.product_id);
+              product = await this.supabase.getTableById(
+                'products',
+                row.product_id,
+              );
               if (product) productsCache.set(row.product_id, product);
             }
           } else if (row.product_sku) {
@@ -161,7 +235,9 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (productsCache.has(row.product_sku)) {
               product = productsCache.get(row.product_sku);
             } else {
-              const products = await this.supabase.getTable('products', { sku: row.product_sku });
+              const products = await this.supabase.getTable('products', {
+                sku: row.product_sku,
+              });
               if (products.length > 0) {
                 product = products[0];
                 productsCache.set(row.product_sku, product);
@@ -172,7 +248,9 @@ export class AdminCompanyPricingComponent implements OnInit {
             if (productsCache.has(row.product_name)) {
               product = productsCache.get(row.product_name);
             } else {
-              const products = await this.supabase.getTable('products', { name: row.product_name });
+              const products = await this.supabase.getTable('products', {
+                name: row.product_name,
+              });
               if (products.length > 0) {
                 product = products[0];
                 productsCache.set(row.product_name, product);
@@ -189,35 +267,50 @@ export class AdminCompanyPricingComponent implements OnInit {
           // Validate tier pricing logic
           const tier1Price = parseFloat(row.price_tier_1) || 0;
           const tier1Qty = parseInt(row.quantity_tier_1) || 1;
-          const tier2Price = row.price_tier_2 ? parseFloat(row.price_tier_2) : null;
-          const tier2Qty = row.quantity_tier_2 ? parseInt(row.quantity_tier_2) : null;
-          const tier3Price = row.price_tier_3 ? parseFloat(row.price_tier_3) : null;
-          const tier3Qty = row.quantity_tier_3 ? parseInt(row.quantity_tier_3) : null;
+          const tier2Price = row.price_tier_2
+            ? parseFloat(row.price_tier_2)
+            : null;
+          const tier2Qty = row.quantity_tier_2
+            ? parseInt(row.quantity_tier_2)
+            : null;
+          const tier3Price = row.price_tier_3
+            ? parseFloat(row.price_tier_3)
+            : null;
+          const tier3Qty = row.quantity_tier_3
+            ? parseInt(row.quantity_tier_3)
+            : null;
           const minimumOrder = parseInt(row.minimum_order) || 1;
 
           // Validate tier quantity progression
           if (tier2Qty && tier2Qty <= tier1Qty) {
-            errors.push(`Tier 2 quantity (${tier2Qty}) must be greater than tier 1 quantity (${tier1Qty}) for ${companyIdentifier} - ${productIdentifier}`);
+            errors.push(
+              `Tier 2 quantity (${tier2Qty}) must be greater than tier 1 quantity (${tier1Qty}) for ${companyIdentifier} - ${productIdentifier}`,
+            );
             errorCount++;
             continue;
           }
           if (tier3Qty && (!tier2Qty || tier3Qty <= tier2Qty)) {
-            errors.push(`Tier 3 quantity (${tier3Qty}) must be greater than tier 2 quantity (${tier2Qty}) for ${companyIdentifier} - ${productIdentifier}`);
+            errors.push(
+              `Tier 3 quantity (${tier3Qty}) must be greater than tier 2 quantity (${tier2Qty}) for ${companyIdentifier} - ${productIdentifier}`,
+            );
             errorCount++;
             continue;
           }
 
           // Check if pricing already exists
-          const { data: existingPricing, error: checkError } = await this.supabase.client
-            .from('company_pricing')
-            .select('*')
-            .eq('company_id', company.id)
-            .eq('product_id', product.id)
-            .single();
+          const { data: existingPricing, error: checkError } =
+            await this.supabase.client
+              .from('company_pricing')
+              .select('*')
+              .eq('company_id', company.id)
+              .eq('product_id', product.id)
+              .single();
 
           if (checkError && checkError.code !== 'PGRST116') {
             console.error('Error checking existing pricing:', checkError);
-            errors.push(`Error checking existing pricing for company ${company.company_name || company.id} and product ${product.name || product.id}`);
+            errors.push(
+              `Error checking existing pricing for company ${company.company_name || company.id} and product ${product.name || product.id}`,
+            );
             errorCount++;
             continue;
           }
@@ -233,7 +326,7 @@ export class AdminCompanyPricingComponent implements OnInit {
             price_tier_3: tier3Price,
             quantity_tier_3: tier3Qty,
             minimum_order: Math.max(minimumOrder, 1), // Ensure minimum order is at least 1
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
           };
 
           // Handle update mode
@@ -251,7 +344,9 @@ export class AdminCompanyPricingComponent implements OnInit {
 
             if (updateError) {
               console.error('Error updating company pricing:', updateError);
-              errors.push(`Error updating pricing for company ${company.company_name || company.id} and product ${product.name || product.id}: ${updateError.message}`);
+              errors.push(
+                `Error updating pricing for company ${company.company_name || company.id} and product ${product.name || product.id}: ${updateError.message}`,
+              );
               errorCount++;
               continue;
             }
@@ -267,7 +362,9 @@ export class AdminCompanyPricingComponent implements OnInit {
 
             if (insertError) {
               console.error('Error inserting company pricing:', insertError);
-              errors.push(`Error inserting pricing for company ${company.company_name || company.id} and product ${product.name || product.id}: ${insertError.message}`);
+              errors.push(
+                `Error inserting pricing for company ${company.company_name || company.id} and product ${product.name || product.id}: ${insertError.message}`,
+              );
               errorCount++;
               continue;
             }
@@ -276,8 +373,11 @@ export class AdminCompanyPricingComponent implements OnInit {
           successCount++;
         } catch (error) {
           console.error('Error processing row:', error);
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-          errors.push(`Error processing row: ${JSON.stringify(row)} - ${errorMessage}`);
+          const errorMessage =
+            error instanceof Error ? error.message : 'Unknown error';
+          errors.push(
+            `Error processing row: ${JSON.stringify(row)} - ${errorMessage}`,
+          );
           errorCount++;
         }
       }
@@ -305,7 +405,9 @@ export class AdminCompanyPricingComponent implements OnInit {
       await this.loadCompanyPricing();
     } catch (error) {
       console.error('Error importing CSV:', error);
-      const errorMessage = this.translationService.translate('admin.companyPricingForm.errorImportingCsv');
+      const errorMessage = this.translationService.translate(
+        'admin.companyPricingForm.errorImportingCsv',
+      );
       alert(errorMessage);
     }
   }
@@ -315,16 +417,29 @@ export class AdminCompanyPricingComponent implements OnInit {
       // Get all company pricing data with tier pricing
       const allPricing = await this.supabase.getTable('company_pricing');
       if (!allPricing || allPricing.length === 0) {
-        const message = this.translationService.translate('admin.companyPricingForm.noCompanyPricingDataToExport');
+        const message = this.translationService.translate(
+          'admin.companyPricingForm.noCompanyPricingDataToExport',
+        );
         alert(message);
         return;
       }
 
       // Define comprehensive CSV headers
       const headers = [
-        'company_id', 'company_name', 'company_email', 'product_id', 'product_sku', 'product_name',
-        'price_tier_1', 'quantity_tier_1', 'price_tier_2', 'quantity_tier_2',
-        'price_tier_3', 'quantity_tier_3', 'minimum_order', 'update_mode'
+        'company_id',
+        'company_name',
+        'company_email',
+        'product_id',
+        'product_sku',
+        'product_name',
+        'price_tier_1',
+        'quantity_tier_1',
+        'price_tier_2',
+        'quantity_tier_2',
+        'price_tier_3',
+        'quantity_tier_3',
+        'minimum_order',
+        'update_mode',
       ];
 
       // Get company and product details for enhanced export
@@ -332,14 +447,18 @@ export class AdminCompanyPricingComponent implements OnInit {
       const productIds = [...new Set(allPricing.map((p: any) => p.product_id))];
 
       const companies = await Promise.all(
-        companyIds.map(id => this.supabase.getTableById('companies', id))
+        companyIds.map((id) => this.supabase.getTableById('companies', id)),
       );
       const products = await Promise.all(
-        productIds.map(id => this.supabase.getTableById('products', id))
+        productIds.map((id) => this.supabase.getTableById('products', id)),
       );
 
-      const companyMap = new Map(companies.filter(c => c).map(c => [c!.id, c]));
-      const productMap = new Map(products.filter(p => p).map(p => [p!.id, p]));
+      const companyMap = new Map(
+        companies.filter((c) => c).map((c) => [c!.id, c]),
+      );
+      const productMap = new Map(
+        products.filter((p) => p).map((p) => [p!.id, p]),
+      );
 
       // Create enhanced CSV rows with company and product details
       const rows = allPricing.map((pricing: any) => {
@@ -360,12 +479,15 @@ export class AdminCompanyPricingComponent implements OnInit {
           pricing.price_tier_3 || '',
           pricing.quantity_tier_3 || '',
           pricing.minimum_order || '1',
-          'upsert' // Default update mode
+          'upsert', // Default update mode
         ];
       });
 
       // Create CSV content
-      const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+      const csvContent = [
+        headers.join(','),
+        ...rows.map((row) => row.join(',')),
+      ].join('\n');
 
       // Create and download the file
       const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -377,7 +499,9 @@ export class AdminCompanyPricingComponent implements OnInit {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Error exporting company pricing:', error);
-      const errorMessage = this.translationService.translate('admin.companyPricingForm.errorExportingCompanyPricing');
+      const errorMessage = this.translationService.translate(
+        'admin.companyPricingForm.errorExportingCompanyPricing',
+      );
       alert(errorMessage);
     }
   }
@@ -396,10 +520,12 @@ export class AdminCompanyPricingComponent implements OnInit {
     }
   }
 
-  private async groupByCompany(pricingData: any[]): Promise<CompanyPricingSummary[]> {
+  private async groupByCompany(
+    pricingData: any[],
+  ): Promise<CompanyPricingSummary[]> {
     const companyGroups = new Map<string, any[]>();
 
-    pricingData.forEach(pricing => {
+    pricingData.forEach((pricing) => {
       if (!companyGroups.has(pricing.company_id)) {
         companyGroups.set(pricing.company_id, []);
       }
@@ -420,18 +546,21 @@ export class AdminCompanyPricingComponent implements OnInit {
 
     companyGroups.forEach((pricings, companyId) => {
       const company = (companies || []).find((c: any) => c.id === companyId);
-      const companyName = company ?
-        company.company_name :
-        `Company ${companyId}`;
+      const companyName = company
+        ? company.company_name
+        : `Company ${companyId}`;
 
-      const sortedPricings = pricings.sort((a, b) =>
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+      const sortedPricings = pricings.sort(
+        (a, b) =>
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
       );
 
       const lastUpdated = pricings.reduce((latest, current) => {
         const currentDate = new Date(current.updated_at || current.created_at);
         const latestDate = new Date(latest);
-        return currentDate > latestDate ? current.updated_at || current.created_at : latest;
+        return currentDate > latestDate
+          ? current.updated_at || current.created_at
+          : latest;
       }, sortedPricings[0].created_at);
 
       summaries.push({
@@ -440,34 +569,49 @@ export class AdminCompanyPricingComponent implements OnInit {
         company_name: companyName,
         product_count: pricings.length,
         created_at: sortedPricings[0].created_at,
-        updated_at: lastUpdated
+        updated_at: lastUpdated,
       });
     });
 
-    return summaries.sort((a, b) => a.company_name.localeCompare(b.company_name));
+    return summaries.sort((a, b) =>
+      a.company_name.localeCompare(b.company_name),
+    );
   }
 
-  private async deleteAllCompanyPricing(companySummary: CompanyPricingSummary): Promise<void> {
-    if (!confirm(`Delete all custom pricing for ${companySummary.company_name}? This will remove all ${companySummary.product_count} custom price(s) for this company.`)) {
+  private async deleteAllCompanyPricing(
+    companySummary: CompanyPricingSummary,
+  ): Promise<void> {
+    if (
+      !confirm(
+        `Delete all custom pricing for ${companySummary.company_name}? This will remove all ${companySummary.product_count} custom price(s) for this company.`,
+      )
+    ) {
       return;
     }
 
     try {
       const allPricing = await this.supabase.getTable('company_pricing');
-      const companyPricing = (allPricing || []).filter((p: any) => p.company_id === companySummary.company_id);
+      const companyPricing = (allPricing || []).filter(
+        (p: any) => p.company_id === companySummary.company_id,
+      );
 
       for (const pricing of companyPricing) {
         await this.supabase.deleteRecord('company_pricing', pricing.id);
       }
 
       this.loadCompanyPricing();
-      const successMessage = this.translationService.translate('admin.companyPricingForm.successfullyDeletedAllCustomPricing', {
-        companyName: companySummary.company_name
-      });
+      const successMessage = this.translationService.translate(
+        'admin.companyPricingForm.successfullyDeletedAllCustomPricing',
+        {
+          companyName: companySummary.company_name,
+        },
+      );
       alert(successMessage);
     } catch (err) {
       console.error('Error deleting company pricing', err);
-      const errorMessage = this.translationService.translate('admin.companyPricingForm.errorDeletingCompanyPricing');
+      const errorMessage = this.translationService.translate(
+        'admin.companyPricingForm.errorDeletingCompanyPricing',
+      );
       alert(errorMessage);
     }
   }
@@ -482,13 +626,20 @@ export class AdminCompanyPricingComponent implements OnInit {
   }
 
   async applyGlobalBulkDiscountToAll(): Promise<void> {
-    if (!this.globalBulkDiscountPercentage || this.globalBulkDiscountPercentage <= 0 || this.globalBulkDiscountPercentage > 100) {
+    if (
+      !this.globalBulkDiscountPercentage ||
+      this.globalBulkDiscountPercentage <= 0 ||
+      this.globalBulkDiscountPercentage > 100
+    ) {
       return;
     }
 
-    const confirmMessage = this.translationService.translate('admin.companyPricingForm.confirmBulkDiscountAll', {
-      percentage: this.globalBulkDiscountPercentage.toString()
-    });
+    const confirmMessage = this.translationService.translate(
+      'admin.companyPricingForm.confirmBulkDiscountAll',
+      {
+        percentage: this.globalBulkDiscountPercentage.toString(),
+      },
+    );
     if (confirm(confirmMessage)) {
       this.applyGlobalBulkDiscountToAllConfirmed();
     }
@@ -501,7 +652,9 @@ export class AdminCompanyPricingComponent implements OnInit {
       this.loadingSubject.next(true);
 
       // Start loading toast
-      const loadingMessage = this.translationService.translate('admin.companyPricingForm.bulkDiscountProcessing');
+      const loadingMessage = this.translationService.translate(
+        'admin.companyPricingForm.bulkDiscountProcessing',
+      );
       toastId = this.toastService.showLoading(loadingMessage);
 
       const discount = this.globalBulkDiscountPercentage / 100;
@@ -509,10 +662,11 @@ export class AdminCompanyPricingComponent implements OnInit {
       let errorCount = 0;
 
       // Step 1: Get all approved companies
-      const { data: companies, error: companiesError } = await this.supabase.client
-        .from('companies')
-        .select('*')
-        .eq('status', 'approved');
+      const { data: companies, error: companiesError } =
+        await this.supabase.client
+          .from('companies')
+          .select('*')
+          .eq('status', 'approved');
 
       if (companiesError) {
         console.error('Error fetching companies:', companiesError);
@@ -520,14 +674,20 @@ export class AdminCompanyPricingComponent implements OnInit {
       }
 
       if (!companies || companies.length === 0) {
-        this.toastService.failLoading(toastId, 'No approved companies found to apply discount to.');
+        this.toastService.failLoading(
+          toastId,
+          'No approved companies found to apply discount to.',
+        );
         return;
       }
 
       // Step 2: Get all products
       const allProducts = await this.supabase.getTable('products');
       if (!allProducts || allProducts.length === 0) {
-        this.toastService.failLoading(toastId, 'No products found to apply discount to.');
+        this.toastService.failLoading(
+          toastId,
+          'No products found to apply discount to.',
+        );
         return;
       }
 
@@ -536,7 +696,7 @@ export class AdminCompanyPricingComponent implements OnInit {
       const pricingMap = new Map<string, any>();
 
       if (existingPricing) {
-        existingPricing.forEach(pricing => {
+        existingPricing.forEach((pricing) => {
           const key = `${pricing.company_id}-${pricing.product_id}`;
           pricingMap.set(key, pricing);
         });
@@ -552,13 +712,25 @@ export class AdminCompanyPricingComponent implements OnInit {
             processedCount++;
 
             // Update progress every 10 items or on final item
-            if (processedCount % 10 === 0 || processedCount === totalCombinations) {
-              const progress = Math.round((processedCount / totalCombinations) * 100);
-              const progressMessage = this.translationService.translate('admin.companyPricingForm.bulkDiscountProgress', {
-                current: processedCount.toString(),
-                total: totalCombinations.toString()
-              });
-              this.toastService.updateLoadingProgress(toastId, progressMessage, progress);
+            if (
+              processedCount % 10 === 0 ||
+              processedCount === totalCombinations
+            ) {
+              const progress = Math.round(
+                (processedCount / totalCombinations) * 100,
+              );
+              const progressMessage = this.translationService.translate(
+                'admin.companyPricingForm.bulkDiscountProgress',
+                {
+                  current: processedCount.toString(),
+                  total: totalCombinations.toString(),
+                },
+              );
+              this.toastService.updateLoadingProgress(
+                toastId,
+                progressMessage,
+                progress,
+              );
             }
 
             const key = `${company.id}-${product.id}`;
@@ -570,7 +742,8 @@ export class AdminCompanyPricingComponent implements OnInit {
               continue; // Skip products without valid price
             }
 
-            const discountedPrice = Math.round(basePrice * (1 - discount) * 100) / 100;
+            const discountedPrice =
+              Math.round(basePrice * (1 - discount) * 100) / 100;
 
             if (existingRecord) {
               // Update existing pricing record with discounted original price
@@ -582,7 +755,7 @@ export class AdminCompanyPricingComponent implements OnInit {
                 price_tier_3: null,
                 quantity_tier_3: null,
                 minimum_order: 1,
-                updated_at: new Date().toISOString()
+                updated_at: new Date().toISOString(),
               };
 
               const { error: updateError } = await this.supabase.client
@@ -609,7 +782,7 @@ export class AdminCompanyPricingComponent implements OnInit {
                 quantity_tier_3: null,
                 minimum_order: 1,
                 created_at: new Date().toISOString(),
-                updated_at: new Date().toISOString()
+                updated_at: new Date().toISOString(),
               };
 
               const { error: insertError } = await this.supabase.client
@@ -624,24 +797,31 @@ export class AdminCompanyPricingComponent implements OnInit {
               }
             }
           } catch (error) {
-            console.error('Error processing company-product combination:', error);
+            console.error(
+              'Error processing company-product combination:',
+              error,
+            );
             errorCount++;
           }
         }
       }
 
       // Complete the loading toast with success
-      const successMessage = this.translationService.translate('admin.companyPricingForm.bulkDiscountCompleted', {
-        count: successCount.toString()
-      });
+      const successMessage = this.translationService.translate(
+        'admin.companyPricingForm.bulkDiscountCompleted',
+        {
+          count: successCount.toString(),
+        },
+      );
       this.toastService.completeLoading(toastId, successMessage);
 
       // Reload the data
       await this.loadCompanyPricing();
-
     } catch (error) {
       console.error('Error applying global bulk discount:', error);
-      const errorMessage = this.translationService.translate('admin.companyPricingForm.errorSavingPricing');
+      const errorMessage = this.translationService.translate(
+        'admin.companyPricingForm.errorSavingPricing',
+      );
 
       // Check if toastId exists (might be undefined if error occurred before toast creation)
       if (typeof toastId !== 'undefined') {

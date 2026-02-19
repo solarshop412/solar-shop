@@ -1,6 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -8,15 +14,26 @@ import { AdminFormComponent } from '../../shared/admin-form/admin-form.component
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { SuccessModalComponent } from '../../../../shared/components/modals/success-modal/success-modal.component';
 import { TranslationService } from '../../../../shared/services/translation.service';
-import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  catchError,
+} from 'rxjs/operators';
 import { EMPTY, from } from 'rxjs';
 
 @Component({
   selector: 'app-order-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent, TranslatePipe, SuccessModalComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdminFormComponent,
+    TranslatePipe,
+    SuccessModalComponent,
+  ],
   templateUrl: './order-form.component.html',
-  styleUrls: ['./order-form.component.scss']
+  styleUrls: ['./order-form.component.scss'],
 })
 export class OrderFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -64,7 +81,7 @@ export class OrderFormComponent implements OnInit {
       tax_amount: [0, [Validators.min(0)]],
       is_b2b: [false],
       notes: [''],
-      order_items: this.fb.array([])
+      order_items: this.fb.array([]),
     });
   }
 
@@ -87,7 +104,11 @@ export class OrderFormComponent implements OnInit {
     // Set default order date to now for new orders
     if (!this.isEditMode) {
       const now = new Date();
-      const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
+      const localDateTime = new Date(
+        now.getTime() - now.getTimezoneOffset() * 60000,
+      )
+        .toISOString()
+        .slice(0, 16);
       this.orderForm?.patchValue({ order_date: localDateTime });
     }
 
@@ -95,7 +116,9 @@ export class OrderFormComponent implements OnInit {
     this.setupEmailListener();
 
     // Set page title
-    this.title.setTitle(this.translationService.translate('admin.ordersForm.title'));
+    this.title.setTitle(
+      this.translationService.translate('admin.ordersForm.title'),
+    );
   }
 
   createOrderItem(): FormGroup {
@@ -106,7 +129,7 @@ export class OrderFormComponent implements OnInit {
       unit_price: [0, [Validators.required, Validators.min(0)]],
       quantity: [1, [Validators.required, Validators.min(1)]],
       discount_percentage: [0, [Validators.min(0), Validators.max(100)]],
-      discount_amount: [0, [Validators.min(0)]]
+      discount_amount: [0, [Validators.min(0)]],
     });
   }
 
@@ -156,8 +179,10 @@ export class OrderFormComponent implements OnInit {
   }
 
   getOrderDiscountAmount(): number {
-    const subtotalAfterItemDiscounts = this.getOrderSubtotal() - this.getItemDiscountsTotal();
-    const discountPercentage = this.orderForm?.get('discount_percentage')?.value || 0;
+    const subtotalAfterItemDiscounts =
+      this.getOrderSubtotal() - this.getItemDiscountsTotal();
+    const discountPercentage =
+      this.orderForm?.get('discount_percentage')?.value || 0;
     return subtotalAfterItemDiscounts * (discountPercentage / 100);
   }
 
@@ -166,7 +191,11 @@ export class OrderFormComponent implements OnInit {
   }
 
   getTaxAmount(): number {
-    const subtotalAfterDiscounts = this.getOrderSubtotal() - this.getItemDiscountsTotal() - this.getOrderDiscountAmount() + this.getShippingCost();
+    const subtotalAfterDiscounts =
+      this.getOrderSubtotal() -
+      this.getItemDiscountsTotal() -
+      this.getOrderDiscountAmount() +
+      this.getShippingCost();
     const taxPercentage = this.orderForm?.get('tax_percentage')?.value || 0;
     return subtotalAfterDiscounts * (taxPercentage / 100);
   }
@@ -177,7 +206,10 @@ export class OrderFormComponent implements OnInit {
     const orderDiscount = this.getOrderDiscountAmount();
     const shipping = this.getShippingCost();
     const tax = this.getTaxAmount();
-    return Math.max(0, subtotal - itemDiscounts - orderDiscount + shipping + tax);
+    return Math.max(
+      0,
+      subtotal - itemDiscounts - orderDiscount + shipping + tax,
+    );
   }
 
   // User lookup method
@@ -188,7 +220,8 @@ export class OrderFormComponent implements OnInit {
 
     try {
       console.log(`Looking up user by email: ${email}`);
-      const matchingUser = await this.supabaseService.findAuthUserByEmail(email);
+      const matchingUser =
+        await this.supabaseService.findAuthUserByEmail(email);
 
       if (matchingUser) {
         console.log(`Found matching user for email ${email}:`, matchingUser.id);
@@ -208,25 +241,27 @@ export class OrderFormComponent implements OnInit {
 
     const emailControl = this.orderForm.get('customer_email');
     if (emailControl) {
-      emailControl.valueChanges.pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap(email => {
-          if (!email || !email.includes('@')) {
-            this.foundUser = null;
+      emailControl.valueChanges
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          switchMap((email) => {
+            if (!email || !email.includes('@')) {
+              this.foundUser = null;
+              this.isLookingUpUser = false;
+              return EMPTY;
+            }
+
+            this.isLookingUpUser = true;
+            return from(this.lookupUserForDisplay(email));
+          }),
+          catchError((error) => {
+            console.error('Error in email lookup:', error);
             this.isLookingUpUser = false;
             return EMPTY;
-          }
-
-          this.isLookingUpUser = true;
-          return from(this.lookupUserForDisplay(email));
-        }),
-        catchError(error => {
-          console.error('Error in email lookup:', error);
-          this.isLookingUpUser = false;
-          return EMPTY;
-        })
-      ).subscribe();
+          }),
+        )
+        .subscribe();
     }
   }
 
@@ -242,7 +277,7 @@ export class OrderFormComponent implements OnInit {
           first_name: authUser.profile.first_name,
           last_name: authUser.profile.last_name,
           full_name: authUser.profile.full_name,
-          role: authUser.profile.role
+          role: authUser.profile.role,
         };
       } else {
         this.foundUser = null;
@@ -264,7 +299,10 @@ export class OrderFormComponent implements OnInit {
 
     this.isSearching = true;
     try {
-      const products = await this.supabaseService.getProducts({ search: query, limit: 10 });
+      const products = await this.supabaseService.getProducts({
+        search: query,
+        limit: 10,
+      });
       this.searchResults = products || [];
       this.activeSearchIndex = itemIndex;
     } catch (error) {
@@ -282,7 +320,7 @@ export class OrderFormComponent implements OnInit {
         product_id: product.id,
         product_name: product.name,
         product_sku: product.sku || '',
-        unit_price: product.price || 0
+        unit_price: product.price || 0,
       });
     }
     this.searchResults = [];
@@ -313,16 +351,21 @@ export class OrderFormComponent implements OnInit {
     this.loading = true;
     try {
       console.log('Loading order with ID:', this.orderId);
-      const data = await this.supabaseService.getTableById('orders', this.orderId);
+      const data = await this.supabaseService.getTableById(
+        'orders',
+        this.orderId,
+      );
       if (data) {
         console.log('Order loaded successfully:', data);
 
         // Format dates for datetime-local inputs and addresses for display
         const formData = {
           ...data,
-          order_date: data.order_date ? new Date(data.order_date).toISOString().slice(0, 16) : '',
+          order_date: data.order_date
+            ? new Date(data.order_date).toISOString().slice(0, 16)
+            : '',
           shipping_address: this.formatAddressForDisplay(data.shipping_address),
-          billing_address: this.formatAddressForDisplay(data.billing_address)
+          billing_address: this.formatAddressForDisplay(data.billing_address),
         };
 
         console.log('Formatted form data:', formData);
@@ -348,7 +391,9 @@ export class OrderFormComponent implements OnInit {
     if (!this.orderId) return;
 
     try {
-      const orderItems = await this.supabaseService.getTable('order_items', { order_id: this.orderId });
+      const orderItems = await this.supabaseService.getTable('order_items', {
+        order_id: this.orderId,
+      });
 
       // Clear existing items
       while (this.orderItems.length !== 0) {
@@ -365,7 +410,7 @@ export class OrderFormComponent implements OnInit {
             unit_price: item.unit_price || 0,
             quantity: item.quantity || 1,
             discount_percentage: (item as any).discount_percentage || 0,
-            discount_amount: (item as any).discount_amount || 0
+            discount_amount: (item as any).discount_amount || 0,
           });
           this.orderItems.push(orderItemForm);
         }
@@ -401,11 +446,15 @@ export class OrderFormComponent implements OnInit {
 
       // Convert address strings back to JSONB objects
       if (formData.shipping_address) {
-        formData.shipping_address = this.parseAddressForStorage(formData.shipping_address);
+        formData.shipping_address = this.parseAddressForStorage(
+          formData.shipping_address,
+        );
       }
 
       if (formData.billing_address) {
-        formData.billing_address = this.parseAddressForStorage(formData.billing_address);
+        formData.billing_address = this.parseAddressForStorage(
+          formData.billing_address,
+        );
       }
 
       // Calculate and set amounts from percentages
@@ -427,19 +476,31 @@ export class OrderFormComponent implements OnInit {
         shipping_cost: Number(formData.shipping_cost) || 0,
         discount_percentage: Number(formData.discount_percentage) || 0,
         tax_percentage: Number(formData.tax_percentage) || 0,
-        is_b2b: Boolean(formData.is_b2b)
+        is_b2b: Boolean(formData.is_b2b),
       };
 
       console.log('Cleaned form data for order save:', cleanedFormData);
 
       // Handle empty payment method - ensure valid values only
-      if (!cleanedFormData.payment_method || cleanedFormData.payment_method === '') {
+      if (
+        !cleanedFormData.payment_method ||
+        cleanedFormData.payment_method === ''
+      ) {
         delete cleanedFormData.payment_method; // Remove the field entirely if empty
       } else {
         // Ensure the payment method is one of the allowed values
-        const validPaymentMethods = ['credit_card', 'debit_card', 'paypal', 'bank_transfer', 'cash_on_delivery'];
+        const validPaymentMethods = [
+          'credit_card',
+          'debit_card',
+          'paypal',
+          'bank_transfer',
+          'cash_on_delivery',
+        ];
         if (!validPaymentMethods.includes(cleanedFormData.payment_method)) {
-          console.error('Invalid payment method:', cleanedFormData.payment_method);
+          console.error(
+            'Invalid payment method:',
+            cleanedFormData.payment_method,
+          );
           delete cleanedFormData.payment_method;
         }
       }
@@ -457,21 +518,31 @@ export class OrderFormComponent implements OnInit {
 
         try {
           // First verify the order exists
-          const existingOrder = await this.supabaseService.getTableById('orders', this.orderId);
+          const existingOrder = await this.supabaseService.getTableById(
+            'orders',
+            this.orderId,
+          );
           if (!existingOrder) {
             throw new Error(`Order with ID ${this.orderId} not found`);
           }
           console.log('Existing order found:', existingOrder);
 
-          savedOrder = await this.supabaseService.updateRecord('orders', this.orderId, cleanedFormData);
+          savedOrder = await this.supabaseService.updateRecord(
+            'orders',
+            this.orderId,
+            cleanedFormData,
+          );
           console.log('Order updated successfully:', savedOrder);
 
           // Delete existing order items and create new ones
           await this.deleteExistingOrderItems();
           await this.saveOrderItems(this.orderId, orderItems);
 
-          this.successModalTitle = this.translationService.translate('common.success');
-          this.successModalMessage = this.translationService.translate('admin.orderUpdatedSuccessfully');
+          this.successModalTitle =
+            this.translationService.translate('common.success');
+          this.successModalMessage = this.translationService.translate(
+            'admin.orderUpdatedSuccessfully',
+          );
           this.showSuccessModal = true;
         } catch (updateError: any) {
           console.error('Error updating order:', updateError);
@@ -479,25 +550,37 @@ export class OrderFormComponent implements OnInit {
         }
       } else {
         // Create new order
-        savedOrder = await this.supabaseService.createRecord('orders', cleanedFormData);
+        savedOrder = await this.supabaseService.createRecord(
+          'orders',
+          cleanedFormData,
+        );
 
         if (savedOrder && savedOrder.id) {
           // First, check and decrement stock for all items
           console.log('Processing stock adjustment for new order items...');
-          const stockAdjustmentSuccess = await this.supabaseService.processOrderStockAdjustment(orderItems, true);
+          const stockAdjustmentSuccess =
+            await this.supabaseService.processOrderStockAdjustment(
+              orderItems,
+              true,
+            );
 
           if (!stockAdjustmentSuccess) {
             // Delete the order if stock adjustment fails
             await this.supabaseService.deleteRecord('orders', savedOrder.id);
-            throw new Error('Insufficient stock for one or more items. Order not created.');
+            throw new Error(
+              'Insufficient stock for one or more items. Order not created.',
+            );
           }
 
           // Save order items
           await this.saveOrderItems(savedOrder.id, orderItems);
         }
 
-        this.successModalTitle = this.translationService.translate('common.success');
-        this.successModalMessage = this.translationService.translate('admin.orderCreatedSuccessfully');
+        this.successModalTitle =
+          this.translationService.translate('common.success');
+        this.successModalMessage = this.translationService.translate(
+          'admin.orderCreatedSuccessfully',
+        );
         this.showSuccessModal = true;
       }
     } catch (error) {
@@ -513,7 +596,9 @@ export class OrderFormComponent implements OnInit {
 
     try {
       // Get existing order items
-      const existingItems = await this.supabaseService.getTable('order_items', { order_id: this.orderId });
+      const existingItems = await this.supabaseService.getTable('order_items', {
+        order_id: this.orderId,
+      });
 
       // Delete each item
       if (existingItems && existingItems.length > 0) {
@@ -526,7 +611,10 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
-  private async saveOrderItems(orderId: string, orderItems: any[]): Promise<void> {
+  private async saveOrderItems(
+    orderId: string,
+    orderItems: any[],
+  ): Promise<void> {
     if (!orderItems || orderItems.length === 0) return;
 
     try {
@@ -550,7 +638,7 @@ export class OrderFormComponent implements OnInit {
             quantity: quantity,
             total_price: totalPrice,
             discount_percentage: discountPercentage,
-            discount_amount: discountAmount
+            discount_amount: discountAmount,
           };
 
           await this.supabaseService.createRecord('order_items', orderItemData);
@@ -588,12 +676,16 @@ export class OrderFormComponent implements OnInit {
     };
 
     const parts = [
-      address.firstName && address.lastName ? `${address.firstName} ${address.lastName}` : '',
+      address.firstName && address.lastName
+        ? `${address.firstName} ${address.lastName}`
+        : '',
       address.addressLine1 || '',
       address.addressLine2 || '',
-      [address.city, address.state, address.postalCode].filter(Boolean).join(', '),
+      [address.city, address.state, address.postalCode]
+        .filter(Boolean)
+        .join(', '),
       address.country || '',
-      address.phone || ''
+      address.phone || '',
     ].filter(Boolean);
 
     return parts.join('\n');
@@ -607,7 +699,7 @@ export class OrderFormComponent implements OnInit {
       return null;
     }
 
-    const lines = addressString.split('\n').filter(line => line.trim());
+    const lines = addressString.split('\n').filter((line) => line.trim());
     if (lines.length === 0) {
       return null;
     }
@@ -637,7 +729,7 @@ export class OrderFormComponent implements OnInit {
     // Next line might be city, state, postal code
     if (lines.length > 0) {
       const cityStatePostal = lines[0];
-      const parts = cityStatePostal.split(',').map(part => part.trim());
+      const parts = cityStatePostal.split(',').map((part) => part.trim());
       if (parts.length >= 1) address.city = parts[0];
       if (parts.length >= 2) address.state = parts[1];
       if (parts.length >= 3) address.postalCode = parts[2];
@@ -657,4 +749,4 @@ export class OrderFormComponent implements OnInit {
 
     return address;
   }
-} 
+}

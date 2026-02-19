@@ -10,7 +10,7 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './offer-details.component.html',
-  styleUrls: ['./offer-details.component.scss']
+  styleUrls: ['./offer-details.component.scss'],
 })
 export class OfferDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -36,7 +36,9 @@ export class OfferDetailsComponent implements OnInit {
     try {
       this.offer = await this.supabaseService.getTableById('offers', offerId);
       if (this.offer) {
-        this.title.setTitle(`${this.offer.title} - Offer Details - Solar Shop Admin`);
+        this.title.setTitle(
+          `${this.offer.title} - Offer Details - Solar Shop Admin`,
+        );
         await this.loadOfferProducts(offerId);
         await this.loadOfferCategory();
       } else {
@@ -52,7 +54,8 @@ export class OfferDetailsComponent implements OnInit {
     try {
       const { data, error } = await this.supabaseService.client
         .from('offer_products')
-        .select(`
+        .select(
+          `
           *,
           products (
             id,
@@ -65,7 +68,8 @@ export class OfferDetailsComponent implements OnInit {
               name
             )
           )
-        `)
+        `,
+        )
         .eq('offer_id', offerId)
         .order('sort_order');
 
@@ -74,19 +78,23 @@ export class OfferDetailsComponent implements OnInit {
       if (data && data.length > 0) {
         const offerProducts = data.map((offerProduct: any) => {
           // Determine discount type based on which field has a value
-          const discountType = (offerProduct.discount_amount && offerProduct.discount_amount > 0) ? 'fixed_amount' : 'percentage';
-          
+          const discountType =
+            offerProduct.discount_amount && offerProduct.discount_amount > 0
+              ? 'fixed_amount'
+              : 'percentage';
+
           return {
             id: offerProduct.products.id,
             name: offerProduct.products.name,
             sku: offerProduct.products.sku,
-            category: offerProduct.products.categories?.name || 'Solar Equipment',
+            category:
+              offerProduct.products.categories?.name || 'Solar Equipment',
             price: offerProduct.products.price || 0,
             discount_percentage: offerProduct.discount_percentage || 0,
             discount_amount: offerProduct.discount_amount || 0,
             discount_type: discountType,
             stock_quantity: offerProduct.products.stock_quantity || 0,
-            offer_product_id: offerProduct.id
+            offer_product_id: offerProduct.id,
           };
         });
 
@@ -94,21 +102,31 @@ export class OfferDetailsComponent implements OnInit {
       } else {
         this.offerProducts = [];
       }
-
     } catch (error) {
       console.error('Error loading offer products:', error);
       this.offerProducts = [];
     }
   }
 
-  calculateDiscountedPrice(originalPrice: number, discountPercentage: number): number {
+  calculateDiscountedPrice(
+    originalPrice: number,
+    discountPercentage: number,
+  ): number {
     if (!discountPercentage) return originalPrice;
     return originalPrice * (1 - discountPercentage / 100);
   }
 
-  calculateDiscountedPriceByType(originalPrice: number, discountType: string, discountPercentage: number, discountAmount: number): number {
+  calculateDiscountedPriceByType(
+    originalPrice: number,
+    discountType: string,
+    discountPercentage: number,
+    discountAmount: number,
+  ): number {
     if (!discountType || discountType === 'percentage') {
-      return this.calculateDiscountedPrice(originalPrice, discountPercentage || 0);
+      return this.calculateDiscountedPrice(
+        originalPrice,
+        discountPercentage || 0,
+      );
     } else if (discountType === 'fixed_amount') {
       return Math.max(0, originalPrice - (discountAmount || 0));
     }
@@ -116,12 +134,23 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   getTotalOriginalPrice(): number {
-    return this.offerProducts.reduce((total, product) => total + product.price, 0);
+    return this.offerProducts.reduce(
+      (total, product) => total + product.price,
+      0,
+    );
   }
 
   getTotalDiscountedPrice(): number {
     return this.offerProducts.reduce((total, product) => {
-      return total + this.calculateDiscountedPriceByType(product.price, product.discount_type, product.discount_percentage, product.discount_amount);
+      return (
+        total +
+        this.calculateDiscountedPriceByType(
+          product.price,
+          product.discount_type,
+          product.discount_percentage,
+          product.discount_amount,
+        )
+      );
     }, 0);
   }
 
@@ -138,7 +167,10 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   private async loadOfferCategory(): Promise<void> {
-    if (!this.offer?.applicable_category_ids || this.offer.applicable_category_ids.length === 0) {
+    if (
+      !this.offer?.applicable_category_ids ||
+      this.offer.applicable_category_ids.length === 0
+    ) {
       this.offerCategory = null;
       return;
     }
@@ -158,5 +190,4 @@ export class OfferDetailsComponent implements OnInit {
       this.offerCategory = null;
     }
   }
-
-} 
+}

@@ -14,7 +14,7 @@ import {
   selectBlogError,
   selectFilteredPosts,
   selectPostCategories,
-  selectFilteredCategory
+  selectFilteredCategory,
 } from './store/blog.selectors';
 
 @Component({
@@ -22,7 +22,7 @@ import {
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  styleUrls: ['./blog.component.scss'],
 })
 export class BlogComponent implements OnInit, OnDestroy {
   private router = inject(Router);
@@ -49,7 +49,7 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.selectedCategory$ = this.store.select(selectFilteredCategory);
 
     // Debug the selected category changes
-    this.selectedCategory$.subscribe(category => {
+    this.selectedCategory$.subscribe((category) => {
       console.log('Selected category changed to:', category);
     });
   }
@@ -58,7 +58,7 @@ export class BlogComponent implements OnInit, OnDestroy {
     // Set SEO for blog list page
     this.seoService.setCategoryPage(
       'Blog',
-      'Pročitajte najnovije vijesti i savjete o solarnim elektranama, energetskoj učinkovitosti i obnovljivim izvorima energije.'
+      'Pročitajte najnovije vijesti i savjete o solarnim elektranama, energetskoj učinkovitosti i obnovljivim izvorima energije.',
     );
 
     this.loadBlogPosts();
@@ -95,13 +95,16 @@ export class BlogComponent implements OnInit, OnDestroy {
   formatDate(date: string | Date): string {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const currentLang = this.translationService.getCurrentLanguage();
-    
+
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     };
-    
-    return dateObj.toLocaleDateString(currentLang === 'hr' ? 'hr-HR' : 'en-US', options);
+
+    return dateObj.toLocaleDateString(
+      currentLang === 'hr' ? 'hr-HR' : 'en-US',
+      options,
+    );
   }
-} 
+}

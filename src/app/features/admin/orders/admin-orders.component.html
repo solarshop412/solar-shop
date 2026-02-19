@@ -1,44 +1,63 @@
 <div class="w-full max-w-full overflow-hidden">
-    <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
+  <div class="space-y-4 sm:space-y-6 p-4 sm:p-6">
     <!-- Page Header -->
-    <div class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
-        <div class="min-w-0 flex-1">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate">{{ 'admin.ordersForm.title' | translate }}</h1>
-        <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">{{ 'admin.ordersForm.subtitle' | translate }}</p>
-    </div>
+    <div
+      class="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0"
+    >
+      <div class="min-w-0 flex-1">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 truncate">
+          {{ "admin.ordersForm.title" | translate }}
+        </h1>
+        <p class="mt-1 sm:mt-2 text-sm sm:text-base text-gray-600">
+          {{ "admin.ordersForm.subtitle" | translate }}
+        </p>
+      </div>
     </div>
 
     <!-- Error Message -->
-    <div *ngIf="error$ | async" class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-        <div class="flex items-center">
-        <svg class="w-5 h-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+    <div
+      *ngIf="error$ | async"
+      class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6"
+    >
+      <div class="flex items-center">
+        <svg
+          class="w-5 h-5 text-red-600 mr-3"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+            clip-rule="evenodd"
+          />
         </svg>
-        <span class="text-red-800 font-medium">{{ (error$ | async) || 'Failed to load orders' }}</span>
-        </div>
+        <span class="text-red-800 font-medium">{{
+          (error$ | async) || "Failed to load orders"
+        }}</span>
+      </div>
     </div>
 
     <!-- Data Table Container -->
     <div class="w-full overflow-hidden">
-    <app-data-table
-    [title]="'admin.ordersForm.customerOrders' | translate"
-    [data]="(filteredOrders$ | async) || []"
-    [config]="tableConfig"
-    [loading]="(loading$ | async) || false"
-    (addClicked)="onAddOrder()"
-    (actionClicked)="onTableAction($event)"
-    (rowClicked)="onRowClick($event)"
-    (csvImported)="onCsvImported($event)">
-    </app-data-table>
-    
+      <app-data-table
+        [title]="'admin.ordersForm.customerOrders' | translate"
+        [data]="(filteredOrders$ | async) || []"
+        [config]="tableConfig"
+        [loading]="(loading$ | async) || false"
+        (addClicked)="onAddOrder()"
+        (actionClicked)="onTableAction($event)"
+        (rowClicked)="onRowClick($event)"
+        (csvImported)="onCsvImported($event)"
+      >
+      </app-data-table>
     </div>
-    </div>
+  </div>
 </div>
 
 <!-- Success Modal -->
 <app-success-modal
-    [isOpen]="showSuccessModal"
-    [title]="successModalTitle"
-    [message]="successModalMessage"
-    (closed)="onSuccessModalClosed()"
+  [isOpen]="showSuccessModal"
+  [title]="successModalTitle"
+  [message]="successModalMessage"
+  (closed)="onSuccessModalClosed()"
 ></app-success-modal>

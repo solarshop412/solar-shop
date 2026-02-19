@@ -17,7 +17,7 @@ export interface NotificationCounts {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminNotificationsService {
   private supabaseService = inject(SupabaseService);
@@ -31,28 +31,33 @@ export class AdminNotificationsService {
     users: 0,
     wishlists: 0,
     companies: 0,
-    reviews: 0
+    reviews: 0,
   });
 
   constructor() {
     // Get current admin ID
-    this.store.select(selectCurrentUser).pipe(
-      filter(user => !!user),
-      take(1)
-    ).subscribe(user => {
-      this.currentAdminId = user!.id;
-    });
+    this.store
+      .select(selectCurrentUser)
+      .pipe(
+        filter((user) => !!user),
+        take(1),
+      )
+      .subscribe((user) => {
+        this.currentAdminId = user!.id;
+      });
 
     // Refresh counts every 30 seconds
-    timer(0, 30000).pipe(
-      switchMap(() => this.fetchAllCounts()),
-      catchError(error => {
-        console.error('Error fetching notification counts:', error);
-        return [this.notificationCounts$.value];
-      })
-    ).subscribe(counts => {
-      this.notificationCounts$.next(counts);
-    });
+    timer(0, 30000)
+      .pipe(
+        switchMap(() => this.fetchAllCounts()),
+        catchError((error) => {
+          console.error('Error fetching notification counts:', error);
+          return [this.notificationCounts$.value];
+        }),
+      )
+      .subscribe((counts) => {
+        this.notificationCounts$.next(counts);
+      });
   }
 
   getNotificationCounts(): Observable<NotificationCounts> {
@@ -71,17 +76,27 @@ export class AdminNotificationsService {
   /**
    * Mark a section as viewed by updating the last_viewed_at timestamp
    */
-  async markSectionAsViewed(section: 'orders' | 'partner_orders' | 'contacts' | 'users' | 'companies' | 'wishlists' | 'reviews'): Promise<void> {
+  async markSectionAsViewed(
+    section:
+      | 'orders'
+      | 'partner_orders'
+      | 'contacts'
+      | 'users'
+      | 'companies'
+      | 'wishlists'
+      | 'reviews',
+  ): Promise<void> {
     if (!this.currentAdminId) return;
 
     try {
-      await this.supabaseService.client
-        .from('admin_last_viewed')
-        .upsert({
+      await this.supabaseService.client.from('admin_last_viewed').upsert(
+        {
           admin_id: this.currentAdminId,
           section: section,
-          last_viewed_at: new Date().toISOString()
-        }, { onConflict: 'admin_id,section' });
+          last_viewed_at: new Date().toISOString(),
+        },
+        { onConflict: 'admin_id,section' },
+      );
 
       // Refresh counts after marking section as viewed
       await this.refreshCounts();
@@ -93,7 +108,9 @@ export class AdminNotificationsService {
   /**
    * Get the last viewed timestamp for a section
    */
-  private async getLastViewedTimestamp(section: string): Promise<string | null> {
+  private async getLastViewedTimestamp(
+    section: string,
+  ): Promise<string | null> {
     if (!this.currentAdminId) return null;
 
     try {
@@ -120,7 +137,7 @@ export class AdminNotificationsService {
         users,
         wishlists,
         companies,
-        reviews
+        reviews,
       ] = await Promise.all([
         this.getOrdersCount(),
         this.getPartnerOrdersCount(),
@@ -128,7 +145,7 @@ export class AdminNotificationsService {
         this.getUsersCount(),
         this.getWishlistsCount(),
         this.getCompaniesCount(),
-        this.getReviewsCount()
+        this.getReviewsCount(),
       ]);
 
       return {
@@ -138,7 +155,7 @@ export class AdminNotificationsService {
         users,
         wishlists,
         companies,
-        reviews
+        reviews,
       };
     } catch (error) {
       console.error('Error fetching counts:', error);
@@ -149,7 +166,7 @@ export class AdminNotificationsService {
         users: 0,
         wishlists: 0,
         companies: 0,
-        reviews: 0
+        reviews: 0,
       };
     }
   }
@@ -232,11 +249,13 @@ export class AdminNotificationsService {
       const lastViewed = await this.getLastViewedTimestamp('users');
 
       // If never viewed, only show users from last 7 days to avoid overwhelming count
-      const compareDate = lastViewed || (() => {
-        const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-        return sevenDaysAgo.toISOString();
-      })();
+      const compareDate =
+        lastViewed ||
+        (() => {
+          const sevenDaysAgo = new Date();
+          sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+          return sevenDaysAgo.toISOString();
+        })();
 
       const { count } = await this.supabaseService.client
         .from('profiles')

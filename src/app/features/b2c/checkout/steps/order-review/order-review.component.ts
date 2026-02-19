@@ -6,7 +6,10 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import * as CartSelectors from '../../../cart/store/cart.selectors';
 import * as CartActions from '../../../cart/store/cart.actions';
-import { CartItem, AppliedCoupon } from '../../../../../shared/models/cart.model';
+import {
+  CartItem,
+  AppliedCoupon,
+} from '../../../../../shared/models/cart.model';
 import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 
 @Component({
@@ -14,7 +17,7 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './order-review.component.html',
-  styleUrls: ['./order-review.component.scss']
+  styleUrls: ['./order-review.component.scss'],
 })
 export class OrderReviewComponent {
   private store = inject(Store);
@@ -33,7 +36,9 @@ export class OrderReviewComponent {
 
   constructor() {
     this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
-    this.appliedCoupons$ = this.store.select(CartSelectors.selectAppliedCoupons);
+    this.appliedCoupons$ = this.store.select(
+      CartSelectors.selectAppliedCoupons,
+    );
     this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
   }
 
@@ -55,11 +60,11 @@ export class OrderReviewComponent {
 
   continueToShipping() {
     // Save current cart items to localStorage for order processing
-    this.cartItems$.pipe(take(1)).subscribe(cartItems => {
+    this.cartItems$.pipe(take(1)).subscribe((cartItems) => {
       console.log('Saving cart items for checkout:', cartItems);
       localStorage.setItem('checkoutItems', JSON.stringify(cartItems));
     });
 
     this.router.navigate(['/blagajna/dostava']);
   }
-} 
+}

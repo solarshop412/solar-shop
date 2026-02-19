@@ -11,15 +11,15 @@ import { PartnersCtaComponent } from './cta/partners-cta.component';
   selector: 'app-partners',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterModule, 
-    PartnersHeroComponent, 
-    PartnersHighlightsComponent, 
-    PartnersCategoriesComponent, 
-    PartnersBrandsComponent, 
-    PartnersCtaComponent
+    CommonModule,
+    RouterModule,
+    PartnersHeroComponent,
+    PartnersHighlightsComponent,
+    PartnersCategoriesComponent,
+    PartnersBrandsComponent,
+    PartnersCtaComponent,
   ],
   templateUrl: './partners.component.html',
-  styleUrls: ['./partners.component.scss']
+  styleUrls: ['./partners.component.scss'],
 })
 export class PartnersComponent {}

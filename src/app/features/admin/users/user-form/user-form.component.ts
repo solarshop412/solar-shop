@@ -1,6 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -10,9 +15,14 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AdminFormComponent, TranslatePipe],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AdminFormComponent,
+    TranslatePipe,
+  ],
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -40,7 +50,7 @@ export class UserFormComponent implements OnInit {
       city: [''],
       state: [''],
       postal_code: [''],
-      country: ['']
+      country: [''],
     });
   }
 
@@ -54,14 +64,21 @@ export class UserFormComponent implements OnInit {
     }
 
     // Set page title
-    this.titleService.setTitle(this.isEditMode ? 'Edit User - Solar Shop Admin' : 'Create User - Solar Shop Admin');
+    this.titleService.setTitle(
+      this.isEditMode
+        ? 'Edit User - Solar Shop Admin'
+        : 'Create User - Solar Shop Admin',
+    );
   }
 
   private async loadUser(): Promise<void> {
     if (!this.userId) return;
 
     try {
-      const data = await this.supabaseService.getTableById('profiles', this.userId);
+      const data = await this.supabaseService.getTableById(
+        'profiles',
+        this.userId,
+      );
       if (data) {
         this.userForm.patchValue(data);
       }
@@ -79,7 +96,11 @@ export class UserFormComponent implements OnInit {
       const formData = this.userForm.value;
 
       if (this.isEditMode && this.userId) {
-        await this.supabaseService.updateRecord('profiles', this.userId, formData);
+        await this.supabaseService.updateRecord(
+          'profiles',
+          this.userId,
+          formData,
+        );
         alert('User updated successfully');
       } else {
         await this.supabaseService.createRecord('profiles', formData);
@@ -94,4 +115,4 @@ export class UserFormComponent implements OnInit {
       this.loading = false;
     }
   }
-} 
+}

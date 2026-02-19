@@ -7,24 +7,24 @@ import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './partners-brands.component.html',
-  styleUrls: ['./partners-brands.component.scss']
+  styleUrls: ['./partners-brands.component.scss'],
 })
 export class PartnersBrandsComponent {
   brands = [
     {
       name: 'FRONIUS',
       descriptionKey: 'b2b.products.premiumInverterSolutions',
-      image: 'assets/images/fronius.jpeg'
+      image: 'assets/images/fronius.jpeg',
     },
     {
       name: 'GOODWE',
       descriptionKey: 'b2b.products.reliableSolarTechnology',
-      image: 'assets/images/goodwe.jpeg'
+      image: 'assets/images/goodwe.jpeg',
     },
     {
       name: 'HUAWEI',
       descriptionKey: 'b2b.products.smartEnergySolutions',
-      image: 'assets/images/huawei.jpeg'
-    }
+      image: 'assets/images/huawei.jpeg',
+    },
   ];
 }

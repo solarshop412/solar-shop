@@ -1,240 +1,407 @@
-<div class="flex justify-center items-center w-full h-dvh bg-white" *ngIf="loading$ | async; else registerTemplate">
-    <app-loader class="h-24 w-dvw"></app-loader>
+<div
+  class="flex justify-center items-center w-full h-dvh bg-white"
+  *ngIf="loading$ | async; else registerTemplate"
+>
+  <app-loader class="h-24 w-dvw"></app-loader>
 </div>
 <ng-template #registerTemplate>
-    <div class="flex min-h-screen bg-white font-sans">
-        <!-- Register form - Left side -->
-        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
-            <div class="w-full max-w-md">
-                <!-- Logo/Brand -->
-                <div class="mb-8">
-                    <h1 class="text-2xl lg:text-3xl font-bold text-[#222529] font-['Poppins']">{{ 'register.title' |
-                        translate }}</h1>
-                    <p class="text-[#324053] text-sm mt-2 font-['DM_Sans']">{{ 'register.subtitle' | translate }}</p>
-                </div>
-
-                <!-- Sign in link -->
-                <div class="mb-8">
-                    <p class="text-sm text-[#324053] font-['DM_Sans']">
-                        {{ 'register.alreadyHaveAccount' | translate }}
-                        <a class="text-solar-500 hover:text-solar-600 font-medium ml-1" routerLink="/prijava">{{
-                            'register.signIn' | translate }}</a>
-                    </p>
-                </div>
-
-                <!-- Error Message -->
-                <div *ngIf="error$ | async as errorMessage" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <p class="text-sm text-red-800 font-['DM_Sans']">{{ errorMessage }}</p>
-                    </div>
-                </div>
-
-                <!-- Register Form -->
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
-                    <!-- Name Fields Row -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- First Name Field -->
-                        <div>
-                            <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
-                                for="firstName">
-                                {{ 'register.firstName' | translate }}*
-                            </label>
-                            <input formControlName="firstName"
-                                class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                                [class.border-red-500]="isFieldInvalid('firstName')"
-                                [class.border-gray-300]="!isFieldInvalid('firstName')" id="firstName" type="text"
-                                [placeholder]="'register.enterFirstName' | translate" autocomplete="given-name">
-                            <div *ngIf="isFieldInvalid('firstName')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                                {{ getFieldError('firstName') }}
-                            </div>
-                        </div>
-
-                        <!-- Last Name Field -->
-                        <div>
-                            <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
-                                for="lastName">
-                                {{ 'register.lastName' | translate }}*
-                            </label>
-                            <input formControlName="lastName"
-                                class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                                [class.border-red-500]="isFieldInvalid('lastName')"
-                                [class.border-gray-300]="!isFieldInvalid('lastName')" id="lastName" type="text"
-                                [placeholder]="'register.enterLastName' | translate" autocomplete="family-name">
-                            <div *ngIf="isFieldInvalid('lastName')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                                {{ getFieldError('lastName') }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email Field -->
-                    <div>
-                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="email">
-                            {{ 'register.email' | translate }}*
-                        </label>
-                        <input formControlName="email"
-                            class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                            [class.border-red-500]="isFieldInvalid('email')"
-                            [class.border-gray-300]="!isFieldInvalid('email')" id="email" type="email"
-                            [placeholder]="'register.enterEmail' | translate" autocomplete="email">
-                        <div *ngIf="isFieldInvalid('email')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                            {{ getFieldError('email') }}
-                        </div>
-                    </div>
-
-                    <!-- Phone Number Field -->
-                    <div>
-                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="phoneNumber">
-                            {{ 'register.phoneNumber' | translate }}
-                        </label>
-                        <input formControlName="phoneNumber"
-                            class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                            [class.border-red-500]="isFieldInvalid('phoneNumber')"
-                            [class.border-gray-300]="!isFieldInvalid('phoneNumber')" id="phoneNumber" type="tel"
-                            [placeholder]="'register.enterPhone' | translate" autocomplete="tel">
-                        <div *ngIf="isFieldInvalid('phoneNumber')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                            {{ getFieldError('phoneNumber') }}
-                        </div>
-                    </div>
-
-                    <!-- Address Field -->
-                    <div>
-                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="address">
-                            {{ 'register.address' | translate }}
-                        </label>
-                        <textarea formControlName="address"
-                            class="w-full h-20 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans'] resize-none"
-                            [class.border-red-500]="isFieldInvalid('address')"
-                            [class.border-gray-300]="!isFieldInvalid('address')" id="address"
-                            [placeholder]="'register.enterAddress' | translate"
-                            autocomplete="street-address"></textarea>
-                        <div *ngIf="isFieldInvalid('address')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                            {{ getFieldError('address') }}
-                        </div>
-                    </div>
-
-                    <!-- Password Field -->
-                    <div>
-                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']" for="password">
-                            {{ 'register.password' | translate }}*
-                        </label>
-                        <div class="relative">
-                            <input formControlName="password" [type]="showPassword ? 'text' : 'password'"
-                                class="w-full h-12 px-4 py-3 pr-12 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                                [class.border-red-500]="isFieldInvalid('password')"
-                                [class.border-gray-300]="!isFieldInvalid('password')" id="password"
-                                [placeholder]="'register.createPassword' | translate" autocomplete="new-password">
-                            <button type="button"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
-                                (click)="showPassword = !showPassword">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path *ngIf="!showPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path *ngIf="!showPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                    <path *ngIf="showPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div *ngIf="isFieldInvalid('password')" class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                            {{ getFieldError('password') }}
-                        </div>
-                    </div>
-
-                    <!-- Confirm Password Field -->
-                    <div>
-                        <label class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
-                            for="confirmPassword">
-                            {{ 'register.confirmPassword' | translate }}*
-                        </label>
-                        <div class="relative">
-                            <input formControlName="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'"
-                                class="w-full h-12 px-4 py-3 pr-12 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                                [class.border-red-500]="isFieldInvalid('confirmPassword')"
-                                [class.border-gray-300]="!isFieldInvalid('confirmPassword')" id="confirmPassword"
-                                [placeholder]="'register.confirmYourPassword' | translate" autocomplete="new-password">
-                            <button type="button"
-                                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
-                                (click)="showConfirmPassword = !showConfirmPassword">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path *ngIf="!showConfirmPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path *ngIf="!showConfirmPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                    <path *ngIf="showConfirmPassword" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div *ngIf="isFieldInvalid('confirmPassword')"
-                            class="mt-1 text-sm text-red-600 font-['DM_Sans']">
-                            {{ getFieldError('confirmPassword') }}
-                        </div>
-                    </div>
-
-                    <!-- Register Button -->
-                    <button type="submit" [disabled]="registerForm.invalid || (loading$ | async)"
-                        class="w-full h-12 bg-solar-500 hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 font-['DM_Sans'] flex items-center justify-center">
-
-                        <app-loader *ngIf="loading$ | async" class="w-5 h-5 mr-2"></app-loader>
-
-                        <span *ngIf="(loading$ | async) === false">{{ 'register.createAccount' | translate }}</span>
-                        <span *ngIf="loading$ | async">{{ 'register.creatingAccount' | translate }}</span>
-                    </button>
-
-                    <!-- Go to Home Link -->
-                    <div class="text-center mt-4">
-                        <a routerLink="/"
-                            class="text-sm text-[#324053] hover:text-solar-600 font-medium font-['DM_Sans'] transition-colors duration-200 inline-flex items-center space-x-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                            </svg>
-                            <span>{{ 'auth.backToHome' | translate }}</span>
-                        </a>
-                    </div>
-                </form>
-            </div>
+  <div class="flex min-h-screen bg-white font-sans">
+    <!-- Register form - Left side -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
+      <div class="w-full max-w-md">
+        <!-- Logo/Brand -->
+        <div class="mb-8">
+          <h1
+            class="text-2xl lg:text-3xl font-bold text-[#222529] font-['Poppins']"
+          >
+            {{ "register.title" | translate }}
+          </h1>
+          <p class="text-[#324053] text-sm mt-2 font-['DM_Sans']">
+            {{ "register.subtitle" | translate }}
+          </p>
         </div>
 
-        <!-- Background Image - Right side -->
+        <!-- Sign in link -->
+        <div class="mb-8">
+          <p class="text-sm text-[#324053] font-['DM_Sans']">
+            {{ "register.alreadyHaveAccount" | translate }}
+            <a
+              class="text-solar-500 hover:text-solar-600 font-medium ml-1"
+              routerLink="/prijava"
+              >{{ "register.signIn" | translate }}</a
+            >
+          </p>
+        </div>
+
+        <!-- Error Message -->
         <div
-            class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-solar-500 to-solar-600 items-center justify-center relative overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" />
-                        </pattern>
-                    </defs>
-                    <rect width="100" height="100" fill="url(#grid)" />
-                </svg>
+          *ngIf="error$ | async as errorMessage"
+          class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"
+        >
+          <div class="flex items-center">
+            <svg
+              class="w-5 h-5 text-red-600 mr-2"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <p class="text-sm text-red-800 font-['DM_Sans']">
+              {{ errorMessage }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Register Form -->
+        <form
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-6"
+        >
+          <!-- Name Fields Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- First Name Field -->
+            <div>
+              <label
+                class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+                for="firstName"
+              >
+                {{ "register.firstName" | translate }}*
+              </label>
+              <input
+                formControlName="firstName"
+                class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                [class.border-red-500]="isFieldInvalid('firstName')"
+                [class.border-gray-300]="!isFieldInvalid('firstName')"
+                id="firstName"
+                type="text"
+                [placeholder]="'register.enterFirstName' | translate"
+                autocomplete="given-name"
+              />
+              <div
+                *ngIf="isFieldInvalid('firstName')"
+                class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+              >
+                {{ getFieldError("firstName") }}
+              </div>
             </div>
 
-            <!-- Logo/Brand -->
-            <div class="relative z-10 text-center text-white">
-                <div class="mb-6">
-                    <!-- Logo -->
-                    <div class="h-64 mx-auto mb-6 flex items-center justify-center">
-                        <img src="assets/images/logo-white.png" alt="SolarShop"
-                            class="w-full h-auto filter brightness-0 invert">
-                    </div>
-                </div>
+            <!-- Last Name Field -->
+            <div>
+              <label
+                class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+                for="lastName"
+              >
+                {{ "register.lastName" | translate }}*
+              </label>
+              <input
+                formControlName="lastName"
+                class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                [class.border-red-500]="isFieldInvalid('lastName')"
+                [class.border-gray-300]="!isFieldInvalid('lastName')"
+                id="lastName"
+                type="text"
+                [placeholder]="'register.enterLastName' | translate"
+                autocomplete="family-name"
+              />
+              <div
+                *ngIf="isFieldInvalid('lastName')"
+                class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+              >
+                {{ getFieldError("lastName") }}
+              </div>
             </div>
-        </div>
+          </div>
+
+          <!-- Email Field -->
+          <div>
+            <label
+              class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+              for="email"
+            >
+              {{ "register.email" | translate }}*
+            </label>
+            <input
+              formControlName="email"
+              class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+              [class.border-red-500]="isFieldInvalid('email')"
+              [class.border-gray-300]="!isFieldInvalid('email')"
+              id="email"
+              type="email"
+              [placeholder]="'register.enterEmail' | translate"
+              autocomplete="email"
+            />
+            <div
+              *ngIf="isFieldInvalid('email')"
+              class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+            >
+              {{ getFieldError("email") }}
+            </div>
+          </div>
+
+          <!-- Phone Number Field -->
+          <div>
+            <label
+              class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+              for="phoneNumber"
+            >
+              {{ "register.phoneNumber" | translate }}
+            </label>
+            <input
+              formControlName="phoneNumber"
+              class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+              [class.border-red-500]="isFieldInvalid('phoneNumber')"
+              [class.border-gray-300]="!isFieldInvalid('phoneNumber')"
+              id="phoneNumber"
+              type="tel"
+              [placeholder]="'register.enterPhone' | translate"
+              autocomplete="tel"
+            />
+            <div
+              *ngIf="isFieldInvalid('phoneNumber')"
+              class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+            >
+              {{ getFieldError("phoneNumber") }}
+            </div>
+          </div>
+
+          <!-- Address Field -->
+          <div>
+            <label
+              class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+              for="address"
+            >
+              {{ "register.address" | translate }}
+            </label>
+            <textarea
+              formControlName="address"
+              class="w-full h-20 px-4 py-3 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans'] resize-none"
+              [class.border-red-500]="isFieldInvalid('address')"
+              [class.border-gray-300]="!isFieldInvalid('address')"
+              id="address"
+              [placeholder]="'register.enterAddress' | translate"
+              autocomplete="street-address"
+            ></textarea>
+            <div
+              *ngIf="isFieldInvalid('address')"
+              class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+            >
+              {{ getFieldError("address") }}
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div>
+            <label
+              class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+              for="password"
+            >
+              {{ "register.password" | translate }}*
+            </label>
+            <div class="relative">
+              <input
+                formControlName="password"
+                [type]="showPassword ? 'text' : 'password'"
+                class="w-full h-12 px-4 py-3 pr-12 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                [class.border-red-500]="isFieldInvalid('password')"
+                [class.border-gray-300]="!isFieldInvalid('password')"
+                id="password"
+                [placeholder]="'register.createPassword' | translate"
+                autocomplete="new-password"
+              />
+              <button
+                type="button"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
+                (click)="showPassword = !showPassword"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    *ngIf="!showPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    *ngIf="!showPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                  <path
+                    *ngIf="showPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              *ngIf="isFieldInvalid('password')"
+              class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+            >
+              {{ getFieldError("password") }}
+            </div>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div>
+            <label
+              class="block text-sm font-medium text-[#222529] mb-2 font-['DM_Sans']"
+              for="confirmPassword"
+            >
+              {{ "register.confirmPassword" | translate }}*
+            </label>
+            <div class="relative">
+              <input
+                formControlName="confirmPassword"
+                [type]="showConfirmPassword ? 'text' : 'password'"
+                class="w-full h-12 px-4 py-3 pr-12 border rounded-lg text-sm text-[#222529] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
+                [class.border-red-500]="isFieldInvalid('confirmPassword')"
+                [class.border-gray-300]="!isFieldInvalid('confirmPassword')"
+                id="confirmPassword"
+                [placeholder]="'register.confirmYourPassword' | translate"
+                autocomplete="new-password"
+              />
+              <button
+                type="button"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#324053] hover:text-[#222529] transition-colors duration-200"
+                (click)="showConfirmPassword = !showConfirmPassword"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    *ngIf="!showConfirmPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                  <path
+                    *ngIf="!showConfirmPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  ></path>
+                  <path
+                    *ngIf="showConfirmPassword"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div
+              *ngIf="isFieldInvalid('confirmPassword')"
+              class="mt-1 text-sm text-red-600 font-['DM_Sans']"
+            >
+              {{ getFieldError("confirmPassword") }}
+            </div>
+          </div>
+
+          <!-- Register Button -->
+          <button
+            type="submit"
+            [disabled]="registerForm.invalid || (loading$ | async)"
+            class="w-full h-12 bg-solar-500 hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-500 focus:ring-offset-2 font-['DM_Sans'] flex items-center justify-center"
+          >
+            <app-loader
+              *ngIf="loading$ | async"
+              class="w-5 h-5 mr-2"
+            ></app-loader>
+
+            <span *ngIf="(loading$ | async) === false">{{
+              "register.createAccount" | translate
+            }}</span>
+            <span *ngIf="loading$ | async">{{
+              "register.creatingAccount" | translate
+            }}</span>
+          </button>
+
+          <!-- Go to Home Link -->
+          <div class="text-center mt-4">
+            <a
+              routerLink="/"
+              class="text-sm text-[#324053] hover:text-solar-600 font-medium font-['DM_Sans'] transition-colors duration-200 inline-flex items-center space-x-2"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              <span>{{ "auth.backToHome" | translate }}</span>
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
+
+    <!-- Background Image - Right side -->
+    <div
+      class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-solar-500 to-solar-600 items-center justify-center relative overflow-hidden"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" viewBox="0 0 100 100" fill="none">
+          <defs>
+            <pattern
+              id="grid"
+              width="10"
+              height="10"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 10 0 L 0 0 0 10"
+                fill="none"
+                stroke="white"
+                stroke-width="0.5"
+              />
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <!-- Logo/Brand -->
+      <div class="relative z-10 text-center text-white">
+        <div class="mb-6">
+          <!-- Logo -->
+          <div class="h-64 mx-auto mb-6 flex items-center justify-center">
+            <img
+              src="assets/images/logo-white.png"
+              alt="SolarShop"
+              class="w-full h-auto filter brightness-0 invert"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>

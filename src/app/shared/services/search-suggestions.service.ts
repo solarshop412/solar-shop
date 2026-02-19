@@ -11,7 +11,7 @@ export interface SearchSuggestion {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchSuggestionsService {
   private translationService = inject(TranslationService);
@@ -23,7 +23,11 @@ export class SearchSuggestionsService {
   /**
    * Add a search suggestion to both localStorage and global database
    */
-  addSearchSuggestion(type: 'search' | 'filter' | 'category', value: string, displayText?: string): void {
+  addSearchSuggestion(
+    type: 'search' | 'filter' | 'category',
+    value: string,
+    displayText?: string,
+  ): void {
     const normalizedValue = value.toLowerCase().trim();
     if (!normalizedValue) return;
 
@@ -37,10 +41,14 @@ export class SearchSuggestionsService {
   /**
    * Add suggestion to localStorage for immediate user experience
    */
-  private addToLocalStorage(type: 'search' | 'filter' | 'category', normalizedValue: string, displayText: string): void {
+  private addToLocalStorage(
+    type: 'search' | 'filter' | 'category',
+    normalizedValue: string,
+    displayText: string,
+  ): void {
     const suggestions = this.getSuggestions();
-    const existingIndex = suggestions.findIndex(s =>
-      s.type === type && s.value.toLowerCase() === normalizedValue
+    const existingIndex = suggestions.findIndex(
+      (s) => s.type === type && s.value.toLowerCase() === normalizedValue,
     );
 
     const suggestion: SearchSuggestion = {
@@ -48,7 +56,7 @@ export class SearchSuggestionsService {
       value: normalizedValue,
       displayText,
       timestamp: Date.now(),
-      count: existingIndex >= 0 ? suggestions[existingIndex].count + 1 : 1
+      count: existingIndex >= 0 ? suggestions[existingIndex].count + 1 : 1,
     };
 
     if (existingIndex >= 0) {
@@ -71,7 +79,11 @@ export class SearchSuggestionsService {
   /**
    * Add suggestion to global database
    */
-  private async addToGlobalDatabase(type: 'search' | 'filter' | 'category', normalizedValue: string, displayText: string): Promise<void> {
+  private async addToGlobalDatabase(
+    type: 'search' | 'filter' | 'category',
+    normalizedValue: string,
+    displayText: string,
+  ): Promise<void> {
     try {
       // First try to update existing record
       const { data: existing } = await this.supabaseService.client
@@ -87,7 +99,7 @@ export class SearchSuggestionsService {
           .from('global_search_suggestions')
           .update({
             count: existing.count + 1,
-            display_text: displayText
+            display_text: displayText,
           })
           .eq('id', existing.id);
       } else {
@@ -98,7 +110,7 @@ export class SearchSuggestionsService {
             type,
             value: normalizedValue,
             display_text: displayText,
-            count: 1
+            count: 1,
           });
       }
     } catch (error) {
@@ -109,7 +121,10 @@ export class SearchSuggestionsService {
   /**
    * Get suggestions filtered by type and search query
    */
-  getSuggestionsByQuery(query: string = '', types?: ('search' | 'filter' | 'category')[]): SearchSuggestion[] {
+  getSuggestionsByQuery(
+    query: string = '',
+    types?: ('search' | 'filter' | 'category')[],
+  ): SearchSuggestion[] {
     const suggestions = this.getSuggestions();
     const normalizedQuery = query.toLowerCase().trim();
 
@@ -117,20 +132,21 @@ export class SearchSuggestionsService {
 
     // Filter by types if specified
     if (types && types.length > 0) {
-      filtered = filtered.filter(s => types.includes(s.type));
+      filtered = filtered.filter((s) => types.includes(s.type));
     }
 
     // Filter by query if provided
     if (normalizedQuery) {
-      filtered = filtered.filter(s =>
-        s.value.toLowerCase().includes(normalizedQuery) ||
-        s.displayText.toLowerCase().includes(normalizedQuery)
+      filtered = filtered.filter(
+        (s) =>
+          s.value.toLowerCase().includes(normalizedQuery) ||
+          s.displayText.toLowerCase().includes(normalizedQuery),
       );
     }
 
     // Remove old suggestions
-    const cutoffTime = Date.now() - (this.MAX_AGE_DAYS * 24 * 60 * 60 * 1000);
-    filtered = filtered.filter(s => s.timestamp > cutoffTime);
+    const cutoffTime = Date.now() - this.MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+    filtered = filtered.filter((s) => s.timestamp > cutoffTime);
 
     return filtered.slice(0, 8); // Limit display suggestions
   }
@@ -173,19 +189,19 @@ export class SearchSuggestionsService {
         data = seededData;
       }
 
-      return (data || []).map(item => ({
+      return (data || []).map((item) => ({
         type: item.type as 'search' | 'filter' | 'category',
         value: item.value,
         displayText: item.display_text,
         timestamp: new Date(item.updated_at).getTime(),
-        count: item.count
+        count: item.count,
       }));
     } catch (error) {
       console.error('Error fetching popular suggestions:', error);
       // Fallback to localStorage
       const suggestions = this.getSuggestions();
       return suggestions
-        .filter(s => s.count >= 1) // Lowered threshold for fallback too
+        .filter((s) => s.count >= 1) // Lowered threshold for fallback too
         .sort((a, b) => b.count - a.count)
         .slice(0, limit);
     }
@@ -202,12 +218,12 @@ export class SearchSuggestionsService {
         .order('updated_at', { ascending: false })
         .limit(limit);
 
-      return (data || []).map(item => ({
+      return (data || []).map((item) => ({
         type: item.type as 'search' | 'filter' | 'category',
         value: item.value,
         displayText: item.display_text,
         timestamp: new Date(item.updated_at).getTime(),
-        count: item.count
+        count: item.count,
       }));
     } catch (error) {
       console.error('Error fetching recent suggestions:', error);
@@ -230,36 +246,36 @@ export class SearchSuggestionsService {
         value: 'solar-panels',
         displayText: this.translationService.translate('search.solarPanels'),
         timestamp,
-        count: 1
+        count: 1,
       },
       {
         type: 'category',
         value: 'inverters',
         displayText: this.translationService.translate('search.inverters'),
         timestamp,
-        count: 1
+        count: 1,
       },
       {
         type: 'category',
         value: 'batteries',
         displayText: this.translationService.translate('search.batteries'),
         timestamp,
-        count: 1
+        count: 1,
       },
       {
         type: 'category',
         value: 'klima-uredaji',
         displayText: 'Klima uređaji',
         timestamp,
-        count: 1
+        count: 1,
       },
       {
         type: 'category',
         value: 'peci',
         displayText: 'Peći',
         timestamp,
-        count: 1
-      }
+        count: 1,
+      },
     ];
   }
 
@@ -275,9 +291,11 @@ export class SearchSuggestionsService {
    */
   clearOldSuggestions(): void {
     const suggestions = this.getSuggestions();
-    const cutoffTime = Date.now() - (this.MAX_AGE_DAYS * 24 * 60 * 60 * 1000);
+    const cutoffTime = Date.now() - this.MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
 
-    const validSuggestions = suggestions.filter(s => s.timestamp > cutoffTime);
+    const validSuggestions = suggestions.filter(
+      (s) => s.timestamp > cutoffTime,
+    );
     this.saveSuggestions(validSuggestions);
   }
 
@@ -291,32 +309,32 @@ export class SearchSuggestionsService {
           type: 'category',
           value: 'solar-panels',
           display_text: this.translationService.translate('search.solarPanels'),
-          count: 3
+          count: 3,
         },
         {
           type: 'category',
           value: 'inverters',
           display_text: this.translationService.translate('search.inverters'),
-          count: 3
+          count: 3,
         },
         {
           type: 'category',
           value: 'batteries',
           display_text: this.translationService.translate('search.batteries'),
-          count: 2
+          count: 2,
         },
         {
           type: 'category',
           value: 'klima-uredaji',
           display_text: 'Klima uređaji',
-          count: 2
+          count: 2,
         },
         {
           type: 'category',
           value: 'peci',
           display_text: 'Peći',
-          count: 2
-        }
+          count: 2,
+        },
       ];
 
       // Insert the seeded suggestions
@@ -335,7 +353,10 @@ export class SearchSuggestionsService {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
     } catch (error) {
-      console.error('Error reading search suggestions from localStorage:', error);
+      console.error(
+        'Error reading search suggestions from localStorage:',
+        error,
+      );
       return [];
     }
   }

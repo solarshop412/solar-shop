@@ -20,7 +20,7 @@ export interface SustainabilityFeature {
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './sustainability.component.html',
-  styleUrls: ['./sustainability.component.scss']
+  styleUrls: ['./sustainability.component.scss'],
 })
 export class SustainabilityComponent implements OnInit {
   private store = inject(Store);
@@ -46,4 +46,4 @@ export class SustainabilityComponent implements OnInit {
   navigateToSustainability() {
     this.router.navigate(['/tvrtka']);
   }
-} 
+}

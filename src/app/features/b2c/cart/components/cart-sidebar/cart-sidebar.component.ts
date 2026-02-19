@@ -15,14 +15,14 @@ import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
   selector: 'app-cart-sidebar',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    RouterModule, 
-    TranslatePipe, 
-    LucideAngularModule
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslatePipe,
+    LucideAngularModule,
   ],
   templateUrl: './cart-sidebar.component.html',
-  styleUrls: ['./cart-sidebar.component.scss']
+  styleUrls: ['./cart-sidebar.component.scss'],
 })
 export class CartSidebarComponent implements OnInit {
   private store = inject(Store);
@@ -43,33 +43,35 @@ export class CartSidebarComponent implements OnInit {
   // For individual product discounts, the discount is shown on each item, not in summary
   shouldShowAppliedCoupons$ = combineLatest([
     this.appliedCoupons$,
-    this.cartItems$
+    this.cartItems$,
   ]).pipe(
     map(([coupons, items]) => {
       if (!coupons || coupons.length === 0) return false;
 
       // Show coupon if any item has offerSavings (individual discount applied)
-      const hasIndividualDiscounts = items && items.some(item => item.offerSavings && item.offerSavings > 0);
+      const hasIndividualDiscounts =
+        items &&
+        items.some((item) => item.offerSavings && item.offerSavings > 0);
 
       return hasIndividualDiscounts;
-    })
+    }),
   );
 
   // Calculate total individual discount amount for display in coupon section
   totalIndividualDiscount$ = this.cartItems$.pipe(
-    map(items => {
+    map((items) => {
       if (!items) return 0;
       return items.reduce((total, item) => {
-        return total + ((item.offerSavings || 0) * item.quantity);
+        return total + (item.offerSavings || 0) * item.quantity;
       }, 0);
-    })
+    }),
   );
 
   // Calculate enhanced summary with pre-discount subtotal
   enhancedCartSummary$ = combineLatest([
     this.cartSummary$,
     this.cartItems$,
-    this.totalIndividualDiscount$
+    this.totalIndividualDiscount$,
   ]).pipe(
     map(([summary, items, individualDiscount]) => {
       if (!summary || !items) return null;
@@ -78,16 +80,16 @@ export class CartSidebarComponent implements OnInit {
       const subtotalBeforeDiscount = items.reduce((total, item) => {
         // Use offerOriginalPrice if available (price before coupon), otherwise use current price
         const priceBeforeDiscount = item.offerOriginalPrice || item.price;
-        return total + (priceBeforeDiscount * item.quantity);
+        return total + priceBeforeDiscount * item.quantity;
       }, 0);
 
       return {
         ...summary,
         subtotalBeforeDiscount,
         totalDiscount: individualDiscount, // Use individual discount for display
-        finalTotal: summary.total
+        finalTotal: summary.total,
       };
-    })
+    }),
   );
 
   // Component state
@@ -105,25 +107,21 @@ export class CartSidebarComponent implements OnInit {
 
   constructor() {
     // Debug: Log cart state changes
-    this.isCartOpen$.subscribe(() => {
-    });
+    this.isCartOpen$.subscribe(() => {});
 
-    this.cartItems$.subscribe(() => {
-    });
+    this.cartItems$.subscribe(() => {});
 
     // Debug: Log cart loading state
-    this.store.select(CartSelectors.selectIsCartLoading).subscribe(() => {
-    });
+    this.store.select(CartSelectors.selectIsCartLoading).subscribe(() => {});
 
     // Debug: Log cart errors
-    this.store.select(CartSelectors.selectCartError).subscribe(error => {
+    this.store.select(CartSelectors.selectCartError).subscribe((error) => {
       if (error) {
       }
     });
 
     // Debug: Log the entire cart state
-    this.store.select(CartSelectors.selectCartState).subscribe(() => {
-    });
+    this.store.select(CartSelectors.selectCartState).subscribe(() => {});
   }
 
   ngOnInit() {
@@ -133,7 +131,7 @@ export class CartSidebarComponent implements OnInit {
     this.store.dispatch(CartActions.loadCart());
 
     // Reset coupon errors when cart opens
-    this.isCartOpen$.subscribe(isOpen => {
+    this.isCartOpen$.subscribe((isOpen) => {
       if (isOpen) {
         this.store.dispatch(CartActions.resetCouponError());
       }
@@ -155,7 +153,11 @@ export class CartSidebarComponent implements OnInit {
     const currentTarget = event.currentTarget as HTMLElement;
 
     // Check if the click target is the overlay itself or the background div
-    if (target === currentTarget || target.classList.contains('cart-overlay') || target.classList.contains('bg-black')) {
+    if (
+      target === currentTarget ||
+      target.classList.contains('cart-overlay') ||
+      target.classList.contains('bg-black')
+    ) {
       console.log('Overlay clicked - closing cart');
       this.closeCart();
     }
@@ -175,7 +177,9 @@ export class CartSidebarComponent implements OnInit {
 
   applyCoupon() {
     if (this.couponCode.trim()) {
-      this.store.dispatch(CartActions.applyCoupon({ code: this.couponCode.trim() }));
+      this.store.dispatch(
+        CartActions.applyCoupon({ code: this.couponCode.trim() }),
+      );
       // Clear the input after applying
       this.couponCode = '';
     }
@@ -232,4 +236,4 @@ export class CartSidebarComponent implements OnInit {
     // This would need to be calculated properly with the actual values from the store
     return 75; // Placeholder - in real implementation, calculate based on cart summary
   }
-} 
+}

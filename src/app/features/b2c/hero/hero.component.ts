@@ -15,7 +15,7 @@ import { SupabaseService } from '../../../services/supabase.service';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss']
+  styleUrls: ['./hero.component.scss'],
 })
 export class HeroComponent implements OnInit, OnDestroy {
   private store = inject(Store);
@@ -58,12 +58,14 @@ export class HeroComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error loading featured offers:', error);
         this.offersLoading = false;
-      }
+      },
     });
   }
 
   private async loadOfferProducts(): Promise<void> {
-    const productPromises = this.featuredOffers.map(offer => this.getRelatedProducts(offer));
+    const productPromises = this.featuredOffers.map((offer) =>
+      this.getRelatedProducts(offer),
+    );
     const allProducts = await Promise.all(productPromises);
 
     this.featuredOffers.forEach((offer, index) => {
@@ -72,7 +74,8 @@ export class HeroComponent implements OnInit, OnDestroy {
 
     // Set current products to the first offer's products
     if (this.featuredOffers.length > 0) {
-      this.currentProducts = this.offerProducts[this.featuredOffers[0].id] || [];
+      this.currentProducts =
+        this.offerProducts[this.featuredOffers[0].id] || [];
     }
   }
 
@@ -80,7 +83,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     try {
       const { data: offerProducts, error } = await this.supabaseService.client
         .from('offer_products')
-        .select(`
+        .select(
+          `
           *,
           products (
             id,
@@ -95,7 +99,8 @@ export class HeroComponent implements OnInit, OnDestroy {
               name
             )
           )
-        `)
+        `,
+        )
         .eq('offer_id', offer.id)
         .order('sort_order');
 
@@ -108,20 +113,25 @@ export class HeroComponent implements OnInit, OnDestroy {
         // Map offer products to the expected format including discount information
         const products = offerProducts.map((op: any) => {
           // Determine discount type based on which field has a value
-          const discountType = (op.discount_amount && op.discount_amount > 0) ? 'fixed_amount' : 'percentage';
+          const discountType =
+            op.discount_amount && op.discount_amount > 0
+              ? 'fixed_amount'
+              : 'percentage';
 
           const productResult = {
             id: op.products.id,
             name: op.products.name,
             description: op.products.description,
             price: op.products.price,
-            availability: this.getProductAvailability(op.products.stock_quantity),
+            availability: this.getProductAvailability(
+              op.products.stock_quantity,
+            ),
             images: op.products.images || [],
             category: op.products.categories?.name,
             stock_quantity: op.products.stock_quantity || 0,
             discount_percentage: op.discount_percentage || 0,
             discount_amount: op.discount_amount || 0,
-            discount_type: discountType
+            discount_type: discountType,
           };
 
           return productResult;
@@ -164,7 +174,9 @@ export class HeroComponent implements OnInit, OnDestroy {
     }
     // Update current products for the new offer
     if (this.featuredOffers[this.currentOfferIndex]) {
-      this.currentProducts = this.offerProducts[this.featuredOffers[this.currentOfferIndex].id] || [];
+      this.currentProducts =
+        this.offerProducts[this.featuredOffers[this.currentOfferIndex].id] ||
+        [];
     }
   }
 
@@ -176,7 +188,9 @@ export class HeroComponent implements OnInit, OnDestroy {
     }
     // Update current products for the new offer
     if (this.featuredOffers[this.currentOfferIndex]) {
-      this.currentProducts = this.offerProducts[this.featuredOffers[this.currentOfferIndex].id] || [];
+      this.currentProducts =
+        this.offerProducts[this.featuredOffers[this.currentOfferIndex].id] ||
+        [];
     }
   }
 
@@ -184,7 +198,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.currentOfferIndex = index;
     // Update current products for the new offer
     if (this.featuredOffers[index]) {
-      this.currentProducts = this.offerProducts[this.featuredOffers[index].id] || [];
+      this.currentProducts =
+        this.offerProducts[this.featuredOffers[index].id] || [];
     }
     // Reset auto-slide timer when manually navigating
     this.setupAutoSlide();
@@ -194,9 +209,16 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.router.navigate(['/ponude', offerId]);
   }
 
-  calculateDiscountedPrice(originalPrice: number, offer: Offer, product?: any): number {
+  calculateDiscountedPrice(
+    originalPrice: number,
+    offer: Offer,
+    product?: any,
+  ): number {
     // If we have product-specific discount information, use that
-    if (product && (product.discount_percentage > 0 || product.discount_amount > 0)) {
+    if (
+      product &&
+      (product.discount_percentage > 0 || product.discount_amount > 0)
+    ) {
       if (product.discount_type === 'fixed_amount') {
         return Math.max(0, originalPrice - (product.discount_amount || 0));
       } else {
@@ -213,7 +235,8 @@ export class HeroComponent implements OnInit, OnDestroy {
       const totalOriginalPrice = this.getTotalOriginalPrice();
       const fixedDiscountAmount = offer.discount_value || 0;
       if (totalOriginalPrice > 0) {
-        const proportionalDiscount = (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
+        const proportionalDiscount =
+          (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
         return Math.max(0, originalPrice - proportionalDiscount);
       }
     }
@@ -223,25 +246,32 @@ export class HeroComponent implements OnInit, OnDestroy {
   calculateTotalDiscountedPrice(offer: Offer): number {
     // Calculate total using individual product discounts
     return this.currentProducts.reduce((total, product) => {
-      return total + this.calculateDiscountedPrice(product.price, offer, product);
+      return (
+        total + this.calculateDiscountedPrice(product.price, offer, product)
+      );
     }, 0);
   }
 
   getTotalOriginalPrice(): number {
-    return this.currentProducts.reduce((total, product) => total + product.price, 0);
+    return this.currentProducts.reduce(
+      (total, product) => total + product.price,
+      0,
+    );
   }
 
   getTotalSavings(offer: Offer): number {
-    return this.getTotalOriginalPrice() - this.calculateTotalDiscountedPrice(offer);
+    return (
+      this.getTotalOriginalPrice() - this.calculateTotalDiscountedPrice(offer)
+    );
   }
 
   onExploreProducts(): void {
     this.router.navigate(['/proizvodi'], {
-      state: { fromHero: true, clearFilters: true }
+      state: { fromHero: true, clearFilters: true },
     });
   }
 
   onExploreOffers(): void {
     this.router.navigate(['/ponude']);
   }
-} 
+}

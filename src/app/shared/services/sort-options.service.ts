@@ -32,7 +32,7 @@ export interface SortOptionDisplay {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SortOptionsService {
   private supabaseService = inject(SupabaseService);
@@ -45,9 +45,10 @@ export class SortOptionsService {
   public loading$ = this.loadingSubject.asObservable();
 
   // Observable that returns enabled sort options with translated labels
-  public enabledSortOptions$: Observable<SortOptionDisplay[]> = this.sortOptions$.pipe(
-    map(options => this.getEnabledSortOptionsWithLabels(options))
-  );
+  public enabledSortOptions$: Observable<SortOptionDisplay[]> =
+    this.sortOptions$.pipe(
+      map((options) => this.getEnabledSortOptionsWithLabels(options)),
+    );
 
   constructor() {
     // Load sort options on service initialization
@@ -98,18 +99,21 @@ export class SortOptionsService {
   /**
    * Get enabled sort options with translated labels
    */
-  private getEnabledSortOptionsWithLabels(options: SortOption[]): SortOptionDisplay[] {
+  private getEnabledSortOptionsWithLabels(
+    options: SortOption[],
+  ): SortOptionDisplay[] {
     const currentLang = this.translationService.getCurrentLanguage();
     return options
-      .filter(opt => opt.is_enabled)
+      .filter((opt) => opt.is_enabled)
       .sort((a, b) => a.display_order - b.display_order)
-      .map(opt => ({
+      .map((opt) => ({
         code: opt.code,
         label: currentLang === 'en' ? opt.label_en : opt.label_hr,
-        sortFields: opt.sort_fields && opt.sort_fields.length > 0
-          ? opt.sort_fields
-          : [{ field: opt.field, direction: opt.direction }], // Fallback to legacy single field
-        isDefault: opt.is_default
+        sortFields:
+          opt.sort_fields && opt.sort_fields.length > 0
+            ? opt.sort_fields
+            : [{ field: opt.field, direction: opt.direction }], // Fallback to legacy single field
+        isDefault: opt.is_default,
       }));
   }
 
@@ -118,7 +122,9 @@ export class SortOptionsService {
    */
   getDefaultSortOptionCode(): string {
     const options = this.sortOptionsSubject.value;
-    const defaultOption = options.find(opt => opt.is_default && opt.is_enabled);
+    const defaultOption = options.find(
+      (opt) => opt.is_default && opt.is_enabled,
+    );
     return defaultOption?.code || 'featured';
   }
 
@@ -139,7 +145,9 @@ export class SortOptionsService {
   /**
    * Create a new sort option
    */
-  async createSortOption(sortOption: Omit<SortOption, 'id' | 'created_at' | 'updated_at'>): Promise<SortOption | null> {
+  async createSortOption(
+    sortOption: Omit<SortOption, 'id' | 'created_at' | 'updated_at'>,
+  ): Promise<SortOption | null> {
     try {
       const { data, error } = await this.supabaseService.client
         .from('sort_options')
@@ -168,7 +176,10 @@ export class SortOptionsService {
   /**
    * Update an existing sort option
    */
-  async updateSortOption(id: string, updates: Partial<SortOption>): Promise<boolean> {
+  async updateSortOption(
+    id: string,
+    updates: Partial<SortOption>,
+  ): Promise<boolean> {
     try {
       const { error } = await this.supabaseService.client
         .from('sort_options')
@@ -225,7 +236,10 @@ export class SortOptionsService {
         .eq('id', id);
 
       if (error) {
-        console.error('[SortOptions] Error setting default sort option:', error);
+        console.error(
+          '[SortOptions] Error setting default sort option:',
+          error,
+        );
         return false;
       }
 
@@ -241,14 +255,19 @@ export class SortOptionsService {
   /**
    * Toggle sort option enabled state
    */
-  async toggleSortOptionEnabled(id: string, enabled: boolean): Promise<boolean> {
+  async toggleSortOptionEnabled(
+    id: string,
+    enabled: boolean,
+  ): Promise<boolean> {
     return this.updateSortOption(id, { is_enabled: enabled });
   }
 
   /**
    * Update display order for multiple sort options
    */
-  async updateDisplayOrder(updates: { id: string; display_order: number }[]): Promise<boolean> {
+  async updateDisplayOrder(
+    updates: { id: string; display_order: number }[],
+  ): Promise<boolean> {
     try {
       for (const update of updates) {
         const { error } = await this.supabaseService.client
@@ -276,26 +295,93 @@ export class SortOptionsService {
    */
   private getDefaultSortOptions(): SortOption[] {
     return [
-      { code: 'featured', label_hr: 'Istaknuto', label_en: 'Featured', field: 'is_featured', direction: 'desc', sort_fields: [{ field: 'is_featured', direction: 'desc' }, { field: 'created_at', direction: 'desc' }], is_default: true, is_enabled: true, display_order: 0 },
-      { code: 'newest', label_hr: 'Najnovije', label_en: 'Newest Arrivals', field: 'created_at', direction: 'desc', sort_fields: [{ field: 'created_at', direction: 'desc' }], is_default: false, is_enabled: true, display_order: 1 },
-      { code: 'name-asc', label_hr: 'Naziv A-Ž', label_en: 'Name A-Z', field: 'name', direction: 'asc', sort_fields: [{ field: 'name', direction: 'asc' }], is_default: false, is_enabled: true, display_order: 2 },
-      { code: 'name-desc', label_hr: 'Naziv Ž-A', label_en: 'Name Z-A', field: 'name', direction: 'desc', sort_fields: [{ field: 'name', direction: 'desc' }], is_default: false, is_enabled: true, display_order: 3 },
-      { code: 'price-low', label_hr: 'Cijena: od najniže', label_en: 'Price: Low to High', field: 'price', direction: 'asc', sort_fields: [{ field: 'price', direction: 'asc' }], is_default: false, is_enabled: true, display_order: 4 },
-      { code: 'price-high', label_hr: 'Cijena: od najviše', label_en: 'Price: High to Low', field: 'price', direction: 'desc', sort_fields: [{ field: 'price', direction: 'desc' }], is_default: false, is_enabled: true, display_order: 5 }
+      {
+        code: 'featured',
+        label_hr: 'Istaknuto',
+        label_en: 'Featured',
+        field: 'is_featured',
+        direction: 'desc',
+        sort_fields: [
+          { field: 'is_featured', direction: 'desc' },
+          { field: 'created_at', direction: 'desc' },
+        ],
+        is_default: true,
+        is_enabled: true,
+        display_order: 0,
+      },
+      {
+        code: 'newest',
+        label_hr: 'Najnovije',
+        label_en: 'Newest Arrivals',
+        field: 'created_at',
+        direction: 'desc',
+        sort_fields: [{ field: 'created_at', direction: 'desc' }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 1,
+      },
+      {
+        code: 'name-asc',
+        label_hr: 'Naziv A-Ž',
+        label_en: 'Name A-Z',
+        field: 'name',
+        direction: 'asc',
+        sort_fields: [{ field: 'name', direction: 'asc' }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 2,
+      },
+      {
+        code: 'name-desc',
+        label_hr: 'Naziv Ž-A',
+        label_en: 'Name Z-A',
+        field: 'name',
+        direction: 'desc',
+        sort_fields: [{ field: 'name', direction: 'desc' }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 3,
+      },
+      {
+        code: 'price-low',
+        label_hr: 'Cijena: od najniže',
+        label_en: 'Price: Low to High',
+        field: 'price',
+        direction: 'asc',
+        sort_fields: [{ field: 'price', direction: 'asc' }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 4,
+      },
+      {
+        code: 'price-high',
+        label_hr: 'Cijena: od najviše',
+        label_en: 'Price: High to Low',
+        field: 'price',
+        direction: 'desc',
+        sort_fields: [{ field: 'price', direction: 'desc' }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 5,
+      },
     ];
   }
 
   /**
    * Get available field options for creating sort options
    */
-  getAvailableFields(): { value: string; label_hr: string; label_en: string }[] {
+  getAvailableFields(): {
+    value: string;
+    label_hr: string;
+    label_en: string;
+  }[] {
     return [
       { value: 'name', label_hr: 'Naziv', label_en: 'Name' },
       { value: 'price', label_hr: 'Cijena', label_en: 'Price' },
       { value: 'created_at', label_hr: 'Datum', label_en: 'Date' },
       { value: 'brand', label_hr: 'Proizvođač', label_en: 'Manufacturer' },
       { value: 'is_featured', label_hr: 'Istaknuto', label_en: 'Featured' },
-      { value: 'stock_quantity', label_hr: 'Zalihe', label_en: 'Stock' }
+      { value: 'stock_quantity', label_hr: 'Zalihe', label_en: 'Stock' },
     ];
   }
 }

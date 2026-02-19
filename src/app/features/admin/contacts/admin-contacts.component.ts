@@ -4,7 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { SupabaseService } from '../../../services/supabase.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-import { DataTableComponent, TableConfig } from '../shared/data-table/data-table.component';
+import {
+  DataTableComponent,
+  TableConfig,
+} from '../shared/data-table/data-table.component';
 import { AdminNotificationsService } from '../shared/services/admin-notifications.service';
 
 @Component({
@@ -12,7 +15,7 @@ import { AdminNotificationsService } from '../shared/services/admin-notification
   standalone: true,
   imports: [CommonModule, DataTableComponent, TranslatePipe],
   templateUrl: './admin-contacts.component.html',
-  styleUrls: ['./admin-contacts.component.scss']
+  styleUrls: ['./admin-contacts.component.scss'],
 })
 export class AdminContactsComponent implements OnInit {
   private supabaseService = inject(SupabaseService);
@@ -30,59 +33,70 @@ export class AdminContactsComponent implements OnInit {
     columns: [
       {
         key: 'first_name',
-        label: this.translationService.translate('admin.contactsForm.contactName'),
+        label: this.translationService.translate(
+          'admin.contactsForm.contactName',
+        ),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'last_name',
-        label: this.translationService.translate('admin.contactsForm.contactName'),
+        label: this.translationService.translate(
+          'admin.contactsForm.contactName',
+        ),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'email',
-        label: this.translationService.translate('admin.contactsForm.contactEmail'),
+        label: this.translationService.translate(
+          'admin.contactsForm.contactEmail',
+        ),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'subject',
-        label: this.translationService.translate('admin.contactsForm.contactSubject'),
+        label: this.translationService.translate(
+          'admin.contactsForm.contactSubject',
+        ),
         type: 'text',
         sortable: true,
-        searchable: true
+        searchable: true,
       },
       {
         key: 'is_newsletter',
         label: this.translationService.translate('footer.newsletter'),
         type: 'boolean',
         sortable: true,
-        format: (value) => value ? this.translationService.translate('admin.common.yes') : this.translationService.translate('admin.common.no')
+        format: (value) =>
+          value
+            ? this.translationService.translate('admin.common.yes')
+            : this.translationService.translate('admin.common.no'),
       },
       {
         key: 'created_at',
         label: this.translationService.translate('admin.orderDate'),
         type: 'date',
-        sortable: true
-      }
+        sortable: true,
+      },
     ],
     actions: [
       {
         label: this.translationService.translate('common.view'),
         icon: 'eye',
         action: 'view',
-        class: 'text-blue-600 hover:text-blue-900'
+        class: 'text-blue-600 hover:text-blue-900',
       },
       {
         label: this.translationService.translate('common.delete'),
         icon: 'trash2',
         action: 'delete',
-        class: 'text-red-600 hover:text-red-900'
-      }
+        class: 'text-red-600 hover:text-red-900',
+      },
     ],
     searchable: true,
     sortable: true,
@@ -90,7 +104,7 @@ export class AdminContactsComponent implements OnInit {
     pageSize: 20,
     allowCsvImport: false,
     allowExport: true,
-    rowClickable: true
+    rowClickable: true,
   };
 
   ngOnInit(): void {
@@ -100,7 +114,7 @@ export class AdminContactsComponent implements OnInit {
     this.notificationsService.markSectionAsViewed('contacts');
   }
 
-  onTableAction(event: { action: string, item: any }): void {
+  onTableAction(event: { action: string; item: any }): void {
     const { action, item } = event;
     if (action === 'view') {
       this.selectedContact = item;
@@ -131,13 +145,20 @@ export class AdminContactsComponent implements OnInit {
   }
 
   private async deleteContact(contact: any): Promise<void> {
-    if (!confirm(this.translationService.translate('admin.contactsForm.contactDeleted'))) return;
+    if (
+      !confirm(
+        this.translationService.translate('admin.contactsForm.contactDeleted'),
+      )
+    )
+      return;
     try {
       await this.supabaseService.deleteRecord('contacts', contact.id);
       this.loadContacts();
     } catch (error) {
       console.error('Error deleting contact:', error);
-      alert(this.translationService.translate('admin.contactsForm.contactError'));
+      alert(
+        this.translationService.translate('admin.contactsForm.contactError'),
+      );
     }
   }
 }

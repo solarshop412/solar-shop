@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -42,7 +48,7 @@ export interface FooterData {
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
   private store = inject(Store);
@@ -70,4 +76,4 @@ export class FooterComponent implements OnInit {
     const parts = ['info', 'solarni-paneli', 'hr'];
     return 'mailto:' + parts[0] + '@' + parts[1] + '.' + parts[2];
   }
-} 
+}

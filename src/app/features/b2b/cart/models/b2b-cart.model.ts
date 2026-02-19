@@ -1,117 +1,122 @@
 import { AppliedCoupon } from '../../../../shared/models/cart.model';
 
 export interface B2BCartItem {
-    id: string;
-    productId: string;
-    name: string;
-    sku: string;
-    imageUrl: string;
-    quantity: number;
-    unitPrice: number; // This will be the B2B price (company or partner price)
-    retailPrice: number; // Original retail price for comparison
-    totalPrice: number;
-    minimumOrder: number;
-    companyPrice?: number; // Company-specific price
-    partnerPrice?: number; // Standard partner price
-    savings: number; // Amount saved vs retail price
-    category: string;
-    inStock: boolean;
-    addedAt: Date;
-    // Partner offer pricing fields
-    partnerOfferId?: string;
-    partnerOfferName?: string;
-    partnerOfferType?: 'percentage' | 'fixed_amount' | 'tier_based' | 'bundle' | 'buy_x_get_y';
-    partnerOfferDiscount?: number;
-    partnerOfferOriginalPrice?: number;
-    partnerOfferValidUntil?: string;
-    partnerOfferAppliedAt?: Date;
-    additionalSavings?: number;
-    // Pricing tier fields
-    priceTier1?: number;
-    quantityTier1?: number;
-    priceTier2?: number;
-    quantityTier2?: number;
-    priceTier3?: number;
-    quantityTier3?: number;
-    originalUnitPrice?: number; // Store the original price before tier adjustment
-    appliedTier?: 1 | 2 | 3; // Which tier is currently applied
-    // Bundle offer fields
-    isBundle?: boolean;
-    bundleProductIds?: string[];
-    bundleComplete?: boolean;
+  id: string;
+  productId: string;
+  name: string;
+  sku: string;
+  imageUrl: string;
+  quantity: number;
+  unitPrice: number; // This will be the B2B price (company or partner price)
+  retailPrice: number; // Original retail price for comparison
+  totalPrice: number;
+  minimumOrder: number;
+  companyPrice?: number; // Company-specific price
+  partnerPrice?: number; // Standard partner price
+  savings: number; // Amount saved vs retail price
+  category: string;
+  inStock: boolean;
+  addedAt: Date;
+  // Partner offer pricing fields
+  partnerOfferId?: string;
+  partnerOfferName?: string;
+  partnerOfferType?:
+    | 'percentage'
+    | 'fixed_amount'
+    | 'tier_based'
+    | 'bundle'
+    | 'buy_x_get_y';
+  partnerOfferDiscount?: number;
+  partnerOfferOriginalPrice?: number;
+  partnerOfferValidUntil?: string;
+  partnerOfferAppliedAt?: Date;
+  additionalSavings?: number;
+  // Pricing tier fields
+  priceTier1?: number;
+  quantityTier1?: number;
+  priceTier2?: number;
+  quantityTier2?: number;
+  priceTier3?: number;
+  quantityTier3?: number;
+  originalUnitPrice?: number; // Store the original price before tier adjustment
+  appliedTier?: 1 | 2 | 3; // Which tier is currently applied
+  // Bundle offer fields
+  isBundle?: boolean;
+  bundleProductIds?: string[];
+  bundleComplete?: boolean;
 }
 
 export interface B2BAppliedCoupon extends AppliedCoupon {
-    title?: string;
-    description?: string;
+  title?: string;
+  description?: string;
 }
 
 export interface B2BCartState {
-    items: B2BCartItem[];
-    totalItems: number;
-    subtotal: number;
-    totalSavings: number; // Total savings vs retail prices
-    loading: boolean;
-    error: string | null;
-    companyId: string | null; // The company this cart belongs to
-    companyName: string | null;
-    lastUpdated: Date | null;
-    sidebarOpen: boolean; // Sidebar visibility state
-    // Coupon state
-    appliedCoupons: B2BAppliedCoupon[]; // Applied coupons
-    couponDiscount: number; // Total discount from coupons
-    couponError: string | null;
-    isCouponLoading: boolean;
+  items: B2BCartItem[];
+  totalItems: number;
+  subtotal: number;
+  totalSavings: number; // Total savings vs retail prices
+  loading: boolean;
+  error: string | null;
+  companyId: string | null; // The company this cart belongs to
+  companyName: string | null;
+  lastUpdated: Date | null;
+  sidebarOpen: boolean; // Sidebar visibility state
+  // Coupon state
+  appliedCoupons: B2BAppliedCoupon[]; // Applied coupons
+  couponDiscount: number; // Total discount from coupons
+  couponError: string | null;
+  isCouponLoading: boolean;
 }
 
 export interface B2BCartSummary {
-    itemCount: number;
-    subtotal: number;
-    totalSavings: number;
-    couponDiscount: number; // Discount from applied coupons
-    estimatedTax: number;
-    estimatedShipping: number;
-    total: number;
+  itemCount: number;
+  subtotal: number;
+  totalSavings: number;
+  couponDiscount: number; // Discount from applied coupons
+  estimatedTax: number;
+  estimatedShipping: number;
+  total: number;
 }
 
 export interface AddToB2BCartPayload {
-    productId: string;
-    quantity: number;
-    companyId: string;
+  productId: string;
+  quantity: number;
+  companyId: string;
 }
 
 export interface UpdateB2BCartItemPayload {
-    productId: string;
-    quantity: number;
+  productId: string;
+  quantity: number;
 }
 
 export interface RemoveFromB2BCartPayload {
-    productId: string;
+  productId: string;
 }
 
 // B2B specific shipping information
 export interface B2BShippingInfo {
-    // Company information (pre-filled and disabled)
-    companyName: string;
-    companyEmail: string;
-    companyPhone: string;
-    companyAddress: string;
-    contactPersonName: string;
-    contactPersonEmail: string;
+  // Company information (pre-filled and disabled)
+  companyName: string;
+  companyEmail: string;
+  companyPhone: string;
+  companyAddress: string;
+  contactPersonName: string;
+  contactPersonEmail: string;
 
-    // Delivery details
-    deliveryAddress: string;
-    deliveryCity: string;
-    deliveryPostalCode: string;
-    deliveryCountry: string;
-    deliveryContact?: string; // Optional different contact for delivery
-    deliveryPhone?: string;
+  // Delivery details
+  deliveryAddress: string;
+  deliveryCity: string;
+  deliveryPostalCode: string;
+  deliveryCountry: string;
+  deliveryContact?: string; // Optional different contact for delivery
+  deliveryPhone?: string;
 
-    // Special instructions
-    deliveryInstructions?: string;
-    purchaseOrderNumber?: string; // For company accounting
-    requestedDeliveryDate?: Date;
+  // Special instructions
+  deliveryInstructions?: string;
+  purchaseOrderNumber?: string; // For company accounting
+  requestedDeliveryDate?: Date;
 
-    // Shipping method
-    shippingMethod: 'standard' | 'express' | 'scheduled';
-} 
+  // Shipping method
+  shippingMethod: 'standard' | 'express' | 'scheduled';
+}

@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil, filter, distinctUntilChanged } from 'rxjs';
 import * as CartSelectors from '../../store/cart.selectors';
-import { TranslatePipe } from "../../../../../shared/pipes/translate.pipe";
+import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-cart-notification',
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './cart-notification.component.html',
-  styleUrls: ['./cart-notification.component.scss']
+  styleUrls: ['./cart-notification.component.scss'],
 })
 export class CartNotificationComponent implements OnDestroy {
   private store = inject(Store);
@@ -22,13 +22,14 @@ export class CartNotificationComponent implements OnDestroy {
 
   constructor() {
     // Watch for cart item count changes with better debouncing
-    this.store.select(CartSelectors.selectCartItemCount)
+    this.store
+      .select(CartSelectors.selectCartItemCount)
       .pipe(
         takeUntil(this.destroy$),
         distinctUntilChanged(),
-        filter(count => count !== null && count !== undefined)
+        filter((count) => count !== null && count !== undefined),
       )
-      .subscribe(count => {
+      .subscribe((count) => {
         // Only show notification if count actually increased
         if (count > this.previousItemCount && this.previousItemCount > 0) {
           this.showSuccessNotification();
@@ -58,4 +59,4 @@ export class CartNotificationComponent implements OnDestroy {
       this.showNotification = false;
     }, 3000);
   }
-} 
+}

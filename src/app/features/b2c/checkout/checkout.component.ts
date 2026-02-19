@@ -7,7 +7,11 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import * as CartSelectors from '../cart/store/cart.selectors';
 import * as CartActions from '../cart/store/cart.actions';
-import { AppliedCoupon, CartItem, CartSummary } from '../../../shared/models/cart.model';
+import {
+  AppliedCoupon,
+  CartItem,
+  CartSummary,
+} from '../../../shared/models/cart.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
@@ -15,7 +19,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, TranslatePipe],
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   private store = inject(Store);
@@ -32,9 +36,13 @@ export class CheckoutComponent implements OnInit {
   constructor() {
     this.cartItems$ = this.store.select(CartSelectors.selectCartItems);
     this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
-    this.appliedCoupons$ = this.store.select(CartSelectors.selectAppliedCoupons);
+    this.appliedCoupons$ = this.store.select(
+      CartSelectors.selectAppliedCoupons,
+    );
     this.couponError$ = this.store.select(CartSelectors.selectCouponError);
-    this.isCouponLoading$ = this.store.select(CartSelectors.selectIsCouponLoading);
+    this.isCouponLoading$ = this.store.select(
+      CartSelectors.selectIsCouponLoading,
+    );
   }
 
   ngOnInit() {
@@ -43,7 +51,7 @@ export class CheckoutComponent implements OnInit {
     // No need to dispatch loadCart here as it would be redundant
 
     // Check if cart is empty and redirect if needed
-    this.store.select(CartSelectors.selectIsCartEmpty).subscribe(isEmpty => {
+    this.store.select(CartSelectors.selectIsCartEmpty).subscribe((isEmpty) => {
       if (isEmpty) {
         this.router.navigate(['/proizvodi']);
       }
@@ -53,11 +61,11 @@ export class CheckoutComponent implements OnInit {
     this.updateCurrentStep();
 
     // Listen to route changes to update step
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.updateCurrentStep();
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateCurrentStep();
+      });
   }
 
   get isApplyButtonDisabled(): boolean {
@@ -92,4 +100,4 @@ export class CheckoutComponent implements OnInit {
   trackByItemId(index: number, item: CartItem): string {
     return item.id;
   }
-} 
+}

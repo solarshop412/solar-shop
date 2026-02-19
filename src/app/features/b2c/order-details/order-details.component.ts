@@ -12,7 +12,7 @@ import { Order } from '../../../shared/models/order.model';
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.scss']
+  styleUrls: ['./order-details.component.scss'],
 })
 export class OrderDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -42,7 +42,10 @@ export class OrderDetailsComponent implements OnInit {
       console.log(`Loading order details for ID: ${orderId}`);
 
       // Load order from database
-      const orderData = await this.supabaseService.getTableById('orders', orderId);
+      const orderData = await this.supabaseService.getTableById(
+        'orders',
+        orderId,
+      );
 
       if (!orderData) {
         console.error(`Order not found with ID: ${orderId}`);
@@ -53,11 +56,17 @@ export class OrderDetailsComponent implements OnInit {
       console.log('Order data loaded:', orderData);
 
       // Load order items
-      const orderItemsData = await this.supabaseService.getTable('order_items', {
-        order_id: orderId
-      });
+      const orderItemsData = await this.supabaseService.getTable(
+        'order_items',
+        {
+          order_id: orderId,
+        },
+      );
 
-      console.log(`Loaded ${orderItemsData?.length || 0} order items:`, orderItemsData);
+      console.log(
+        `Loaded ${orderItemsData?.length || 0} order items:`,
+        orderItemsData,
+      );
 
       // Convert database order to Order model
       this.order = {
@@ -82,46 +91,56 @@ export class OrderDetailsComponent implements OnInit {
         trackingNumber: orderData.tracking_number || undefined,
         notes: orderData.notes || undefined,
         adminNotes: orderData.admin_notes || undefined,
-        items: await Promise.all((orderItemsData || []).map(async (itemData: any) => {
-          let productImageUrl = itemData.product_image_url;
+        items: await Promise.all(
+          (orderItemsData || []).map(async (itemData: any) => {
+            let productImageUrl = itemData.product_image_url;
 
-          // If no image URL in order item and we have a product ID, try to get it from products table
-          if (!productImageUrl && itemData.product_id) {
-            try {
-              const productData = await this.supabaseService.getTableById('products', itemData.product_id);
-              if (productData?.images && productData.images.length > 0) {
-                productImageUrl = productData.images[0].url || productData.images[0];
+            // If no image URL in order item and we have a product ID, try to get it from products table
+            if (!productImageUrl && itemData.product_id) {
+              try {
+                const productData = await this.supabaseService.getTableById(
+                  'products',
+                  itemData.product_id,
+                );
+                if (productData?.images && productData.images.length > 0) {
+                  productImageUrl =
+                    productData.images[0].url || productData.images[0];
+                }
+              } catch (error) {
+                console.warn(
+                  'Could not load product image for product ID:',
+                  itemData.product_id,
+                  error,
+                );
               }
-            } catch (error) {
-              console.warn('Could not load product image for product ID:', itemData.product_id, error);
             }
-          }
 
-          const orderItem = {
-            id: itemData.id,
-            orderId: itemData.order_id,
-            productId: itemData.product_id || undefined,
-            productName: itemData.product_name || 'Unknown Product',
-            productSku: itemData.product_sku || undefined,
-            quantity: itemData.quantity || 0,
-            unitPrice: itemData.unit_price || 0,
-            totalPrice: itemData.total_price || 0,
-            discountAmount: itemData.discount_amount || 0,
-            discountPercentage: itemData.discount_percentage || 0,
-            productImageUrl: productImageUrl || undefined,
-            productSpecifications: itemData.product_specifications || undefined,
-            createdAt: itemData.created_at
-          };
+            const orderItem = {
+              id: itemData.id,
+              orderId: itemData.order_id,
+              productId: itemData.product_id || undefined,
+              productName: itemData.product_name || 'Unknown Product',
+              productSku: itemData.product_sku || undefined,
+              quantity: itemData.quantity || 0,
+              unitPrice: itemData.unit_price || 0,
+              totalPrice: itemData.total_price || 0,
+              discountAmount: itemData.discount_amount || 0,
+              discountPercentage: itemData.discount_percentage || 0,
+              productImageUrl: productImageUrl || undefined,
+              productSpecifications:
+                itemData.product_specifications || undefined,
+              createdAt: itemData.created_at,
+            };
 
-          console.log('Mapped order item:', orderItem);
-          return orderItem;
-        })),
+            console.log('Mapped order item:', orderItem);
+            return orderItem;
+          }),
+        ),
         createdAt: orderData.created_at,
-        updatedAt: orderData.updated_at
+        updatedAt: orderData.updated_at,
       };
 
       console.log('Successfully loaded complete order:', this.order);
-
     } catch (error) {
       console.error('Error loading order:', error);
       this.error = true;
@@ -170,7 +189,7 @@ export class OrderDetailsComponent implements OnInit {
     return new Date(date).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   }
-} 
+}

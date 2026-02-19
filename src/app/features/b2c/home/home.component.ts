@@ -6,19 +6,18 @@ import { SustainabilityComponent } from '../sustainability/sustainability.compon
 import { BlogHomeComponent } from '../blog/blog-home/blog-home.component';
 import { SeoService } from '../../../shared/services/seo.service';
 
-
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule, 
-    HeroComponent, 
-    SustainabilityComponent, 
-    ProductsComponent, 
-    BlogHomeComponent
+    CommonModule,
+    HeroComponent,
+    SustainabilityComponent,
+    ProductsComponent,
+    BlogHomeComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
@@ -32,4 +31,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.seoService.removeAllDynamicJsonLd();
   }
-} 
+}

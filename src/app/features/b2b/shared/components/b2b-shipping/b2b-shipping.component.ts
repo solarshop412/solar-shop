@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
@@ -12,7 +17,7 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './b2b-shipping.component.html',
-  styleUrls: ['./b2b-shipping.component.scss']
+  styleUrls: ['./b2b-shipping.component.scss'],
 })
 export class B2BShippingComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
@@ -22,7 +27,7 @@ export class B2BShippingComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
   ) {
     this.initializeForm();
   }
@@ -46,28 +51,30 @@ export class B2BShippingComponent implements OnInit, OnDestroy {
       deliveryCity: ['', [Validators.required]],
       deliveryPostalCode: ['', [Validators.required]],
       deliveryCountry: ['HR', [Validators.required]],
-      shippingMethod: ['standard', [Validators.required]]
+      shippingMethod: ['standard', [Validators.required]],
     });
   }
 
   private loadUserAndCompanyData(): void {
-    this.currentUser$.pipe(
-      filter(user => !!user),
-      takeUntil(this.destroy$)
-    ).subscribe(user => {
-      if (user) {
-        const mockCompanyData = {
-          companyName: 'Solar Innovations d.o.o.',
-          companyEmail: 'orders@solarinnovations.hr'
-        };
+    this.currentUser$
+      .pipe(
+        filter((user) => !!user),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((user) => {
+        if (user) {
+          const mockCompanyData = {
+            companyName: 'Solar Innovations d.o.o.',
+            companyEmail: 'orders@solarinnovations.hr',
+          };
 
-        this.shippingForm.patchValue({
-          ...mockCompanyData,
-          contactPersonName: `${user.firstName} ${user.lastName}`,
-          contactPersonEmail: user.email
-        });
-      }
-    });
+          this.shippingForm.patchValue({
+            ...mockCompanyData,
+            contactPersonName: `${user.firstName} ${user.lastName}`,
+            contactPersonEmail: user.email,
+          });
+        }
+      });
   }
 
   onSubmit(): void {
@@ -81,9 +88,9 @@ export class B2BShippingComponent implements OnInit, OnDestroy {
         window.location.href = '/partneri/checkout/payment';
       }
     } else {
-      Object.keys(this.shippingForm.controls).forEach(key => {
+      Object.keys(this.shippingForm.controls).forEach((key) => {
         this.shippingForm.get(key)?.markAsTouched();
       });
     }
   }
-} 
+}

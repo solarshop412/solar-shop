@@ -11,7 +11,7 @@ import { Offer } from '../../../shared/models/offer.model';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.scss']
+  styleUrls: ['./offers.component.scss'],
 })
 export class OffersComponent implements OnInit {
   offers$: Observable<Offer[]>;
@@ -19,7 +19,7 @@ export class OffersComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private offersService: OffersService
+    private offersService: OffersService,
   ) {
     this.offers$ = this.offersService.getFeaturedOffers(4);
   }
@@ -40,7 +40,7 @@ export class OffersComponent implements OnInit {
       error: (error) => {
         console.error('Error loading offers:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -55,4 +55,4 @@ export class OffersComponent implements OnInit {
   navigateToOfferDetails(offerId: string) {
     this.router.navigate(['/ponude', offerId]);
   }
-} 
+}

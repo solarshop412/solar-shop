@@ -1,4 +1,11 @@
-import { Component, Input, inject, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  inject,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -10,32 +17,35 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
 import { ToastService } from '../../../../../../shared/services/toast.service';
 import { TranslationService } from '../../../../../../shared/services/translation.service';
 import { StockItem } from '../../../../../../shared/services/erp-integration.service';
-import { filterAndCombineErpStock, FilteredStockItem } from '../../../../../../shared/utils/erp-unit-names';
+import {
+  filterAndCombineErpStock,
+  FilteredStockItem,
+} from '../../../../../../shared/utils/erp-unit-names';
 import * as WishlistActions from '../../../../../b2c/wishlist/store/wishlist.actions';
 import {
   selectIsProductInWishlist,
   selectAddingToWishlist,
-  selectRemovingFromWishlist
+  selectRemovingFromWishlist,
 } from '../../../../../b2c/wishlist/store/wishlist.selectors';
 import { selectCurrentUser } from '../../../../../../core/auth/store/auth.selectors';
 import * as CartActions from '../../../../../b2c/cart/store/cart.actions';
 import {
   selectAverageRating,
-  selectReviewCount
+  selectReviewCount,
 } from '../../store/product-details.selectors';
-import { LucideAngularModule, Star, StarHalf, ShoppingCart } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  Star,
+  StarHalf,
+  ShoppingCart,
+} from 'lucide-angular';
 
 @Component({
   selector: 'app-product-info',
   standalone: true,
-  imports: [
-    CommonModule, 
-    FormsModule, 
-    TranslatePipe, 
-    LucideAngularModule
-  ],
+  imports: [CommonModule, FormsModule, TranslatePipe, LucideAngularModule],
   templateUrl: './product-info.component.html',
-  styleUrls: ['./product-info.component.scss']
+  styleUrls: ['./product-info.component.scss'],
 })
 export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
   @Input() product!: Product;
@@ -87,13 +97,13 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
     this.wishlistState$ = combineLatest([
       this.store.select(selectIsProductInWishlist(this.product.id)),
       this.store.select(selectAddingToWishlist),
-      this.store.select(selectRemovingFromWishlist)
+      this.store.select(selectRemovingFromWishlist),
     ]).pipe(
       map(([isInWishlist, addingToWishlist, removingFromWishlist]) => ({
         isInWishlist,
         addingToWishlist,
-        removingFromWishlist
-      }))
+        removingFromWishlist,
+      })),
     );
 
     // Load wishlist data
@@ -116,7 +126,10 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
    * Get total stock across all filtered units
    */
   getTotalStock(): number {
-    return this.filteredErpStock.reduce((total, stock) => total + stock.quantity, 0);
+    return this.filteredErpStock.reduce(
+      (total, stock) => total + stock.quantity,
+      0,
+    );
   }
 
   ngOnDestroy(): void {
@@ -150,10 +163,14 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
 
   getAvailabilityText(availability: string): string {
     switch (availability) {
-      case 'available': return 'productDetails.inStock';
-      case 'limited': return 'productDetails.limitedStock';
-      case 'out-of-stock': return 'productDetails.outOfStock';
-      default: return '';
+      case 'available':
+        return 'productDetails.inStock';
+      case 'limited':
+        return 'productDetails.limitedStock';
+      case 'out-of-stock':
+        return 'productDetails.outOfStock';
+      default:
+        return '';
     }
   }
 
@@ -170,31 +187,47 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   addToCart(): void {
-    this.store.dispatch(CartActions.addToCart({ productId: this.product.id, quantity: this.quantity }));
+    this.store.dispatch(
+      CartActions.addToCart({
+        productId: this.product.id,
+        quantity: this.quantity,
+      }),
+    );
   }
 
   toggleWishlist(): void {
     // Check authentication first
-    this.store.select(selectCurrentUser).pipe(
-      takeUntil(this.destroy$),
-      take(1)
-    ).subscribe(user => {
-      if (!user) {
-        this.toastService.showError(this.translationService.translate('productDetails.loginRequiredForWishlist'));
-        return;
-      }
-
-      // Get current wishlist state and toggle
-      this.store.select(selectIsProductInWishlist(this.product.id)).pipe(
-        take(1)
-      ).subscribe(isInWishlist => {
-        if (isInWishlist) {
-          this.store.dispatch(WishlistActions.removeFromWishlist({ productId: this.product.id }));
-        } else {
-          this.store.dispatch(WishlistActions.addToWishlist({ productId: this.product.id }));
+    this.store
+      .select(selectCurrentUser)
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((user) => {
+        if (!user) {
+          this.toastService.showError(
+            this.translationService.translate(
+              'productDetails.loginRequiredForWishlist',
+            ),
+          );
+          return;
         }
+
+        // Get current wishlist state and toggle
+        this.store
+          .select(selectIsProductInWishlist(this.product.id))
+          .pipe(take(1))
+          .subscribe((isInWishlist) => {
+            if (isInWishlist) {
+              this.store.dispatch(
+                WishlistActions.removeFromWishlist({
+                  productId: this.product.id,
+                }),
+              );
+            } else {
+              this.store.dispatch(
+                WishlistActions.addToWishlist({ productId: this.product.id }),
+              );
+            }
+          });
       });
-    });
   }
 
   getCompanyPrice(): number {
@@ -211,16 +244,22 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
     }
     return Object.entries(this.product.specifications).map(([key, value]) => ({
       key,
-      value: String(value)
+      value: String(value),
     }));
   }
 
   formatSpecificationKey(key: string): string {
-    return key.replace(/([A-Z])/g, ' $1').replace(/_/g, ' ').trim();
+    return key
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/_/g, ' ')
+      .trim();
   }
 
   hasSpecifications(): boolean {
-    return !!(this.product.specifications && Object.keys(this.product.specifications).length > 0);
+    return !!(
+      this.product.specifications &&
+      Object.keys(this.product.specifications).length > 0
+    );
   }
 
   hasFeatures(): boolean {
@@ -228,11 +267,16 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   hasCertifications(): boolean {
-    return !!(this.product.certificates && this.product.certificates.length > 0);
+    return !!(
+      this.product.certificates && this.product.certificates.length > 0
+    );
   }
 
   hasTechnicalSheet(): boolean {
-    return !!(this.product.technical_sheet && this.product.technical_sheet.trim().length > 0);
+    return !!(
+      this.product.technical_sheet &&
+      this.product.technical_sheet.trim().length > 0
+    );
   }
 
   toggleDescription() {
@@ -268,30 +312,30 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
     if (reviewsElement) {
       reviewsElement.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       });
     }
   }
 
   getFullTechnicalSheetUrl(url: string): string {
     if (!url) return '';
-    
+
     // If URL already has protocol, return as is
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
-    
+
     // If URL starts with www., add https://
     if (url.startsWith('www.')) {
       return `https://${url}`;
     }
-    
+
     // If it doesn't start with www. or protocol, assume it needs https://www.
     if (!url.includes('.')) {
       // If it doesn't contain a dot, it's probably not a valid URL
       return url;
     }
-    
+
     return `https://${url}`;
   }
 
@@ -303,8 +347,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigate(['/proizvodi'], {
       queryParams: {
         category: categorySlug,
-        categories: categoryName // Pass the actual category name for filtering
-      }
+        categories: categoryName, // Pass the actual category name for filtering
+      },
     });
   }
-} 
+}

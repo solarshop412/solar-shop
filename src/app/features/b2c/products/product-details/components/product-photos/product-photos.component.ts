@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../product-list/product-list.component';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
@@ -8,7 +14,7 @@ import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './product-photos.component.html',
-  styleUrls: ['./product-photos.component.scss']
+  styleUrls: ['./product-photos.component.scss'],
 })
 export class ProductPhotosComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
@@ -26,15 +32,17 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
   private extractProductImages(): void {
     // Check if product has images array (new format)
     if (this.product.images && Array.isArray(this.product.images)) {
-      this.productImages = this.product.images.map((img: any) => {
-        // Handle both object format {url: string} and string format
-        return typeof img === 'string' ? img : img.url || img;
-      }).filter(url => url); // Filter out empty urls
-    } 
+      this.productImages = this.product.images
+        .map((img: any) => {
+          // Handle both object format {url: string} and string format
+          return typeof img === 'string' ? img : img.url || img;
+        })
+        .filter((url) => url); // Filter out empty urls
+    }
     // Fallback to single imageUrl (legacy format)
     else if (this.product.imageUrl) {
       this.productImages = [this.product.imageUrl];
-    } 
+    }
     // Default placeholder if no images
     else {
       this.productImages = ['assets/images/product-placeholder.svg'];
@@ -69,7 +77,8 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
 
   previousImage(): void {
     const currentIndex = this.getCurrentImageIndex();
-    const prevIndex = currentIndex === 0 ? this.productImages.length - 1 : currentIndex - 1;
+    const prevIndex =
+      currentIndex === 0 ? this.productImages.length - 1 : currentIndex - 1;
     this.selectedImage = this.productImages[prevIndex];
   }
 
@@ -98,4 +107,4 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
       document.body.style.overflow = 'auto';
     }
   }
-} 
+}

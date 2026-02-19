@@ -12,7 +12,7 @@ export const ERP_UNIT_NAMES: Record<string, string> = {
   '21': 'SolarShop Zadar',
   '24': 'SolarShop Buzin, Zagreb',
   '28': 'SolarShop Rijeka',
-  '30': 'SolarShop Jastrebarsko'
+  '30': 'SolarShop Jastrebarsko',
 };
 
 /**
@@ -21,7 +21,10 @@ export const ERP_UNIT_NAMES: Record<string, string> = {
  * @param unitName - The ERP unit name (RADJEDNAZIV) as fallback
  * @returns The store name, or the unit name from ERP, or the unit ID
  */
-export function getUnitName(unitId: string | undefined, unitName?: string): string {
+export function getUnitName(
+  unitId: string | undefined,
+  unitName?: string,
+): string {
   if (!unitId) return unitName || '';
   // Return mapped name if exists, otherwise return the unit name from ERP, or the unit ID
   return ERP_UNIT_NAMES[unitId] || unitName || unitId;
@@ -42,22 +45,31 @@ export interface FilteredStockItem {
   retailPrice?: number;
 }
 
-export function filterAndCombineErpStock(stockItems: any[]): FilteredStockItem[] {
+export function filterAndCombineErpStock(
+  stockItems: any[],
+): FilteredStockItem[] {
   if (!stockItems || stockItems.length === 0) return [];
 
   // Filter to only include mapped units
-  const mappedStock = stockItems.filter(item => ERP_UNIT_NAMES[item.unitId]);
+  const mappedStock = stockItems.filter((item) => ERP_UNIT_NAMES[item.unitId]);
 
   // Group Buzin units (01, 02, 17, 24)
   const buzinUnits = ['01', '02', '17', '24'];
-  const buzinStock = mappedStock.filter(item => buzinUnits.includes(item.unitId));
-  const otherStock = mappedStock.filter(item => !buzinUnits.includes(item.unitId));
+  const buzinStock = mappedStock.filter((item) =>
+    buzinUnits.includes(item.unitId),
+  );
+  const otherStock = mappedStock.filter(
+    (item) => !buzinUnits.includes(item.unitId),
+  );
 
   const result: FilteredStockItem[] = [];
 
   // Add combined Buzin stock if any exists
   if (buzinStock.length > 0) {
-    const totalBuzinQuantity = buzinStock.reduce((sum, item) => sum + (item.quantity || 0), 0);
+    const totalBuzinQuantity = buzinStock.reduce(
+      (sum, item) => sum + (item.quantity || 0),
+      0,
+    );
 
     // Use the first item's prices as representative (they should all be the same for the same store)
     const representativeItem = buzinStock[0];
@@ -67,18 +79,18 @@ export function filterAndCombineErpStock(stockItems: any[]): FilteredStockItem[]
       displayName: 'SolarShop Buzin, Zagreb',
       quantity: totalBuzinQuantity,
       wholesalePrice: representativeItem.wholesalePrice,
-      retailPrice: representativeItem.retailPrice
+      retailPrice: representativeItem.retailPrice,
     });
   }
 
   // Add other mapped units
-  otherStock.forEach(item => {
+  otherStock.forEach((item) => {
     result.push({
       unitId: item.unitId,
       displayName: ERP_UNIT_NAMES[item.unitId],
       quantity: item.quantity || 0,
       wholesalePrice: item.wholesalePrice,
-      retailPrice: item.retailPrice
+      retailPrice: item.retailPrice,
     });
   });
 

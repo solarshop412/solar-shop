@@ -1,12 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../store/auth.state';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { resetPasswordRequest } from '../../store/auth.actions';
-import { selectAuthError, selectAuthLoading, selectPasswordResetSuccessMessage } from '../../store/auth.selectors';
+import {
+  selectAuthError,
+  selectAuthLoading,
+  selectPasswordResetSuccessMessage,
+} from '../../store/auth.selectors';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 
 @Component({
@@ -14,7 +23,7 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
   standalone: true,
   imports: [CommonModule, RouterModule, LoaderComponent, ReactiveFormsModule],
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm!: FormGroup;
@@ -32,9 +41,11 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit(): void {
     this.loading$ = this.store.select(selectAuthLoading);
     this.error$ = this.store.select(selectAuthError);
-    this.passwordResetSuccessMessage$ = this.store.select(selectPasswordResetSuccessMessage);
+    this.passwordResetSuccessMessage$ = this.store.select(
+      selectPasswordResetSuccessMessage,
+    );
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['new'] != null) {
         this.isNewUser = params['new'] === 'true';
       }
@@ -42,10 +53,13 @@ export class ResetPasswordComponent implements OnInit {
       this.email = params['email'];
     });
 
-    this.resetPasswordForm = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validator: this.passwordMatchValidator });
+    this.resetPasswordForm = this.fb.group(
+      {
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validator: this.passwordMatchValidator },
+    );
   }
 
   get password() {
@@ -59,13 +73,20 @@ export class ResetPasswordComponent implements OnInit {
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { 'mismatch': true };
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   onResetPassword() {
     if (this.resetPasswordForm.valid) {
       const password = this.password?.value;
-      this.store.dispatch(resetPasswordRequest({ email: this.email, token: this.token, newPassword: password, isNewUser: this.isNewUser }));
+      this.store.dispatch(
+        resetPasswordRequest({
+          email: this.email,
+          token: this.token,
+          newPassword: password,
+          isNewUser: this.isNewUser,
+        }),
+      );
     }
   }
 }

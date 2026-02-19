@@ -3,13 +3,19 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, from, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { SupabaseService } from '../../../services/supabase.service';
-import { LoginRequest, AuthResponse, AuthUser, AuthSession, UpdatePasswordRequest } from '../../../shared/models/auth.model';
+import {
+  LoginRequest,
+  AuthResponse,
+  AuthUser,
+  AuthSession,
+  UpdatePasswordRequest,
+} from '../../../shared/models/auth.model';
 import { RegisterRequest as SupabaseRegisterRequest } from '../../../shared/models/auth.model';
 import { RegisterRequest } from '../store/auth.actions';
 import { User } from '../../../shared/models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private supabase = inject(SupabaseService);
@@ -25,7 +31,7 @@ export class AuthService {
       password: registerRequest.password,
       firstName: registerRequest.firstName,
       lastName: registerRequest.lastName,
-      phone: registerRequest.phone || undefined
+      phone: registerRequest.phone || undefined,
     };
 
     return from(this.supabase.signUp(supabaseRegisterRequest));
@@ -42,7 +48,7 @@ export class AuthService {
 
         // Fetch user profile from database
         return this.fetchUserProfile(authUser.id);
-      })
+      }),
     );
   }
 
@@ -64,7 +70,9 @@ export class AuthService {
       }
 
       // Get auth user data for email
-      const { data: { user: authUser } } = await supabaseClient.auth.getUser();
+      const {
+        data: { user: authUser },
+      } = await supabaseClient.auth.getUser();
 
       // Map to simplified User model
       const user: User = {
@@ -82,12 +90,12 @@ export class AuthService {
           name: profile.role,
           permissions: [], // Simple role-based system doesn't need complex permissions
           isDefault: profile.role === 'customer',
-          isActive: true
+          isActive: true,
         },
         status: {
           isActive: true,
           isBlocked: false,
-          isSuspended: false
+          isSuspended: false,
         },
         preferences: {
           language: 'hr',
@@ -100,18 +108,18 @@ export class AuthService {
               promotions: true,
               newsletter: true,
               security: true,
-              productUpdates: true
+              productUpdates: true,
             },
             sms: {
               orderUpdates: true,
               security: true,
-              promotions: false
+              promotions: false,
             },
             push: {
               orderUpdates: true,
               promotions: false,
-              reminders: true
-            }
+              reminders: true,
+            },
           },
           privacy: {
             profileVisibility: 'private',
@@ -119,15 +127,15 @@ export class AuthService {
             showPhone: false,
             allowDataCollection: true,
             allowPersonalization: true,
-            allowThirdPartySharing: false
+            allowThirdPartySharing: false,
           },
           marketing: {
             allowEmailMarketing: true,
             allowSmsMarketing: false,
             allowPushMarketing: true,
             interests: [],
-            preferredContactTime: 'anytime'
-          }
+            preferredContactTime: 'anytime',
+          },
         },
         addresses: [],
         paymentMethods: [],
@@ -137,7 +145,7 @@ export class AuthService {
         twoFactorEnabled: false,
         lastLoginAt: authUser?.last_sign_in_at,
         createdAt: profile.created_at,
-        updatedAt: profile.updated_at
+        updatedAt: profile.updated_at,
       };
 
       return user;
@@ -146,7 +154,9 @@ export class AuthService {
 
       // If it's an RLS infinite recursion error, provide specific guidance
       if ((error as any)?.message?.includes('infinite recursion')) {
-        console.error('INFINITE RECURSION DETECTED: Please run the RLS fix migration');
+        console.error(
+          'INFINITE RECURSION DETECTED: Please run the RLS fix migration',
+        );
       }
 
       return null;
@@ -155,12 +165,12 @@ export class AuthService {
 
   getUserProfile(): Observable<User> {
     return this.getCurrentUser().pipe(
-      map(user => {
+      map((user) => {
         if (!user) {
           throw new Error('No authenticated user found');
         }
         return user;
-      })
+      }),
     );
   }
 
@@ -172,7 +182,9 @@ export class AuthService {
     return from(this.supabase.resetPassword({ email }));
   }
 
-  updatePassword(request: UpdatePasswordRequest): Observable<{ error?: string }> {
+  updatePassword(
+    request: UpdatePasswordRequest,
+  ): Observable<{ error?: string }> {
     return from(this.supabase.updatePassword(request.password));
   }
 
@@ -193,21 +205,26 @@ export class AuthService {
   // Helper method to check if user is admin
   isAdmin(): Observable<boolean> {
     return this.getCurrentUser().pipe(
-      map(user => user?.role?.name === 'admin' || false)
+      map((user) => user?.role?.name === 'admin' || false),
     );
   }
 
   // Helper method to check if user is company admin
   isCompanyAdmin(): Observable<boolean> {
     return this.getCurrentUser().pipe(
-      map(user => user?.role?.name === 'company_admin' || false)
+      map((user) => user?.role?.name === 'company_admin' || false),
     );
   }
 
   // Helper method to check if user has admin privileges (admin or company_admin)
   hasAdminPrivileges(): Observable<boolean> {
     return this.getCurrentUser().pipe(
-      map(user => user?.role?.name === 'admin' || user?.role?.name === 'company_admin' || false)
+      map(
+        (user) =>
+          user?.role?.name === 'admin' ||
+          user?.role?.name === 'company_admin' ||
+          false,
+      ),
     );
   }
 }

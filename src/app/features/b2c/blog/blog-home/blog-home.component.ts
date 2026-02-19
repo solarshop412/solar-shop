@@ -12,7 +12,7 @@ import {
   selectBlogPosts,
   selectBlogIsLoading,
   selectBlogError,
-  selectFeaturedPosts
+  selectFeaturedPosts,
 } from '../store/blog.selectors';
 
 @Component({
@@ -20,7 +20,7 @@ import {
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './blog-home.component.html',
-  styleUrls: ['./blog-home.component.scss']
+  styleUrls: ['./blog-home.component.scss'],
 })
 export class BlogHomeComponent implements OnInit, OnDestroy {
   private router = inject(Router);
@@ -44,25 +44,24 @@ export class BlogHomeComponent implements OnInit, OnDestroy {
 
     // Display posts: prioritize featured posts, then recent posts, limit to 6 total
     this.displayPosts$ = this.blogPosts$.pipe(
-      map(posts => {
+      map((posts) => {
         if (!posts || posts.length === 0) return [];
 
         // Create a copy of the array before sorting to avoid mutating the original
-        const sortedPosts = [...posts]
-          .sort((a, b) => {
-            // First, prioritize featured posts
-            if (a.featured && !b.featured) return -1;
-            if (!a.featured && b.featured) return 1;
+        const sortedPosts = [...posts].sort((a, b) => {
+          // First, prioritize featured posts
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
 
-            // Then sort by updatedAt (most recent first)
-            const aDate = new Date(a.updatedAt || a.publishedAt).getTime();
-            const bDate = new Date(b.updatedAt || b.publishedAt).getTime();
-            return bDate - aDate;
-          });
+          // Then sort by updatedAt (most recent first)
+          const aDate = new Date(a.updatedAt || a.publishedAt).getTime();
+          const bDate = new Date(b.updatedAt || b.publishedAt).getTime();
+          return bDate - aDate;
+        });
 
         // Return up to 3 posts for the home page
         return sortedPosts.slice(0, 3);
-      })
+      }),
     );
   }
 
@@ -91,13 +90,16 @@ export class BlogHomeComponent implements OnInit, OnDestroy {
   formatDate(date: string | Date): string {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
     const currentLang = this.translationService.getCurrentLanguage();
-    
+
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'short',
-      day: 'numeric'
+      day: 'numeric',
     };
-    
-    return dateObj.toLocaleDateString(currentLang === 'hr' ? 'hr-HR' : 'en-US', options);
+
+    return dateObj.toLocaleDateString(
+      currentLang === 'hr' ? 'hr-HR' : 'en-US',
+      options,
+    );
   }
-} 
+}

@@ -11,19 +11,35 @@ import { selectCurrentUser } from '../../../../../core/auth/store/auth.selectors
 import { User } from '../../../../../shared/models/user.model';
 import { Company } from '../../../../../shared/models/company.model';
 import { SupabaseService } from '../../../../../services/supabase.service';
-import { ErpIntegrationService, StockItem } from '../../../../../shared/services/erp-integration.service';
-import { getUnitName, filterAndCombineErpStock, FilteredStockItem } from '../../../../../shared/utils/erp-unit-names';
+import {
+  ErpIntegrationService,
+  StockItem,
+} from '../../../../../shared/services/erp-integration.service';
+import {
+  getUnitName,
+  filterAndCombineErpStock,
+  FilteredStockItem,
+} from '../../../../../shared/utils/erp-unit-names';
 import * as ProductsActions from '../../../shared/store/products.actions';
-import { selectProductsWithPricing, selectProductsLoading } from '../../../shared/store/products.selectors';
+import {
+  selectProductsWithPricing,
+  selectProductsLoading,
+} from '../../../shared/store/products.selectors';
 import { ProductWithPricing } from '../../../shared/store/products.actions';
 import * as B2BCartActions from '../../../cart/store/b2b-cart.actions';
 
 @Component({
   selector: 'app-partners-product-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe, LucideAngularModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    TranslatePipe,
+    LucideAngularModule,
+  ],
   templateUrl: './partners-product-details.component.html',
-  styleUrls: ['./partners-product-details.component.scss']
+  styleUrls: ['./partners-product-details.component.scss'],
 })
 export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
@@ -82,7 +98,8 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Load user and company info first, then load products
-    this.store.select(selectCurrentUser)
+    this.store
+      .select(selectCurrentUser)
       .pipe(takeUntil(this.destroy$))
       .subscribe(async (user) => {
         this.currentUser = user;
@@ -101,33 +118,27 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
       });
 
     // Subscribe to products from store
-    this.products$
-      .pipe(
-        takeUntil(this.destroy$)
-      )
-      .subscribe(products => {
-        if (products && products.length > 0 && productId) {
-          const foundProduct = products.find(p => p.id === productId);
-          if (foundProduct) {
-            this.product = foundProduct;
-            this.error = null;
-            // Load suggested products
-            this.loadSuggestedProducts(foundProduct.id);
-            // Load ERP stock
-            this.loadErpStock(foundProduct);
-          } else if (!this.loading) {
-            // Only set error if we're not still loading
-            this.error = 'Product not found';
-          }
+    this.products$.pipe(takeUntil(this.destroy$)).subscribe((products) => {
+      if (products && products.length > 0 && productId) {
+        const foundProduct = products.find((p) => p.id === productId);
+        if (foundProduct) {
+          this.product = foundProduct;
+          this.error = null;
+          // Load suggested products
+          this.loadSuggestedProducts(foundProduct.id);
+          // Load ERP stock
+          this.loadErpStock(foundProduct);
+        } else if (!this.loading) {
+          // Only set error if we're not still loading
+          this.error = 'Product not found';
         }
-      });
+      }
+    });
 
     // Subscribe to loading state
-    this.loading$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(loading => {
-        this.loading = loading;
-      });
+    this.loading$.pipe(takeUntil(this.destroy$)).subscribe((loading) => {
+      this.loading = loading;
+    });
   }
 
   ngOnDestroy(): void {
@@ -165,7 +176,9 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     if (this.isCompanyContact && this.company) {
       setTimeout(() => {
         if (this.company) {
-          this.store.dispatch(ProductsActions.loadCompanyPricing({ companyId: this.company.id }));
+          this.store.dispatch(
+            ProductsActions.loadCompanyPricing({ companyId: this.company.id }),
+          );
         }
       }, 100);
     }
@@ -183,20 +196,27 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     return product.minimum_order || 1;
   }
 
-  getSpecifications(specs: Record<string, string>): { key: string, value: string }[] {
+  getSpecifications(
+    specs: Record<string, string>,
+  ): { key: string; value: string }[] {
     return Object.entries(specs).map(([key, value]) => ({ key, value }));
   }
 
   addToCart(product: ProductWithPricing): void {
     if (this.isCompanyContact && this.company) {
       // Ensure quantity meets minimum order requirement
-      const quantity = Math.max(this.selectedQuantity, this.getMinimumOrder(product));
+      const quantity = Math.max(
+        this.selectedQuantity,
+        this.getMinimumOrder(product),
+      );
 
-      this.store.dispatch(B2BCartActions.addToB2BCart({
-        productId: product.id,
-        quantity: quantity,
-        companyId: this.company.id
-      }));
+      this.store.dispatch(
+        B2BCartActions.addToB2BCart({
+          productId: product.id,
+          quantity: quantity,
+          companyId: this.company.id,
+        }),
+      );
 
       // Open cart sidebar after adding
       this.store.dispatch(B2BCartActions.openB2BCartSidebar());
@@ -232,8 +252,8 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
         subject: 'pricingInquiry',
         productId: product.id,
         productName: product.name,
-        sku: product.sku
-      }
+        sku: product.sku,
+      },
     });
   }
 
@@ -244,9 +264,13 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Extract from images array
-    if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+    if (
+      product.images &&
+      Array.isArray(product.images) &&
+      product.images.length > 0
+    ) {
       // Find primary image first
-      const primaryImage = product.images.find(img => img.is_primary);
+      const primaryImage = product.images.find((img) => img.is_primary);
       if (primaryImage) {
         return primaryImage.url;
       }
@@ -304,7 +328,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
 
     // Add images from images array
     if (this.product.images && Array.isArray(this.product.images)) {
-      this.product.images.forEach(img => {
+      this.product.images.forEach((img) => {
         if (img.url && img.url.trim() && !images.includes(img.url)) {
           images.push(img.url);
         }
@@ -348,15 +372,23 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Extract from images array - use first image
-    if (product.images && Array.isArray(product.images) && product.images.length > 0) {
+    if (
+      product.images &&
+      Array.isArray(product.images) &&
+      product.images.length > 0
+    ) {
       // Find primary image first
-      const primaryImage = product.images.find(img => img.is_primary && img.url && img.url.trim());
+      const primaryImage = product.images.find(
+        (img) => img.is_primary && img.url && img.url.trim(),
+      );
       if (primaryImage) {
         return primaryImage.url;
       }
 
       // Fallback to first image with valid url
-      const firstImageWithUrl = product.images.find(img => img.url && img.url.trim());
+      const firstImageWithUrl = product.images.find(
+        (img) => img.url && img.url.trim(),
+      );
       if (firstImageWithUrl) {
         return firstImageWithUrl.url;
       }
@@ -394,11 +426,13 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
       // Load product relationships
       const { data: relationships, error } = await this.supabaseService.client
         .from('product_relationships')
-        .select(`
+        .select(
+          `
           *,
           related_product_id,
           related_category_id
-        `)
+        `,
+        )
         .eq('product_id', productId)
         .eq('is_active', true)
         .order('sort_order');
@@ -408,19 +442,18 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
       if (relationships && relationships.length > 0) {
         // Get related product IDs
         const relatedProductIds = relationships
-          .filter(r => r.related_product_id)
-          .map(r => r.related_product_id);
+          .filter((r) => r.related_product_id)
+          .map((r) => r.related_product_id);
 
         // Get products from related categories
         const relatedCategoryIds = relationships
-          .filter(r => r.related_category_id)
-          .map(r => r.related_category_id);
+          .filter((r) => r.related_category_id)
+          .map((r) => r.related_category_id);
 
         // Use the existing products from store and filter
-        this.products$
-          .pipe(takeUntil(this.destroy$))
-          .subscribe(products => {
-            this.suggestedProducts = products.filter(p => {
+        this.products$.pipe(takeUntil(this.destroy$)).subscribe((products) => {
+          this.suggestedProducts = products
+            .filter((p) => {
               // Don't suggest the current product
               if (p.id === productId) return false;
 
@@ -431,16 +464,21 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
               if (relatedCategoryIds.includes(p.category_id)) return true;
 
               return false;
-            }).slice(0, 4); // Limit to 4 suggested products
-          });
+            })
+            .slice(0, 4); // Limit to 4 suggested products
+        });
       } else {
         // If no relationships defined, show products from same category
         if (this.product?.category_id) {
           this.products$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(products => {
+            .subscribe((products) => {
               this.suggestedProducts = products
-                .filter(p => p.id !== productId && p.category_id === this.product?.category_id)
+                .filter(
+                  (p) =>
+                    p.id !== productId &&
+                    p.category_id === this.product?.category_id,
+                )
                 .slice(0, 4);
             });
         }
@@ -461,23 +499,23 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
 
   getFullTechnicalSheetUrl(url: string): string {
     if (!url) return '';
-    
+
     // If URL already has protocol, return as is
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
     }
-    
+
     // If URL starts with www., add https://
     if (url.startsWith('www.')) {
       return `https://${url}`;
     }
-    
+
     // If it doesn't start with www. or protocol, assume it needs https://www.
     if (!url.includes('.')) {
       // If it doesn't contain a dot, it's probably not a valid URL
       return url;
     }
-    
+
     return `https://${url}`;
   }
 
@@ -489,8 +527,8 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/partneri/proizvodi'], {
       queryParams: {
         category: categorySlug,
-        categories: category // Pass the actual category name for filtering
-      }
+        categories: category, // Pass the actual category name for filtering
+      },
     });
   }
 
@@ -504,7 +542,8 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.erpStockLoading = true;
-    this.erpService.getStockBySku(product.sku)
+    this.erpService
+      .getStockBySku(product.sku)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
@@ -512,20 +551,29 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
             this.erpStock = response.data;
             // Filter and combine stock for display
             this.updateFilteredStock();
-            console.log('[B2B Product Details] ERP stock loaded:', this.erpStock);
+            console.log(
+              '[B2B Product Details] ERP stock loaded:',
+              this.erpStock,
+            );
           } else {
-            console.warn('[B2B Product Details] Failed to load ERP stock:', response.error);
+            console.warn(
+              '[B2B Product Details] Failed to load ERP stock:',
+              response.error,
+            );
             this.erpStock = [];
             this.filteredErpStock = [];
           }
           this.erpStockLoading = false;
         },
         error: (error) => {
-          console.error('[B2B Product Details] Error loading ERP stock:', error);
+          console.error(
+            '[B2B Product Details] Error loading ERP stock:',
+            error,
+          );
           this.erpStock = [];
           this.filteredErpStock = [];
           this.erpStockLoading = false;
-        }
+        },
       });
   }
 
@@ -540,7 +588,10 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
    * Get total ERP stock across all units
    */
   getTotalErpStock(): number {
-    return this.filteredErpStock.reduce((total, stock) => total + stock.quantity, 0);
+    return this.filteredErpStock.reduce(
+      (total, stock) => total + stock.quantity,
+      0,
+    );
   }
 
   /**
@@ -549,4 +600,4 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   getUnitDisplayName(unitId: string | undefined, unitName?: string): string {
     return getUnitName(unitId, unitName);
   }
-} 
+}

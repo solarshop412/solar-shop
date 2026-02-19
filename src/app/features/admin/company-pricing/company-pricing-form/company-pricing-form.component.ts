@@ -1,4 +1,11 @@
-import { Component, OnInit, inject, OnDestroy, HostListener, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  OnDestroy,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -14,13 +21,12 @@ import * as CompanyPricingSelectors from '../store/company-pricing.selectors';
 import { Company, Product } from '../store/company-pricing.actions';
 import { ProductWithCustomPrice } from '../../../../shared/models/product-with-custom-price.model';
 
-
 @Component({
   selector: 'app-company-pricing-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule, TranslatePipe],
   templateUrl: './company-pricing-form.component.html',
-  styleUrls: ['./company-pricing-form.component.scss']
+  styleUrls: ['./company-pricing-form.component.scss'],
 })
 export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -33,9 +39,15 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   private elementRef = inject(ElementRef);
   private destroy$ = new Subject<void>();
 
-  companies$: Observable<Company[]> = this.store.select(CompanyPricingSelectors.selectCompanies);
-  products$: Observable<Product[]> = this.store.select(CompanyPricingSelectors.selectProducts);
-  loading$: Observable<boolean> = this.store.select(CompanyPricingSelectors.selectCompanyPricingLoading);
+  companies$: Observable<Company[]> = this.store.select(
+    CompanyPricingSelectors.selectCompanies,
+  );
+  products$: Observable<Product[]> = this.store.select(
+    CompanyPricingSelectors.selectProducts,
+  );
+  loading$: Observable<boolean> = this.store.select(
+    CompanyPricingSelectors.selectCompanyPricingLoading,
+  );
 
   companies: Company[] = [];
   products: Product[] = [];
@@ -60,7 +72,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     this.store.dispatch(CompanyPricingActions.loadProducts());
 
     // Subscribe to data
-    this.companies$.pipe(takeUntil(this.destroy$)).subscribe(companies => {
+    this.companies$.pipe(takeUntil(this.destroy$)).subscribe((companies) => {
       console.log('Company Pricing Form: Companies received:', companies);
       this.companies = companies;
       // Check edit mode after companies are loaded
@@ -69,22 +81,26 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.products$.pipe(takeUntil(this.destroy$)).subscribe(products => {
+    this.products$.pipe(takeUntil(this.destroy$)).subscribe((products) => {
       console.log('Company Pricing Form: Products received:', products);
       this.products = products;
 
       // Extract unique categories from all products
       const categoriesSet = new Set<string>();
-      products.forEach(product => {
+      products.forEach((product) => {
         if (product.categories && product.categories.length > 0) {
-          product.categories.forEach(category => categoriesSet.add(category));
+          product.categories.forEach((category) => categoriesSet.add(category));
         }
       });
       this.availableCategories = Array.from(categoriesSet).sort();
 
       this.updateFilteredProducts();
       // If we have a selected company but products weren't loaded yet, trigger the selection again
-      if (this.selectedCompanyId && this.selectedCompany && products.length > 0) {
+      if (
+        this.selectedCompanyId &&
+        this.selectedCompany &&
+        products.length > 0
+      ) {
         this.loadExistingPricing();
         this.updateFilteredProducts();
       }
@@ -103,10 +119,18 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     const clickedInside = this.elementRef.nativeElement.contains(target);
 
     // Check if the click is outside the dropdown area
-    if (!clickedInside || (!target.closest('.category-dropdown') && this.showCategoryDropdown)) {
+    if (
+      !clickedInside ||
+      (!target.closest('.category-dropdown') && this.showCategoryDropdown)
+    ) {
       // Only close if we didn't click on the dropdown button or its contents
-      const isDropdownButton = target.closest('button[type="button"]')?.textContent?.includes('kategorij') ||
-                                target.closest('button[type="button"]')?.textContent?.includes('categor');
+      const isDropdownButton =
+        target
+          .closest('button[type="button"]')
+          ?.textContent?.includes('kategorij') ||
+        target
+          .closest('button[type="button"]')
+          ?.textContent?.includes('categor');
       if (!isDropdownButton) {
         this.showCategoryDropdown = false;
       }
@@ -122,9 +146,16 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   }
 
   onCompanySelected(companyId: string): void {
-    console.log('Company Pricing Form: onCompanySelected called with:', companyId);
-    this.selectedCompany = this.companies.find(c => c.id === companyId) || null;
-    console.log('Company Pricing Form: Selected company:', this.selectedCompany);
+    console.log(
+      'Company Pricing Form: onCompanySelected called with:',
+      companyId,
+    );
+    this.selectedCompany =
+      this.companies.find((c) => c.id === companyId) || null;
+    console.log(
+      'Company Pricing Form: Selected company:',
+      this.selectedCompany,
+    );
 
     if (this.selectedCompany) {
       this.loadExistingPricing();
@@ -134,11 +165,16 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
 
   private async loadExistingPricing(): Promise<void> {
     if (!this.selectedCompany) {
-      console.log('Company Pricing Form: loadExistingPricing - no selected company');
+      console.log(
+        'Company Pricing Form: loadExistingPricing - no selected company',
+      );
       return;
     }
 
-    console.log('Company Pricing Form: Loading existing pricing for company:', this.selectedCompany.id);
+    console.log(
+      'Company Pricing Form: Loading existing pricing for company:',
+      this.selectedCompany.id,
+    );
 
     try {
       const { data, error } = await this.supabase.client
@@ -152,7 +188,10 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
       }
 
       this.existingPricing = data || [];
-      console.log('Company Pricing Form: Loaded existing pricing:', this.existingPricing);
+      console.log(
+        'Company Pricing Form: Loaded existing pricing:',
+        this.existingPricing,
+      );
       this.updateFilteredProducts();
     } catch (error) {
       console.error('Error loading existing pricing:', error);
@@ -160,51 +199,71 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   }
 
   private updateFilteredProducts(): void {
-    console.log('Company Pricing Form: updateFilteredProducts called, products count:', this.products.length);
+    console.log(
+      'Company Pricing Form: updateFilteredProducts called, products count:',
+      this.products.length,
+    );
     if (!this.products.length) {
-      console.log('Company Pricing Form: No products available, skipping update');
+      console.log(
+        'Company Pricing Form: No products available, skipping update',
+      );
       return;
     }
 
-    let filtered = this.products.map(product => {
-      const existingPrice = this.existingPricing.find(p => p.product_id === product.id);
-      const minimumOrder = existingPrice ? (existingPrice.minimum_order || 1) : 1;
+    let filtered = this.products.map((product) => {
+      const existingPrice = this.existingPricing.find(
+        (p) => p.product_id === product.id,
+      );
+      const minimumOrder = existingPrice ? existingPrice.minimum_order || 1 : 1;
 
       // Handle quantity-based pricing tiers
       const quantityTier1 = existingPrice?.quantity_tier_1 || 1;
-      const priceTier1 = existingPrice ? parseFloat(existingPrice.price_tier_1) : product.price;
+      const priceTier1 = existingPrice
+        ? parseFloat(existingPrice.price_tier_1)
+        : product.price;
       const quantityTier2 = existingPrice?.quantity_tier_2;
-      const priceTier2 = existingPrice?.price_tier_2 ? parseFloat(existingPrice.price_tier_2) : undefined;
+      const priceTier2 = existingPrice?.price_tier_2
+        ? parseFloat(existingPrice.price_tier_2)
+        : undefined;
       const quantityTier3 = existingPrice?.quantity_tier_3;
-      const priceTier3 = existingPrice?.price_tier_3 ? parseFloat(existingPrice.price_tier_3) : undefined;
+      const priceTier3 = existingPrice?.price_tier_3
+        ? parseFloat(existingPrice.price_tier_3)
+        : undefined;
 
       return {
         ...product,
         customPrice: priceTier1, // For backward compatibility
-        hasCustomPrice: !!existingPrice && (priceTier1 !== product.price || !!priceTier2 || !!priceTier3),
+        hasCustomPrice:
+          !!existingPrice &&
+          (priceTier1 !== product.price || !!priceTier2 || !!priceTier3),
         minimumOrder: minimumOrder,
         quantityTier1,
         priceTier1,
         quantityTier2,
         priceTier2,
         quantityTier3,
-        priceTier3
+        priceTier3,
       };
     });
 
     // Apply search term filter
     if (this.productSearchTerm) {
       const searchTerm = this.productSearchTerm.toLowerCase();
-      filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.sku.toLowerCase().includes(searchTerm)
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(searchTerm) ||
+          product.sku.toLowerCase().includes(searchTerm),
       );
     }
 
     // Apply category filter (multi-select - product must have at least one of the selected categories)
     if (this.selectedCategories.length > 0) {
-      filtered = filtered.filter(product =>
-        product.categories && product.categories.some(cat => this.selectedCategories.includes(cat))
+      filtered = filtered.filter(
+        (product) =>
+          product.categories &&
+          product.categories.some((cat) =>
+            this.selectedCategories.includes(cat),
+          ),
       );
     }
 
@@ -253,7 +312,11 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateQuantityTier(product: ProductWithCustomPrice, tier: number, event: Event): void {
+  updateQuantityTier(
+    product: ProductWithCustomPrice,
+    tier: number,
+    event: Event,
+  ): void {
     const target = event.target as HTMLInputElement;
     const value = parseInt(target.value);
 
@@ -270,7 +333,11 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
         product.priceTier3 = undefined;
       }
     } else if (tier === 3) {
-      if (!isNaN(value) && product.quantityTier2 && value > product.quantityTier2) {
+      if (
+        !isNaN(value) &&
+        product.quantityTier2 &&
+        value > product.quantityTier2
+      ) {
         product.quantityTier3 = value;
       } else {
         product.quantityTier3 = undefined;
@@ -281,7 +348,11 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     this.updateHasCustomPrice(product);
   }
 
-  updatePriceTier(product: ProductWithCustomPrice, tier: number, event: Event): void {
+  updatePriceTier(
+    product: ProductWithCustomPrice,
+    tier: number,
+    event: Event,
+  ): void {
     const target = event.target as HTMLInputElement;
     const value = parseFloat(target.value);
 
@@ -342,9 +413,8 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   }
 
   getProductsWithCustomPricing(): ProductWithCustomPrice[] {
-    return this.filteredProducts.filter(p =>
-      p.hasCustomPrice ||
-      p.minimumOrder !== 1
+    return this.filteredProducts.filter(
+      (p) => p.hasCustomPrice || p.minimumOrder !== 1,
     );
   }
 
@@ -361,7 +431,9 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     try {
       // Create new pricing records
       for (const product of productsToSave) {
-        const existingPricing = this.existingPricing.find(p => p.product_id === product.id);
+        const existingPricing = this.existingPricing.find(
+          (p) => p.product_id === product.id,
+        );
 
         if (existingPricing) {
           // Update existing
@@ -374,7 +446,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
               quantity_tier_2: product.quantityTier2 || null,
               price_tier_3: product.priceTier3 || null,
               quantity_tier_3: product.quantityTier3 || null,
-              minimum_order: product.minimumOrder
+              minimum_order: product.minimumOrder,
             })
             .eq('id', existingPricing.id);
 
@@ -393,7 +465,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
                 quantity_tier_2: product.quantityTier2 || null,
                 price_tier_3: product.priceTier3 || null,
                 quantity_tier_3: product.quantityTier3 || null,
-                minimum_order: product.minimumOrder
+                minimum_order: product.minimumOrder,
               });
 
             if (error) throw error;
@@ -402,9 +474,9 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
       }
 
       // Remove pricing for products that no longer have custom pricing or minimum order requirements
-      const currentProductIds = productsToSave.map(p => p.id);
-      const toRemove = this.existingPricing.filter(p =>
-        !currentProductIds.includes(p.product_id)
+      const currentProductIds = productsToSave.map((p) => p.id);
+      const toRemove = this.existingPricing.filter(
+        (p) => !currentProductIds.includes(p.product_id),
       );
 
       for (const pricing of toRemove) {
@@ -420,7 +492,9 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
       this.router.navigate(['/admin/cijene-tvrtki']);
     } catch (error) {
       console.error('Error saving company pricing:', error);
-      const errorMessage = this.translationService.translate('admin.companyPricingForm.errorSavingPricing');
+      const errorMessage = this.translationService.translate(
+        'admin.companyPricingForm.errorSavingPricing',
+      );
       alert(errorMessage);
     }
   }
@@ -434,13 +508,20 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   }
 
   applyBulkDiscount(): void {
-    if (!this.bulkDiscountPercentage || this.bulkDiscountPercentage <= 0 || this.bulkDiscountPercentage > 100) {
+    if (
+      !this.bulkDiscountPercentage ||
+      this.bulkDiscountPercentage <= 0 ||
+      this.bulkDiscountPercentage > 100
+    ) {
       return;
     }
 
-    const confirmMessage = this.translationService.translate('admin.companyPricingForm.confirmBulkDiscountCompany', {
-      percentage: this.bulkDiscountPercentage.toString()
-    });
+    const confirmMessage = this.translationService.translate(
+      'admin.companyPricingForm.confirmBulkDiscountCompany',
+      {
+        percentage: this.bulkDiscountPercentage.toString(),
+      },
+    );
     if (confirm(confirmMessage)) {
       this.applyBulkDiscountConfirmed();
     }
@@ -450,7 +531,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     const discount = this.bulkDiscountPercentage / 100;
 
     // Apply discount to all products
-    this.filteredProducts = this.products.map(product => {
+    this.filteredProducts = this.products.map((product) => {
       const discountedPrice = product.price * (1 - discount);
       const quantityTier1 = 1;
       const priceTier1 = Math.round(discountedPrice * 100) / 100; // Round to 2 decimal places
@@ -465,27 +546,37 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
         quantityTier2: undefined,
         priceTier2: undefined,
         quantityTier3: undefined,
-        priceTier3: undefined
+        priceTier3: undefined,
       };
     });
 
     // Show notification
-    const message = this.translationService.translate('admin.companyPricingForm.bulkDiscountAppliedAll', {
-      percentage: this.bulkDiscountPercentage.toString(),
-      count: this.products.length.toString()
-    });
+    const message = this.translationService.translate(
+      'admin.companyPricingForm.bulkDiscountAppliedAll',
+      {
+        percentage: this.bulkDiscountPercentage.toString(),
+        count: this.products.length.toString(),
+      },
+    );
     alert(message);
   }
 
   applyBulkDiscountToFiltered(): void {
-    if (!this.bulkDiscountPercentage || this.bulkDiscountPercentage <= 0 || this.bulkDiscountPercentage > 100) {
+    if (
+      !this.bulkDiscountPercentage ||
+      this.bulkDiscountPercentage <= 0 ||
+      this.bulkDiscountPercentage > 100
+    ) {
       return;
     }
 
-    const confirmMessage = this.translationService.translate('admin.companyPricingForm.confirmBulkDiscountFiltered', {
-      percentage: this.bulkDiscountPercentage.toString(),
-      count: this.filteredProducts.length.toString()
-    });
+    const confirmMessage = this.translationService.translate(
+      'admin.companyPricingForm.confirmBulkDiscountFiltered',
+      {
+        percentage: this.bulkDiscountPercentage.toString(),
+        count: this.filteredProducts.length.toString(),
+      },
+    );
     if (!confirm(confirmMessage)) {
       return;
     }
@@ -493,7 +584,7 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
     const discount = this.bulkDiscountPercentage / 100;
 
     // Apply discount only to currently filtered/visible products
-    this.filteredProducts = this.filteredProducts.map(product => {
+    this.filteredProducts = this.filteredProducts.map((product) => {
       const discountedPrice = product.price * (1 - discount);
       const quantityTier1 = product.quantityTier1 || 1;
       const priceTier1 = Math.round(discountedPrice * 100) / 100;
@@ -508,14 +599,17 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
         quantityTier2: undefined,
         priceTier2: undefined,
         quantityTier3: undefined,
-        priceTier3: undefined
+        priceTier3: undefined,
       };
     });
 
-    const message = this.translationService.translate('admin.companyPricingForm.bulkDiscountAppliedFiltered', {
-      percentage: this.bulkDiscountPercentage.toString(),
-      count: this.filteredProducts.length.toString()
-    });
+    const message = this.translationService.translate(
+      'admin.companyPricingForm.bulkDiscountAppliedFiltered',
+      {
+        percentage: this.bulkDiscountPercentage.toString(),
+        count: this.filteredProducts.length.toString(),
+      },
+    );
     alert(message);
   }
 
@@ -524,13 +618,15 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
   }
 
   clearAllCustomPricing(): void {
-    const confirmMessage = this.translationService.translate('admin.companyPricingForm.confirmClearAllPricing');
+    const confirmMessage = this.translationService.translate(
+      'admin.companyPricingForm.confirmClearAllPricing',
+    );
     if (!confirm(confirmMessage)) {
       return;
     }
 
     // Clear all custom pricing
-    this.filteredProducts = this.filteredProducts.map(product => ({
+    this.filteredProducts = this.filteredProducts.map((product) => ({
       ...product,
       customPrice: product.price,
       hasCustomPrice: false,
@@ -540,10 +636,12 @@ export class CompanyPricingFormComponent implements OnInit, OnDestroy {
       quantityTier2: undefined,
       priceTier2: undefined,
       quantityTier3: undefined,
-      priceTier3: undefined
+      priceTier3: undefined,
     }));
 
-    const message = this.translationService.translate('admin.companyPricingForm.allPricingCleared');
+    const message = this.translationService.translate(
+      'admin.companyPricingForm.allPricingCleared',
+    );
     alert(message);
   }
 }

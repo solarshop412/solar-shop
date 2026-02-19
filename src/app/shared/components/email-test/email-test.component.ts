@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { EmailService } from '../../../services/email.service';
 
 @Component({
@@ -8,7 +13,7 @@ import { EmailService } from '../../../services/email.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './email-test.component.html',
-  styleUrls: ['./email-test.component.scss']
+  styleUrls: ['./email-test.component.scss'],
 })
 export class EmailTestComponent {
   testForm: FormGroup;
@@ -17,7 +22,7 @@ export class EmailTestComponent {
 
   constructor(
     private fb: FormBuilder,
-    private emailService: EmailService
+    private emailService: EmailService,
   ) {
     this.testForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -25,7 +30,7 @@ export class EmailTestComponent {
       lastName: ['', [Validators.required]],
       emailType: ['order-confirmation', [Validators.required]],
       // Company approval fields
-      companyName: ['']
+      companyName: [''],
     });
   }
 
@@ -53,20 +58,20 @@ export class EmailTestComponent {
                   productSku: 'SP-300W-001',
                   quantity: 2,
                   unitPrice: 149.99,
-                  totalPrice: 299.98
+                  totalPrice: 299.98,
                 },
                 {
                   productName: 'Solar Inverter 2000W',
                   productSku: 'SI-2000W-001',
                   quantity: 1,
                   unitPrice: 299.99,
-                  totalPrice: 299.99
-                }
+                  totalPrice: 299.99,
+                },
               ],
               subtotal: 599.97,
               taxAmount: 119.99,
-              shippingCost: 25.00,
-              totalAmount: 744.96
+              shippingCost: 25.0,
+              totalAmount: 744.96,
             });
             break;
 
@@ -74,7 +79,7 @@ export class EmailTestComponent {
             success = await this.emailService.sendCompanyApprovalEmail({
               to: formData.email,
               companyName: formData.companyName || 'Test Company Ltd.',
-              companyEmail: formData.email
+              companyEmail: formData.email,
             });
             break;
 
@@ -98,13 +103,13 @@ export class EmailTestComponent {
           success,
           message: success
             ? `Test ${formData.emailType} email sent successfully to ${formData.email}`
-            : `Failed to send ${formData.emailType} email. Check console for details.`
+            : `Failed to send ${formData.emailType} email. Check console for details.`,
         };
       } catch (error) {
         console.error('Email test error:', error);
         this.result = {
           success: false,
-          message: `Error sending email: ${error instanceof Error ? error.message : 'Unknown error'}`
+          message: `Error sending email: ${error instanceof Error ? error.message : 'Unknown error'}`,
         };
       } finally {
         this.isSending = false;

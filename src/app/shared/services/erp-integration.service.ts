@@ -9,24 +9,24 @@ import { environment } from '../../../environments/environment';
  * Note: API uses uppercase field names
  */
 export interface ErpStockItem {
-  ARTIKL: string;      // Šifra artikla (Product SKU)
-  RADJED: string;      // Šifra radne jedinice (Unit ID)
+  ARTIKL: string; // Šifra artikla (Product SKU)
+  RADJED: string; // Šifra radne jedinice (Unit ID)
   RADJEDNAZIV?: string; // Naziv radne jedinice (Unit name)
-  ZALIHA: number;      // Količina (Stock quantity)
-  VEL_CIJENA: number;  // Veleprodajna cijena (Wholesale price)
-  MAL_CIJENA: number;  // Maloprodajna cijena (Retail price)
+  ZALIHA: number; // Količina (Stock quantity)
+  VEL_CIJENA: number; // Veleprodajna cijena (Wholesale price)
+  MAL_CIJENA: number; // Maloprodajna cijena (Retail price)
 }
 
 /**
  * Normalized stock item for internal use
  */
 export interface StockItem {
-  sku: string;           // Šifra artikla
-  unitId: string;        // Šifra radne jedinice
-  unitName?: string;     // Naziv radne jedinice
-  quantity: number;      // Količina
+  sku: string; // Šifra artikla
+  unitId: string; // Šifra radne jedinice
+  unitName?: string; // Naziv radne jedinice
+  quantity: number; // Količina
   wholesalePrice: number; // Veleprodajna cijena
-  retailPrice: number;   // Maloprodajna cijena
+  retailPrice: number; // Maloprodajna cijena
 }
 
 export interface ErpStockResponse {
@@ -37,7 +37,7 @@ export interface ErpStockResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErpIntegrationService {
   private readonly ERP_BASE_URL = environment.erp.baseUrl;
@@ -59,7 +59,7 @@ export class ErpIntegrationService {
       console.warn('[ERP] Integration is disabled in this environment');
       return of({
         success: false,
-        error: 'ERP integracija nije dostupna u ovom okruženju.'
+        error: 'ERP integracija nije dostupna u ovom okruženju.',
       });
     }
 
@@ -83,16 +83,21 @@ export class ErpIntegrationService {
     }
 
     // Build URL - proxy doesn't need /zaliha endpoint
-    const url = isProxy ? this.ERP_BASE_URL : `${this.ERP_BASE_URL}${this.STOCK_ENDPOINT}`;
+    const url = isProxy
+      ? this.ERP_BASE_URL
+      : `${this.ERP_BASE_URL}${this.STOCK_ENDPOINT}`;
     console.log('[ERP] Fetching from:', isProxy ? 'proxy' : 'direct', url);
 
     return this.http.get<ErpStockItem[]>(url, { params }).pipe(
-      map(response => {
+      map((response) => {
         const rawData = Array.isArray(response) ? response : [response];
-        const normalizedData: StockItem[] = rawData.map(item => {
+        const normalizedData: StockItem[] = rawData.map((item) => {
           // Log items without RADJEDNAZIV for debugging
           if (!item.RADJEDNAZIV) {
-            console.log(`[ERP] Unit ${item.RADJED} missing RADJEDNAZIV. Full item:`, item);
+            console.log(
+              `[ERP] Unit ${item.RADJED} missing RADJEDNAZIV. Full item:`,
+              item,
+            );
           }
 
           return {
@@ -101,17 +106,17 @@ export class ErpIntegrationService {
             unitName: item.RADJEDNAZIV || item.RADJED, // Fallback to unit ID if name not available
             quantity: item.ZALIHA,
             wholesalePrice: item.VEL_CIJENA,
-            retailPrice: item.MAL_CIJENA
+            retailPrice: item.MAL_CIJENA,
           };
         });
 
         return {
           success: true,
           data: normalizedData,
-          rawData: rawData
+          rawData: rawData,
         };
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('ERP Stock fetch failed:', error);
 
         // Provide user-friendly error messages based on error type
@@ -119,13 +124,15 @@ export class ErpIntegrationService {
 
         if (error.status === 0) {
           // Network error, CORS, or SSL certificate issue
-          errorMessage = 'Nije moguće povezati se s ERP serverom. Mogući uzroci:\n' +
+          errorMessage =
+            'Nije moguće povezati se s ERP serverom. Mogući uzroci:\n' +
             '• SSL certifikat servera nije valjan\n' +
             '• CORS politika blokira zahtjev\n' +
             '• Server nije dostupan\n' +
             '• Provjerite mrežnu vezu';
         } else if (error.status === 401 || error.status === 403) {
-          errorMessage = 'Autentifikacija neuspješna. Molimo provjerite auth token.';
+          errorMessage =
+            'Autentifikacija neuspješna. Molimo provjerite auth token.';
         } else if (error.status === 404) {
           errorMessage = 'ERP endpoint nije pronađen.';
         } else if (error.status === 500) {
@@ -136,9 +143,9 @@ export class ErpIntegrationService {
 
         return of({
           success: false,
-          error: errorMessage
+          error: errorMessage,
         });
-      })
+      }),
     );
   }
 
@@ -165,7 +172,10 @@ export class ErpIntegrationService {
    * @param unitId - Šifra radne jedinice
    * @returns Observable of stock data for specific product and unit
    */
-  getStockBySkuAndUnit(sku: string, unitId: string): Observable<ErpStockResponse> {
+  getStockBySkuAndUnit(
+    sku: string,
+    unitId: string,
+  ): Observable<ErpStockResponse> {
     return this.getStock(sku, unitId);
   }
 
@@ -176,12 +186,15 @@ export class ErpIntegrationService {
    */
   getTotalStockQuantity(sku: string): Observable<number> {
     return this.getStockBySku(sku).pipe(
-      map(response => {
+      map((response) => {
         if (response.success && response.data) {
-          return response.data.reduce((total, item) => total + item.quantity, 0);
+          return response.data.reduce(
+            (total, item) => total + item.quantity,
+            0,
+          );
         }
         return 0;
-      })
+      }),
     );
   }
 }

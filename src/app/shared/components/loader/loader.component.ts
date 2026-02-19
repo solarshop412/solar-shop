@@ -1,8 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { AnimationOptions, LottieComponent, provideLottieOptions } from 'ngx-lottie';
+import {
+  AnimationOptions,
+  LottieComponent,
+  provideLottieOptions,
+} from 'ngx-lottie';
 import player from 'lottie-web';
 import { CommonModule } from '@angular/common';
-
 
 export function playerFactory() {
   return player;
@@ -18,10 +21,9 @@ export function playerFactory() {
     provideLottieOptions({
       player: () => player,
     }),
-  ]
+  ],
 })
 export class LoaderComponent {
-
   @Input() options: AnimationOptions;
 
   constructor() {
@@ -29,5 +31,4 @@ export class LoaderComponent {
       path: '/assets/loading.json',
     };
   }
-
 }

@@ -10,4 +10,4 @@ export * from './store/b2b-cart.selectors';
 export * from './services/b2b-cart.service';
 
 // Components
-export * from './components/b2b-cart-sidebar/b2b-cart-sidebar.component'; 
+export * from './components/b2b-cart-sidebar/b2b-cart-sidebar.component';

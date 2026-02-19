@@ -58,7 +58,7 @@ export interface MonriFormParams {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MonriPaymentService {
   private readonly monriConfig = environment.monri;
@@ -67,7 +67,9 @@ export class MonriPaymentService {
   /**
    * Create payment request and get form parameters for Monri
    */
-  async createPaymentRequest(paymentData: MonriPaymentRequest): Promise<MonriFormParams> {
+  async createPaymentRequest(
+    paymentData: MonriPaymentRequest,
+  ): Promise<MonriFormParams> {
     // First create all parameters without digest
     const params: MonriFormParams = {
       key: this.monriConfig.key,
@@ -80,27 +82,35 @@ export class MonriPaymentService {
       transaction_type: paymentData.transaction_type || 'purchase',
       success_url: this.monriConfig.successUrl,
       cancel_url: this.monriConfig.cancelUrl,
-      order_info: paymentData.order_info || `Solar Shop Order ${paymentData.order_number}`, // Required parameter
+      order_info:
+        paymentData.order_info ||
+        `Solar Shop Order ${paymentData.order_number}`, // Required parameter
       // Try multiple redirect parameter variations
       success_redirect: this.monriConfig.successUrl,
       cancel_redirect: this.monriConfig.cancelUrl,
       return_url: this.monriConfig.successUrl,
-      callback_url: this.monriConfig.successUrl
+      callback_url: this.monriConfig.successUrl,
     };
 
     // Add other optional parameters
-    if (paymentData.order_info && paymentData.order_info !== params.order_info) {
+    if (
+      paymentData.order_info &&
+      paymentData.order_info !== params.order_info
+    ) {
       params.order_info = paymentData.order_info;
     }
-    if (paymentData.ch_full_name) params.ch_full_name = paymentData.ch_full_name;
+    if (paymentData.ch_full_name)
+      params.ch_full_name = paymentData.ch_full_name;
     if (paymentData.ch_address) params.ch_address = paymentData.ch_address;
     if (paymentData.ch_city) params.ch_city = paymentData.ch_city;
     if (paymentData.ch_zip) params.ch_zip = paymentData.ch_zip;
     if (paymentData.ch_country) params.ch_country = paymentData.ch_country;
     if (paymentData.ch_phone) params.ch_phone = paymentData.ch_phone;
     if (paymentData.ch_email) params.ch_email = paymentData.ch_email;
-    if (paymentData.number_of_installments) params.number_of_installments = paymentData.number_of_installments;
-    if (paymentData.custom_params) params.custom_params = paymentData.custom_params;
+    if (paymentData.number_of_installments)
+      params.number_of_installments = paymentData.number_of_installments;
+    if (paymentData.custom_params)
+      params.custom_params = paymentData.custom_params;
 
     // Generate digest with all parameters
     params.digest = await this.generateDigest(params);
@@ -153,7 +163,9 @@ export class MonriPaymentService {
       const messageData = encoder.encode(message);
       const hashBuffer = await crypto.subtle.digest('SHA-512', messageData);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
 
       return hashHex;
     } catch (error) {
@@ -167,12 +179,12 @@ export class MonriPaymentService {
    */
   checkPaymentStatus(orderNumber: string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
 
     return this.http.get(
       `${this.monriConfig.endpoint}/api/v1/payment/status/${orderNumber}`,
-      { headers }
+      { headers },
     );
   }
 

@@ -6,15 +6,23 @@ import { BehaviorSubject } from 'rxjs';
 import { SupabaseService } from '../../../services/supabase.service';
 import { TranslationService } from '../../../shared/services/translation.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-import { DataTableComponent, TableConfig } from '../shared/data-table/data-table.component';
+import {
+  DataTableComponent,
+  TableConfig,
+} from '../shared/data-table/data-table.component';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-offers',
   standalone: true,
-  imports: [CommonModule, DataTableComponent, ReactiveFormsModule, TranslatePipe],
+  imports: [
+    CommonModule,
+    DataTableComponent,
+    ReactiveFormsModule,
+    TranslatePipe,
+  ],
   templateUrl: './admin-offers.component.html',
-  styleUrls: ['./admin-offers.component.scss']
+  styleUrls: ['./admin-offers.component.scss'],
 })
 export class AdminOffersComponent implements OnInit {
   private supabaseService = inject(SupabaseService);
@@ -38,7 +46,7 @@ export class AdminOffersComponent implements OnInit {
         sortable: false,
         searchable: false,
         width: '8%',
-        minWidth: '70px'
+        minWidth: '70px',
       },
       {
         key: 'title',
@@ -48,7 +56,7 @@ export class AdminOffersComponent implements OnInit {
         searchable: true,
         width: '25%',
         minWidth: '180px',
-        maxWidth: '300px'
+        maxWidth: '300px',
       },
       {
         key: 'code',
@@ -57,20 +65,24 @@ export class AdminOffersComponent implements OnInit {
         sortable: true,
         searchable: true,
         width: '15%',
-        minWidth: '120px'
+        minWidth: '120px',
       },
       {
         key: 'discount_type',
-        label: this.translationService.translate('admin.offersForm.discountType'),
+        label: this.translationService.translate(
+          'admin.offersForm.discountType',
+        ),
         type: 'status',
         sortable: true,
         searchable: true,
         width: '12%',
-        minWidth: '100px'
+        minWidth: '100px',
       },
       {
         key: 'discount_value',
-        label: this.translationService.translate('admin.offersForm.discountValue'),
+        label: this.translationService.translate(
+          'admin.offersForm.discountValue',
+        ),
         type: 'number',
         sortable: true,
         format: (value: any, item: any) => {
@@ -81,7 +93,7 @@ export class AdminOffersComponent implements OnInit {
           return `${value}%`;
         },
         width: '10%',
-        minWidth: '90px'
+        minWidth: '90px',
       },
       {
         key: 'is_b2b',
@@ -89,9 +101,12 @@ export class AdminOffersComponent implements OnInit {
         type: 'boolean',
         sortable: true,
         searchable: true,
-        format: (value) => value ? this.translationService.translate('admin.contactsForm.yes') : this.translationService.translate('admin.contactsForm.no'),
+        format: (value) =>
+          value
+            ? this.translationService.translate('admin.contactsForm.yes')
+            : this.translationService.translate('admin.contactsForm.no'),
         width: '10%',
-        minWidth: '80px'
+        minWidth: '80px',
       },
       {
         key: 'status',
@@ -99,31 +114,34 @@ export class AdminOffersComponent implements OnInit {
         type: 'status',
         sortable: true,
         format: (value) => {
-          return this.translationService.translate(`admin.offersForm.${value}`) || value;
+          return (
+            this.translationService.translate(`admin.offersForm.${value}`) ||
+            value
+          );
         },
         width: '12%',
-        minWidth: '100px'
-      }
+        minWidth: '100px',
+      },
     ],
     actions: [
       {
         label: this.translationService.translate('common.edit'),
         icon: 'edit',
         action: 'edit',
-        class: 'text-blue-600 hover:text-blue-900'
+        class: 'text-blue-600 hover:text-blue-900',
       },
       {
         label: this.translationService.translate('common.view'),
         icon: 'eye',
         action: 'details',
-        class: 'text-green-600 hover:text-green-900'
+        class: 'text-green-600 hover:text-green-900',
       },
       {
         label: this.translationService.translate('common.delete'),
         icon: 'trash2',
         action: 'delete',
-        class: 'text-red-600 hover:text-red-900'
-      }
+        class: 'text-red-600 hover:text-red-900',
+      },
     ],
     searchable: true,
     sortable: true,
@@ -131,15 +149,18 @@ export class AdminOffersComponent implements OnInit {
     pageSize: 20,
     allowCsvImport: true,
     allowExport: true,
-    rowClickable: true
+    rowClickable: true,
   };
 
   ngOnInit(): void {
-    this.title.setTitle(this.translationService.translate('admin.offersForm.title') + ' - Solar Shop Admin');
+    this.title.setTitle(
+      this.translationService.translate('admin.offersForm.title') +
+        ' - Solar Shop Admin',
+    );
     this.loadOffers();
   }
 
-  onTableAction(event: { action: string, item: any }): void {
+  onTableAction(event: { action: string; item: any }): void {
     const { action, item } = event;
 
     switch (action) {
@@ -173,27 +194,44 @@ export class AdminOffersComponent implements OnInit {
 
     try {
       // Map CSV data to offer format
-      const offers = csvData.map(row => ({
+      const offers = csvData.map((row) => ({
         title: row.title || row.Title || '',
         description: row.description || row.Description || '',
-        short_description: row.short_description || row['Short Description'] || '',
+        short_description:
+          row.short_description || row['Short Description'] || '',
         status: (row.status || row['Status'] || 'active') as any,
-        featured: (row.featured || row['Featured'] || 'false').toLowerCase() === 'true',
-        discount_type: (row.discount_type || row['Discount Type'] || 'percentage') as any,
-        discount_value: parseFloat(row.discount_value || row['Discount Value'] || '0'),
-        min_order_amount: row.min_order_amount ? parseFloat(row.min_order_amount) : undefined,
-        max_order_amount: row.max_order_amount ? parseFloat(row.max_order_amount) : undefined,
+        featured:
+          (row.featured || row['Featured'] || 'false').toLowerCase() === 'true',
+        discount_type: (row.discount_type ||
+          row['Discount Type'] ||
+          'percentage') as any,
+        discount_value: parseFloat(
+          row.discount_value || row['Discount Value'] || '0',
+        ),
+        min_order_amount: row.min_order_amount
+          ? parseFloat(row.min_order_amount)
+          : undefined,
+        max_order_amount: row.max_order_amount
+          ? parseFloat(row.max_order_amount)
+          : undefined,
         start_date: row.start_date || row['Start Date'] || undefined,
         end_date: row.end_date || row['End Date'] || undefined,
-        image_url: row.image_url || row['Image URL'] || undefined
+        image_url: row.image_url || row['Image URL'] || undefined,
       }));
 
       // Import offers one by one
       for (const offer of offers) {
         // Check if offer already exists based on the title
-        const existingOffer = await this.supabaseService.getTable('offers', { title: offer.title });
+        const existingOffer = await this.supabaseService.getTable('offers', {
+          title: offer.title,
+        });
         if (existingOffer.length > 0) {
-          alert(this.translationService.translate('admin.offersForm.offerAlreadyExists', { title: offer.title }));
+          alert(
+            this.translationService.translate(
+              'admin.offersForm.offerAlreadyExists',
+              { title: offer.title },
+            ),
+          );
           continue;
         }
         await this.supabaseService.createRecord('offers', offer);
@@ -231,4 +269,4 @@ export class AdminOffersComponent implements OnInit {
       alert(this.translationService.translate('admin.offersForm.offerError'));
     }
   }
-} 
+}

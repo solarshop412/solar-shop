@@ -10,7 +10,7 @@ import { HighlightOffer } from '../../../../shared/models/highlight-offer.model'
   standalone: true,
   imports: [CommonModule, RouterModule, TranslatePipe],
   templateUrl: './partners-highlights.component.html',
-  styleUrls: ['./partners-highlights.component.scss']
+  styleUrls: ['./partners-highlights.component.scss'],
 })
 export class PartnersHighlightsComponent implements OnInit {
   private supabase = inject(SupabaseService);
@@ -34,18 +34,25 @@ export class PartnersHighlightsComponent implements OnInit {
           const originalPrice = offer.original_price || 0;
           const discountPercentage = offer.discount_value || 0;
           let discountedPrice = offer.discounted_price || 0;
-          
+
           // Calculate discounted price for percentage-only offers if not provided
-          if (discountedPrice === 0 && discountPercentage > 0 && originalPrice > 0) {
+          if (
+            discountedPrice === 0 &&
+            discountPercentage > 0 &&
+            originalPrice > 0
+          ) {
             discountedPrice = originalPrice * (1 - discountPercentage / 100);
           }
-          
+
           return {
             id: offer.id,
             title: offer.title,
             description: offer.description || '',
-            shortDescription: offer.short_description || offer.description || '',
-            imageUrl: offer.image_url || 'assets/images/placeholders/solar-panels-1.jpg',
+            shortDescription:
+              offer.short_description || offer.description || '',
+            imageUrl:
+              offer.image_url ||
+              'assets/images/placeholders/solar-panels-1.jpg',
             originalPrice: originalPrice,
             discountedPrice: discountedPrice,
             discountPercentage: discountPercentage,
@@ -53,7 +60,7 @@ export class PartnersHighlightsComponent implements OnInit {
             status: offer.status || 'active',
             featured: offer.featured || false,
             isB2B: offer.is_b2b || false,
-            endDate: offer.end_date
+            endDate: offer.end_date,
           };
         });
 
@@ -61,10 +68,38 @@ export class PartnersHighlightsComponent implements OnInit {
       } else {
         console.warn('No B2B offers found in database.');
         // Let's try to create a sample offer to test the component
-        this.highlights = [{
+        this.highlights = [
+          {
+            id: 'sample-1',
+            title: 'Premium Inverter Bundle - Limited Time',
+            description:
+              'High-efficiency inverter package with smart monitoring system. Perfect for commercial installations requiring maximum reliability.',
+            shortDescription: 'Premium inverter with smart monitoring',
+            imageUrl: 'assets/images/placeholders/solar-energy-landscape.jpg',
+            originalPrice: 8500,
+            discountedPrice: 6800,
+            discountPercentage: 20,
+            type: 'bundle_deal',
+            status: 'active',
+            featured: true,
+            isB2B: true,
+            endDate: '2024-12-25',
+          },
+        ];
+      }
+    } catch (error) {
+      console.error('Error loading B2B offers from database:', error);
+      console.warn(
+        'Using fallback sample data. Please ensure the offers table exists and the migration has been run.',
+      );
+
+      // Fallback sample data
+      this.highlights = [
+        {
           id: 'sample-1',
           title: 'Premium Inverter Bundle - Limited Time',
-          description: 'High-efficiency inverter package with smart monitoring system. Perfect for commercial installations requiring maximum reliability.',
+          description:
+            'High-efficiency inverter package with smart monitoring system. Perfect for commercial installations requiring maximum reliability.',
           shortDescription: 'Premium inverter with smart monitoring',
           imageUrl: 'assets/images/placeholders/solar-energy-landscape.jpg',
           originalPrice: 8500,
@@ -74,29 +109,9 @@ export class PartnersHighlightsComponent implements OnInit {
           status: 'active',
           featured: true,
           isB2B: true,
-          endDate: '2024-12-25'
-        }];
-      }
-    } catch (error) {
-      console.error('Error loading B2B offers from database:', error);
-      console.warn('Using fallback sample data. Please ensure the offers table exists and the migration has been run.');
-
-      // Fallback sample data
-      this.highlights = [{
-        id: 'sample-1',
-        title: 'Premium Inverter Bundle - Limited Time',
-        description: 'High-efficiency inverter package with smart monitoring system. Perfect for commercial installations requiring maximum reliability.',
-        shortDescription: 'Premium inverter with smart monitoring',
-        imageUrl: 'assets/images/placeholders/solar-energy-landscape.jpg',
-        originalPrice: 8500,
-        discountedPrice: 6800,
-        discountPercentage: 20,
-        type: 'bundle_deal',
-        status: 'active',
-        featured: true,
-        isB2B: true,
-        endDate: '2024-12-25'
-      }];
+          endDate: '2024-12-25',
+        },
+      ];
     }
   }
 
@@ -108,7 +123,9 @@ export class PartnersHighlightsComponent implements OnInit {
     if (!endDate) return false;
     const end = new Date(endDate);
     const now = new Date();
-    const daysUntilEnd = Math.ceil((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+    const daysUntilEnd = Math.ceil(
+      (end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
+    );
     return daysUntilEnd <= 7 && daysUntilEnd > 0;
   }
 }

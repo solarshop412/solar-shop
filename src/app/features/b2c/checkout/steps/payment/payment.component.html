@@ -1,196 +1,366 @@
 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Poppins']">{{ 'checkout.paymentMethod' | translate }}</h2>
+  <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Poppins']">
+    {{ "checkout.paymentMethod" | translate }}
+  </h2>
 
-    <!-- Ordering Disabled Notice -->
-    <div *ngIf="!orderingEnabled" class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+  <!-- Ordering Disabled Notice -->
+  <div
+    *ngIf="!orderingEnabled"
+    class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg"
+  >
     <div class="flex items-center space-x-3">
-        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-        </svg>
-        <div>
-        <h4 class="text-lg font-semibold text-amber-900 font-['Poppins']">{{ 'checkout.orderingDisabled' | translate }}</h4>
-        <p class="text-sm text-amber-800 font-['DM_Sans']">{{ 'checkout.orderingDisabledDescription' | translate }}</p>
-        </div>
+      <svg
+        class="w-6 h-6 text-amber-600 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        />
+      </svg>
+      <div>
+        <h4 class="text-lg font-semibold text-amber-900 font-['Poppins']">
+          {{ "checkout.orderingDisabled" | translate }}
+        </h4>
+        <p class="text-sm text-amber-800 font-['DM_Sans']">
+          {{ "checkout.orderingDisabledDescription" | translate }}
+        </p>
+      </div>
     </div>
-    </div>
+  </div>
 
-    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
     <!-- Payment Method Selection -->
     <div class="mb-8">
-        <div class="space-y-3">
+      <div class="space-y-3">
         <!-- Credit Card (Conditionally shown based on settings) -->
-        <label *ngIf="creditCardPaymentEnabled" class="flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer">
-            <input
+        <label
+          *ngIf="creditCardPaymentEnabled"
+          class="flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer"
+        >
+          <input
             type="radio"
             name="paymentMethod"
             value="credit_card"
             formControlName="paymentMethod"
             class="text-blue-600 focus:ring-blue-600"
-            >
-            <div class="ml-3 flex-1 flex items-center justify-between">
+          />
+          <div class="ml-3 flex-1 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-                </svg>
-                <span class="font-medium text-blue-900 font-['DM_Sans']">{{ 'checkout.creditCard' | translate }}</span>
+              <svg
+                class="w-6 h-6 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+              </svg>
+              <span class="font-medium text-blue-900 font-['DM_Sans']">{{
+                "checkout.creditCard" | translate
+              }}</span>
             </div>
-            </div>
+          </div>
         </label>
 
         <!-- Pay on Delivery -->
-        <label class="flex items-center p-4 border-2 border-green-200 bg-green-50 rounded-lg cursor-pointer">
-            <input
+        <label
+          class="flex items-center p-4 border-2 border-green-200 bg-green-50 rounded-lg cursor-pointer"
+        >
+          <input
             type="radio"
             name="paymentMethod"
             value="cash_on_delivery"
             formControlName="paymentMethod"
             class="text-green-600 focus:ring-green-600"
             checked
-            >
-            <div class="ml-3 flex-1 flex items-center justify-between">
+          />
+          <div class="ml-3 flex-1 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-                <span class="font-medium text-green-900 font-['DM_Sans']">{{ 'checkout.payOnDelivery' | translate }}</span>
+              <svg
+                class="w-6 h-6 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+                />
+              </svg>
+              <span class="font-medium text-green-900 font-['DM_Sans']">{{
+                "checkout.payOnDelivery" | translate
+              }}</span>
             </div>
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            <svg
+              class="w-6 h-6 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
-            </div>
+          </div>
         </label>
-        </div>
-        
-        <!-- Credit Card Notice -->
-        <div *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <div class="flex items-center space-x-3">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            </svg>
-            <div>
-            <h4 class="text-lg font-semibold text-blue-900 mb-2 font-['Poppins']">{{ 'checkout.securePayment' | translate }}</h4>
-            <p class="text-sm text-blue-800 font-['DM_Sans']">
-                {{ 'checkout.securePaymentDescription' | translate }}
-            </p>
-            </div>
-        </div>
-        </div>
+      </div>
 
-        <p class="text-sm text-gray-600 mt-3 font-['DM_Sans']" *ngIf="paymentForm.get('paymentMethod')?.value === 'cash_on_delivery'">
-        {{ 'checkout.payOnDeliveryDescription' | translate }}
-        </p>
-        <p class="text-sm text-gray-600 mt-3 font-['DM_Sans']" *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'">
-        {{ 'checkout.creditCardDescription' | translate }}
-        </p>
-        
-        <!-- Guest Checkout Notice (only show for non-authenticated users) -->
-        <div *ngIf="(currentUser$ | async) === null" 
-             class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-        <div class="flex items-center space-x-2">
-            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
+      <!-- Credit Card Notice -->
+      <div
+        *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'"
+        class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"
+      >
+        <div class="flex items-center space-x-3">
+          <svg
+            class="w-6 h-6 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+          </svg>
+          <div>
+            <h4
+              class="text-lg font-semibold text-blue-900 mb-2 font-['Poppins']"
+            >
+              {{ "checkout.securePayment" | translate }}
+            </h4>
             <p class="text-sm text-blue-800 font-['DM_Sans']">
-            <span class="font-medium">{{ 'checkout.guestCheckout' | translate }}:</span> {{ 'checkout.guestCheckoutDescription' | translate }}
+              {{ "checkout.securePaymentDescription" | translate }}
             </p>
+          </div>
         </div>
+      </div>
+
+      <p
+        class="text-sm text-gray-600 mt-3 font-['DM_Sans']"
+        *ngIf="paymentForm.get('paymentMethod')?.value === 'cash_on_delivery'"
+      >
+        {{ "checkout.payOnDeliveryDescription" | translate }}
+      </p>
+      <p
+        class="text-sm text-gray-600 mt-3 font-['DM_Sans']"
+        *ngIf="paymentForm.get('paymentMethod')?.value === 'credit_card'"
+      >
+        {{ "checkout.creditCardDescription" | translate }}
+      </p>
+
+      <!-- Guest Checkout Notice (only show for non-authenticated users) -->
+      <div
+        *ngIf="(currentUser$ | async) === null"
+        class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg"
+      >
+        <div class="flex items-center space-x-2">
+          <svg
+            class="w-5 h-5 text-blue-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <p class="text-sm text-blue-800 font-['DM_Sans']">
+            <span class="font-medium"
+              >{{ "checkout.guestCheckout" | translate }}:</span
+            >
+            {{ "checkout.guestCheckoutDescription" | translate }}
+          </p>
         </div>
+      </div>
     </div>
 
     <!-- B2B Order Option (only show for company users) -->
-    <div *ngIf="isCompanyUser$ | async" class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg">
-        <label class="flex items-start space-x-3 cursor-pointer">
+    <div
+      *ngIf="isCompanyUser$ | async"
+      class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg"
+    >
+      <label class="flex items-start space-x-3 cursor-pointer">
         <input
-            type="checkbox"
-            formControlName="isB2BOrder"
-            class="mt-1 text-purple-600 focus:ring-purple-600 rounded"
-        >
+          type="checkbox"
+          formControlName="isB2BOrder"
+          class="mt-1 text-purple-600 focus:ring-purple-600 rounded"
+        />
         <div class="flex-1">
-            <div class="flex items-center space-x-2">
-            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          <div class="flex items-center space-x-2">
+            <svg
+              class="w-5 h-5 text-purple-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+              />
             </svg>
-            <span class="font-medium text-purple-900 font-['DM_Sans']">{{ 'checkout.businessOrder' | translate }}</span>
-            <span class="px-2 py-1 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full">B2B</span>
-            </div>
-            <p class="mt-1 text-sm text-purple-700 font-['DM_Sans']">
-            {{ 'checkout.businessOrderDescription' | translate }}
-            </p>
-            <div class="mt-2 flex items-center space-x-4 text-xs text-purple-600">
+            <span class="font-medium text-purple-900 font-['DM_Sans']">{{
+              "checkout.businessOrder" | translate
+            }}</span>
+            <span
+              class="px-2 py-1 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full"
+              >B2B</span
+            >
+          </div>
+          <p class="mt-1 text-sm text-purple-700 font-['DM_Sans']">
+            {{ "checkout.businessOrderDescription" | translate }}
+          </p>
+          <div class="mt-2 flex items-center space-x-4 text-xs text-purple-600">
             <div class="flex items-center space-x-1">
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span>{{ 'checkout.bulkDiscounts' | translate }}</span>
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>{{ "checkout.bulkDiscounts" | translate }}</span>
             </div>
             <div class="flex items-center space-x-1">
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span>{{ 'checkout.prioritySupport' | translate }}</span>
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>{{ "checkout.prioritySupport" | translate }}</span>
             </div>
             <div class="flex items-center space-x-1">
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                </svg>
-                <span>{{ 'checkout.customInvoicing' | translate }}</span>
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span>{{ "checkout.customInvoicing" | translate }}</span>
             </div>
-            </div>
+          </div>
         </div>
-        </label>
+      </label>
     </div>
 
     <!-- Terms and Conditions -->
     <div class="mb-8">
-        <label class="flex items-start space-x-3">
+      <label class="flex items-start space-x-3">
         <input
-            type="checkbox"
-            formControlName="acceptTerms"
-            class="mt-1 text-blue-600 focus:ring-blue-600 rounded"
-        >
+          type="checkbox"
+          formControlName="acceptTerms"
+          class="mt-1 text-blue-600 focus:ring-blue-600 rounded"
+        />
         <span class="text-sm text-gray-600 font-['DM_Sans']">
-            {{ 'checkout.termsAndConditions' | translate }} <a href="uvjeti" class="text-blue-600 hover:underline">{{ 'checkout.terms' | translate }}</a> {{ 'checkout.and' | translate }}
-            <a href="/privatnost" class="text-blue-600 hover:underline">{{ 'checkout.privacyPolicy' | translate }}</a> *
+          {{ "checkout.termsAndConditions" | translate }}
+          <a href="uvjeti" class="text-blue-600 hover:underline">{{
+            "checkout.terms" | translate
+          }}</a>
+          {{ "checkout.and" | translate }}
+          <a href="/privatnost" class="text-blue-600 hover:underline">{{
+            "checkout.privacyPolicy" | translate
+          }}</a>
+          *
         </span>
-        </label>
-        <div *ngIf="paymentForm.get('acceptTerms')?.invalid && paymentForm.get('acceptTerms')?.touched" class="mt-1 text-sm text-red-600">
-        {{ 'checkout.termsAndConditionsRequired' | translate }}
-        </div>
+      </label>
+      <div
+        *ngIf="
+          paymentForm.get('acceptTerms')?.invalid &&
+          paymentForm.get('acceptTerms')?.touched
+        "
+        class="mt-1 text-sm text-red-600"
+      >
+        {{ "checkout.termsAndConditionsRequired" | translate }}
+      </div>
     </div>
 
     <!-- Error Message -->
-    <div *ngIf="(orderCreationError$ | async) as error" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-        <div class="flex items-center space-x-2">
-        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+    <div
+      *ngIf="orderCreationError$ | async as error"
+      class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"
+    >
+      <div class="flex items-center space-x-2">
+        <svg
+          class="w-5 h-5 text-red-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+          />
         </svg>
         <p class="text-sm text-red-800 font-['DM_Sans']">{{ error }}</p>
-        </div>
+      </div>
     </div>
 
     <!-- Navigation Buttons -->
     <div class="flex space-x-4 pt-6 border-t border-gray-200">
-        <button 
+      <button
         type="button"
         (click)="goBack()"
         class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium font-['DM_Sans']"
-        >
-        {{ 'checkout.backStep' | translate }} {{ 'checkout.step2' | translate }}
-        </button>
-        <button
+      >
+        {{ "checkout.backStep" | translate }} {{ "checkout.step2" | translate }}
+      </button>
+      <button
         type="submit"
         [disabled]="paymentForm.invalid || isProcessing || !orderingEnabled"
         class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold font-['DM_Sans'] disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-        <span *ngIf="!isProcessing">{{ 'checkout.completeOrder' | translate }}</span>
+      >
+        <span *ngIf="!isProcessing">{{
+          "checkout.completeOrder" | translate
+        }}</span>
         <span *ngIf="isProcessing" class="flex items-center justify-center">
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            {{ 'checkout.processing' | translate }}
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          {{ "checkout.processing" | translate }}
         </span>
-        </button>
+      </button>
     </div>
-    </form>
+  </form>
 </div>

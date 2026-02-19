@@ -1,6 +1,11 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
@@ -11,9 +16,15 @@ import { TranslatePipe } from '../../../../../shared/pipes/translate.pipe';
 import { User } from '../../../../../shared/models/user.model';
 import * as CartActions from '../../../cart/store/cart.actions';
 import * as OrdersActions from '../../../../admin/orders/store/orders.actions';
-import { selectB2COrderCreated, selectB2COrderError } from '../../../../admin/orders/store/orders.selectors';
+import {
+  selectB2COrderCreated,
+  selectB2COrderError,
+} from '../../../../admin/orders/store/orders.selectors';
 import { TranslationService } from '../../../../../shared/services/translation.service';
-import { MonriPaymentService, MonriPaymentRequest } from '../../../../../shared/services/monri-payment.service';
+import {
+  MonriPaymentService,
+  MonriPaymentRequest,
+} from '../../../../../shared/services/monri-payment.service';
 import * as CartSelectors from '../../../cart/store/cart.selectors';
 import { SettingsService } from '../../../../../shared/services/settings.service';
 
@@ -22,7 +33,7 @@ import { SettingsService } from '../../../../../shared/services/settings.service
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './payment.component.html',
-  styleUrls: ['./payment.component.scss']
+  styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -47,13 +58,13 @@ export class PaymentComponent implements OnInit, OnDestroy {
   constructor() {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.isCompanyUser$ = this.currentUser$.pipe(
-      map((user: User | null) => user?.companyId != null)
+      map((user: User | null) => user?.companyId != null),
     );
     this.cartSummary$ = this.store.select(CartSelectors.selectCartSummary);
 
     // Subscribe to settings to check if credit card payment and ordering are enabled
     this.subscriptions.add(
-      this.settingsService.settings$.subscribe(settings => {
+      this.settingsService.settings$.subscribe((settings) => {
         const previousCreditCardValue = this.creditCardPaymentEnabled;
         this.creditCardPaymentEnabled = settings.credit_card_payment_enabled;
         this.orderingEnabled = settings.ordering_enabled;
@@ -62,69 +73,87 @@ export class PaymentComponent implements OnInit, OnDestroy {
           previousCreditCard: previousCreditCardValue,
           currentCreditCard: this.creditCardPaymentEnabled,
           orderingEnabled: this.orderingEnabled,
-          settings
+          settings,
         });
 
         // If credit card is now disabled and it was selected, switch to cash on delivery
-        if (!this.creditCardPaymentEnabled && this.paymentForm?.get('paymentMethod')?.value === 'credit_card') {
+        if (
+          !this.creditCardPaymentEnabled &&
+          this.paymentForm?.get('paymentMethod')?.value === 'credit_card'
+        ) {
           this.paymentForm.patchValue({ paymentMethod: 'cash_on_delivery' });
-          console.log('[Payment] Switched payment method to cash_on_delivery because credit card is disabled');
+          console.log(
+            '[Payment] Switched payment method to cash_on_delivery because credit card is disabled',
+          );
         }
-      })
+      }),
     );
 
     this.paymentForm = this.fb.group({
       paymentMethod: ['cash_on_delivery', [Validators.required]],
       isB2BOrder: [false],
-      acceptTerms: [false, [Validators.requiredTrue]]
+      acceptTerms: [false, [Validators.requiredTrue]],
     });
-
   }
 
   ngOnInit(): void {
     // Subscribe to order creation success
     this.subscriptions.add(
-      this.store.select(selectB2COrderCreated)
-        .pipe(
-          distinctUntilChanged()
-        )
-        .subscribe(order => {
-          console.log('Order state changed in payment component:', order, 'isProcessing:', this.isProcessing);
+      this.store
+        .select(selectB2COrderCreated)
+        .pipe(distinctUntilChanged())
+        .subscribe((order) => {
+          console.log(
+            'Order state changed in payment component:',
+            order,
+            'isProcessing:',
+            this.isProcessing,
+          );
           if (order && this.isProcessing) {
             console.log('Order created successfully:', order);
             this.isProcessing = false;
             this.orderNumber = order.orderNumber;
             this.handleOrderSuccess();
           }
-        })
+        }),
     );
 
     // Subscribe to order creation errors
     this.subscriptions.add(
-      this.store.select(selectB2COrderError)
-        .pipe(
-          distinctUntilChanged()
-        )
-        .subscribe(error => {
-          console.log('Error state changed in payment component:', error, 'isProcessing:', this.isProcessing);
+      this.store
+        .select(selectB2COrderError)
+        .pipe(distinctUntilChanged())
+        .subscribe((error) => {
+          console.log(
+            'Error state changed in payment component:',
+            error,
+            'isProcessing:',
+            this.isProcessing,
+          );
           if (error && this.isProcessing) {
             console.error('Order creation failed:', error);
             this.isProcessing = false;
 
             // Check for specific error types
             if (error.includes('Insufficient stock')) {
-              this.orderCreationError$.next(this.translationService.translate('checkout.oneOrMoreItemsUnavailable'));
+              this.orderCreationError$.next(
+                this.translationService.translate(
+                  'checkout.oneOrMoreItemsUnavailable',
+                ),
+              );
             } else {
-              this.orderCreationError$.next('Error creating order. Please try again.');
+              this.orderCreationError$.next(
+                'Error creating order. Please try again.',
+              );
             }
           }
-        })
+        }),
     );
   }
 
   async onSubmit() {
     if (this.paymentForm.invalid) {
-      Object.keys(this.paymentForm.controls).forEach(key => {
+      Object.keys(this.paymentForm.controls).forEach((key) => {
         this.paymentForm.get(key)?.markAsTouched();
       });
       return;
@@ -147,9 +176,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   private async createOrder() {
     // Get current user (optional for guest checkout)
-    const currentUser = await this.store.select(selectCurrentUser).pipe(
-      take(1)
-    ).toPromise();
+    const currentUser = await this.store
+      .select(selectCurrentUser)
+      .pipe(take(1))
+      .toPromise();
 
     // If no authenticated user, proceed with guest checkout
     if (!currentUser) {
@@ -163,7 +193,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
             email: session.user.email || '',
             firstName: session.user.user_metadata?.firstName || 'Customer',
             lastName: session.user.user_metadata?.lastName || '',
-            phone: session.user.user_metadata?.phone || ''
+            phone: session.user.user_metadata?.phone || '',
           };
           return this.createOrderWithUser(sessionUser);
         } else {
@@ -171,7 +201,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
           return this.createGuestOrder();
         }
       } catch (sessionError) {
-        console.warn('Session error, proceeding with guest checkout:', sessionError);
+        console.warn(
+          'Session error, proceeding with guest checkout:',
+          sessionError,
+        );
         return this.createGuestOrder();
       }
     }
@@ -181,9 +214,15 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   private async createGuestOrder() {
     // Get shipping info from the shipping step
-    const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo') || '{}');
+    const shippingInfo = JSON.parse(
+      localStorage.getItem('shippingInfo') || '{}',
+    );
 
-    if (!shippingInfo.email || !shippingInfo.firstName || !shippingInfo.lastName) {
+    if (
+      !shippingInfo.email ||
+      !shippingInfo.firstName ||
+      !shippingInfo.lastName
+    ) {
       throw new Error('Shipping information is required for guest checkout');
     }
 
@@ -193,14 +232,13 @@ export class PaymentComponent implements OnInit, OnDestroy {
       email: shippingInfo.email,
       firstName: shippingInfo.firstName,
       lastName: shippingInfo.lastName,
-      phone: shippingInfo.phone || ''
+      phone: shippingInfo.phone || '',
     };
 
     return this.createOrderWithUser(guestUser);
   }
 
   private async createOrderWithUser(currentUser: any) {
-
     // Get cart items from localStorage that was saved during checkout flow
     const cartItems = JSON.parse(localStorage.getItem('checkoutItems') || '[]');
 
@@ -214,16 +252,20 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   private async processCartItems(currentUser: any, cartItems: any[]) {
-
     // Calculate totals from CartItem objects
-    const subtotal = cartItems.reduce((sum: number, item: any) => sum + (item.price * item.quantity), 0);
+    const subtotal = cartItems.reduce(
+      (sum: number, item: any) => sum + item.price * item.quantity,
+      0,
+    );
     const total = subtotal; // No tax or shipping
 
     // Generate order number
     this.orderNumber = 'ORD-' + Date.now();
 
     // Get shipping info from localStorage (from shipping step)
-    const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo') || '{}');
+    const shippingInfo = JSON.parse(
+      localStorage.getItem('shippingInfo') || '{}',
+    );
 
     // Create shipping and billing address objects
     const shippingAddress = {
@@ -235,21 +277,23 @@ export class PaymentComponent implements OnInit, OnDestroy {
       state: shippingInfo.state || '',
       postalCode: shippingInfo.postalCode || '',
       country: shippingInfo.country || '',
-      phone: shippingInfo.phone || currentUser.phone || ''
+      phone: shippingInfo.phone || currentUser.phone || '',
     };
 
     // Get B2B flag from form
     const isB2BOrder = this.paymentForm.get('isB2BOrder')?.value || false;
 
     // Get payment method from form
-    const paymentMethod = this.paymentForm.get('paymentMethod')?.value || 'cash_on_delivery';
+    const paymentMethod =
+      this.paymentForm.get('paymentMethod')?.value || 'cash_on_delivery';
 
     // Create order object
     const orderData = {
       order_number: this.orderNumber,
       user_id: currentUser.id, // Will be null for guest orders
       customer_email: currentUser.email,
-      customer_name: `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim(),
+      customer_name:
+        `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim(),
       customer_phone: shippingInfo.phone || currentUser.phone,
 
       // Amounts
@@ -273,15 +317,20 @@ export class PaymentComponent implements OnInit, OnDestroy {
       // Timestamps
       order_date: new Date().toISOString(),
       created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
     };
 
     // Dispatch NgRx action to create order with stock management
-    console.log('Dispatching createB2COrder action with data:', { orderData, cartItems });
-    this.store.dispatch(OrdersActions.createB2COrder({
+    console.log('Dispatching createB2COrder action with data:', {
       orderData,
-      cartItems
-    }));
+      cartItems,
+    });
+    this.store.dispatch(
+      OrdersActions.createB2COrder({
+        orderData,
+        cartItems,
+      }),
+    );
   }
 
   /**
@@ -290,28 +339,36 @@ export class PaymentComponent implements OnInit, OnDestroy {
   private async processMonriPayment() {
     try {
       // Get current user
-      const currentUser = await this.store.select(selectCurrentUser).pipe(take(1)).toPromise();
-      
+      const currentUser = await this.store
+        .select(selectCurrentUser)
+        .pipe(take(1))
+        .toPromise();
+
       // Get cart summary
       const cartSummary = await this.cartSummary$.pipe(take(1)).toPromise();
-      
+
       if (!cartSummary) {
         throw new Error('Cart summary not available');
       }
 
       // Get shipping info
-      const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo') || '{}');
-      
+      const shippingInfo = JSON.parse(
+        localStorage.getItem('shippingInfo') || '{}',
+      );
+
       // Generate order number for payment
       this.orderNumber = 'ORD-' + Date.now();
 
       // Prepare payment data for Monri
       const paymentData: MonriPaymentRequest = {
         order_number: this.orderNumber,
-        amount: this.monriPaymentService.formatAmountToCents(cartSummary.subtotal), // Convert to cents
+        amount: this.monriPaymentService.formatAmountToCents(
+          cartSummary.subtotal,
+        ), // Convert to cents
         currency: 'EUR',
         order_info: `Solar Shop Order ${this.orderNumber}`,
-        ch_full_name: `${shippingInfo.firstName || ''} ${shippingInfo.lastName || ''}`.trim(),
+        ch_full_name:
+          `${shippingInfo.firstName || ''} ${shippingInfo.lastName || ''}`.trim(),
         ch_address: shippingInfo.address || '',
         ch_city: shippingInfo.city || '',
         ch_zip: shippingInfo.postalCode || '',
@@ -319,32 +376,37 @@ export class PaymentComponent implements OnInit, OnDestroy {
         ch_phone: shippingInfo.phone || '',
         ch_email: currentUser?.email || shippingInfo.email || '',
         language: 'hr',
-        transaction_type: 'purchase'
+        transaction_type: 'purchase',
       };
 
       // Store order data temporarily for after payment completion
-      localStorage.setItem('pendingOrderData', JSON.stringify({
-        currentUser: currentUser || {
-          id: null,
-          email: shippingInfo.email,
-          firstName: shippingInfo.firstName,
-          lastName: shippingInfo.lastName,
-          phone: shippingInfo.phone
-        },
-        orderNumber: this.orderNumber,
-        paymentMethod: 'credit_card'
-      }));
+      localStorage.setItem(
+        'pendingOrderData',
+        JSON.stringify({
+          currentUser: currentUser || {
+            id: null,
+            email: shippingInfo.email,
+            firstName: shippingInfo.firstName,
+            lastName: shippingInfo.lastName,
+            phone: shippingInfo.phone,
+          },
+          orderNumber: this.orderNumber,
+          paymentMethod: 'credit_card',
+        }),
+      );
 
       // Create form parameters and submit to Monri
-      const formParams = await this.monriPaymentService.createPaymentRequest(paymentData);
-      
+      const formParams =
+        await this.monriPaymentService.createPaymentRequest(paymentData);
+
       // Submit payment form to Monri
       this.monriPaymentService.submitPaymentForm(formParams);
-      
     } catch (error) {
       console.error('Error processing Monri payment:', error);
       this.isProcessing = false;
-      this.orderCreationError$.next('Error processing payment. Please try again.');
+      this.orderCreationError$.next(
+        'Error processing payment. Please try again.',
+      );
     }
   }
 
@@ -356,17 +418,16 @@ export class PaymentComponent implements OnInit, OnDestroy {
     localStorage.removeItem('shippingInfo');
 
     // Dispatch order completion action which will automatically clear cart
-    this.store.dispatch(CartActions.orderCompleted({
-      orderId: '', // Will be filled by the effect
-      orderNumber: this.orderNumber
-    }));
+    this.store.dispatch(
+      CartActions.orderCompleted({
+        orderId: '', // Will be filled by the effect
+        orderNumber: this.orderNumber,
+      }),
+    );
 
     // Clear the order state after success
     this.store.dispatch(OrdersActions.clearB2COrderState());
-
   }
-
-
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
@@ -375,4 +436,4 @@ export class PaymentComponent implements OnInit, OnDestroy {
   goBack() {
     this.router.navigate(['/blagajna/dostava']);
   }
-} 
+}

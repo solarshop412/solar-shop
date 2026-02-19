@@ -1,8 +1,5 @@
 import { isDevMode } from '@angular/core';
-import {
-  ActionReducerMap,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { authReducer } from '../core/auth/store/auth.reducer';
 import { AuthState } from '../core/auth/store/auth.state';
 import { navbarReducer } from '../features/b2c/navbar/store/navbar.reducer';

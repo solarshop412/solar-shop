@@ -7,7 +7,7 @@ import { TranslatePipe } from '../../../pipes/translate.pipe';
   standalone: true,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './delete-confirmation-modal.component.html',
-  styleUrls: ['./delete-confirmation-modal.component.scss']
+  styleUrls: ['./delete-confirmation-modal.component.scss'],
 })
 export class DeleteConfirmationModalComponent {
   @Input() isOpen: boolean = false;

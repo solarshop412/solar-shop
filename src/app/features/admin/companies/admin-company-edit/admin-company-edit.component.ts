@@ -1,10 +1,25 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  AsyncValidatorFn,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, filter, debounceTime, distinctUntilChanged, switchMap, first } from 'rxjs/operators';
+import {
+  takeUntil,
+  filter,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  first,
+} from 'rxjs/operators';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { Company } from '../../../../shared/models/company.model';
 import { SupabaseService } from '../../../../services/supabase.service';
@@ -12,7 +27,7 @@ import * as CompaniesActions from '../store/companies.actions';
 import {
   selectCompaniesLoading,
   selectCompaniesError,
-  selectCompanyById
+  selectCompanyById,
 } from '../store/companies.selectors';
 
 @Component({
@@ -20,7 +35,7 @@ import {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './admin-company-edit.component.html',
-  styleUrls: ['./admin-company-edit.component.scss']
+  styleUrls: ['./admin-company-edit.component.scss'],
 })
 export class AdminCompanyEditComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -58,7 +73,7 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
       firstName: [''],
       lastName: [''],
       email: [''],
-      phoneNumber: ['']
+      phoneNumber: [''],
     });
   }
 
@@ -70,12 +85,13 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
       // Load company data for editing
       this.store.dispatch(CompaniesActions.loadCompanies());
 
-      this.store.select(selectCompanyById(this.companyId))
+      this.store
+        .select(selectCompanyById(this.companyId))
         .pipe(
-          filter(company => !!company),
-          takeUntil(this.destroy$)
+          filter((company) => !!company),
+          takeUntil(this.destroy$),
         )
-        .subscribe(company => {
+        .subscribe((company) => {
           if (company) {
             this.populateForm(company);
           }
@@ -102,7 +118,7 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
       website: company.website,
       companyAddress: company.companyAddress,
       description: company.description,
-      status: company.status
+      status: company.status,
     });
   }
 
@@ -112,15 +128,19 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
 
       if (this.isEditMode && this.companyId) {
         // Update existing company
-        this.store.dispatch(CompaniesActions.updateCompany({
-          companyId: this.companyId,
-          company: formData
-        }));
+        this.store.dispatch(
+          CompaniesActions.updateCompany({
+            companyId: this.companyId,
+            company: formData,
+          }),
+        );
       } else {
         // Create new company
-        this.store.dispatch(CompaniesActions.createCompany({
-          company: formData
-        }));
+        this.store.dispatch(
+          CompaniesActions.createCompany({
+            company: formData,
+          }),
+        );
       }
 
       // Navigate back after action is dispatched
@@ -133,7 +153,7 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {
-    Object.keys(formGroup.controls).forEach(key => {
+    Object.keys(formGroup.controls).forEach((key) => {
       const control = formGroup.get(key);
       control?.markAsTouched();
     });
@@ -144,12 +164,15 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
   }
 
   copyToClipboard(text: string): void {
-    navigator.clipboard.writeText(text).then(() => {
-      // You could show a toast notification here if you have one
-      console.log('Company UUID copied to clipboard');
-    }).catch(err => {
-      console.error('Failed to copy Company UUID: ', err);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        // You could show a toast notification here if you have one
+        console.log('Company UUID copied to clipboard');
+      })
+      .catch((err) => {
+        console.error('Failed to copy Company UUID: ', err);
+      });
   }
 
   /**
@@ -158,7 +181,7 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
   private taxNumberValidator(): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (!control.value) {
-        return new Observable(observer => {
+        return new Observable((observer) => {
           observer.next(null);
           observer.complete();
         });
@@ -187,7 +210,11 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
               }
 
               // If editing and tax number belongs to current company, it's valid
-              if (this.isEditMode && this.companyId && data[0].id === this.companyId) {
+              if (
+                this.isEditMode &&
+                this.companyId &&
+                data[0].id === this.companyId
+              ) {
                 return null;
               }
 
@@ -195,7 +222,7 @@ export class AdminCompanyEditComponent implements OnInit, OnDestroy {
               return { taxNumberExists: true };
             });
         }),
-        first()
+        first(),
       );
     };
   }

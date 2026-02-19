@@ -1,4 +1,10 @@
-import { Component, Input, inject, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  inject,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
@@ -7,27 +13,30 @@ import { SuccessModalComponent } from '../../../../../../shared/components/modal
 import { SupabaseService } from '../../../../../../services/supabase.service';
 import { selectCurrentUser } from '../../../../../../core/auth/store/auth.selectors';
 import { WriteReviewModalComponent } from '../../../../../../shared/components/modals/write-review-modal/write-review-modal.component';
-import { ProductDetailsActions, ProductReview } from '../../store/product-details.actions';
+import {
+  ProductDetailsActions,
+  ProductReview,
+} from '../../store/product-details.actions';
 import {
   selectProductReviews,
   selectProductReviewsLoading,
   selectProductReviewsError,
   selectAverageRating,
   selectReviewCount,
-  selectIsMarkingHelpful
+  selectIsMarkingHelpful,
 } from '../../store/product-details.selectors';
 
 @Component({
   selector: 'app-product-reviews',
   standalone: true,
   imports: [
-    CommonModule, 
-    TranslatePipe, 
-    WriteReviewModalComponent, 
-    SuccessModalComponent
+    CommonModule,
+    TranslatePipe,
+    WriteReviewModalComponent,
+    SuccessModalComponent,
   ],
   templateUrl: './product-reviews.component.html',
-  styleUrls: ['./product-reviews.component.scss']
+  styleUrls: ['./product-reviews.component.scss'],
 })
 export class ProductReviewsComponent implements OnChanges {
   @Input() productId!: string;
@@ -66,7 +75,12 @@ export class ProductReviewsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // Check if productId has changed and is now available
     if (changes['productId'] && this.productId && this.userId) {
-      console.log('ProductId changed to:', this.productId, 'UserId:', this.userId); // Debug log
+      console.log(
+        'ProductId changed to:',
+        this.productId,
+        'UserId:',
+        this.userId,
+      ); // Debug log
       this.checkIfUserCanWriteReview();
     }
   }
@@ -97,31 +111,43 @@ export class ProductReviewsComponent implements OnChanges {
 
   getRatingCount(rating: number): number {
     let count = 0;
-    this.reviews$.subscribe(reviews => {
-      count = reviews.filter(review => review.rating === rating).length;
-    }).unsubscribe();
+    this.reviews$
+      .subscribe((reviews) => {
+        count = reviews.filter((review) => review.rating === rating).length;
+      })
+      .unsubscribe();
     return count;
   }
 
   getRatingPercentage(rating: number): number {
     const count = this.getRatingCount(rating);
     let totalCount = 0;
-    this.reviewCount$.subscribe(total => {
-      totalCount = total;
-    }).unsubscribe();
+    this.reviewCount$
+      .subscribe((total) => {
+        totalCount = total;
+      })
+      .unsubscribe();
     return totalCount > 0 ? (count / totalCount) * 100 : 0;
   }
 
   isMarkingHelpful(reviewId: string): boolean {
     let isMarking = false;
-    this.store.select(selectIsMarkingHelpful(reviewId)).subscribe(marking => {
-      isMarking = marking;
-    }).unsubscribe();
+    this.store
+      .select(selectIsMarkingHelpful(reviewId))
+      .subscribe((marking) => {
+        isMarking = marking;
+      })
+      .unsubscribe();
     return isMarking;
   }
 
   markHelpful(reviewId: string): void {
-    this.store.dispatch(ProductDetailsActions.markReviewHelpful({ reviewId, productId: this.productId }));
+    this.store.dispatch(
+      ProductDetailsActions.markReviewHelpful({
+        reviewId,
+        productId: this.productId,
+      }),
+    );
   }
 
   reportReview(reviewId: string): void {
@@ -134,7 +160,7 @@ export class ProductReviewsComponent implements OnChanges {
     } else {
       this.showSuccess(
         this.translationService.translate('reviewsSection.cannotWriteReview'),
-        this.translationService.translate('reviewsSection.mustPurchaseFirst')
+        this.translationService.translate('reviewsSection.mustPurchaseFirst'),
       );
     }
   }
@@ -143,7 +169,9 @@ export class ProductReviewsComponent implements OnChanges {
     this.showReviewModal = false;
     this.showSuccess(
       this.translationService.translate('reviewsSection.reviewSubmitted'),
-      this.translationService.translate('reviewsSection.reviewSubmittedMessage')
+      this.translationService.translate(
+        'reviewsSection.reviewSubmittedMessage',
+      ),
     );
     // Reload reviews to include the new one (if approved)
     this.reloadReviews();
@@ -154,7 +182,9 @@ export class ProductReviewsComponent implements OnChanges {
   }
 
   reloadReviews(): void {
-    this.store.dispatch(ProductDetailsActions.loadProductReviews({ productId: this.productId }));
+    this.store.dispatch(
+      ProductDetailsActions.loadProductReviews({ productId: this.productId }),
+    );
   }
 
   private async checkIfUserCanWriteReview(): Promise<void> {
@@ -172,12 +202,18 @@ export class ProductReviewsComponent implements OnChanges {
         return;
       }
 
-      console.log('Checking if user can write review for userId:', this.userId, 'productId:', this.productId); // Debug log
+      console.log(
+        'Checking if user can write review for userId:',
+        this.userId,
+        'productId:',
+        this.productId,
+      ); // Debug log
 
       // Check if user has purchased this product and order is delivered
       const { data: orderItems, error } = await this.supabaseService.client
         .from('order_items')
-        .select(`
+        .select(
+          `
           id,
           order_id,
           product_id,
@@ -186,7 +222,8 @@ export class ProductReviewsComponent implements OnChanges {
             user_id,
             status
           )
-        `)
+        `,
+        )
         .eq('product_id', this.productId)
         .eq('orders.user_id', this.userId)
         .eq('orders.status', 'delivered');
@@ -205,7 +242,7 @@ export class ProductReviewsComponent implements OnChanges {
       }
 
       // Check if user has already reviewed this product for any of these order items
-      const orderItemIds = orderItems.map(item => item.id);
+      const orderItemIds = orderItems.map((item) => item.id);
       const { data: existingReviews } = await this.supabaseService.client
         .from('reviews')
         .select('order_item_id')
@@ -216,7 +253,9 @@ export class ProductReviewsComponent implements OnChanges {
       console.log('Existing reviews found:', existingReviews?.length || 0); // Debug log
 
       // User can write review if they have order items but haven't reviewed all of them
-      this.canWriteReview = existingReviews ? existingReviews.length < orderItems.length : true;
+      this.canWriteReview = existingReviews
+        ? existingReviews.length < orderItems.length
+        : true;
       console.log('Final canWriteReview result:', this.canWriteReview); // Debug log
     } catch (error) {
       console.error('Error checking if user can write review:', error);
@@ -243,4 +282,4 @@ export class ProductReviewsComponent implements OnChanges {
   trackByReviewId(index: number, review: ProductReview): string {
     return review.id;
   }
-} 
+}

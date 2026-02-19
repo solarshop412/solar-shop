@@ -3,21 +3,21 @@ import { OffersActions } from './offers.actions';
 import { initialOffersState } from './offers.state';
 
 export const offersReducer = createReducer(
-    initialOffersState,
-    on(OffersActions.loadOffers, (state) => ({
-        ...state,
-        isLoading: true,
-        error: null
-    })),
-    on(OffersActions.loadOffersSuccess, (state, { offers }) => ({
-        ...state,
-        offers,
-        isLoading: false,
-        error: null
-    })),
-    on(OffersActions.loadOffersFailure, (state, { error }) => ({
-        ...state,
-        isLoading: false,
-        error
-    }))
-); 
+  initialOffersState,
+  on(OffersActions.loadOffers, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+  on(OffersActions.loadOffersSuccess, (state, { offers }) => ({
+    ...state,
+    offers,
+    isLoading: false,
+    error: null,
+  })),
+  on(OffersActions.loadOffersFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error,
+  })),
+);

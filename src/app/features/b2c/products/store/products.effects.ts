@@ -7,20 +7,26 @@ import { CategoriesService } from '../services/categories.service';
 
 @Injectable()
 export class ProductsEffects {
-    private actions$ = inject(Actions);
-    private categoriesService = inject(CategoriesService);
+  private actions$ = inject(Actions);
+  private categoriesService = inject(CategoriesService);
 
-    loadProductCategories$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(ProductsActions.loadProductCategories),
-            switchMap(() =>
-                this.categoriesService.getActiveCategories().pipe(
-                    map(categories => ProductsActions.loadProductCategoriesSuccess({ categories })),
-                    catchError((error: any) => of(ProductsActions.loadProductCategoriesFailure({
-                        error: error.message || 'Failed to load categories'
-                    })))
-                )
-            )
-        )
-    );
-} 
+  loadProductCategories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.loadProductCategories),
+      switchMap(() =>
+        this.categoriesService.getActiveCategories().pipe(
+          map((categories) =>
+            ProductsActions.loadProductCategoriesSuccess({ categories }),
+          ),
+          catchError((error: any) =>
+            of(
+              ProductsActions.loadProductCategoriesFailure({
+                error: error.message || 'Failed to load categories',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
