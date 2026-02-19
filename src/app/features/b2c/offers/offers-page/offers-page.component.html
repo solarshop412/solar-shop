@@ -97,40 +97,5 @@
             {{ 'offers.browseAllProducts' | translate }}
         </button>
     </div>
-
-    <!-- Call to Action -->
-    <div class="mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white">
-        <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-['Poppins']">
-            {{ 'offers.dontMissOut' | translate }}
-        </h2>
-        <p class="text-xl mb-8 max-w-2xl mx-auto font-['DM_Sans']">
-            {{ 'offers.subscribeText' | translate }}
-        </p>
-        <form #newsletterForm="ngForm" 
-            (ngSubmit)="onNewsletterSubmit($event, newsletterForm)" 
-            class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input 
-                type="email" 
-                name="email"
-                [placeholder]="'offers.enterEmail' | translate"
-                class="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white font-['DM_Sans']"
-                required
-                #emailInput
-                ngModel
-            >
-            <button 
-                type="submit"
-                class="px-8 py-3 rounded-lg font-semibold transition-colors font-['DM_Sans']"
-                [class.bg-green-500]="(newsletterState$ | async)?.success"
-                [class.text-white]="(newsletterState$ | async)?.success"
-                [class.bg-white]="!(newsletterState$ | async)?.success"
-                [class.text-solar-600]="!(newsletterState$ | async)?.success"
-                [class.hover:bg-gray-100]="!(newsletterState$ | async)?.success"
-                [disabled]="(newsletterState$ | async)?.loading || !newsletterForm.valid"
-            >
-                {{ (newsletterState$ | async)?.success ? ('footer.subscribed' | translate) : ('offers.subscribe' | translate) }}
-            </button>
-        </form>
-    </div>
     </div>
 </div>

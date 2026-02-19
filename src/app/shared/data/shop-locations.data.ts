@@ -12,7 +12,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
       latitude: 45.746312459217116,
       longitude: 16.000339126187583,
       isFranchise: false,
-      mapRedirect: 'https://maps.app.goo.gl/7YuBWDFCoqfcxkuL6'
+      mapRedirect: 'https://maps.app.goo.gl/Huco28ifaAuj22g9A'
     },
     {
       id: 'cakovec',
@@ -26,6 +26,20 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
       longitude: 16.397300257022263,
       isFranchise: false,
       mapRedirect: 'https://maps.app.goo.gl/N8uEyHMqE3gNFsKSA'
+    },
+    {
+      id: 'zadar',
+      name: 'SolarShop ZADAR',
+      address: 'Vlatka Mačeka 26, Zadar',
+      phone: '+385 23 390 436',
+      phoneLink: '+38523390436',
+      mobile: '091 278 7875',
+      email: 'zadar@solarno.hr',
+      workingHours: 'PON-PET 08-14',
+      latitude: 44.104042818005006,
+      longitude: 15.24548113988031,
+      isFranchise: false,
+      mapRedirect: 'https://maps.app.goo.gl/wQaupusqXwsSKhVBA'
     },
     {
       id: 'zadar2',
@@ -190,20 +204,6 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
       longitude: 15.883857029305762,
       isFranchise: true,
       mapRedirect: 'https://maps.app.goo.gl/xutEaXV2f6z8dkmZ6'
-    },
-    {
-      id: 'zadar',
-      name: 'SolarShop ZADAR',
-      address: 'Vlatka Mačeka 26, Zadar',
-      phone: '+385 23 390 436',
-      phoneLink: '+38523390436',
-      mobile: '091 278 7875',
-      email: 'zadar@solarno.hr',
-      workingHours: 'PON-PET 08-14',
-      latitude: 44.104042818005006,
-      longitude: 15.24548113988031,
-      isFranchise: false,
-      mapRedirect: 'https://maps.app.goo.gl/wQaupusqXwsSKhVBA'
     },
     {
       id: 'pula',

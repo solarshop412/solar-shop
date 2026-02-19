@@ -78,10 +78,6 @@ export class FooterEffects {
                         phone: '+385 (1) 6407 715',
                         email: 'webshop@solarno.hr',
                         hours: 'Mon-Fri: 8:00-18:00, Sat: 9:00-13:00'
-                    },
-                    newsletter: {
-                        title: 'Newsletter',
-                        description: 'Get the latest news on sustainable products, energy efficiency tips and exclusive offers.'
                     }
                 };
                 return FooterActions.loadFooterDataSuccess({ data });
@@ -92,16 +88,4 @@ export class FooterEffects {
             })
         );
     });
-
-    subscribeNewsletter$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(FooterActions.subscribeNewsletter),
-            mergeMap(({ email }) =>
-                from(this.supabaseService.createRecord('contacts', { email, is_newsletter: true })).pipe(
-                    map(() => FooterActions.subscribeNewsletterSuccess({ message: this.translationService.translate('footer.subscribed') })),
-                    catchError(error => of(FooterActions.subscribeNewsletterFailure({ error: error.message || 'Subscription failed' })))
-                )
-            )
-        )
-    );
 }

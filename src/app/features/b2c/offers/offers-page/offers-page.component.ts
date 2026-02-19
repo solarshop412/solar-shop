@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -8,8 +8,6 @@ import { OffersActions } from '../store/offers.actions';
 import { selectOffers, selectIsLoading } from '../store/offers.selectors';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { Offer } from '../../../../shared/models/offer.model';
-import { FooterActions } from '../../footer/store/footer.actions';
-import { selectNewsletterState } from '../../footer/store/footer.selectors';
 import { SupabaseService } from '../../../../services/supabase.service';
 import { SeoService } from '../../../../shared/services/seo.service';
 
@@ -27,17 +25,14 @@ export class OffersPageComponent implements OnInit, OnDestroy {
   private seoService = inject(SeoService);
 
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('newsletterForm') newsletterForm!: NgForm;
 
   offers$: Observable<Offer[]>;
   isLoading$: Observable<boolean>;
-  newsletterState$: Observable<{ loading: boolean; success: boolean; error: string | null }>;
   private offerProducts: { [offerId: string]: any[] } = {}; // Store products for each offer
 
   constructor() {
     this.offers$ = this.store.select(selectOffers);
     this.isLoading$ = this.store.select(selectIsLoading);
-    this.newsletterState$ = this.store.select(selectNewsletterState);
   }
 
   ngOnInit(): void {
@@ -135,23 +130,6 @@ export class OffersPageComponent implements OnInit, OnDestroy {
 
   navigateToProducts(): void {
     this.router.navigate(['/proizvodi']);
-  }
-
-  onNewsletterSubmit(event: Event, form: NgForm): void {
-    event.preventDefault();
-
-    if (form.valid) {
-      const emailValue = this.emailInput.nativeElement.value;
-      console.log('Submitting newsletter from offers page with email:', emailValue); // Debug log
-
-      this.store.dispatch(FooterActions.subscribeNewsletter({ email: emailValue }));
-      form.resetForm();
-
-      // Reset success state after 3 seconds
-      setTimeout(() => {
-        this.store.dispatch(FooterActions.resetNewsletterState());
-      }, 3000);
-    }
   }
 
   getTotalSavings(offer: Offer): number {

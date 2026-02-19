@@ -5,7 +5,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FooterActions } from './store/footer.actions';
-import { selectFooterData, selectNewsletterState } from './store/footer.selectors';
+import { selectFooterData } from './store/footer.selectors';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -35,10 +35,6 @@ export interface FooterData {
     email: string;
     hours: string;
   };
-  newsletter: {
-    title: string;
-    description: string;
-  };
 }
 
 @Component({
@@ -53,15 +49,12 @@ export class FooterComponent implements OnInit {
   private sanitizer = inject(DomSanitizer);
 
   @ViewChild('emailInput') emailInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('newsletterForm') newsletterForm!: NgForm;
 
   footerData$: Observable<FooterData | null>;
-  newsletterState$: Observable<{ loading: boolean; success: boolean; error: string | null }>;
   currentYear = new Date().getFullYear();
 
   constructor() {
     this.footerData$ = this.store.select(selectFooterData);
-    this.newsletterState$ = this.store.select(selectNewsletterState);
   }
 
   ngOnInit(): void {
@@ -70,23 +63,6 @@ export class FooterComponent implements OnInit {
 
   sanitizeIcon(icon: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(icon);
-  }
-
-  onNewsletterSubmit(event: Event, form: NgForm): void {
-    event.preventDefault();
-
-    if (form.valid) {
-      const emailValue = this.emailInput.nativeElement.value;
-      console.log('Submitting newsletter with email:', emailValue); // Debug log
-
-      this.store.dispatch(FooterActions.subscribeNewsletter({ email: emailValue }));
-      form.resetForm();
-
-      // Reset success state after 3 seconds
-      setTimeout(() => {
-        this.store.dispatch(FooterActions.resetNewsletterState());
-      }, 3000);
-    }
   }
 
   // Obfuscate email to prevent spam harvesting

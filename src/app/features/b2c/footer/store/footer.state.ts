@@ -3,8 +3,6 @@ import { FooterData } from '../footer.component';
 export interface FooterState {
     data: FooterData | null;
     error: string | null;
-    newsletterSubscriptionStatus: 'idle' | 'loading' | 'success' | 'error';
-    newsletterMessage: string | null;
 }
 
 export const initialFooterState: FooterState = {
@@ -68,13 +66,7 @@ export const initialFooterState: FooterState = {
             phone: '+385 (1) 6407 715',
             email: 'webshop@solarno.hr',
             hours: 'Mon-Fri: 8:00-18:00, Sat: 9:00-13:00'
-        },
-        newsletter: {
-            title: 'Newsletter',
-            description: 'Get the latest news on sustainable products, energy efficiency tips and exclusive offers.'
         }
     },
-    error: null,
-    newsletterSubscriptionStatus: 'idle',
-    newsletterMessage: null,
+    error: null
 }; 
