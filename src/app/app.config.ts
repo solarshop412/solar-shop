@@ -3,7 +3,7 @@ import {
   provideZoneChangeDetection,
   LOCALE_ID,
 } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
@@ -33,6 +33,7 @@ import { provideLottieOptions } from 'ngx-lottie';
 import { playerFactory } from './shared/components/loader/loader.component';
 import { environment } from '../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
+import { SelectivePreloadingStrategy } from './core/routing/selective-preloading.strategy';
 
 // Register locale data
 registerLocaleData(localeDE);
@@ -46,6 +47,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'top',
       }),
+      withPreloading(SelectivePreloadingStrategy)
     ),
     provideHttpClient(),
     { provide: LOCALE_ID, useValue: 'en-US' },
