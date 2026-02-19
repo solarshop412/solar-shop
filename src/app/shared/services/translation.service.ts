@@ -17,9 +17,9 @@ export class TranslationService {
       // Navigation
       nav: {
         products: 'Proizvodi',
-        offers: 'Ponude',
+        complaints: 'Reklamacije',
         sustainability: 'Održivost',
-        blog: 'Blog',
+        news: 'Novosti',
         company: 'O nama',
         contact: 'Kontakt',
         partners: 'Za Partnere',
@@ -3170,9 +3170,9 @@ export class TranslationService {
       // Navigation
       nav: {
         products: 'Products',
-        offers: 'Deals',
+        complaints: 'Complaints',
         sustainability: 'Sustainability',
-        blog: 'Blog',
+        news: 'News',
         company: 'About us',
         contact: 'Contact & Support',
         partners: 'Partners',

@@ -420,22 +420,11 @@
         </a>
 
         <a
-          routerLink="/ponude"
+          routerLink="/novosti"
           routerLinkActive="text-solar-600 font-semibold"
           class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group"
         >
-          <span>{{ "nav.offers" | translate }}</span>
-          <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
-          ></div>
-        </a>
-
-        <a
-          routerLink="/blog"
-          routerLinkActive="text-solar-600 font-semibold"
-          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group"
-        >
-          <span>{{ "nav.blog" | translate }}</span>
+          <span>{{ "nav.news" | translate }}</span>
           <div
             class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
           ></div>
@@ -458,6 +447,17 @@
           class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group"
         >
           <span>{{ "nav.contact" | translate }}</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
+          ></div>
+        </a>
+
+        <a
+          routerLink="/reklamacija"
+          routerLinkActive="text-solar-600 font-semibold"
+          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 hover:scale-105 group"
+        >
+          <span>{{ "nav.complaints" | translate }}</span>
           <div
             class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
           ></div>
@@ -827,21 +827,12 @@
       </a>
 
       <a
-        routerLink="/ponude"
+        routerLink="/novosti"
         routerLinkActive="text-solar-600 font-semibold bg-solar-50"
         (click)="closeMobileMenu()"
         class="block text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 py-2 px-3 rounded-lg hover:bg-solar-50"
       >
-        {{ "nav.offers" | translate }}
-      </a>
-
-      <a
-        routerLink="/blog"
-        routerLinkActive="text-solar-600 font-semibold bg-solar-50"
-        (click)="closeMobileMenu()"
-        class="block text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 py-2 px-3 rounded-lg hover:bg-solar-50"
-      >
-        {{ "nav.blog" | translate }}
+        {{ "nav.news" | translate }}
       </a>
 
       <a
@@ -860,6 +851,15 @@
         class="block text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 py-2 px-3 rounded-lg hover:bg-solar-50"
       >
         {{ "nav.contact" | translate }}
+      </a>
+
+      <a
+        routerLink="/reklamacije"
+        routerLinkActive="text-solar-600 font-semibold bg-solar-50"
+        (click)="closeMobileMenu()"
+        class="block text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 py-2 px-3 rounded-lg hover:bg-solar-50"
+      >
+        {{ "nav.complaints" | translate }}
       </a>
 
       <a
