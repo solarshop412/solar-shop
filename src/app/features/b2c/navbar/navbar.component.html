@@ -168,69 +168,94 @@
 <!-- Top Info Bar (Desktop) -->
 <div class="hidden lg:block bg-black text-white text-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-2">
-        <!-- Contact Info -->
-        <div class="flex items-center space-x-6">
-        <a href="tel:+385 (1) 6407 715" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
-            <lucide-angular 
-            name="phone" 
-            class="w-4 h-4 opacity-70"
-            [img]="PhoneIcon">
-            </lucide-angular>
-            <span>{{ 'contact.phone' | translate }}</span>
-        </a>
-        <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
-            <lucide-angular 
-            name="mail" 
-            class="w-4 h-4 opacity-70"
-            [img]="MailIcon">
-            </lucide-angular>
-            <span>{{ 'contact.email' | translate }}</span>
-        </a>
-        </div>
-        
-        <!-- Language Selector -->
-        <div class="flex items-center space-x-1 cursor-pointer hover:text-solar-200 transition-colors duration-200" 
-             (click)="toggleLanguage()"
-             (keydown.enter)="toggleLanguage()"
-             (keydown.space)="toggleLanguage()">
-        <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'en'">
-            <span>{{ 'language.current' | translate }}</span>
-            <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
-        </div>
-        <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'hr'">
-            <div class="flex items-center space-x-1">                
-            <span>{{ 'language.current' | translate }}</span>
+        <div class="flex justify-between items-center py-2">
+            <!-- Contact Info -->
+            <div class="flex items-center space-x-6">
+            <a href="tel:+385 (1) 6407 715" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
+                <lucide-angular 
+                name="phone" 
+                class="w-4 h-4 opacity-70"
+                [img]="PhoneIcon">
+                </lucide-angular>
+                <span>{{ 'contact.phone' | translate }}</span>
+            </a>
+            <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
+                <lucide-angular 
+                name="mail" 
+                class="w-4 h-4 opacity-70"
+                [img]="MailIcon">
+                </lucide-angular>
+                <span>{{ 'contact.email' | translate }}</span>
+            </a>
             </div>
-            <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-            </svg>
+            
+            <!-- Language Selector -->
+            <div class="flex items-center space-x-1 cursor-pointer hover:text-solar-200 transition-colors duration-200" 
+                (click)="toggleLanguage()"
+                (keydown.enter)="toggleLanguage()"
+                (keydown.space)="toggleLanguage()">
+                <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'en'">
+                    <span>{{ 'language.current' | translate }}</span>
+                    <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'hr'">
+                    <div class="flex items-center space-x-1">                
+                    <span>{{ 'language.current' | translate }}</span>
+                    </div>
+                    <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
     </div>
 </div>
 
 <!-- Mobile Top Info Bar -->
 <div class="lg:hidden bg-black text-white text-xs">
-    <div class="px-3 py-2">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-            <a href="tel:+385 (1) 6407 715" class="flex items-center space-x-1">
-                <svg class="w-3 h-3 opacity-50" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                </svg>
-                <span class="whitespace-nowrap">{{ 'contact.phone' | translate }}</span>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-2">
+            <!-- Contact Info -->
+            <div class="flex items-center space-x-6">
+            <a href="tel:+385 (1) 6407 715" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
+                <lucide-angular 
+                name="phone" 
+                class="w-4 h-4 opacity-70"
+                [img]="PhoneIcon">
+                </lucide-angular>
+                <span>{{ 'contact.phone' | translate }}</span>
             </a>
-            <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-1">
-                <svg class="w-3 h-3 opacity-50" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                </svg>
-                <span class="whitespace-nowrap">{{ 'contact.email' | translate }}</span>
+            <a href="mailto:webshop@solarno.hr" class="flex items-center space-x-2 hover:text-solar-200 transition-colors duration-200">
+                <lucide-angular 
+                name="mail" 
+                class="w-4 h-4 opacity-70"
+                [img]="MailIcon">
+                </lucide-angular>
+                <span>{{ 'contact.email' | translate }}</span>
             </a>
+            </div>
+            
+            <!-- Language Selector -->
+            <div class="flex items-center space-x-1 cursor-pointer hover:text-solar-200 transition-colors duration-200" 
+                (click)="toggleLanguage()"
+                (keydown.enter)="toggleLanguage()"
+                (keydown.space)="toggleLanguage()">
+                <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'en'">
+                    <span>{{ 'language.current' | translate }}</span>
+                    <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="flex items-center space-x-2" *ngIf="(currentLanguage$ | async) === 'hr'">
+                    <div class="flex items-center space-x-1">                
+                    <span>{{ 'language.current' | translate }}</span>
+                    </div>
+                    <svg class="w-4 h-4 transform transition-transform duration-200 hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>
