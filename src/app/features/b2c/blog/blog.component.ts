@@ -16,6 +16,7 @@ import {
   selectPostCategories,
   selectFilteredCategory,
 } from './store/blog.selectors';
+import { ImagePlaceholders } from '../../../core/data/image-placeholders.data';
 
 @Component({
   selector: 'app-blog',
@@ -52,6 +53,10 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.selectedCategory$.subscribe((category) => {
       console.log('Selected category changed to:', category);
     });
+
+    this.filteredPosts$.subscribe(posts => {
+      console.log(posts);
+    });
   }
 
   ngOnInit() {
@@ -85,7 +90,7 @@ export class BlogComponent implements OnInit, OnDestroy {
 
   navigateToPost(postId: string) {
     this.store.dispatch(BlogActions.selectPost({ postId }));
-    this.router.navigate(['/blog', postId]);
+    this.router.navigate(['/novosti', postId]);
   }
 
   navigateToBlog() {
@@ -106,5 +111,16 @@ export class BlogComponent implements OnInit, OnDestroy {
       currentLang === 'hr' ? 'hr-HR' : 'en-US',
       options,
     );
+  }
+
+  get placeholderImage(): string {
+    const placeholder = ImagePlaceholders.find(p => p.id === 'news');
+
+    return placeholder?.url || '';
+  }
+
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.placeholderImage;
   }
 }

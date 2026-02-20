@@ -11,6 +11,7 @@ import {
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { SeoService } from '../../../../shared/services/seo.service';
+import { ImagePlaceholders } from '../../../../core/data/image-placeholders.data';
 
 @Component({
   selector: 'app-blog-detail',
@@ -33,6 +34,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   postId: string | null = null;
   loading = true;
   error: string | null = null;
+  imageVisible = true;
 
   ngOnInit() {
     this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) => {
@@ -117,6 +119,16 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       currentLang === 'hr' ? 'hr-HR' : 'en-US',
       options,
     );
+  }
+
+  get placeholderImage(): string {
+    const placeholder = ImagePlaceholders.find(p => p.id === 'news');
+
+    return placeholder?.url || '';
+  }
+
+  onImageError(event: Event): void {
+    this.imageVisible = false;
   }
 
   /**

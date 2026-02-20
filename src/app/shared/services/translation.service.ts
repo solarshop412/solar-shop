@@ -2170,8 +2170,8 @@ export class TranslationService {
       // Blog
       blog: {
         home: 'Početna',
-        blog: 'Blog',
-        title: 'Blog i članci',
+        blog: 'Novosti',
+        title: 'Novosti',
         subtitle:
           'Najnovije vijesti, savjeti i uvidi iz svijeta solarne energije',
         allPosts: 'Svi postovi',
@@ -2193,7 +2193,7 @@ export class TranslationService {
           'Pretplatite se na naš newsletter i budite prvi koji će saznati o najnovijim člancima i solarnim rješenjima.',
         loadingArticle: 'Učitavanje članka...',
         articleNotFound: 'Članak nije pronađen',
-        backToBlog: 'Natrag na blog',
+        backToBlog: 'Natrag na novosti',
         whatYouFind: 'Što ćete pronaći',
         technicalGuides: 'Tehnički vodiči',
         technicalGuidesText:
@@ -5183,9 +5183,9 @@ export class TranslationService {
       },
       // Blog
       blog: {
-        home: 'Početna',
-        blog: 'Blog',
-        title: 'Blog & Articles',
+        home: 'Home',
+        blog: 'News',
+        title: 'News',
         subtitle:
           'Latest news, tips and insights from the world of solar energy',
         allPosts: 'All Posts',
@@ -5207,7 +5207,7 @@ export class TranslationService {
           'Subscribe to our newsletter and be the first to know about new articles and solar solutions.',
         loadingArticle: 'Loading article...',
         articleNotFound: 'Article not found',
-        backToBlog: 'Back to Blog',
+        backToBlog: 'News',
         whatYouFind: "What you'll find",
         technicalGuides: 'Technical Guides',
         technicalGuidesText:

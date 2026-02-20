@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-white">
+<div class="bg-white mb-20">
   <!-- Loading State -->
   <div *ngIf="loading" class="flex justify-center items-center min-h-screen">
     <div class="flex flex-col items-center space-y-4">
@@ -29,11 +29,11 @@
   <!-- Content -->
   <div *ngIf="blogPost && !loading">
     <!-- Hero Section -->
-    <section class="relative bg-solar-500 text-white py-20">
+    <section class="relative bg-solar-500 text-white py-12">
       <div class="absolute inset-0"></div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Breadcrumb -->
-        <nav class="mb-8">
+        <nav class="mb-4">
           <ol class="flex items-center space-x-2 text-sm">
             <li>
               <a
@@ -45,7 +45,7 @@
             <li class="text-solar-200 font-['DM_Sans']">/</li>
             <li>
               <a
-                routerLink="/blog"
+                routerLink="/novosti"
                 class="hover:text-solar-200 transition-colors font-['DM_Sans']"
                 >{{ "blog.blog" | translate }}</a
               >
@@ -58,12 +58,7 @@
         </nav>
 
         <div class="max-w-4xl">
-          <div class="flex items-center space-x-4 mb-6">
-            <span
-              class="bg-solar-500 text-white px-3 py-1 rounded-full text-sm font-medium font-['DM_Sans']"
-            >
-              {{ blogPost.category.name }}
-            </span>
+          <div class="flex items-center space-x-8 mb-8">
             <span class="text-solar-100 font-['DM_Sans']"
               >{{ blogPost.readTime }}
               {{ "blog.minutesRead" | translate }}</span
@@ -91,11 +86,12 @@
     <!-- Article Content -->
     <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <!-- Featured Image -->
-      <div class="mb-12">
+      <div *ngIf="imageVisible" class="mb-12">
         <img
-          [src]="blogPost.imageUrl || '/assets/images/blog-placeholder.jpg'"
+          [src]="blogPost.imageUrl || this.placeholderImage"
           [alt]="blogPost.title"
           class="w-full h-96 object-cover rounded-lg shadow-lg"
+          (error)="onImageError($event)"
         />
       </div>
 
@@ -110,13 +106,14 @@
       </div>
 
       <!-- Tags -->
-      <div class="mt-12 pt-8 border-t border-gray-200">
+      <div *ngIf="blogPost.tags.length > 0"
+           class="mt-12 pt-8 border-t border-gray-200">
         <h3 class="text-lg font-semibold mb-4 font-['Poppins'] text-gray-900">
           {{ "blog.tags" | translate }}
         </h3>
         <div class="flex flex-wrap gap-2">
           <span
-            *ngFor="let tag of blogPost?.tags"
+            *ngFor="let tag of blogPost.tags"
             class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-['DM_Sans']"
           >
             {{ tag.name }}
@@ -124,82 +121,5 @@
         </div>
       </div>
     </article>
-
-    <!-- Related Posts -->
-    <section class="bg-gray-50 py-16" *ngIf="relatedPosts.length > 0">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2
-          class="text-3xl font-bold text-gray-900 mb-12 text-center font-['Poppins']"
-        >
-          {{ "blog.relatedArticles" | translate }}
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
-            *ngFor="let post of relatedPosts"
-            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-            (click)="navigateToPost(post.id)"
-            (keydown.enter)="navigateToPost(post.id)"
-            (keydown.space)="navigateToPost(post.id)"
-          >
-            <img
-              [src]="post.imageUrl || '/assets/images/blog-placeholder.jpg'"
-              [alt]="post.title"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-3">
-                <span
-                  class="bg-solar-100 text-solar-800 px-2 py-1 rounded text-sm font-medium font-['DM_Sans']"
-                >
-                  {{ post.category.name }}
-                </span>
-                <span class="text-gray-500 text-sm font-['DM_Sans']"
-                  >{{ post.readTime }} {{ "blog.minRead" | translate }}</span
-                >
-              </div>
-              <h3
-                class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2 font-['Poppins']"
-              >
-                {{ post.title }}
-              </h3>
-              <p class="text-gray-600 mb-4 line-clamp-3 font-['DM_Sans']">
-                {{ post.excerpt }}
-              </p>
-              <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-500 font-['DM_Sans']">{{
-                  formatDate(post.publishedAt, "short")
-                }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="bg-solar-500 py-16">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4 font-['Poppins']">
-          {{ "blog.stayUpdated" | translate }}
-        </h2>
-        <p class="text-solar-100 mb-8 text-lg font-['DM_Sans']">
-          {{ "blog.newsletterText" | translate }}
-        </p>
-        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-          <input
-            type="email"
-            [placeholder]="'offers.enterEmail' | translate"
-            class="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-solar-300 focus:outline-none font-['DM_Sans']"
-          />
-          <button
-            type="submit"
-            class="bg-accent-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-600 transition-colors font-['DM_Sans']"
-          >
-            {{ "offers.subscribe" | translate }}
-          </button>
-        </form>
-      </div>
-    </section>
   </div>
 </div>
