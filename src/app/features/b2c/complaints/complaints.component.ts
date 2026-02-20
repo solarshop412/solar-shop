@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SupabaseService } from '../../../services/supabase.service';
 import { FAQItem } from '../../../shared/models/faq-item.model';
-import { ShopLocation } from '../../../shared/models/shop-location.model';
 import { FAQS } from '../../../shared/data/faqs.data';
 import { TranslatePipe } from "../../../shared/pipes/translate.pipe";
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-complaints',
@@ -16,9 +15,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './complaints.component.scss'
 })
 export class ComplaintsComponent {
+  private readonly MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+  private readonly ALLOWED_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/webp',
+    'application/pdf'
+  ];
+
   contactForm: FormGroup;
   isSubmitting = false;
   messageSent = false;
+  fileErrors: string[] = [];
 
   selectedFiles: File[] = [];
   isDragOver = false;
@@ -28,7 +36,7 @@ export class ComplaintsComponent {
   constructor(
     private fb: FormBuilder, 
     private supabase: SupabaseService, 
-    private sanitizer: DomSanitizer) {
+    private router: Router) {
     this.contactForm = this.fb.group({
       fullNameOrCompany: ['', [Validators.required]],
       address: [''],
@@ -59,7 +67,9 @@ export class ComplaintsComponent {
       invoice_date: v.invoiceDate, // if input type="date" => "YYYY-MM-DD"
       item_or_service: v.itemOrService || null,
       description: v.description,
-      attachments: attachmentNames.length ? attachmentNames : null,
+      attachments: this.selectedFiles.length
+        ? this.selectedFiles.map(f => ({ name: f.name, size: f.size, type: f.type }))
+        : null,
       // extra metadata if you want:
       status: 'new'
     })
@@ -73,7 +83,7 @@ export class ComplaintsComponent {
     .catch(error => {
       console.error('Error sending complaints form:', error);
       this.isSubmitting = false;
-      alert('Error sending form');
+      this.fileErrors.push(`Error sending form`);
     });
   }
 
@@ -91,7 +101,26 @@ export class ComplaintsComponent {
   onFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const files = input.files ? Array.from(input.files) : [];
-    this.selectedFiles = files;
+
+    const validFiles: File[] = [];
+
+    this.fileErrors = [];
+
+    for (const file of files) {
+      if (file.size > this.MAX_FILE_SIZE) {
+        this.fileErrors.push(`File "${file.name}" is larger than 2MB.`);
+        continue;
+      }
+
+      if (!this.ALLOWED_TYPES.includes(file.type)) {
+        this.fileErrors.push(`File "${file.name}" is not a supported format.`);
+        continue;
+      }
+
+      validFiles.push(file);
+    }
+
+    this.selectedFiles = validFiles;
     input.value = '';
   }
 
@@ -108,8 +137,32 @@ export class ComplaintsComponent {
   onDrop(event: DragEvent): void {
     event.preventDefault();
     this.isDragOver = false;
+    this.fileErrors = [];
 
-    const files = event.dataTransfer?.files ? Array.from(event.dataTransfer.files) : [];
-    if (files.length) this.selectedFiles = files;
+    const files = event.dataTransfer?.files
+      ? Array.from(event.dataTransfer.files)
+      : [];
+
+    const validFiles: File[] = [];
+
+    for (const file of files) {
+      if (file.size > this.MAX_FILE_SIZE) {
+        this.fileErrors.push(`File "${file.name}" is larger than 2MB.`);
+        continue;
+      }
+
+      if (!this.ALLOWED_TYPES.includes(file.type)) {
+        this.fileErrors.push(`File "${file.name}" is not a supported format.`);
+        continue;
+      }
+
+      validFiles.push(file);
+    }
+
+    this.selectedFiles = validFiles;
+  }
+
+  goToHome() {
+    this.router.navigate(['/']);
   }
 }

@@ -53,10 +53,9 @@ export interface Database {
           invoice_date?: string;
           item_or_service?: string;
           description: string;
-          attachments?: string[] | null;
+          attachments?: any;
           status: string;
           created_at: string;
-          updated_at: string;
         };
         Insert: {
           id?: string;
@@ -68,10 +67,9 @@ export interface Database {
           invoice_date?: string;
           item_or_service?: string;
           description?: string;
-          attachments?: string[] | null;
+          attachments?: any;
           status?: string;
           created_at?: string;
-          updated_at?: string;
         };
         Update: {
           id?: string;
@@ -83,9 +81,8 @@ export interface Database {
           invoice_date?: string;
           item_or_service?: string;
           description?: string;
-          attachments?: string[] | null;
+          attachments?: any;
           status?: string;
-          updated_at?: string;
         };
       };
       profiles: {

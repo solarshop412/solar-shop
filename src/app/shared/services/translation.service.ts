@@ -2759,7 +2759,16 @@ export class TranslationService {
         clickToUpload: 'Kliknite za prijenos',
         orDragAndDrop: 'ili povucite i ispustite datoteke',
         maxSizeHint: 'Maksimalna veličina datoteke 2MB',
-        send: 'Pošalji'
+        send: 'Pošalji',
+        sending: 'Slanje u tijeku...',
+        selectedFiles: 'Odabrani dokumenti',
+        fileErrorsTitle: 'Greška prilikom prijenosa',
+        sent: {
+          title: "Reklamacija je uspješno poslana",
+          description: "Vaša reklamacija je zaprimljena. Naš tim će je pregledati i kontaktirati Vas u najkraćem mogućem roku.",
+          notifyWhenComplete: "Obavijestit ćemo Vas kada obrada bude završena",
+          goToHome: "Povratak na početnu stranicu"
+        }
       },
       // Product List
       productList: {
@@ -5794,7 +5803,16 @@ export class TranslationService {
         clickToUpload: 'Click to upload',
         orDragAndDrop: 'or drag and drop files',
         maxSizeHint: 'Maximum file size 2MB',
-        send: 'Submit'
+        send: 'Submit',
+        sending: 'Sending...',
+        selectedFiles: 'Selected files',
+        fileErrorsTitle: 'Error while uploading',
+        sent: {
+          title: "Complaint Submitted Successfully",
+          description: "Your complaint has been received. Our team will review it and contact you as soon as possible.",
+          notifyWhenComplete: "We will notify you when processing is complete",
+          goToHome: "Return to Home Page"
+        }
       },
       // Product List
       productList: {
