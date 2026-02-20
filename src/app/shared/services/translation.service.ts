@@ -2741,6 +2741,26 @@ export class TranslationService {
         bottomCta:
           'Kakva god da je Vaša potreba, tim SolarShop-a spreman je pomoći Vam. Kontaktirajte nas danas i dozvolite da Vas vodimo prema rješenju koje je u potpunosti prilagođeno Vašim potrebama.',
       },
+      complaints: {
+        title: 'Reklamacije',
+        subtitle: 'Za bržu i učinkovitiju pomoć koristite ovaj obrazac za podršku vezanu uz reklamacije i/ili tehnička pitanja.',
+        formTitle: 'Kontaktni obrazac',
+        formSubtitle: 'Molimo ispunite sva obavezna polja (označena *) i kliknite Pošalji. Naš tim će Vas kontaktirati u najkraćem mogućem roku.',
+        fullNameOrCompany: 'Ime i prezime ili naziv tvrtke',
+        address: 'Adresa',
+        email: 'Email',
+        phone: 'Kontakt telefon',
+        invoiceNumber: 'Broj računa',
+        invoiceDate: 'Datum računa',
+        itemOrService: 'Naziv artikla ili usluge',
+        description: 'Sadržaj poruke',
+        descriptionPlaceholder: 'Navedite sve relevantne informacije vezane uz problem...',
+        attachments: 'Slike i dokumenti',
+        clickToUpload: 'Kliknite za prijenos',
+        orDragAndDrop: 'ili povucite i ispustite datoteke',
+        maxSizeHint: 'Maksimalna veličina datoteke 2MB',
+        send: 'Pošalji'
+      },
       // Product List
       productList: {
         title: 'Proizvodi',
@@ -5755,6 +5775,26 @@ export class TranslationService {
           'Absolutely! We provide comprehensive project management for complete renovations, handling everything from initial planning and permits to final installation and quality assurance.',
         bottomCta:
           'Whatever your need, the SolarShop team is ready to help you. Contact us today and let us guide you towards the solution most suited to your needs. Building or renovating has never been easier, secure and satisfying.',
+      },
+      complaints: {
+        title: 'Complaints',
+        subtitle: 'For faster and more efficient assistance, please use this support form for complaints and/or technical inquiries.',
+        formTitle: 'Contact Form',
+        formSubtitle: 'Please fill in all required fields (marked with *) and click Submit. Our team will contact you as soon as possible.',
+        fullNameOrCompany: 'Full Name or Company Name',
+        address: 'Address',
+        email: 'Email',
+        phone: 'Contact Phone',
+        invoiceNumber: 'Invoice Number',
+        invoiceDate: 'Invoice Date',
+        itemOrService: 'Item or Service Name',
+        description: 'Message Content',
+        descriptionPlaceholder: 'Please provide all relevant information regarding the issue...',
+        attachments: 'Images and Documents',
+        clickToUpload: 'Click to upload',
+        orDragAndDrop: 'or drag and drop files',
+        maxSizeHint: 'Maximum file size 2MB',
+        send: 'Submit'
       },
       // Product List
       productList: {

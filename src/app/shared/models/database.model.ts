@@ -42,6 +42,52 @@ export interface Database {
           updated_at?: string;
         };
       };
+      complaints: {
+        Row: {
+          id: string;
+          full_name_or_company?: string;
+          address?: string;
+          email: string;
+          phone?: string;
+          invoice_number?: string;
+          invoice_date?: string;
+          item_or_service?: string;
+          description: string;
+          attachments?: string[] | null;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          full_name_or_company?: string;
+          address?: string;
+          email: string;
+          phone?: string;
+          invoice_number?: string;
+          invoice_date?: string;
+          item_or_service?: string;
+          description?: string;
+          attachments?: string[] | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          full_name_or_company?: string;
+          address?: string;
+          email?: string;
+          phone?: string;
+          invoice_number?: string;
+          invoice_date?: string;
+          item_or_service?: string;
+          description?: string;
+          attachments?: string[] | null;
+          status?: string;
+          updated_at?: string;
+        };
+      };
       profiles: {
         Row: {
           id: string;

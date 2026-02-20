@@ -154,6 +154,13 @@ export const B2C_ROUTES: Routes = [
             (m) => m.SafetyPaymentComponent,
           ),
       },
+      {
+        path: 'reklamacije',
+        loadComponent: () =>
+          import('./complaints/complaints.component').then(
+            (m) => m.ComplaintsComponent
+          )
+      }
     ],
   },
 ];
