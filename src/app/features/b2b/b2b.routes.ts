@@ -5,7 +5,7 @@ import { CompanyApprovedGuard } from '../../guards/company-approved.guard';
 
 export const B2B_ROUTES: Routes = [
   {
-    path: 'partneri',
+    path: '',
     component: B2bLayoutComponent,
     children: [
       {

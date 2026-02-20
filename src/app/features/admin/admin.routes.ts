@@ -4,7 +4,7 @@ import { AdminGuard } from '../../core/auth/guards/admin.guard';
 
 export const ADMIN_ROUTES: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: AdminLayoutComponent,
     canActivate: [AdminGuard],
     children: [
