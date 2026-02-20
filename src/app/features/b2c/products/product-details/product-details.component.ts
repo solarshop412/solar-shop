@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, filter } from 'rxjs/operators';
+import { takeUntil, filter, switchMap, take } from 'rxjs/operators';
 import { Product } from '../product-list/product-list.component';
 import { ProductDetailsActions } from './store/product-details.actions';
 import {
@@ -222,34 +222,28 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   private loadRelatedProducts(productId: string): void {
     this.relatedProductsLoading = true;
+    this.relatedProducts = [];
 
     this.product$
       .pipe(
+        filter((p): p is Product => !!p && p.id === productId),
+        take(1), // IMPORTANT: only take the matching product once
+        switchMap((product) => {
+          const categoryNames = product.categories?.map((c) => c.name) || [product.category];
+          return this.productsService.getProductsByCategories(categoryNames, productId, 4);
+        }),
         takeUntil(this.destroy$),
-        filter((product) => product !== null),
       )
-      .subscribe((product) => {
-        if (product) {
-          // Get products from same categories
-          const categoryNames = product.categories?.map((cat) => cat.name) || [
-            product.category,
-          ];
-
-          this.productsService
-            .getProductsByCategories(categoryNames, productId, 4)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-              next: (products) => {
-                this.relatedProducts = products;
-                this.relatedProductsLoading = false;
-              },
-              error: (error) => {
-                console.error('Error loading related products:', error);
-                this.relatedProducts = [];
-                this.relatedProductsLoading = false;
-              },
-            });
-        }
+      .subscribe({
+        next: (products) => {
+          this.relatedProducts = products;
+          this.relatedProductsLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading related products:', error);
+          this.relatedProducts = [];
+          this.relatedProductsLoading = false;
+        },
       });
   }
 

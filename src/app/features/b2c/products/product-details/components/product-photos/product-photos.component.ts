@@ -4,6 +4,8 @@ import {
   OnInit,
   OnDestroy,
   HostListener,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../product-list/product-list.component';
@@ -17,7 +19,7 @@ import { ImagePlaceholders } from '../../../../../../core/data/image-placeholder
   templateUrl: './product-photos.component.html',
   styleUrls: ['./product-photos.component.scss'],
 })
-export class ProductPhotosComponent implements OnInit, OnDestroy {
+export class ProductPhotosComponent implements OnInit, OnDestroy, OnChanges {
   @Input() product!: Product;
 
   selectedImage: string = '';
@@ -26,28 +28,37 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
   isImageAvailable = true;
 
   ngOnInit(): void {
-    // Get images from product data
+    this.resetForProduct();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['product'] && this.product) {
+      this.resetForProduct();
+    }
+  }
+
+  private resetForProduct(): void {
+    // close modal if switching products
+    if (this.isZoomOpen) {
+      this.isZoomOpen = false;
+      document.body.style.overflow = 'auto';
+    }
+
+    this.isImageAvailable = true;
+
     this.extractProductImages();
-    this.selectedImage = this.productImages[0];
+    this.selectedImage = this.productImages[0] ?? this.placeholderImage;
   }
 
   private extractProductImages(): void {
-    // Check if product has images array (new format)
-    if (this.product.images && Array.isArray(this.product.images)) {
+    if (this.product?.images && Array.isArray(this.product.images)) {
       this.productImages = this.product.images
-        .map((img: any) => {
-          // Handle both object format {url: string} and string format
-          return typeof img === 'string' ? img : img.url || img;
-        })
-        .filter((url) => url); // Filter out empty urls
-    }
-    // Fallback to single imageUrl (legacy format)
-    else if (this.product.imageUrl) {
+        .map((img: any) => (typeof img === 'string' ? img : img?.url ?? img))
+        .filter((url: string) => !!url);
+    } else if (this.product?.imageUrl) {
       this.productImages = [this.product.imageUrl];
-    }
-    // Default placeholder if no images
-    else {
-      this.productImages = ['assets/images/product-placeholder.webp'];
+    } else {
+      this.productImages = [this.placeholderImage || 'assets/images/product-placeholder.webp'];
     }
   }
 
@@ -116,7 +127,7 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
   get placeholderImage(): string {
     const placeholder = ImagePlaceholders.find(p => p.id === 'product');
 
-    return placeholder?.url || '';
+    return placeholder?.url || 'assets/images/product-placeholder.webp';
   }
 
   onImageError(event: Event): void {
