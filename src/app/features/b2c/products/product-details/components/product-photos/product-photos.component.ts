@@ -8,6 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { Product } from '../../../product-list/product-list.component';
 import { TranslatePipe } from '../../../../../../shared/pipes/translate.pipe';
+import { ImagePlaceholders } from '../../../../../../core/data/image-placeholders.data';
 
 @Component({
   selector: 'app-product-photos',
@@ -22,6 +23,7 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
   selectedImage: string = '';
   productImages: string[] = [];
   isZoomOpen: boolean = false;
+  isImageAvailable = true;
 
   ngOnInit(): void {
     // Get images from product data
@@ -45,7 +47,7 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
     }
     // Default placeholder if no images
     else {
-      this.productImages = ['assets/images/product-placeholder.svg'];
+      this.productImages = ['assets/images/product-placeholder.webp'];
     }
   }
 
@@ -58,9 +60,12 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
   }
 
   openZoom(): void {
-    this.isZoomOpen = true;
-    // Prevent body scroll when modal is open
-    document.body.style.overflow = 'hidden';
+    if(this.isImageAvailable) {
+      this.isZoomOpen = true;
+
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden';
+    }    
   }
 
   closeZoom(): void {
@@ -106,5 +111,18 @@ export class ProductPhotosComponent implements OnInit, OnDestroy {
     if (this.isZoomOpen) {
       document.body.style.overflow = 'auto';
     }
+  }
+
+  get placeholderImage(): string {
+    const placeholder = ImagePlaceholders.find(p => p.id === 'product');
+
+    return placeholder?.url || '';
+  }
+
+  onImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.placeholderImage;
+
+    this.isImageAvailable = false;
   }
 }

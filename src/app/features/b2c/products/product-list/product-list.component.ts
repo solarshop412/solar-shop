@@ -446,13 +446,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     }
 
     // Only return placeholder if no valid image found
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   onProductImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
     if (target) {
-      target.src = 'assets/images/product-placeholder.svg';
+      target.src = 'assets/images/product-placeholder.webp';
     }
   }
 

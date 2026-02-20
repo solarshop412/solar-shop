@@ -212,7 +212,7 @@ export class CategoryFormComponent implements OnInit {
 
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
-    img.src = 'assets/images/product-placeholder.svg';
+    img.src = 'assets/images/product-placeholder.webp';
   }
 
   async onSubmit(formValue: any): Promise<void> {

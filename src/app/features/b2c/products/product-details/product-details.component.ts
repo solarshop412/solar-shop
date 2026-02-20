@@ -209,14 +209,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   public onImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
     if (target) {
-      target.src = 'assets/images/product-placeholder.svg';
+      target.src = 'assets/images/product-placeholder.webp';
     }
   }
 
   public onRelatedProductImageError(event: Event): void {
     const target = event.target as HTMLImageElement;
     if (target) {
-      target.src = 'assets/images/product-placeholder.svg';
+      target.src = 'assets/images/product-placeholder.webp';
     }
   }
 
@@ -275,7 +275,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Only return placeholder if no valid image found
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   public trackByProductId(index: number, product: Product): string {

@@ -743,7 +743,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      img.src = 'assets/images/product-placeholder.svg';
+      img.src = 'assets/images/product-placeholder.webp';
     }
   }
 
@@ -777,7 +777,7 @@ export class PartnersProductsComponent implements OnInit, OnDestroy {
     }
 
     // Return placeholder SVG as fallback only if no valid images found
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   hasProductImage(product: ProductWithPricing): boolean {

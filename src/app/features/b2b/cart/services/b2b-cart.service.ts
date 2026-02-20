@@ -141,7 +141,7 @@ export class B2BCartService {
           sku: product.sku,
           imageUrl:
             this.getProductImageUrl(product.images) ||
-            'assets/images/product-placeholder.svg',
+            'assets/images/product-placeholder.webp',
           quantity,
           unitPrice,
           retailPrice,

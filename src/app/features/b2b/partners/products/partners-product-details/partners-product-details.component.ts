@@ -290,21 +290,21 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   onImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      img.src = 'assets/images/product-placeholder.svg';
+      img.src = 'assets/images/product-placeholder.webp';
     }
   }
 
   onThumbnailImageError(event: Event, index: number): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      img.src = 'assets/images/product-placeholder.svg';
+      img.src = 'assets/images/product-placeholder.webp';
     }
   }
 
   onSuggestedImageError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (img) {
-      img.src = 'assets/images/product-placeholder.svg';
+      img.src = 'assets/images/product-placeholder.webp';
     }
   }
 
@@ -313,7 +313,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     if (images.length > 0 && this.currentImageIndex < images.length) {
       return images[this.currentImageIndex];
     }
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   getProductImages(): string[] {
@@ -395,7 +395,7 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     // Return placeholder if no valid image available
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   navigateToLogin(): void {

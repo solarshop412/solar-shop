@@ -194,7 +194,7 @@ export class OfferDetailsComponent implements OnInit, OnDestroy {
     ) {
       return product.images[0].url || product.images[0];
     }
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   calculateDiscountedPrice(

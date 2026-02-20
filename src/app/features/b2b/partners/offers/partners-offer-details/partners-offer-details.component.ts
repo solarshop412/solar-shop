@@ -153,7 +153,7 @@ export class PartnersOfferDetailsComponent implements OnInit, OnDestroy {
         discountPercentage: discountPercentage,
         discount_type: offer.discount_type,
         discount_value: offer.discount_value,
-        imageUrl: offer.image_url || 'assets/images/product-placeholder.svg',
+        imageUrl: offer.image_url || 'assets/images/product-placeholder.webp',
         description: offer.description || '',
         shortDescription: offer.short_description || '',
         type: 'partner-exclusive',
@@ -343,7 +343,7 @@ export class PartnersOfferDetailsComponent implements OnInit, OnDestroy {
     if (images && Array.isArray(images) && images.length > 0) {
       return images[0].url || images[0];
     }
-    return 'assets/images/product-placeholder.svg';
+    return 'assets/images/product-placeholder.webp';
   }
 
   copyCouponCode(code: string): void {

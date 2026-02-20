@@ -5,12 +5,14 @@
       [src]="selectedImage"
       [alt]="product.name"
       class="w-full h-full object-contain cursor-zoom-in"
+      (error)="onImageError($event)"
       (click)="openZoom()"
     />
   </div>
 
   <!-- Thumbnail Gallery -->
-  <div class="grid grid-cols-4 gap-4">
+  <div *ngIf="isImageAvailable" 
+      class="grid grid-cols-4 gap-4">
     <button
       *ngFor="let image of productImages; let i = index"
       (click)="selectImage(image)"
@@ -27,12 +29,14 @@
   </div>
 
   <!-- Image Counter -->
-  <div class="text-center text-sm text-gray-500 font-['DM_Sans']">
+  <div *ngIf="isImageAvailable"
+       class="text-center text-sm text-gray-500 font-['DM_Sans']">
     {{ getCurrentImageIndex() + 1 }} / {{ productImages.length }}
   </div>
 
   <!-- Zoom Button -->
   <button
+    *ngIf="isImageAvailable"
     (click)="openZoom()"
     class="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors font-['DM_Sans']"
   >

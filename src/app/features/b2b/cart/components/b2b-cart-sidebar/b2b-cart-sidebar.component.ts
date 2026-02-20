@@ -240,12 +240,12 @@ export class B2BCartSidebarComponent implements OnDestroy {
   getImageSrc(imagePath: string): string {
     // Ensure we have a valid image path and handle potential errors
     if (!imagePath) {
-      return 'assets/images/product-placeholder.svg';
+      return 'assets/images/product-placeholder.webp';
     }
 
     // If this image has already failed to load, return the fallback immediately
     if (this.imageErrors.has(imagePath)) {
-      return 'assets/images/product-placeholder.svg';
+      return 'assets/images/product-placeholder.webp';
     }
 
     return imagePath;
@@ -259,8 +259,8 @@ export class B2BCartSidebarComponent implements OnDestroy {
     this.imageErrors.add(originalSrc);
 
     // Set fallback image only if it's not already the fallback
-    if (!originalSrc.includes('product-placeholder.svg')) {
-      event.target.src = 'assets/images/product-placeholder.svg';
+    if (!originalSrc.includes('product-placeholder.webp')) {
+      event.target.src = 'assets/images/product-placeholder.webp';
     }
 
     // Suppress console errors by preventing default behavior
