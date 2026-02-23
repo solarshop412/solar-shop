@@ -1,0 +1,2643 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >OrdersEffects</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/admin/orders/store/orders.effects.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#actions$" >actions$</a>
+                            </li>
+                            <li>
+                                <a href="#confirmPurchase$" >confirmPurchase$</a>
+                            </li>
+                            <li>
+                                <a href="#createB2COrder$" >createB2COrder$</a>
+                            </li>
+                            <li>
+                                <a href="#deleteOrder$" >deleteOrder$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#emailService" >emailService</a>
+                            </li>
+                            <li>
+                                <a href="#loadOrder$" >loadOrder$</a>
+                            </li>
+                            <li>
+                                <a href="#loadOrders$" >loadOrders$</a>
+                            </li>
+                            <li>
+                                <a href="#loadUserOrders$" >loadUserOrders$</a>
+                            </li>
+                            <li>
+                                <a href="#loadUserReviews$" >loadUserReviews$</a>
+                            </li>
+                            <li>
+                                <a href="#sendOrderConfirmationEmails$" >sendOrderConfirmationEmails$</a>
+                            </li>
+                            <li>
+                                <a href="#sendOrderStatusChangeEmails$" >sendOrderStatusChangeEmails$</a>
+                            </li>
+                            <li>
+                                <a href="#sendPaymentStatusChangeEmails$" >sendPaymentStatusChangeEmails$</a>
+                            </li>
+                            <li>
+                                <a href="#showB2COrderSuccessToast$" >showB2COrderSuccessToast$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                            <li>
+                                <a href="#updateOrderStatus$" >updateOrderStatus$</a>
+                            </li>
+                            <li>
+                                <a href="#updatePaymentStatus$" >updatePaymentStatus$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createOrderWithStockManagement" >createOrderWithStockManagement</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createOrderWithStockManagement"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createOrderWithStockManagement</b></span>
+                        <a href="#createOrderWithStockManagement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createOrderWithStockManagement(orderData: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, cartItems: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="619"
+                                    class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:619</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>orderData</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actions$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>actions$</b></span>
+                        <a href="#actions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Actions)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmPurchase$"></a>
+                    <span class="name">
+                        <span ><b>confirmPurchase$</b></span>
+                        <a href="#confirmPurchase$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.confirmPurchase),
+      switchMap(({ orderId }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, { payment_status: &#x27;paid&#x27; })
+          .then(() &#x3D;&gt; OrdersActions.confirmPurchaseSuccess({ orderId }))
+          .catch((error) &#x3D;&gt;
+            OrdersActions.confirmPurchaseFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="552" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:552</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createB2COrder$"></a>
+                    <span class="name">
+                        <span ><b>createB2COrder$</b></span>
+                        <a href="#createB2COrder$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.createB2COrder),
+      switchMap(({ orderData, cartItems }) &#x3D;&gt; {
+        console.log(&#x27;B2C Order creation started in effect&#x27;);
+        return this.createOrderWithStockManagement(orderData, cartItems)
+          .then((result) &#x3D;&gt; {
+            console.log(&#x27;B2C Order creation successful in effect:&#x27;, result);
+            return OrdersActions.createB2COrderSuccess({
+              order: result.order,
+              orderNumber: result.orderNumber,
+            });
+          })
+          .catch((error: any) &#x3D;&gt; {
+            console.error(&#x27;B2C Order creation failed in effect:&#x27;, error);
+            return OrdersActions.createB2COrderFailure({
+              error: error.message,
+            });
+          });
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="596" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:596</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteOrder$"></a>
+                    <span class="name">
+                        <span ><b>deleteOrder$</b></span>
+                        <a href="#deleteOrder$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.deleteOrder),
+      switchMap(({ orderId }) &#x3D;&gt;
+        // First delete order items, then delete the order
+        this.supabaseService
+          .getTable(&#x27;order_items&#x27;, { order_id: orderId })
+          .then(async (orderItems) &#x3D;&gt; {
+            // Delete all order items first
+            if (orderItems &amp;&amp; orderItems.length &gt; 0) {
+              for (const item of orderItems) {
+                await this.supabaseService.adminDeleteRecord(
+                  &#x27;order_items&#x27;,
+                  item.id,
+                );
+              }
+            }
+
+            // Then delete the order
+            await this.supabaseService.adminDeleteRecord(&#x27;orders&#x27;, orderId);
+
+            return OrdersActions.deleteOrderSuccess({ orderId });
+          })
+          .catch((error) &#x3D;&gt; {
+            return OrdersActions.deleteOrderFailure({ error: error.message });
+          }),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="566" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:566</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="emailService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>emailService</b></span>
+                        <a href="#emailService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(EmailService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadOrder$"></a>
+                    <span class="name">
+                        <span ><b>loadOrder$</b></span>
+                        <a href="#loadOrder$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadOrder),
+      switchMap(({ orderId }) &#x3D;&gt;
+        this.supabaseService
+          .getTableById(&#x27;orders&#x27;, orderId)
+          .then(async (orderData: any) &#x3D;&gt; {
+            if (!orderData) {
+              throw new Error(&#x27;Order not found&#x27;);
+            }
+
+            // Load order items
+            const orderItemsData &#x3D; await this.supabaseService.getTable(
+              &#x27;order_items&#x27;,
+              {
+                order_id: orderData.id,
+              },
+            );
+
+            // Convert database order to Order model
+            const order: Order &#x3D; {
+              id: orderData.id,
+              orderNumber: orderData.order_number,
+              userId: orderData.user_id,
+              customerEmail: orderData.customer_email,
+              customerName: orderData.customer_name,
+              customerPhone: orderData.customer_phone,
+              totalAmount: orderData.total_amount,
+              subtotal: orderData.subtotal,
+              taxAmount: orderData.tax_amount || 0,
+              shippingCost: orderData.shipping_cost || 0,
+              discountAmount: orderData.discount_amount || 0,
+              status: orderData.status,
+              paymentStatus: orderData.payment_status,
+              shippingStatus: orderData.shipping_status,
+              paymentMethod: orderData.payment_method,
+              orderDate: orderData.order_date,
+              shippingAddress: orderData.shipping_address,
+              billingAddress: orderData.billing_address,
+              trackingNumber: orderData.tracking_number,
+              notes: orderData.notes,
+              adminNotes: orderData.admin_notes,
+              is_b2b: orderData.is_b2b,
+              items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                id: itemData.id,
+                orderId: itemData.order_id,
+                productId: itemData.product_id,
+                productName: itemData.product_name,
+                productSku: itemData.product_sku,
+                quantity: itemData.quantity,
+                unitPrice: itemData.unit_price,
+                totalPrice: itemData.total_price,
+                productImageUrl: itemData.product_image_url,
+                productSpecifications: itemData.product_specifications,
+                createdAt: itemData.created_at,
+              })),
+              createdAt: orderData.created_at,
+              updatedAt: orderData.updated_at,
+            };
+
+            return OrdersActions.loadOrderSuccess({ order });
+          })
+          .catch((error) &#x3D;&gt;
+            OrdersActions.loadOrderFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:250</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadOrders$"></a>
+                    <span class="name">
+                        <span ><b>loadOrders$</b></span>
+                        <a href="#loadOrders$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadOrders),
+      switchMap(() &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;orders&#x27;)
+          .then(async (ordersData) &#x3D;&gt; {
+            // Load orders with related data
+            const ordersWithItems: Order[] &#x3D; [];
+
+            for (const orderData of ordersData || []) {
+              try {
+                // Load order items
+                const orderItemsData &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  {
+                    order_id: orderData.id,
+                  },
+                );
+
+                // Convert database order to Order model
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                    id: itemData.id,
+                    orderId: itemData.order_id,
+                    productId: itemData.product_id,
+                    productName: itemData.product_name,
+                    productSku: itemData.product_sku,
+                    quantity: itemData.quantity,
+                    unitPrice: itemData.unit_price,
+                    totalPrice: itemData.total_price,
+                    productImageUrl: itemData.product_image_url,
+                    productSpecifications: itemData.product_specifications,
+                    createdAt: itemData.created_at,
+                  })),
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+
+                ordersWithItems.push(order);
+              } catch (itemError) {
+                console.error(&#x27;Error loading order items:&#x27;, itemError);
+                // Continue with order but empty items
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: [],
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+                ordersWithItems.push(order);
+              }
+            }
+
+            return OrdersActions.loadOrdersSuccess({ orders: ordersWithItems });
+          })
+          .catch((error) &#x3D;&gt;
+            OrdersActions.loadOrdersFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserOrders$"></a>
+                    <span class="name">
+                        <span ><b>loadUserOrders$</b></span>
+                        <a href="#loadUserOrders$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadUserOrders),
+      switchMap(({ userEmail }) &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;orders&#x27;, { customer_email: userEmail })
+          .then(async (ordersData) &#x3D;&gt; {
+            console.log(
+              &#x27;Loading orders for user email:&#x27;,
+              userEmail,
+              &#x27;Found orders:&#x27;,
+              ordersData?.length || 0,
+            );
+
+            const ordersWithItems: Order[] &#x3D; [];
+
+            for (const orderData of ordersData || []) {
+              try {
+                // Load order items
+                const orderItemsData &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  {
+                    order_id: orderData.id,
+                  },
+                );
+
+                // Convert database order to Order model
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                    id: itemData.id,
+                    orderId: itemData.order_id,
+                    productId: itemData.product_id,
+                    productName: itemData.product_name,
+                    productSku: itemData.product_sku,
+                    quantity: itemData.quantity,
+                    unitPrice: itemData.unit_price,
+                    totalPrice: itemData.total_price,
+                    discountAmount: itemData.discount_amount,
+                    discountPercentage: itemData.discount_percentage,
+                    productImageUrl: itemData.product_image_url,
+                    productSpecifications: itemData.product_specifications,
+                    createdAt: itemData.created_at,
+                  })),
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+
+                ordersWithItems.push(order);
+              } catch (itemError) {
+                console.error(
+                  &#x27;Error loading order items for user order:&#x27;,
+                  itemError,
+                );
+                // Continue with order but empty items
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: [],
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+                ordersWithItems.push(order);
+              }
+            }
+
+            console.log(
+              &#x27;User orders loaded successfully:&#x27;,
+              ordersWithItems.length,
+            );
+            return OrdersActions.loadUserOrdersSuccess({
+              orders: ordersWithItems,
+            });
+          })
+          .catch((error) &#x3D;&gt; {
+            console.error(&#x27;Error loading user orders:&#x27;, error);
+            return OrdersActions.loadUserOrdersFailure({
+              error: error.message,
+            });
+          }),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserReviews$"></a>
+                    <span class="name">
+                        <span ><b>loadUserReviews$</b></span>
+                        <a href="#loadUserReviews$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadUserReviews),
+      switchMap(({ userId }) &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;reviews&#x27;, { user_id: userId })
+          .then(async (reviewsData) &#x3D;&gt; {
+            console.log(
+              &#x27;Loading reviews for user ID:&#x27;,
+              userId,
+              &#x27;Found reviews:&#x27;,
+              reviewsData?.length || 0,
+            );
+
+            const reviewsWithProducts: Review[] &#x3D; [];
+
+            for (const reviewData of reviewsData || []) {
+              try {
+                // Load product data for each review
+                const productData &#x3D; await this.supabaseService.getTable(
+                  &#x27;products&#x27;,
+                  {
+                    id: reviewData.product_id,
+                  },
+                );
+
+                const review: Review &#x3D; {
+                  id: reviewData.id,
+                  userId: reviewData.user_id,
+                  productId: reviewData.product_id,
+                  orderId: reviewData.order_id,
+                  orderItemId: reviewData.order_item_id,
+                  rating: reviewData.rating,
+                  title: reviewData.title,
+                  comment: reviewData.comment,
+                  isVerifiedPurchase: reviewData.is_verified_purchase,
+                  isApproved: reviewData.is_approved,
+                  adminResponse: reviewData.admin_response,
+                  helpfulCount: reviewData.helpful_count,
+                  reportedCount: reviewData.reported_count,
+                  status: reviewData.status,
+                  createdAt: reviewData.created_at,
+                  updatedAt: reviewData.updated_at,
+                  product:
+                    productData &amp;&amp; productData.length &gt; 0
+                      ? {
+                          name: productData[0].name,
+                          imageUrl: productData[0].images?.[0]?.url,
+                        }
+                      : undefined,
+                };
+                reviewsWithProducts.push(review);
+              } catch (productError) {
+                console.error(
+                  &#x27;Error loading product for user review:&#x27;,
+                  productError,
+                );
+                // Continue with review but without product data
+                const review: Review &#x3D; {
+                  id: reviewData.id,
+                  userId: reviewData.user_id,
+                  productId: reviewData.product_id,
+                  orderId: reviewData.order_id,
+                  orderItemId: reviewData.order_item_id,
+                  rating: reviewData.rating,
+                  title: reviewData.title,
+                  comment: reviewData.comment,
+                  isVerifiedPurchase: reviewData.is_verified_purchase,
+                  isApproved: reviewData.is_approved,
+                  adminResponse: reviewData.admin_response,
+                  helpfulCount: reviewData.helpful_count,
+                  reportedCount: reviewData.reported_count,
+                  status: reviewData.status,
+                  createdAt: reviewData.created_at,
+                  updatedAt: reviewData.updated_at,
+                  product: undefined,
+                };
+                reviewsWithProducts.push(review);
+              }
+            }
+
+            console.log(
+              &#x27;User reviews loaded successfully:&#x27;,
+              reviewsWithProducts.length,
+            );
+            return OrdersActions.loadUserReviewsSuccess({
+              reviews: reviewsWithProducts,
+            });
+          })
+          .catch((error) &#x3D;&gt; {
+            console.error(&#x27;Error loading user reviews:&#x27;, error);
+            return OrdersActions.loadUserReviewsFailure({
+              error: error.message,
+            });
+          }),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="802" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:802</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendOrderConfirmationEmails$"></a>
+                    <span class="name">
+                        <span ><b>sendOrderConfirmationEmails$</b></span>
+                        <a href="#sendOrderConfirmationEmails$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.createB2COrderSuccess),
+        switchMap(async ({ order, orderNumber }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending order confirmation emails for order:&#x27;,
+              orderNumber,
+            );
+
+            // Prepare order items for email
+            const orderItems &#x3D; await this.supabaseService.getTable(
+              &#x27;order_items&#x27;,
+              {
+                order_id: order.id,
+              },
+            );
+
+            const emailData &#x3D; {
+              to: order.customerEmail,
+              orderNumber: order.orderNumber,
+              orderDate: new Date(order.orderDate).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customerName || &#x27;Kupac&#x27;,
+              customerEmail: order.customerEmail,
+              items: (orderItems || []).map((item: any) &#x3D;&gt; ({
+                productName: item.product_name,
+                productSku: item.product_sku || &#x27;SKU-N/A&#x27;,
+                quantity: item.quantity,
+                unitPrice: item.unit_price,
+                totalPrice: item.total_price,
+              })),
+              subtotal: order.subtotal,
+              taxAmount: order.taxAmount,
+              shippingCost: order.shippingCost,
+              totalAmount: order.totalAmount,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderConfirmationEmail(emailData);
+            console.log(
+              &#x27;Customer order confirmation email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderNotificationToAdmin(emailData);
+            console.log(&#x27;Admin order notification email sent:&#x27;, adminEmailSent);
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending order confirmation emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="738" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:738</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendOrderStatusChangeEmails$"></a>
+                    <span class="name">
+                        <span ><b>sendOrderStatusChangeEmails$</b></span>
+                        <a href="#sendOrderStatusChangeEmails$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.updateOrderStatusSuccess),
+        switchMap(async ({ orderId, status }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending order status change emails for order:&#x27;,
+              orderId,
+              &#x27;new status:&#x27;,
+              status,
+            );
+
+            // Get the updated order data
+            const orderData &#x3D; await this.supabaseService.getTable(&#x27;orders&#x27;, {
+              id: orderId,
+            });
+            const order &#x3D;
+              orderData &amp;&amp; orderData.length &gt; 0 ? orderData[0] : null;
+
+            if (!order) {
+              console.error(
+                &#x27;Order not found for status change email:&#x27;,
+                orderId,
+              );
+              return { success: false, error: &#x27;Order not found&#x27; };
+            }
+
+            // Get Croatian status translation directly
+            const croatianStatusTranslations: { [key: string]: string } &#x3D; {
+              pending: &#x27;Na čekanju&#x27;,
+              confirmed: &#x27;Potvrđeno&#x27;,
+              processing: &#x27;U obradi&#x27;,
+              shipped: &#x27;Poslano&#x27;,
+              delivered: &#x27;Dostavljeno&#x27;,
+              cancelled: &#x27;Otkazano&#x27;,
+              refunded: &#x27;Povraćeno&#x27;,
+            };
+
+            const emailData &#x3D; {
+              to: order.customer_email,
+              orderNumber: order.order_number,
+              orderId: order.id,
+              orderDate: new Date(order.order_date).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customer_name || &#x27;Kupac&#x27;,
+              customerEmail: order.customer_email,
+              newStatus: croatianStatusTranslations[status] || status,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeEmail(emailData);
+            console.log(
+              &#x27;Customer order status change email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeNotificationToAdmin(
+                emailData,
+              );
+            console.log(
+              &#x27;Admin order status change notification email sent:&#x27;,
+              adminEmailSent,
+            );
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending order status change emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="369" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:369</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendPaymentStatusChangeEmails$"></a>
+                    <span class="name">
+                        <span ><b>sendPaymentStatusChangeEmails$</b></span>
+                        <a href="#sendPaymentStatusChangeEmails$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.updatePaymentStatusSuccess),
+        switchMap(async ({ orderId, paymentStatus }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending payment status change emails for order:&#x27;,
+              orderId,
+              &#x27;new payment status:&#x27;,
+              paymentStatus,
+            );
+
+            // Get the updated order data
+            const orderData &#x3D; await this.supabaseService.getTable(&#x27;orders&#x27;, {
+              id: orderId,
+            });
+            const order &#x3D;
+              orderData &amp;&amp; orderData.length &gt; 0 ? orderData[0] : null;
+
+            if (!order) {
+              console.error(
+                &#x27;Order not found for payment status change email:&#x27;,
+                orderId,
+              );
+              return { success: false, error: &#x27;Order not found&#x27; };
+            }
+
+            // Get Croatian payment status translation directly
+            const croatianPaymentStatusTranslations: { [key: string]: string } &#x3D;
+              {
+                pending: &#x27;Na čekanju&#x27;,
+                paid: &#x27;Plaćeno&#x27;,
+                failed: &#x27;Neuspješno&#x27;,
+                refunded: &#x27;Povraćeno&#x27;,
+                partially_refunded: &#x27;Djelomično povraćeno&#x27;,
+              };
+
+            const emailData &#x3D; {
+              to: order.customer_email,
+              orderNumber: order.order_number,
+              orderId: order.id,
+              orderDate: new Date(order.order_date).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customer_name || &#x27;Kupac&#x27;,
+              customerEmail: order.customer_email,
+              newStatus:
+                croatianPaymentStatusTranslations[paymentStatus] ||
+                paymentStatus,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeEmail(emailData);
+            console.log(
+              &#x27;Customer payment status change email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeNotificationToAdmin(
+                emailData,
+              );
+            console.log(
+              &#x27;Admin payment status change notification email sent:&#x27;,
+              adminEmailSent,
+            );
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending payment status change emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="471" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:471</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showB2COrderSuccessToast$"></a>
+                    <span class="name">
+                        <span ><b>showB2COrderSuccessToast$</b></span>
+                        <a href="#showB2COrderSuccessToast$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.createB2COrderSuccess),
+        tap(({ order, orderNumber }) &#x3D;&gt; {
+          console.log(&#x27;Showing success toast for order:&#x27;, orderNumber);
+          const message &#x3D; this.translationService.translate(
+            &#x27;checkout.orderCreated&#x27;,
+            { number: orderNumber },
+          );
+          this.toastService.showSuccess(message, 4000);
+        }),
+      ),
+    { dispatch: false },
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="721" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:721</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateOrderStatus$"></a>
+                    <span class="name">
+                        <span ><b>updateOrderStatus$</b></span>
+                        <a href="#updateOrderStatus$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.updateOrderStatus),
+      switchMap(({ orderId, status }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, { status: status as any })
+          .then(async () &#x3D;&gt; {
+            // Handle stock restoration for cancelled orders
+            if (status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;) {
+              try {
+                console.log(
+                  &#x27;Order cancelled, restoring stock for order:&#x27;,
+                  orderId,
+                );
+                // Get order items to restore stock
+                const orderItems &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  { order_id: orderId },
+                );
+
+                if (orderItems &amp;&amp; orderItems.length &gt; 0) {
+                  // Restore stock for all items (increment &#x3D; false for decrement, true for increment)
+                  await this.supabaseService.processOrderStockAdjustment(
+                    orderItems,
+                    false,
+                  );
+                  console.log(
+                    &#x27;Stock restored successfully for cancelled order:&#x27;,
+                    orderId,
+                  );
+                }
+              } catch (error) {
+                console.error(
+                  &#x27;Error restoring stock for cancelled order:&#x27;,
+                  error,
+                );
+                // Don&#x27;t fail the status update if stock restoration fails
+              }
+            }
+
+            return OrdersActions.updateOrderStatusSuccess({ orderId, status });
+          })
+          .catch((error: any) &#x3D;&gt;
+            OrdersActions.updateOrderStatusFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="319" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:319</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePaymentStatus$"></a>
+                    <span class="name">
+                        <span ><b>updatePaymentStatus$</b></span>
+                        <a href="#updatePaymentStatus$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.updatePaymentStatus),
+      switchMap(({ orderId, paymentStatus }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, {
+            payment_status: paymentStatus as any,
+          })
+          .then(() &#x3D;&gt;
+            OrdersActions.updatePaymentStatusSuccess({
+              orderId,
+              paymentStatus,
+            }),
+          )
+          .catch((error: any) &#x3D;&gt;
+            OrdersActions.updatePaymentStatusFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="449" class="link-to-prism">src/app/features/admin/orders/store/orders.effects.ts:449</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { switchMap, tap } from &#x27;rxjs/operators&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { ToastService } from &#x27;../../../../shared/services/toast.service&#x27;;
+import { TranslationService } from &#x27;../../../../shared/services/translation.service&#x27;;
+import { EmailService } from &#x27;../../../../services/email.service&#x27;;
+import * as OrdersActions from &#x27;./orders.actions&#x27;;
+import { Order } from &#x27;../../../../shared/models/order.model&#x27;;
+import { Review } from &#x27;../../../../shared/models/review.model&#x27;;
+
+@Injectable()
+export class OrdersEffects {
+  private actions$ &#x3D; inject(Actions);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private toastService &#x3D; inject(ToastService);
+  private translationService &#x3D; inject(TranslationService);
+  private emailService &#x3D; inject(EmailService);
+
+  loadOrders$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadOrders),
+      switchMap(() &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;orders&#x27;)
+          .then(async (ordersData) &#x3D;&gt; {
+            // Load orders with related data
+            const ordersWithItems: Order[] &#x3D; [];
+
+            for (const orderData of ordersData || []) {
+              try {
+                // Load order items
+                const orderItemsData &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  {
+                    order_id: orderData.id,
+                  },
+                );
+
+                // Convert database order to Order model
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                    id: itemData.id,
+                    orderId: itemData.order_id,
+                    productId: itemData.product_id,
+                    productName: itemData.product_name,
+                    productSku: itemData.product_sku,
+                    quantity: itemData.quantity,
+                    unitPrice: itemData.unit_price,
+                    totalPrice: itemData.total_price,
+                    productImageUrl: itemData.product_image_url,
+                    productSpecifications: itemData.product_specifications,
+                    createdAt: itemData.created_at,
+                  })),
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+
+                ordersWithItems.push(order);
+              } catch (itemError) {
+                console.error(&#x27;Error loading order items:&#x27;, itemError);
+                // Continue with order but empty items
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: [],
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+                ordersWithItems.push(order);
+              }
+            }
+
+            return OrdersActions.loadOrdersSuccess({ orders: ordersWithItems });
+          })
+          .catch((error) &#x3D;&gt;
+            OrdersActions.loadOrdersFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  );
+
+  loadUserOrders$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadUserOrders),
+      switchMap(({ userEmail }) &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;orders&#x27;, { customer_email: userEmail })
+          .then(async (ordersData) &#x3D;&gt; {
+            console.log(
+              &#x27;Loading orders for user email:&#x27;,
+              userEmail,
+              &#x27;Found orders:&#x27;,
+              ordersData?.length || 0,
+            );
+
+            const ordersWithItems: Order[] &#x3D; [];
+
+            for (const orderData of ordersData || []) {
+              try {
+                // Load order items
+                const orderItemsData &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  {
+                    order_id: orderData.id,
+                  },
+                );
+
+                // Convert database order to Order model
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                    id: itemData.id,
+                    orderId: itemData.order_id,
+                    productId: itemData.product_id,
+                    productName: itemData.product_name,
+                    productSku: itemData.product_sku,
+                    quantity: itemData.quantity,
+                    unitPrice: itemData.unit_price,
+                    totalPrice: itemData.total_price,
+                    discountAmount: itemData.discount_amount,
+                    discountPercentage: itemData.discount_percentage,
+                    productImageUrl: itemData.product_image_url,
+                    productSpecifications: itemData.product_specifications,
+                    createdAt: itemData.created_at,
+                  })),
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+
+                ordersWithItems.push(order);
+              } catch (itemError) {
+                console.error(
+                  &#x27;Error loading order items for user order:&#x27;,
+                  itemError,
+                );
+                // Continue with order but empty items
+                const order: Order &#x3D; {
+                  id: orderData.id,
+                  orderNumber: orderData.order_number,
+                  userId: orderData.user_id,
+                  customerEmail: orderData.customer_email,
+                  customerName: orderData.customer_name,
+                  customerPhone: orderData.customer_phone,
+                  totalAmount: orderData.total_amount,
+                  subtotal: orderData.subtotal,
+                  taxAmount: orderData.tax_amount || 0,
+                  shippingCost: orderData.shipping_cost || 0,
+                  discountAmount: orderData.discount_amount || 0,
+                  status: orderData.status,
+                  paymentStatus: orderData.payment_status,
+                  shippingStatus: orderData.shipping_status,
+                  paymentMethod: orderData.payment_method,
+                  orderDate: orderData.order_date,
+                  shippingAddress: orderData.shipping_address,
+                  billingAddress: orderData.billing_address,
+                  trackingNumber: orderData.tracking_number,
+                  notes: orderData.notes,
+                  adminNotes: orderData.admin_notes,
+                  is_b2b: (orderData as any).is_b2b,
+                  items: [],
+                  createdAt: orderData.created_at,
+                  updatedAt: orderData.updated_at,
+                };
+                ordersWithItems.push(order);
+              }
+            }
+
+            console.log(
+              &#x27;User orders loaded successfully:&#x27;,
+              ordersWithItems.length,
+            );
+            return OrdersActions.loadUserOrdersSuccess({
+              orders: ordersWithItems,
+            });
+          })
+          .catch((error) &#x3D;&gt; {
+            console.error(&#x27;Error loading user orders:&#x27;, error);
+            return OrdersActions.loadUserOrdersFailure({
+              error: error.message,
+            });
+          }),
+      ),
+    ),
+  );
+
+  loadOrder$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadOrder),
+      switchMap(({ orderId }) &#x3D;&gt;
+        this.supabaseService
+          .getTableById(&#x27;orders&#x27;, orderId)
+          .then(async (orderData: any) &#x3D;&gt; {
+            if (!orderData) {
+              throw new Error(&#x27;Order not found&#x27;);
+            }
+
+            // Load order items
+            const orderItemsData &#x3D; await this.supabaseService.getTable(
+              &#x27;order_items&#x27;,
+              {
+                order_id: orderData.id,
+              },
+            );
+
+            // Convert database order to Order model
+            const order: Order &#x3D; {
+              id: orderData.id,
+              orderNumber: orderData.order_number,
+              userId: orderData.user_id,
+              customerEmail: orderData.customer_email,
+              customerName: orderData.customer_name,
+              customerPhone: orderData.customer_phone,
+              totalAmount: orderData.total_amount,
+              subtotal: orderData.subtotal,
+              taxAmount: orderData.tax_amount || 0,
+              shippingCost: orderData.shipping_cost || 0,
+              discountAmount: orderData.discount_amount || 0,
+              status: orderData.status,
+              paymentStatus: orderData.payment_status,
+              shippingStatus: orderData.shipping_status,
+              paymentMethod: orderData.payment_method,
+              orderDate: orderData.order_date,
+              shippingAddress: orderData.shipping_address,
+              billingAddress: orderData.billing_address,
+              trackingNumber: orderData.tracking_number,
+              notes: orderData.notes,
+              adminNotes: orderData.admin_notes,
+              is_b2b: orderData.is_b2b,
+              items: (orderItemsData || []).map((itemData: any) &#x3D;&gt; ({
+                id: itemData.id,
+                orderId: itemData.order_id,
+                productId: itemData.product_id,
+                productName: itemData.product_name,
+                productSku: itemData.product_sku,
+                quantity: itemData.quantity,
+                unitPrice: itemData.unit_price,
+                totalPrice: itemData.total_price,
+                productImageUrl: itemData.product_image_url,
+                productSpecifications: itemData.product_specifications,
+                createdAt: itemData.created_at,
+              })),
+              createdAt: orderData.created_at,
+              updatedAt: orderData.updated_at,
+            };
+
+            return OrdersActions.loadOrderSuccess({ order });
+          })
+          .catch((error) &#x3D;&gt;
+            OrdersActions.loadOrderFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  );
+
+  updateOrderStatus$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.updateOrderStatus),
+      switchMap(({ orderId, status }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, { status: status as any })
+          .then(async () &#x3D;&gt; {
+            // Handle stock restoration for cancelled orders
+            if (status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;) {
+              try {
+                console.log(
+                  &#x27;Order cancelled, restoring stock for order:&#x27;,
+                  orderId,
+                );
+                // Get order items to restore stock
+                const orderItems &#x3D; await this.supabaseService.getTable(
+                  &#x27;order_items&#x27;,
+                  { order_id: orderId },
+                );
+
+                if (orderItems &amp;&amp; orderItems.length &gt; 0) {
+                  // Restore stock for all items (increment &#x3D; false for decrement, true for increment)
+                  await this.supabaseService.processOrderStockAdjustment(
+                    orderItems,
+                    false,
+                  );
+                  console.log(
+                    &#x27;Stock restored successfully for cancelled order:&#x27;,
+                    orderId,
+                  );
+                }
+              } catch (error) {
+                console.error(
+                  &#x27;Error restoring stock for cancelled order:&#x27;,
+                  error,
+                );
+                // Don&#x27;t fail the status update if stock restoration fails
+              }
+            }
+
+            return OrdersActions.updateOrderStatusSuccess({ orderId, status });
+          })
+          .catch((error: any) &#x3D;&gt;
+            OrdersActions.updateOrderStatusFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  );
+
+  // Send order status change emails when order status is updated
+  sendOrderStatusChangeEmails$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.updateOrderStatusSuccess),
+        switchMap(async ({ orderId, status }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending order status change emails for order:&#x27;,
+              orderId,
+              &#x27;new status:&#x27;,
+              status,
+            );
+
+            // Get the updated order data
+            const orderData &#x3D; await this.supabaseService.getTable(&#x27;orders&#x27;, {
+              id: orderId,
+            });
+            const order &#x3D;
+              orderData &amp;&amp; orderData.length &gt; 0 ? orderData[0] : null;
+
+            if (!order) {
+              console.error(
+                &#x27;Order not found for status change email:&#x27;,
+                orderId,
+              );
+              return { success: false, error: &#x27;Order not found&#x27; };
+            }
+
+            // Get Croatian status translation directly
+            const croatianStatusTranslations: { [key: string]: string } &#x3D; {
+              pending: &#x27;Na čekanju&#x27;,
+              confirmed: &#x27;Potvrđeno&#x27;,
+              processing: &#x27;U obradi&#x27;,
+              shipped: &#x27;Poslano&#x27;,
+              delivered: &#x27;Dostavljeno&#x27;,
+              cancelled: &#x27;Otkazano&#x27;,
+              refunded: &#x27;Povraćeno&#x27;,
+            };
+
+            const emailData &#x3D; {
+              to: order.customer_email,
+              orderNumber: order.order_number,
+              orderId: order.id,
+              orderDate: new Date(order.order_date).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customer_name || &#x27;Kupac&#x27;,
+              customerEmail: order.customer_email,
+              newStatus: croatianStatusTranslations[status] || status,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeEmail(emailData);
+            console.log(
+              &#x27;Customer order status change email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeNotificationToAdmin(
+                emailData,
+              );
+            console.log(
+              &#x27;Admin order status change notification email sent:&#x27;,
+              adminEmailSent,
+            );
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending order status change emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  updatePaymentStatus$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.updatePaymentStatus),
+      switchMap(({ orderId, paymentStatus }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, {
+            payment_status: paymentStatus as any,
+          })
+          .then(() &#x3D;&gt;
+            OrdersActions.updatePaymentStatusSuccess({
+              orderId,
+              paymentStatus,
+            }),
+          )
+          .catch((error: any) &#x3D;&gt;
+            OrdersActions.updatePaymentStatusFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  );
+
+  // Send payment status change emails when payment status is updated
+  sendPaymentStatusChangeEmails$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.updatePaymentStatusSuccess),
+        switchMap(async ({ orderId, paymentStatus }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending payment status change emails for order:&#x27;,
+              orderId,
+              &#x27;new payment status:&#x27;,
+              paymentStatus,
+            );
+
+            // Get the updated order data
+            const orderData &#x3D; await this.supabaseService.getTable(&#x27;orders&#x27;, {
+              id: orderId,
+            });
+            const order &#x3D;
+              orderData &amp;&amp; orderData.length &gt; 0 ? orderData[0] : null;
+
+            if (!order) {
+              console.error(
+                &#x27;Order not found for payment status change email:&#x27;,
+                orderId,
+              );
+              return { success: false, error: &#x27;Order not found&#x27; };
+            }
+
+            // Get Croatian payment status translation directly
+            const croatianPaymentStatusTranslations: { [key: string]: string } &#x3D;
+              {
+                pending: &#x27;Na čekanju&#x27;,
+                paid: &#x27;Plaćeno&#x27;,
+                failed: &#x27;Neuspješno&#x27;,
+                refunded: &#x27;Povraćeno&#x27;,
+                partially_refunded: &#x27;Djelomično povraćeno&#x27;,
+              };
+
+            const emailData &#x3D; {
+              to: order.customer_email,
+              orderNumber: order.order_number,
+              orderId: order.id,
+              orderDate: new Date(order.order_date).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customer_name || &#x27;Kupac&#x27;,
+              customerEmail: order.customer_email,
+              newStatus:
+                croatianPaymentStatusTranslations[paymentStatus] ||
+                paymentStatus,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeEmail(emailData);
+            console.log(
+              &#x27;Customer payment status change email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderStatusChangeNotificationToAdmin(
+                emailData,
+              );
+            console.log(
+              &#x27;Admin payment status change notification email sent:&#x27;,
+              adminEmailSent,
+            );
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending payment status change emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  confirmPurchase$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.confirmPurchase),
+      switchMap(({ orderId }) &#x3D;&gt;
+        this.supabaseService
+          .adminUpdateRecord(&#x27;orders&#x27;, orderId, { payment_status: &#x27;paid&#x27; })
+          .then(() &#x3D;&gt; OrdersActions.confirmPurchaseSuccess({ orderId }))
+          .catch((error) &#x3D;&gt;
+            OrdersActions.confirmPurchaseFailure({ error: error.message }),
+          ),
+      ),
+    ),
+  );
+
+  deleteOrder$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.deleteOrder),
+      switchMap(({ orderId }) &#x3D;&gt;
+        // First delete order items, then delete the order
+        this.supabaseService
+          .getTable(&#x27;order_items&#x27;, { order_id: orderId })
+          .then(async (orderItems) &#x3D;&gt; {
+            // Delete all order items first
+            if (orderItems &amp;&amp; orderItems.length &gt; 0) {
+              for (const item of orderItems) {
+                await this.supabaseService.adminDeleteRecord(
+                  &#x27;order_items&#x27;,
+                  item.id,
+                );
+              }
+            }
+
+            // Then delete the order
+            await this.supabaseService.adminDeleteRecord(&#x27;orders&#x27;, orderId);
+
+            return OrdersActions.deleteOrderSuccess({ orderId });
+          })
+          .catch((error) &#x3D;&gt; {
+            return OrdersActions.deleteOrderFailure({ error: error.message });
+          }),
+      ),
+    ),
+  );
+
+  createB2COrder$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.createB2COrder),
+      switchMap(({ orderData, cartItems }) &#x3D;&gt; {
+        console.log(&#x27;B2C Order creation started in effect&#x27;);
+        return this.createOrderWithStockManagement(orderData, cartItems)
+          .then((result) &#x3D;&gt; {
+            console.log(&#x27;B2C Order creation successful in effect:&#x27;, result);
+            return OrdersActions.createB2COrderSuccess({
+              order: result.order,
+              orderNumber: result.orderNumber,
+            });
+          })
+          .catch((error: any) &#x3D;&gt; {
+            console.error(&#x27;B2C Order creation failed in effect:&#x27;, error);
+            return OrdersActions.createB2COrderFailure({
+              error: error.message,
+            });
+          });
+      }),
+    ),
+  );
+
+  private async createOrderWithStockManagement(
+    orderData: any,
+    cartItems: any[],
+  ): Promise&lt;{ order: Order; orderNumber: string }&gt; {
+    try {
+      // First, check and decrement stock for all items
+      console.log(&#x27;Processing stock adjustment for order items...&#x27;);
+      const stockAdjustmentSuccess &#x3D;
+        await this.supabaseService.processOrderStockAdjustment(cartItems, true);
+
+      if (!stockAdjustmentSuccess) {
+        throw new Error(&#x27;Insufficient stock for one or more items&#x27;);
+      }
+
+      // Create order in database - use special method for guest orders
+      let orderRecord;
+      if (orderData.user_id &#x3D;&#x3D;&#x3D; null) {
+        // Guest order - use special guest order creation method
+        console.log(&#x27;Creating guest order with null user_id&#x27;);
+        orderRecord &#x3D; await this.supabaseService.createGuestOrder(orderData);
+      } else {
+        // Authenticated user order - use regular method
+        console.log(
+          &#x27;Creating authenticated user order with user_id:&#x27;,
+          orderData.user_id,
+        );
+        orderRecord &#x3D; await this.supabaseService.createRecord(
+          &#x27;orders&#x27;,
+          orderData,
+        );
+      }
+
+      if (!orderRecord) {
+        // Rollback stock if order creation fails
+        await this.supabaseService.processOrderStockAdjustment(
+          cartItems,
+          false,
+        );
+        throw new Error(&#x27;Failed to create order&#x27;);
+      }
+
+      // Create order items
+      console.log(&#x27;Creating order items for order:&#x27;, orderRecord.id);
+      for (const item of cartItems) {
+        const orderItemData &#x3D; {
+          order_id: orderRecord.id,
+          product_id:
+            item.productId &#x3D;&#x3D;&#x3D; &#x27;00000000-0000-0000-0000-000000000001&#x27;
+              ? null
+              : item.productId,
+          product_name: item.name,
+          product_sku: item.sku || &#x60;SKU-${item.productId}&#x60;,
+          product_image_url: item.image,
+          quantity: item.quantity,
+          unit_price: item.price,
+          total_price: item.price * item.quantity,
+          created_at: new Date().toISOString(),
+        };
+
+        console.log(&#x27;Creating order item:&#x27;, orderItemData);
+        await this.supabaseService.createRecord(&#x27;order_items&#x27;, orderItemData);
+      }
+
+      // Convert database order to Order model
+      const order: Order &#x3D; {
+        id: orderRecord.id,
+        orderNumber: orderRecord.order_number,
+        userId: orderRecord.user_id,
+        customerEmail: orderRecord.customer_email,
+        customerName: orderRecord.customer_name,
+        customerPhone: orderRecord.customer_phone,
+        totalAmount: orderRecord.total_amount,
+        subtotal: orderRecord.subtotal,
+        taxAmount: orderRecord.tax_amount || 0,
+        shippingCost: orderRecord.shipping_cost || 0,
+        discountAmount: orderRecord.discount_amount || 0,
+        status: orderRecord.status,
+        paymentStatus: orderRecord.payment_status,
+        shippingStatus: orderRecord.shipping_status,
+        paymentMethod: orderRecord.payment_method,
+        orderDate: orderRecord.order_date,
+        shippingAddress: orderRecord.shipping_address,
+        billingAddress: orderRecord.billing_address,
+        trackingNumber: orderRecord.tracking_number,
+        notes: orderRecord.notes,
+        adminNotes: orderRecord.admin_notes,
+        items: [], // Items will be loaded separately if needed
+        createdAt: orderRecord.created_at,
+        updatedAt: orderRecord.updated_at,
+      };
+
+      return {
+        order,
+        orderNumber: orderRecord.order_number,
+      };
+    } catch (error) {
+      console.error(&#x27;Error in createOrderWithStockManagement:&#x27;, error);
+      throw error;
+    }
+  }
+
+  // Show success toast when B2C order is created
+  showB2COrderSuccessToast$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.createB2COrderSuccess),
+        tap(({ order, orderNumber }) &#x3D;&gt; {
+          console.log(&#x27;Showing success toast for order:&#x27;, orderNumber);
+          const message &#x3D; this.translationService.translate(
+            &#x27;checkout.orderCreated&#x27;,
+            { number: orderNumber },
+          );
+          this.toastService.showSuccess(message, 4000);
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  // Send order confirmation emails when B2C order is created
+  sendOrderConfirmationEmails$ &#x3D; createEffect(
+    () &#x3D;&gt;
+      this.actions$.pipe(
+        ofType(OrdersActions.createB2COrderSuccess),
+        switchMap(async ({ order, orderNumber }) &#x3D;&gt; {
+          try {
+            console.log(
+              &#x27;Sending order confirmation emails for order:&#x27;,
+              orderNumber,
+            );
+
+            // Prepare order items for email
+            const orderItems &#x3D; await this.supabaseService.getTable(
+              &#x27;order_items&#x27;,
+              {
+                order_id: order.id,
+              },
+            );
+
+            const emailData &#x3D; {
+              to: order.customerEmail,
+              orderNumber: order.orderNumber,
+              orderDate: new Date(order.orderDate).toLocaleDateString(&#x27;hr-HR&#x27;),
+              customerName: order.customerName || &#x27;Kupac&#x27;,
+              customerEmail: order.customerEmail,
+              items: (orderItems || []).map((item: any) &#x3D;&gt; ({
+                productName: item.product_name,
+                productSku: item.product_sku || &#x27;SKU-N/A&#x27;,
+                quantity: item.quantity,
+                unitPrice: item.unit_price,
+                totalPrice: item.total_price,
+              })),
+              subtotal: order.subtotal,
+              taxAmount: order.taxAmount,
+              shippingCost: order.shippingCost,
+              totalAmount: order.totalAmount,
+            };
+
+            // Send email to customer
+            const customerEmailSent &#x3D;
+              await this.emailService.sendOrderConfirmationEmail(emailData);
+            console.log(
+              &#x27;Customer order confirmation email sent:&#x27;,
+              customerEmailSent,
+            );
+
+            // Send email to admin
+            const adminEmailSent &#x3D;
+              await this.emailService.sendOrderNotificationToAdmin(emailData);
+            console.log(&#x27;Admin order notification email sent:&#x27;, adminEmailSent);
+
+            return { success: true };
+          } catch (error) {
+            console.error(&#x27;Error sending order confirmation emails:&#x27;, error);
+            return {
+              success: false,
+              error: error instanceof Error ? error.message : &#x27;Unknown error&#x27;,
+            };
+          }
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  loadUserReviews$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(OrdersActions.loadUserReviews),
+      switchMap(({ userId }) &#x3D;&gt;
+        this.supabaseService
+          .getTable(&#x27;reviews&#x27;, { user_id: userId })
+          .then(async (reviewsData) &#x3D;&gt; {
+            console.log(
+              &#x27;Loading reviews for user ID:&#x27;,
+              userId,
+              &#x27;Found reviews:&#x27;,
+              reviewsData?.length || 0,
+            );
+
+            const reviewsWithProducts: Review[] &#x3D; [];
+
+            for (const reviewData of reviewsData || []) {
+              try {
+                // Load product data for each review
+                const productData &#x3D; await this.supabaseService.getTable(
+                  &#x27;products&#x27;,
+                  {
+                    id: reviewData.product_id,
+                  },
+                );
+
+                const review: Review &#x3D; {
+                  id: reviewData.id,
+                  userId: reviewData.user_id,
+                  productId: reviewData.product_id,
+                  orderId: reviewData.order_id,
+                  orderItemId: reviewData.order_item_id,
+                  rating: reviewData.rating,
+                  title: reviewData.title,
+                  comment: reviewData.comment,
+                  isVerifiedPurchase: reviewData.is_verified_purchase,
+                  isApproved: reviewData.is_approved,
+                  adminResponse: reviewData.admin_response,
+                  helpfulCount: reviewData.helpful_count,
+                  reportedCount: reviewData.reported_count,
+                  status: reviewData.status,
+                  createdAt: reviewData.created_at,
+                  updatedAt: reviewData.updated_at,
+                  product:
+                    productData &amp;&amp; productData.length &gt; 0
+                      ? {
+                          name: productData[0].name,
+                          imageUrl: productData[0].images?.[0]?.url,
+                        }
+                      : undefined,
+                };
+                reviewsWithProducts.push(review);
+              } catch (productError) {
+                console.error(
+                  &#x27;Error loading product for user review:&#x27;,
+                  productError,
+                );
+                // Continue with review but without product data
+                const review: Review &#x3D; {
+                  id: reviewData.id,
+                  userId: reviewData.user_id,
+                  productId: reviewData.product_id,
+                  orderId: reviewData.order_id,
+                  orderItemId: reviewData.order_item_id,
+                  rating: reviewData.rating,
+                  title: reviewData.title,
+                  comment: reviewData.comment,
+                  isVerifiedPurchase: reviewData.is_verified_purchase,
+                  isApproved: reviewData.is_approved,
+                  adminResponse: reviewData.admin_response,
+                  helpfulCount: reviewData.helpful_count,
+                  reportedCount: reviewData.reported_count,
+                  status: reviewData.status,
+                  createdAt: reviewData.created_at,
+                  updatedAt: reviewData.updated_at,
+                  product: undefined,
+                };
+                reviewsWithProducts.push(review);
+              }
+            }
+
+            console.log(
+              &#x27;User reviews loaded successfully:&#x27;,
+              reviewsWithProducts.length,
+            );
+            return OrdersActions.loadUserReviewsSuccess({
+              reviews: reviewsWithProducts,
+            });
+          })
+          .catch((error) &#x3D;&gt; {
+            console.error(&#x27;Error loading user reviews:&#x27;, error);
+            return OrdersActions.loadUserReviewsFailure({
+              error: error.message,
+            });
+          }),
+      ),
+    ),
+  );
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'OrdersEffects.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

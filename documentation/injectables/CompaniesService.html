@@ -1,0 +1,1067 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >CompaniesService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/admin/companies/services/companies.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#approveCompany" >approveCompany</a>
+                            </li>
+                            <li>
+                                <a href="#createCompany" >createCompany</a>
+                            </li>
+                            <li>
+                                <a href="#deleteCompany" >deleteCompany</a>
+                            </li>
+                            <li>
+                                <a href="#getCompanies" >getCompanies</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mapDatabaseToModel" >mapDatabaseToModel</a>
+                            </li>
+                            <li>
+                                <a href="#rejectCompany" >rejectCompany</a>
+                            </li>
+                            <li>
+                                <a href="#updateCompany" >updateCompany</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="approveCompany"></a>
+                    <span class="name">
+                        <span ><b>approveCompany</b></span>
+                        <a href="#approveCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>approveCompany(companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;Company&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createCompany"></a>
+                    <span class="name">
+                        <span ><b>createCompany</b></span>
+                        <a href="#createCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createCompany(company: Omit<Company | "id" | "createdAt" | "updatedAt">)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>company</td>
+                                            <td>
+                                                        <code>Omit&lt;Company | &quot;id&quot; | &quot;createdAt&quot; | &quot;updatedAt&quot;&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;Company&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteCompany"></a>
+                    <span class="name">
+                        <span ><b>deleteCompany</b></span>
+                        <a href="#deleteCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>deleteCompany(companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCompanies"></a>
+                    <span class="name">
+                        <span ><b>getCompanies</b></span>
+                        <a href="#getCompanies"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCompanies()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="13"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;Company[]&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapDatabaseToModel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mapDatabaseToModel</b></span>
+                        <a href="#mapDatabaseToModel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mapDatabaseToModel(dbCompany: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dbCompany</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Company.html" target="_self" >Company</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rejectCompany"></a>
+                    <span class="name">
+                        <span ><b>rejectCompany</b></span>
+                        <a href="#rejectCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>rejectCompany(companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, reason: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>reason</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;Company&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCompany"></a>
+                    <span class="name">
+                        <span ><b>updateCompany</b></span>
+                        <a href="#updateCompany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateCompany(companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, company: Partial<Company>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>company</td>
+                                            <td>
+                                                        <code>Partial&lt;Company&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;Company&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/features/admin/companies/services/companies.service.ts:11</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { Observable, from } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { Company } from &#x27;../../../../shared/models/company.model&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class CompaniesService {
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  getCompanies(): Observable&lt;Company[]&gt; {
+    return from(
+      this.supabaseService.client
+        .from(&#x27;companies&#x27;)
+        .select(
+          &#x60;
+          *,
+          contact_person:profiles!companies_contact_person_id_fkey(
+            full_name
+          )
+        &#x60;,
+        )
+        .order(&#x27;created_at&#x27;, { ascending: false }),
+    ).pipe(
+      map(({ data, error }) &#x3D;&gt; {
+        if (error) throw error;
+        return (data || []).map(this.mapDatabaseToModel);
+      }),
+    );
+  }
+
+  approveCompany(companyId: string): Observable&lt;Company&gt; {
+    return from(
+      this.supabaseService.getSession().then((session) &#x3D;&gt; {
+        const currentUserId &#x3D; session?.user?.id;
+        return this.supabaseService.client
+          .from(&#x27;companies&#x27;)
+          .update({
+            status: &#x27;approved&#x27;,
+            approved: true,
+            approved_at: new Date().toISOString(),
+            approved_by: currentUserId,
+            updated_at: new Date().toISOString(),
+          })
+          .eq(&#x27;id&#x27;, companyId)
+          .select(
+            &#x60;
+            *,
+            contact_person:profiles!companies_contact_person_id_fkey(
+              full_name
+            )
+          &#x60;,
+          )
+          .single();
+      }),
+    ).pipe(
+      map(({ data, error }) &#x3D;&gt; {
+        if (error) throw error;
+        return this.mapDatabaseToModel(data);
+      }),
+    );
+  }
+
+  rejectCompany(companyId: string, reason: string): Observable&lt;Company&gt; {
+    return from(
+      this.supabaseService.getSession().then((session) &#x3D;&gt; {
+        const currentUserId &#x3D; session?.user?.id;
+        return this.supabaseService.client
+          .from(&#x27;companies&#x27;)
+          .update({
+            status: &#x27;rejected&#x27;,
+            approved: false,
+            rejected_at: new Date().toISOString(),
+            rejected_by: currentUserId,
+            rejection_reason: reason,
+            updated_at: new Date().toISOString(),
+          })
+          .eq(&#x27;id&#x27;, companyId)
+          .select(
+            &#x60;
+            *,
+            contact_person:profiles!companies_contact_person_id_fkey(
+              full_name
+            )
+          &#x60;,
+          )
+          .single();
+      }),
+    ).pipe(
+      map(({ data, error }) &#x3D;&gt; {
+        if (error) throw error;
+        return this.mapDatabaseToModel(data);
+      }),
+    );
+  }
+
+  deleteCompany(companyId: string): Observable&lt;void&gt; {
+    return from(
+      this.supabaseService.client
+        .from(&#x27;companies&#x27;)
+        .delete()
+        .eq(&#x27;id&#x27;, companyId),
+    ).pipe(
+      map(({ error }) &#x3D;&gt; {
+        if (error) throw error;
+        return;
+      }),
+    );
+  }
+
+  createCompany(
+    company: Omit&lt;Company, &#x27;id&#x27; | &#x27;createdAt&#x27; | &#x27;updatedAt&#x27;&gt;,
+  ): Observable&lt;Company&gt; {
+    return from(
+      this.supabaseService.getSession().then(async () &#x3D;&gt; {
+        // Parse first name and last name from contactPersonName
+        // Format: &quot;FirstName LastName&quot;
+        let firstName &#x3D; &#x27;Pending&#x27;;
+        let lastName &#x3D; &#x27;User&#x27;;
+
+        if (company.contactPersonName) {
+          const nameParts &#x3D; company.contactPersonName.trim().split(&#x27; &#x27;);
+          firstName &#x3D; nameParts[0] || &#x27;Pending&#x27;;
+          lastName &#x3D; nameParts.slice(1).join(&#x27; &#x27;) || &#x27;User&#x27;;
+        }
+
+        // Call Edge Function to create user, profile, and company
+        // This uses the service role key on the server side
+        const { data, error } &#x3D;
+          await this.supabaseService.client.functions.invoke(
+            &#x27;create-company-user&#x27;,
+            {
+              body: {
+                email: company.companyEmail,
+                firstName,
+                lastName,
+                phoneNumber: company.companyPhone,
+                companyName: company.companyName,
+                taxNumber: company.taxNumber,
+                companyAddress: company.companyAddress,
+                companyPhone: company.companyPhone,
+                companyEmail: company.companyEmail,
+                website: company.website,
+                businessType: company.businessType,
+                yearsInBusiness: company.yearsInBusiness,
+                annualRevenue: company.annualRevenue,
+                numberOfEmployees: company.numberOfEmployees,
+                description: company.description,
+                status: company.status || &#x27;pending&#x27;,
+              },
+            },
+          );
+
+        if (error) {
+          console.error(&#x27;Error calling edge function:&#x27;, error);
+          throw new Error(&#x60;Failed to create company: ${error.message}&#x60;);
+        }
+
+        if (!data || !data.success) {
+          throw new Error(data?.error || &#x27;Unknown error creating company&#x27;);
+        }
+
+        // Return the created company from the edge function response
+        return { data: data.company, error: null };
+      }),
+    ).pipe(
+      map(({ data, error }) &#x3D;&gt; {
+        if (error) throw error;
+        return this.mapDatabaseToModel(data);
+      }),
+    );
+  }
+
+  updateCompany(
+    companyId: string,
+    company: Partial&lt;Company&gt;,
+  ): Observable&lt;Company&gt; {
+    return from(
+      this.supabaseService.client
+        .from(&#x27;companies&#x27;)
+        .update({
+          ...(company.companyName &amp;&amp; { company_name: company.companyName }),
+          ...(company.taxNumber &amp;&amp; { tax_number: company.taxNumber }),
+          ...(company.companyAddress &amp;&amp; {
+            company_address: company.companyAddress,
+          }),
+          ...(company.companyPhone &amp;&amp; { company_phone: company.companyPhone }),
+          ...(company.companyEmail &amp;&amp; { company_email: company.companyEmail }),
+          ...(company.website !&#x3D;&#x3D; undefined &amp;&amp; { website: company.website }),
+          ...(company.businessType &amp;&amp; { business_type: company.businessType }),
+          ...(company.yearsInBusiness !&#x3D;&#x3D; undefined &amp;&amp; {
+            years_in_business: company.yearsInBusiness,
+          }),
+          ...(company.annualRevenue !&#x3D;&#x3D; undefined &amp;&amp; {
+            annual_revenue: company.annualRevenue,
+          }),
+          ...(company.numberOfEmployees !&#x3D;&#x3D; undefined &amp;&amp; {
+            number_of_employees: company.numberOfEmployees,
+          }),
+          ...(company.description !&#x3D;&#x3D; undefined &amp;&amp; {
+            description: company.description,
+          }),
+          ...(company.status &amp;&amp; { status: company.status }),
+          ...(company.status &amp;&amp; { approved: company.status &#x3D;&#x3D;&#x3D; &#x27;approved&#x27; }),
+          updated_at: new Date().toISOString(),
+        })
+        .eq(&#x27;id&#x27;, companyId)
+        .select(
+          &#x60;
+                    *,
+                    contact_person:profiles!companies_contact_person_id_fkey(
+                        full_name
+                    )
+                &#x60;,
+        )
+        .single(),
+    ).pipe(
+      map(({ data, error }) &#x3D;&gt; {
+        if (error) throw error;
+        return this.mapDatabaseToModel(data);
+      }),
+    );
+  }
+
+  private mapDatabaseToModel(dbCompany: any): Company {
+    return {
+      id: dbCompany.id,
+      contactPersonId: dbCompany.contact_person_id,
+      contactPersonName:
+        dbCompany.contact_person?.full_name ||
+        &#x60;${dbCompany.first_name} ${dbCompany.last_name}&#x60;,
+      companyName: dbCompany.company_name,
+      taxNumber: dbCompany.tax_number,
+      companyAddress: dbCompany.company_address,
+      companyPhone: dbCompany.company_phone,
+      companyEmail: dbCompany.company_email,
+      website: dbCompany.website,
+      businessType: dbCompany.business_type,
+      yearsInBusiness: dbCompany.years_in_business,
+      annualRevenue: dbCompany.annual_revenue,
+      numberOfEmployees: dbCompany.number_of_employees,
+      description: dbCompany.description,
+      status: dbCompany.status,
+      approved: dbCompany.approved,
+      approvedAt: dbCompany.approved_at
+        ? new Date(dbCompany.approved_at)
+        : undefined,
+      approvedBy: dbCompany.approved_by,
+      rejectedAt: dbCompany.rejected_at
+        ? new Date(dbCompany.rejected_at)
+        : undefined,
+      rejectedBy: dbCompany.rejected_by,
+      rejectionReason: dbCompany.rejection_reason,
+      createdAt: new Date(dbCompany.created_at),
+      updatedAt: new Date(dbCompany.updated_at),
+    };
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CompaniesService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

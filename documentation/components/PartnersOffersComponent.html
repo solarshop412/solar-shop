@@ -1,0 +1,2881 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PartnersOffersComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-partners-offers</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./partners-offers.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./partners-offers.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#b2bOffers" >b2bOffers</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser" >currentUser</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser$" >currentUser$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#hasCompanyId" >hasCompanyId</a>
+                            </li>
+                            <li>
+                                <a href="#hasCompanyId$" >hasCompanyId$</a>
+                            </li>
+                            <li>
+                                <a href="#isAuthenticated" >isAuthenticated</a>
+                            </li>
+                            <li>
+                                <a href="#isAuthenticated$" >isAuthenticated$</a>
+                            </li>
+                            <li>
+                                <a href="#isPartner" >isPartner</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                            <li>
+                                <a href="#userCompanyId" >userCompanyId</a>
+                            </li>
+                            <li>
+                                <a href="#userCompanyId$" >userCompanyId$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#addOfferProductsToCartBulk" >addOfferProductsToCartBulk</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#calculateOfferPartnerPricing" >calculateOfferPartnerPricing</a>
+                            </li>
+                            <li>
+                                <a href="#claimOffer" >claimOffer</a>
+                            </li>
+                            <li>
+                                <a href="#copyCouponCode" >copyCouponCode</a>
+                            </li>
+                            <li>
+                                <a href="#formatDate" >formatDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getProductsWithPartnerPricing" >getProductsWithPartnerPricing</a>
+                            </li>
+                            <li>
+                                <a href="#isOfferExpired" >isOfferExpired</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadB2BOffers" >loadB2BOffers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadOfferProducts" >loadOfferProducts</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToLogin" >navigateToLogin</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToPartnerContact" >navigateToPartnerContact</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToPartnerRegistration" >navigateToPartnerRegistration</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#viewOfferDetails" >viewOfferDetails</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addOfferProductsToCartBulk"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>addOfferProductsToCartBulk</b></span>
+                        <a href="#addOfferProductsToCartBulk"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addOfferProductsToCartBulk(offerProducts: any[], offer: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offerProducts</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateOfferPartnerPricing"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>calculateOfferPartnerPricing</b></span>
+                        <a href="#calculateOfferPartnerPricing"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>calculateOfferPartnerPricing(offerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="406"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:406</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calculate partner pricing for an offer based on its products</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offerId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type | null&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="claimOffer"></a>
+                    <span class="name">
+                        <span ><b>claimOffer</b></span>
+                        <a href="#claimOffer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>claimOffer(offer: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:194</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyCouponCode"></a>
+                    <span class="name">
+                        <span ><b>copyCouponCode</b></span>
+                        <a href="#copyCouponCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyCouponCode(couponCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="373"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:373</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>couponCode</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDate(dateString: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="389"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:389</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>dateString</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductsWithPartnerPricing"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getProductsWithPartnerPricing</b></span>
+                        <a href="#getProductsWithPartnerPricing"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductsWithPartnerPricing(productIds: string[], companyId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="506"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:506</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get products with partner pricing for a specific company</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productIds</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>companyId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;any[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOfferExpired"></a>
+                    <span class="name">
+                        <span ><b>isOfferExpired</b></span>
+                        <a href="#isOfferExpired"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isOfferExpired(endDate?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="398"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:398</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>endDate</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadB2BOffers"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadB2BOffers</b></span>
+                        <a href="#loadB2BOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadB2BOffers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadOfferProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadOfferProducts</b></span>
+                        <a href="#loadOfferProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadOfferProducts(offerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:237</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offerId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;any[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToLogin"></a>
+                    <span class="name">
+                        <span ><b>navigateToLogin</b></span>
+                        <a href="#navigateToLogin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToLogin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPartnerContact"></a>
+                    <span class="name">
+                        <span ><b>navigateToPartnerContact</b></span>
+                        <a href="#navigateToPartnerContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToPartnerContact()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPartnerRegistration"></a>
+                    <span class="name">
+                        <span ><b>navigateToPartnerRegistration</b></span>
+                        <a href="#navigateToPartnerRegistration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToPartnerRegistration()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewOfferDetails"></a>
+                    <span class="name">
+                        <span ><b>viewOfferDetails</b></span>
+                        <a href="#viewOfferDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewOfferDetails(offer: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="369"
+                                    class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:369</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="b2bOffers"></a>
+                    <span class="name">
+                        <span ><b>b2bOffers</b></span>
+                        <a href="#b2bOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser"></a>
+                    <span class="name">
+                        <span ><b>currentUser</b></span>
+                        <a href="#currentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser$"></a>
+                    <span class="name">
+                        <span ><b>currentUser$</b></span>
+                        <a href="#currentUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectCurrentUser)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasCompanyId"></a>
+                    <span class="name">
+                        <span ><b>hasCompanyId</b></span>
+                        <a href="#hasCompanyId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasCompanyId$"></a>
+                    <span class="name">
+                        <span ><b>hasCompanyId$</b></span>
+                        <a href="#hasCompanyId$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(
+    selectB2BCartHasCompanyId,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAuthenticated"></a>
+                    <span class="name">
+                        <span ><b>isAuthenticated</b></span>
+                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAuthenticated$"></a>
+                    <span class="name">
+                        <span ><b>isAuthenticated$</b></span>
+                        <a href="#isAuthenticated$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(
+    selectIsAuthenticated,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPartner"></a>
+                    <span class="name">
+                        <span ><b>isPartner</b></span>
+                        <a href="#isPartner"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userCompanyId"></a>
+                    <span class="name">
+                        <span ><b>userCompanyId</b></span>
+                        <a href="#userCompanyId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userCompanyId$"></a>
+                    <span class="name">
+                        <span ><b>userCompanyId$</b></span>
+                        <a href="#userCompanyId$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;string | null&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(
+    selectB2BCartCompanyId,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/b2b/partners/offers/partners-offers/partners-offers.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, OnDestroy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule, Router } from &#x27;@angular/router&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable, Subject, from } from &#x27;rxjs&#x27;;
+import { takeUntil, switchMap } from &#x27;rxjs/operators&#x27;;
+import { TranslatePipe } from &#x27;../../../../../shared/pipes/translate.pipe&#x27;;
+import { SupabaseService } from &#x27;../../../../../services/supabase.service&#x27;;
+import { ToastService } from &#x27;../../../../../shared/services/toast.service&#x27;;
+import {
+  selectCurrentUser,
+  selectIsAuthenticated,
+} from &#x27;../../../../../core/auth/store/auth.selectors&#x27;;
+import { addAllToB2BCartFromOffer } from &#x27;../../../cart/store/b2b-cart.actions&#x27;;
+import * as B2BCartActions from &#x27;../../../cart/store/b2b-cart.actions&#x27;;
+import {
+  selectB2BCartHasCompanyId,
+  selectB2BCartCompanyId,
+} from &#x27;../../../cart/store/b2b-cart.selectors&#x27;;
+import { TranslationService } from &#x27;../../../../../shared/services/translation.service&#x27;;
+import { User } from &#x27;../../../../../shared/models/user.model&#x27;;
+
+@Component({
+  selector: &#x27;app-partners-offers&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslatePipe],
+  templateUrl: &#x27;./partners-offers.component.html&#x27;,
+  styleUrls: [&#x27;./partners-offers.component.scss&#x27;],
+})
+export class PartnersOffersComponent implements OnInit, OnDestroy {
+  private supabaseService &#x3D; inject(SupabaseService);
+  private store &#x3D; inject(Store);
+  private toastService &#x3D; inject(ToastService);
+  private translationService &#x3D; inject(TranslationService);
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  // Observables
+  currentUser$: Observable&lt;User | null&gt; &#x3D; this.store.select(selectCurrentUser);
+  isAuthenticated$: Observable&lt;boolean&gt; &#x3D; this.store.select(
+    selectIsAuthenticated,
+  );
+  userCompanyId$: Observable&lt;string | null&gt; &#x3D; this.store.select(
+    selectB2BCartCompanyId,
+  );
+  hasCompanyId$: Observable&lt;boolean&gt; &#x3D; this.store.select(
+    selectB2BCartHasCompanyId,
+  );
+
+  isAuthenticated &#x3D; false;
+  hasCompanyId &#x3D; false;
+  isPartner &#x3D; false;
+  loading &#x3D; false;
+  currentUser: User | null &#x3D; null;
+  userCompanyId: string | null &#x3D; null;
+
+  // B2B offers loaded from database
+  b2bOffers: any[] &#x3D; [];
+
+  private router &#x3D; inject(Router);
+
+  ngOnInit(): void {
+    // Subscribe to auth state
+    this.isAuthenticated$.pipe(takeUntil(this.destroy$)).subscribe((isAuth) &#x3D;&gt; {
+      this.isAuthenticated &#x3D; isAuth;
+    });
+
+    this.currentUser$.pipe(takeUntil(this.destroy$)).subscribe((user) &#x3D;&gt; {
+      this.currentUser &#x3D; user;
+      this.isPartner &#x3D;
+        !!user?.companyId &amp;&amp;
+        (user?.role?.name &#x3D;&#x3D;&#x3D; &#x27;company_admin&#x27; || user?.role?.name &#x3D;&#x3D;&#x3D; &#x27;admin&#x27;);
+    });
+
+    this.hasCompanyId$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((hasCompanyId) &#x3D;&gt; {
+        this.hasCompanyId &#x3D; hasCompanyId;
+      });
+
+    this.userCompanyId$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((companyId) &#x3D;&gt; {
+        this.userCompanyId &#x3D; companyId;
+        // Reload offers when company ID changes to update pricing
+        if (companyId &amp;&amp; this.b2bOffers.length &gt; 0) {
+          this.loadB2BOffers();
+        }
+      });
+
+    // Load B2B offers from database
+    this.loadB2BOffers();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  async loadB2BOffers(): Promise&lt;void&gt; {
+    this.loading &#x3D; true;
+    try {
+      // Load offers where is_b2b is true and status is active
+      const offers &#x3D; await this.supabaseService.getTable(&#x27;offers&#x27;, {
+        is_b2b: true,
+        status: &#x27;active&#x27;,
+      });
+
+      // Transform database offers to Offer model and calculate partner pricing
+      const transformedOffers &#x3D; await Promise.all(
+        offers.map(async (offer) &#x3D;&gt; {
+          let originalPrice &#x3D; offer.original_price || 0;
+          const discountPercentage &#x3D;
+            offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; ? offer.discount_value : 0;
+          let discountedPrice &#x3D; offer.discounted_price || 0;
+
+          // If user has a company, calculate partner pricing
+          let hasAllPartnerPricing &#x3D; true;
+          let hasProducts &#x3D; false;
+          let productCount &#x3D; 0;
+
+          if (this.userCompanyId) {
+            const partnerPricing &#x3D; await this.calculateOfferPartnerPricing(
+              offer.id,
+              this.userCompanyId,
+            );
+            if (partnerPricing) {
+              originalPrice &#x3D; partnerPricing.originalPrice;
+              discountedPrice &#x3D; partnerPricing.discountedPrice;
+              hasAllPartnerPricing &#x3D; partnerPricing.hasAllPartnerPricing;
+              hasProducts &#x3D; true;
+              productCount &#x3D; partnerPricing.productCount;
+            }
+          }
+
+          // Calculate discounted price for percentage-only offers if not provided
+          if (
+            discountedPrice &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+            discountPercentage &gt; 0 &amp;&amp;
+            originalPrice &gt; 0
+          ) {
+            discountedPrice &#x3D; originalPrice * (1 - discountPercentage / 100);
+          }
+
+          return {
+            id: offer.id,
+            title: offer.title,
+            originalPrice: originalPrice,
+            discountedPrice: discountedPrice,
+            discountPercentage: discountPercentage,
+            imageUrl:
+              offer.image_url ||
+              &#x27;assets/images/placeholders/solar-panels-1.jpg&#x27;,
+            description: offer.description,
+            shortDescription: offer.short_description || &#x27;&#x27;,
+            status: offer.status,
+            couponCode: offer.code || &#x27;&#x27;,
+            startDate: offer.start_date,
+            endDate: offer.end_date,
+            featured: offer.featured || false,
+            isB2B: offer.is_b2b || false,
+            discount_type: offer.discount_type,
+            discount_value: offer.discount_value,
+            hasAllPartnerPricing: hasAllPartnerPricing,
+            hasProducts: hasProducts,
+            productCount: productCount,
+            bundle: offer.bundle || false,
+          } as any;
+        }),
+      );
+
+      this.b2bOffers &#x3D; transformedOffers;
+    } catch (error) {
+      console.error(&#x27;Error loading B2B offers:&#x27;, error);
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  navigateToLogin(): void {
+    // Navigate to login page
+    window.location.href &#x3D; &#x27;/prijava&#x27;;
+  }
+
+  navigateToPartnerRegistration(): void {
+    // Navigate to partner registration page
+    this.router.navigate([&#x27;/partneri/registracija&#x27;]);
+  }
+
+  navigateToPartnerContact(): void {
+    // Navigate to partner contact page
+    this.router.navigate([&#x27;/partneri/kontakt&#x27;]);
+  }
+
+  claimOffer(offer: any): void {
+    // Check if user is authenticated and has company ID
+    if (!this.isAuthenticated || !this.userCompanyId) {
+      this.toastService.showError(
+        this.translationService.translate(&#x27;b2b.auth.pleaseLoginAsPartner&#x27;),
+      );
+      return;
+    }
+
+    // Check if offer is expired
+    if (this.isOfferExpired(offer.endDate)) {
+      this.toastService.showError(
+        this.translationService.translate(&#x27;b2b.offers.offerExpired&#x27;),
+      );
+      return;
+    }
+
+    // Load offer products and add them to cart
+    this.loadOfferProducts(offer.id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(async (products) &#x3D;&gt; {
+        if (!products || products.length &#x3D;&#x3D;&#x3D; 0) {
+          // If no products, just show success message (general offer)
+          let message &#x3D; this.translationService.translate(
+            &#x27;b2b.offers.offerClaimed&#x27;,
+            { title: offer.title },
+          );
+          if (offer.couponCode) {
+            message +&#x3D;
+              &#x27; &#x27; +
+              this.translationService.translate(&#x27;b2b.offers.useCouponCode&#x27;, {
+                code: offer.couponCode,
+              });
+          }
+          this.toastService.showSuccess(message);
+          return;
+        }
+
+        // Use the bulk add action for better performance and consistency
+        await this.addOfferProductsToCartBulk(products, offer);
+      });
+  }
+
+  private loadOfferProducts(offerId: string): Observable&lt;any[]&gt; {
+    return from(
+      this.supabaseService.client
+        .from(&#x27;offer_products&#x27;)
+        .select(
+          &#x60;
+          *,
+          products (
+            id,
+            name,
+            description,
+            price,
+            sku,
+            stock_quantity,
+            images
+          )
+        &#x60;,
+        )
+        .eq(&#x27;offer_id&#x27;, offerId)
+        .order(&#x27;sort_order&#x27;),
+    ).pipe(
+      switchMap(({ data, error }) &#x3D;&gt; {
+        if (error) {
+          console.error(&#x27;Error loading offer products:&#x27;, error);
+          return [];
+        }
+        return [data || []];
+      }),
+    );
+  }
+
+  private async addOfferProductsToCartBulk(
+    offerProducts: any[],
+    offer: any,
+  ): Promise&lt;void&gt; {
+    if (!this.userCompanyId) {
+      this.toastService.showError(
+        this.translationService.translate(&#x27;b2b.auth.companyIdNotFound&#x27;),
+      );
+      return;
+    }
+
+    // First, fetch partner pricing for all products
+    const productsWithPricing &#x3D; await this.getProductsWithPartnerPricing(
+      offerProducts.map((op) &#x3D;&gt; op.products.id),
+      this.userCompanyId,
+    );
+
+    // Filter and prepare products for bulk add with partner pricing and individual discounts
+    const availableProducts &#x3D; offerProducts
+      .filter((offerProduct) &#x3D;&gt; {
+        const product &#x3D; offerProduct.products;
+        return product &amp;&amp; product.stock_quantity &gt; 0;
+      })
+      .map((offerProduct) &#x3D;&gt; {
+        // Get partner pricing for this product
+        const productWithPricing &#x3D; productsWithPricing.find(
+          (p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; offerProduct.products.id,
+        );
+        const partnerPrice &#x3D;
+          productWithPricing?.partner_price ||
+          productWithPricing?.company_price;
+        const retailPrice &#x3D; offerProduct.products.price;
+
+        // Determine individual discount type and value
+        const hasIndividualDiscount &#x3D;
+          (offerProduct.discount_percentage &amp;&amp;
+            offerProduct.discount_percentage &gt; 0) ||
+          (offerProduct.discount_amount &amp;&amp; offerProduct.discount_amount &gt; 0);
+
+        return {
+          productId: offerProduct.products.id,
+          quantity: 1,
+          individualDiscount: hasIndividualDiscount
+            ? offerProduct.discount_percentage || offerProduct.discount_amount
+            : undefined,
+          individualDiscountType: hasIndividualDiscount
+            ? ((offerProduct.discount_amount &gt; 0
+                ? &#x27;fixed_amount&#x27;
+                : &#x27;percentage&#x27;) as &#x27;percentage&#x27; | &#x27;fixed_amount&#x27;)
+            : undefined,
+          originalPrice: partnerPrice || retailPrice, // Use partner price as base, fall back to retail price if no partner pricing
+        };
+      });
+
+    if (availableProducts.length &#x3D;&#x3D;&#x3D; 0) {
+      this.toastService.showWarning(
+        this.translationService.translate(&#x27;b2b.offers.allProductsOutOfStock&#x27;),
+      );
+      return;
+    }
+
+    // Get offer details for the bulk action
+    const offerType &#x3D; (offer.discount_type || &#x27;percentage&#x27;) as
+      | &#x27;percentage&#x27;
+      | &#x27;fixed_amount&#x27;
+      | &#x27;tier_based&#x27;
+      | &#x27;bundle&#x27;;
+    const discountValue &#x3D; offer.discount_value || offer.discountPercentage || 0;
+
+    // Get all product IDs from this offer for bundle tracking
+    const allProductIds &#x3D; offerProducts.map((op) &#x3D;&gt; op.products.id);
+
+    // Dispatch the bulk add action
+    this.store.dispatch(
+      addAllToB2BCartFromOffer({
+        products: availableProducts,
+        companyId: this.userCompanyId,
+        partnerOfferId: offer.id,
+        partnerOfferName: offer.title,
+        partnerOfferType: offerType,
+        partnerOfferDiscount: discountValue,
+        partnerOfferValidUntil: offer.endDate,
+        isBundle: offer.bundle || false,
+        bundleProductIds: offer.bundle ? allProductIds : undefined,
+      }),
+    );
+
+    // Open cart sidebar
+    this.store.dispatch(B2BCartActions.openB2BCartSidebar());
+
+    // Show immediate feedback for skipped products
+    const skippedCount &#x3D; offerProducts.length - availableProducts.length;
+    if (skippedCount &gt; 0) {
+      this.toastService.showWarning(
+        this.translationService.translate(&#x27;b2b.offers.productsOutOfStock&#x27;, {
+          count: skippedCount,
+        }),
+      );
+    }
+  }
+
+  viewOfferDetails(offer: any): void {
+    this.router.navigate([&#x27;/partneri/ponude&#x27;, offer.id]);
+  }
+
+  copyCouponCode(couponCode: string): void {
+    navigator.clipboard
+      .writeText(couponCode)
+      .then(() &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;b2b.offers.couponCopied&#x27;),
+        );
+      })
+      .catch((err) &#x3D;&gt; {
+        console.error(&#x27;Failed to copy coupon code:&#x27;, err);
+        this.toastService.showError(
+          this.translationService.translate(&#x27;b2b.offers.failedToCopyCoupon&#x27;),
+        );
+      });
+  }
+
+  formatDate(dateString: string): string {
+    const date &#x3D; new Date(dateString);
+    return date.toLocaleDateString(&#x27;en-US&#x27;, {
+      year: &#x27;numeric&#x27;,
+      month: &#x27;short&#x27;,
+      day: &#x27;numeric&#x27;,
+    });
+  }
+
+  isOfferExpired(endDate?: string): boolean {
+    if (!endDate) return false;
+    return new Date(endDate) &lt; new Date();
+  }
+
+  /**
+   * Calculate partner pricing for an offer based on its products
+   */
+  private async calculateOfferPartnerPricing(
+    offerId: string,
+    companyId: string,
+  ): Promise&lt;{
+    originalPrice: number;
+    discountedPrice: number;
+    hasAllPartnerPricing: boolean;
+    productCount: number;
+  } | null&gt; {
+    try {
+      // Get offer products
+      const { data: offerProducts, error: offerError } &#x3D;
+        await this.supabaseService.client
+          .from(&#x27;offer_products&#x27;)
+          .select(
+            &#x60;
+          *,
+          products (
+            id,
+            name,
+            price
+          )
+        &#x60;,
+          )
+          .eq(&#x27;offer_id&#x27;, offerId);
+
+      if (offerError || !offerProducts?.length) {
+        return null;
+      }
+
+      // Get partner pricing for these products
+      const productIds &#x3D; offerProducts.map((op) &#x3D;&gt; op.products.id);
+      const productsWithPricing &#x3D; await this.getProductsWithPartnerPricing(
+        productIds,
+        companyId,
+      );
+
+      // Calculate sum of partner prices (not average)
+      let totalPartnerPrice &#x3D; 0;
+      let productsWithValidPricing &#x3D; 0;
+      const totalProducts &#x3D; offerProducts.length;
+
+      offerProducts.forEach((offerProduct) &#x3D;&gt; {
+        const productWithPricing &#x3D; productsWithPricing.find(
+          (p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; offerProduct.products.id,
+        );
+        const partnerPrice &#x3D; productWithPricing?.partner_price;
+
+        if (partnerPrice) {
+          totalPartnerPrice +&#x3D; partnerPrice;
+          productsWithValidPricing++;
+        }
+      });
+
+      // Check if all products have partner pricing
+      const hasAllPartnerPricing &#x3D; productsWithValidPricing &#x3D;&#x3D;&#x3D; totalProducts;
+
+      if (productsWithValidPricing &#x3D;&#x3D;&#x3D; 0) {
+        return null;
+      }
+
+      // Get the offer details to calculate discount
+      const { data: offer } &#x3D; await this.supabaseService.client
+        .from(&#x27;offers&#x27;)
+        .select(&#x27;discount_type, discount_value&#x27;)
+        .eq(&#x27;id&#x27;, offerId)
+        .single();
+
+      let discountedPrice &#x3D; totalPartnerPrice;
+
+      if (offer) {
+        if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; &amp;&amp; offer.discount_value) {
+          discountedPrice &#x3D;
+            totalPartnerPrice * (1 - offer.discount_value / 100);
+        } else if (
+          offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27; &amp;&amp;
+          offer.discount_value
+        ) {
+          discountedPrice &#x3D; Math.max(
+            0,
+            totalPartnerPrice - offer.discount_value,
+          );
+        }
+      }
+
+      return {
+        originalPrice: totalPartnerPrice, // Sum of partner prices
+        discountedPrice: discountedPrice, // Sum of discounted partner prices
+        hasAllPartnerPricing,
+        productCount: totalProducts,
+      };
+    } catch (error) {
+      console.error(&#x27;Error calculating offer partner pricing:&#x27;, error);
+      return null;
+    }
+  }
+
+  /**
+   * Get products with partner pricing for a specific company
+   */
+  private async getProductsWithPartnerPricing(
+    productIds: string[],
+    companyId: string,
+  ): Promise&lt;any[]&gt; {
+    try {
+      const { data: products, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+          id,
+          name,
+          price,
+          company_pricing!left (
+            price_tier_1,
+            price,
+            company_id
+          )
+        &#x60;,
+        )
+        .in(&#x27;id&#x27;, productIds);
+
+      if (error) {
+        console.error(&#x27;Error fetching products with partner pricing:&#x27;, error);
+        return [];
+      }
+
+      return (products || []).map((product) &#x3D;&gt; {
+        // Find the company-specific pricing
+        const companyPricing &#x3D; product.company_pricing?.find(
+          (cp: any) &#x3D;&gt; cp.company_id &#x3D;&#x3D;&#x3D; companyId,
+        );
+
+        return {
+          ...product,
+          partner_price: companyPricing?.price_tier_1 || companyPricing?.price,
+          company_price: companyPricing?.price_tier_1 || companyPricing?.price,
+          has_partner_pricing: !!companyPricing,
+        };
+      });
+    } catch (error) {
+      console.error(&#x27;Error in getProductsWithPartnerPricing:&#x27;, error);
+      return [];
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen bg-gray-50&quot;&gt;
+  &lt;!-- Header --&gt;
+  &lt;div class&#x3D;&quot;bg-white shadow-sm border-b border-gray-200&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;&gt;
+      &lt;h1 class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;b2b.offers.title&quot; | translate }}
+      &lt;/h1&gt;
+      &lt;p class&#x3D;&quot;mt-2 text-lg text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;b2b.offers.subtitle&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Login Required Banner (for non-authenticated users) --&gt;
+  &lt;div
+    *ngIf&#x3D;&quot;!isAuthenticated || !hasCompanyId&quot;
+    class&#x3D;&quot;bg-solar-50 border-b border-solar-200&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;div&gt;
+            &lt;p class&#x3D;&quot;text-sm font-medium text-solar-800&quot;&gt;
+              &lt;span *ngIf&#x3D;&quot;!isAuthenticated&quot;&gt;{{
+                &quot;b2b.offers.loginRequired&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;isAuthenticated &amp;&amp; !hasCompanyId&quot;&gt;{{
+                &quot;b2b.auth.partnerVerificationRequired&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button
+          *ngIf&#x3D;&quot;!isAuthenticated&quot;
+          (click)&#x3D;&quot;navigateToLogin()&quot;
+          class&#x3D;&quot;bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors&quot;
+        &gt;
+          {{ &quot;b2b.offers.loginToViewOffers&quot; | translate }}
+        &lt;/button&gt;
+        &lt;button
+          *ngIf&#x3D;&quot;isAuthenticated &amp;&amp; !hasCompanyId&quot;
+          (click)&#x3D;&quot;navigateToPartnerRegistration()&quot;
+          class&#x3D;&quot;bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors&quot;
+        &gt;
+          {{ &quot;b2b.auth.becomePartner&quot; | translate }}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Offers Grid --&gt;
+  &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;&gt;
+    &lt;!-- Loading State --&gt;
+    &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex items-center justify-center py-12&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600&quot;
+      &gt;&lt;/div&gt;
+      &lt;span class&#x3D;&quot;ml-3 text-lg text-gray-600&quot;&gt;{{
+        &quot;b2b.offers.loadingOffers&quot; | translate
+      }}&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Offers Grid --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;!loading&quot;
+      class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8&quot;
+    &gt;
+      &lt;div
+        *ngFor&#x3D;&quot;let offer of b2bOffers&quot;
+        class&#x3D;&quot;bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300&quot;
+      &gt;
+        &lt;!-- Offer Image --&gt;
+        &lt;div class&#x3D;&quot;relative&quot;&gt;
+          &lt;img
+            [src]&#x3D;&quot;offer.imageUrl&quot;
+            [alt]&#x3D;&quot;offer.title&quot;
+            class&#x3D;&quot;w-full h-48 object-cover&quot;
+          /&gt;
+
+          &lt;!-- Discount Badge --&gt;
+          &lt;div class&#x3D;&quot;absolute top-4 left-4&quot;&gt;
+            &lt;span
+              class&#x3D;&quot;bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold&quot;
+            &gt;
+              &lt;span
+                *ngIf&#x3D;&quot;
+                  offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; || !offer.discount_type
+                &quot;
+                &gt;-{{ offer.discountPercentage }}%&lt;/span
+              &gt;
+              &lt;span *ngIf&#x3D;&quot;offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;&quot;
+                &gt;{{
+                  offer.discount_value | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.0-2&quot;
+                }}
+                {{ &quot;hero.off&quot; | translate }}&lt;/span
+              &gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Partner Only Badge --&gt;
+          &lt;div class&#x3D;&quot;absolute top-4 right-4 flex flex-col gap-2 items-end&quot;&gt;
+            &lt;span
+              class&#x3D;&quot;bg-solar-500 text-white px-3 py-1 rounded-full text-xs font-medium&quot;
+            &gt;
+              {{ &quot;b2b.offers.partnerOnly&quot; | translate }}
+            &lt;/span&gt;
+            &lt;!-- Bundle Badge --&gt;
+            &lt;span
+              *ngIf&#x3D;&quot;offer.bundle&quot;
+              class&#x3D;&quot;bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium&quot;
+            &gt;
+              {{ &quot;b2b.offers.bundleOffer&quot; | translate }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Expiry Date --&gt;
+          &lt;div *ngIf&#x3D;&quot;offer.endDate&quot; class&#x3D;&quot;absolute bottom-4 right-4&quot;&gt;
+            &lt;span
+              class&#x3D;&quot;bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs&quot;
+            &gt;
+              {{ &quot;b2b.offers.expires&quot; | translate }}:
+              {{ formatDate(offer.endDate) }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Offer Content --&gt;
+        &lt;div class&#x3D;&quot;p-6&quot;&gt;
+          &lt;!-- Title --&gt;
+          &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ offer.title }}
+          &lt;/h3&gt;
+
+          &lt;!-- Description --&gt;
+          &lt;p class&#x3D;&quot;text-gray-600 mb-4 font-[&#x27;DM_Sans&#x27;] line-clamp-3&quot;&gt;
+            {{ offer.description }}
+          &lt;/p&gt;
+
+          &lt;!-- Pricing for offers with products and full partner pricing --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              isAuthenticated &amp;&amp;
+              hasCompanyId &amp;&amp;
+              offer.hasProducts &amp;&amp;
+              offer.hasAllPartnerPricing
+            &quot;
+            class&#x3D;&quot;mb-4&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;text-2xl font-bold text-solar-600&quot;&gt;
+                  €{{ offer.discountedPrice | number: &quot;1.2-2&quot; }}
+                &lt;/span&gt;
+                &lt;span class&#x3D;&quot;text-lg text-gray-500 line-through ml-2&quot;&gt;
+                  €{{ offer.originalPrice | number: &quot;1.2-2&quot; }}
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;text-right&quot;&gt;
+                &lt;div class&#x3D;&quot;text-sm text-gray-500&quot;&gt;
+                  {{ &quot;b2b.offers.savings&quot; | translate }}
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;text-lg font-bold text-green-600&quot;&gt;
+                  €{{
+                    offer.originalPrice - offer.discountedPrice
+                      | number: &quot;1.2-2&quot;
+                  }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;text-xs text-gray-500 mt-1&quot;&gt;
+              {{ &quot;b2b.offers.sumOfPartnerPrices&quot; | translate }} ({{
+                offer.productCount
+              }}
+              {{ &quot;b2b.offers.products&quot; | translate }})
+            &lt;/div&gt;
+            &lt;!-- Bundle Notice --&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;offer.bundle&quot;
+              class&#x3D;&quot;mt-2 p-2 bg-purple-50 border border-purple-200 rounded-lg&quot;
+            &gt;
+              &lt;p class&#x3D;&quot;text-xs text-purple-700 flex items-center&quot;&gt;
+                &lt;svg
+                  class&#x3D;&quot;w-4 h-4 mr-1&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                {{ &quot;b2b.offers.bundleRequiresAllProductsInCart&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Pricing for offers with products but missing partner pricing --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              isAuthenticated &amp;&amp;
+              hasCompanyId &amp;&amp;
+              offer.hasProducts &amp;&amp;
+              !offer.hasAllPartnerPricing
+            &quot;
+            class&#x3D;&quot;mb-4 text-center py-4 bg-orange-50 border border-orange-200 rounded-lg&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-8 h-8 text-orange-500 mx-auto mb-2&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+              /&gt;
+            &lt;/svg&gt;
+            &lt;p class&#x3D;&quot;text-sm text-orange-700 font-medium mb-1&quot;&gt;
+              {{ &quot;b2b.offers.incompletePricing&quot; | translate }}
+            &lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-xs text-orange-600&quot;&gt;
+              {{ &quot;b2b.offers.contactSupportForPricing&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Pricing for general offers (no products) --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;isAuthenticated &amp;&amp; hasCompanyId &amp;&amp; !offer.hasProducts&quot;
+            class&#x3D;&quot;mb-4 text-center py-4 bg-blue-50 border border-blue-200 rounded-lg&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;text-lg font-bold text-blue-800 mb-1&quot;&gt;
+              &lt;span *ngIf&#x3D;&quot;offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;&quot;
+                &gt;{{ offer.discount_value }}%
+                {{ &quot;b2b.offers.discount&quot; | translate }}&lt;/span
+              &gt;
+              &lt;span *ngIf&#x3D;&quot;offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;&quot;
+                &gt;€{{ offer.discount_value | number: &quot;1.2-2&quot; }}
+                {{ &quot;b2b.offers.discount&quot; | translate }}&lt;/span
+              &gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;text-xs text-blue-600&quot;&gt;
+              {{ &quot;b2b.offers.generalOffer&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Login Required Pricing --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;!isAuthenticated || !hasCompanyId&quot;
+            class&#x3D;&quot;mb-4 text-center py-4 bg-gray-50 rounded-lg&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-8 h-8 text-gray-400 mx-auto mb-2&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;
+              /&gt;
+            &lt;/svg&gt;
+            &lt;p class&#x3D;&quot;text-sm text-gray-500 font-medium&quot;&gt;
+              &lt;span *ngIf&#x3D;&quot;!isAuthenticated&quot;&gt;{{
+                &quot;b2b.offers.loginToViewPrices&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;isAuthenticated &amp;&amp; !hasCompanyId&quot;&gt;{{
+                &quot;b2b.auth.partnerVerificationRequiredPricing&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Coupon Code --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;offer.couponCode &amp;&amp; isAuthenticated &amp;&amp; hasCompanyId&quot;
+            class&#x3D;&quot;mb-4&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-3&quot;
+            &gt;
+              &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                &lt;div&gt;
+                  &lt;span class&#x3D;&quot;text-sm text-gray-600&quot;
+                    &gt;{{ &quot;b2b.offers.couponCode&quot; | translate }}:&lt;/span
+                  &gt;
+                  &lt;span class&#x3D;&quot;ml-2 font-mono font-bold text-solar-600&quot;&gt;{{
+                    offer.couponCode
+                  }}&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;button
+                  (click)&#x3D;&quot;copyCouponCode(offer.couponCode)&quot;
+                  class&#x3D;&quot;text-solar-500 hover:text-solar-600 text-sm font-medium&quot;
+                &gt;
+                  {{ &quot;b2b.offers.copy&quot; | translate }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Actions --&gt;
+          &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
+            &lt;!-- Claim offer button - only show if authenticated, has company, and either no products OR has all partner pricing --&gt;
+            &lt;button
+              *ngIf&#x3D;&quot;
+                isAuthenticated &amp;&amp;
+                hasCompanyId &amp;&amp;
+                (!offer.hasProducts || offer.hasAllPartnerPricing)
+              &quot;
+              (click)&#x3D;&quot;claimOffer(offer)&quot;
+              [disabled]&#x3D;&quot;isOfferExpired(offer.endDate)&quot;
+              class&#x3D;&quot;w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;!isOfferExpired(offer.endDate)&quot;&gt;{{
+                &quot;b2b.offers.claimOffer&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;isOfferExpired(offer.endDate)&quot;&gt;{{
+                &quot;b2b.offers.expired&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;!-- Contact support button - show when authenticated, has company, has products, but missing partner pricing --&gt;
+            &lt;button
+              *ngIf&#x3D;&quot;
+                isAuthenticated &amp;&amp;
+                hasCompanyId &amp;&amp;
+                offer.hasProducts &amp;&amp;
+                !offer.hasAllPartnerPricing
+              &quot;
+              (click)&#x3D;&quot;navigateToPartnerContact()&quot;
+              class&#x3D;&quot;w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors&quot;
+            &gt;
+              {{ &quot;b2b.offers.contactSupport&quot; | translate }}
+            &lt;/button&gt;
+
+            &lt;button
+              *ngIf&#x3D;&quot;!isAuthenticated&quot;
+              (click)&#x3D;&quot;navigateToLogin()&quot;
+              class&#x3D;&quot;w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors&quot;
+            &gt;
+              {{ &quot;b2b.offers.signInToClaim&quot; | translate }}
+            &lt;/button&gt;
+
+            &lt;button
+              *ngIf&#x3D;&quot;isAuthenticated &amp;&amp; !hasCompanyId&quot;
+              (click)&#x3D;&quot;navigateToPartnerRegistration()&quot;
+              class&#x3D;&quot;w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors&quot;
+            &gt;
+              {{ &quot;b2b.offers.claimOffer&quot; | translate }}
+            &lt;/button&gt;
+
+            &lt;button
+              (click)&#x3D;&quot;viewOfferDetails(offer)&quot;
+              class&#x3D;&quot;w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors&quot;
+            &gt;
+              {{ &quot;b2b.offers.viewDetails&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- No Offers Available --&gt;
+    &lt;div *ngIf&#x3D;&quot;!loading &amp;&amp; b2bOffers.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;text-center py-12&quot;&gt;
+      &lt;svg
+        class&#x3D;&quot;w-16 h-16 text-gray-400 mx-auto mb-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-medium text-gray-900 mb-2&quot;&gt;
+        {{ &quot;b2b.offers.noOffers&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &quot;b2b.offers.noOffersText&quot; | translate }}&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./partners-offers.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen bg-gray-50">  <!-- Header -->  <div class="bg-white shadow-sm border-b border-gray-200">    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">      <h1 class="text-3xl font-bold text-gray-900 font-[\'Poppins\']">        {{ "b2b.offers.title" | translate }}      </h1>      <p class="mt-2 text-lg text-gray-600 font-[\'DM_Sans\']">        {{ "b2b.offers.subtitle" | translate }}      </p>    </div>  </div>  <!-- Login Required Banner (for non-authenticated users) -->  <div    *ngIf="!isAuthenticated || !hasCompanyId"    class="bg-solar-50 border-b border-solar-200"  >    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">      <div class="flex items-center justify-between">        <div class="flex items-center space-x-3">          <svg            class="w-6 h-6 text-solar-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"            />          </svg>          <div>            <p class="text-sm font-medium text-solar-800">              <span *ngIf="!isAuthenticated">{{                "b2b.offers.loginRequired" | translate              }}</span>              <span *ngIf="isAuthenticated && !hasCompanyId">{{                "b2b.auth.partnerVerificationRequired" | translate              }}</span>            </p>          </div>        </div>        <button          *ngIf="!isAuthenticated"          (click)="navigateToLogin()"          class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors"        >          {{ "b2b.offers.loginToViewOffers" | translate }}        </button>        <button          *ngIf="isAuthenticated && !hasCompanyId"          (click)="navigateToPartnerRegistration()"          class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-500 transition-colors"        >          {{ "b2b.auth.becomePartner" | translate }}        </button>      </div>    </div>  </div>  <!-- Offers Grid -->  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">    <!-- Loading State -->    <div *ngIf="loading" class="flex items-center justify-center py-12">      <div        class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600"      ></div>      <span class="ml-3 text-lg text-gray-600">{{        "b2b.offers.loadingOffers" | translate      }}</span>    </div>    <!-- Offers Grid -->    <div      *ngIf="!loading"      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"    >      <div        *ngFor="let offer of b2bOffers"        class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"      >        <!-- Offer Image -->        <div class="relative">          <img            [src]="offer.imageUrl"            [alt]="offer.title"            class="w-full h-48 object-cover"          />          <!-- Discount Badge -->          <div class="absolute top-4 left-4">            <span              class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold"            >              <span                *ngIf="                  offer.discount_type === \'percentage\' || !offer.discount_type                "                >-{{ offer.discountPercentage }}%</span              >              <span *ngIf="offer.discount_type === \'fixed_amount\'"                >{{                  offer.discount_value | currency: "EUR" : "symbol" : "1.0-2"                }}                {{ "hero.off" | translate }}</span              >            </span>          </div>          <!-- Partner Only Badge -->          <div class="absolute top-4 right-4 flex flex-col gap-2 items-end">            <span              class="bg-solar-500 text-white px-3 py-1 rounded-full text-xs font-medium"            >              {{ "b2b.offers.partnerOnly" | translate }}            </span>            <!-- Bundle Badge -->            <span              *ngIf="offer.bundle"              class="bg-purple-600 text-white px-3 py-1 rounded-full text-xs font-medium"            >              {{ "b2b.offers.bundleOffer" | translate }}            </span>          </div>          <!-- Expiry Date -->          <div *ngIf="offer.endDate" class="absolute bottom-4 right-4">            <span              class="bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs"            >              {{ "b2b.offers.expires" | translate }}:              {{ formatDate(offer.endDate) }}            </span>          </div>        </div>        <!-- Offer Content -->        <div class="p-6">          <!-- Title -->          <h3 class="text-xl font-bold text-gray-900 mb-2 font-[\'Poppins\']">            {{ offer.title }}          </h3>          <!-- Description -->          <p class="text-gray-600 mb-4 font-[\'DM_Sans\'] line-clamp-3">            {{ offer.description }}          </p>          <!-- Pricing for offers with products and full partner pricing -->          <div            *ngIf="              isAuthenticated &&              hasCompanyId &&              offer.hasProducts &&              offer.hasAllPartnerPricing            "            class="mb-4"          >            <div class="flex items-center justify-between">              <div>                <span class="text-2xl font-bold text-solar-600">                  €{{ offer.discountedPrice | number: "1.2-2" }}                </span>                <span class="text-lg text-gray-500 line-through ml-2">                  €{{ offer.originalPrice | number: "1.2-2" }}                </span>              </div>              <div class="text-right">                <div class="text-sm text-gray-500">                  {{ "b2b.offers.savings" | translate }}                </div>                <div class="text-lg font-bold text-green-600">                  €{{                    offer.originalPrice - offer.discountedPrice                      | number: "1.2-2"                  }}                </div>              </div>            </div>            <div class="text-xs text-gray-500 mt-1">              {{ "b2b.offers.sumOfPartnerPrices" | translate }} ({{                offer.productCount              }}              {{ "b2b.offers.products" | translate }})            </div>            <!-- Bundle Notice -->            <div              *ngIf="offer.bundle"              class="mt-2 p-2 bg-purple-50 border border-purple-200 rounded-lg"            >              <p class="text-xs text-purple-700 flex items-center">                <svg                  class="w-4 h-4 mr-1"                  fill="currentColor"                  viewBox="0 0 20 20"                >                  <path                    fill-rule="evenodd"                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"                    clip-rule="evenodd"                  />                </svg>                {{ "b2b.offers.bundleRequiresAllProductsInCart" | translate }}              </p>            </div>          </div>          <!-- Pricing for offers with products but missing partner pricing -->          <div            *ngIf="              isAuthenticated &&              hasCompanyId &&              offer.hasProducts &&              !offer.hasAllPartnerPricing            "            class="mb-4 text-center py-4 bg-orange-50 border border-orange-200 rounded-lg"          >            <svg              class="w-8 h-8 text-orange-500 mx-auto mb-2"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"              />            </svg>            <p class="text-sm text-orange-700 font-medium mb-1">              {{ "b2b.offers.incompletePricing" | translate }}            </p>            <p class="text-xs text-orange-600">              {{ "b2b.offers.contactSupportForPricing" | translate }}            </p>          </div>          <!-- Pricing for general offers (no products) -->          <div            *ngIf="isAuthenticated && hasCompanyId && !offer.hasProducts"            class="mb-4 text-center py-4 bg-blue-50 border border-blue-200 rounded-lg"          >            <div class="text-lg font-bold text-blue-800 mb-1">              <span *ngIf="offer.discount_type === \'percentage\'"                >{{ offer.discount_value }}%                {{ "b2b.offers.discount" | translate }}</span              >              <span *ngIf="offer.discount_type === \'fixed_amount\'"                >€{{ offer.discount_value | number: "1.2-2" }}                {{ "b2b.offers.discount" | translate }}</span              >            </div>            <p class="text-xs text-blue-600">              {{ "b2b.offers.generalOffer" | translate }}            </p>          </div>          <!-- Login Required Pricing -->          <div            *ngIf="!isAuthenticated || !hasCompanyId"            class="mb-4 text-center py-4 bg-gray-50 rounded-lg"          >            <svg              class="w-8 h-8 text-gray-400 mx-auto mb-2"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"              />            </svg>            <p class="text-sm text-gray-500 font-medium">              <span *ngIf="!isAuthenticated">{{                "b2b.offers.loginToViewPrices" | translate              }}</span>              <span *ngIf="isAuthenticated && !hasCompanyId">{{                "b2b.auth.partnerVerificationRequiredPricing" | translate              }}</span>            </p>          </div>          <!-- Coupon Code -->          <div            *ngIf="offer.couponCode && isAuthenticated && hasCompanyId"            class="mb-4"          >            <div              class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-3"            >              <div class="flex items-center justify-between">                <div>                  <span class="text-sm text-gray-600"                    >{{ "b2b.offers.couponCode" | translate }}:</span                  >                  <span class="ml-2 font-mono font-bold text-solar-600">{{                    offer.couponCode                  }}</span>                </div>                <button                  (click)="copyCouponCode(offer.couponCode)"                  class="text-solar-500 hover:text-solar-600 text-sm font-medium"                >                  {{ "b2b.offers.copy" | translate }}                </button>              </div>            </div>          </div>          <!-- Actions -->          <div class="space-y-2">            <!-- Claim offer button - only show if authenticated, has company, and either no products OR has all partner pricing -->            <button              *ngIf="                isAuthenticated &&                hasCompanyId &&                (!offer.hasProducts || offer.hasAllPartnerPricing)              "              (click)="claimOffer(offer)"              [disabled]="isOfferExpired(offer.endDate)"              class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"            >              <span *ngIf="!isOfferExpired(offer.endDate)">{{                "b2b.offers.claimOffer" | translate              }}</span>              <span *ngIf="isOfferExpired(offer.endDate)">{{                "b2b.offers.expired" | translate              }}</span>            </button>            <!-- Contact support button - show when authenticated, has company, has products, but missing partner pricing -->            <button              *ngIf="                isAuthenticated &&                hasCompanyId &&                offer.hasProducts &&                !offer.hasAllPartnerPricing              "              (click)="navigateToPartnerContact()"              class="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors"            >              {{ "b2b.offers.contactSupport" | translate }}            </button>            <button              *ngIf="!isAuthenticated"              (click)="navigateToLogin()"              class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors"            >              {{ "b2b.offers.signInToClaim" | translate }}            </button>            <button              *ngIf="isAuthenticated && !hasCompanyId"              (click)="navigateToPartnerRegistration()"              class="w-full bg-solar-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-500 transition-colors"            >              {{ "b2b.offers.claimOffer" | translate }}            </button>            <button              (click)="viewOfferDetails(offer)"              class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors"            >              {{ "b2b.offers.viewDetails" | translate }}            </button>          </div>        </div>      </div>    </div>    <!-- No Offers Available -->    <div *ngIf="!loading && b2bOffers.length === 0" class="text-center py-12">      <svg        class="w-16 h-16 text-gray-400 mx-auto mb-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"        />      </svg>      <h3 class="text-lg font-medium text-gray-900 mb-2">        {{ "b2b.offers.noOffers" | translate }}      </h3>      <p class="text-gray-600">{{ "b2b.offers.noOffersText" | translate }}</p>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PartnersOffersComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PartnersOffersComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

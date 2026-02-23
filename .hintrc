@@ -44,6 +44,7 @@
           "iframe[referrerpolicy=no-referrer-when-downgrade]"
         ]
       }
-    ]
+    ],
+    "typescript-config/strict": "off"
   }
 }

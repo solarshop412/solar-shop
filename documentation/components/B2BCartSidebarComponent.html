@@ -1,0 +1,3079 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  B2BCartSidebarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-b2b-cart-sidebar</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                            <code>LucideAngularModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./b2b-cart-sidebar.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./b2b-cart-sidebar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#appliedCoupons$" >appliedCoupons$</a>
+                            </li>
+                            <li>
+                                <a href="#cartItems$" >cartItems$</a>
+                            </li>
+                            <li>
+                                <a href="#cartSummary$" >cartSummary$</a>
+                            </li>
+                            <li>
+                                <a href="#companyInfo$" >companyInfo$</a>
+                            </li>
+                            <li>
+                                <a href="#couponCode" >couponCode</a>
+                            </li>
+                            <li>
+                                <a href="#couponError$" >couponError$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#hasCouponsApplied$" >hasCouponsApplied$</a>
+                            </li>
+                            <li>
+                                <a href="#hasMinimumOrderViolations$" >hasMinimumOrderViolations$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#imageErrors" >imageErrors</a>
+                            </li>
+                            <li>
+                                <a href="#isCouponLoading$" >isCouponLoading$</a>
+                            </li>
+                            <li>
+                                <a href="#isEmpty$" >isEmpty$</a>
+                            </li>
+                            <li>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ShoppingCartIcon" >ShoppingCartIcon</a>
+                            </li>
+                            <li>
+                                <a href="#sidebarOpen$" >sidebarOpen$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#applyCoupon" >applyCoupon</a>
+                            </li>
+                            <li>
+                                <a href="#canDecreaseQuantity" >canDecreaseQuantity</a>
+                            </li>
+                            <li>
+                                <a href="#clearCart" >clearCart</a>
+                            </li>
+                            <li>
+                                <a href="#closeSidebar" >closeSidebar</a>
+                            </li>
+                            <li>
+                                <a href="#decreaseQuantity" >decreaseQuantity</a>
+                            </li>
+                            <li>
+                                <a href="#getImageSrc" >getImageSrc</a>
+                            </li>
+                            <li>
+                                <a href="#getMinimumOrderMessage" >getMinimumOrderMessage</a>
+                            </li>
+                            <li>
+                                <a href="#getNextTierHint" >getNextTierHint</a>
+                            </li>
+                            <li>
+                                <a href="#increaseQuantity" >increaseQuantity</a>
+                            </li>
+                            <li>
+                                <a href="#isMinimumOrderMet" >isMinimumOrderMet</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#onEscapeKey" >onEscapeKey</a>
+                            </li>
+                            <li>
+                                <a href="#onImageError" >onImageError</a>
+                            </li>
+                            <li>
+                                <a href="#onOverlayClick" >onOverlayClick</a>
+                            </li>
+                            <li>
+                                <a href="#proceedToCheckout" >proceedToCheckout</a>
+                            </li>
+                            <li>
+                                <a href="#removeCoupon" >removeCoupon</a>
+                            </li>
+                            <li>
+                                <a href="#removeItem" >removeItem</a>
+                            </li>
+                            <li>
+                                <a href="#trackByProductId" >trackByProductId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#document:keydown.escape" >document:keydown.escape</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#isApplyButtonDisabled" >isApplyButtonDisabled</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(store: Store, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code>Store</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TranslationService.html" target="_self" >TranslationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="document:keydown.escape"></a>
+                    <span class="name">
+                        <span ><b>document:keydown.escape</b></span>
+                        <a href="#document:keydown.escape"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>document:keydown.escape()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyCoupon"></a>
+                    <span class="name">
+                        <span ><b>applyCoupon</b></span>
+                        <a href="#applyCoupon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyCoupon()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canDecreaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>canDecreaseQuantity</b></span>
+                        <a href="#canDecreaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canDecreaseQuantity(item: <a href="../interfaces/B2BCartItem.html" target="_self">B2BCartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/B2BCartItem.html" target="_self" >B2BCartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearCart"></a>
+                    <span class="name">
+                        <span ><b>clearCart</b></span>
+                        <a href="#clearCart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearCart()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeSidebar"></a>
+                    <span class="name">
+                        <span ><b>closeSidebar</b></span>
+                        <a href="#closeSidebar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeSidebar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="decreaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>decreaseQuantity</b></span>
+                        <a href="#decreaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>decreaseQuantity(productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:178</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getImageSrc"></a>
+                    <span class="name">
+                        <span ><b>getImageSrc</b></span>
+                        <a href="#getImageSrc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getImageSrc(imagePath: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="240"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:240</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>imagePath</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMinimumOrderMessage"></a>
+                    <span class="name">
+                        <span ><b>getMinimumOrderMessage</b></span>
+                        <a href="#getMinimumOrderMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMinimumOrderMessage(item: <a href="../interfaces/B2BCartItem.html" target="_self">B2BCartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/B2BCartItem.html" target="_self" >B2BCartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getNextTierHint"></a>
+                    <span class="name">
+                        <span ><b>getNextTierHint</b></span>
+                        <a href="#getNextTierHint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getNextTierHint(item: <a href="../interfaces/B2BCartItem.html" target="_self">B2BCartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/B2BCartItem.html" target="_self" >B2BCartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="increaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>increaseQuantity</b></span>
+                        <a href="#increaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>increaseQuantity(productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isMinimumOrderMet"></a>
+                    <span class="name">
+                        <span ><b>isMinimumOrderMet</b></span>
+                        <a href="#isMinimumOrderMet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isMinimumOrderMet(item: <a href="../interfaces/B2BCartItem.html" target="_self">B2BCartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="222"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:222</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/B2BCartItem.html" target="_self" >B2BCartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEscapeKey"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>onEscapeKey</b></span>
+                        <a href="#onEscapeKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onEscapeKey()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;document:keydown.escape&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImageError"></a>
+                    <span class="name">
+                        <span ><b>onImageError</b></span>
+                        <a href="#onImageError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImageError(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, _productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:254</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>_productId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onOverlayClick"></a>
+                    <span class="name">
+                        <span ><b>onOverlayClick</b></span>
+                        <a href="#onOverlayClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onOverlayClick(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="proceedToCheckout"></a>
+                    <span class="name">
+                        <span ><b>proceedToCheckout</b></span>
+                        <a href="#proceedToCheckout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>proceedToCheckout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeCoupon"></a>
+                    <span class="name">
+                        <span ><b>removeCoupon</b></span>
+                        <a href="#removeCoupon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeCoupon(couponId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>couponId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeItem"></a>
+                    <span class="name">
+                        <span ><b>removeItem</b></span>
+                        <a href="#removeItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeItem(productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="199"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:199</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByProductId"></a>
+                    <span class="name">
+                        <span ><b>trackByProductId</b></span>
+                        <a href="#trackByProductId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackByProductId(_index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, item: <a href="../interfaces/B2BCartItem.html" target="_self">B2BCartItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:217</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>_index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>item</td>
+                                            <td>
+                                                            <code><a href="../interfaces/B2BCartItem.html" target="_self" >B2BCartItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appliedCoupons$"></a>
+                    <span class="name">
+                        <span ><b>appliedCoupons$</b></span>
+                        <a href="#appliedCoupons$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;B2BAppliedCoupon[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cartItems$"></a>
+                    <span class="name">
+                        <span ><b>cartItems$</b></span>
+                        <a href="#cartItems$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;B2BCartItem[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cartSummary$"></a>
+                    <span class="name">
+                        <span ><b>cartSummary$</b></span>
+                        <a href="#cartSummary$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;B2BCartSummary&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="companyInfo$"></a>
+                    <span class="name">
+                        <span ><b>companyInfo$</b></span>
+                        <a href="#companyInfo$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;literal type&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="couponCode"></a>
+                    <span class="name">
+                        <span ><b>couponCode</b></span>
+                        <a href="#couponCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="couponError$"></a>
+                    <span class="name">
+                        <span ><b>couponError$</b></span>
+                        <a href="#couponError$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;string | null&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasCouponsApplied$"></a>
+                    <span class="name">
+                        <span ><b>hasCouponsApplied$</b></span>
+                        <a href="#hasCouponsApplied$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasMinimumOrderViolations$"></a>
+                    <span class="name">
+                        <span ><b>hasMinimumOrderViolations$</b></span>
+                        <a href="#hasMinimumOrderViolations$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageErrors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>imageErrors</b></span>
+                        <a href="#imageErrors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Set&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCouponLoading$"></a>
+                    <span class="name">
+                        <span ><b>isCouponLoading$</b></span>
+                        <a href="#isCouponLoading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEmpty$"></a>
+                    <span class="name">
+                        <span ><b>isEmpty$</b></span>
+                        <a href="#isEmpty$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ShoppingCartIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ShoppingCartIcon</b></span>
+                        <a href="#ShoppingCartIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ShoppingCart</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sidebarOpen$"></a>
+                    <span class="name">
+                        <span ><b>sidebarOpen$</b></span>
+                        <a href="#sidebarOpen$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isApplyButtonDisabled"></a>
+                        <span class="name"><b>isApplyButtonDisabled</b><a href="#isApplyButtonDisabled"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isApplyButtonDisabled()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/b2b/cart/components/b2b-cart-sidebar/b2b-cart-sidebar.component.ts:57</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, HostListener } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { RouterModule, Router } from &#x27;@angular/router&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { takeUntil, take, map } from &#x27;rxjs/operators&#x27;;
+import {
+  B2BCartItem,
+  B2BCartSummary,
+  B2BAppliedCoupon,
+} from &#x27;../../models/b2b-cart.model&#x27;;
+import * as B2BCartSelectors from &#x27;../../store/b2b-cart.selectors&#x27;;
+import * as B2BCartActions from &#x27;../../store/b2b-cart.actions&#x27;;
+import { TranslatePipe } from &#x27;../../../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../../../shared/services/translation.service&#x27;;
+import { LucideAngularModule, ShoppingCart } from &#x27;lucide-angular&#x27;;
+
+@Component({
+  selector: &#x27;app-b2b-cart-sidebar&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslatePipe,
+    LucideAngularModule,
+  ],
+  templateUrl: &#x27;./b2b-cart-sidebar.component.html&#x27;,
+  styleUrls: [&#x27;./b2b-cart-sidebar.component.scss&#x27;],
+})
+export class B2BCartSidebarComponent implements OnDestroy {
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+  private imageErrors &#x3D; new Set&lt;string&gt;();
+
+  // Observables
+  cartItems$: Observable&lt;B2BCartItem[]&gt;;
+  cartSummary$: Observable&lt;B2BCartSummary&gt;;
+  loading$: Observable&lt;boolean&gt;;
+  isEmpty$: Observable&lt;boolean&gt;;
+  companyInfo$: Observable&lt;{
+    companyId: string | null;
+    companyName: string | null;
+  }&gt;;
+  sidebarOpen$: Observable&lt;boolean&gt;;
+  hasMinimumOrderViolations$: Observable&lt;boolean&gt;;
+  appliedCoupons$: Observable&lt;B2BAppliedCoupon[]&gt;;
+  couponError$: Observable&lt;string | null&gt;;
+  isCouponLoading$: Observable&lt;boolean&gt;;
+  hasCouponsApplied$: Observable&lt;boolean&gt;;
+
+  couponCode &#x3D; &#x27;&#x27;;
+
+  // Lucide Icons
+  readonly ShoppingCartIcon &#x3D; ShoppingCart;
+
+  get isApplyButtonDisabled(): boolean {
+    return !this.couponCode.trim();
+  }
+
+  constructor(
+    private store: Store,
+    private router: Router,
+    private translationService: TranslationService,
+  ) {
+    this.cartItems$ &#x3D; this.store.select(B2BCartSelectors.selectB2BCartItems);
+    this.cartSummary$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartSummary,
+    );
+    this.loading$ &#x3D; this.store.select(B2BCartSelectors.selectB2BCartLoading);
+    this.isEmpty$ &#x3D; this.store.select(B2BCartSelectors.selectB2BCartIsEmpty);
+    this.companyInfo$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartCompanyInfo,
+    );
+    this.sidebarOpen$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartSidebarOpen,
+    );
+    this.appliedCoupons$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartAppliedCoupons,
+    );
+    this.couponError$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartCouponError,
+    );
+    this.isCouponLoading$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartIsCouponLoading,
+    );
+    this.hasCouponsApplied$ &#x3D; this.store.select(
+      B2BCartSelectors.selectB2BCartHasCoupons,
+    );
+    this.hasMinimumOrderViolations$ &#x3D; this.cartItems$.pipe(
+      takeUntil(this.destroy$),
+      // Check if any item has quantity below minimum order
+      map((items: B2BCartItem[]) &#x3D;&gt;
+        items.some((item) &#x3D;&gt; item.quantity &lt; item.minimumOrder),
+      ),
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  @HostListener(&#x27;document:keydown.escape&#x27;)
+  onEscapeKey() {
+    this.closeSidebar();
+  }
+
+  closeSidebar(): void {
+    this.store.dispatch(B2BCartActions.closeB2BCartSidebar());
+  }
+
+  applyCoupon(): void {
+    const code &#x3D; this.couponCode.trim();
+    if (!code) {
+      return;
+    }
+
+    this.companyInfo$.pipe(take(1)).subscribe((info) &#x3D;&gt; {
+      if (!info.companyId) {
+        this.store.dispatch(
+          B2BCartActions.applyB2BCouponFailure({
+            error: this.translationService.translate(
+              &#x27;b2b.auth.companyIdNotFound&#x27;,
+            ),
+          }),
+        );
+        return;
+      }
+
+      this.store.dispatch(
+        B2BCartActions.applyB2BCoupon({ code, companyId: info.companyId }),
+      );
+      this.couponCode &#x3D; &#x27;&#x27;;
+    });
+  }
+
+  removeCoupon(couponId: string): void {
+    this.store.dispatch(B2BCartActions.removeB2BCoupon({ couponId }));
+  }
+
+  onOverlayClick(event: Event) {
+    // Close cart if clicking on the overlay (not the sidebar content)
+    const target &#x3D; event.target as HTMLElement;
+    const currentTarget &#x3D; event.currentTarget as HTMLElement;
+
+    // Check if the click target is the overlay itself or the background div
+    if (
+      target &#x3D;&#x3D;&#x3D; currentTarget ||
+      target.classList.contains(&#x27;cart-overlay&#x27;) ||
+      target.classList.contains(&#x27;bg-black&#x27;)
+    ) {
+      this.closeSidebar();
+    }
+  }
+
+  increaseQuantity(productId: string): void {
+    // Get current quantity and increase by 1
+    this.cartItems$
+      .pipe(
+        takeUntil(this.destroy$),
+        // Take only the first emission to avoid multiple subscriptions
+        take(1),
+      )
+      .subscribe((items: B2BCartItem[]) &#x3D;&gt; {
+        const item &#x3D; items.find((i: B2BCartItem) &#x3D;&gt; i.productId &#x3D;&#x3D;&#x3D; productId);
+        if (item) {
+          this.store.dispatch(
+            B2BCartActions.updateB2BCartItem({
+              productId,
+              quantity: item.quantity + 1,
+            }),
+          );
+        }
+      });
+  }
+
+  decreaseQuantity(productId: string): void {
+    // Get current quantity and decrease by 1 (minimum is the minimum order requirement)
+    this.cartItems$
+      .pipe(
+        takeUntil(this.destroy$),
+        // Take only the first emission to avoid multiple subscriptions
+        take(1),
+      )
+      .subscribe((items: B2BCartItem[]) &#x3D;&gt; {
+        const item &#x3D; items.find((i: B2BCartItem) &#x3D;&gt; i.productId &#x3D;&#x3D;&#x3D; productId);
+        if (item &amp;&amp; item.quantity &gt; item.minimumOrder) {
+          this.store.dispatch(
+            B2BCartActions.updateB2BCartItem({
+              productId,
+              quantity: item.quantity - 1,
+            }),
+          );
+        }
+      });
+  }
+
+  removeItem(productId: string): void {
+    this.store.dispatch(B2BCartActions.removeFromB2BCart({ productId }));
+  }
+
+  clearCart(): void {
+    const confirmMessage &#x3D; this.translationService.translate(
+      &#x27;b2bCart.clearCartConfirm&#x27;,
+    );
+    if (confirm(confirmMessage)) {
+      this.store.dispatch(B2BCartActions.clearB2BCart());
+    }
+  }
+
+  proceedToCheckout(): void {
+    this.closeSidebar();
+    this.router.navigate([&#x27;/partneri/blagajna&#x27;]);
+  }
+
+  trackByProductId(_index: number, item: B2BCartItem): string {
+    return item.productId;
+  }
+
+  // Minimum order validation methods
+  isMinimumOrderMet(item: B2BCartItem): boolean {
+    return item.quantity &gt;&#x3D; item.minimumOrder;
+  }
+
+  canDecreaseQuantity(item: B2BCartItem): boolean {
+    return item.quantity &gt; item.minimumOrder;
+  }
+
+  getMinimumOrderMessage(item: B2BCartItem): string {
+    if (this.isMinimumOrderMet(item)) {
+      return &#x27;&#x27;;
+    }
+    return this.translationService.translate(&#x27;b2bCart.minimumOrderRequired&#x27;, {
+      minimum: item.minimumOrder,
+      current: item.quantity,
+    });
+  }
+
+  getImageSrc(imagePath: string): string {
+    // Ensure we have a valid image path and handle potential errors
+    if (!imagePath) {
+      return &#x27;assets/images/product-placeholder.webp&#x27;;
+    }
+
+    // If this image has already failed to load, return the fallback immediately
+    if (this.imageErrors.has(imagePath)) {
+      return &#x27;assets/images/product-placeholder.webp&#x27;;
+    }
+
+    return imagePath;
+  }
+
+  onImageError(event: any, _productId: string) {
+    // Prevent infinite error loops by tracking failed images
+    const originalSrc &#x3D; event.target.src;
+
+    // Add to error set to prevent retrying
+    this.imageErrors.add(originalSrc);
+
+    // Set fallback image only if it&#x27;s not already the fallback
+    if (!originalSrc.includes(&#x27;product-placeholder.webp&#x27;)) {
+      event.target.src &#x3D; &#x27;assets/images/product-placeholder.webp&#x27;;
+    }
+
+    // Suppress console errors by preventing default behavior
+    event.preventDefault();
+  }
+
+  getNextTierHint(item: B2BCartItem): string {
+    if (!item.priceTier1) {
+      return &#x27;&#x27;;
+    }
+
+    // Check if there&#x27;s a next tier available
+    if (item.appliedTier &#x3D;&#x3D;&#x3D; 1 &amp;&amp; item.quantityTier2 &amp;&amp; item.priceTier2) {
+      const neededQty &#x3D; item.quantityTier2 - item.quantity;
+      if (neededQty &gt; 0 &amp;&amp; neededQty &lt;&#x3D; 5) {
+        const savings &#x3D; (
+          (item.unitPrice - item.priceTier2) *
+          item.quantityTier2
+        ).toFixed(2);
+        return this.translationService.translate(&#x27;b2bCart.addMoreForTier&#x27;, {
+          qty: neededQty,
+          price: item.priceTier2.toFixed(2),
+          savings: savings,
+        });
+      }
+    } else if (
+      item.appliedTier &#x3D;&#x3D;&#x3D; 2 &amp;&amp;
+      item.quantityTier3 &amp;&amp;
+      item.priceTier3
+    ) {
+      const neededQty &#x3D; item.quantityTier3 - item.quantity;
+      if (neededQty &gt; 0 &amp;&amp; neededQty &lt;&#x3D; 10) {
+        const savings &#x3D; (
+          (item.unitPrice - item.priceTier3) *
+          item.quantityTier3
+        ).toFixed(2);
+        return this.translationService.translate(&#x27;b2bCart.addMoreForTier&#x27;, {
+          qty: neededQty,
+          price: item.priceTier3.toFixed(2),
+          savings: savings,
+        });
+      }
+    }
+
+    return &#x27;&#x27;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Cart Overlay --&gt;
+&lt;div
+  *ngIf&#x3D;&quot;sidebarOpen$ | async&quot;
+  class&#x3D;&quot;fixed inset-0 z-50 overflow-hidden cart-overlay&quot;
+  role&#x3D;&quot;button&quot;
+  tabindex&#x3D;&quot;0&quot;
+  (click)&#x3D;&quot;onOverlayClick($event)&quot;
+  (keydown.space)&#x3D;&quot;onOverlayClick($event)&quot;
+  (keydown.enter)&#x3D;&quot;onOverlayClick($event)&quot;
+&gt;
+  &lt;!-- Background overlay --&gt;
+  &lt;div
+    class&#x3D;&quot;absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300&quot;
+    role&#x3D;&quot;button&quot;
+    tabindex&#x3D;&quot;0&quot;
+    (click)&#x3D;&quot;closeSidebar()&quot;
+    (keydown.space)&#x3D;&quot;closeSidebar()&quot;
+    (keydown.enter)&#x3D;&quot;closeSidebar()&quot;
+  &gt;&lt;/div&gt;
+
+  &lt;!-- Cart sidebar --&gt;
+  &lt;div
+    class&#x3D;&quot;absolute right-0 top-0 h-screen w-full max-w-md bg-white shadow-xl transform transition-all duration-300 ease-out flex flex-col cart-sidebar animate-slide-in-right&quot;
+    (click)&#x3D;&quot;$event.stopPropagation()&quot;
+    (keydown.space)&#x3D;&quot;$event.stopPropagation()&quot;
+    (keydown.enter)&#x3D;&quot;$event.stopPropagation()&quot;
+    role&#x3D;&quot;button&quot;
+    tabindex&#x3D;&quot;0&quot;
+  &gt;
+    &lt;!-- Cart Header --&gt;
+    &lt;div class&#x3D;&quot;flex items-center justify-between p-4 border-b border-gray-200&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-lg font-semibold text-gray-900&quot;&gt;
+        {{ &quot;cart.yourCart&quot; | translate }}
+      &lt;/h2&gt;
+      &lt;button
+        role&#x3D;&quot;button&quot;
+        tabindex&#x3D;&quot;0&quot;
+        (click)&#x3D;&quot;closeSidebar()&quot;
+        (keydown.space)&#x3D;&quot;closeSidebar()&quot;
+        (keydown.enter)&#x3D;&quot;closeSidebar()&quot;
+        class&#x3D;&quot;p-2 text-gray-400 hover:text-gray-600 transition-colors&quot;
+        aria-label&#x3D;&quot;Close cart&quot;
+      &gt;
+        &lt;svg
+          class&#x3D;&quot;w-6 h-6&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+          &gt;&lt;/path&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Cart Content --&gt;
+    &lt;div class&#x3D;&quot;flex flex-col flex-1 min-h-0&quot;&gt;
+      &lt;!-- Loading State --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;loading$ | async&quot;
+        class&#x3D;&quot;flex-1 flex items-center justify-center p-8&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600&quot;
+        &gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Empty Cart State --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;(isEmpty$ | async) &amp;&amp; (loading$ | async) &#x3D;&#x3D;&#x3D; false&quot;
+        class&#x3D;&quot;flex-1 flex flex-col items-center justify-center p-8 text-center&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;w-24 h-24 mb-6 text-gray-300 flex items-center justify-center&quot;
+        &gt;
+          &lt;lucide-angular
+            name&#x3D;&quot;shopping-cart&quot;
+            class&#x3D;&quot;w-24 h-24 text-gray-300&quot;
+            [img]&#x3D;&quot;ShoppingCartIcon&quot;
+          &gt;
+          &lt;/lucide-angular&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;text-xl font-medium text-gray-900 mb-2&quot;&gt;
+          {{ &quot;cart.empty&quot; | translate }}
+        &lt;/h3&gt;
+        &lt;p class&#x3D;&quot;text-gray-500 mb-6&quot;&gt;{{ &quot;cart.emptyText&quot; | translate }}&lt;/p&gt;
+        &lt;button
+          (click)&#x3D;&quot;closeSidebar()&quot;
+          (keydown.space)&#x3D;&quot;closeSidebar()&quot;
+          (keydown.enter)&#x3D;&quot;closeSidebar()&quot;
+          role&#x3D;&quot;button&quot;
+          tabindex&#x3D;&quot;0&quot;
+          class&#x3D;&quot;px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors&quot;
+        &gt;
+          {{ &quot;cart.continueShopping&quot; | translate }}
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Populated Cart State --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;(isEmpty$ | async) &#x3D;&#x3D;&#x3D; false &amp;&amp; (loading$ | async) &#x3D;&#x3D;&#x3D; false&quot;
+        class&#x3D;&quot;flex-1 flex flex-col min-h-0&quot;
+      &gt;
+        &lt;!-- Company Info --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;companyInfo$ | async as company&quot;
+          class&#x3D;&quot;p-4 bg-solar-50 border-b border-gray-200&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;text-sm text-solar-800&quot;&gt;
+            &lt;span class&#x3D;&quot;font-medium&quot;
+              &gt;{{ &quot;b2bCart.orderingFor&quot; | translate }}:&lt;/span
+            &gt;
+            {{ company.companyName || (&quot;b2bCart.unknownCompany&quot; | translate) }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Cart Items --&gt;
+        &lt;div class&#x3D;&quot;flex-1 overflow-y-auto p-4 min-h-0&quot;&gt;
+          &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+            &lt;div
+              *ngFor&#x3D;&quot;let item of cartItems$ | async; trackBy: trackByProductId&quot;
+              class&#x3D;&quot;flex items-start space-x-3 p-3 border rounded-lg cart-item&quot;
+              [class.border-gray-200]&#x3D;&quot;isMinimumOrderMet(item)&quot;
+              [class.border-amber-300]&#x3D;&quot;!isMinimumOrderMet(item)&quot;
+              [class.bg-amber-50]&#x3D;&quot;!isMinimumOrderMet(item)&quot;
+            &gt;
+              &lt;!-- Product Image --&gt;
+              &lt;div class&#x3D;&quot;flex-shrink-0&quot;&gt;
+                &lt;img
+                  [src]&#x3D;&quot;getImageSrc(item.imageUrl)&quot;
+                  [alt]&#x3D;&quot;item.name&quot;
+                  class&#x3D;&quot;w-14 h-14 object-cover rounded-lg bg-gray-100&quot;
+                  (error)&#x3D;&quot;onImageError($event, item.productId)&quot;
+                  loading&#x3D;&quot;lazy&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Product Details --&gt;
+              &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+                &lt;a
+                  [routerLink]&#x3D;&quot;[&#x27;/partneri/proizvodi&#x27;, item.productId]&quot;
+                  (click)&#x3D;&quot;closeSidebar()&quot;
+                  class&#x3D;&quot;text-sm font-medium text-gray-900 hover:text-solar-600 truncate block cursor-pointer&quot;
+                &gt;
+                  {{ item.name }}
+                &lt;/a&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-500 mt-1&quot;&gt;
+                  {{ &quot;b2bCart.sku&quot; | translate }}: {{ item.sku }}
+                &lt;/p&gt;
+
+                &lt;!-- Price --&gt;
+                &lt;div class&#x3D;&quot;flex items-center space-x-2 mt-2&quot;&gt;
+                  &lt;span class&#x3D;&quot;text-sm font-semibold text-gray-900&quot;&gt;
+                    {{ item.unitPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+                  &lt;/span&gt;
+                  &lt;span
+                    *ngIf&#x3D;&quot;
+                      item.partnerOfferOriginalPrice &amp;&amp;
+                      item.partnerOfferOriginalPrice &gt; item.unitPrice
+                    &quot;
+                    class&#x3D;&quot;text-xs text-gray-500 line-through&quot;
+                  &gt;
+                    {{
+                      item.partnerOfferOriginalPrice
+                        | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                    }}
+                  &lt;/span&gt;
+                  &lt;span
+                    *ngIf&#x3D;&quot;
+                      !item.partnerOfferOriginalPrice &amp;&amp;
+                      item.retailPrice &amp;&amp;
+                      item.retailPrice &gt; item.unitPrice
+                    &quot;
+                    class&#x3D;&quot;text-xs text-gray-500 line-through&quot;
+                  &gt;
+                    {{
+                      item.retailPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                    }}
+                  &lt;/span&gt;
+                  &lt;span
+                    *ngIf&#x3D;&quot;item.savings &amp;&amp; item.savings &gt; 0&quot;
+                    class&#x3D;&quot;text-xs text-green-600 font-medium&quot;
+                  &gt;
+                    {{ &quot;b2bCart.save&quot; | translate }}
+                    {{
+                      item.savings / item.quantity
+                        | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                    }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Next Tier Hint --&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;getNextTierHint(item)&quot;
+                  class&#x3D;&quot;mt-1 text-xs text-amber-600&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-3 h-3 inline mr-1&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                  {{ getNextTierHint(item) }}
+                &lt;/div&gt;
+
+                &lt;!-- Partner Offer Badge --&gt;
+                &lt;div *ngIf&#x3D;&quot;item.partnerOfferId&quot; class&#x3D;&quot;mt-1&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800&quot;
+                  &gt;
+                    &lt;svg
+                      class&#x3D;&quot;w-3 h-3 mr-1&quot;
+                      fill&#x3D;&quot;currentColor&quot;
+                      viewBox&#x3D;&quot;0 0 20 20&quot;
+                    &gt;
+                      &lt;path
+                        fill-rule&#x3D;&quot;evenodd&quot;
+                        d&#x3D;&quot;M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z&quot;
+                        clip-rule&#x3D;&quot;evenodd&quot;
+                      /&gt;
+                    &lt;/svg&gt;
+                    {{ item.partnerOfferName }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Bundle Status Indicator --&gt;
+                &lt;div *ngIf&#x3D;&quot;item.isBundle&quot; class&#x3D;&quot;mt-1&quot;&gt;
+                  &lt;span
+                    *ngIf&#x3D;&quot;item.bundleComplete&quot;
+                    class&#x3D;&quot;inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800&quot;
+                  &gt;
+                    &lt;svg
+                      class&#x3D;&quot;w-3 h-3 mr-1&quot;
+                      fill&#x3D;&quot;currentColor&quot;
+                      viewBox&#x3D;&quot;0 0 20 20&quot;
+                    &gt;
+                      &lt;path
+                        fill-rule&#x3D;&quot;evenodd&quot;
+                        d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+                        clip-rule&#x3D;&quot;evenodd&quot;
+                      /&gt;
+                    &lt;/svg&gt;
+                    {{ &quot;cart.bundleComplete&quot; | translate }}
+                  &lt;/span&gt;
+                  &lt;span
+                    *ngIf&#x3D;&quot;!item.bundleComplete&quot;
+                    class&#x3D;&quot;inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800&quot;
+                  &gt;
+                    &lt;svg
+                      class&#x3D;&quot;w-3 h-3 mr-1&quot;
+                      fill&#x3D;&quot;currentColor&quot;
+                      viewBox&#x3D;&quot;0 0 20 20&quot;
+                    &gt;
+                      &lt;path
+                        fill-rule&#x3D;&quot;evenodd&quot;
+                        d&#x3D;&quot;M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z&quot;
+                        clip-rule&#x3D;&quot;evenodd&quot;
+                      /&gt;
+                    &lt;/svg&gt;
+                    {{ &quot;cart.bundleIncomplete&quot; | translate }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Additional Partner Offer Savings --&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;item.additionalSavings &amp;&amp; item.additionalSavings &gt; 0&quot;
+                  class&#x3D;&quot;mt-1&quot;
+                &gt;
+                  &lt;span class&#x3D;&quot;text-xs text-blue-600 font-medium&quot;&gt;
+                    {{ &quot;b2bCart.additionalOfferSavings&quot; | translate }}:
+                    {{
+                      item.additionalSavings / item.quantity
+                        | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                    }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Quantity Controls --&gt;
+                &lt;div class&#x3D;&quot;flex items-center justify-between mt-2&quot;&gt;
+                  &lt;div class&#x3D;&quot;flex items-center space-x-1&quot;&gt;
+                    &lt;button
+                      (click)&#x3D;&quot;decreaseQuantity(item.productId)&quot;
+                      [disabled]&#x3D;&quot;!canDecreaseQuantity(item)&quot;
+                      class&#x3D;&quot;w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+                    &gt;
+                      &lt;svg
+                        class&#x3D;&quot;w-4 h-4&quot;
+                        fill&#x3D;&quot;none&quot;
+                        stroke&#x3D;&quot;currentColor&quot;
+                        viewBox&#x3D;&quot;0 0 24 24&quot;
+                      &gt;
+                        &lt;path
+                          stroke-linecap&#x3D;&quot;round&quot;
+                          stroke-linejoin&#x3D;&quot;round&quot;
+                          stroke-width&#x3D;&quot;2&quot;
+                          d&#x3D;&quot;M20 12H4&quot;
+                        &gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/button&gt;
+
+                    &lt;span class&#x3D;&quot;w-7 text-center text-sm font-medium&quot;&gt;{{
+                      item.quantity
+                    }}&lt;/span&gt;
+
+                    &lt;button
+                      (click)&#x3D;&quot;increaseQuantity(item.productId)&quot;
+                      class&#x3D;&quot;w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50&quot;
+                    &gt;
+                      &lt;svg
+                        class&#x3D;&quot;w-4 h-4&quot;
+                        fill&#x3D;&quot;none&quot;
+                        stroke&#x3D;&quot;currentColor&quot;
+                        viewBox&#x3D;&quot;0 0 24 24&quot;
+                      &gt;
+                        &lt;path
+                          stroke-linecap&#x3D;&quot;round&quot;
+                          stroke-linejoin&#x3D;&quot;round&quot;
+                          stroke-width&#x3D;&quot;2&quot;
+                          d&#x3D;&quot;M12 6v6m0 0v6m0-6h6m-6 0H6&quot;
+                        &gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+
+                  &lt;!-- Remove Button --&gt;
+                  &lt;button
+                    (click)&#x3D;&quot;removeItem(item.productId)&quot;
+                    class&#x3D;&quot;text-red-500 hover:text-red-700 text-sm&quot;
+                  &gt;
+                    {{ &quot;cart.remove&quot; | translate }}
+                  &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;!-- Minimum Order Warning --&gt;
+                &lt;div *ngIf&#x3D;&quot;!isMinimumOrderMet(item)&quot; class&#x3D;&quot;mt-2&quot;&gt;
+                  &lt;div
+                    class&#x3D;&quot;flex items-center space-x-1 text-xs text-amber-600 bg-amber-50 p-2 rounded&quot;
+                  &gt;
+                    &lt;svg
+                      class&#x3D;&quot;w-4 h-4 flex-shrink-0&quot;
+                      fill&#x3D;&quot;none&quot;
+                      stroke&#x3D;&quot;currentColor&quot;
+                      viewBox&#x3D;&quot;0 0 24 24&quot;
+                    &gt;
+                      &lt;path
+                        stroke-linecap&#x3D;&quot;round&quot;
+                        stroke-linejoin&#x3D;&quot;round&quot;
+                        stroke-width&#x3D;&quot;2&quot;
+                        d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.884-.833-2.654 0L3.16 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+                      &gt;&lt;/path&gt;
+                    &lt;/svg&gt;
+                    &lt;span
+                      &gt;{{ &quot;b2bCart.minimumOrder&quot; | translate }}:
+                      {{ item.minimumOrder }}&lt;/span
+                    &gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Coupon Section --&gt;
+        &lt;div class&#x3D;&quot;mt-4 p-3 bg-gray-50 rounded-lg mx-4&quot;&gt;
+          &lt;h4 class&#x3D;&quot;text-sm font-medium text-gray-900 mb-3&quot;&gt;
+            {{ &quot;cart.discountCode&quot; | translate }}
+          &lt;/h4&gt;
+
+          &lt;div *ngIf&#x3D;&quot;appliedCoupons$ | async as coupons&quot;&gt;
+            &lt;div
+              *ngFor&#x3D;&quot;let coupon of coupons&quot;
+              class&#x3D;&quot;flex items-center justify-between p-2 bg-blue-50 text-blue-800 rounded text-sm mb-2 last:mb-0&quot;
+            &gt;
+              &lt;span&gt;
+                {{ coupon.code }} -
+                &lt;ng-container *ngIf&#x3D;&quot;coupon.type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;&quot;&gt;
+                  {{ coupon.value }}% ({{
+                    coupon.discountAmount
+                      | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                  }})
+                &lt;/ng-container&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;coupon.type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;&quot;&gt;
+                  {{
+                    coupon.discountAmount | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                  }}
+                &lt;/ng-container&gt;
+                &lt;ng-container *ngIf&#x3D;&quot;coupon.type &#x3D;&#x3D;&#x3D; &#x27;free_shipping&#x27;&quot;&gt;
+                  {{ &quot;cart.freeShipping&quot; | translate }}
+                &lt;/ng-container&gt;
+              &lt;/span&gt;
+              &lt;button
+                (click)&#x3D;&quot;removeCoupon(coupon.id)&quot;
+                class&#x3D;&quot;text-blue-600 hover:text-blue-800&quot;
+                aria-label&#x3D;&quot;Remove coupon&quot;
+              &gt;
+                ×
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Coupon Input - Only show when no coupons are applied --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;(hasCouponsApplied$ | async) &#x3D;&#x3D;&#x3D; false&quot;
+            class&#x3D;&quot;flex space-x-2&quot;
+          &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [(ngModel)]&#x3D;&quot;couponCode&quot;
+              [placeholder]&#x3D;&quot;&#x27;cart.enterDiscountCode&#x27; | translate&quot;
+              class&#x3D;&quot;flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-solar-500&quot;
+              [disabled]&#x3D;&quot;(isCouponLoading$ | async) || false&quot;
+            /&gt;
+            &lt;button
+              (click)&#x3D;&quot;applyCoupon()&quot;
+              [disabled]&#x3D;&quot;isApplyButtonDisabled || (isCouponLoading$ | async)&quot;
+              class&#x3D;&quot;px-4 py-2 bg-solar-500 text-white rounded-lg text-sm hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;(isCouponLoading$ | async) &#x3D;&#x3D;&#x3D; false&quot;&gt;{{
+                &quot;cart.apply&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span *ngIf&#x3D;&quot;isCouponLoading$ | async&quot;&gt;...&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Single coupon limitation message --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;hasCouponsApplied$ | async&quot;
+            class&#x3D;&quot;text-xs text-gray-600 mt-2&quot;
+          &gt;
+            {{ &quot;cart.singleCouponLimit&quot; | translate }}
+          &lt;/div&gt;
+
+          &lt;div
+            *ngIf&#x3D;&quot;couponError$ | async as error&quot;
+            class&#x3D;&quot;mt-2 text-sm text-red-600&quot;
+          &gt;
+            {{ error }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Cart Summary --&gt;
+        &lt;div class&#x3D;&quot;border-t border-gray-200 p-4 flex-shrink-0&quot;&gt;
+          &lt;div class&#x3D;&quot;space-y-2 text-sm&quot;&gt;
+            &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+              &lt;span class&#x3D;&quot;text-gray-600&quot;&gt;{{
+                &quot;cart.subtotal&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span&gt;{{
+                (cartSummary$ | async)?.subtotal
+                  | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;
+                (cartSummary$ | async)?.totalSavings &amp;&amp;
+                (cartSummary$ | async)!.totalSavings &gt; 0
+              &quot;
+              class&#x3D;&quot;flex justify-between text-green-600&quot;
+            &gt;
+              &lt;span&gt;{{ &quot;b2bCart.totalSavings&quot; | translate }}&lt;/span&gt;
+              &lt;span
+                &gt;-{{
+                  (cartSummary$ | async)?.totalSavings
+                    | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                }}&lt;/span
+              &gt;
+            &lt;/div&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;
+                (cartSummary$ | async)?.couponDiscount &amp;&amp;
+                (cartSummary$ | async)!.couponDiscount &gt; 0
+              &quot;
+              class&#x3D;&quot;flex justify-between text-blue-600&quot;
+            &gt;
+              &lt;span&gt;{{ &quot;cart.couponDiscount&quot; | translate }}&lt;/span&gt;
+              &lt;span
+                &gt;-{{
+                  (cartSummary$ | async)?.couponDiscount
+                    | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                }}&lt;/span
+              &gt;
+            &lt;/div&gt;
+            &lt;div
+              class&#x3D;&quot;flex justify-between font-semibold text-lg border-t pt-2&quot;
+            &gt;
+              &lt;span&gt;{{ &quot;cart.total&quot; | translate }}&lt;/span&gt;
+              &lt;span&gt;{{
+                (cartSummary$ | async)?.total
+                  | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Checkout Button --&gt;
+          &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+            &lt;!-- Minimum Order Violations Warning --&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;hasMinimumOrderViolations$ | async&quot;
+              class&#x3D;&quot;mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg&quot;
+            &gt;
+              &lt;div class&#x3D;&quot;flex items-center space-x-2 text-amber-700&quot;&gt;
+                &lt;svg
+                  class&#x3D;&quot;w-5 h-5 flex-shrink-0&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.884-.833-2.654 0L3.16 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+                  &gt;&lt;/path&gt;
+                &lt;/svg&gt;
+                &lt;span class&#x3D;&quot;text-sm font-medium&quot;&gt;{{
+                  &quot;b2bCart.minimumOrderViolation&quot; | translate
+                }}&lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;button
+              (click)&#x3D;&quot;proceedToCheckout()&quot;
+              [disabled]&#x3D;&quot;hasMinimumOrderViolations$ | async&quot;
+              class&#x3D;&quot;w-full px-6 py-4 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-[&#x27;DM_Sans&#x27;] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400&quot;
+            &gt;
+              {{ &quot;cart.proceedToCheckout&quot; | translate }}
+            &lt;/button&gt;
+            &lt;button
+              (click)&#x3D;&quot;clearCart()&quot;
+              class&#x3D;&quot;w-full mt-2 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors text-sm&quot;
+            &gt;
+              {{ &quot;b2bCart.clearCart&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./b2b-cart-sidebar.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+
+.cart-overlay {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+.cart-sidebar {
+  will-change: transform;
+  backface-visibility: hidden;
+  pointer-events: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(100%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cart item animations - staggered for better performance */
+.cart-item {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideInUp 0.5s ease-out forwards;
+}
+
+.cart-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.cart-item:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.cart-item:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.cart-item:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.cart-item:nth-child(n + 5) {
+  animation-delay: 0.25s;
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth transitions for quantity changes */
+.cart-item {
+  transition: all 0.5s ease;
+}
+
+/* Minimum order violation styling */
+.cart-item.border-amber-300 {
+  border-left: 4px solid #f59e0b;
+}
+
+/* Disabled button styling */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Cart Overlay --><div  *ngIf="sidebarOpen$ | async"  class="fixed inset-0 z-50 overflow-hidden cart-overlay"  role="button"  tabindex="0"  (click)="onOverlayClick($event)"  (keydown.space)="onOverlayClick($event)"  (keydown.enter)="onOverlayClick($event)">  <!-- Background overlay -->  <div    class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300"    role="button"    tabindex="0"    (click)="closeSidebar()"    (keydown.space)="closeSidebar()"    (keydown.enter)="closeSidebar()"  ></div>  <!-- Cart sidebar -->  <div    class="absolute right-0 top-0 h-screen w-full max-w-md bg-white shadow-xl transform transition-all duration-300 ease-out flex flex-col cart-sidebar animate-slide-in-right"    (click)="$event.stopPropagation()"    (keydown.space)="$event.stopPropagation()"    (keydown.enter)="$event.stopPropagation()"    role="button"    tabindex="0"  >    <!-- Cart Header -->    <div class="flex items-center justify-between p-4 border-b border-gray-200">      <h2 class="text-lg font-semibold text-gray-900">        {{ "cart.yourCart" | translate }}      </h2>      <button        role="button"        tabindex="0"        (click)="closeSidebar()"        (keydown.space)="closeSidebar()"        (keydown.enter)="closeSidebar()"        class="p-2 text-gray-400 hover:text-gray-600 transition-colors"        aria-label="Close cart"      >        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <!-- Cart Content -->    <div class="flex flex-col flex-1 min-h-0">      <!-- Loading State -->      <div        *ngIf="loading$ | async"        class="flex-1 flex items-center justify-center p-8"      >        <div          class="animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600"        ></div>      </div>      <!-- Empty Cart State -->      <div        *ngIf="(isEmpty$ | async) && (loading$ | async) === false"        class="flex-1 flex flex-col items-center justify-center p-8 text-center"      >        <div          class="w-24 h-24 mb-6 text-gray-300 flex items-center justify-center"        >          <lucide-angular            name="shopping-cart"            class="w-24 h-24 text-gray-300"            [img]="ShoppingCartIcon"          >          </lucide-angular>        </div>        <h3 class="text-xl font-medium text-gray-900 mb-2">          {{ "cart.empty" | translate }}        </h3>        <p class="text-gray-500 mb-6">{{ "cart.emptyText" | translate }}</p>        <button          (click)="closeSidebar()"          (keydown.space)="closeSidebar()"          (keydown.enter)="closeSidebar()"          role="button"          tabindex="0"          class="px-6 py-3 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors"        >          {{ "cart.continueShopping" | translate }}        </button>      </div>      <!-- Populated Cart State -->      <div        *ngIf="(isEmpty$ | async) === false && (loading$ | async) === false"        class="flex-1 flex flex-col min-h-0"      >        <!-- Company Info -->        <div          *ngIf="companyInfo$ | async as company"          class="p-4 bg-solar-50 border-b border-gray-200"        >          <div class="text-sm text-solar-800">            <span class="font-medium"              >{{ "b2bCart.orderingFor" | translate }}:</span            >            {{ company.companyName || ("b2bCart.unknownCompany" | translate) }}          </div>        </div>        <!-- Cart Items -->        <div class="flex-1 overflow-y-auto p-4 min-h-0">          <div class="space-y-3">            <div              *ngFor="let item of cartItems$ | async; trackBy: trackByProductId"              class="flex items-start space-x-3 p-3 border rounded-lg cart-item"              [class.border-gray-200]="isMinimumOrderMet(item)"              [class.border-amber-300]="!isMinimumOrderMet(item)"              [class.bg-amber-50]="!isMinimumOrderMet(item)"            >              <!-- Product Image -->              <div class="flex-shrink-0">                <img                  [src]="getImageSrc(item.imageUrl)"                  [alt]="item.name"                  class="w-14 h-14 object-cover rounded-lg bg-gray-100"                  (error)="onImageError($event, item.productId)"                  loading="lazy"                />              </div>              <!-- Product Details -->              <div class="flex-1 min-w-0">                <a                  [routerLink]="[\'/partneri/proizvodi\', item.productId]"                  (click)="closeSidebar()"                  class="text-sm font-medium text-gray-900 hover:text-solar-600 truncate block cursor-pointer"                >                  {{ item.name }}                </a>                <p class="text-xs text-gray-500 mt-1">                  {{ "b2bCart.sku" | translate }}: {{ item.sku }}                </p>                <!-- Price -->                <div class="flex items-center space-x-2 mt-2">                  <span class="text-sm font-semibold text-gray-900">                    {{ item.unitPrice | currency: "EUR" : "symbol" : "1.2-2" }}                  </span>                  <span                    *ngIf="                      item.partnerOfferOriginalPrice &&                      item.partnerOfferOriginalPrice > item.unitPrice                    "                    class="text-xs text-gray-500 line-through"                  >                    {{                      item.partnerOfferOriginalPrice                        | currency: "EUR" : "symbol" : "1.2-2"                    }}                  </span>                  <span                    *ngIf="                      !item.partnerOfferOriginalPrice &&                      item.retailPrice &&                      item.retailPrice > item.unitPrice                    "                    class="text-xs text-gray-500 line-through"                  >                    {{                      item.retailPrice | currency: "EUR" : "symbol" : "1.2-2"                    }}                  </span>                  <span                    *ngIf="item.savings && item.savings > 0"                    class="text-xs text-green-600 font-medium"                  >                    {{ "b2bCart.save" | translate }}                    {{                      item.savings / item.quantity                        | currency: "EUR" : "symbol" : "1.2-2"                    }}                  </span>                </div>                <!-- Next Tier Hint -->                <div                  *ngIf="getNextTierHint(item)"                  class="mt-1 text-xs text-amber-600"                >                  <svg                    class="w-3 h-3 inline mr-1"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"                    />                  </svg>                  {{ getNextTierHint(item) }}                </div>                <!-- Partner Offer Badge -->                <div *ngIf="item.partnerOfferId" class="mt-1">                  <span                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800"                  >                    <svg                      class="w-3 h-3 mr-1"                      fill="currentColor"                      viewBox="0 0 20 20"                    >                      <path                        fill-rule="evenodd"                        d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"                        clip-rule="evenodd"                      />                    </svg>                    {{ item.partnerOfferName }}                  </span>                </div>                <!-- Bundle Status Indicator -->                <div *ngIf="item.isBundle" class="mt-1">                  <span                    *ngIf="item.bundleComplete"                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"                  >                    <svg                      class="w-3 h-3 mr-1"                      fill="currentColor"                      viewBox="0 0 20 20"                    >                      <path                        fill-rule="evenodd"                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"                        clip-rule="evenodd"                      />                    </svg>                    {{ "cart.bundleComplete" | translate }}                  </span>                  <span                    *ngIf="!item.bundleComplete"                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"                  >                    <svg                      class="w-3 h-3 mr-1"                      fill="currentColor"                      viewBox="0 0 20 20"                    >                      <path                        fill-rule="evenodd"                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"                        clip-rule="evenodd"                      />                    </svg>                    {{ "cart.bundleIncomplete" | translate }}                  </span>                </div>                <!-- Additional Partner Offer Savings -->                <div                  *ngIf="item.additionalSavings && item.additionalSavings > 0"                  class="mt-1"                >                  <span class="text-xs text-blue-600 font-medium">                    {{ "b2bCart.additionalOfferSavings" | translate }}:                    {{                      item.additionalSavings / item.quantity                        | currency: "EUR" : "symbol" : "1.2-2"                    }}                  </span>                </div>                <!-- Quantity Controls -->                <div class="flex items-center justify-between mt-2">                  <div class="flex items-center space-x-1">                    <button                      (click)="decreaseQuantity(item.productId)"                      [disabled]="!canDecreaseQuantity(item)"                      class="w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"                    >                      <svg                        class="w-4 h-4"                        fill="none"                        stroke="currentColor"                        viewBox="0 0 24 24"                      >                        <path                          stroke-linecap="round"                          stroke-linejoin="round"                          stroke-width="2"                          d="M20 12H4"                        ></path>                      </svg>                    </button>                    <span class="w-7 text-center text-sm font-medium">{{                      item.quantity                    }}</span>                    <button                      (click)="increaseQuantity(item.productId)"                      class="w-7 h-7 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50"                    >                      <svg                        class="w-4 h-4"                        fill="none"                        stroke="currentColor"                        viewBox="0 0 24 24"                      >                        <path                          stroke-linecap="round"                          stroke-linejoin="round"                          stroke-width="2"                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"                        ></path>                      </svg>                    </button>                  </div>                  <!-- Remove Button -->                  <button                    (click)="removeItem(item.productId)"                    class="text-red-500 hover:text-red-700 text-sm"                  >                    {{ "cart.remove" | translate }}                  </button>                </div>                <!-- Minimum Order Warning -->                <div *ngIf="!isMinimumOrderMet(item)" class="mt-2">                  <div                    class="flex items-center space-x-1 text-xs text-amber-600 bg-amber-50 p-2 rounded"                  >                    <svg                      class="w-4 h-4 flex-shrink-0"                      fill="none"                      stroke="currentColor"                      viewBox="0 0 24 24"                    >                      <path                        stroke-linecap="round"                        stroke-linejoin="round"                        stroke-width="2"                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.884-.833-2.654 0L3.16 16.5c-.77.833.192 2.5 1.732 2.5z"                      ></path>                    </svg>                    <span                      >{{ "b2bCart.minimumOrder" | translate }}:                      {{ item.minimumOrder }}</span                    >                  </div>                </div>              </div>            </div>          </div>        </div>        <!-- Coupon Section -->        <div class="mt-4 p-3 bg-gray-50 rounded-lg mx-4">          <h4 class="text-sm font-medium text-gray-900 mb-3">            {{ "cart.discountCode" | translate }}          </h4>          <div *ngIf="appliedCoupons$ | async as coupons">            <div              *ngFor="let coupon of coupons"              class="flex items-center justify-between p-2 bg-blue-50 text-blue-800 rounded text-sm mb-2 last:mb-0"            >              <span>                {{ coupon.code }} -                <ng-container *ngIf="coupon.type === \'percentage\'">                  {{ coupon.value }}% ({{                    coupon.discountAmount                      | currency: "EUR" : "symbol" : "1.2-2"                  }})                </ng-container>                <ng-container *ngIf="coupon.type === \'fixed_amount\'">                  {{                    coupon.discountAmount | currency: "EUR" : "symbol" : "1.2-2"                  }}                </ng-container>                <ng-container *ngIf="coupon.type === \'free_shipping\'">                  {{ "cart.freeShipping" | translate }}                </ng-container>              </span>              <button                (click)="removeCoupon(coupon.id)"                class="text-blue-600 hover:text-blue-800"                aria-label="Remove coupon"              >                ×              </button>            </div>          </div>          <!-- Coupon Input - Only show when no coupons are applied -->          <div            *ngIf="(hasCouponsApplied$ | async) === false"            class="flex space-x-2"          >            <input              type="text"              [(ngModel)]="couponCode"              [placeholder]="\'cart.enterDiscountCode\' | translate"              class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-solar-500"              [disabled]="(isCouponLoading$ | async) || false"            />            <button              (click)="applyCoupon()"              [disabled]="isApplyButtonDisabled || (isCouponLoading$ | async)"              class="px-4 py-2 bg-solar-500 text-white rounded-lg text-sm hover:bg-solar-700 disabled:opacity-50 disabled:cursor-not-allowed"            >              <span *ngIf="(isCouponLoading$ | async) === false">{{                "cart.apply" | translate              }}</span>              <span *ngIf="isCouponLoading$ | async">...</span>            </button>          </div>          <!-- Single coupon limitation message -->          <div            *ngIf="hasCouponsApplied$ | async"            class="text-xs text-gray-600 mt-2"          >            {{ "cart.singleCouponLimit" | translate }}          </div>          <div            *ngIf="couponError$ | async as error"            class="mt-2 text-sm text-red-600"          >            {{ error }}          </div>        </div>        <!-- Cart Summary -->        <div class="border-t border-gray-200 p-4 flex-shrink-0">          <div class="space-y-2 text-sm">            <div class="flex justify-between">              <span class="text-gray-600">{{                "cart.subtotal" | translate              }}</span>              <span>{{                (cartSummary$ | async)?.subtotal                  | currency: "EUR" : "symbol" : "1.2-2"              }}</span>            </div>            <div              *ngIf="                (cartSummary$ | async)?.totalSavings &&                (cartSummary$ | async)!.totalSavings > 0              "              class="flex justify-between text-green-600"            >              <span>{{ "b2bCart.totalSavings" | translate }}</span>              <span                >-{{                  (cartSummary$ | async)?.totalSavings                    | currency: "EUR" : "symbol" : "1.2-2"                }}</span              >            </div>            <div              *ngIf="                (cartSummary$ | async)?.couponDiscount &&                (cartSummary$ | async)!.couponDiscount > 0              "              class="flex justify-between text-blue-600"            >              <span>{{ "cart.couponDiscount" | translate }}</span>              <span                >-{{                  (cartSummary$ | async)?.couponDiscount                    | currency: "EUR" : "symbol" : "1.2-2"                }}</span              >            </div>            <div              class="flex justify-between font-semibold text-lg border-t pt-2"            >              <span>{{ "cart.total" | translate }}</span>              <span>{{                (cartSummary$ | async)?.total                  | currency: "EUR" : "symbol" : "1.2-2"              }}</span>            </div>          </div>          <!-- Checkout Button -->          <div class="mt-6">            <!-- Minimum Order Violations Warning -->            <div              *ngIf="hasMinimumOrderViolations$ | async"              class="mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg"            >              <div class="flex items-center space-x-2 text-amber-700">                <svg                  class="w-5 h-5 flex-shrink-0"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.884-.833-2.654 0L3.16 16.5c-.77.833.192 2.5 1.732 2.5z"                  ></path>                </svg>                <span class="text-sm font-medium">{{                  "b2bCart.minimumOrderViolation" | translate                }}</span>              </div>            </div>            <button              (click)="proceedToCheckout()"              [disabled]="hasMinimumOrderViolations$ | async"              class="w-full px-6 py-4 bg-solar-500 text-white rounded-lg hover:bg-solar-700 transition-colors font-semibold text-lg font-[\'DM_Sans\'] disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400"            >              {{ "cart.proceedToCheckout" | translate }}            </button>            <button              (click)="clearCart()"              class="w-full mt-2 bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors text-sm"            >              {{ "b2bCart.clearCart" | translate }}            </button>          </div>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'B2BCartSidebarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'B2BCartSidebarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

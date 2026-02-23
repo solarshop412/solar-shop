@@ -1,0 +1,2591 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  OfferDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/offers/offer-details/offer-details.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-offer-details</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="../components/AddToCartButtonComponent.html" target="_self" >AddToCartButtonComponent</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./offer-details.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./offer-details.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#copiedCoupon" >copiedCoupon</a>
+                            </li>
+                            <li>
+                                <a href="#currentOffer" >currentOffer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentProducts" >currentProducts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#isBundle" >isBundle</a>
+                            </li>
+                            <li>
+                                <a href="#offer$" >offer$</a>
+                            </li>
+                            <li>
+                                <a href="#relatedProducts$" >relatedProducts$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#addAllToCart" >addAllToCart</a>
+                            </li>
+                            <li>
+                                <a href="#calculateDiscountedPrice" >calculateDiscountedPrice</a>
+                            </li>
+                            <li>
+                                <a href="#calculateTotalDiscountedPrice" >calculateTotalDiscountedPrice</a>
+                            </li>
+                            <li>
+                                <a href="#copyCouponCode" >copyCouponCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getProductAvailability" >getProductAvailability</a>
+                            </li>
+                            <li>
+                                <a href="#getProductImage" >getProductImage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getRelatedProducts" >getRelatedProducts</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalOriginalPrice" >getTotalOriginalPrice</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalSavings" >getTotalSavings</a>
+                            </li>
+                            <li>
+                                <a href="#hasProductSpecificDiscount" >hasProductSpecificDiscount</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToProduct" >navigateToProduct</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToProducts" >navigateToProducts</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setOfferSeo" >setOfferSeo</a>
+                            </li>
+                            <li>
+                                <a href="#trackByProductId" >trackByProductId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, offersService: <a href="../injectables/OffersService.html" target="_self">OffersService</a>, supabaseService: <a href="../injectables/SupabaseService.html" target="_self">SupabaseService</a>, store: Store, toastService: <a href="../injectables/ToastService.html" target="_self">ToastService</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>, seoService: <a href="../injectables/SeoService.html" target="_self">SeoService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>offersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/OffersService.html" target="_self" >OffersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>supabaseService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SupabaseService.html" target="_self" >SupabaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code>Store</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toastService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ToastService.html" target="_self" >ToastService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TranslationService.html" target="_self" >TranslationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>seoService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SeoService.html" target="_self" >SeoService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAllToCart"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>addAllToCart</b></span>
+                        <a href="#addAllToCart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>addAllToCart()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="289"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:289</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateDiscountedPrice"></a>
+                    <span class="name">
+                        <span ><b>calculateDiscountedPrice</b></span>
+                        <a href="#calculateDiscountedPrice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculateDiscountedPrice(originalPrice: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, offer: <a href="../interfaces/Offer.html" target="_self">Offer</a>, product?: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>originalPrice</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Offer.html" target="_self" >Offer</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>product</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateTotalDiscountedPrice"></a>
+                    <span class="name">
+                        <span ><b>calculateTotalDiscountedPrice</b></span>
+                        <a href="#calculateTotalDiscountedPrice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>calculateTotalDiscountedPrice(offer: <a href="../interfaces/Offer.html" target="_self">Offer</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:234</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Offer.html" target="_self" >Offer</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyCouponCode"></a>
+                    <span class="name">
+                        <span ><b>copyCouponCode</b></span>
+                        <a href="#copyCouponCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyCouponCode(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:243</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductAvailability"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getProductAvailability</b></span>
+                        <a href="#getProductAvailability"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getProductAvailability(stockQuantity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>stockQuantity</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductImage"></a>
+                    <span class="name">
+                        <span ><b>getProductImage</b></span>
+                        <a href="#getProductImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProductImage(product: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>product</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRelatedProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getRelatedProducts</b></span>
+                        <a href="#getRelatedProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getRelatedProducts(offer: <a href="../interfaces/Offer.html" target="_self">Offer</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Offer.html" target="_self" >Offer</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;any[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalOriginalPrice"></a>
+                    <span class="name">
+                        <span ><b>getTotalOriginalPrice</b></span>
+                        <a href="#getTotalOriginalPrice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalOriginalPrice()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="269"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:269</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalSavings"></a>
+                    <span class="name">
+                        <span ><b>getTotalSavings</b></span>
+                        <a href="#getTotalSavings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalSavings(offer: <a href="../interfaces/Offer.html" target="_self">Offer</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="276"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:276</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Offer.html" target="_self" >Offer</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasProductSpecificDiscount"></a>
+                    <span class="name">
+                        <span ><b>hasProductSpecificDiscount</b></span>
+                        <a href="#hasProductSpecificDiscount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasProductSpecificDiscount(product: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>product</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToProduct"></a>
+                    <span class="name">
+                        <span ><b>navigateToProduct</b></span>
+                        <a href="#navigateToProduct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToProduct(productId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>productId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToProducts"></a>
+                    <span class="name">
+                        <span ><b>navigateToProducts</b></span>
+                        <a href="#navigateToProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToProducts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="265"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setOfferSeo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setOfferSeo</b></span>
+                        <a href="#setOfferSeo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setOfferSeo(offer: <a href="../interfaces/Offer.html" target="_self">Offer</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="427"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:427</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set SEO tags for the offer page</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Offer.html" target="_self" >Offer</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByProductId"></a>
+                    <span class="name">
+                        <span ><b>trackByProductId</b></span>
+                        <a href="#trackByProductId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackByProductId(_index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, product: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>_index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>product</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copiedCoupon"></a>
+                    <span class="name">
+                        <span ><b>copiedCoupon</b></span>
+                        <a href="#copiedCoupon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentOffer"></a>
+                    <span class="name">
+                        <span ><b>currentOffer</b></span>
+                        <a href="#currentOffer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentProducts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>currentProducts</b></span>
+                        <a href="#currentProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isBundle"></a>
+                    <span class="name">
+                        <span ><b>isBundle</b></span>
+                        <a href="#isBundle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offer$"></a>
+                    <span class="name">
+                        <span ><b>offer$</b></span>
+                        <a href="#offer$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Offer.html" target="_self" >Observable&lt;Offer | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="relatedProducts$"></a>
+                    <span class="name">
+                        <span ><b>relatedProducts$</b></span>
+                        <a href="#relatedProducts$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/b2c/offers/offer-details/offer-details.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Observable, Subject, from, of } from &#x27;rxjs&#x27;;
+import { takeUntil, switchMap, map, catchError } from &#x27;rxjs/operators&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { OffersService } from &#x27;../services/offers.service&#x27;;
+import { AddToCartButtonComponent } from &#x27;../../cart/components/add-to-cart-button/add-to-cart-button.component&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { Offer } from &#x27;../../../../shared/models/offer.model&#x27;;
+import { TranslatePipe } from &#x27;../../../../shared/pipes/translate.pipe&#x27;;
+import { addAllToCartFromOffer } from &#x27;../../cart/store/cart.actions&#x27;;
+import { ToastService } from &#x27;../../../../shared/services/toast.service&#x27;;
+import { TranslationService } from &#x27;../../../../shared/services/translation.service&#x27;;
+import { SeoService } from &#x27;../../../../shared/services/seo.service&#x27;;
+
+@Component({
+  selector: &#x27;app-offer-details&#x27;,
+  standalone: true,
+  imports: [CommonModule, AddToCartButtonComponent, TranslatePipe],
+  templateUrl: &#x27;./offer-details.component.html&#x27;,
+  styleUrls: [&#x27;./offer-details.component.scss&#x27;],
+})
+export class OfferDetailsComponent implements OnInit, OnDestroy {
+  offer$: Observable&lt;Offer | null&gt;;
+  relatedProducts$: Observable&lt;any[]&gt;;
+  copiedCoupon &#x3D; false;
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+  private currentProducts: any[] &#x3D; [];
+  isBundle &#x3D; false;
+  currentOffer: any &#x3D; null;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private offersService: OffersService,
+    private supabaseService: SupabaseService,
+    private store: Store,
+    private toastService: ToastService,
+    private translationService: TranslationService,
+    private seoService: SeoService,
+  ) {
+    this.offer$ &#x3D; this.route.params.pipe(
+      switchMap((params) &#x3D;&gt; this.offersService.getOfferById(params[&#x27;id&#x27;])),
+      takeUntil(this.destroy$),
+    );
+
+    this.relatedProducts$ &#x3D; this.offer$.pipe(
+      switchMap((offer) &#x3D;&gt; {
+        if (!offer) return [];
+        return this.getRelatedProducts(offer);
+      }),
+      map((products) &#x3D;&gt; {
+        this.currentProducts &#x3D; products;
+        return products;
+      }),
+      takeUntil(this.destroy$),
+    );
+  }
+
+  ngOnInit(): void {
+    // Scroll to top when component loads
+    window.scrollTo(0, 0);
+
+    // Load offer data and check if it&#x27;s a bundle
+    this.offer$.subscribe(async (offer) &#x3D;&gt; {
+      if (offer) {
+        this.currentOffer &#x3D; offer;
+
+        // Set SEO for offer page
+        this.setOfferSeo(offer);
+
+        // Fetch full offer details from database to get bundle flag
+        try {
+          const fullOffer &#x3D; await this.supabaseService.getTableById(
+            &#x27;offers&#x27;,
+            offer.id,
+          );
+          if (fullOffer) {
+            this.isBundle &#x3D; fullOffer.bundle || false;
+          }
+        } catch (error) {
+          console.error(&#x27;Error loading full offer details:&#x27;, error);
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.seoService.resetToDefaults();
+  }
+
+  private getRelatedProducts(offer: Offer): Observable&lt;any[]&gt; {
+    return from(
+      this.supabaseService.client
+        .from(&#x27;offer_products&#x27;)
+        .select(
+          &#x60;
+          *,
+          products (
+            id,
+            name,
+            description,
+            price,
+            sku,
+            stock_quantity,
+            images,
+            category_id,
+            categories (
+              name
+            )
+          )
+        &#x60;,
+        )
+        .eq(&#x27;offer_id&#x27;, offer.id)
+        .order(&#x27;sort_order&#x27;),
+    ).pipe(
+      switchMap(({ data: offerProducts, error }) &#x3D;&gt; {
+        console.log(&#x27;Raw offer products from database:&#x27;, offerProducts);
+
+        if (error) {
+          console.error(&#x27;Error fetching related products:&#x27;, error);
+          // Fallback to featured products on error
+          return from(
+            this.supabaseService.getProducts({ featured: true, limit: 3 }),
+          );
+        }
+
+        if (offerProducts &amp;&amp; offerProducts.length &gt; 0) {
+          // Map offer products to the expected format including discount information
+          const products &#x3D; offerProducts.map((op: any) &#x3D;&gt; {
+            // Determine discount type based on which field has a value
+            const discountType &#x3D;
+              op.discount_amount &amp;&amp; op.discount_amount &gt; 0
+                ? &#x27;fixed_amount&#x27;
+                : &#x27;percentage&#x27;;
+
+            const productResult &#x3D; {
+              id: op.products.id,
+              name: op.products.name,
+              description: op.products.description,
+              price: op.products.price,
+              availability: this.getProductAvailability(
+                op.products.stock_quantity,
+              ),
+              images: op.products.images || [],
+              category: op.products.categories?.name,
+              stock_quantity: op.products.stock_quantity || 0,
+              discount_percentage: op.discount_percentage || 0,
+              discount_amount: op.discount_amount || 0,
+              discount_type: discountType,
+            };
+
+            console.log(&#x27;Offer Details - Product with discount info:&#x27;, {
+              productId: productResult.id,
+              price: productResult.price,
+              discount_percentage: productResult.discount_percentage,
+              discount_amount: productResult.discount_amount,
+              discount_type: productResult.discount_type,
+              raw_op: op,
+            });
+
+            return productResult;
+          });
+          return of(products);
+        } else {
+          // If no specific products, fallback to featured products
+          return from(
+            this.supabaseService.getProducts({ featured: true, limit: 6 }),
+          );
+        }
+      }),
+      map((products) &#x3D;&gt; products || []),
+      catchError((error: any) &#x3D;&gt; {
+        console.error(&#x27;Error fetching fallback products:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  private getProductAvailability(stockQuantity: number): string {
+    if (stockQuantity &gt; 10) return &#x27;in_stock&#x27;;
+    if (stockQuantity &gt; 0) return &#x27;low_stock&#x27;;
+    return &#x27;out_of_stock&#x27;;
+  }
+
+  getProductImage(product: any): string {
+    if (
+      product.images &amp;&amp;
+      Array.isArray(product.images) &amp;&amp;
+      product.images.length &gt; 0
+    ) {
+      return product.images[0].url || product.images[0];
+    }
+    return &#x27;assets/images/product-placeholder.webp&#x27;;
+  }
+
+  calculateDiscountedPrice(
+    originalPrice: number,
+    offer: Offer,
+    product?: any,
+  ): number {
+    // If we have product-specific discount information, use that
+    if (
+      product &amp;&amp;
+      (product.discount_percentage &gt; 0 || product.discount_amount &gt; 0)
+    ) {
+      if (product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;) {
+        return Math.max(0, originalPrice - (product.discount_amount || 0));
+      } else {
+        return originalPrice * (1 - (product.discount_percentage || 0) / 100);
+      }
+    }
+
+    // Fallback to offer-level discount calculation
+    if (!offer.discount_type || offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;) {
+      const discountPercentage &#x3D; offer.discountPercentage || 0;
+      return originalPrice * (1 - discountPercentage / 100);
+    } else if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;) {
+      // For fixed amount discounts, calculate proportional discount per product
+      const totalOriginalPrice &#x3D; this.getTotalOriginalPrice();
+      const fixedDiscountAmount &#x3D; offer.discount_value || 0;
+      if (totalOriginalPrice &gt; 0) {
+        const proportionalDiscount &#x3D;
+          (originalPrice / totalOriginalPrice) * fixedDiscountAmount;
+        return Math.max(0, originalPrice - proportionalDiscount);
+      }
+    }
+    return originalPrice;
+  }
+
+  calculateTotalDiscountedPrice(offer: Offer): number {
+    // Calculate total using individual product discounts
+    return this.currentProducts.reduce((total, product) &#x3D;&gt; {
+      return (
+        total + this.calculateDiscountedPrice(product.price, offer, product)
+      );
+    }, 0);
+  }
+
+  copyCouponCode(code: string): void {
+    navigator.clipboard
+      .writeText(code)
+      .then(() &#x3D;&gt; {
+        this.copiedCoupon &#x3D; true;
+        setTimeout(() &#x3D;&gt; {
+          this.copiedCoupon &#x3D; false;
+        }, 2000);
+      })
+      .catch((err) &#x3D;&gt; {
+        console.error(&#x27;Failed to copy coupon code:&#x27;, err);
+      });
+  }
+
+  trackByProductId(_index: number, product: any): string {
+    return product.id;
+  }
+
+  navigateToProduct(productId: string): void {
+    this.router.navigate([&#x27;/proizvodi&#x27;, productId]);
+  }
+
+  navigateToProducts(): void {
+    this.router.navigate([&#x27;/proizvodi&#x27;]);
+  }
+
+  getTotalOriginalPrice(): number {
+    return this.currentProducts.reduce(
+      (total, product) &#x3D;&gt; total + product.price,
+      0,
+    );
+  }
+
+  getTotalSavings(offer: Offer): number {
+    return (
+      this.getTotalOriginalPrice() - this.calculateTotalDiscountedPrice(offer)
+    );
+  }
+
+  hasProductSpecificDiscount(product: any): boolean {
+    return (
+      (product.discount_percentage &amp;&amp; product.discount_percentage &gt; 0) ||
+      (product.discount_amount &amp;&amp; product.discount_amount &gt; 0)
+    );
+  }
+
+  async addAllToCart(): Promise&lt;void&gt; {
+    if (!this.currentProducts || this.currentProducts.length &#x3D;&#x3D;&#x3D; 0) {
+      this.toastService.showWarning(
+        this.translationService.translate(&#x27;offers.noProductsToAdd&#x27;),
+      );
+      return;
+    }
+
+    // Get current offer to pass offer information
+    this.offer$.pipe(takeUntil(this.destroy$)).subscribe(async (offer) &#x3D;&gt; {
+      if (!offer) {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;offers.offerNotFound&#x27;),
+        );
+        return;
+      }
+
+      // Filter out out-of-stock products
+      const availableProducts &#x3D; this.currentProducts.filter(
+        (product) &#x3D;&gt;
+          product.availability !&#x3D;&#x3D; &#x27;out_of_stock&#x27; &amp;&amp; product.stock_quantity &gt; 0,
+      );
+
+      if (availableProducts.length &#x3D;&#x3D;&#x3D; 0) {
+        this.toastService.showWarning(
+          this.translationService.translate(&#x27;offers.allProductsOutOfStock&#x27;),
+        );
+        return;
+      }
+
+      // Prepare products for the action with individual discounts
+      const products &#x3D; availableProducts.map((product) &#x3D;&gt; {
+        // Get the correct individual discount based on type
+        let individualDiscount;
+        if (
+          product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27; &amp;&amp;
+          product.discount_amount &gt; 0
+        ) {
+          individualDiscount &#x3D; product.discount_amount;
+        } else if (
+          product.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; &amp;&amp;
+          product.discount_percentage &gt; 0
+        ) {
+          individualDiscount &#x3D; product.discount_percentage;
+        } else {
+          individualDiscount &#x3D; undefined;
+        }
+
+        const productData &#x3D; {
+          productId: product.id,
+          quantity: 1,
+          variantId: undefined,
+          individualDiscount: individualDiscount,
+          individualDiscountType: product.discount_type || undefined,
+          originalPrice: product.price,
+        };
+
+        console.log(&#x27;Offer Details - Sending product to cart:&#x27;, {
+          productId: productData.productId,
+          individualDiscount: productData.individualDiscount,
+          individualDiscountType: productData.individualDiscountType,
+          originalPrice: productData.originalPrice,
+          product_discount_amount: product.discount_amount,
+          product_discount_percentage: product.discount_percentage,
+          product_discount_type: product.discount_type,
+        });
+
+        return productData;
+      });
+
+      // Get the original offer from database to get discount_value and bundle flag
+      let discountValue &#x3D; offer.discountPercentage || 0;
+      let isBundle &#x3D; false;
+      let totalProductsInOffer &#x3D; this.currentProducts.length;
+
+      try {
+        const originalOffer &#x3D; await this.supabaseService.getTableById(
+          &#x27;offers&#x27;,
+          offer.id,
+        );
+        if (originalOffer) {
+          discountValue &#x3D;
+            originalOffer.discount_value || offer.discountPercentage || 0;
+          isBundle &#x3D; originalOffer.bundle || false;
+        }
+      } catch (error) {
+        console.error(&#x27;Error fetching original offer data:&#x27;, error);
+      }
+
+      // Dispatch the offer-based add all to cart action
+      const actionPayload &#x3D; {
+        products,
+        offerId: offer.id,
+        offerName: offer.title,
+        offerType: (offer.discount_type || &#x27;percentage&#x27;) as
+          | &#x27;percentage&#x27;
+          | &#x27;fixed_amount&#x27;
+          | &#x27;buy_x_get_y&#x27;
+          | &#x27;bundle&#x27;,
+        offerDiscount: discountValue,
+        offerValidUntil: offer.endDate,
+        isBundle: isBundle,
+        bundleProductIds: isBundle
+          ? this.currentProducts.map((p) &#x3D;&gt; p.id)
+          : undefined,
+      };
+
+      console.log(&#x27;Offer Details - Dispatching cart action:&#x27;, {
+        offerType: actionPayload.offerType,
+        offerDiscount: actionPayload.offerDiscount,
+        products: actionPayload.products,
+      });
+
+      this.store.dispatch(addAllToCartFromOffer(actionPayload));
+
+      // Show success message
+      this.toastService.showSuccess(
+        this.translationService.translate(&#x27;offers.addedProductsToCart&#x27;, {
+          count: availableProducts.length,
+        }),
+      );
+
+      // Show warning for out-of-stock products if any
+      const outOfStockCount &#x3D;
+        this.currentProducts.length - availableProducts.length;
+      if (outOfStockCount &gt; 0) {
+        this.toastService.showWarning(
+          this.translationService.translate(&#x27;offers.productsOutOfStock&#x27;, {
+            count: outOfStockCount,
+          }),
+        );
+      }
+    });
+  }
+
+  /**
+   * Set SEO tags for the offer page
+   */
+  private setOfferSeo(offer: Offer): void {
+    // Calculate discounted price for SEO
+    const originalPrice &#x3D;
+      this.getTotalOriginalPrice() || offer.originalPrice || 0;
+    const discountedPrice &#x3D;
+      offer.discountedPrice || this.calculateTotalDiscountedPrice(offer);
+
+    // Set offer page SEO
+    this.seoService.setOfferPage({
+      name: offer.title,
+      description:
+        offer.description ||
+        offer.shortDescription ||
+        &#x60;Posebna ponuda: ${offer.title}&#x60;,
+      image: offer.imageUrl,
+      price: discountedPrice,
+      originalPrice: originalPrice,
+      currency: &#x27;EUR&#x27;,
+      validFrom: offer.startDate
+        ? new Date(offer.startDate).toISOString()
+        : undefined,
+      validThrough: offer.endDate
+        ? new Date(offer.endDate).toISOString()
+        : undefined,
+    });
+
+    // Set breadcrumbs schema
+    this.seoService.setBreadcrumbs([
+      { name: &#x27;Početna&#x27;, url: &#x27;/&#x27; },
+      { name: &#x27;Ponude&#x27;, url: &#x27;/ponude&#x27; },
+      { name: offer.title },
+    ]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  class&#x3D;&quot;min-h-screen bg-gray-50&quot;
+  *ngIf&#x3D;&quot;offer$ | async as offer; else loadingTemplate&quot;
+&gt;
+  &lt;!-- Hero Section --&gt;
+  &lt;div class&#x3D;&quot;relative bg-solar-500 text-white py-20&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-12 items-center&quot;&gt;
+        &lt;!-- Offer Image --&gt;
+        &lt;div class&#x3D;&quot;relative&quot;&gt;
+          &lt;img
+            [src]&#x3D;&quot;offer.imageUrl&quot;
+            [alt]&#x3D;&quot;offer.title&quot;
+            class&#x3D;&quot;w-full h-96 object-cover rounded-2xl shadow-2xl&quot;
+          /&gt;
+          &lt;!-- Discount Badge --&gt;
+          &lt;div
+            class&#x3D;&quot;absolute top-6 left-6 bg-accent-500 text-white text-lg font-bold px-4 py-3 rounded-full shadow-lg&quot;
+          &gt;
+            &lt;span
+              *ngIf&#x3D;&quot;
+                offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; || !offer.discount_type
+              &quot;
+              &gt;-{{ offer.discountPercentage }}%&lt;/span
+            &gt;
+            &lt;span *ngIf&#x3D;&quot;offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;&quot;
+              &gt;{{ offer.discount_value | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.0-2&quot; }}
+              {{ &quot;hero.off&quot; | translate }}&lt;/span
+            &gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Offer Info --&gt;
+        &lt;div&gt;
+          &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+            &lt;h1 class&#x3D;&quot;text-5xl lg:text-6xl font-bold mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+              {{ offer.title }}
+            &lt;/h1&gt;
+            &lt;p class&#x3D;&quot;text-xl lg:text-2xl text-white/90 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ offer.description || offer.shortDescription }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Pricing --&gt;
+          &lt;div
+            class&#x3D;&quot;bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8&quot;
+            *ngIf&#x3D;&quot;(relatedProducts$ | async)?.length&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-4 mb-4&quot;&gt;
+              &lt;span class&#x3D;&quot;text-2xl text-white/70 line-through font-medium&quot;&gt;
+                {{
+                  getTotalOriginalPrice() | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                }}
+              &lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-4xl font-bold text-white&quot;&gt;
+                {{
+                  calculateTotalDiscountedPrice(offer)
+                    | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;text-lg text-white/90&quot;&gt;
+              {{ &quot;offers.youSave&quot; | translate }}
+              {{
+                getTotalSavings(offer) | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Coupon Code --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;offer.couponCode&quot;
+            class&#x3D;&quot;bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-6&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;div&gt;
+                &lt;span class&#x3D;&quot;text-sm text-white/70&quot;
+                  &gt;{{ &quot;offers.couponCode&quot; | translate }}:&lt;/span
+                &gt;
+                &lt;div class&#x3D;&quot;text-xl font-bold text-white font-mono&quot;&gt;
+                  {{ offer.couponCode }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;button
+                (click)&#x3D;&quot;copyCouponCode(offer.couponCode!)&quot;
+                class&#x3D;&quot;bg-white text-solar-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors&quot;
+              &gt;
+                {{
+                  copiedCoupon
+                    ? (&quot;offers.copied&quot; | translate)
+                    : (&quot;offers.copy&quot; | translate)
+                }}
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Offer Validity --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;offer.endDate&quot;
+            class&#x3D;&quot;bg-accent-500/20 border border-accent-300/30 rounded-xl p-4 mb-6&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5 text-accent-300&quot;
+                fill&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+              &gt;
+                &lt;path
+                  d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V5z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;text-white font-semibold&quot;&gt;
+                {{ &quot;offers.expires&quot; | translate }}:
+                {{ offer.endDate | date: &quot;medium&quot; }}
+              &lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Related Products Section --&gt;
+  &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16&quot;&gt;
+    &lt;h2 class&#x3D;&quot;text-3xl font-bold text-gray-900 mb-8 font-[&#x27;Poppins&#x27;]&quot;&gt;
+      {{ &quot;offers.productsIncluded&quot; | translate }}
+    &lt;/h2&gt;
+
+    &lt;!-- Add All to Cart Button --&gt;
+    &lt;div *ngIf&#x3D;&quot;(relatedProducts$ | async)?.length&quot; class&#x3D;&quot;mb-8&quot;&gt;
+      &lt;button
+        (click)&#x3D;&quot;addAllToCart()&quot;
+        class&#x3D;&quot;w-full md:w-auto px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-[&#x27;DM_Sans&#x27;] mb-6&quot;
+      &gt;
+        {{ &quot;offers.addAllToCart&quot; | translate }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Product Cards --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;relatedProducts$ | async as products&quot;
+      class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8&quot;
+    &gt;
+      &lt;div
+        *ngFor&#x3D;&quot;let product of products; trackBy: trackByProductId&quot;
+        class&#x3D;&quot;bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2&quot;
+      &gt;
+        &lt;!-- Product Image --&gt;
+        &lt;div class&#x3D;&quot;relative h-64 bg-gray-50 overflow-hidden&quot;&gt;
+          &lt;img
+            [src]&#x3D;&quot;getProductImage(product)&quot;
+            [alt]&#x3D;&quot;product.name&quot;
+            class&#x3D;&quot;w-full h-full object-cover&quot;
+          /&gt;
+          &lt;!-- Offer Badge --&gt;
+          &lt;div
+            class&#x3D;&quot;absolute top-4 left-4 bg-solar-500 text-white text-sm font-bold px-3 py-2 rounded-full&quot;
+          &gt;
+            {{ &quot;offers.specialOffer&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Product Info --&gt;
+        &lt;div class&#x3D;&quot;p-6&quot;&gt;
+          &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ product.name }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-gray-600 text-sm mb-4 font-[&#x27;DM_Sans&#x27;] line-clamp-2&quot;&gt;
+            {{ product.description }}
+          &lt;/p&gt;
+
+          &lt;!-- Product Price --&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3 mb-4&quot;&gt;
+            &lt;span class&#x3D;&quot;text-lg text-gray-500 line-through&quot;&gt;
+              {{ product.price | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+            &lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xl font-bold text-solar-600&quot;&gt;
+              {{
+                calculateDiscountedPrice(product.price, offer, product)
+                  | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Individual Product Discount Badge (Only if product has specific discount) --&gt;
+          &lt;div *ngIf&#x3D;&quot;hasProductSpecificDiscount(product)&quot; class&#x3D;&quot;mb-3&quot;&gt;
+            &lt;span
+              class&#x3D;&quot;inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded&quot;
+            &gt;
+              &lt;span *ngIf&#x3D;&quot;product.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;&quot;
+                &gt;{{ product.discount_percentage }}%
+                {{ &quot;hero.off&quot; | translate }}&lt;/span
+              &gt;
+              &lt;span *ngIf&#x3D;&quot;product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;&quot;
+                &gt;{{
+                  product.discount_amount | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.0-2&quot;
+                }}
+                {{ &quot;hero.off&quot; | translate }}&lt;/span
+              &gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Add to Cart --&gt;
+          &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+            &lt;app-add-to-cart-button
+              [availability]&#x3D;&quot;product.availability&quot;
+              [productId]&#x3D;&quot;product.id&quot;
+              [quantity]&#x3D;&quot;1&quot;
+              buttonText&#x3D;&quot;{{ &#x27;offers.addToCart&#x27; | translate }}&quot;
+              [fullWidth]&#x3D;&quot;true&quot;
+              size&#x3D;&quot;md&quot;
+              [offerId]&#x3D;&quot;!isBundle ? offer.id : undefined&quot;
+              [offerName]&#x3D;&quot;!isBundle ? offer.title : undefined&quot;
+              [offerType]&#x3D;&quot;
+                !isBundle
+                  ? product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;
+                    ? &#x27;fixed_amount&#x27;
+                    : &#x27;percentage&#x27;
+                  : undefined
+              &quot;
+              [offerDiscount]&#x3D;&quot;
+                !isBundle
+                  ? product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;
+                    ? product.discount_amount
+                    : product.discount_percentage
+                  : undefined
+              &quot;
+              [offerOriginalPrice]&#x3D;&quot;!isBundle ? product.price : undefined&quot;
+              [offerValidUntil]&#x3D;&quot;!isBundle ? offer.endDate : undefined&quot;
+              [individualDiscount]&#x3D;&quot;
+                !isBundle
+                  ? product.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;
+                    ? product.discount_amount
+                    : product.discount_percentage
+                  : undefined
+              &quot;
+              [individualDiscountType]&#x3D;&quot;
+                !isBundle ? product.discount_type : undefined
+              &quot;
+            &gt;
+            &lt;/app-add-to-cart-button&gt;
+
+            &lt;button
+              (click)&#x3D;&quot;navigateToProduct(product.id)&quot;
+              class&#x3D;&quot;w-full px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;offers.viewDetails&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- No Products Message --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;
+        (relatedProducts$ | async) &#x3D;&#x3D;&#x3D; null ||
+        (relatedProducts$ | async)?.length &#x3D;&#x3D;&#x3D; 0
+      &quot;
+      class&#x3D;&quot;text-center py-12&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-2xl p-12 shadow-lg&quot;&gt;
+        &lt;div class&#x3D;&quot;text-gray-400 mb-4&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;w-16 h-16 mx-auto&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;offers.generalOffer&quot; | translate }}
+        &lt;/h3&gt;
+        &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          {{ &quot;offers.generalOfferDescription&quot; | translate }}
+        &lt;/p&gt;
+        &lt;button
+          (click)&#x3D;&quot;navigateToProducts()&quot;
+          class&#x3D;&quot;mt-6 px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+        &gt;
+          {{ &quot;offers.browseProducts&quot; | translate }}
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Offer Details Section --&gt;
+  &lt;div class&#x3D;&quot;bg-white py-16&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-3 gap-8&quot;&gt;
+        &lt;!-- Offer Description --&gt;
+        &lt;div class&#x3D;&quot;lg:col-span-2&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-3xl font-bold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;offers.aboutThisOffer&quot; | translate }}
+          &lt;/h2&gt;
+          &lt;div class&#x3D;&quot;prose prose-lg max-w-none&quot;&gt;
+            &lt;p class&#x3D;&quot;text-gray-600 leading-relaxed font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{
+                offer.description || (&quot;offers.defaultDescription&quot; | translate)
+              }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Loading Template --&gt;
+&lt;ng-template #loadingTemplate&gt;
+  &lt;div class&#x3D;&quot;min-h-screen bg-gray-50 flex items-center justify-center&quot;&gt;
+    &lt;div class&#x3D;&quot;text-center&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-4 border-solar-600 border-t-transparent mx-auto mb-4&quot;
+      &gt;&lt;/div&gt;
+      &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;hero.loading&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./offer-details.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.prose {
+  max-width: none;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  class="min-h-screen bg-gray-50"  *ngIf="offer$ | async as offer; else loadingTemplate">  <!-- Hero Section -->  <div class="relative bg-solar-500 text-white py-20">    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">        <!-- Offer Image -->        <div class="relative">          <img            [src]="offer.imageUrl"            [alt]="offer.title"            class="w-full h-96 object-cover rounded-2xl shadow-2xl"          />          <!-- Discount Badge -->          <div            class="absolute top-6 left-6 bg-accent-500 text-white text-lg font-bold px-4 py-3 rounded-full shadow-lg"          >            <span              *ngIf="                offer.discount_type === \'percentage\' || !offer.discount_type              "              >-{{ offer.discountPercentage }}%</span            >            <span *ngIf="offer.discount_type === \'fixed_amount\'"              >{{ offer.discount_value | currency: "EUR" : "symbol" : "1.0-2" }}              {{ "hero.off" | translate }}</span            >          </div>        </div>        <!-- Offer Info -->        <div>          <div class="mb-6">            <h1 class="text-5xl lg:text-6xl font-bold mb-6 font-[\'Poppins\']">              {{ offer.title }}            </h1>            <p class="text-xl lg:text-2xl text-white/90 font-[\'DM_Sans\']">              {{ offer.description || offer.shortDescription }}            </p>          </div>          <!-- Pricing -->          <div            class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8"            *ngIf="(relatedProducts$ | async)?.length"          >            <div class="flex items-center gap-4 mb-4">              <span class="text-2xl text-white/70 line-through font-medium">                {{                  getTotalOriginalPrice() | currency: "EUR" : "symbol" : "1.2-2"                }}              </span>              <span class="text-4xl font-bold text-white">                {{                  calculateTotalDiscountedPrice(offer)                    | currency: "EUR" : "symbol" : "1.2-2"                }}              </span>            </div>            <div class="text-lg text-white/90">              {{ "offers.youSave" | translate }}              {{                getTotalSavings(offer) | currency: "EUR" : "symbol" : "1.2-2"              }}            </div>          </div>          <!-- Coupon Code -->          <div            *ngIf="offer.couponCode"            class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-6"          >            <div class="flex items-center justify-between">              <div>                <span class="text-sm text-white/70"                  >{{ "offers.couponCode" | translate }}:</span                >                <div class="text-xl font-bold text-white font-mono">                  {{ offer.couponCode }}                </div>              </div>              <button                (click)="copyCouponCode(offer.couponCode!)"                class="bg-white text-solar-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"              >                {{                  copiedCoupon                    ? ("offers.copied" | translate)                    : ("offers.copy" | translate)                }}              </button>            </div>          </div>          <!-- Offer Validity -->          <div            *ngIf="offer.endDate"            class="bg-accent-500/20 border border-accent-300/30 rounded-xl p-4 mb-6"          >            <div class="flex items-center gap-2">              <svg                class="w-5 h-5 text-accent-300"                fill="currentColor"                viewBox="0 0 20 20"              >                <path                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V5z"                />              </svg>              <span class="text-white font-semibold">                {{ "offers.expires" | translate }}:                {{ offer.endDate | date: "medium" }}              </span>            </div>          </div>        </div>      </div>    </div>  </div>  <!-- Related Products Section -->  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">    <h2 class="text-3xl font-bold text-gray-900 mb-8 font-[\'Poppins\']">      {{ "offers.productsIncluded" | translate }}    </h2>    <!-- Add All to Cart Button -->    <div *ngIf="(relatedProducts$ | async)?.length" class="mb-8">      <button        (click)="addAllToCart()"        class="w-full md:w-auto px-8 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-[\'DM_Sans\'] mb-6"      >        {{ "offers.addAllToCart" | translate }}      </button>    </div>    <!-- Product Cards -->    <div      *ngIf="relatedProducts$ | async as products"      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"    >      <div        *ngFor="let product of products; trackBy: trackByProductId"        class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"      >        <!-- Product Image -->        <div class="relative h-64 bg-gray-50 overflow-hidden">          <img            [src]="getProductImage(product)"            [alt]="product.name"            class="w-full h-full object-cover"          />          <!-- Offer Badge -->          <div            class="absolute top-4 left-4 bg-solar-500 text-white text-sm font-bold px-3 py-2 rounded-full"          >            {{ "offers.specialOffer" | translate }}          </div>        </div>        <!-- Product Info -->        <div class="p-6">          <h3 class="text-xl font-bold text-gray-900 mb-2 font-[\'Poppins\']">            {{ product.name }}          </h3>          <p class="text-gray-600 text-sm mb-4 font-[\'DM_Sans\'] line-clamp-2">            {{ product.description }}          </p>          <!-- Product Price -->          <div class="flex items-center gap-3 mb-4">            <span class="text-lg text-gray-500 line-through">              {{ product.price | currency: "EUR" : "symbol" : "1.2-2" }}            </span>            <span class="text-xl font-bold text-solar-600">              {{                calculateDiscountedPrice(product.price, offer, product)                  | currency: "EUR" : "symbol" : "1.2-2"              }}            </span>          </div>          <!-- Individual Product Discount Badge (Only if product has specific discount) -->          <div *ngIf="hasProductSpecificDiscount(product)" class="mb-3">            <span              class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded"            >              <span *ngIf="product.discount_type === \'percentage\'"                >{{ product.discount_percentage }}%                {{ "hero.off" | translate }}</span              >              <span *ngIf="product.discount_type === \'fixed_amount\'"                >{{                  product.discount_amount | currency: "EUR" : "symbol" : "1.0-2"                }}                {{ "hero.off" | translate }}</span              >            </span>          </div>          <!-- Add to Cart -->          <div class="space-y-3">            <app-add-to-cart-button              [availability]="product.availability"              [productId]="product.id"              [quantity]="1"              buttonText="{{ \'offers.addToCart\' | translate }}"              [fullWidth]="true"              size="md"              [offerId]="!isBundle ? offer.id : undefined"              [offerName]="!isBundle ? offer.title : undefined"              [offerType]="                !isBundle                  ? product.discount_type === \'fixed_amount\'                    ? \'fixed_amount\'                    : \'percentage\'                  : undefined              "              [offerDiscount]="                !isBundle                  ? product.discount_type === \'fixed_amount\'                    ? product.discount_amount                    : product.discount_percentage                  : undefined              "              [offerOriginalPrice]="!isBundle ? product.price : undefined"              [offerValidUntil]="!isBundle ? offer.endDate : undefined"              [individualDiscount]="                !isBundle                  ? product.discount_type === \'fixed_amount\'                    ? product.discount_amount                    : product.discount_percentage                  : undefined              "              [individualDiscountType]="                !isBundle ? product.discount_type : undefined              "            >            </app-add-to-cart-button>            <button              (click)="navigateToProduct(product.id)"              class="w-full px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold font-[\'DM_Sans\']"            >              {{ "offers.viewDetails" | translate }}            </button>          </div>        </div>      </div>    </div>    <!-- No Products Message -->    <div      *ngIf="        (relatedProducts$ | async) === null ||        (relatedProducts$ | async)?.length === 0      "      class="text-center py-12"    >      <div class="bg-white rounded-2xl p-12 shadow-lg">        <div class="text-gray-400 mb-4">          <svg            class="w-16 h-16 mx-auto"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"            />          </svg>        </div>        <h3 class="text-xl font-bold text-gray-900 mb-2 font-[\'Poppins\']">          {{ "offers.generalOffer" | translate }}        </h3>        <p class="text-gray-600 font-[\'DM_Sans\']">          {{ "offers.generalOfferDescription" | translate }}        </p>        <button          (click)="navigateToProducts()"          class="mt-6 px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors font-[\'DM_Sans\']"        >          {{ "offers.browseProducts" | translate }}        </button>      </div>    </div>  </div>  <!-- Offer Details Section -->  <div class="bg-white py-16">    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">        <!-- Offer Description -->        <div class="lg:col-span-2">          <h2 class="text-3xl font-bold text-gray-900 mb-6 font-[\'Poppins\']">            {{ "offers.aboutThisOffer" | translate }}          </h2>          <div class="prose prose-lg max-w-none">            <p class="text-gray-600 leading-relaxed font-[\'DM_Sans\']">              {{                offer.description || ("offers.defaultDescription" | translate)              }}            </p>          </div>        </div>      </div>    </div>  </div></div><!-- Loading Template --><ng-template #loadingTemplate>  <div class="min-h-screen bg-gray-50 flex items-center justify-center">    <div class="text-center">      <div        class="animate-spin rounded-full h-12 w-12 border-4 border-solar-600 border-t-transparent mx-auto mb-4"      ></div>      <p class="text-gray-600 font-[\'DM_Sans\']">        {{ "hero.loading" | translate }}      </p>    </div>  </div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'OfferDetailsComponent-1'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'OfferDetailsComponent-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

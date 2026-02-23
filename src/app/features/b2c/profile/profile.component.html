@@ -227,7 +227,7 @@
           *ngIf="activeTab === 'user-info'"
           class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"
         >
-          <div class="mb-6">
+          <div class="mb-12">
             <h2
               class="text-2xl font-semibold text-gray-900 font-['Poppins'] mb-2"
             >
@@ -243,42 +243,6 @@
             (ngSubmit)="updateUserInfo()"
             class="space-y-6"
           >
-            <!-- Profile Picture -->
-            <div class="flex items-center space-x-6">
-              <div
-                class="w-20 h-20 rounded-full overflow-hidden bg-gray-200 flex items-center justify-center"
-              >
-                <img
-                  *ngIf="(currentUser$ | async)?.avatar; else defaultAvatar"
-                  [src]="(currentUser$ | async)?.avatar"
-                  [alt]="(currentUser$ | async)?.firstName"
-                  class="w-full h-full object-cover"
-                />
-                <ng-template #defaultAvatar>
-                  <svg
-                    class="w-8 h-8 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
-                    />
-                  </svg>
-                </ng-template>
-              </div>
-              <div>
-                <button
-                  type="button"
-                  class="px-4 py-2 bg-solar-500 text-white rounded-lg font-['DM_Sans'] font-medium hover:bg-solar-700 transition-colors"
-                >
-                  {{ "profile.changePhoto" | translate }}
-                </button>
-                <p class="text-sm text-gray-600 mt-1 font-['DM_Sans']">
-                  {{ "profile.photoRequirements" | translate }}
-                </p>
-              </div>
-            </div>
-
             <!-- Name Fields -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

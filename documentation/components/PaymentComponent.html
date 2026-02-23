@@ -1,0 +1,2306 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PaymentComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/checkout/steps/payment/payment.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-payment</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./payment.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./payment.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cartSummary$" >cartSummary$</a>
+                            </li>
+                            <li>
+                                <a href="#creditCardPaymentEnabled" >creditCardPaymentEnabled</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser$" >currentUser$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#isCompanyUser$" >isCompanyUser$</a>
+                            </li>
+                            <li>
+                                <a href="#isProcessing" >isProcessing</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#monriPaymentService" >monriPaymentService</a>
+                            </li>
+                            <li>
+                                <a href="#orderCreationError$" >orderCreationError$</a>
+                            </li>
+                            <li>
+                                <a href="#orderingEnabled" >orderingEnabled</a>
+                            </li>
+                            <li>
+                                <a href="#orderNumber" >orderNumber</a>
+                            </li>
+                            <li>
+                                <a href="#paymentForm" >paymentForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#settingsService" >settingsService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscriptions" >subscriptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createGuestOrder" >createGuestOrder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createOrder" >createOrder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#createOrderWithUser" >createOrderWithUser</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleOrderSuccess" >handleOrderSuccess</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processCartItems" >processCartItems</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#processMonriPayment" >processMonriPayment</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:56</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createGuestOrder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createGuestOrder</b></span>
+                        <a href="#createGuestOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createGuestOrder()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createOrder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createOrder</b></span>
+                        <a href="#createOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createOrder()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createOrderWithUser"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createOrderWithUser</b></span>
+                        <a href="#createOrderWithUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createOrderWithUser(currentUser: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="241"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:241</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>currentUser</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="436"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:436</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleOrderSuccess"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleOrderSuccess</b></span>
+                        <a href="#handleOrderSuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleOrderSuccess()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="413"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:413</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="432"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:432</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processCartItems"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>processCartItems</b></span>
+                        <a href="#processCartItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processCartItems(currentUser: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, cartItems: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:254</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>currentUser</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processMonriPayment"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>processMonriPayment</b></span>
+                        <a href="#processMonriPayment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processMonriPayment()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="339"
+                                    class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:339</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Process Monri payment for credit card transactions</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cartSummary$"></a>
+                    <span class="name">
+                        <span ><b>cartSummary$</b></span>
+                        <a href="#cartSummary$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="creditCardPaymentEnabled"></a>
+                    <span class="name">
+                        <span ><b>creditCardPaymentEnabled</b></span>
+                        <a href="#creditCardPaymentEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser$"></a>
+                    <span class="name">
+                        <span ><b>currentUser$</b></span>
+                        <a href="#currentUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCompanyUser$"></a>
+                    <span class="name">
+                        <span ><b>isCompanyUser$</b></span>
+                        <a href="#isCompanyUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;boolean&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isProcessing"></a>
+                    <span class="name">
+                        <span ><b>isProcessing</b></span>
+                        <a href="#isProcessing"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="monriPaymentService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>monriPaymentService</b></span>
+                        <a href="#monriPaymentService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MonriPaymentService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderCreationError$"></a>
+                    <span class="name">
+                        <span ><b>orderCreationError$</b></span>
+                        <a href="#orderCreationError$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderingEnabled"></a>
+                    <span class="name">
+                        <span ><b>orderingEnabled</b></span>
+                        <a href="#orderingEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderNumber"></a>
+                    <span class="name">
+                        <span ><b>orderNumber</b></span>
+                        <a href="#orderNumber"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paymentForm"></a>
+                    <span class="name">
+                        <span ><b>paymentForm</b></span>
+                        <a href="#paymentForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="settingsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>settingsService</b></span>
+                        <a href="#settingsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SettingsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscriptions"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscriptions</b></span>
+                        <a href="#subscriptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subscription()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/b2c/checkout/steps/payment/payment.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable, BehaviorSubject, Subscription } from &#x27;rxjs&#x27;;
+import { take, map, distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
+import { selectCurrentUser } from &#x27;../../../../../core/auth/store/auth.selectors&#x27;;
+import { SupabaseService } from &#x27;../../../../../services/supabase.service&#x27;;
+import { TranslatePipe } from &#x27;../../../../../shared/pipes/translate.pipe&#x27;;
+import { User } from &#x27;../../../../../shared/models/user.model&#x27;;
+import * as CartActions from &#x27;../../../cart/store/cart.actions&#x27;;
+import * as OrdersActions from &#x27;../../../../admin/orders/store/orders.actions&#x27;;
+import {
+  selectB2COrderCreated,
+  selectB2COrderError,
+} from &#x27;../../../../admin/orders/store/orders.selectors&#x27;;
+import { TranslationService } from &#x27;../../../../../shared/services/translation.service&#x27;;
+import {
+  MonriPaymentService,
+  MonriPaymentRequest,
+} from &#x27;../../../../../shared/services/monri-payment.service&#x27;;
+import * as CartSelectors from &#x27;../../../cart/store/cart.selectors&#x27;;
+import { SettingsService } from &#x27;../../../../../shared/services/settings.service&#x27;;
+
+@Component({
+  selector: &#x27;app-payment&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+  templateUrl: &#x27;./payment.component.html&#x27;,
+  styleUrls: [&#x27;./payment.component.scss&#x27;],
+})
+export class PaymentComponent implements OnInit, OnDestroy {
+  private fb &#x3D; inject(FormBuilder);
+  private router &#x3D; inject(Router);
+  private store &#x3D; inject(Store);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private translationService &#x3D; inject(TranslationService);
+  private monriPaymentService &#x3D; inject(MonriPaymentService);
+  private settingsService &#x3D; inject(SettingsService);
+
+  paymentForm: FormGroup;
+  isProcessing &#x3D; false;
+  orderNumber &#x3D; &#x27;&#x27;;
+  currentUser$: Observable&lt;User | null&gt;;
+  isCompanyUser$: Observable&lt;boolean&gt;;
+  orderCreationError$ &#x3D; new BehaviorSubject&lt;string | null&gt;(null);
+  cartSummary$: Observable&lt;any&gt;;
+  private subscriptions &#x3D; new Subscription();
+  creditCardPaymentEnabled &#x3D; false; // Default to false until settings are loaded
+  orderingEnabled &#x3D; true; // Default to true until settings are loaded
+
+  constructor() {
+    this.currentUser$ &#x3D; this.store.select(selectCurrentUser);
+    this.isCompanyUser$ &#x3D; this.currentUser$.pipe(
+      map((user: User | null) &#x3D;&gt; user?.companyId !&#x3D; null),
+    );
+    this.cartSummary$ &#x3D; this.store.select(CartSelectors.selectCartSummary);
+
+    // Subscribe to settings to check if credit card payment and ordering are enabled
+    this.subscriptions.add(
+      this.settingsService.settings$.subscribe((settings) &#x3D;&gt; {
+        const previousCreditCardValue &#x3D; this.creditCardPaymentEnabled;
+        this.creditCardPaymentEnabled &#x3D; settings.credit_card_payment_enabled;
+        this.orderingEnabled &#x3D; settings.ordering_enabled;
+
+        console.log(&#x27;[Payment] Settings updated:&#x27;, {
+          previousCreditCard: previousCreditCardValue,
+          currentCreditCard: this.creditCardPaymentEnabled,
+          orderingEnabled: this.orderingEnabled,
+          settings,
+        });
+
+        // If credit card is now disabled and it was selected, switch to cash on delivery
+        if (
+          !this.creditCardPaymentEnabled &amp;&amp;
+          this.paymentForm?.get(&#x27;paymentMethod&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;credit_card&#x27;
+        ) {
+          this.paymentForm.patchValue({ paymentMethod: &#x27;cash_on_delivery&#x27; });
+          console.log(
+            &#x27;[Payment] Switched payment method to cash_on_delivery because credit card is disabled&#x27;,
+          );
+        }
+      }),
+    );
+
+    this.paymentForm &#x3D; this.fb.group({
+      paymentMethod: [&#x27;cash_on_delivery&#x27;, [Validators.required]],
+      isB2BOrder: [false],
+      acceptTerms: [false, [Validators.requiredTrue]],
+    });
+  }
+
+  ngOnInit(): void {
+    // Subscribe to order creation success
+    this.subscriptions.add(
+      this.store
+        .select(selectB2COrderCreated)
+        .pipe(distinctUntilChanged())
+        .subscribe((order) &#x3D;&gt; {
+          console.log(
+            &#x27;Order state changed in payment component:&#x27;,
+            order,
+            &#x27;isProcessing:&#x27;,
+            this.isProcessing,
+          );
+          if (order &amp;&amp; this.isProcessing) {
+            console.log(&#x27;Order created successfully:&#x27;, order);
+            this.isProcessing &#x3D; false;
+            this.orderNumber &#x3D; order.orderNumber;
+            this.handleOrderSuccess();
+          }
+        }),
+    );
+
+    // Subscribe to order creation errors
+    this.subscriptions.add(
+      this.store
+        .select(selectB2COrderError)
+        .pipe(distinctUntilChanged())
+        .subscribe((error) &#x3D;&gt; {
+          console.log(
+            &#x27;Error state changed in payment component:&#x27;,
+            error,
+            &#x27;isProcessing:&#x27;,
+            this.isProcessing,
+          );
+          if (error &amp;&amp; this.isProcessing) {
+            console.error(&#x27;Order creation failed:&#x27;, error);
+            this.isProcessing &#x3D; false;
+
+            // Check for specific error types
+            if (error.includes(&#x27;Insufficient stock&#x27;)) {
+              this.orderCreationError$.next(
+                this.translationService.translate(
+                  &#x27;checkout.oneOrMoreItemsUnavailable&#x27;,
+                ),
+              );
+            } else {
+              this.orderCreationError$.next(
+                &#x27;Error creating order. Please try again.&#x27;,
+              );
+            }
+          }
+        }),
+    );
+  }
+
+  async onSubmit() {
+    if (this.paymentForm.invalid) {
+      Object.keys(this.paymentForm.controls).forEach((key) &#x3D;&gt; {
+        this.paymentForm.get(key)?.markAsTouched();
+      });
+      return;
+    }
+
+    this.isProcessing &#x3D; true;
+    this.orderCreationError$.next(null); // Clear any previous errors
+
+    // Clear any previous order state
+    this.store.dispatch(OrdersActions.clearB2COrderState());
+
+    const paymentMethod &#x3D; this.paymentForm.get(&#x27;paymentMethod&#x27;)?.value;
+
+    if (paymentMethod &#x3D;&#x3D;&#x3D; &#x27;credit_card&#x27;) {
+      await this.processMonriPayment();
+    } else {
+      await this.createOrder();
+    }
+  }
+
+  private async createOrder() {
+    // Get current user (optional for guest checkout)
+    const currentUser &#x3D; await this.store
+      .select(selectCurrentUser)
+      .pipe(take(1))
+      .toPromise();
+
+    // If no authenticated user, proceed with guest checkout
+    if (!currentUser) {
+      try {
+        const session &#x3D; await this.supabaseService.getSession();
+
+        if (session?.user) {
+          // Use authenticated user data
+          const sessionUser &#x3D; {
+            id: session.user.id,
+            email: session.user.email || &#x27;&#x27;,
+            firstName: session.user.user_metadata?.firstName || &#x27;Customer&#x27;,
+            lastName: session.user.user_metadata?.lastName || &#x27;&#x27;,
+            phone: session.user.user_metadata?.phone || &#x27;&#x27;,
+          };
+          return this.createOrderWithUser(sessionUser);
+        } else {
+          // Proceed with guest checkout
+          return this.createGuestOrder();
+        }
+      } catch (sessionError) {
+        console.warn(
+          &#x27;Session error, proceeding with guest checkout:&#x27;,
+          sessionError,
+        );
+        return this.createGuestOrder();
+      }
+    }
+
+    return this.createOrderWithUser(currentUser);
+  }
+
+  private async createGuestOrder() {
+    // Get shipping info from the shipping step
+    const shippingInfo &#x3D; JSON.parse(
+      localStorage.getItem(&#x27;shippingInfo&#x27;) || &#x27;{}&#x27;,
+    );
+
+    if (
+      !shippingInfo.email ||
+      !shippingInfo.firstName ||
+      !shippingInfo.lastName
+    ) {
+      throw new Error(&#x27;Shipping information is required for guest checkout&#x27;);
+    }
+
+    // Create guest user object from shipping info
+    const guestUser &#x3D; {
+      id: null, // No user ID for guest orders
+      email: shippingInfo.email,
+      firstName: shippingInfo.firstName,
+      lastName: shippingInfo.lastName,
+      phone: shippingInfo.phone || &#x27;&#x27;,
+    };
+
+    return this.createOrderWithUser(guestUser);
+  }
+
+  private async createOrderWithUser(currentUser: any) {
+    // Get cart items from localStorage that was saved during checkout flow
+    const cartItems &#x3D; JSON.parse(localStorage.getItem(&#x27;checkoutItems&#x27;) || &#x27;[]&#x27;);
+
+    console.log(&#x27;Cart items for order processing:&#x27;, cartItems);
+
+    if (!cartItems.length) {
+      throw new Error(&#x27;No items in cart for checkout&#x27;);
+    }
+
+    return this.processCartItems(currentUser, cartItems);
+  }
+
+  private async processCartItems(currentUser: any, cartItems: any[]) {
+    // Calculate totals from CartItem objects
+    const subtotal &#x3D; cartItems.reduce(
+      (sum: number, item: any) &#x3D;&gt; sum + item.price * item.quantity,
+      0,
+    );
+    const total &#x3D; subtotal; // No tax or shipping
+
+    // Generate order number
+    this.orderNumber &#x3D; &#x27;ORD-&#x27; + Date.now();
+
+    // Get shipping info from localStorage (from shipping step)
+    const shippingInfo &#x3D; JSON.parse(
+      localStorage.getItem(&#x27;shippingInfo&#x27;) || &#x27;{}&#x27;,
+    );
+
+    // Create shipping and billing address objects
+    const shippingAddress &#x3D; {
+      firstName: shippingInfo.firstName || currentUser.firstName || &#x27;&#x27;,
+      lastName: shippingInfo.lastName || currentUser.lastName || &#x27;&#x27;,
+      addressLine1: shippingInfo.address || &#x27;&#x27;,
+      addressLine2: shippingInfo.addressLine2 || null,
+      city: shippingInfo.city || &#x27;&#x27;,
+      state: shippingInfo.state || &#x27;&#x27;,
+      postalCode: shippingInfo.postalCode || &#x27;&#x27;,
+      country: shippingInfo.country || &#x27;&#x27;,
+      phone: shippingInfo.phone || currentUser.phone || &#x27;&#x27;,
+    };
+
+    // Get B2B flag from form
+    const isB2BOrder &#x3D; this.paymentForm.get(&#x27;isB2BOrder&#x27;)?.value || false;
+
+    // Get payment method from form
+    const paymentMethod &#x3D;
+      this.paymentForm.get(&#x27;paymentMethod&#x27;)?.value || &#x27;cash_on_delivery&#x27;;
+
+    // Create order object
+    const orderData &#x3D; {
+      order_number: this.orderNumber,
+      user_id: currentUser.id, // Will be null for guest orders
+      customer_email: currentUser.email,
+      customer_name:
+        &#x60;${currentUser.firstName || &#x27;&#x27;} ${currentUser.lastName || &#x27;&#x27;}&#x60;.trim(),
+      customer_phone: shippingInfo.phone || currentUser.phone,
+
+      // Amounts
+      subtotal: subtotal,
+      tax_amount: 0,
+      shipping_cost: 0,
+      discount_amount: 0,
+      total_amount: total,
+
+      // Order details
+      status: &#x27;pending&#x27; as const,
+      payment_status: paymentMethod &#x3D;&#x3D;&#x3D; &#x27;credit_card&#x27; ? &#x27;pending&#x27; : &#x27;pending&#x27;,
+      shipping_status: &#x27;not_shipped&#x27; as const,
+      payment_method: paymentMethod as &#x27;cash_on_delivery&#x27; | &#x27;credit_card&#x27;,
+      is_b2b: isB2BOrder,
+
+      // Addresses as JSON
+      shipping_address: shippingAddress,
+      billing_address: shippingAddress, // Same as shipping for now
+
+      // Timestamps
+      order_date: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    // Dispatch NgRx action to create order with stock management
+    console.log(&#x27;Dispatching createB2COrder action with data:&#x27;, {
+      orderData,
+      cartItems,
+    });
+    this.store.dispatch(
+      OrdersActions.createB2COrder({
+        orderData,
+        cartItems,
+      }),
+    );
+  }
+
+  /**
+   * Process Monri payment for credit card transactions
+   */
+  private async processMonriPayment() {
+    try {
+      // Get current user
+      const currentUser &#x3D; await this.store
+        .select(selectCurrentUser)
+        .pipe(take(1))
+        .toPromise();
+
+      // Get cart summary
+      const cartSummary &#x3D; await this.cartSummary$.pipe(take(1)).toPromise();
+
+      if (!cartSummary) {
+        throw new Error(&#x27;Cart summary not available&#x27;);
+      }
+
+      // Get shipping info
+      const shippingInfo &#x3D; JSON.parse(
+        localStorage.getItem(&#x27;shippingInfo&#x27;) || &#x27;{}&#x27;,
+      );
+
+      // Generate order number for payment
+      this.orderNumber &#x3D; &#x27;ORD-&#x27; + Date.now();
+
+      // Prepare payment data for Monri
+      const paymentData: MonriPaymentRequest &#x3D; {
+        order_number: this.orderNumber,
+        amount: this.monriPaymentService.formatAmountToCents(
+          cartSummary.subtotal,
+        ), // Convert to cents
+        currency: &#x27;EUR&#x27;,
+        order_info: &#x60;Solar Shop Order ${this.orderNumber}&#x60;,
+        ch_full_name:
+          &#x60;${shippingInfo.firstName || &#x27;&#x27;} ${shippingInfo.lastName || &#x27;&#x27;}&#x60;.trim(),
+        ch_address: shippingInfo.address || &#x27;&#x27;,
+        ch_city: shippingInfo.city || &#x27;&#x27;,
+        ch_zip: shippingInfo.postalCode || &#x27;&#x27;,
+        ch_country: shippingInfo.country || &#x27;HR&#x27;,
+        ch_phone: shippingInfo.phone || &#x27;&#x27;,
+        ch_email: currentUser?.email || shippingInfo.email || &#x27;&#x27;,
+        language: &#x27;hr&#x27;,
+        transaction_type: &#x27;purchase&#x27;,
+      };
+
+      // Store order data temporarily for after payment completion
+      localStorage.setItem(
+        &#x27;pendingOrderData&#x27;,
+        JSON.stringify({
+          currentUser: currentUser || {
+            id: null,
+            email: shippingInfo.email,
+            firstName: shippingInfo.firstName,
+            lastName: shippingInfo.lastName,
+            phone: shippingInfo.phone,
+          },
+          orderNumber: this.orderNumber,
+          paymentMethod: &#x27;credit_card&#x27;,
+        }),
+      );
+
+      // Create form parameters and submit to Monri
+      const formParams &#x3D;
+        await this.monriPaymentService.createPaymentRequest(paymentData);
+
+      // Submit payment form to Monri
+      this.monriPaymentService.submitPaymentForm(formParams);
+    } catch (error) {
+      console.error(&#x27;Error processing Monri payment:&#x27;, error);
+      this.isProcessing &#x3D; false;
+      this.orderCreationError$.next(
+        &#x27;Error processing payment. Please try again.&#x27;,
+      );
+    }
+  }
+
+  private handleOrderSuccess() {
+    console.log(&#x27;Handling order success, orderNumber:&#x27;, this.orderNumber);
+
+    // Clear cart - localStorage and NgRx store
+    localStorage.removeItem(&#x27;checkoutItems&#x27;);
+    localStorage.removeItem(&#x27;shippingInfo&#x27;);
+
+    // Dispatch order completion action which will automatically clear cart
+    this.store.dispatch(
+      CartActions.orderCompleted({
+        orderId: &#x27;&#x27;, // Will be filled by the effect
+        orderNumber: this.orderNumber,
+      }),
+    );
+
+    // Clear the order state after success
+    this.store.dispatch(OrdersActions.clearB2COrderState());
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
+  goBack() {
+    this.router.navigate([&#x27;/blagajna/dostava&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+  &lt;h2 class&#x3D;&quot;text-2xl font-bold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+    {{ &quot;checkout.paymentMethod&quot; | translate }}
+  &lt;/h2&gt;
+
+  &lt;!-- Ordering Disabled Notice --&gt;
+  &lt;div
+    *ngIf&#x3D;&quot;!orderingEnabled&quot;
+    class&#x3D;&quot;mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+      &lt;svg
+        class&#x3D;&quot;w-6 h-6 text-amber-600 flex-shrink-0&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;div&gt;
+        &lt;h4 class&#x3D;&quot;text-lg font-semibold text-amber-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;checkout.orderingDisabled&quot; | translate }}
+        &lt;/h4&gt;
+        &lt;p class&#x3D;&quot;text-sm text-amber-800 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          {{ &quot;checkout.orderingDisabledDescription&quot; | translate }}
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;form [formGroup]&#x3D;&quot;paymentForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+    &lt;!-- Payment Method Selection --&gt;
+    &lt;div class&#x3D;&quot;mb-8&quot;&gt;
+      &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+        &lt;!-- Credit Card (Conditionally shown based on settings) --&gt;
+        &lt;label
+          *ngIf&#x3D;&quot;creditCardPaymentEnabled&quot;
+          class&#x3D;&quot;flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer&quot;
+        &gt;
+          &lt;input
+            type&#x3D;&quot;radio&quot;
+            name&#x3D;&quot;paymentMethod&quot;
+            value&#x3D;&quot;credit_card&quot;
+            formControlName&#x3D;&quot;paymentMethod&quot;
+            class&#x3D;&quot;text-blue-600 focus:ring-blue-600&quot;
+          /&gt;
+          &lt;div class&#x3D;&quot;ml-3 flex-1 flex items-center justify-between&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 text-blue-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;font-medium text-blue-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{
+                &quot;checkout.creditCard&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/label&gt;
+
+        &lt;!-- Pay on Delivery --&gt;
+        &lt;label
+          class&#x3D;&quot;flex items-center p-4 border-2 border-green-200 bg-green-50 rounded-lg cursor-pointer&quot;
+        &gt;
+          &lt;input
+            type&#x3D;&quot;radio&quot;
+            name&#x3D;&quot;paymentMethod&quot;
+            value&#x3D;&quot;cash_on_delivery&quot;
+            formControlName&#x3D;&quot;paymentMethod&quot;
+            class&#x3D;&quot;text-green-600 focus:ring-green-600&quot;
+            checked
+          /&gt;
+          &lt;div class&#x3D;&quot;ml-3 flex-1 flex items-center justify-between&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 text-green-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;font-medium text-green-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{
+                &quot;checkout.payOnDelivery&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;svg
+              class&#x3D;&quot;w-6 h-6 text-green-600&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M5 13l4 4L19 7&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Credit Card Notice --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;paymentForm.get(&#x27;paymentMethod&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;credit_card&#x27;&quot;
+        class&#x3D;&quot;mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;w-6 h-6 text-blue-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;div&gt;
+            &lt;h4
+              class&#x3D;&quot;text-lg font-semibold text-blue-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ &quot;checkout.securePayment&quot; | translate }}
+            &lt;/h4&gt;
+            &lt;p class&#x3D;&quot;text-sm text-blue-800 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ &quot;checkout.securePaymentDescription&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;p
+        class&#x3D;&quot;text-sm text-gray-600 mt-3 font-[&#x27;DM_Sans&#x27;]&quot;
+        *ngIf&#x3D;&quot;paymentForm.get(&#x27;paymentMethod&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;cash_on_delivery&#x27;&quot;
+      &gt;
+        {{ &quot;checkout.payOnDeliveryDescription&quot; | translate }}
+      &lt;/p&gt;
+      &lt;p
+        class&#x3D;&quot;text-sm text-gray-600 mt-3 font-[&#x27;DM_Sans&#x27;]&quot;
+        *ngIf&#x3D;&quot;paymentForm.get(&#x27;paymentMethod&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;credit_card&#x27;&quot;
+      &gt;
+        {{ &quot;checkout.creditCardDescription&quot; | translate }}
+      &lt;/p&gt;
+
+      &lt;!-- Guest Checkout Notice (only show for non-authenticated users) --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;(currentUser$ | async) &#x3D;&#x3D;&#x3D; null&quot;
+        class&#x3D;&quot;mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;w-5 h-5 text-blue-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;p class&#x3D;&quot;text-sm text-blue-800 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            &lt;span class&#x3D;&quot;font-medium&quot;
+              &gt;{{ &quot;checkout.guestCheckout&quot; | translate }}:&lt;/span
+            &gt;
+            {{ &quot;checkout.guestCheckoutDescription&quot; | translate }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- B2B Order Option (only show for company users) --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;isCompanyUser$ | async&quot;
+      class&#x3D;&quot;mb-6 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg&quot;
+    &gt;
+      &lt;label class&#x3D;&quot;flex items-start space-x-3 cursor-pointer&quot;&gt;
+        &lt;input
+          type&#x3D;&quot;checkbox&quot;
+          formControlName&#x3D;&quot;isB2BOrder&quot;
+          class&#x3D;&quot;mt-1 text-purple-600 focus:ring-purple-600 rounded&quot;
+        /&gt;
+        &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+            &lt;svg
+              class&#x3D;&quot;w-5 h-5 text-purple-600&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4&quot;
+              /&gt;
+            &lt;/svg&gt;
+            &lt;span class&#x3D;&quot;font-medium text-purple-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{
+              &quot;checkout.businessOrder&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span
+              class&#x3D;&quot;px-2 py-1 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full&quot;
+              &gt;B2B&lt;/span
+            &gt;
+          &lt;/div&gt;
+          &lt;p class&#x3D;&quot;mt-1 text-sm text-purple-700 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;checkout.businessOrderDescription&quot; | translate }}
+          &lt;/p&gt;
+          &lt;div class&#x3D;&quot;mt-2 flex items-center space-x-4 text-xs text-purple-600&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-1&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-3 h-3&quot; fill&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;checkout.bulkDiscounts&quot; | translate }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-1&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-3 h-3&quot; fill&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;checkout.prioritySupport&quot; | translate }}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex items-center space-x-1&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-3 h-3&quot; fill&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;checkout.customInvoicing&quot; | translate }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Terms and Conditions --&gt;
+    &lt;div class&#x3D;&quot;mb-8&quot;&gt;
+      &lt;label class&#x3D;&quot;flex items-start space-x-3&quot;&gt;
+        &lt;input
+          type&#x3D;&quot;checkbox&quot;
+          formControlName&#x3D;&quot;acceptTerms&quot;
+          class&#x3D;&quot;mt-1 text-blue-600 focus:ring-blue-600 rounded&quot;
+        /&gt;
+        &lt;span class&#x3D;&quot;text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          {{ &quot;checkout.termsAndConditions&quot; | translate }}
+          &lt;a href&#x3D;&quot;uvjeti&quot; class&#x3D;&quot;text-blue-600 hover:underline&quot;&gt;{{
+            &quot;checkout.terms&quot; | translate
+          }}&lt;/a&gt;
+          {{ &quot;checkout.and&quot; | translate }}
+          &lt;a href&#x3D;&quot;/privatnost&quot; class&#x3D;&quot;text-blue-600 hover:underline&quot;&gt;{{
+            &quot;checkout.privacyPolicy&quot; | translate
+          }}&lt;/a&gt;
+          *
+        &lt;/span&gt;
+      &lt;/label&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;
+          paymentForm.get(&#x27;acceptTerms&#x27;)?.invalid &amp;&amp;
+          paymentForm.get(&#x27;acceptTerms&#x27;)?.touched
+        &quot;
+        class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+      &gt;
+        {{ &quot;checkout.termsAndConditionsRequired&quot; | translate }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Error Message --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;orderCreationError$ | async as error&quot;
+      class&#x3D;&quot;mb-6 p-4 bg-red-50 border border-red-200 rounded-lg&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+        &lt;svg
+          class&#x3D;&quot;w-5 h-5 text-red-600&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+          /&gt;
+        &lt;/svg&gt;
+        &lt;p class&#x3D;&quot;text-sm text-red-800 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{ error }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Navigation Buttons --&gt;
+    &lt;div class&#x3D;&quot;flex space-x-4 pt-6 border-t border-gray-200&quot;&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        (click)&#x3D;&quot;goBack()&quot;
+        class&#x3D;&quot;flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium font-[&#x27;DM_Sans&#x27;]&quot;
+      &gt;
+        {{ &quot;checkout.backStep&quot; | translate }} {{ &quot;checkout.step2&quot; | translate }}
+      &lt;/button&gt;
+      &lt;button
+        type&#x3D;&quot;submit&quot;
+        [disabled]&#x3D;&quot;paymentForm.invalid || isProcessing || !orderingEnabled&quot;
+        class&#x3D;&quot;flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold font-[&#x27;DM_Sans&#x27;] disabled:opacity-50 disabled:cursor-not-allowed&quot;
+      &gt;
+        &lt;span *ngIf&#x3D;&quot;!isProcessing&quot;&gt;{{
+          &quot;checkout.completeOrder&quot; | translate
+        }}&lt;/span&gt;
+        &lt;span *ngIf&#x3D;&quot;isProcessing&quot; class&#x3D;&quot;flex items-center justify-center&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;animate-spin -ml-1 mr-3 h-5 w-5 text-white&quot;
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            fill&#x3D;&quot;none&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;circle
+              class&#x3D;&quot;opacity-25&quot;
+              cx&#x3D;&quot;12&quot;
+              cy&#x3D;&quot;12&quot;
+              r&#x3D;&quot;10&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              stroke-width&#x3D;&quot;4&quot;
+            &gt;&lt;/circle&gt;
+            &lt;path
+              class&#x3D;&quot;opacity-75&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+            &gt;&lt;/path&gt;
+          &lt;/svg&gt;
+          {{ &quot;checkout.processing&quot; | translate }}
+        &lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./payment.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">  <h2 class="text-2xl font-bold text-gray-900 mb-6 font-[\'Poppins\']">    {{ "checkout.paymentMethod" | translate }}  </h2>  <!-- Ordering Disabled Notice -->  <div    *ngIf="!orderingEnabled"    class="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg"  >    <div class="flex items-center space-x-3">      <svg        class="w-6 h-6 text-amber-600 flex-shrink-0"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"        />      </svg>      <div>        <h4 class="text-lg font-semibold text-amber-900 font-[\'Poppins\']">          {{ "checkout.orderingDisabled" | translate }}        </h4>        <p class="text-sm text-amber-800 font-[\'DM_Sans\']">          {{ "checkout.orderingDisabledDescription" | translate }}        </p>      </div>    </div>  </div>  <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">    <!-- Payment Method Selection -->    <div class="mb-8">      <div class="space-y-3">        <!-- Credit Card (Conditionally shown based on settings) -->        <label          *ngIf="creditCardPaymentEnabled"          class="flex items-center p-4 border-2 border-blue-200 bg-blue-50 rounded-lg cursor-pointer"        >          <input            type="radio"            name="paymentMethod"            value="credit_card"            formControlName="paymentMethod"            class="text-blue-600 focus:ring-blue-600"          />          <div class="ml-3 flex-1 flex items-center justify-between">            <div class="flex items-center space-x-3">              <svg                class="w-6 h-6 text-blue-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"                />              </svg>              <span class="font-medium text-blue-900 font-[\'DM_Sans\']">{{                "checkout.creditCard" | translate              }}</span>            </div>          </div>        </label>        <!-- Pay on Delivery -->        <label          class="flex items-center p-4 border-2 border-green-200 bg-green-50 rounded-lg cursor-pointer"        >          <input            type="radio"            name="paymentMethod"            value="cash_on_delivery"            formControlName="paymentMethod"            class="text-green-600 focus:ring-green-600"            checked          />          <div class="ml-3 flex-1 flex items-center justify-between">            <div class="flex items-center space-x-3">              <svg                class="w-6 h-6 text-green-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"                />              </svg>              <span class="font-medium text-green-900 font-[\'DM_Sans\']">{{                "checkout.payOnDelivery" | translate              }}</span>            </div>            <svg              class="w-6 h-6 text-green-600"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M5 13l4 4L19 7"              />            </svg>          </div>        </label>      </div>      <!-- Credit Card Notice -->      <div        *ngIf="paymentForm.get(\'paymentMethod\')?.value === \'credit_card\'"        class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg"      >        <div class="flex items-center space-x-3">          <svg            class="w-6 h-6 text-blue-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"            />          </svg>          <div>            <h4              class="text-lg font-semibold text-blue-900 mb-2 font-[\'Poppins\']"            >              {{ "checkout.securePayment" | translate }}            </h4>            <p class="text-sm text-blue-800 font-[\'DM_Sans\']">              {{ "checkout.securePaymentDescription" | translate }}            </p>          </div>        </div>      </div>      <p        class="text-sm text-gray-600 mt-3 font-[\'DM_Sans\']"        *ngIf="paymentForm.get(\'paymentMethod\')?.value === \'cash_on_delivery\'"      >        {{ "checkout.payOnDeliveryDescription" | translate }}      </p>      <p        class="text-sm text-gray-600 mt-3 font-[\'DM_Sans\']"        *ngIf="paymentForm.get(\'paymentMethod\')?.value === \'credit_card\'"      >        {{ "checkout.creditCardDescription" | translate }}      </p>      <!-- Guest Checkout Notice (only show for non-authenticated users) -->      <div        *ngIf="(currentUser$ | async) === null"        class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg"      >        <div class="flex items-center space-x-2">          <svg            class="w-5 h-5 text-blue-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"            />          </svg>          <p class="text-sm text-blue-800 font-[\'DM_Sans\']">            <span class="font-medium"              >{{ "checkout.guestCheckout" | translate }}:</span            >            {{ "checkout.guestCheckoutDescription" | translate }}          </p>        </div>      </div>    </div>    <!-- B2B Order Option (only show for company users) -->    <div      *ngIf="isCompanyUser$ | async"      class="mb-6 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg"    >      <label class="flex items-start space-x-3 cursor-pointer">        <input          type="checkbox"          formControlName="isB2BOrder"          class="mt-1 text-purple-600 focus:ring-purple-600 rounded"        />        <div class="flex-1">          <div class="flex items-center space-x-2">            <svg              class="w-5 h-5 text-purple-600"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"              />            </svg>            <span class="font-medium text-purple-900 font-[\'DM_Sans\']">{{              "checkout.businessOrder" | translate            }}</span>            <span              class="px-2 py-1 text-xs font-semibold text-purple-700 bg-purple-100 rounded-full"              >B2B</span            >          </div>          <p class="mt-1 text-sm text-purple-700 font-[\'DM_Sans\']">            {{ "checkout.businessOrderDescription" | translate }}          </p>          <div class="mt-2 flex items-center space-x-4 text-xs text-purple-600">            <div class="flex items-center space-x-1">              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">                <path                  fill-rule="evenodd"                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"                  clip-rule="evenodd"                />              </svg>              <span>{{ "checkout.bulkDiscounts" | translate }}</span>            </div>            <div class="flex items-center space-x-1">              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">                <path                  fill-rule="evenodd"                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"                  clip-rule="evenodd"                />              </svg>              <span>{{ "checkout.prioritySupport" | translate }}</span>            </div>            <div class="flex items-center space-x-1">              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">                <path                  fill-rule="evenodd"                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"                  clip-rule="evenodd"                />              </svg>              <span>{{ "checkout.customInvoicing" | translate }}</span>            </div>          </div>        </div>      </label>    </div>    <!-- Terms and Conditions -->    <div class="mb-8">      <label class="flex items-start space-x-3">        <input          type="checkbox"          formControlName="acceptTerms"          class="mt-1 text-blue-600 focus:ring-blue-600 rounded"        />        <span class="text-sm text-gray-600 font-[\'DM_Sans\']">          {{ "checkout.termsAndConditions" | translate }}          <a href="uvjeti" class="text-blue-600 hover:underline">{{            "checkout.terms" | translate          }}</a>          {{ "checkout.and" | translate }}          <a href="/privatnost" class="text-blue-600 hover:underline">{{            "checkout.privacyPolicy" | translate          }}</a>          *        </span>      </label>      <div        *ngIf="          paymentForm.get(\'acceptTerms\')?.invalid &&          paymentForm.get(\'acceptTerms\')?.touched        "        class="mt-1 text-sm text-red-600"      >        {{ "checkout.termsAndConditionsRequired" | translate }}      </div>    </div>    <!-- Error Message -->    <div      *ngIf="orderCreationError$ | async as error"      class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"    >      <div class="flex items-center space-x-2">        <svg          class="w-5 h-5 text-red-600"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"          />        </svg>        <p class="text-sm text-red-800 font-[\'DM_Sans\']">{{ error }}</p>      </div>    </div>    <!-- Navigation Buttons -->    <div class="flex space-x-4 pt-6 border-t border-gray-200">      <button        type="button"        (click)="goBack()"        class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium font-[\'DM_Sans\']"      >        {{ "checkout.backStep" | translate }} {{ "checkout.step2" | translate }}      </button>      <button        type="submit"        [disabled]="paymentForm.invalid || isProcessing || !orderingEnabled"        class="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold font-[\'DM_Sans\'] disabled:opacity-50 disabled:cursor-not-allowed"      >        <span *ngIf="!isProcessing">{{          "checkout.completeOrder" | translate        }}</span>        <span *ngIf="isProcessing" class="flex items-center justify-center">          <svg            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"            xmlns="http://www.w3.org/2000/svg"            fill="none"            viewBox="0 0 24 24"          >            <circle              class="opacity-25"              cx="12"              cy="12"              r="10"              stroke="currentColor"              stroke-width="4"            ></circle>            <path              class="opacity-75"              fill="currentColor"              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"            ></path>          </svg>          {{ "checkout.processing" | translate }}        </span>      </button>    </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PaymentComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PaymentComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,2284 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  WriteReviewModalComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-write-review-modal</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./write-review-modal.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./write-review-modal.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#allProductsSelected" >allProductsSelected</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#hoverRating" >hoverRating</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <a href="#rating" >rating</a>
+                            </li>
+                            <li>
+                                <a href="#reviewForm" >reviewForm</a>
+                            </li>
+                            <li>
+                                <a href="#selectedOrder" >selectedOrder</a>
+                            </li>
+                            <li>
+                                <a href="#selectedOrderItemIds" >selectedOrderItemIds</a>
+                            </li>
+                            <li>
+                                <a href="#stars" >stars</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                <a href="#userOrders" >userOrders</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadUserOrders" >loadUserOrders</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onBackdropClick" >onBackdropClick</a>
+                            </li>
+                            <li>
+                                <a href="#onCancel" >onCancel</a>
+                            </li>
+                            <li>
+                                <a href="#onOrderSelected" >onOrderSelected</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resetForm" >resetForm</a>
+                            </li>
+                            <li>
+                                <a href="#setHoverRating" >setHoverRating</a>
+                            </li>
+                            <li>
+                                <a href="#setRating" >setRating</a>
+                            </li>
+                            <li>
+                                <a href="#toggleAllProducts" >toggleAllProducts</a>
+                            </li>
+                            <li>
+                                <a href="#toggleOrderItem" >toggleOrderItem</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isOpen" >isOpen</a>
+                            </li>
+                            <li>
+                                <a href="#preselectedOrderId" >preselectedOrderId</a>
+                            </li>
+                            <li>
+                                <a href="#productId" >productId</a>
+                            </li>
+                            <li>
+                                <a href="#userId" >userId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelled" >cancelled</a>
+                            </li>
+                            <li>
+                                <a href="#submitted" >submitted</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:51</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isOpen"></a>
+                        <b>isOpen</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="preselectedOrderId"></a>
+                        <b>preselectedOrderId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:34</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="productId"></a>
+                        <b>productId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userId"></a>
+                        <b>userId</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:33</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="cancelled"></a>
+                        <b>cancelled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:37</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="submitted"></a>
+                        <b>submitted</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserOrders"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadUserOrders</b></span>
+                        <a href="#loadUserOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadUserOrders()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onBackdropClick"></a>
+                    <span class="name">
+                        <span ><b>onBackdropClick</b></span>
+                        <a href="#onBackdropClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onBackdropClick(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:200</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCancel"></a>
+                    <span class="name">
+                        <span ><b>onCancel</b></span>
+                        <a href="#onCancel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCancel()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="285"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:285</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onOrderSelected"></a>
+                    <span class="name">
+                        <span ><b>onOrderSelected</b></span>
+                        <a href="#onOrderSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onOrderSelected(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetForm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resetForm</b></span>
+                        <a href="#resetForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetForm()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setHoverRating"></a>
+                    <span class="name">
+                        <span ><b>setHoverRating</b></span>
+                        <a href="#setHoverRating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setHoverRating(rating: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:211</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rating</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setRating"></a>
+                    <span class="name">
+                        <span ><b>setRating</b></span>
+                        <a href="#setRating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setRating(rating: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rating</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleAllProducts"></a>
+                    <span class="name">
+                        <span ><b>toggleAllProducts</b></span>
+                        <a href="#toggleAllProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleAllProducts(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleOrderItem"></a>
+                    <span class="name">
+                        <span ><b>toggleOrderItem</b></span>
+                        <a href="#toggleOrderItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleOrderItem(orderItemId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:170</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>orderItemId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allProductsSelected"></a>
+                    <span class="name">
+                        <span ><b>allProductsSelected</b></span>
+                        <a href="#allProductsSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hoverRating"></a>
+                    <span class="name">
+                        <span ><b>hoverRating</b></span>
+                        <a href="#hoverRating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rating"></a>
+                    <span class="name">
+                        <span ><b>rating</b></span>
+                        <a href="#rating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reviewForm"></a>
+                    <span class="name">
+                        <span ><b>reviewForm</b></span>
+                        <a href="#reviewForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedOrder"></a>
+                    <span class="name">
+                        <span ><b>selectedOrder</b></span>
+                        <a href="#selectedOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>UserOrder | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedOrderItemIds"></a>
+                    <span class="name">
+                        <span ><b>selectedOrderItemIds</b></span>
+                        <a href="#selectedOrderItemIds"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stars"></a>
+                    <span class="name">
+                        <span ><b>stars</b></span>
+                        <a href="#stars"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Array(5).fill(0)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userOrders"></a>
+                    <span class="name">
+                        <span ><b>userOrders</b></span>
+                        <a href="#userOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>UserOrder[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/components/modals/write-review-modal/write-review-modal.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from &#x27;@angular/forms&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { ReviewStatus } from &#x27;../../../models/review.model&#x27;;
+import { TranslatePipe } from &#x27;../../../pipes/translate.pipe&#x27;;
+import { UserOrder } from &#x27;../../../models/user-order.model&#x27;;
+
+@Component({
+  selector: &#x27;app-write-review-modal&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+  templateUrl: &#x27;./write-review-modal.component.html&#x27;,
+  styleUrls: [&#x27;./write-review-modal.component.scss&#x27;],
+})
+export class WriteReviewModalComponent implements OnInit, OnChanges {
+  @Input() isOpen: boolean &#x3D; false;
+  @Input() productId!: string;
+  @Input() userId!: string;
+  @Input() preselectedOrderId?: string;
+
+  @Output() submitted &#x3D; new EventEmitter&lt;any&gt;();
+  @Output() cancelled &#x3D; new EventEmitter&lt;void&gt;();
+
+  private fb &#x3D; inject(FormBuilder);
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  reviewForm: FormGroup;
+  stars &#x3D; Array(5).fill(0);
+  rating &#x3D; 0;
+  hoverRating &#x3D; 0;
+  isSubmitting &#x3D; false;
+
+  userOrders: UserOrder[] &#x3D; [];
+  selectedOrder: UserOrder | null &#x3D; null;
+  selectedOrderItemIds: string[] &#x3D; [];
+  allProductsSelected &#x3D; false;
+
+  constructor() {
+    this.reviewForm &#x3D; this.fb.group({
+      selectedOrderId: [&#x27;&#x27;, Validators.required],
+      selectedOrderItemIds: [[], Validators.required],
+      rating: [0, [Validators.required, Validators.min(1)]],
+      title: [&#x27;&#x27;, [Validators.required, Validators.maxLength(200)]],
+      comment: [&#x27;&#x27;, [Validators.required, Validators.maxLength(1000)]],
+    });
+  }
+
+  ngOnInit(): void {
+    // Don&#x27;t load orders here - wait for isOpen to be true
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Load user orders when modal opens
+    if (changes[&#x27;isOpen&#x27;] &amp;&amp; this.isOpen &amp;&amp; this.userId) {
+      console.log(&#x27;Modal opened, loading user orders for userId:&#x27;, this.userId);
+      this.loadUserOrders();
+    }
+  }
+
+  async loadUserOrders(): Promise&lt;void&gt; {
+    try {
+      console.log(&#x27;Loading user orders...&#x27;); // Debug log
+      // Load user&#x27;s delivered orders with order items
+      const { data: orders, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;orders&#x27;)
+        .select(
+          &#x60;
+          id,
+          order_number,
+          order_date,
+          status,
+          order_items(
+            id,
+            product_id,
+            product_name,
+            product_image_url,
+            quantity,
+            unit_price
+          )
+        &#x60;,
+        )
+        .eq(&#x27;user_id&#x27;, this.userId)
+        .eq(&#x27;status&#x27;, &#x27;delivered&#x27;)
+        .order(&#x27;order_date&#x27;, { ascending: false });
+
+      if (error) {
+        console.error(&#x27;Error loading orders:&#x27;, error);
+        return;
+      }
+
+      console.log(&#x27;Orders loaded:&#x27;, orders?.length || 0); // Debug log
+
+      // Check which order items already have reviews
+      const { data: existingReviews } &#x3D; await this.supabaseService.client
+        .from(&#x27;reviews&#x27;)
+        .select(&#x27;order_item_id&#x27;)
+        .eq(&#x27;user_id&#x27;, this.userId);
+
+      this.userOrders &#x3D; (orders || []).map((order: any) &#x3D;&gt; ({
+        id: order.id,
+        order_number: order.order_number,
+        order_date: order.order_date,
+        status: order.status,
+        items: order.order_items.map((item: any) &#x3D;&gt; ({
+          ...item,
+          hasReview:
+            existingReviews?.some(
+              (review: any) &#x3D;&gt; review.order_item_id &#x3D;&#x3D;&#x3D; item.id,
+            ) || false,
+        })),
+      }));
+
+      console.log(&#x27;User orders processed:&#x27;, this.userOrders.length); // Debug log
+
+      // If preselected order, set it
+      if (this.preselectedOrderId) {
+        this.selectedOrder &#x3D;
+          this.userOrders.find(
+            (order) &#x3D;&gt; order.id &#x3D;&#x3D;&#x3D; this.preselectedOrderId,
+          ) || null;
+        if (this.selectedOrder) {
+          this.reviewForm.patchValue({
+            selectedOrderId: this.preselectedOrderId,
+          });
+          this.onOrderSelected({ target: { value: this.preselectedOrderId } });
+        }
+      }
+    } catch (error) {
+      console.error(&#x27;Error loading user orders:&#x27;, error);
+    }
+  }
+
+  onOrderSelected(event: any): void {
+    const orderId &#x3D; event.target.value;
+    this.selectedOrder &#x3D;
+      this.userOrders.find((order) &#x3D;&gt; order.id &#x3D;&#x3D;&#x3D; orderId) || null;
+    this.selectedOrderItemIds &#x3D; [];
+    this.allProductsSelected &#x3D; false;
+
+    if (this.selectedOrder) {
+      // Auto-select order items that don&#x27;t have reviews yet
+      const availableOrderItems &#x3D; this.selectedOrder.items
+        .filter((item) &#x3D;&gt; !item.hasReview)
+        .map((item) &#x3D;&gt; item.id);
+
+      this.selectedOrderItemIds &#x3D; availableOrderItems;
+      this.allProductsSelected &#x3D; availableOrderItems.length &gt; 0;
+
+      this.reviewForm.patchValue({
+        selectedOrderItemIds: this.selectedOrderItemIds,
+      });
+    }
+  }
+
+  toggleOrderItem(orderItemId: string, event: any): void {
+    if (event.target.checked) {
+      this.selectedOrderItemIds.push(orderItemId);
+    } else {
+      this.selectedOrderItemIds &#x3D; this.selectedOrderItemIds.filter(
+        (id) &#x3D;&gt; id !&#x3D;&#x3D; orderItemId,
+      );
+    }
+    this.allProductsSelected &#x3D;
+      this.selectedOrderItemIds.length &#x3D;&#x3D;&#x3D;
+      this.selectedOrder?.items.filter((item) &#x3D;&gt; !item.hasReview).length;
+    this.reviewForm.patchValue({
+      selectedOrderItemIds: this.selectedOrderItemIds,
+    });
+  }
+
+  toggleAllProducts(event: any): void {
+    this.allProductsSelected &#x3D; event.target.checked;
+    if (this.allProductsSelected &amp;&amp; this.selectedOrder) {
+      this.selectedOrderItemIds &#x3D; this.selectedOrder.items
+        .filter((item) &#x3D;&gt; !item.hasReview)
+        .map((item) &#x3D;&gt; item.id);
+    } else {
+      this.selectedOrderItemIds &#x3D; [];
+    }
+    this.reviewForm.patchValue({
+      selectedOrderItemIds: this.selectedOrderItemIds,
+    });
+  }
+
+  onBackdropClick(event: Event): void {
+    if (event.target &#x3D;&#x3D;&#x3D; event.currentTarget) {
+      this.onCancel();
+    }
+  }
+
+  setRating(rating: number): void {
+    this.rating &#x3D; rating;
+    this.reviewForm.patchValue({ rating });
+  }
+
+  setHoverRating(rating: number): void {
+    this.hoverRating &#x3D; rating;
+  }
+
+  async onSubmit(): Promise&lt;void&gt; {
+    if (this.reviewForm.invalid || this.isSubmitting) {
+      this.reviewForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting &#x3D; true;
+
+    try {
+      const formValue &#x3D; this.reviewForm.value;
+      const orderId &#x3D; this.preselectedOrderId || formValue.selectedOrderId;
+      const orderItemIds &#x3D; formValue.selectedOrderItemIds;
+
+      const reviews &#x3D; [];
+
+      for (const orderItemId of orderItemIds) {
+        // Get the order item to get the product_id
+        const { data: orderItem } &#x3D; await this.supabaseService.client
+          .from(&#x27;order_items&#x27;)
+          .select(&#x27;product_id&#x27;)
+          .eq(&#x27;id&#x27;, orderItemId)
+          .single();
+
+        if (!orderItem) continue;
+
+        const reviewData &#x3D; {
+          user_id: this.userId,
+          product_id: orderItem.product_id,
+          order_id: orderId,
+          order_item_id: orderItemId,
+          rating: formValue.rating,
+          title: formValue.title,
+          comment: formValue.comment,
+          is_verified_purchase: true,
+          is_approved: false,
+          status: &#x27;pending&#x27; as ReviewStatus,
+          helpful_count: 0,
+          reported_count: 0,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+
+        const createdReview &#x3D; await this.supabaseService.createRecord(
+          &#x27;reviews&#x27;,
+          reviewData,
+        );
+        if (createdReview) {
+          reviews.push(createdReview);
+        }
+      }
+
+      if (reviews.length &gt; 0) {
+        this.submitted.emit({
+          reviews,
+          orderId,
+          orderItemIds,
+          rating: formValue.rating,
+          title: formValue.title,
+          comment: formValue.comment,
+        });
+        this.resetForm();
+      }
+    } catch (error) {
+      console.error(&#x27;Error submitting review:&#x27;, error);
+      // You might want to show an error message here
+    } finally {
+      this.isSubmitting &#x3D; false;
+    }
+  }
+
+  onCancel(): void {
+    this.resetForm();
+    this.cancelled.emit();
+  }
+
+  private resetForm(): void {
+    this.reviewForm.reset();
+    this.rating &#x3D; 0;
+    this.hoverRating &#x3D; 0;
+    this.isSubmitting &#x3D; false;
+    this.selectedOrder &#x3D; null;
+    this.selectedOrderItemIds &#x3D; [];
+    this.allProductsSelected &#x3D; false;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  *ngIf&#x3D;&quot;isOpen&quot;
+  class&#x3D;&quot;fixed inset-0 z-50 overflow-y-auto&quot;
+  (click)&#x3D;&quot;onBackdropClick($event)&quot;
+&gt;
+  &lt;!-- Backdrop --&gt;
+  &lt;div class&#x3D;&quot;fixed inset-0 bg-black bg-opacity-50 transition-opacity&quot;&gt;&lt;/div&gt;
+
+  &lt;!-- Modal Container --&gt;
+  &lt;div
+    class&#x3D;&quot;flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl sm:p-6 max-h-[90vh] overflow-y-auto&quot;
+      (click)&#x3D;&quot;$event.stopPropagation()&quot;
+    &gt;
+      &lt;!-- Header --&gt;
+      &lt;div
+        class&#x3D;&quot;flex items-center justify-between border-b border-gray-200 pb-4&quot;
+      &gt;
+        &lt;h3
+          class&#x3D;&quot;text-lg font-semibold leading-6 text-gray-900&quot;
+          id&#x3D;&quot;modal-title&quot;
+        &gt;
+          {{ &quot;reviews.writeReview&quot; | translate }}
+        &lt;/h3&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          class&#x3D;&quot;text-gray-400 hover:text-gray-600&quot;
+          (click)&#x3D;&quot;onCancel()&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;h-6 w-6&quot;
+            fill&#x3D;&quot;none&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+            stroke-width&#x3D;&quot;1.5&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Form --&gt;
+      &lt;form [formGroup]&#x3D;&quot;reviewForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;mt-6&quot;&gt;
+        &lt;!-- Order Selection (if not preselected) --&gt;
+        &lt;div *ngIf&#x3D;&quot;!preselectedOrderId &amp;&amp; userOrders.length &gt; 0&quot; class&#x3D;&quot;mb-6&quot;&gt;
+          &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-3&quot;
+            &gt;{{ &quot;reviews.selectOrder&quot; | translate }} *&lt;/label
+          &gt;
+          &lt;select
+            formControlName&#x3D;&quot;selectedOrderId&quot;
+            class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent&quot;
+            (change)&#x3D;&quot;onOrderSelected($event)&quot;
+          &gt;
+            &lt;option value&#x3D;&quot;&quot;&gt;
+              {{ &quot;reviews.selectOrderPlaceholder&quot; | translate }}
+            &lt;/option&gt;
+            &lt;option *ngFor&#x3D;&quot;let order of userOrders&quot; [value]&#x3D;&quot;order.id&quot;&gt;
+              {{ &quot;reviews.orderNumber&quot; | translate }}:
+              {{ order.order_number }} -
+              {{ order.order_date | date: &quot;MMM d, yyyy&quot; }}
+            &lt;/option&gt;
+          &lt;/select&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              reviewForm.get(&#x27;selectedOrderId&#x27;)?.invalid &amp;&amp;
+              reviewForm.get(&#x27;selectedOrderId&#x27;)?.touched
+            &quot;
+            class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+          &gt;
+            {{ &quot;reviews.pleaseSelectOrder&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Order Item Selection --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;selectedOrder &amp;&amp; selectedOrder.items.length &gt; 0&quot;
+          class&#x3D;&quot;mb-6&quot;
+        &gt;
+          &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-3&quot;
+            &gt;{{ &quot;reviews.selectProducts&quot; | translate }} *&lt;/label
+          &gt;
+
+          &lt;!-- Select All Products Checkbox --&gt;
+          &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+            &lt;label class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;checkbox&quot;
+                [checked]&#x3D;&quot;allProductsSelected&quot;
+                (change)&#x3D;&quot;toggleAllProducts($event)&quot;
+                class&#x3D;&quot;rounded border-gray-300 text-blue-600 focus:ring-blue-500&quot;
+              /&gt;
+              &lt;span class&#x3D;&quot;ml-2 text-sm text-gray-700&quot;&gt;{{
+                &quot;reviews.addSameReviewForAllProducts&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Order Items List --&gt;
+          &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+            &lt;div
+              *ngFor&#x3D;&quot;let item of selectedOrder.items; let i &#x3D; index&quot;
+              class&#x3D;&quot;flex items-center p-3 border border-gray-200 rounded-lg&quot;
+              [class.bg-gray-50]&#x3D;&quot;item.hasReview&quot;
+            &gt;
+              &lt;input
+                type&#x3D;&quot;checkbox&quot;
+                [value]&#x3D;&quot;item.id&quot;
+                [checked]&#x3D;&quot;selectedOrderItemIds.includes(item.id)&quot;
+                (change)&#x3D;&quot;toggleOrderItem(item.id, $event)&quot;
+                [disabled]&#x3D;&quot;item.hasReview&quot;
+                class&#x3D;&quot;rounded border-gray-300 text-blue-600 focus:ring-blue-500&quot;
+              /&gt;
+              &lt;div class&#x3D;&quot;ml-3 flex-1&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+                  &lt;img
+                    *ngIf&#x3D;&quot;item.product_image_url&quot;
+                    [src]&#x3D;&quot;item.product_image_url&quot;
+                    [alt]&#x3D;&quot;item.product_name&quot;
+                    class&#x3D;&quot;w-12 h-12 object-cover rounded mr-3&quot;
+                  /&gt;
+                  &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                    &lt;h4 class&#x3D;&quot;font-medium text-gray-900&quot;&gt;
+                      {{ item.product_name }}
+                    &lt;/h4&gt;
+                    &lt;p class&#x3D;&quot;text-sm text-gray-500&quot;&gt;
+                      {{ &quot;reviews.quantity&quot; | translate }}: {{ item.quantity }}
+                    &lt;/p&gt;
+                  &lt;/div&gt;
+                  &lt;div *ngIf&#x3D;&quot;item.hasReview&quot; class&#x3D;&quot;ml-2&quot;&gt;
+                    &lt;span
+                      class&#x3D;&quot;inline-flex items-center px-2.5 py-0.5 bg-green-100 text-green-800 text-xs font-medium rounded-full&quot;
+                    &gt;
+                      &lt;svg
+                        class&#x3D;&quot;w-3 h-3 mr-1&quot;
+                        fill&#x3D;&quot;currentColor&quot;
+                        viewBox&#x3D;&quot;0 0 20 20&quot;
+                      &gt;
+                        &lt;path
+                          fill-rule&#x3D;&quot;evenodd&quot;
+                          d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+                          clip-rule&#x3D;&quot;evenodd&quot;
+                        /&gt;
+                      &lt;/svg&gt;
+                      {{ &quot;reviews.reviewed&quot; | translate }}
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div
+            *ngIf&#x3D;&quot;
+              selectedOrderItemIds.length &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+              reviewForm.get(&#x27;selectedOrderItemIds&#x27;)?.touched
+            &quot;
+            class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+          &gt;
+            {{ &quot;reviews.pleaseSelectProducts&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Star Rating --&gt;
+        &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+          &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-3&quot;
+            &gt;{{ &quot;reviews.rating&quot; | translate }} *&lt;/label
+          &gt;
+          &lt;div class&#x3D;&quot;flex items-center space-x-1&quot;&gt;
+            &lt;button
+              *ngFor&#x3D;&quot;let star of stars; let i &#x3D; index&quot;
+              type&#x3D;&quot;button&quot;
+              class&#x3D;&quot;focus:outline-none transition-colors duration-200&quot;
+              (click)&#x3D;&quot;setRating(i + 1)&quot;
+              (mouseenter)&#x3D;&quot;setHoverRating(i + 1)&quot;
+              (mouseleave)&#x3D;&quot;setHoverRating(0)&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-8 h-8 transition-colors duration-200&quot;
+                [class.text-yellow-400]&#x3D;&quot;i &lt; (hoverRating || rating)&quot;
+                [class.text-gray-300]&#x3D;&quot;i &gt;&#x3D; (hoverRating || rating)&quot;
+                fill&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+              &gt;
+                &lt;path
+                  d&#x3D;&quot;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              reviewForm.get(&#x27;rating&#x27;)?.invalid &amp;&amp;
+              reviewForm.get(&#x27;rating&#x27;)?.touched
+            &quot;
+            class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+          &gt;
+            {{ &quot;reviews.pleaseSelectRating&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Title --&gt;
+        &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+          &lt;label
+            for&#x3D;&quot;title&quot;
+            class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;
+            &gt;{{ &quot;reviews.writeReview&quot; | translate }} *&lt;/label
+          &gt;
+          &lt;input
+            type&#x3D;&quot;text&quot;
+            id&#x3D;&quot;title&quot;
+            formControlName&#x3D;&quot;title&quot;
+            placeholder&#x3D;&quot;{{ &#x27;reviews.summarizeReview&#x27; | translate }}&quot;
+            class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent&quot;
+          /&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              reviewForm.get(&#x27;title&#x27;)?.invalid &amp;&amp;
+              reviewForm.get(&#x27;title&#x27;)?.touched
+            &quot;
+            class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+          &gt;
+            {{ &quot;reviews.titleRequired&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Comment --&gt;
+        &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+          &lt;label
+            for&#x3D;&quot;comment&quot;
+            class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;
+            &gt;{{ &quot;reviews.yourReview&quot; | translate }} *&lt;/label
+          &gt;
+          &lt;textarea
+            id&#x3D;&quot;comment&quot;
+            formControlName&#x3D;&quot;comment&quot;
+            rows&#x3D;&quot;4&quot;
+            placeholder&#x3D;&quot;{{ &#x27;reviews.tellOthersAboutExperience&#x27; | translate }}&quot;
+            class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none&quot;
+          &gt;&lt;/textarea&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;
+              reviewForm.get(&#x27;comment&#x27;)?.invalid &amp;&amp;
+              reviewForm.get(&#x27;comment&#x27;)?.touched
+            &quot;
+            class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+          &gt;
+            {{ &quot;reviews.reviewCommentRequired&quot; | translate }}
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Actions --&gt;
+        &lt;div class&#x3D;&quot;flex justify-end space-x-3 pt-4 border-t border-gray-200&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            class&#x3D;&quot;px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500&quot;
+            (click)&#x3D;&quot;onCancel()&quot;
+          &gt;
+            {{ &quot;common.cancel&quot; | translate }}
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;reviewForm.invalid || isSubmitting&quot;
+            class&#x3D;&quot;px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+          &gt;
+            &lt;span *ngIf&#x3D;&quot;!isSubmitting&quot;&gt;{{
+              &quot;reviews.submitReview&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;isSubmitting&quot; class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-4 h-4 mr-2 animate-spin&quot;
+                fill&#x3D;&quot;none&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;circle
+                  class&#x3D;&quot;opacity-25&quot;
+                  cx&#x3D;&quot;12&quot;
+                  cy&#x3D;&quot;12&quot;
+                  r&#x3D;&quot;10&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  stroke-width&#x3D;&quot;4&quot;
+                &gt;&lt;/circle&gt;
+                &lt;path
+                  class&#x3D;&quot;opacity-75&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                  d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+                &gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              {{ &quot;common.submitting&quot; | translate }}
+            &lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./write-review-modal.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  *ngIf="isOpen"  class="fixed inset-0 z-50 overflow-y-auto"  (click)="onBackdropClick($event)">  <!-- Backdrop -->  <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>  <!-- Modal Container -->  <div    class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"  >    <div      class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-4xl sm:p-6 max-h-[90vh] overflow-y-auto"      (click)="$event.stopPropagation()"    >      <!-- Header -->      <div        class="flex items-center justify-between border-b border-gray-200 pb-4"      >        <h3          class="text-lg font-semibold leading-6 text-gray-900"          id="modal-title"        >          {{ "reviews.writeReview" | translate }}        </h3>        <button          type="button"          class="text-gray-400 hover:text-gray-600"          (click)="onCancel()"        >          <svg            class="h-6 w-6"            fill="none"            viewBox="0 0 24 24"            stroke-width="1.5"            stroke="currentColor"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              d="M6 18L18 6M6 6l12 12"            />          </svg>        </button>      </div>      <!-- Form -->      <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="mt-6">        <!-- Order Selection (if not preselected) -->        <div *ngIf="!preselectedOrderId && userOrders.length > 0" class="mb-6">          <label class="block text-sm font-medium text-gray-700 mb-3"            >{{ "reviews.selectOrder" | translate }} *</label          >          <select            formControlName="selectedOrderId"            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"            (change)="onOrderSelected($event)"          >            <option value="">              {{ "reviews.selectOrderPlaceholder" | translate }}            </option>            <option *ngFor="let order of userOrders" [value]="order.id">              {{ "reviews.orderNumber" | translate }}:              {{ order.order_number }} -              {{ order.order_date | date: "MMM d, yyyy" }}            </option>          </select>          <div            *ngIf="              reviewForm.get(\'selectedOrderId\')?.invalid &&              reviewForm.get(\'selectedOrderId\')?.touched            "            class="mt-1 text-sm text-red-600"          >            {{ "reviews.pleaseSelectOrder" | translate }}          </div>        </div>        <!-- Order Item Selection -->        <div          *ngIf="selectedOrder && selectedOrder.items.length > 0"          class="mb-6"        >          <label class="block text-sm font-medium text-gray-700 mb-3"            >{{ "reviews.selectProducts" | translate }} *</label          >          <!-- Select All Products Checkbox -->          <div class="mb-4">            <label class="flex items-center">              <input                type="checkbox"                [checked]="allProductsSelected"                (change)="toggleAllProducts($event)"                class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"              />              <span class="ml-2 text-sm text-gray-700">{{                "reviews.addSameReviewForAllProducts" | translate              }}</span>            </label>          </div>          <!-- Order Items List -->          <div class="space-y-3">            <div              *ngFor="let item of selectedOrder.items; let i = index"              class="flex items-center p-3 border border-gray-200 rounded-lg"              [class.bg-gray-50]="item.hasReview"            >              <input                type="checkbox"                [value]="item.id"                [checked]="selectedOrderItemIds.includes(item.id)"                (change)="toggleOrderItem(item.id, $event)"                [disabled]="item.hasReview"                class="rounded border-gray-300 text-blue-600 focus:ring-blue-500"              />              <div class="ml-3 flex-1">                <div class="flex items-center">                  <img                    *ngIf="item.product_image_url"                    [src]="item.product_image_url"                    [alt]="item.product_name"                    class="w-12 h-12 object-cover rounded mr-3"                  />                  <div class="flex-1">                    <h4 class="font-medium text-gray-900">                      {{ item.product_name }}                    </h4>                    <p class="text-sm text-gray-500">                      {{ "reviews.quantity" | translate }}: {{ item.quantity }}                    </p>                  </div>                  <div *ngIf="item.hasReview" class="ml-2">                    <span                      class="inline-flex items-center px-2.5 py-0.5 bg-green-100 text-green-800 text-xs font-medium rounded-full"                    >                      <svg                        class="w-3 h-3 mr-1"                        fill="currentColor"                        viewBox="0 0 20 20"                      >                        <path                          fill-rule="evenodd"                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"                          clip-rule="evenodd"                        />                      </svg>                      {{ "reviews.reviewed" | translate }}                    </span>                  </div>                </div>              </div>            </div>          </div>          <div            *ngIf="              selectedOrderItemIds.length === 0 &&              reviewForm.get(\'selectedOrderItemIds\')?.touched            "            class="mt-1 text-sm text-red-600"          >            {{ "reviews.pleaseSelectProducts" | translate }}          </div>        </div>        <!-- Star Rating -->        <div class="mb-6">          <label class="block text-sm font-medium text-gray-700 mb-3"            >{{ "reviews.rating" | translate }} *</label          >          <div class="flex items-center space-x-1">            <button              *ngFor="let star of stars; let i = index"              type="button"              class="focus:outline-none transition-colors duration-200"              (click)="setRating(i + 1)"              (mouseenter)="setHoverRating(i + 1)"              (mouseleave)="setHoverRating(0)"            >              <svg                class="w-8 h-8 transition-colors duration-200"                [class.text-yellow-400]="i < (hoverRating || rating)"                [class.text-gray-300]="i >= (hoverRating || rating)"                fill="currentColor"                viewBox="0 0 20 20"              >                <path                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"                />              </svg>            </button>          </div>          <div            *ngIf="              reviewForm.get(\'rating\')?.invalid &&              reviewForm.get(\'rating\')?.touched            "            class="mt-1 text-sm text-red-600"          >            {{ "reviews.pleaseSelectRating" | translate }}          </div>        </div>        <!-- Title -->        <div class="mb-6">          <label            for="title"            class="block text-sm font-medium text-gray-700 mb-2"            >{{ "reviews.writeReview" | translate }} *</label          >          <input            type="text"            id="title"            formControlName="title"            placeholder="{{ \'reviews.summarizeReview\' | translate }}"            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"          />          <div            *ngIf="              reviewForm.get(\'title\')?.invalid &&              reviewForm.get(\'title\')?.touched            "            class="mt-1 text-sm text-red-600"          >            {{ "reviews.titleRequired" | translate }}          </div>        </div>        <!-- Comment -->        <div class="mb-6">          <label            for="comment"            class="block text-sm font-medium text-gray-700 mb-2"            >{{ "reviews.yourReview" | translate }} *</label          >          <textarea            id="comment"            formControlName="comment"            rows="4"            placeholder="{{ \'reviews.tellOthersAboutExperience\' | translate }}"            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"          ></textarea>          <div            *ngIf="              reviewForm.get(\'comment\')?.invalid &&              reviewForm.get(\'comment\')?.touched            "            class="mt-1 text-sm text-red-600"          >            {{ "reviews.reviewCommentRequired" | translate }}          </div>        </div>        <!-- Actions -->        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">          <button            type="button"            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"            (click)="onCancel()"          >            {{ "common.cancel" | translate }}          </button>          <button            type="submit"            [disabled]="reviewForm.invalid || isSubmitting"            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"          >            <span *ngIf="!isSubmitting">{{              "reviews.submitReview" | translate            }}</span>            <span *ngIf="isSubmitting" class="flex items-center">              <svg                class="w-4 h-4 mr-2 animate-spin"                fill="none"                viewBox="0 0 24 24"              >                <circle                  class="opacity-25"                  cx="12"                  cy="12"                  r="10"                  stroke="currentColor"                  stroke-width="4"                ></circle>                <path                  class="opacity-75"                  fill="currentColor"                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                ></path>              </svg>              {{ "common.submitting" | translate }}            </span>          </button>        </div>      </form>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'WriteReviewModalComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'WriteReviewModalComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

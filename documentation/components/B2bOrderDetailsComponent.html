@@ -1,0 +1,1783 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  B2bOrderDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2b/order-details/b2b-order-details.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-b2b-order-details</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./b2b-order-details.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./b2b-order-details.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#order" >order</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getBillingAddressField" >getBillingAddressField</a>
+                            </li>
+                            <li>
+                                <a href="#getFormattedDate" >getFormattedDate</a>
+                            </li>
+                            <li>
+                                <a href="#getPaymentMethodLabel" >getPaymentMethodLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getPaymentStatusLabel" >getPaymentStatusLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getShippingAddressField" >getShippingAddressField</a>
+                            </li>
+                            <li>
+                                <a href="#getStatusLabel" >getStatusLabel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadOrderDetails" >loadOrderDetails</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onImageError" >onImageError</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getBillingAddressField"></a>
+                    <span class="name">
+                        <span ><b>getBillingAddressField</b></span>
+                        <a href="#getBillingAddressField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getBillingAddressField(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFormattedDate"></a>
+                    <span class="name">
+                        <span ><b>getFormattedDate</b></span>
+                        <a href="#getFormattedDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFormattedDate(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="171"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:171</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentMethodLabel"></a>
+                    <span class="name">
+                        <span ><b>getPaymentMethodLabel</b></span>
+                        <a href="#getPaymentMethodLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPaymentMethodLabel(paymentMethod: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>paymentMethod</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getPaymentStatusLabel</b></span>
+                        <a href="#getPaymentStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPaymentStatusLabel(paymentStatus: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>paymentStatus</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getShippingAddressField"></a>
+                    <span class="name">
+                        <span ><b>getShippingAddressField</b></span>
+                        <a href="#getShippingAddressField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getShippingAddressField(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getStatusLabel</b></span>
+                        <a href="#getStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusLabel(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadOrderDetails"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadOrderDetails</b></span>
+                        <a href="#loadOrderDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadOrderDetails(orderId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>orderId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImageError"></a>
+                    <span class="name">
+                        <span ><b>onImageError</b></span>
+                        <a href="#onImageError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImageError(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="order"></a>
+                    <span class="name">
+                        <span ><b>order</b></span>
+                        <a href="#order"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Order.html" target="_self" >Order | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/b2b/order-details/b2b-order-details.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, RouterModule } from &#x27;@angular/router&#x27;;
+import { SupabaseService } from &#x27;../../../services/supabase.service&#x27;;
+import { TranslatePipe } from &#x27;../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../shared/services/translation.service&#x27;;
+import { Order } from &#x27;../../../shared/models/order.model&#x27;;
+
+@Component({
+  selector: &#x27;app-b2b-order-details&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslatePipe],
+  templateUrl: &#x27;./b2b-order-details.component.html&#x27;,
+  styleUrls: [&#x27;./b2b-order-details.component.scss&#x27;],
+})
+export class B2bOrderDetailsComponent implements OnInit {
+  private route &#x3D; inject(ActivatedRoute);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private translationService &#x3D; inject(TranslationService);
+
+  order: Order | null &#x3D; null;
+  loading &#x3D; true;
+  error &#x3D; false;
+
+  async ngOnInit(): Promise&lt;void&gt; {
+    const orderId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    if (orderId) {
+      await this.loadOrderDetails(orderId);
+    } else {
+      this.error &#x3D; true;
+      this.loading &#x3D; false;
+    }
+  }
+
+  private async loadOrderDetails(orderId: string): Promise&lt;void&gt; {
+    try {
+      const { data: order, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;orders&#x27;)
+        .select(
+          &#x60;
+          *,
+          order_items (
+            id,
+            product_id,
+            product_name,
+            product_sku,
+            quantity,
+            unit_price,
+            total_price,
+            product_image_url,
+            product_specifications
+          )
+        &#x60;,
+        )
+        .eq(&#x27;id&#x27;, orderId)
+        .eq(&#x27;is_b2b&#x27;, true)
+        .single();
+
+      if (error) {
+        console.error(&#x27;Error loading order details:&#x27;, error);
+        this.error &#x3D; true;
+        return;
+      }
+
+      if (!order) {
+        this.error &#x3D; true;
+        return;
+      }
+
+      // Map the order data
+      this.order &#x3D; {
+        id: order.id,
+        orderNumber: order.order_number,
+        userId: order.user_id,
+        customerEmail: order.customer_email,
+        customerName: order.customer_name,
+        customerPhone: order.customer_phone,
+        totalAmount: order.total_amount,
+        subtotal: order.subtotal,
+        taxAmount: order.tax_amount,
+        shippingCost: order.shipping_cost,
+        discountAmount: order.discount_amount,
+        status: order.status,
+        paymentStatus: order.payment_status,
+        shippingStatus: order.shipping_status,
+        paymentMethod: order.payment_method,
+        orderDate: order.order_date,
+        shippingAddress: order.shipping_address,
+        billingAddress: order.billing_address,
+        trackingNumber: order.tracking_number,
+        notes: order.notes,
+        adminNotes: order.admin_notes,
+        items: (order.order_items || []).map((item: any) &#x3D;&gt; ({
+          id: item.id,
+          orderId: item.order_id,
+          productId: item.product_id,
+          productName: item.product_name,
+          productSku: item.product_sku,
+          quantity: item.quantity,
+          unitPrice: item.unit_price,
+          totalPrice: item.total_price,
+          productImageUrl: item.product_image_url,
+          productSpecifications: item.product_specifications,
+          createdAt: item.created_at,
+        })),
+        is_b2b: order.is_b2b,
+        createdAt: order.created_at,
+        updatedAt: order.updated_at,
+      };
+    } catch (error) {
+      console.error(&#x27;Error loading order details:&#x27;, error);
+      this.error &#x3D; true;
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  getStatusLabel(status: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      pending: &#x27;b2b.orders.pending&#x27;,
+      confirmed: &#x27;b2b.orders.confirmed&#x27;,
+      processing: &#x27;b2b.orders.processing&#x27;,
+      shipped: &#x27;b2b.orders.shipped&#x27;,
+      delivered: &#x27;b2b.orders.delivered&#x27;,
+      cancelled: &#x27;b2b.orders.cancelled&#x27;,
+    };
+    return statusMap[status] || status;
+  }
+
+  getPaymentStatusLabel(paymentStatus: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      pending: &#x27;b2b.orders.pending&#x27;,
+      paid: &#x27;b2b.orders.paid&#x27;,
+      failed: &#x27;b2b.orders.failed&#x27;,
+    };
+    return statusMap[paymentStatus] || paymentStatus;
+  }
+
+  getPaymentMethodLabel(paymentMethod: string): string {
+    const methodMap: { [key: string]: string } &#x3D; {
+      payment_upon_collection: &#x27;b2b.orders.paymentUponCollection&#x27;,
+      bank_transfer: &#x27;b2b.orders.bankTransfer&#x27;,
+      cash_on_delivery: &#x27;b2b.orders.cashOnDelivery&#x27;,
+      credit_30_days: &#x27;b2b.orders.creditTerms30Days&#x27;,
+    };
+    return methodMap[paymentMethod] || paymentMethod;
+  }
+
+  getShippingAddressField(field: string): string | null {
+    if (!this.order?.shippingAddress) return null;
+    // Type assertion to handle dynamic B2B address fields
+    const address &#x3D; this.order.shippingAddress as any;
+    return address[field] || null;
+  }
+
+  getBillingAddressField(field: string): string | null {
+    if (!this.order?.billingAddress) return null;
+    // Type assertion to handle dynamic B2B address fields
+    const address &#x3D; this.order.billingAddress as any;
+    return address[field] || null;
+  }
+
+  onImageError(event: Event): void {
+    const img &#x3D; event.target as HTMLImageElement;
+    if (img) {
+      // Hide the broken image and let the fallback icon show
+      img.style.display &#x3D; &#x27;none&#x27;;
+    }
+  }
+
+  getFormattedDate(date: string): string {
+    const currentLanguage &#x3D; this.translationService.getCurrentLanguage();
+    const locale &#x3D; currentLanguage &#x3D;&#x3D;&#x3D; &#x27;hr&#x27; ? &#x27;hr-HR&#x27; : &#x27;en-US&#x27;;
+    return new Date(date).toLocaleDateString(locale, {
+      year: &#x27;numeric&#x27;,
+      month: &#x27;long&#x27;,
+      day: &#x27;numeric&#x27;,
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen bg-gray-50 py-8&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-4xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+    &lt;!-- Header --&gt;
+    &lt;div class&#x3D;&quot;mb-8&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div&gt;
+          &lt;h1 class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;orderDetails.title&quot; | translate }}
+          &lt;/h1&gt;
+          &lt;p class&#x3D;&quot;mt-2 text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot; *ngIf&#x3D;&quot;order&quot;&gt;
+            {{ &quot;orderDetails.orderPlacedOn&quot; | translate }}
+            {{ getFormattedDate(order.orderDate) }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          routerLink&#x3D;&quot;/partneri/profil&quot;
+          [queryParams]&#x3D;&quot;{ tab: &#x27;company-orders&#x27; }&quot;
+          class&#x3D;&quot;px-4 py-2 text-gray-600 hover:text-gray-800 font-medium font-[&#x27;DM_Sans&#x27;] flex items-center space-x-2&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;w-4 h-4&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;{{ &quot;orderDetails.backToOrders&quot; | translate }}&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Loading State --&gt;
+    &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex justify-center py-12&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600&quot;
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Error State --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;error&quot;
+      class&#x3D;&quot;bg-red-50 border border-red-200 rounded-lg p-6 text-center&quot;
+    &gt;
+      &lt;svg
+        class&#x3D;&quot;w-12 h-12 text-red-400 mx-auto mb-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-medium text-red-800 mb-2&quot;&gt;
+        {{ &quot;orderDetails.orderNotFound&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;p class&#x3D;&quot;text-red-600&quot;&gt;
+        {{ &quot;orderDetails.orderNotFoundMessage&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Order Content --&gt;
+    &lt;div *ngIf&#x3D;&quot;order &amp;&amp; !loading&quot; class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Order Summary --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6&quot;&gt;
+          &lt;!-- Order Number --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.orderNumber&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p
+              class&#x3D;&quot;mt-1 text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ order.orderNumber }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Order Status --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.status&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;span
+              class&#x3D;&quot;mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[&#x27;DM_Sans&#x27;]&quot;
+              [ngClass]&#x3D;&quot;{
+                &#x27;bg-yellow-100 text-yellow-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;pending&#x27;,
+                &#x27;bg-blue-100 text-blue-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;confirmed&#x27;,
+                &#x27;bg-purple-100 text-purple-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;processing&#x27;,
+                &#x27;bg-indigo-100 text-indigo-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;shipped&#x27;,
+                &#x27;bg-green-100 text-green-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;delivered&#x27;,
+                &#x27;bg-red-100 text-red-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;,
+              }&quot;
+            &gt;
+              {{ getStatusLabel(order.status) | translate }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Payment Status --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.payment&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;span
+              class&#x3D;&quot;mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[&#x27;DM_Sans&#x27;]&quot;
+              [ngClass]&#x3D;&quot;{
+                &#x27;bg-yellow-100 text-yellow-800&#x27;:
+                  order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;pending&#x27;,
+                &#x27;bg-green-100 text-green-800&#x27;: order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;paid&#x27;,
+                &#x27;bg-red-100 text-red-800&#x27;: order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;failed&#x27;,
+              }&quot;
+            &gt;
+              {{ getPaymentStatusLabel(order.paymentStatus) | translate }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Total Amount (Subtotal for B2B) --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.total&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p
+              class&#x3D;&quot;mt-1 text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Tracking Number --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;order.trackingNumber&quot;
+          class&#x3D;&quot;mt-6 pt-6 border-t border-gray-200&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;div&gt;
+              &lt;h3
+                class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;orderDetails.trackingNumber&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;p class&#x3D;&quot;mt-1 text-sm font-medium text-gray-900&quot;&gt;
+                {{ order.trackingNumber }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button
+              class&#x3D;&quot;text-solar-500 hover:text-solar-600 text-sm font-medium&quot;
+            &gt;
+              {{ &quot;orderDetails.trackPackage&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Items --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.orderItems&quot; | translate }}
+        &lt;/h2&gt;
+
+        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+          &lt;div
+            *ngFor&#x3D;&quot;let item of order.items&quot;
+            class&#x3D;&quot;flex items-center space-x-4 py-4 border-b border-gray-200 last:border-b-0&quot;
+          &gt;
+            &lt;!-- Product Image --&gt;
+            &lt;div
+              class&#x3D;&quot;w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0 flex items-center justify-center&quot;
+            &gt;
+              &lt;img
+                *ngIf&#x3D;&quot;item.productImageUrl&quot;
+                [src]&#x3D;&quot;item.productImageUrl&quot;
+                [alt]&#x3D;&quot;item.productName&quot;
+                class&#x3D;&quot;w-full h-full object-cover rounded-lg&quot;
+                (error)&#x3D;&quot;onImageError($event)&quot;
+              /&gt;
+              &lt;svg
+                *ngIf&#x3D;&quot;!item.productImageUrl&quot;
+                class&#x3D;&quot;w-8 h-8 text-gray-400&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Product Details --&gt;
+            &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+              &lt;h3 class&#x3D;&quot;text-base font-medium text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+                {{ item.productName }}
+              &lt;/h3&gt;
+              &lt;p
+                class&#x3D;&quot;text-sm text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;
+                *ngIf&#x3D;&quot;item.productSku&quot;
+              &gt;
+                SKU: {{ item.productSku }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Quantity and Price --&gt;
+            &lt;div class&#x3D;&quot;text-right&quot;&gt;
+              &lt;p class&#x3D;&quot;text-sm text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;orderDetails.qty&quot; | translate }}: {{ item.quantity }}
+              &lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;orderDetails.unitPrice&quot; | translate }}:
+                {{ item.unitPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+              &lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-base font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+                {{ item.totalPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Summary --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.orderSummary&quot; | translate }}
+        &lt;/h2&gt;
+
+        &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+          &lt;div class&#x3D;&quot;flex justify-between text-sm&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-600&quot;&gt;{{
+              &quot;orderDetails.subtotal&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{
+              order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+            }}&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div
+            *ngIf&#x3D;&quot;order.discountAmount &gt; 0&quot;
+            class&#x3D;&quot;flex justify-between text-sm&quot;
+          &gt;
+            &lt;span class&#x3D;&quot;text-gray-600&quot;&gt;{{
+              &quot;orderDetails.discount&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;font-medium text-green-600&quot;
+              &gt;-{{
+                order.discountAmount | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span
+            &gt;
+          &lt;/div&gt;
+
+          &lt;!-- B2B Orders don&#x27;t show tax and shipping --&gt;
+          &lt;div class&#x3D;&quot;border-t border-gray-200 pt-3&quot;&gt;
+            &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+              &lt;span class&#x3D;&quot;text-base font-semibold text-gray-900&quot;&gt;{{
+                &quot;orderDetails.total&quot; | translate
+              }}&lt;/span&gt;
+              &lt;span class&#x3D;&quot;text-base font-semibold text-gray-900&quot;&gt;{{
+                order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Shipping and Billing Information --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-6&quot;&gt;
+        &lt;!-- Shipping Information --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;orderDetails.shippingInformation&quot; | translate }}
+          &lt;/h2&gt;
+
+          &lt;div *ngIf&#x3D;&quot;order.shippingAddress&quot; class&#x3D;&quot;space-y-2&quot;&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.shippingAddress&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;div class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              &lt;p *ngIf&#x3D;&quot;getShippingAddressField(&#x27;contactName&#x27;)&quot;&gt;
+                {{ getShippingAddressField(&quot;contactName&quot;) }}
+              &lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;getShippingAddressField(&#x27;address&#x27;)&quot;&gt;
+                {{ getShippingAddressField(&quot;address&quot;) }}
+              &lt;/p&gt;
+              &lt;p
+                *ngIf&#x3D;&quot;
+                  getShippingAddressField(&#x27;city&#x27;) &amp;&amp;
+                  getShippingAddressField(&#x27;postalCode&#x27;)
+                &quot;
+              &gt;
+                {{ getShippingAddressField(&quot;city&quot;) }},
+                {{ getShippingAddressField(&quot;postalCode&quot;) }}
+              &lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;getShippingAddressField(&#x27;country&#x27;)&quot;&gt;
+                {{ getShippingAddressField(&quot;country&quot;) }}
+              &lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;getShippingAddressField(&#x27;contactPhone&#x27;)&quot; class&#x3D;&quot;mt-2&quot;&gt;
+                {{ getShippingAddressField(&quot;contactPhone&quot;) }}
+              &lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;getShippingAddressField(&#x27;contactEmail&#x27;)&quot;&gt;
+                {{ getShippingAddressField(&quot;contactEmail&quot;) }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;mt-4&quot;&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.paymentMethod&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;mt-1 text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ getPaymentMethodLabel(order.paymentMethod || &quot;&quot;) | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Billing Information --&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;orderDetails.billingAddress&quot; | translate }}
+          &lt;/h2&gt;
+
+          &lt;div
+            *ngIf&#x3D;&quot;order.billingAddress&quot;
+            class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;
+            &lt;p
+              *ngIf&#x3D;&quot;getBillingAddressField(&#x27;companyName&#x27;)&quot;
+              class&#x3D;&quot;font-medium&quot;
+            &gt;
+              {{ getBillingAddressField(&quot;companyName&quot;) }}
+            &lt;/p&gt;
+            &lt;p *ngIf&#x3D;&quot;getBillingAddressField(&#x27;address&#x27;)&quot;&gt;
+              {{ getBillingAddressField(&quot;address&quot;) }}
+            &lt;/p&gt;
+            &lt;p *ngIf&#x3D;&quot;getBillingAddressField(&#x27;taxNumber&#x27;)&quot; class&#x3D;&quot;mt-2&quot;&gt;
+              {{ getBillingAddressField(&quot;taxNumber&quot;) }}
+            &lt;/p&gt;
+            &lt;p *ngIf&#x3D;&quot;getBillingAddressField(&#x27;email&#x27;)&quot; class&#x3D;&quot;mt-2&quot;&gt;
+              {{ getBillingAddressField(&quot;email&quot;) }}
+            &lt;/p&gt;
+            &lt;p *ngIf&#x3D;&quot;getBillingAddressField(&#x27;phone&#x27;)&quot;&gt;
+              {{ getBillingAddressField(&quot;phone&quot;) }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Notes --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;order.notes&quot;
+        class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+      &gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.orderNotes&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;p class&#x3D;&quot;text-sm text-gray-700 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{ order.notes }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./b2b-order-details.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen bg-gray-50 py-8">  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">    <!-- Header -->    <div class="mb-8">      <div class="flex items-center justify-between">        <div>          <h1 class="text-3xl font-bold text-gray-900 font-[\'Poppins\']">            {{ "orderDetails.title" | translate }}          </h1>          <p class="mt-2 text-gray-600 font-[\'DM_Sans\']" *ngIf="order">            {{ "orderDetails.orderPlacedOn" | translate }}            {{ getFormattedDate(order.orderDate) }}          </p>        </div>        <button          routerLink="/partneri/profil"          [queryParams]="{ tab: \'company-orders\' }"          class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium font-[\'DM_Sans\'] flex items-center space-x-2"        >          <svg            class="w-4 h-4"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M10 19l-7-7m0 0l7-7m-7 7h18"            />          </svg>          <span>{{ "orderDetails.backToOrders" | translate }}</span>        </button>      </div>    </div>    <!-- Loading State -->    <div *ngIf="loading" class="flex justify-center py-12">      <div        class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600"      ></div>    </div>    <!-- Error State -->    <div      *ngIf="error"      class="bg-red-50 border border-red-200 rounded-lg p-6 text-center"    >      <svg        class="w-12 h-12 text-red-400 mx-auto mb-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"        />      </svg>      <h3 class="text-lg font-medium text-red-800 mb-2">        {{ "orderDetails.orderNotFound" | translate }}      </h3>      <p class="text-red-600">        {{ "orderDetails.orderNotFoundMessage" | translate }}      </p>    </div>    <!-- Order Content -->    <div *ngIf="order && !loading" class="space-y-6">      <!-- Order Summary -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">          <!-- Order Number -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.orderNumber" | translate }}            </h3>            <p              class="mt-1 text-lg font-semibold text-gray-900 font-[\'Poppins\']"            >              {{ order.orderNumber }}            </p>          </div>          <!-- Order Status -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.status" | translate }}            </h3>            <span              class="mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[\'DM_Sans\']"              [ngClass]="{                \'bg-yellow-100 text-yellow-800\': order.status === \'pending\',                \'bg-blue-100 text-blue-800\': order.status === \'confirmed\',                \'bg-purple-100 text-purple-800\': order.status === \'processing\',                \'bg-indigo-100 text-indigo-800\': order.status === \'shipped\',                \'bg-green-100 text-green-800\': order.status === \'delivered\',                \'bg-red-100 text-red-800\': order.status === \'cancelled\',              }"            >              {{ getStatusLabel(order.status) | translate }}            </span>          </div>          <!-- Payment Status -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.payment" | translate }}            </h3>            <span              class="mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[\'DM_Sans\']"              [ngClass]="{                \'bg-yellow-100 text-yellow-800\':                  order.paymentStatus === \'pending\',                \'bg-green-100 text-green-800\': order.paymentStatus === \'paid\',                \'bg-red-100 text-red-800\': order.paymentStatus === \'failed\',              }"            >              {{ getPaymentStatusLabel(order.paymentStatus) | translate }}            </span>          </div>          <!-- Total Amount (Subtotal for B2B) -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.total" | translate }}            </h3>            <p              class="mt-1 text-lg font-semibold text-gray-900 font-[\'Poppins\']"            >              {{ order.subtotal | currency: "EUR" : "symbol" : "1.2-2" }}            </p>          </div>        </div>        <!-- Tracking Number -->        <div          *ngIf="order.trackingNumber"          class="mt-6 pt-6 border-t border-gray-200"        >          <div class="flex items-center justify-between">            <div>              <h3                class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"              >                {{ "orderDetails.trackingNumber" | translate }}              </h3>              <p class="mt-1 text-sm font-medium text-gray-900">                {{ order.trackingNumber }}              </p>            </div>            <button              class="text-solar-500 hover:text-solar-600 text-sm font-medium"            >              {{ "orderDetails.trackPackage" | translate }}            </button>          </div>        </div>      </div>      <!-- Order Items -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <h2 class="text-xl font-semibold text-gray-900 mb-6 font-[\'Poppins\']">          {{ "orderDetails.orderItems" | translate }}        </h2>        <div class="space-y-4">          <div            *ngFor="let item of order.items"            class="flex items-center space-x-4 py-4 border-b border-gray-200 last:border-b-0"          >            <!-- Product Image -->            <div              class="w-16 h-16 bg-gray-100 rounded-lg flex-shrink-0 flex items-center justify-center"            >              <img                *ngIf="item.productImageUrl"                [src]="item.productImageUrl"                [alt]="item.productName"                class="w-full h-full object-cover rounded-lg"                (error)="onImageError($event)"              />              <svg                *ngIf="!item.productImageUrl"                class="w-8 h-8 text-gray-400"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"                />              </svg>            </div>            <!-- Product Details -->            <div class="flex-1 min-w-0">              <h3 class="text-base font-medium text-gray-900 font-[\'Poppins\']">                {{ item.productName }}              </h3>              <p                class="text-sm text-gray-500 font-[\'DM_Sans\']"                *ngIf="item.productSku"              >                SKU: {{ item.productSku }}              </p>            </div>            <!-- Quantity and Price -->            <div class="text-right">              <p class="text-sm text-gray-500 font-[\'DM_Sans\']">                {{ "orderDetails.qty" | translate }}: {{ item.quantity }}              </p>              <p class="text-sm text-gray-900 font-[\'DM_Sans\']">                {{ "orderDetails.unitPrice" | translate }}:                {{ item.unitPrice | currency: "EUR" : "symbol" : "1.2-2" }}              </p>              <p class="text-base font-semibold text-gray-900 font-[\'Poppins\']">                {{ item.totalPrice | currency: "EUR" : "symbol" : "1.2-2" }}              </p>            </div>          </div>        </div>      </div>      <!-- Order Summary -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <h2 class="text-xl font-semibold text-gray-900 mb-6 font-[\'Poppins\']">          {{ "orderDetails.orderSummary" | translate }}        </h2>        <div class="space-y-3">          <div class="flex justify-between text-sm">            <span class="text-gray-600">{{              "orderDetails.subtotal" | translate            }}</span>            <span class="font-medium">{{              order.subtotal | currency: "EUR" : "symbol" : "1.2-2"            }}</span>          </div>          <div            *ngIf="order.discountAmount > 0"            class="flex justify-between text-sm"          >            <span class="text-gray-600">{{              "orderDetails.discount" | translate            }}</span>            <span class="font-medium text-green-600"              >-{{                order.discountAmount | currency: "EUR" : "symbol" : "1.2-2"              }}</span            >          </div>          <!-- B2B Orders don\'t show tax and shipping -->          <div class="border-t border-gray-200 pt-3">            <div class="flex justify-between">              <span class="text-base font-semibold text-gray-900">{{                "orderDetails.total" | translate              }}</span>              <span class="text-base font-semibold text-gray-900">{{                order.subtotal | currency: "EUR" : "symbol" : "1.2-2"              }}</span>            </div>          </div>        </div>      </div>      <!-- Shipping and Billing Information -->      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">        <!-- Shipping Information -->        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">          <h2 class="text-xl font-semibold text-gray-900 mb-4 font-[\'Poppins\']">            {{ "orderDetails.shippingInformation" | translate }}          </h2>          <div *ngIf="order.shippingAddress" class="space-y-2">            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.shippingAddress" | translate }}            </h3>            <div class="text-sm text-gray-900 font-[\'DM_Sans\']">              <p *ngIf="getShippingAddressField(\'contactName\')">                {{ getShippingAddressField("contactName") }}              </p>              <p *ngIf="getShippingAddressField(\'address\')">                {{ getShippingAddressField("address") }}              </p>              <p                *ngIf="                  getShippingAddressField(\'city\') &&                  getShippingAddressField(\'postalCode\')                "              >                {{ getShippingAddressField("city") }},                {{ getShippingAddressField("postalCode") }}              </p>              <p *ngIf="getShippingAddressField(\'country\')">                {{ getShippingAddressField("country") }}              </p>              <p *ngIf="getShippingAddressField(\'contactPhone\')" class="mt-2">                {{ getShippingAddressField("contactPhone") }}              </p>              <p *ngIf="getShippingAddressField(\'contactEmail\')">                {{ getShippingAddressField("contactEmail") }}              </p>            </div>          </div>          <div class="mt-4">            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.paymentMethod" | translate }}            </h3>            <p class="mt-1 text-sm text-gray-900 font-[\'DM_Sans\']">              {{ getPaymentMethodLabel(order.paymentMethod || "") | translate }}            </p>          </div>        </div>        <!-- Billing Information -->        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">          <h2 class="text-xl font-semibold text-gray-900 mb-4 font-[\'Poppins\']">            {{ "orderDetails.billingAddress" | translate }}          </h2>          <div            *ngIf="order.billingAddress"            class="text-sm text-gray-900 font-[\'DM_Sans\']"          >            <p              *ngIf="getBillingAddressField(\'companyName\')"              class="font-medium"            >              {{ getBillingAddressField("companyName") }}            </p>            <p *ngIf="getBillingAddressField(\'address\')">              {{ getBillingAddressField("address") }}            </p>            <p *ngIf="getBillingAddressField(\'taxNumber\')" class="mt-2">              {{ getBillingAddressField("taxNumber") }}            </p>            <p *ngIf="getBillingAddressField(\'email\')" class="mt-2">              {{ getBillingAddressField("email") }}            </p>            <p *ngIf="getBillingAddressField(\'phone\')">              {{ getBillingAddressField("phone") }}            </p>          </div>        </div>      </div>      <!-- Order Notes -->      <div        *ngIf="order.notes"        class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"      >        <h2 class="text-xl font-semibold text-gray-900 mb-4 font-[\'Poppins\']">          {{ "orderDetails.orderNotes" | translate }}        </h2>        <p class="text-sm text-gray-700 font-[\'DM_Sans\']">{{ order.notes }}</p>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'B2bOrderDetailsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'B2bOrderDetailsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

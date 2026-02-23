@@ -1,0 +1,1074 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ErpIntegrationService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/erp-integration.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#AUTH_TOKEN" >AUTH_TOKEN</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ERP_BASE_URL" >ERP_BASE_URL</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ERP_ENABLED" >ERP_ENABLED</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#http" >http</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#STOCK_ENDPOINT" >STOCK_ENDPOINT</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getAllStock" >getAllStock</a>
+                            </li>
+                            <li>
+                                <a href="#getStock" >getStock</a>
+                            </li>
+                            <li>
+                                <a href="#getStockBySku" >getStockBySku</a>
+                            </li>
+                            <li>
+                                <a href="#getStockBySkuAndUnit" >getStockBySkuAndUnit</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalStockQuantity" >getTotalStockQuantity</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllStock"></a>
+                    <span class="name">
+                        <span ><b>getAllStock</b></span>
+                        <a href="#getAllStock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllStock()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/shared/services/erp-integration.service.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get all stock data (no filters)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ErpStockResponse.html" target="_self" >Observable&lt;ErpStockResponse&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable of all stock data</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStock"></a>
+                    <span class="name">
+                        <span ><b>getStock</b></span>
+                        <a href="#getStock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStock(sku?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, unitId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/shared/services/erp-integration.service.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get all stock information from ERP system</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sku</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional šifra artikla to filter by (sent as &#39;artikl&#39; to ERP)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>unitId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional šifra radne jedinice to filter by (sent as &#39;radjed&#39; to ERP)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ErpStockResponse.html" target="_self" >Observable&lt;ErpStockResponse&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable of stock data</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStockBySku"></a>
+                    <span class="name">
+                        <span ><b>getStockBySku</b></span>
+                        <a href="#getStockBySku"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStockBySku(sku: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/shared/services/erp-integration.service.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get stock for a specific product across all units</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sku</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Šifra artikla</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ErpStockResponse.html" target="_self" >Observable&lt;ErpStockResponse&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable of stock data for all units</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStockBySkuAndUnit"></a>
+                    <span class="name">
+                        <span ><b>getStockBySkuAndUnit</b></span>
+                        <a href="#getStockBySkuAndUnit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStockBySkuAndUnit(sku: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, unitId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/shared/services/erp-integration.service.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get stock for a specific product and unit</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sku</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Šifra artikla</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>unitId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Šifra radne jedinice</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ErpStockResponse.html" target="_self" >Observable&lt;ErpStockResponse&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable of stock data for specific product and unit</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalStockQuantity"></a>
+                    <span class="name">
+                        <span ><b>getTotalStockQuantity</b></span>
+                        <a href="#getTotalStockQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalStockQuantity(sku: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/shared/services/erp-integration.service.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calculate total stock quantity for a product across all units</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sku</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Šifra artikla</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;number&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable of total stock quantity</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="AUTH_TOKEN"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>AUTH_TOKEN</b></span>
+                        <a href="#AUTH_TOKEN"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.erp.authToken</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/services/erp-integration.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ERP_BASE_URL"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ERP_BASE_URL</b></span>
+                        <a href="#ERP_BASE_URL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.erp.baseUrl</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/services/erp-integration.service.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ERP_ENABLED"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ERP_ENABLED</b></span>
+                        <a href="#ERP_ENABLED"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>environment.erp.enabled</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/shared/services/erp-integration.service.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="http"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>http</b></span>
+                        <a href="#http"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(HttpClient)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/services/erp-integration.service.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STOCK_ENDPOINT"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>STOCK_ENDPOINT</b></span>
+                        <a href="#STOCK_ENDPOINT"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;/zaliha&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/services/erp-integration.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient, HttpParams } from &#x27;@angular/common/http&#x27;;
+import { Observable, of } from &#x27;rxjs&#x27;;
+import { catchError, map } from &#x27;rxjs/operators&#x27;;
+import { environment } from &#x27;../../../environments/environment&#x27;;
+
+/**
+ * ERP Stock Item as returned from the API
+ * Note: API uses uppercase field names
+ */
+export interface ErpStockItem {
+  ARTIKL: string; // Šifra artikla (Product SKU)
+  RADJED: string; // Šifra radne jedinice (Unit ID)
+  RADJEDNAZIV?: string; // Naziv radne jedinice (Unit name)
+  ZALIHA: number; // Količina (Stock quantity)
+  VEL_CIJENA: number; // Veleprodajna cijena (Wholesale price)
+  MAL_CIJENA: number; // Maloprodajna cijena (Retail price)
+}
+
+/**
+ * Normalized stock item for internal use
+ */
+export interface StockItem {
+  sku: string; // Šifra artikla
+  unitId: string; // Šifra radne jedinice
+  unitName?: string; // Naziv radne jedinice
+  quantity: number; // Količina
+  wholesalePrice: number; // Veleprodajna cijena
+  retailPrice: number; // Maloprodajna cijena
+}
+
+export interface ErpStockResponse {
+  success: boolean;
+  data?: StockItem[];
+  rawData?: ErpStockItem[];
+  error?: string;
+}
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ErpIntegrationService {
+  private readonly ERP_BASE_URL &#x3D; environment.erp.baseUrl;
+  private readonly STOCK_ENDPOINT &#x3D; &#x27;/zaliha&#x27;;
+  private readonly AUTH_TOKEN &#x3D; environment.erp.authToken;
+  private readonly ERP_ENABLED &#x3D; environment.erp.enabled;
+
+  private http &#x3D; inject(HttpClient);
+
+  /**
+   * Get all stock information from ERP system
+   * @param sku - Optional šifra artikla to filter by (sent as &#x27;artikl&#x27; to ERP)
+   * @param unitId - Optional šifra radne jedinice to filter by (sent as &#x27;radjed&#x27; to ERP)
+   * @returns Observable of stock data
+   */
+  getStock(sku?: string, unitId?: string): Observable&lt;ErpStockResponse&gt; {
+    // Check if ERP integration is enabled
+    if (!this.ERP_ENABLED) {
+      console.warn(&#x27;[ERP] Integration is disabled in this environment&#x27;);
+      return of({
+        success: false,
+        error: &#x27;ERP integracija nije dostupna u ovom okruženju.&#x27;,
+      });
+    }
+
+    // Check if we&#x27;re using a proxy (no /zaliha endpoint in URL)
+    const isProxy &#x3D; this.ERP_BASE_URL.includes(&#x27;/api/erp-proxy&#x27;);
+
+    // Build query parameters
+    let params &#x3D; new HttpParams();
+
+    // Only add auth token if NOT using proxy (proxy handles auth internally)
+    if (!isProxy &amp;&amp; this.AUTH_TOKEN) {
+      params &#x3D; params.set(&#x27;auth&#x27;, this.AUTH_TOKEN);
+    }
+
+    if (sku) {
+      params &#x3D; params.set(&#x27;artikl&#x27;, sku);
+    }
+
+    if (unitId) {
+      params &#x3D; params.set(&#x27;radjed&#x27;, unitId);
+    }
+
+    // Build URL - proxy doesn&#x27;t need /zaliha endpoint
+    const url &#x3D; isProxy
+      ? this.ERP_BASE_URL
+      : &#x60;${this.ERP_BASE_URL}${this.STOCK_ENDPOINT}&#x60;;
+    console.log(&#x27;[ERP] Fetching from:&#x27;, isProxy ? &#x27;proxy&#x27; : &#x27;direct&#x27;, url);
+
+    return this.http.get&lt;ErpStockItem[]&gt;(url, { params }).pipe(
+      map((response) &#x3D;&gt; {
+        const rawData &#x3D; Array.isArray(response) ? response : [response];
+        const normalizedData: StockItem[] &#x3D; rawData.map((item) &#x3D;&gt; {
+          // Log items without RADJEDNAZIV for debugging
+          if (!item.RADJEDNAZIV) {
+            console.log(
+              &#x60;[ERP] Unit ${item.RADJED} missing RADJEDNAZIV. Full item:&#x60;,
+              item,
+            );
+          }
+
+          return {
+            sku: item.ARTIKL,
+            unitId: item.RADJED,
+            unitName: item.RADJEDNAZIV || item.RADJED, // Fallback to unit ID if name not available
+            quantity: item.ZALIHA,
+            wholesalePrice: item.VEL_CIJENA,
+            retailPrice: item.MAL_CIJENA,
+          };
+        });
+
+        return {
+          success: true,
+          data: normalizedData,
+          rawData: rawData,
+        };
+      }),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;ERP Stock fetch failed:&#x27;, error);
+
+        // Provide user-friendly error messages based on error type
+        let errorMessage &#x3D; &#x27;Greška pri povezivanju s ERP sustavom&#x27;;
+
+        if (error.status &#x3D;&#x3D;&#x3D; 0) {
+          // Network error, CORS, or SSL certificate issue
+          errorMessage &#x3D;
+            &#x27;Nije moguće povezati se s ERP serverom. Mogući uzroci:\n&#x27; +
+            &#x27;• SSL certifikat servera nije valjan\n&#x27; +
+            &#x27;• CORS politika blokira zahtjev\n&#x27; +
+            &#x27;• Server nije dostupan\n&#x27; +
+            &#x27;• Provjerite mrežnu vezu&#x27;;
+        } else if (error.status &#x3D;&#x3D;&#x3D; 401 || error.status &#x3D;&#x3D;&#x3D; 403) {
+          errorMessage &#x3D;
+            &#x27;Autentifikacija neuspješna. Molimo provjerite auth token.&#x27;;
+        } else if (error.status &#x3D;&#x3D;&#x3D; 404) {
+          errorMessage &#x3D; &#x27;ERP endpoint nije pronađen.&#x27;;
+        } else if (error.status &#x3D;&#x3D;&#x3D; 500) {
+          errorMessage &#x3D; &#x27;Greška na ERP serveru. Pokušajte ponovno kasnije.&#x27;;
+        } else if (error.message &amp;&amp; !error.message.includes(&#x27;Http failure&#x27;)) {
+          errorMessage &#x3D; error.message;
+        }
+
+        return of({
+          success: false,
+          error: errorMessage,
+        });
+      }),
+    );
+  }
+
+  /**
+   * Get all stock data (no filters)
+   * @returns Observable of all stock data
+   */
+  getAllStock(): Observable&lt;ErpStockResponse&gt; {
+    return this.getStock();
+  }
+
+  /**
+   * Get stock for a specific product across all units
+   * @param sku - Šifra artikla
+   * @returns Observable of stock data for all units
+   */
+  getStockBySku(sku: string): Observable&lt;ErpStockResponse&gt; {
+    return this.getStock(sku);
+  }
+
+  /**
+   * Get stock for a specific product and unit
+   * @param sku - Šifra artikla
+   * @param unitId - Šifra radne jedinice
+   * @returns Observable of stock data for specific product and unit
+   */
+  getStockBySkuAndUnit(
+    sku: string,
+    unitId: string,
+  ): Observable&lt;ErpStockResponse&gt; {
+    return this.getStock(sku, unitId);
+  }
+
+  /**
+   * Calculate total stock quantity for a product across all units
+   * @param sku - Šifra artikla
+   * @returns Observable of total stock quantity
+   */
+  getTotalStockQuantity(sku: string): Observable&lt;number&gt; {
+    return this.getStockBySku(sku).pipe(
+      map((response) &#x3D;&gt; {
+        if (response.success &amp;&amp; response.data) {
+          return response.data.reduce(
+            (total, item) &#x3D;&gt; total + item.quantity,
+            0,
+          );
+        }
+        return 0;
+      }),
+    );
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ErpIntegrationService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

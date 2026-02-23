@@ -1,0 +1,3029 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SortOptionsManagementComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/admin/sort-options/sort-options-management.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-sort-options-management</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./sort-options-management.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./sort-options-management.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#availableFields" >availableFields</a>
+                            </li>
+                            <li>
+                                <a href="#codeExists" >codeExists</a>
+                            </li>
+                            <li>
+                                <a href="#currentLang" >currentLang</a>
+                            </li>
+                            <li>
+                                <a href="#deleting" >deleting</a>
+                            </li>
+                            <li>
+                                <a href="#deletingOption" >deletingOption</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#editingOption" >editingOption</a>
+                            </li>
+                            <li>
+                                <a href="#formData" >formData</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#saving" >saving</a>
+                            </li>
+                            <li>
+                                <a href="#showDeleteModal" >showDeleteModal</a>
+                            </li>
+                            <li>
+                                <a href="#showModal" >showModal</a>
+                            </li>
+                            <li>
+                                <a href="#sortOptions" >sortOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sortOptionsService" >sortOptionsService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addSortField" >addSortField</a>
+                            </li>
+                            <li>
+                                <a href="#closeDeleteModal" >closeDeleteModal</a>
+                            </li>
+                            <li>
+                                <a href="#closeModal" >closeModal</a>
+                            </li>
+                            <li>
+                                <a href="#confirmDelete" >confirmDelete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteOption" >deleteOption</a>
+                            </li>
+                            <li>
+                                <a href="#getFieldLabel" >getFieldLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getSortFields" >getSortFields</a>
+                            </li>
+                            <li>
+                                <a href="#moveSortField" >moveSortField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#moveSortOption" >moveSortOption</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openAddModal" >openAddModal</a>
+                            </li>
+                            <li>
+                                <a href="#openEditModal" >openEditModal</a>
+                            </li>
+                            <li>
+                                <a href="#removeSortField" >removeSortField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#saveOption" >saveOption</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#setAsDefault" >setAsDefault</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#toggleEnabled" >toggleEnabled</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#sortOptionsChanged" >sortOptionsChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sortOptionsChanged"></a>
+                        <b>sortOptionsChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:35</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addSortField"></a>
+                    <span class="name">
+                        <span ><b>addSortField</b></span>
+                        <a href="#addSortField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addSortField()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="312"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:312</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeDeleteModal"></a>
+                    <span class="name">
+                        <span ><b>closeDeleteModal</b></span>
+                        <a href="#closeDeleteModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeDeleteModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeModal"></a>
+                    <span class="name">
+                        <span ><b>closeModal</b></span>
+                        <a href="#closeModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:143</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmDelete"></a>
+                    <span class="name">
+                        <span ><b>confirmDelete</b></span>
+                        <a href="#confirmDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmDelete(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteOption</b></span>
+                        <a href="#deleteOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteOption()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:220</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFieldLabel"></a>
+                    <span class="name">
+                        <span ><b>getFieldLabel</b></span>
+                        <a href="#getFieldLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFieldLabel(field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSortFields"></a>
+                    <span class="name">
+                        <span ><b>getSortFields</b></span>
+                        <a href="#getSortFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSortFields(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="303"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:303</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SortField.html" target="_self" >SortField[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="moveSortField"></a>
+                    <span class="name">
+                        <span ><b>moveSortField</b></span>
+                        <a href="#moveSortField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>moveSortField(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, direction: unknown | "1")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="324"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:324</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>direction</td>
+                                            <td>
+                                                        <code>unknown | &quot;1&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="moveSortOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>moveSortOption</b></span>
+                        <a href="#moveSortOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>moveSortOption(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>, direction: unknown | "1")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>direction</td>
+                                            <td>
+                                                        <code>unknown | &quot;1&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openAddModal"></a>
+                    <span class="name">
+                        <span ><b>openAddModal</b></span>
+                        <a href="#openAddModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openAddModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openEditModal"></a>
+                    <span class="name">
+                        <span ><b>openEditModal</b></span>
+                        <a href="#openEditModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openEditModal(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeSortField"></a>
+                    <span class="name">
+                        <span ><b>removeSortField</b></span>
+                        <a href="#removeSortField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeSortField(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="317"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:317</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>saveOption</b></span>
+                        <a href="#saveOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>saveOption()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setAsDefault"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>setAsDefault</b></span>
+                        <a href="#setAsDefault"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setAsDefault(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:250</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleEnabled"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>toggleEnabled</b></span>
+                        <a href="#toggleEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleEnabled(option: <a href="../interfaces/SortOption.html" target="_self">SortOption</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="availableFields"></a>
+                    <span class="name">
+                        <span ><b>availableFields</b></span>
+                        <a href="#availableFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="codeExists"></a>
+                    <span class="name">
+                        <span ><b>codeExists</b></span>
+                        <a href="#codeExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentLang"></a>
+                    <span class="name">
+                        <span ><b>currentLang</b></span>
+                        <a href="#currentLang"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;hr&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleting"></a>
+                    <span class="name">
+                        <span ><b>deleting</b></span>
+                        <a href="#deleting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deletingOption"></a>
+                    <span class="name">
+                        <span ><b>deletingOption</b></span>
+                        <a href="#deletingOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortOption.html" target="_self" >SortOption | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editingOption"></a>
+                    <span class="name">
+                        <span ><b>editingOption</b></span>
+                        <a href="#editingOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortOption.html" target="_self" >SortOption | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formData"></a>
+                    <span class="name">
+                        <span ><b>formData</b></span>
+                        <a href="#formData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortOption.html" target="_self" >Omit&lt;SortOption | &quot;id&quot; | &quot;created_at&quot; | &quot;updated_at&quot;&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    code: &#x27;&#x27;,
+    label_hr: &#x27;&#x27;,
+    label_en: &#x27;&#x27;,
+    field: &#x27;name&#x27;,
+    direction: &#x27;asc&#x27;,
+    sort_fields: [{ field: &#x27;name&#x27;, direction: &#x27;asc&#x27; }],
+    is_default: false,
+    is_enabled: true,
+    display_order: 0,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saving"></a>
+                    <span class="name">
+                        <span ><b>saving</b></span>
+                        <a href="#saving"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDeleteModal"></a>
+                    <span class="name">
+                        <span ><b>showDeleteModal</b></span>
+                        <a href="#showDeleteModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showModal"></a>
+                    <span class="name">
+                        <span ><b>showModal</b></span>
+                        <a href="#showModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortOptions"></a>
+                    <span class="name">
+                        <span ><b>sortOptions</b></span>
+                        <a href="#sortOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/SortOption.html" target="_self" >SortOption[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortOptionsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sortOptionsService</b></span>
+                        <a href="#sortOptionsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SortOptionsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/admin/sort-options/sort-options-management.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  OnInit,
+  OnDestroy,
+  inject,
+  EventEmitter,
+  Output,
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import {
+  SortOptionsService,
+  SortOption,
+  SortField,
+} from &#x27;../../../shared/services/sort-options.service&#x27;;
+import { TranslatePipe } from &#x27;../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../shared/services/translation.service&#x27;;
+import { ToastService } from &#x27;../../../shared/services/toast.service&#x27;;
+
+@Component({
+  selector: &#x27;app-sort-options-management&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, TranslatePipe],
+  templateUrl: &#x27;./sort-options-management.component.html&#x27;,
+  styleUrls: [&#x27;./sort-options-management.component.scss&#x27;],
+})
+export class SortOptionsManagementComponent implements OnInit, OnDestroy {
+  private sortOptionsService &#x3D; inject(SortOptionsService);
+  private translationService &#x3D; inject(TranslationService);
+  private toastService &#x3D; inject(ToastService);
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  @Output() sortOptionsChanged &#x3D; new EventEmitter&lt;void&gt;();
+
+  sortOptions: SortOption[] &#x3D; [];
+  loading &#x3D; true;
+  saving &#x3D; false;
+  deleting &#x3D; false;
+
+  showModal &#x3D; false;
+  showDeleteModal &#x3D; false;
+  editingOption: SortOption | null &#x3D; null;
+  deletingOption: SortOption | null &#x3D; null;
+  codeExists &#x3D; false;
+
+  availableFields: { value: string; label_hr: string; label_en: string }[] &#x3D; [];
+  currentLang &#x3D; &#x27;hr&#x27;;
+
+  formData: Omit&lt;SortOption, &#x27;id&#x27; | &#x27;created_at&#x27; | &#x27;updated_at&#x27;&gt; &#x3D; {
+    code: &#x27;&#x27;,
+    label_hr: &#x27;&#x27;,
+    label_en: &#x27;&#x27;,
+    field: &#x27;name&#x27;,
+    direction: &#x27;asc&#x27;,
+    sort_fields: [{ field: &#x27;name&#x27;, direction: &#x27;asc&#x27; }],
+    is_default: false,
+    is_enabled: true,
+    display_order: 0,
+  };
+
+  ngOnInit(): void {
+    this.availableFields &#x3D; this.sortOptionsService.getAvailableFields();
+    this.currentLang &#x3D; this.translationService.getCurrentLanguage();
+
+    this.translationService.currentLanguage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((lang) &#x3D;&gt; {
+        this.currentLang &#x3D; lang;
+      });
+
+    this.sortOptionsService.sortOptions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((options) &#x3D;&gt; {
+        this.sortOptions &#x3D; options;
+      });
+
+    this.sortOptionsService.loading$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((loading) &#x3D;&gt; {
+        this.loading &#x3D; loading;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getFieldLabel(field: string): string {
+    const found &#x3D; this.availableFields.find((f) &#x3D;&gt; f.value &#x3D;&#x3D;&#x3D; field);
+    if (found) {
+      return this.currentLang &#x3D;&#x3D;&#x3D; &#x27;en&#x27; ? found.label_en : found.label_hr;
+    }
+    return field;
+  }
+
+  openAddModal(): void {
+    this.editingOption &#x3D; null;
+    this.formData &#x3D; {
+      code: &#x27;&#x27;,
+      label_hr: &#x27;&#x27;,
+      label_en: &#x27;&#x27;,
+      field: &#x27;name&#x27;,
+      direction: &#x27;asc&#x27;,
+      sort_fields: [{ field: &#x27;name&#x27;, direction: &#x27;asc&#x27; }],
+      is_default: false,
+      is_enabled: true,
+      display_order: this.sortOptions.length,
+    };
+    this.codeExists &#x3D; false;
+    this.showModal &#x3D; true;
+  }
+
+  openEditModal(option: SortOption): void {
+    this.editingOption &#x3D; option;
+    // Get sort_fields from option, or create from legacy field/direction
+    // Deep copy the sort_fields array to avoid reference issues
+    const sortFields &#x3D;
+      option.sort_fields &amp;&amp; option.sort_fields.length &gt; 0
+        ? option.sort_fields.map((sf) &#x3D;&gt; ({
+            field: sf.field,
+            direction: sf.direction,
+          }))
+        : [{ field: option.field, direction: option.direction }];
+
+    this.formData &#x3D; {
+      code: option.code,
+      label_hr: option.label_hr,
+      label_en: option.label_en,
+      field: option.field,
+      direction: option.direction,
+      sort_fields: sortFields,
+      is_default: option.is_default,
+      is_enabled: option.is_enabled,
+      display_order: option.display_order,
+    };
+    this.codeExists &#x3D; false;
+    this.showModal &#x3D; true;
+  }
+
+  closeModal(): void {
+    this.showModal &#x3D; false;
+    this.editingOption &#x3D; null;
+  }
+
+  async saveOption(): Promise&lt;void&gt; {
+    if (this.saving) return;
+
+    // Check for duplicate code when creating new
+    if (!this.editingOption) {
+      const existingCodes &#x3D; this.sortOptions.map((o) &#x3D;&gt; o.code.toLowerCase());
+      if (existingCodes.includes(this.formData.code.toLowerCase())) {
+        this.codeExists &#x3D; true;
+        return;
+      }
+    }
+
+    // Sync legacy field/direction with first sort_fields entry
+    if (this.formData.sort_fields.length &gt; 0) {
+      this.formData.field &#x3D; this.formData.sort_fields[0].field;
+      this.formData.direction &#x3D; this.formData.sort_fields[0].direction;
+    }
+
+    this.saving &#x3D; true;
+
+    try {
+      if (this.editingOption) {
+        const success &#x3D; await this.sortOptionsService.updateSortOption(
+          this.editingOption.id!,
+          this.formData,
+        );
+        if (success) {
+          this.toastService.showSuccess(
+            this.translationService.translate(&#x27;sortOptions.sortOptionUpdated&#x27;),
+          );
+          this.sortOptionsChanged.emit();
+        } else {
+          this.toastService.showError(
+            this.translationService.translate(&#x27;sortOptions.errorUpdating&#x27;),
+          );
+        }
+      } else {
+        const result &#x3D; await this.sortOptionsService.createSortOption(
+          this.formData,
+        );
+        if (result) {
+          this.toastService.showSuccess(
+            this.translationService.translate(&#x27;sortOptions.sortOptionCreated&#x27;),
+          );
+          this.sortOptionsChanged.emit();
+        } else {
+          this.toastService.showError(
+            this.translationService.translate(&#x27;sortOptions.errorCreating&#x27;),
+          );
+        }
+      }
+      this.closeModal();
+    } catch (error) {
+      console.error(&#x27;Error saving sort option:&#x27;, error);
+      this.toastService.showError(
+        this.translationService.translate(&#x27;sortOptions.errorCreating&#x27;),
+      );
+    } finally {
+      this.saving &#x3D; false;
+    }
+  }
+
+  confirmDelete(option: SortOption): void {
+    this.deletingOption &#x3D; option;
+    this.showDeleteModal &#x3D; true;
+  }
+
+  closeDeleteModal(): void {
+    this.showDeleteModal &#x3D; false;
+    this.deletingOption &#x3D; null;
+  }
+
+  async deleteOption(): Promise&lt;void&gt; {
+    if (!this.deletingOption || this.deleting) return;
+
+    this.deleting &#x3D; true;
+
+    try {
+      const success &#x3D; await this.sortOptionsService.deleteSortOption(
+        this.deletingOption.id!,
+      );
+      if (success) {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;sortOptions.sortOptionDeleted&#x27;),
+        );
+        this.sortOptionsChanged.emit();
+      } else {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;sortOptions.errorDeleting&#x27;),
+        );
+      }
+      this.closeDeleteModal();
+    } catch (error) {
+      console.error(&#x27;Error deleting sort option:&#x27;, error);
+      this.toastService.showError(
+        this.translationService.translate(&#x27;sortOptions.errorDeleting&#x27;),
+      );
+    } finally {
+      this.deleting &#x3D; false;
+    }
+  }
+
+  async setAsDefault(option: SortOption): Promise&lt;void&gt; {
+    if (option.is_default) return;
+
+    const success &#x3D; await this.sortOptionsService.setDefaultSortOption(
+      option.id!,
+    );
+    if (success) {
+      this.toastService.showSuccess(
+        this.translationService.translate(&#x27;sortOptions.sortOptionUpdated&#x27;),
+      );
+      this.sortOptionsChanged.emit();
+    } else {
+      this.toastService.showError(
+        this.translationService.translate(&#x27;sortOptions.errorUpdating&#x27;),
+      );
+    }
+  }
+
+  async toggleEnabled(option: SortOption): Promise&lt;void&gt; {
+    const success &#x3D; await this.sortOptionsService.toggleSortOptionEnabled(
+      option.id!,
+      !option.is_enabled,
+    );
+    if (success) {
+      this.sortOptionsChanged.emit();
+    } else {
+      this.toastService.showError(
+        this.translationService.translate(&#x27;sortOptions.errorUpdating&#x27;),
+      );
+    }
+  }
+
+  async moveSortOption(option: SortOption, direction: -1 | 1): Promise&lt;void&gt; {
+    const currentIndex &#x3D; this.sortOptions.findIndex((o) &#x3D;&gt; o.id &#x3D;&#x3D;&#x3D; option.id);
+    const newIndex &#x3D; currentIndex + direction;
+
+    if (newIndex &lt; 0 || newIndex &gt;&#x3D; this.sortOptions.length) return;
+
+    const otherOption &#x3D; this.sortOptions[newIndex];
+
+    // Swap display orders using actual index positions to ensure unique values
+    const updates &#x3D; [
+      { id: option.id!, display_order: newIndex },
+      { id: otherOption.id!, display_order: currentIndex },
+    ];
+
+    const success &#x3D; await this.sortOptionsService.updateDisplayOrder(updates);
+    if (success) {
+      this.sortOptionsChanged.emit();
+    }
+  }
+
+  // Helper to get sort fields from an option (with legacy fallback)
+  getSortFields(option: SortOption): SortField[] {
+    if (option.sort_fields &amp;&amp; option.sort_fields.length &gt; 0) {
+      return option.sort_fields;
+    }
+    // Fallback to legacy single field/direction
+    return [{ field: option.field, direction: option.direction }];
+  }
+
+  // Add a new sort field to the form
+  addSortField(): void {
+    this.formData.sort_fields.push({ field: &#x27;name&#x27;, direction: &#x27;asc&#x27; });
+  }
+
+  // Remove a sort field from the form
+  removeSortField(index: number): void {
+    if (this.formData.sort_fields.length &gt; 1) {
+      this.formData.sort_fields.splice(index, 1);
+    }
+  }
+
+  // Move a sort field up or down in the list
+  moveSortField(index: number, direction: -1 | 1): void {
+    const newIndex &#x3D; index + direction;
+    if (newIndex &lt; 0 || newIndex &gt;&#x3D; this.formData.sort_fields.length) return;
+
+    // Create a new array with swapped positions to trigger Angular change detection
+    const newArray &#x3D; [...this.formData.sort_fields];
+    const temp &#x3D; { ...newArray[index] };
+    newArray[index] &#x3D; { ...newArray[newIndex] };
+    newArray[newIndex] &#x3D; temp;
+    this.formData.sort_fields &#x3D; newArray;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 mb-6&quot;&gt;
+  &lt;!-- Header --&gt;
+  &lt;div class&#x3D;&quot;px-6 py-4 border-b border-gray-200&quot;&gt;
+    &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+      &lt;div&gt;
+        &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900&quot;&gt;
+          {{ &quot;sortOptions.manageSortOptions&quot; | translate }}
+        &lt;/h3&gt;
+        &lt;p class&#x3D;&quot;text-sm text-gray-500 mt-1&quot;&gt;
+          {{ &quot;sortOptions.subtitle&quot; | translate }}
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;button
+        (click)&#x3D;&quot;openAddModal()&quot;
+        class&#x3D;&quot;inline-flex items-center px-4 py-2 bg-solar-500 text-white text-sm font-medium rounded-lg hover:bg-solar-700 transition-colors&quot;
+      &gt;
+        &lt;svg
+          class&#x3D;&quot;w-4 h-4 mr-2&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M12 4v16m8-8H4&quot;
+          /&gt;
+        &lt;/svg&gt;
+        {{ &quot;sortOptions.addSortOption&quot; | translate }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Sort Options List --&gt;
+  &lt;div class&#x3D;&quot;p-6&quot;&gt;
+    &lt;!-- Loading State --&gt;
+    &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex justify-center py-8&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600&quot;
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Empty State --&gt;
+    &lt;div *ngIf&#x3D;&quot;!loading &amp;&amp; sortOptions.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;text-center py-8&quot;&gt;
+      &lt;svg
+        class&#x3D;&quot;w-12 h-12 text-gray-400 mx-auto mb-3&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;p class&#x3D;&quot;text-gray-500 font-medium&quot;&gt;
+        {{ &quot;sortOptions.noSortOptions&quot; | translate }}
+      &lt;/p&gt;
+      &lt;p class&#x3D;&quot;text-gray-400 text-sm mt-1&quot;&gt;
+        {{ &quot;sortOptions.noSortOptionsDescription&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Sort Options Table --&gt;
+    &lt;div *ngIf&#x3D;&quot;!loading &amp;&amp; sortOptions.length &gt; 0&quot; class&#x3D;&quot;overflow-x-auto&quot;&gt;
+      &lt;table class&#x3D;&quot;min-w-full divide-y divide-gray-200&quot;&gt;
+        &lt;thead class&#x3D;&quot;bg-gray-50&quot;&gt;
+          &lt;tr&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.displayOrder&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.code&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.labelHr&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.labelEn&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.sortFields&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.isDefault&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;sortOptions.isEnabled&quot; | translate }}
+            &lt;/th&gt;
+            &lt;th
+              class&#x3D;&quot;px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider&quot;
+            &gt;
+              {{ &quot;common.actions&quot; | translate }}
+            &lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody class&#x3D;&quot;bg-white divide-y divide-gray-200&quot;&gt;
+          &lt;tr
+            *ngFor&#x3D;&quot;let option of sortOptions; let i &#x3D; index&quot;
+            class&#x3D;&quot;hover:bg-gray-50&quot;
+          &gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;moveSortOption(option, -1)&quot;
+                  [disabled]&#x3D;&quot;i &#x3D;&#x3D;&#x3D; 0&quot;
+                  class&#x3D;&quot;p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M5 15l7-7 7 7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;span class&#x3D;&quot;text-sm text-gray-900&quot;&gt;{{
+                  option.display_order
+                }}&lt;/span&gt;
+                &lt;button
+                  (click)&#x3D;&quot;moveSortOption(option, 1)&quot;
+                  [disabled]&#x3D;&quot;i &#x3D;&#x3D;&#x3D; sortOptions.length - 1&quot;
+                  class&#x3D;&quot;p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap&quot;&gt;
+              &lt;span class&#x3D;&quot;text-sm font-mono text-gray-900&quot;&gt;{{
+                option.code
+              }}&lt;/span&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap&quot;&gt;
+              &lt;span class&#x3D;&quot;text-sm text-gray-900&quot;&gt;{{ option.label_hr }}&lt;/span&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap&quot;&gt;
+              &lt;span class&#x3D;&quot;text-sm text-gray-900&quot;&gt;{{ option.label_en }}&lt;/span&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3&quot;&gt;
+              &lt;div class&#x3D;&quot;flex flex-wrap gap-1&quot;&gt;
+                &lt;span
+                  *ngFor&#x3D;&quot;let sf of getSortFields(option); let i &#x3D; index&quot;
+                  class&#x3D;&quot;inline-flex items-center px-2 py-1 rounded text-xs font-medium&quot;
+                  [class.bg-blue-100]&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;&quot;
+                  [class.text-blue-800]&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;&quot;
+                  [class.bg-purple-100]&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;desc&#x27;&quot;
+                  [class.text-purple-800]&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;desc&#x27;&quot;
+                &gt;
+                  {{ getFieldLabel(sf.field) }}
+                  &lt;svg
+                    *ngIf&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;&quot;
+                    class&#x3D;&quot;w-3 h-3 ml-1&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M5 15l7-7 7 7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                  &lt;svg
+                    *ngIf&#x3D;&quot;sf.direction &#x3D;&#x3D;&#x3D; &#x27;desc&#x27;&quot;
+                    class&#x3D;&quot;w-3 h-3 ml-1&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap text-center&quot;&gt;
+              &lt;button
+                (click)&#x3D;&quot;setAsDefault(option)&quot;
+                [disabled]&#x3D;&quot;option.is_default&quot;
+                class&#x3D;&quot;p-1 rounded-full transition-colors&quot;
+                [class.text-yellow-500]&#x3D;&quot;option.is_default&quot;
+                [class.text-gray-300]&#x3D;&quot;!option.is_default&quot;
+                [class.hover:text-yellow-400]&#x3D;&quot;!option.is_default&quot;
+                [title]&#x3D;&quot;
+                  option.is_default
+                    ? (&#x27;sortOptions.isDefault&#x27; | translate)
+                    : (&#x27;sortOptions.setAsDefault&#x27; | translate)
+                &quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;w-5 h-5&quot;
+                  [class.fill-current]&#x3D;&quot;option.is_default&quot;
+                  [class.stroke-current]&#x3D;&quot;!option.is_default&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    *ngIf&#x3D;&quot;option.is_default&quot;
+                    d&#x3D;&quot;M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z&quot;
+                  /&gt;
+                  &lt;path
+                    *ngIf&#x3D;&quot;!option.is_default&quot;
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    fill&#x3D;&quot;none&quot;
+                    d&#x3D;&quot;M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap text-center&quot;&gt;
+              &lt;button
+                (click)&#x3D;&quot;toggleEnabled(option)&quot;
+                class&#x3D;&quot;relative inline-flex h-6 w-11 items-center rounded-full transition-colors&quot;
+                [class.bg-green-600]&#x3D;&quot;option.is_enabled&quot;
+                [class.bg-gray-300]&#x3D;&quot;!option.is_enabled&quot;
+              &gt;
+                &lt;span
+                  class&#x3D;&quot;inline-block h-4 w-4 transform rounded-full bg-white transition-transform&quot;
+                  [class.translate-x-6]&#x3D;&quot;option.is_enabled&quot;
+                  [class.translate-x-1]&#x3D;&quot;!option.is_enabled&quot;
+                &gt;&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/td&gt;
+            &lt;td class&#x3D;&quot;px-4 py-3 whitespace-nowrap text-right&quot;&gt;
+              &lt;div class&#x3D;&quot;flex items-center justify-end space-x-2&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;openEditModal(option)&quot;
+                  class&#x3D;&quot;p-1 text-blue-600 hover:text-blue-800 transition-colors&quot;
+                  [title]&#x3D;&quot;&#x27;common.edit&#x27; | translate&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-5 h-5&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;confirmDelete(option)&quot;
+                  class&#x3D;&quot;p-1 text-red-600 hover:text-red-800 transition-colors&quot;
+                  [title]&#x3D;&quot;&#x27;common.delete&#x27; | translate&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-5 h-5&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Add/Edit Modal --&gt;
+&lt;div *ngIf&#x3D;&quot;showModal&quot; class&#x3D;&quot;fixed inset-0 z-50 overflow-y-auto&quot;&gt;
+  &lt;div
+    class&#x3D;&quot;flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0&quot;
+  &gt;
+    &lt;!-- Backdrop --&gt;
+    &lt;div
+      class&#x3D;&quot;fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75&quot;
+      role&#x3D;&quot;button&quot;
+      tabindex&#x3D;&quot;0&quot;
+      (keydown.space)&#x3D;&quot;closeModal()&quot;
+      (keydown.enter)&#x3D;&quot;closeModal()&quot;
+      (click)&#x3D;&quot;closeModal()&quot;
+    &gt;&lt;/div&gt;
+
+    &lt;!-- Modal Content --&gt;
+    &lt;div
+      class&#x3D;&quot;inline-block w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between mb-4&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900&quot;&gt;
+          {{
+            editingOption
+              ? (&quot;sortOptions.editSortOption&quot; | translate)
+              : (&quot;sortOptions.addSortOption&quot; | translate)
+          }}
+        &lt;/h3&gt;
+        &lt;button
+          (click)&#x3D;&quot;closeModal()&quot;
+          class&#x3D;&quot;text-gray-400 hover:text-gray-600&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;w-6 h-6&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;form (ngSubmit)&#x3D;&quot;saveOption()&quot; #sortOptionForm&#x3D;&quot;ngForm&quot;&gt;
+        &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+          &lt;!-- Code --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-1&quot;
+              &gt;{{ &quot;sortOptions.code&quot; | translate }} *&lt;/label
+            &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [(ngModel)]&#x3D;&quot;formData.code&quot;
+              name&#x3D;&quot;code&quot;
+              required
+              [disabled]&#x3D;&quot;!!editingOption&quot;
+              [placeholder]&#x3D;&quot;&#x27;sortOptions.codePlaceholder&#x27; | translate&quot;
+              class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500 disabled:bg-gray-100 disabled:text-gray-500&quot;
+            /&gt;
+            &lt;p *ngIf&#x3D;&quot;codeExists&quot; class&#x3D;&quot;mt-1 text-sm text-red-600&quot;&gt;
+              {{ &quot;sortOptions.codeExists&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Label HR --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-1&quot;
+              &gt;{{ &quot;sortOptions.labelHr&quot; | translate }} *&lt;/label
+            &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [(ngModel)]&#x3D;&quot;formData.label_hr&quot;
+              name&#x3D;&quot;label_hr&quot;
+              required
+              [placeholder]&#x3D;&quot;&#x27;sortOptions.labelHrPlaceholder&#x27; | translate&quot;
+              class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Label EN --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-1&quot;
+              &gt;{{ &quot;sortOptions.labelEn&quot; | translate }} *&lt;/label
+            &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [(ngModel)]&#x3D;&quot;formData.label_en&quot;
+              name&#x3D;&quot;label_en&quot;
+              required
+              [placeholder]&#x3D;&quot;&#x27;sortOptions.labelEnPlaceholder&#x27; | translate&quot;
+              class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Sort Fields (Multi-field) --&gt;
+          &lt;div&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between mb-2&quot;&gt;
+              &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700&quot;
+                &gt;{{ &quot;sortOptions.sortFields&quot; | translate }} *&lt;/label
+              &gt;
+              &lt;button
+                type&#x3D;&quot;button&quot;
+                (click)&#x3D;&quot;addSortField()&quot;
+                class&#x3D;&quot;inline-flex items-center px-2 py-1 text-xs font-medium text-solar-600 bg-solar-50 rounded hover:bg-solar-100 transition-colors&quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;w-3 h-3 mr-1&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M12 4v16m8-8H4&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                {{ &quot;sortOptions.addField&quot; | translate }}
+              &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;text-xs text-gray-500 mb-2&quot;&gt;
+              {{ &quot;sortOptions.sortFieldsHint&quot; | translate }}
+            &lt;/p&gt;
+
+            &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
+              &lt;div
+                *ngFor&#x3D;&quot;let sf of formData.sort_fields; let i &#x3D; index&quot;
+                class&#x3D;&quot;flex items-center space-x-2 p-2 bg-gray-50 rounded-md border border-gray-200&quot;
+              &gt;
+                &lt;span class&#x3D;&quot;text-xs text-gray-500 font-medium w-6&quot;
+                  &gt;{{ i + 1 }}.&lt;/span
+                &gt;
+                &lt;select
+                  [(ngModel)]&#x3D;&quot;sf.field&quot;
+                  [name]&#x3D;&quot;&#x27;sort_field_&#x27; + i&quot;
+                  required
+                  class&#x3D;&quot;flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-solar-500 focus:border-solar-500&quot;
+                &gt;
+                  &lt;option
+                    *ngFor&#x3D;&quot;let field of availableFields&quot;
+                    [value]&#x3D;&quot;field.value&quot;
+                  &gt;
+                    {{ currentLang &#x3D;&#x3D;&#x3D; &quot;en&quot; ? field.label_en : field.label_hr }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+                &lt;select
+                  [(ngModel)]&#x3D;&quot;sf.direction&quot;
+                  [name]&#x3D;&quot;&#x27;sort_direction_&#x27; + i&quot;
+                  required
+                  class&#x3D;&quot;w-32 px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-solar-500 focus:border-solar-500&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;asc&quot;&gt;
+                    {{ &quot;sortOptions.ascending&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;desc&quot;&gt;
+                    {{ &quot;sortOptions.descending&quot; | translate }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;moveSortField(i, -1)&quot;
+                  [disabled]&#x3D;&quot;i &#x3D;&#x3D;&#x3D; 0&quot;
+                  class&#x3D;&quot;p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed&quot;
+                  title&#x3D;&quot;Move up&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M5 15l7-7 7 7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;moveSortField(i, 1)&quot;
+                  [disabled]&#x3D;&quot;i &#x3D;&#x3D;&#x3D; formData.sort_fields.length - 1&quot;
+                  class&#x3D;&quot;p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed&quot;
+                  title&#x3D;&quot;Move down&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;button
+                  type&#x3D;&quot;button&quot;
+                  (click)&#x3D;&quot;removeSortField(i)&quot;
+                  [disabled]&#x3D;&quot;formData.sort_fields.length &lt;&#x3D; 1&quot;
+                  class&#x3D;&quot;p-1 text-red-400 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed&quot;
+                  title&#x3D;&quot;Remove&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      stroke-linecap&#x3D;&quot;round&quot;
+                      stroke-linejoin&#x3D;&quot;round&quot;
+                      stroke-width&#x3D;&quot;2&quot;
+                      d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Display Order --&gt;
+          &lt;div&gt;
+            &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-1&quot;&gt;{{
+              &quot;sortOptions.displayOrder&quot; | translate
+            }}&lt;/label&gt;
+            &lt;input
+              type&#x3D;&quot;number&quot;
+              [(ngModel)]&#x3D;&quot;formData.display_order&quot;
+              name&#x3D;&quot;display_order&quot;
+              min&#x3D;&quot;0&quot;
+              class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Options --&gt;
+          &lt;div class&#x3D;&quot;flex items-center space-x-6&quot;&gt;
+            &lt;label class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;checkbox&quot;
+                [(ngModel)]&#x3D;&quot;formData.is_enabled&quot;
+                name&#x3D;&quot;is_enabled&quot;
+                class&#x3D;&quot;rounded text-solar-600 focus:ring-solar-500&quot;
+              /&gt;
+              &lt;span class&#x3D;&quot;ml-2 text-sm text-gray-700&quot;&gt;{{
+                &quot;sortOptions.isEnabled&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;label class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;input
+                type&#x3D;&quot;checkbox&quot;
+                [(ngModel)]&#x3D;&quot;formData.is_default&quot;
+                name&#x3D;&quot;is_default&quot;
+                class&#x3D;&quot;rounded text-solar-600 focus:ring-solar-500&quot;
+              /&gt;
+              &lt;span class&#x3D;&quot;ml-2 text-sm text-gray-700&quot;&gt;{{
+                &quot;sortOptions.isDefault&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Actions --&gt;
+        &lt;div class&#x3D;&quot;mt-6 flex justify-end space-x-3&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;closeModal()&quot;
+            class&#x3D;&quot;px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors&quot;
+          &gt;
+            {{ &quot;common.cancel&quot; | translate }}
+          &lt;/button&gt;
+          &lt;button
+            type&#x3D;&quot;submit&quot;
+            [disabled]&#x3D;&quot;!sortOptionForm.valid || saving&quot;
+            class&#x3D;&quot;px-4 py-2 text-sm font-medium text-white bg-solar-500 rounded-md hover:bg-solar-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors&quot;
+          &gt;
+            &lt;span *ngIf&#x3D;&quot;!saving&quot;&gt;{{
+              editingOption
+                ? (&quot;common.save&quot; | translate)
+                : (&quot;common.create&quot; | translate)
+            }}&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;saving&quot; class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-4 h-4 mr-2 animate-spin&quot;
+                fill&#x3D;&quot;none&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;circle
+                  class&#x3D;&quot;opacity-25&quot;
+                  cx&#x3D;&quot;12&quot;
+                  cy&#x3D;&quot;12&quot;
+                  r&#x3D;&quot;10&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  stroke-width&#x3D;&quot;4&quot;
+                &gt;&lt;/circle&gt;
+                &lt;path
+                  class&#x3D;&quot;opacity-75&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                  d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+                &gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              {{ &quot;common.saving&quot; | translate }}...
+            &lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Delete Confirmation Modal --&gt;
+&lt;div *ngIf&#x3D;&quot;showDeleteModal&quot; class&#x3D;&quot;fixed inset-0 z-50 overflow-y-auto&quot;&gt;
+  &lt;div
+    class&#x3D;&quot;flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75&quot;
+      role&#x3D;&quot;button&quot;
+      tabindex&#x3D;&quot;0&quot;
+      (click)&#x3D;&quot;closeDeleteModal()&quot;
+      (keydown.space)&#x3D;&quot;closeDeleteModal()&quot;
+      (keydown.enter)&#x3D;&quot;closeDeleteModal()&quot;
+    &gt;&lt;/div&gt;
+
+    &lt;div
+      class&#x3D;&quot;inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg max-w-md w-full&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;flex items-center mb-4&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;w-6 h-6 text-red-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;ml-3 text-lg font-semibold text-gray-900&quot;&gt;
+          {{ &quot;sortOptions.deleteSortOption&quot; | translate }}
+        &lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;p class&#x3D;&quot;text-sm text-gray-600 mb-4&quot;&gt;
+        {{ &quot;sortOptions.confirmDelete&quot; | translate }}
+      &lt;/p&gt;
+      &lt;p class&#x3D;&quot;text-sm text-gray-500 mb-4&quot; *ngIf&#x3D;&quot;deletingOption&quot;&gt;
+        &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{ deletingOption.label_hr }}&lt;/span&gt; ({{
+          deletingOption.code
+        }})
+      &lt;/p&gt;
+      &lt;div class&#x3D;&quot;flex justify-end space-x-3&quot;&gt;
+        &lt;button
+          (click)&#x3D;&quot;closeDeleteModal()&quot;
+          class&#x3D;&quot;px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors&quot;
+        &gt;
+          {{ &quot;common.cancel&quot; | translate }}
+        &lt;/button&gt;
+        &lt;button
+          (click)&#x3D;&quot;deleteOption()&quot;
+          [disabled]&#x3D;&quot;deleting&quot;
+          class&#x3D;&quot;px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 disabled:bg-gray-400 transition-colors&quot;
+        &gt;
+          &lt;span *ngIf&#x3D;&quot;!deleting&quot;&gt;{{ &quot;common.delete&quot; | translate }}&lt;/span&gt;
+          &lt;span *ngIf&#x3D;&quot;deleting&quot;&gt;{{ &quot;common.deleting&quot; | translate }}...&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./sort-options-management.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">  <!-- Header -->  <div class="px-6 py-4 border-b border-gray-200">    <div class="flex items-center justify-between">      <div>        <h3 class="text-lg font-semibold text-gray-900">          {{ "sortOptions.manageSortOptions" | translate }}        </h3>        <p class="text-sm text-gray-500 mt-1">          {{ "sortOptions.subtitle" | translate }}        </p>      </div>      <button        (click)="openAddModal()"        class="inline-flex items-center px-4 py-2 bg-solar-500 text-white text-sm font-medium rounded-lg hover:bg-solar-700 transition-colors"      >        <svg          class="w-4 h-4 mr-2"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M12 4v16m8-8H4"          />        </svg>        {{ "sortOptions.addSortOption" | translate }}      </button>    </div>  </div>  <!-- Sort Options List -->  <div class="p-6">    <!-- Loading State -->    <div *ngIf="loading" class="flex justify-center py-8">      <div        class="animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600"      ></div>    </div>    <!-- Empty State -->    <div *ngIf="!loading && sortOptions.length === 0" class="text-center py-8">      <svg        class="w-12 h-12 text-gray-400 mx-auto mb-3"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"        />      </svg>      <p class="text-gray-500 font-medium">        {{ "sortOptions.noSortOptions" | translate }}      </p>      <p class="text-gray-400 text-sm mt-1">        {{ "sortOptions.noSortOptionsDescription" | translate }}      </p>    </div>    <!-- Sort Options Table -->    <div *ngIf="!loading && sortOptions.length > 0" class="overflow-x-auto">      <table class="min-w-full divide-y divide-gray-200">        <thead class="bg-gray-50">          <tr>            <th              class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.displayOrder" | translate }}            </th>            <th              class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.code" | translate }}            </th>            <th              class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.labelHr" | translate }}            </th>            <th              class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.labelEn" | translate }}            </th>            <th              class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.sortFields" | translate }}            </th>            <th              class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.isDefault" | translate }}            </th>            <th              class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "sortOptions.isEnabled" | translate }}            </th>            <th              class="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"            >              {{ "common.actions" | translate }}            </th>          </tr>        </thead>        <tbody class="bg-white divide-y divide-gray-200">          <tr            *ngFor="let option of sortOptions; let i = index"            class="hover:bg-gray-50"          >            <td class="px-4 py-3 whitespace-nowrap">              <div class="flex items-center space-x-2">                <button                  (click)="moveSortOption(option, -1)"                  [disabled]="i === 0"                  class="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"                >                  <svg                    class="w-4 h-4"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M5 15l7-7 7 7"                    />                  </svg>                </button>                <span class="text-sm text-gray-900">{{                  option.display_order                }}</span>                <button                  (click)="moveSortOption(option, 1)"                  [disabled]="i === sortOptions.length - 1"                  class="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"                >                  <svg                    class="w-4 h-4"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M19 9l-7 7-7-7"                    />                  </svg>                </button>              </div>            </td>            <td class="px-4 py-3 whitespace-nowrap">              <span class="text-sm font-mono text-gray-900">{{                option.code              }}</span>            </td>            <td class="px-4 py-3 whitespace-nowrap">              <span class="text-sm text-gray-900">{{ option.label_hr }}</span>            </td>            <td class="px-4 py-3 whitespace-nowrap">              <span class="text-sm text-gray-900">{{ option.label_en }}</span>            </td>            <td class="px-4 py-3">              <div class="flex flex-wrap gap-1">                <span                  *ngFor="let sf of getSortFields(option); let i = index"                  class="inline-flex items-center px-2 py-1 rounded text-xs font-medium"                  [class.bg-blue-100]="sf.direction === \'asc\'"                  [class.text-blue-800]="sf.direction === \'asc\'"                  [class.bg-purple-100]="sf.direction === \'desc\'"                  [class.text-purple-800]="sf.direction === \'desc\'"                >                  {{ getFieldLabel(sf.field) }}                  <svg                    *ngIf="sf.direction === \'asc\'"                    class="w-3 h-3 ml-1"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M5 15l7-7 7 7"                    />                  </svg>                  <svg                    *ngIf="sf.direction === \'desc\'"                    class="w-3 h-3 ml-1"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M19 9l-7 7-7-7"                    />                  </svg>                </span>              </div>            </td>            <td class="px-4 py-3 whitespace-nowrap text-center">              <button                (click)="setAsDefault(option)"                [disabled]="option.is_default"                class="p-1 rounded-full transition-colors"                [class.text-yellow-500]="option.is_default"                [class.text-gray-300]="!option.is_default"                [class.hover:text-yellow-400]="!option.is_default"                [title]="                  option.is_default                    ? (\'sortOptions.isDefault\' | translate)                    : (\'sortOptions.setAsDefault\' | translate)                "              >                <svg                  class="w-5 h-5"                  [class.fill-current]="option.is_default"                  [class.stroke-current]="!option.is_default"                  viewBox="0 0 24 24"                >                  <path                    *ngIf="option.is_default"                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"                  />                  <path                    *ngIf="!option.is_default"                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    fill="none"                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"                  />                </svg>              </button>            </td>            <td class="px-4 py-3 whitespace-nowrap text-center">              <button                (click)="toggleEnabled(option)"                class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"                [class.bg-green-600]="option.is_enabled"                [class.bg-gray-300]="!option.is_enabled"              >                <span                  class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"                  [class.translate-x-6]="option.is_enabled"                  [class.translate-x-1]="!option.is_enabled"                ></span>              </button>            </td>            <td class="px-4 py-3 whitespace-nowrap text-right">              <div class="flex items-center justify-end space-x-2">                <button                  (click)="openEditModal(option)"                  class="p-1 text-blue-600 hover:text-blue-800 transition-colors"                  [title]="\'common.edit\' | translate"                >                  <svg                    class="w-5 h-5"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"                    />                  </svg>                </button>                <button                  (click)="confirmDelete(option)"                  class="p-1 text-red-600 hover:text-red-800 transition-colors"                  [title]="\'common.delete\' | translate"                >                  <svg                    class="w-5 h-5"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"                    />                  </svg>                </button>              </div>            </td>          </tr>        </tbody>      </table>    </div>  </div></div><!-- Add/Edit Modal --><div *ngIf="showModal" class="fixed inset-0 z-50 overflow-y-auto">  <div    class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"  >    <!-- Backdrop -->    <div      class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"      role="button"      tabindex="0"      (keydown.space)="closeModal()"      (keydown.enter)="closeModal()"      (click)="closeModal()"    ></div>    <!-- Modal Content -->    <div      class="inline-block w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg"    >      <div class="flex items-center justify-between mb-4">        <h3 class="text-lg font-semibold text-gray-900">          {{            editingOption              ? ("sortOptions.editSortOption" | translate)              : ("sortOptions.addSortOption" | translate)          }}        </h3>        <button          (click)="closeModal()"          class="text-gray-400 hover:text-gray-600"        >          <svg            class="w-6 h-6"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M6 18L18 6M6 6l12 12"            />          </svg>        </button>      </div>      <form (ngSubmit)="saveOption()" #sortOptionForm="ngForm">        <div class="space-y-4">          <!-- Code -->          <div>            <label class="block text-sm font-medium text-gray-700 mb-1"              >{{ "sortOptions.code" | translate }} *</label            >            <input              type="text"              [(ngModel)]="formData.code"              name="code"              required              [disabled]="!!editingOption"              [placeholder]="\'sortOptions.codePlaceholder\' | translate"              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500 disabled:bg-gray-100 disabled:text-gray-500"            />            <p *ngIf="codeExists" class="mt-1 text-sm text-red-600">              {{ "sortOptions.codeExists" | translate }}            </p>          </div>          <!-- Label HR -->          <div>            <label class="block text-sm font-medium text-gray-700 mb-1"              >{{ "sortOptions.labelHr" | translate }} *</label            >            <input              type="text"              [(ngModel)]="formData.label_hr"              name="label_hr"              required              [placeholder]="\'sortOptions.labelHrPlaceholder\' | translate"              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500"            />          </div>          <!-- Label EN -->          <div>            <label class="block text-sm font-medium text-gray-700 mb-1"              >{{ "sortOptions.labelEn" | translate }} *</label            >            <input              type="text"              [(ngModel)]="formData.label_en"              name="label_en"              required              [placeholder]="\'sortOptions.labelEnPlaceholder\' | translate"              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500"            />          </div>          <!-- Sort Fields (Multi-field) -->          <div>            <div class="flex items-center justify-between mb-2">              <label class="block text-sm font-medium text-gray-700"                >{{ "sortOptions.sortFields" | translate }} *</label              >              <button                type="button"                (click)="addSortField()"                class="inline-flex items-center px-2 py-1 text-xs font-medium text-solar-600 bg-solar-50 rounded hover:bg-solar-100 transition-colors"              >                <svg                  class="w-3 h-3 mr-1"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M12 4v16m8-8H4"                  />                </svg>                {{ "sortOptions.addField" | translate }}              </button>            </div>            <p class="text-xs text-gray-500 mb-2">              {{ "sortOptions.sortFieldsHint" | translate }}            </p>            <div class="space-y-2">              <div                *ngFor="let sf of formData.sort_fields; let i = index"                class="flex items-center space-x-2 p-2 bg-gray-50 rounded-md border border-gray-200"              >                <span class="text-xs text-gray-500 font-medium w-6"                  >{{ i + 1 }}.</span                >                <select                  [(ngModel)]="sf.field"                  [name]="\'sort_field_\' + i"                  required                  class="flex-1 px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-solar-500 focus:border-solar-500"                >                  <option                    *ngFor="let field of availableFields"                    [value]="field.value"                  >                    {{ currentLang === "en" ? field.label_en : field.label_hr }}                  </option>                </select>                <select                  [(ngModel)]="sf.direction"                  [name]="\'sort_direction_\' + i"                  required                  class="w-32 px-2 py-1.5 text-sm border border-gray-300 rounded focus:ring-solar-500 focus:border-solar-500"                >                  <option value="asc">                    {{ "sortOptions.ascending" | translate }}                  </option>                  <option value="desc">                    {{ "sortOptions.descending" | translate }}                  </option>                </select>                <button                  type="button"                  (click)="moveSortField(i, -1)"                  [disabled]="i === 0"                  class="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"                  title="Move up"                >                  <svg                    class="w-4 h-4"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M5 15l7-7 7 7"                    />                  </svg>                </button>                <button                  type="button"                  (click)="moveSortField(i, 1)"                  [disabled]="i === formData.sort_fields.length - 1"                  class="p-1 text-gray-400 hover:text-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"                  title="Move down"                >                  <svg                    class="w-4 h-4"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M19 9l-7 7-7-7"                    />                  </svg>                </button>                <button                  type="button"                  (click)="removeSortField(i)"                  [disabled]="formData.sort_fields.length <= 1"                  class="p-1 text-red-400 hover:text-red-600 disabled:opacity-30 disabled:cursor-not-allowed"                  title="Remove"                >                  <svg                    class="w-4 h-4"                    fill="none"                    stroke="currentColor"                    viewBox="0 0 24 24"                  >                    <path                      stroke-linecap="round"                      stroke-linejoin="round"                      stroke-width="2"                      d="M6 18L18 6M6 6l12 12"                    />                  </svg>                </button>              </div>            </div>          </div>          <!-- Display Order -->          <div>            <label class="block text-sm font-medium text-gray-700 mb-1">{{              "sortOptions.displayOrder" | translate            }}</label>            <input              type="number"              [(ngModel)]="formData.display_order"              name="display_order"              min="0"              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-solar-500 focus:border-solar-500"            />          </div>          <!-- Options -->          <div class="flex items-center space-x-6">            <label class="flex items-center">              <input                type="checkbox"                [(ngModel)]="formData.is_enabled"                name="is_enabled"                class="rounded text-solar-600 focus:ring-solar-500"              />              <span class="ml-2 text-sm text-gray-700">{{                "sortOptions.isEnabled" | translate              }}</span>            </label>            <label class="flex items-center">              <input                type="checkbox"                [(ngModel)]="formData.is_default"                name="is_default"                class="rounded text-solar-600 focus:ring-solar-500"              />              <span class="ml-2 text-sm text-gray-700">{{                "sortOptions.isDefault" | translate              }}</span>            </label>          </div>        </div>        <!-- Actions -->        <div class="mt-6 flex justify-end space-x-3">          <button            type="button"            (click)="closeModal()"            class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"          >            {{ "common.cancel" | translate }}          </button>          <button            type="submit"            [disabled]="!sortOptionForm.valid || saving"            class="px-4 py-2 text-sm font-medium text-white bg-solar-500 rounded-md hover:bg-solar-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"          >            <span *ngIf="!saving">{{              editingOption                ? ("common.save" | translate)                : ("common.create" | translate)            }}</span>            <span *ngIf="saving" class="flex items-center">              <svg                class="w-4 h-4 mr-2 animate-spin"                fill="none"                viewBox="0 0 24 24"              >                <circle                  class="opacity-25"                  cx="12"                  cy="12"                  r="10"                  stroke="currentColor"                  stroke-width="4"                ></circle>                <path                  class="opacity-75"                  fill="currentColor"                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                ></path>              </svg>              {{ "common.saving" | translate }}...            </span>          </button>        </div>      </form>    </div>  </div></div><!-- Delete Confirmation Modal --><div *ngIf="showDeleteModal" class="fixed inset-0 z-50 overflow-y-auto">  <div    class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center"  >    <div      class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"      role="button"      tabindex="0"      (click)="closeDeleteModal()"      (keydown.space)="closeDeleteModal()"      (keydown.enter)="closeDeleteModal()"    ></div>    <div      class="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg max-w-md w-full"    >      <div class="flex items-center mb-4">        <div          class="flex-shrink-0 w-10 h-10 bg-red-100 rounded-full flex items-center justify-center"        >          <svg            class="w-6 h-6 text-red-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"            />          </svg>        </div>        <h3 class="ml-3 text-lg font-semibold text-gray-900">          {{ "sortOptions.deleteSortOption" | translate }}        </h3>      </div>      <p class="text-sm text-gray-600 mb-4">        {{ "sortOptions.confirmDelete" | translate }}      </p>      <p class="text-sm text-gray-500 mb-4" *ngIf="deletingOption">        <span class="font-medium">{{ deletingOption.label_hr }}</span> ({{          deletingOption.code        }})      </p>      <div class="flex justify-end space-x-3">        <button          (click)="closeDeleteModal()"          class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"        >          {{ "common.cancel" | translate }}        </button>        <button          (click)="deleteOption()"          [disabled]="deleting"          class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 disabled:bg-gray-400 transition-colors"        >          <span *ngIf="!deleting">{{ "common.delete" | translate }}</span>          <span *ngIf="deleting">{{ "common.deleting" | translate }}...</span>        </button>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SortOptionsManagementComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SortOptionsManagementComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1334 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ManufacturerCountFilters</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/b2c/products/product-list/services/product-list.service.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#availability" 
+>
+                                            availability
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#categories" 
+>
+                                            categories
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#priceRange" 
+>
+                                            priceRange
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#searchQuery" 
+>
+                                            searchQuery
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="availability"></a>
+                                        <span class="name "><b>availability</b>
+                                            <a href="#availability">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>availability:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="categories"></a>
+                                        <span class="name "><b>categories</b>
+                                            <a href="#categories">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>categories:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="priceRange"></a>
+                                        <span class="name "><b>priceRange</b>
+                                            <a href="#priceRange">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>priceRange:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="searchQuery"></a>
+                                        <span class="name "><b>searchQuery</b>
+                                            <a href="#searchQuery">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>searchQuery:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Observable, from, catchError, of } from &#x27;rxjs&#x27;;
+import { SupabaseService } from &#x27;../../../../../services/supabase.service&#x27;;
+import { Product } from &#x27;../product-list.component&#x27;;
+import { ProductsQuery, ProductsResponse } from &#x27;../store/product-list.actions&#x27;;
+import { SortOptionsService } from &#x27;../../../../../shared/services/sort-options.service&#x27;;
+
+export interface ProductFilters {
+  category?: string;
+  manufacturer?: string;
+  priceRange?: { min: number; max: number };
+  rating?: number;
+  availability?: string;
+  featured?: boolean;
+  search?: string;
+}
+
+export interface CategoryCountFilters {
+  searchQuery?: string;
+  manufacturers?: string[];
+  priceRange?: { min: number; max: number };
+  availability?: string;
+}
+
+export interface ManufacturerCountFilters {
+  searchQuery?: string;
+  categories?: string[];
+  priceRange?: { min: number; max: number };
+  availability?: string;
+}
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ProductListService {
+  private sortOptionsService &#x3D; inject(SortOptionsService);
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  getProducts(filters?: ProductFilters): Observable&lt;Product[]&gt; {
+    return from(this.fetchProductsFromSupabase(filters)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching products:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getProductById(id: string): Observable&lt;Product | null&gt; {
+    return from(this.fetchProductById(id)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching product:&#x27;, error);
+        return of(null);
+      }),
+    );
+  }
+
+  getFeaturedProducts(limit: number &#x3D; 6): Observable&lt;Product[]&gt; {
+    return from(this.fetchFeaturedProducts(limit)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching featured products:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getProductsByCategory(
+    categoryId: string,
+    limit?: number,
+  ): Observable&lt;Product[]&gt; {
+    return from(this.fetchProductsByCategory(categoryId, limit)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching products by category:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  searchProducts(query: string, limit?: number): Observable&lt;Product[]&gt; {
+    return from(this.searchProductsInSupabase(query, limit)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error searching products:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getProductsWithPagination(
+    query: ProductsQuery,
+  ): Observable&lt;ProductsResponse&gt; {
+    return from(this.fetchProductsWithPagination(query)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching products with pagination:&#x27;, error);
+        return of({
+          products: [],
+          totalItems: 0,
+          totalPages: 0,
+          currentPage: 1,
+        });
+      }),
+    );
+  }
+
+  getAllManufacturers(): Observable&lt;string[]&gt; {
+    return from(this.fetchAllManufacturers()).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching all manufacturers:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getCategoryCounts(
+    filters?: CategoryCountFilters | Partial&lt;ProductFilters&gt;,
+  ): Observable&lt;{ [categoryName: string]: number }&gt; {
+    return from(this.fetchCategoryCounts(filters)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching category counts:&#x27;, error);
+        return of({});
+      }),
+    );
+  }
+
+  getManufacturerCounts(
+    filters?: ManufacturerCountFilters | Partial&lt;ProductFilters&gt;,
+  ): Observable&lt;{ [manufacturerName: string]: number }&gt; {
+    return from(this.fetchManufacturerCounts(filters)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching manufacturer counts:&#x27;, error);
+        return of({});
+      }),
+    );
+  }
+
+  private async fetchProductsWithPagination(
+    query: ProductsQuery,
+  ): Promise&lt;ProductsResponse&gt; {
+    try {
+      const page &#x3D; query.page || 1;
+      const itemsPerPage &#x3D; query.itemsPerPage || 10;
+      const from &#x3D; (page - 1) * itemsPerPage;
+      const to &#x3D; from + itemsPerPage - 1;
+
+      // Build the query - simplified approach like B2B
+      let supabaseQuery &#x3D; this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+                    *,
+                    categories!inner(id, name, slug)
+                &#x60;,
+          { count: &#x27;exact&#x27; },
+        )
+        .eq(&#x27;is_active&#x27;, true);
+
+      // Apply filters
+      if (query.searchQuery &amp;&amp; query.searchQuery.trim()) {
+        const searchTerm &#x3D; &#x60;%${query.searchQuery.trim()}%&#x60;;
+        supabaseQuery &#x3D; supabaseQuery.or(
+          &#x60;name.ilike.${searchTerm},description.ilike.${searchTerm},sku.ilike.${searchTerm}&#x60;,
+        );
+      }
+
+      if (query.categories &amp;&amp; query.categories.length &gt; 0) {
+        // First, get the category IDs from category names
+        const { data: categoryData } &#x3D; await this.supabaseService.client
+          .from(&#x27;categories&#x27;)
+          .select(&#x27;id, name&#x27;)
+          .in(&#x27;name&#x27;, query.categories);
+
+        if (categoryData &amp;&amp; categoryData.length &gt; 0) {
+          const categoryIds &#x3D; categoryData.map((cat) &#x3D;&gt; cat.id);
+
+          // Handle both legacy category_id and product_categories table
+          // Get products that have category_id in the list OR have entries in product_categories
+          const { data: productCategoryIds } &#x3D; await this.supabaseService.client
+            .from(&#x27;product_categories&#x27;)
+            .select(&#x27;product_id&#x27;)
+            .in(&#x27;category_id&#x27;, categoryIds);
+
+          const productIdsFromJunction &#x3D; (productCategoryIds || []).map(
+            (pc) &#x3D;&gt; pc.product_id,
+          );
+
+          if (productIdsFromJunction.length &gt; 0) {
+            // Filter by either category_id OR product ID exists in junction table
+            const filterQuery &#x3D; &#x60;category_id.in.(${categoryIds.join(&#x27;,&#x27;)}),id.in.(${productIdsFromJunction.join(&#x27;,&#x27;)})&#x60;;
+            supabaseQuery &#x3D; supabaseQuery.or(filterQuery);
+          } else {
+            // Fallback to just legacy category_id
+            supabaseQuery &#x3D; supabaseQuery.in(&#x27;category_id&#x27;, categoryIds);
+          }
+        }
+      }
+
+      if (query.manufacturers &amp;&amp; query.manufacturers.length &gt; 0) {
+        // Use &#x27;in&#x27; operator for manufacturers too
+        supabaseQuery &#x3D; supabaseQuery.in(&#x27;brand&#x27;, query.manufacturers);
+      }
+
+      if (
+        query.priceRange &amp;&amp;
+        (query.priceRange.min &gt; 0 || query.priceRange.max &gt; 0)
+      ) {
+        if (query.priceRange.min &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.gte(&#x27;price&#x27;, query.priceRange.min);
+        }
+        if (query.priceRange.max &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.lte(&#x27;price&#x27;, query.priceRange.max);
+        }
+      }
+
+      // Apply sorting using dynamic sort options (multi-field support)
+      // Don&#x27;t use default sort - let it fall back to display_order
+      const sortCode &#x3D; query.sortOption || &#x27;&#x27;;
+      const sortOptions &#x3D; this.sortOptionsService.getEnabledSortOptions();
+      const selectedSort &#x3D; sortOptions.find((opt) &#x3D;&gt; opt.code &#x3D;&#x3D;&#x3D; sortCode);
+
+      if (
+        selectedSort &amp;&amp;
+        selectedSort.sortFields &amp;&amp;
+        selectedSort.sortFields.length &gt; 0
+      ) {
+        // Apply each sort field in order
+        for (const sf of selectedSort.sortFields) {
+          supabaseQuery &#x3D; supabaseQuery.order(sf.field, {
+            ascending: sf.direction &#x3D;&#x3D;&#x3D; &#x27;asc&#x27;,
+          });
+        }
+      } else {
+        // Fallback to display_order sorting (admin-defined order)
+        supabaseQuery &#x3D; supabaseQuery.order(&#x27;display_order&#x27;, {
+          ascending: true,
+        });
+      }
+
+      // Apply pagination
+      supabaseQuery &#x3D; supabaseQuery.range(from, to);
+
+      const { data, error, count } &#x3D; await supabaseQuery;
+
+      if (error) {
+        throw error;
+      }
+
+      // Convert products using existing method
+      const products &#x3D; await this.convertSupabaseProductsToLocal(data || []);
+
+      const totalItems &#x3D; count || 0;
+      const totalPages &#x3D; Math.ceil(totalItems / itemsPerPage);
+
+      return {
+        products,
+        totalItems,
+        totalPages,
+        currentPage: page,
+      };
+    } catch (error) {
+      console.error(&#x27;Error in fetchProductsWithPagination:&#x27;, error);
+      return { products: [], totalItems: 0, totalPages: 0, currentPage: 1 };
+    }
+  }
+
+  private async fetchProductsFromSupabase(
+    filters?: ProductFilters,
+  ): Promise&lt;Product[]&gt; {
+    try {
+      const supabaseFilters: any &#x3D; {};
+
+      if (filters?.category) {
+        // Get category ID from slug or name
+        const categories &#x3D; await this.supabaseService.getCategories();
+        const category &#x3D; categories.find(
+          (c) &#x3D;&gt;
+            c.slug &#x3D;&#x3D;&#x3D; filters.category ||
+            c.name.toLowerCase() &#x3D;&#x3D;&#x3D; filters.category!.toLowerCase(),
+        );
+        if (category) {
+          supabaseFilters.category_id &#x3D; category.id;
+        }
+      }
+
+      if (filters?.featured !&#x3D;&#x3D; undefined) {
+        supabaseFilters.is_featured &#x3D; filters.featured;
+      }
+
+      if (filters?.availability) {
+        if (filters.availability &#x3D;&#x3D;&#x3D; &#x27;available&#x27;) {
+          supabaseFilters.stock_status &#x3D; &#x27;in_stock&#x27;;
+        } else if (filters.availability &#x3D;&#x3D;&#x3D; &#x27;limited&#x27;) {
+          supabaseFilters.stock_status &#x3D; &#x27;low_stock&#x27;;
+        } else if (filters.availability &#x3D;&#x3D;&#x3D; &#x27;out-of-stock&#x27;) {
+          supabaseFilters.stock_status &#x3D; &#x27;out_of_stock&#x27;;
+        }
+      }
+
+      const products &#x3D; await this.supabaseService.getProducts({
+        ...supabaseFilters,
+        search: filters?.search,
+        limit: 50,
+      });
+
+      return await this.convertSupabaseProductsToLocal(products);
+    } catch (error) {
+      console.error(&#x27;Error in fetchProductsFromSupabase:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchProductById(id: string): Promise&lt;Product | null&gt; {
+    try {
+      // Use supabase query with proper joins to get product_categories data
+      const { data: product, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+                    *,
+                    categories:category_id (
+                        id,
+                        name,
+                        slug
+                    ),
+                    product_categories!product_categories_product_id_fkey (
+                        is_primary,
+                        categories!product_categories_category_id_fkey (
+                            id,
+                            name,
+                            slug
+                        )
+                    )
+                &#x60;,
+        )
+        .eq(&#x27;id&#x27;, id)
+        .eq(&#x27;is_active&#x27;, true)
+        .single();
+
+      if (error || !product) {
+        console.error(&#x27;Error fetching product by ID:&#x27;, error);
+        return null;
+      }
+
+      return await this.convertSupabaseProductToLocal(product);
+    } catch (error) {
+      console.error(&#x27;Error in fetchProductById:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async fetchFeaturedProducts(limit: number): Promise&lt;Product[]&gt; {
+    try {
+      const products &#x3D; await this.supabaseService.getProducts({
+        featured: true,
+        limit,
+      });
+
+      return await this.convertSupabaseProductsToLocal(products);
+    } catch (error) {
+      console.error(&#x27;Error in fetchFeaturedProducts:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchProductsByCategory(
+    categoryId: string,
+    limit?: number,
+  ): Promise&lt;Product[]&gt; {
+    try {
+      const products &#x3D; await this.supabaseService.getProducts({
+        categoryId,
+        limit,
+      });
+
+      return await this.convertSupabaseProductsToLocal(products);
+    } catch (error) {
+      console.error(&#x27;Error in fetchProductsByCategory:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async searchProductsInSupabase(
+    query: string,
+    limit?: number,
+  ): Promise&lt;Product[]&gt; {
+    try {
+      const products &#x3D; await this.supabaseService.getProducts({
+        search: query,
+        limit,
+      });
+
+      return await this.convertSupabaseProductsToLocal(products);
+    } catch (error) {
+      console.error(&#x27;Error in searchProductsInSupabase:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async convertSupabaseProductsToLocal(
+    products: any[],
+  ): Promise&lt;Product[]&gt; {
+    const convertedProducts: Product[] &#x3D; [];
+
+    for (const product of products) {
+      const converted &#x3D; await this.convertSupabaseProductToLocal(product);
+      if (converted) {
+        convertedProducts.push(converted);
+      }
+    }
+
+    return convertedProducts;
+  }
+
+  private async convertSupabaseProductToLocal(
+    product: any,
+  ): Promise&lt;Product | null&gt; {
+    try {
+      // Get legacy single category name
+      const categoryName &#x3D; product.categories?.name || &#x27;Unknown Category&#x27;;
+
+      // For now, use the single category approach to simplify and avoid the complex joins
+      let categoriesArray: Array&lt;{ name: string; isPrimary: boolean }&gt; &#x3D; [];
+
+      // Use the single category from the join
+      if (categoryName &amp;&amp; categoryName !&#x3D;&#x3D; &#x27;Unknown Category&#x27;) {
+        categoriesArray &#x3D; [
+          {
+            name: categoryName,
+            isPrimary: true,
+          },
+        ];
+      }
+
+      // Get primary image
+      const imageUrl &#x3D; this.getProductImage(product.images);
+
+      // Calculate discount percentage
+      const discount &#x3D;
+        product.original_price &amp;&amp; product.original_price &gt; product.price
+          ? Math.round(
+              ((product.original_price - product.price) /
+                product.original_price) *
+                100,
+            )
+          : undefined;
+
+      // Determine availability based on stock status
+      let availability: &#x27;available&#x27; | &#x27;limited&#x27; | &#x27;out-of-stock&#x27; &#x3D; &#x27;available&#x27;;
+      if (
+        product.stock_status &#x3D;&#x3D;&#x3D; &#x27;out_of_stock&#x27; ||
+        product.stock_quantity &#x3D;&#x3D;&#x3D; 0
+      ) {
+        availability &#x3D; &#x27;out-of-stock&#x27;;
+      } else if (
+        product.stock_status &#x3D;&#x3D;&#x3D; &#x27;low_stock&#x27; ||
+        product.stock_quantity &lt; 10
+      ) {
+        availability &#x3D; &#x27;limited&#x27;;
+      }
+
+      // Get the primary category name for legacy support
+      const primaryCategory &#x3D;
+        categoriesArray.find((cat) &#x3D;&gt; cat.isPrimary) || categoriesArray[0];
+      const legacyCategoryName &#x3D; primaryCategory
+        ? primaryCategory.name
+        : categoryName;
+
+      return {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: product.price,
+        originalPrice: product.original_price || undefined,
+        discount,
+        imageUrl,
+        category: legacyCategoryName, // Legacy single category (primary or first from categories)
+        categories: categoriesArray, // New multi-category array
+        manufacturer: product.brand,
+        model: product.model,
+        weight: product.weight,
+        dimensions: product.dimensions,
+        certificates: product.certifications || [],
+        rating: product.rating_average || 0,
+        reviewCount: product.rating_count || 0,
+        availability,
+        featured: product.is_featured || false,
+        createdAt: new Date(product.created_at),
+        specifications: product.specifications || {},
+        features: product.features || [],
+        sku: product.sku || &#x27;&#x27;,
+        images: product.images || [],
+        isOnSale: product.is_on_sale || false,
+        technical_sheet: product.technical_sheet || undefined,
+      };
+    } catch (error) {
+      console.error(&#x27;Error converting product:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async fetchAllManufacturers(): Promise&lt;string[]&gt; {
+    try {
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(&#x27;brand&#x27;)
+        .eq(&#x27;is_active&#x27;, true)
+        .not(&#x27;brand&#x27;, &#x27;is&#x27;, null)
+        .not(&#x27;brand&#x27;, &#x27;eq&#x27;, &#x27;&#x27;);
+
+      if (error) {
+        throw error;
+      }
+
+      // Get unique manufacturers
+      const manufacturers &#x3D; [
+        ...new Set(data?.map((product) &#x3D;&gt; product.brand).filter(Boolean) || []),
+      ];
+      return manufacturers.sort();
+    } catch (error) {
+      console.error(&#x27;Error fetching all manufacturers:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchCategoryCounts(
+    filters?: CategoryCountFilters | Partial&lt;ProductFilters&gt;,
+  ): Promise&lt;{ [categoryName: string]: number }&gt; {
+    try {
+      // First, get ALL categories with hierarchy information to ensure we show 0 counts
+      const { data: allCategoriesData, error: categoriesError } &#x3D;
+        await this.supabaseService.client
+          .from(&#x27;categories&#x27;)
+          .select(&#x27;id, name, parent_id&#x27;)
+          .eq(&#x27;is_active&#x27;, true);
+
+      if (categoriesError) {
+        throw categoriesError;
+      }
+
+      // Initialize all categories with 0 count
+      const categoryCounts: { [categoryName: string]: number } &#x3D; {};
+      const categoryHierarchy: {
+        [categoryId: string]: {
+          name: string;
+          parentId?: string;
+          children: string[];
+        };
+      } &#x3D; {};
+
+      allCategoriesData?.forEach((category) &#x3D;&gt; {
+        categoryCounts[category.name] &#x3D; 0;
+        categoryHierarchy[category.id] &#x3D; {
+          name: category.name,
+          parentId: category.parent_id,
+          children: [],
+        };
+      });
+
+      // Build parent-child relationships
+      allCategoriesData?.forEach((category) &#x3D;&gt; {
+        if (category.parent_id &amp;&amp; categoryHierarchy[category.parent_id]) {
+          categoryHierarchy[category.parent_id].children.push(category.id);
+        }
+      });
+
+      // Now build query to get full product data (without count) - like B2B
+      let supabaseQuery &#x3D; this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+                    id,
+                    name,
+                    description,
+                    sku,
+                    brand,
+                    price,
+                    category_id,
+                    categories!inner(id, name),
+                    product_categories!left(category_id)
+                &#x60;,
+        )
+        .eq(&#x27;is_active&#x27;, true);
+
+      // Apply the same filters as in the main query
+      const searchQuery &#x3D;
+        (filters as any)?.searchQuery || (filters as any)?.search;
+      if (searchQuery &amp;&amp; searchQuery.trim()) {
+        const searchTerm &#x3D; &#x60;%${searchQuery.trim()}%&#x60;;
+        supabaseQuery &#x3D; supabaseQuery.or(
+          &#x60;name.ilike.${searchTerm},description.ilike.${searchTerm},sku.ilike.${searchTerm}&#x60;,
+        );
+      }
+
+      if (
+        (filters as any)?.manufacturers &amp;&amp;
+        (filters as any).manufacturers.length &gt; 0
+      ) {
+        supabaseQuery &#x3D; supabaseQuery.in(
+          &#x27;brand&#x27;,
+          (filters as any).manufacturers,
+        );
+      }
+
+      if (
+        filters?.priceRange &amp;&amp;
+        (filters.priceRange.min &gt; 0 || filters.priceRange.max &gt; 0)
+      ) {
+        if (filters.priceRange.min &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.gte(&#x27;price&#x27;, filters.priceRange.min);
+        }
+        if (filters.priceRange.max &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.lte(&#x27;price&#x27;, filters.priceRange.max);
+        }
+      }
+
+      // Add availability filter like B2B
+      if (filters?.availability &amp;&amp; filters.availability !&#x3D;&#x3D; &#x27;&#x27;) {
+        switch (filters.availability) {
+          case &#x27;in-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;in_stock&#x27;);
+            break;
+          case &#x27;low-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;low_stock&#x27;);
+            break;
+          case &#x27;out-of-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;out_of_stock&#x27;);
+            break;
+        }
+      }
+
+      const { data, error } &#x3D; await supabaseQuery;
+
+      if (error) {
+        throw error;
+      }
+
+      // Count products by individual categories first (including additional categories)
+      const individualCategoryCounts: { [categoryId: string]: Set&lt;string&gt; } &#x3D;
+        {};
+
+      // Initialize all category IDs with empty sets for distinct product tracking
+      Object.keys(categoryHierarchy).forEach((categoryId) &#x3D;&gt; {
+        individualCategoryCounts[categoryId] &#x3D; new Set&lt;string&gt;();
+      });
+
+      data?.forEach((product: any) &#x3D;&gt; {
+        // Count for main category
+        if (
+          product.category_id &amp;&amp;
+          individualCategoryCounts[product.category_id]
+        ) {
+          individualCategoryCounts[product.category_id].add(product.id);
+        }
+
+        // Count for additional categories
+        if (product.product_categories) {
+          const additionalCategories &#x3D; Array.isArray(product.product_categories)
+            ? product.product_categories
+            : [product.product_categories];
+
+          additionalCategories.forEach((pc: any) &#x3D;&gt; {
+            if (pc.category_id &amp;&amp; individualCategoryCounts[pc.category_id]) {
+              individualCategoryCounts[pc.category_id].add(product.id);
+            }
+          });
+        }
+      });
+
+      // Now calculate hierarchical counts: each parent gets its own count + all descendants
+      const hierarchicalCounts &#x3D; this.calculateHierarchicalCounts(
+        categoryHierarchy,
+        individualCategoryCounts,
+      );
+
+      // Convert from category ID-based counts to category name-based counts
+      Object.entries(hierarchicalCounts).forEach(([categoryId, count]) &#x3D;&gt; {
+        const categoryInfo &#x3D; categoryHierarchy[categoryId];
+        if (categoryInfo) {
+          categoryCounts[categoryInfo.name] &#x3D; count;
+        }
+      });
+
+      return categoryCounts;
+    } catch (error) {
+      console.error(&#x27;Error fetching category counts:&#x27;, error);
+      return {};
+    }
+  }
+
+  /**
+   * Calculate hierarchical counts where each parent category includes counts from all its descendants
+   */
+  private calculateHierarchicalCounts(
+    categoryHierarchy: {
+      [categoryId: string]: {
+        name: string;
+        parentId?: string;
+        children: string[];
+      };
+    },
+    individualCounts: { [categoryId: string]: Set&lt;string&gt; },
+  ): { [categoryId: string]: number } {
+    const hierarchicalCounts: { [categoryId: string]: number } &#x3D; {};
+
+    // Helper function to recursively collect all descendant product IDs
+    const collectDescendantProducts &#x3D; (
+      categoryId: string,
+      visited: Set&lt;string&gt; &#x3D; new Set(),
+    ): Set&lt;string&gt; &#x3D;&gt; {
+      if (visited.has(categoryId)) {
+        return new Set(); // Prevent infinite loops
+      }
+      visited.add(categoryId);
+
+      const allProducts &#x3D; new Set&lt;string&gt;();
+
+      // Add this category&#x27;s own products
+      if (individualCounts[categoryId]) {
+        individualCounts[categoryId].forEach((productId) &#x3D;&gt;
+          allProducts.add(productId),
+        );
+      }
+
+      // Add products from all descendants
+      const categoryInfo &#x3D; categoryHierarchy[categoryId];
+      if (categoryInfo &amp;&amp; categoryInfo.children.length &gt; 0) {
+        categoryInfo.children.forEach((childId) &#x3D;&gt; {
+          const childProducts &#x3D; collectDescendantProducts(
+            childId,
+            new Set(visited),
+          );
+          childProducts.forEach((productId) &#x3D;&gt; allProducts.add(productId));
+        });
+      }
+
+      return allProducts;
+    };
+
+    // Calculate hierarchical count for each category
+    Object.keys(categoryHierarchy).forEach((categoryId) &#x3D;&gt; {
+      const allProducts &#x3D; collectDescendantProducts(categoryId);
+      hierarchicalCounts[categoryId] &#x3D; allProducts.size;
+    });
+
+    return hierarchicalCounts;
+  }
+
+  private async fetchManufacturerCounts(
+    filters?: ManufacturerCountFilters | Partial&lt;ProductFilters&gt;,
+  ): Promise&lt;{ [manufacturerName: string]: number }&gt; {
+    try {
+      // First, get ALL manufacturers to ensure we show 0 counts
+      const { data: allManufacturersData, error: manufacturersError } &#x3D;
+        await this.supabaseService.client
+          .from(&#x27;products&#x27;)
+          .select(&#x27;brand&#x27;)
+          .eq(&#x27;is_active&#x27;, true)
+          .not(&#x27;brand&#x27;, &#x27;is&#x27;, null)
+          .not(&#x27;brand&#x27;, &#x27;eq&#x27;, &#x27;&#x27;);
+
+      if (manufacturersError) {
+        throw manufacturersError;
+      }
+
+      // Initialize all manufacturers with 0 count
+      const manufacturerCounts: { [manufacturerName: string]: number } &#x3D; {};
+      const uniqueManufacturers &#x3D; [
+        ...new Set(
+          allManufacturersData
+            ?.map((product) &#x3D;&gt; product.brand)
+            .filter(Boolean) || [],
+        ),
+      ];
+      uniqueManufacturers.forEach((manufacturer) &#x3D;&gt; {
+        manufacturerCounts[manufacturer] &#x3D; 0;
+      });
+
+      // Now build query to get full product data (without count) - like B2B
+      let supabaseQuery &#x3D; this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+                    id,
+                    name,
+                    description,
+                    sku,
+                    brand,
+                    price,
+                    category_id,
+                    categories!inner(name)
+                &#x60;,
+        )
+        .eq(&#x27;is_active&#x27;, true)
+        .not(&#x27;brand&#x27;, &#x27;is&#x27;, null)
+        .not(&#x27;brand&#x27;, &#x27;eq&#x27;, &#x27;&#x27;);
+
+      // Apply the same filters as in the main query
+      const searchQuery &#x3D;
+        (filters as any)?.searchQuery || (filters as any)?.search;
+      if (searchQuery &amp;&amp; searchQuery.trim()) {
+        const searchTerm &#x3D; &#x60;%${searchQuery.trim()}%&#x60;;
+        supabaseQuery &#x3D; supabaseQuery.or(
+          &#x60;name.ilike.${searchTerm},description.ilike.${searchTerm},sku.ilike.${searchTerm}&#x60;,
+        );
+      }
+
+      if (
+        (filters as any)?.categories &amp;&amp;
+        (filters as any).categories.length &gt; 0
+      ) {
+        // First, get the category IDs from category names
+        const { data: categoryData } &#x3D; await this.supabaseService.client
+          .from(&#x27;categories&#x27;)
+          .select(&#x27;id, name&#x27;)
+          .in(&#x27;name&#x27;, (filters as any).categories);
+
+        if (categoryData &amp;&amp; categoryData.length &gt; 0) {
+          const categoryIds &#x3D; categoryData.map((cat) &#x3D;&gt; cat.id);
+
+          // Handle both legacy category_id and product_categories table
+          const { data: productCategoryIds } &#x3D; await this.supabaseService.client
+            .from(&#x27;product_categories&#x27;)
+            .select(&#x27;product_id&#x27;)
+            .in(&#x27;category_id&#x27;, categoryIds);
+
+          const productIdsFromJunction &#x3D; (productCategoryIds || []).map(
+            (pc) &#x3D;&gt; pc.product_id,
+          );
+
+          if (productIdsFromJunction.length &gt; 0) {
+            // Filter by either category_id OR product ID exists in junction table
+            const filterQuery &#x3D; &#x60;category_id.in.(${categoryIds.join(&#x27;,&#x27;)}),id.in.(${productIdsFromJunction.join(&#x27;,&#x27;)})&#x60;;
+            supabaseQuery &#x3D; supabaseQuery.or(filterQuery);
+          } else {
+            // Fallback to just legacy category_id
+            supabaseQuery &#x3D; supabaseQuery.in(&#x27;category_id&#x27;, categoryIds);
+          }
+        }
+      }
+
+      if (
+        filters?.priceRange &amp;&amp;
+        (filters.priceRange.min &gt; 0 || filters.priceRange.max &gt; 0)
+      ) {
+        if (filters.priceRange.min &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.gte(&#x27;price&#x27;, filters.priceRange.min);
+        }
+        if (filters.priceRange.max &gt; 0) {
+          supabaseQuery &#x3D; supabaseQuery.lte(&#x27;price&#x27;, filters.priceRange.max);
+        }
+      }
+
+      // Add availability filter like B2B
+      if (filters?.availability &amp;&amp; filters.availability !&#x3D;&#x3D; &#x27;&#x27;) {
+        switch (filters.availability) {
+          case &#x27;in-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;in_stock&#x27;);
+            break;
+          case &#x27;low-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;low_stock&#x27;);
+            break;
+          case &#x27;out-of-stock&#x27;:
+            supabaseQuery &#x3D; supabaseQuery.eq(&#x27;stock_status&#x27;, &#x27;out_of_stock&#x27;);
+            break;
+        }
+      }
+
+      const { data, error } &#x3D; await supabaseQuery;
+
+      if (error) {
+        throw error;
+      }
+
+      // Count products by manufacturer (overriding 0s with actual counts)
+      data?.forEach((product: any) &#x3D;&gt; {
+        if (product.brand) {
+          manufacturerCounts[product.brand] &#x3D;
+            (manufacturerCounts[product.brand] || 0) + 1;
+        }
+      });
+
+      return manufacturerCounts;
+    } catch (error) {
+      console.error(&#x27;Error fetching manufacturer counts:&#x27;, error);
+      return {};
+    }
+  }
+
+  private getProductImage(images: any[]): string {
+    if (images &amp;&amp; images.length &gt; 0) {
+      const primaryImage &#x3D; images.find((img) &#x3D;&gt; img.is_primary) || images[0];
+      return (
+        primaryImage.url ||
+        &#x27;assets/images/placeholders/solar-panels-default.jpg&#x27;
+      );
+    }
+    return &#x27;assets/images/placeholders/solar-panels-default.jpg&#x27;;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ManufacturerCountFilters-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

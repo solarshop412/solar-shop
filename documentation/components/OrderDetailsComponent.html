@@ -1,0 +1,1837 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  OrderDetailsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/order-details/order-details.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-order-details</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./order-details.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./order-details.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                <a href="#imageErrors" >imageErrors</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#order" >order</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getFormattedDate" >getFormattedDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getPaymentMethodKey" >getPaymentMethodKey</a>
+                            </li>
+                            <li>
+                                <a href="#getPaymentMethodTranslation" >getPaymentMethodTranslation</a>
+                            </li>
+                            <li>
+                                <a href="#hasImageError" >hasImageError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadOrder" >loadOrder</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onImageError" >onImageError</a>
+                            </li>
+                            <li>
+                                <a href="#onImageLoad" >onImageLoad</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFormattedDate"></a>
+                    <span class="name">
+                        <span ><b>getFormattedDate</b></span>
+                        <a href="#getFormattedDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFormattedDate(date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentMethodKey"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getPaymentMethodKey</b></span>
+                        <a href="#getPaymentMethodKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getPaymentMethodKey(paymentMethod: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="169"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:169</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>paymentMethod</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentMethodTranslation"></a>
+                    <span class="name">
+                        <span ><b>getPaymentMethodTranslation</b></span>
+                        <a href="#getPaymentMethodTranslation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPaymentMethodTranslation(paymentMethod: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>paymentMethod</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasImageError"></a>
+                    <span class="name">
+                        <span ><b>hasImageError</b></span>
+                        <a href="#hasImageError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasImageError(itemId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:152</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>itemId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadOrder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadOrder</b></span>
+                        <a href="#loadOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadOrder(orderId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>orderId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImageError"></a>
+                    <span class="name">
+                        <span ><b>onImageError</b></span>
+                        <a href="#onImageError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImageError(itemId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>itemId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImageLoad"></a>
+                    <span class="name">
+                        <span ><b>onImageLoad</b></span>
+                        <a href="#onImageLoad"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImageLoad(itemId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>itemId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageErrors"></a>
+                    <span class="name">
+                        <span ><b>imageErrors</b></span>
+                        <a href="#imageErrors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Set&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="order"></a>
+                    <span class="name">
+                        <span ><b>order</b></span>
+                        <a href="#order"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Order.html" target="_self" >Order | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/b2c/order-details/order-details.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, RouterModule } from &#x27;@angular/router&#x27;;
+import { SupabaseService } from &#x27;../../../services/supabase.service&#x27;;
+import { TranslatePipe } from &#x27;../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../shared/services/translation.service&#x27;;
+
+import { Order } from &#x27;../../../shared/models/order.model&#x27;;
+
+@Component({
+  selector: &#x27;app-order-details&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslatePipe],
+  templateUrl: &#x27;./order-details.component.html&#x27;,
+  styleUrls: [&#x27;./order-details.component.scss&#x27;],
+})
+export class OrderDetailsComponent implements OnInit {
+  private route &#x3D; inject(ActivatedRoute);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private translationService &#x3D; inject(TranslationService);
+
+  order: Order | null &#x3D; null;
+  loading &#x3D; true;
+  error &#x3D; false;
+  imageErrors &#x3D; new Set&lt;string&gt;();
+
+  ngOnInit(): void {
+    const orderId &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    if (orderId) {
+      this.loadOrder(orderId);
+    } else {
+      this.error &#x3D; true;
+      this.loading &#x3D; false;
+    }
+  }
+
+  private async loadOrder(orderId: string): Promise&lt;void&gt; {
+    try {
+      this.loading &#x3D; true;
+      this.error &#x3D; false;
+
+      console.log(&#x60;Loading order details for ID: ${orderId}&#x60;);
+
+      // Load order from database
+      const orderData &#x3D; await this.supabaseService.getTableById(
+        &#x27;orders&#x27;,
+        orderId,
+      );
+
+      if (!orderData) {
+        console.error(&#x60;Order not found with ID: ${orderId}&#x60;);
+        this.error &#x3D; true;
+        return;
+      }
+
+      console.log(&#x27;Order data loaded:&#x27;, orderData);
+
+      // Load order items
+      const orderItemsData &#x3D; await this.supabaseService.getTable(
+        &#x27;order_items&#x27;,
+        {
+          order_id: orderId,
+        },
+      );
+
+      console.log(
+        &#x60;Loaded ${orderItemsData?.length || 0} order items:&#x60;,
+        orderItemsData,
+      );
+
+      // Convert database order to Order model
+      this.order &#x3D; {
+        id: orderData.id,
+        orderNumber: orderData.order_number,
+        userId: orderData.user_id || undefined,
+        customerEmail: orderData.customer_email,
+        customerName: orderData.customer_name || undefined,
+        customerPhone: orderData.customer_phone || undefined,
+        totalAmount: orderData.total_amount || 0,
+        subtotal: orderData.subtotal || 0,
+        taxAmount: orderData.tax_amount || 0,
+        shippingCost: orderData.shipping_cost || 0,
+        discountAmount: orderData.discount_amount || 0,
+        status: orderData.status,
+        paymentStatus: orderData.payment_status,
+        shippingStatus: orderData.shipping_status || undefined,
+        paymentMethod: orderData.payment_method || undefined,
+        orderDate: orderData.order_date,
+        shippingAddress: orderData.shipping_address || undefined,
+        billingAddress: orderData.billing_address || undefined,
+        trackingNumber: orderData.tracking_number || undefined,
+        notes: orderData.notes || undefined,
+        adminNotes: orderData.admin_notes || undefined,
+        items: await Promise.all(
+          (orderItemsData || []).map(async (itemData: any) &#x3D;&gt; {
+            let productImageUrl &#x3D; itemData.product_image_url;
+
+            // If no image URL in order item and we have a product ID, try to get it from products table
+            if (!productImageUrl &amp;&amp; itemData.product_id) {
+              try {
+                const productData &#x3D; await this.supabaseService.getTableById(
+                  &#x27;products&#x27;,
+                  itemData.product_id,
+                );
+                if (productData?.images &amp;&amp; productData.images.length &gt; 0) {
+                  productImageUrl &#x3D;
+                    productData.images[0].url || productData.images[0];
+                }
+              } catch (error) {
+                console.warn(
+                  &#x27;Could not load product image for product ID:&#x27;,
+                  itemData.product_id,
+                  error,
+                );
+              }
+            }
+
+            const orderItem &#x3D; {
+              id: itemData.id,
+              orderId: itemData.order_id,
+              productId: itemData.product_id || undefined,
+              productName: itemData.product_name || &#x27;Unknown Product&#x27;,
+              productSku: itemData.product_sku || undefined,
+              quantity: itemData.quantity || 0,
+              unitPrice: itemData.unit_price || 0,
+              totalPrice: itemData.total_price || 0,
+              discountAmount: itemData.discount_amount || 0,
+              discountPercentage: itemData.discount_percentage || 0,
+              productImageUrl: productImageUrl || undefined,
+              productSpecifications:
+                itemData.product_specifications || undefined,
+              createdAt: itemData.created_at,
+            };
+
+            console.log(&#x27;Mapped order item:&#x27;, orderItem);
+            return orderItem;
+          }),
+        ),
+        createdAt: orderData.created_at,
+        updatedAt: orderData.updated_at,
+      };
+
+      console.log(&#x27;Successfully loaded complete order:&#x27;, this.order);
+    } catch (error) {
+      console.error(&#x27;Error loading order:&#x27;, error);
+      this.error &#x3D; true;
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  hasImageError(itemId: string): boolean {
+    return this.imageErrors.has(itemId);
+  }
+
+  onImageError(itemId: string): void {
+    this.imageErrors.add(itemId);
+  }
+
+  onImageLoad(itemId: string): void {
+    this.imageErrors.delete(itemId);
+  }
+
+  getPaymentMethodTranslation(paymentMethod: string): string {
+    const translationKey &#x3D; this.getPaymentMethodKey(paymentMethod);
+    return translationKey;
+  }
+
+  private getPaymentMethodKey(paymentMethod: string): string {
+    switch (paymentMethod) {
+      case &#x27;credit_card&#x27;:
+        return &#x27;admin.ordersForm.creditCard&#x27;;
+      case &#x27;debit_card&#x27;:
+        return &#x27;admin.ordersForm.debitCard&#x27;;
+      case &#x27;bank_transfer&#x27;:
+        return &#x27;admin.ordersForm.bankTransfer&#x27;;
+      case &#x27;cash_on_delivery&#x27;:
+        return &#x27;admin.ordersForm.cashOnDelivery&#x27;;
+      case &#x27;paypal&#x27;:
+        return &#x27;checkout.paypal&#x27;;
+      default:
+        return paymentMethod;
+    }
+  }
+
+  getFormattedDate(date: string): string {
+    const currentLanguage &#x3D; this.translationService.getCurrentLanguage();
+    const locale &#x3D; currentLanguage &#x3D;&#x3D;&#x3D; &#x27;hr&#x27; ? &#x27;hr-HR&#x27; : &#x27;en-US&#x27;;
+    return new Date(date).toLocaleDateString(locale, {
+      year: &#x27;numeric&#x27;,
+      month: &#x27;long&#x27;,
+      day: &#x27;numeric&#x27;,
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen bg-gray-50 py-8&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-4xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+    &lt;!-- Header --&gt;
+    &lt;div class&#x3D;&quot;mb-8&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div&gt;
+          &lt;h1 class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;orderDetails.title&quot; | translate }}
+          &lt;/h1&gt;
+          &lt;p class&#x3D;&quot;mt-2 text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot; *ngIf&#x3D;&quot;order&quot;&gt;
+            {{ &quot;orderDetails.orderPlacedOn&quot; | translate }}
+            {{ getFormattedDate(order.orderDate) }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button
+          routerLink&#x3D;&quot;/profil&quot;
+          [queryParams]&#x3D;&quot;{ tab: &#x27;my-orders&#x27; }&quot;
+          class&#x3D;&quot;px-4 py-2 text-gray-600 hover:text-gray-800 font-medium font-[&#x27;DM_Sans&#x27;] flex items-center space-x-2&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;w-4 h-4&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M10 19l-7-7m0 0l7-7m-7 7h18&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;span&gt;{{ &quot;orderDetails.backToOrders&quot; | translate }}&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Loading State --&gt;
+    &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex justify-center py-12&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600&quot;
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Error State --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;error&quot;
+      class&#x3D;&quot;bg-red-50 border border-red-200 rounded-lg p-6 text-center&quot;
+    &gt;
+      &lt;svg
+        class&#x3D;&quot;w-12 h-12 text-red-400 mx-auto mb-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-medium text-red-800 mb-2&quot;&gt;
+        {{ &quot;orderDetails.orderNotFound&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;p class&#x3D;&quot;text-red-600&quot;&gt;
+        {{ &quot;orderDetails.orderNotFoundMessage&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Order Content --&gt;
+    &lt;div *ngIf&#x3D;&quot;order &amp;&amp; !loading&quot; class&#x3D;&quot;space-y-6&quot;&gt;
+      &lt;!-- Order Summary --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6&quot;&gt;
+          &lt;!-- Order Number --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.orderNumber&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p
+              class&#x3D;&quot;mt-1 text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ order.orderNumber }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Order Status --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.status&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;span
+              class&#x3D;&quot;mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[&#x27;DM_Sans&#x27;]&quot;
+              [ngClass]&#x3D;&quot;{
+                &#x27;bg-yellow-100 text-yellow-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;pending&#x27;,
+                &#x27;bg-blue-100 text-blue-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;confirmed&#x27;,
+                &#x27;bg-purple-100 text-purple-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;processing&#x27;,
+                &#x27;bg-indigo-100 text-indigo-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;shipped&#x27;,
+                &#x27;bg-green-100 text-green-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;delivered&#x27;,
+                &#x27;bg-red-100 text-red-800&#x27;: order.status &#x3D;&#x3D;&#x3D; &#x27;cancelled&#x27;,
+              }&quot;
+            &gt;
+              {{ &quot;admin.orderStatus.&quot; + order.status | translate }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Payment Status --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.payment&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;span
+              class&#x3D;&quot;mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[&#x27;DM_Sans&#x27;]&quot;
+              [ngClass]&#x3D;&quot;{
+                &#x27;bg-yellow-100 text-yellow-800&#x27;:
+                  order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;pending&#x27;,
+                &#x27;bg-green-100 text-green-800&#x27;: order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;paid&#x27;,
+                &#x27;bg-red-100 text-red-800&#x27;: order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;failed&#x27;,
+              }&quot;
+            &gt;
+              {{ &quot;admin.paymentStatus.&quot; + order.paymentStatus | translate }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Total Amount --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.total&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p
+              class&#x3D;&quot;mt-1 text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Tracking Number --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;order.trackingNumber&quot;
+          class&#x3D;&quot;mt-6 pt-6 border-t border-gray-200&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+            &lt;div&gt;
+              &lt;h3
+                class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;orderDetails.trackingNumber&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;p
+                class&#x3D;&quot;mt-1 text-lg font-medium text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ order.trackingNumber }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button
+              class&#x3D;&quot;px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.trackPackage&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Items --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between mb-6&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;orderDetails.orderItems&quot; | translate }}
+          &lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div
+          class&#x3D;&quot;space-y-4&quot;
+          *ngIf&#x3D;&quot;order.items &amp;&amp; order.items.length &gt; 0; else noItems&quot;
+        &gt;
+          &lt;div
+            *ngFor&#x3D;&quot;let item of order.items&quot;
+            class&#x3D;&quot;flex items-center space-x-4 p-4 border border-gray-200 rounded-lg&quot;
+          &gt;
+            &lt;!-- Product Image --&gt;
+            &lt;div
+              class&#x3D;&quot;w-20 h-20 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center&quot;
+            &gt;
+              &lt;img
+                *ngIf&#x3D;&quot;
+                  item.productImageUrl &amp;&amp; !hasImageError(item.id);
+                  else productIcon
+                &quot;
+                [src]&#x3D;&quot;item.productImageUrl&quot;
+                [alt]&#x3D;&quot;item.productName&quot;
+                class&#x3D;&quot;w-full h-full object-cover&quot;
+                (error)&#x3D;&quot;onImageError(item.id)&quot;
+                (load)&#x3D;&quot;onImageLoad(item.id)&quot;
+              /&gt;
+              &lt;ng-template #productIcon&gt;
+                &lt;svg
+                  class&#x3D;&quot;w-8 h-8 text-gray-400&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/ng-template&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Product Details --&gt;
+            &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+              &lt;h3 class&#x3D;&quot;text-lg font-medium text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+                {{ item.productName }}
+              &lt;/h3&gt;
+              &lt;p
+                class&#x3D;&quot;text-sm text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;
+                *ngIf&#x3D;&quot;item.productSku&quot;
+              &gt;
+                SKU: {{ item.productSku }}
+              &lt;/p&gt;
+              &lt;div
+                class&#x3D;&quot;mt-2 flex items-center space-x-4 text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                &lt;span
+                  &gt;{{ &quot;orderDetails.qty&quot; | translate }}:
+                  {{ item.quantity }}&lt;/span
+                &gt;
+                &lt;span
+                  &gt;{{ &quot;orderDetails.unitPrice&quot; | translate }}:
+                  {{
+                    item.unitPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                  }}&lt;/span
+                &gt;
+                &lt;span
+                  *ngIf&#x3D;&quot;item.discountAmount &amp;&amp; item.discountAmount &gt; 0&quot;
+                  class&#x3D;&quot;text-red-600&quot;
+                &gt;
+                  {{ &quot;orderDetails.itemDiscount&quot; | translate }}: -{{
+                    item.discountAmount | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                  }}
+                  &lt;span
+                    *ngIf&#x3D;&quot;
+                      item.discountPercentage &amp;&amp; item.discountPercentage &gt; 0
+                    &quot;
+                    class&#x3D;&quot;text-xs&quot;
+                  &gt;
+                    ({{ item.discountPercentage }}%)
+                  &lt;/span&gt;
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;mt-2&quot;&gt;
+                &lt;a
+                  *ngIf&#x3D;&quot;item.productId || item.productName; else disabledLink&quot;
+                  [routerLink]&#x3D;&quot;
+                    item.productId
+                      ? [&#x27;/proizvodi&#x27;, item.productId]
+                      : [&#x27;/proizvodi&#x27;]
+                  &quot;
+                  [queryParams]&#x3D;&quot;
+                    !item.productId &amp;&amp; item.productName
+                      ? { search: item.productName }
+                      : null
+                  &quot;
+                  class&#x3D;&quot;inline-flex items-center text-xs text-blue-600 hover:text-blue-800 font-medium cursor-pointer transition-colors&quot;
+                &gt;
+                  {{
+                    item.productId
+                      ? (&quot;orderDetails.viewDetails&quot; | translate)
+                      : (&quot;orderDetails.searchForProduct&quot; | translate)
+                  }}
+                &lt;/a&gt;
+                &lt;ng-template #disabledLink&gt;
+                  &lt;span
+                    class&#x3D;&quot;inline-flex items-center text-xs text-gray-400 font-medium&quot;
+                  &gt;
+                    {{ &quot;orderDetails.productDetailsNotAvailable&quot; | translate }}
+                  &lt;/span&gt;
+                &lt;/ng-template&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Item Total --&gt;
+            &lt;div class&#x3D;&quot;text-right&quot;&gt;
+              &lt;p class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+                {{ item.totalPrice | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;ng-template #noItems&gt;
+          &lt;div class&#x3D;&quot;text-center py-8&quot;&gt;
+            &lt;p class&#x3D;&quot;text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ &quot;orderDetails.noItemsFound&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/ng-template&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Summary --&gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.orderSummary&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+          &lt;div class&#x3D;&quot;flex justify-between font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-600&quot;&gt;{{
+              &quot;orderDetails.subtotal&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-gray-900&quot;&gt;{{
+              order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+            }}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div
+            class&#x3D;&quot;flex justify-between font-[&#x27;DM_Sans&#x27;]&quot;
+            *ngIf&#x3D;&quot;order.discountAmount &gt; 0&quot;
+          &gt;
+            &lt;span class&#x3D;&quot;text-gray-600&quot;&gt;{{
+              &quot;orderDetails.discount&quot; | translate
+            }}&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-red-600&quot;
+              &gt;-{{
+                order.discountAmount | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span
+            &gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;border-t border-gray-200 pt-3&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;flex justify-between text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              &lt;span&gt;{{ &quot;orderDetails.total&quot; | translate }}&lt;/span&gt;
+              &lt;span&gt;{{
+                order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+              }}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Shipping Information --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;order.shippingAddress&quot;
+        class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+      &gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.shippingInformation&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+          &lt;!-- Shipping Address --&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide mb-3 font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.shippingAddress&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;div class&#x3D;&quot;space-y-1 text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              &lt;p class&#x3D;&quot;font-medium&quot;&gt;
+                {{ order.shippingAddress.firstName }}
+                {{ order.shippingAddress.lastName }}
+              &lt;/p&gt;
+              &lt;p&gt;{{ order.shippingAddress.addressLine1 }}&lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;order.shippingAddress.addressLine2&quot;&gt;
+                {{ order.shippingAddress.addressLine2 }}
+              &lt;/p&gt;
+              &lt;p&gt;
+                {{ order.shippingAddress.city }},
+                {{ order.shippingAddress.state }}
+                {{ order.shippingAddress.postalCode }}
+              &lt;/p&gt;
+              &lt;p&gt;{{ order.shippingAddress.country }}&lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;order.shippingAddress.phone&quot;&gt;
+                {{ order.shippingAddress.phone }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Billing Address --&gt;
+          &lt;div *ngIf&#x3D;&quot;order.billingAddress&quot;&gt;
+            &lt;h3
+              class&#x3D;&quot;text-sm font-medium text-gray-500 uppercase tracking-wide mb-3 font-[&#x27;DM_Sans&#x27;]&quot;
+            &gt;
+              {{ &quot;orderDetails.billingAddress&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;div class&#x3D;&quot;space-y-1 text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              &lt;p class&#x3D;&quot;font-medium&quot;&gt;
+                {{ order.billingAddress.firstName }}
+                {{ order.billingAddress.lastName }}
+              &lt;/p&gt;
+              &lt;p&gt;{{ order.billingAddress.addressLine1 }}&lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;order.billingAddress.addressLine2&quot;&gt;
+                {{ order.billingAddress.addressLine2 }}
+              &lt;/p&gt;
+              &lt;p&gt;
+                {{ order.billingAddress.city }},
+                {{ order.billingAddress.state }}
+                {{ order.billingAddress.postalCode }}
+              &lt;/p&gt;
+              &lt;p&gt;{{ order.billingAddress.country }}&lt;/p&gt;
+              &lt;p *ngIf&#x3D;&quot;order.billingAddress.phone&quot;&gt;
+                {{ order.billingAddress.phone }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Payment Method --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;order.paymentMethod&quot;
+        class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+      &gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.paymentMethod&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;div class&#x3D;&quot;flex items-center space-x-3&quot;&gt;
+          &lt;svg
+            class&#x3D;&quot;w-6 h-6 text-gray-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z&quot;
+            /&gt;
+          &lt;/svg&gt;
+          &lt;span class&#x3D;&quot;text-gray-900 font-medium font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{
+            getPaymentMethodTranslation(order.paymentMethod) | translate
+          }}&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Order Notes --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;order.notes&quot;
+        class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+      &gt;
+        &lt;h2 class&#x3D;&quot;text-xl font-semibold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;orderDetails.orderNotes&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;p class&#x3D;&quot;text-gray-700 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{ order.notes }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./order-details.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen bg-gray-50 py-8">  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">    <!-- Header -->    <div class="mb-8">      <div class="flex items-center justify-between">        <div>          <h1 class="text-3xl font-bold text-gray-900 font-[\'Poppins\']">            {{ "orderDetails.title" | translate }}          </h1>          <p class="mt-2 text-gray-600 font-[\'DM_Sans\']" *ngIf="order">            {{ "orderDetails.orderPlacedOn" | translate }}            {{ getFormattedDate(order.orderDate) }}          </p>        </div>        <button          routerLink="/profil"          [queryParams]="{ tab: \'my-orders\' }"          class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium font-[\'DM_Sans\'] flex items-center space-x-2"        >          <svg            class="w-4 h-4"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M10 19l-7-7m0 0l7-7m-7 7h18"            />          </svg>          <span>{{ "orderDetails.backToOrders" | translate }}</span>        </button>      </div>    </div>    <!-- Loading State -->    <div *ngIf="loading" class="flex justify-center py-12">      <div        class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"      ></div>    </div>    <!-- Error State -->    <div      *ngIf="error"      class="bg-red-50 border border-red-200 rounded-lg p-6 text-center"    >      <svg        class="w-12 h-12 text-red-400 mx-auto mb-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z"        />      </svg>      <h3 class="text-lg font-medium text-red-800 mb-2">        {{ "orderDetails.orderNotFound" | translate }}      </h3>      <p class="text-red-600">        {{ "orderDetails.orderNotFoundMessage" | translate }}      </p>    </div>    <!-- Order Content -->    <div *ngIf="order && !loading" class="space-y-6">      <!-- Order Summary -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">          <!-- Order Number -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.orderNumber" | translate }}            </h3>            <p              class="mt-1 text-lg font-semibold text-gray-900 font-[\'Poppins\']"            >              {{ order.orderNumber }}            </p>          </div>          <!-- Order Status -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.status" | translate }}            </h3>            <span              class="mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[\'DM_Sans\']"              [ngClass]="{                \'bg-yellow-100 text-yellow-800\': order.status === \'pending\',                \'bg-blue-100 text-blue-800\': order.status === \'confirmed\',                \'bg-purple-100 text-purple-800\': order.status === \'processing\',                \'bg-indigo-100 text-indigo-800\': order.status === \'shipped\',                \'bg-green-100 text-green-800\': order.status === \'delivered\',                \'bg-red-100 text-red-800\': order.status === \'cancelled\',              }"            >              {{ "admin.orderStatus." + order.status | translate }}            </span>          </div>          <!-- Payment Status -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.payment" | translate }}            </h3>            <span              class="mt-1 inline-flex px-3 py-1 text-sm font-medium rounded-full font-[\'DM_Sans\']"              [ngClass]="{                \'bg-yellow-100 text-yellow-800\':                  order.paymentStatus === \'pending\',                \'bg-green-100 text-green-800\': order.paymentStatus === \'paid\',                \'bg-red-100 text-red-800\': order.paymentStatus === \'failed\',              }"            >              {{ "admin.paymentStatus." + order.paymentStatus | translate }}            </span>          </div>          <!-- Total Amount -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"            >              {{ "orderDetails.total" | translate }}            </h3>            <p              class="mt-1 text-lg font-semibold text-gray-900 font-[\'Poppins\']"            >              {{ order.subtotal | currency: "EUR" : "symbol" : "1.2-2" }}            </p>          </div>        </div>        <!-- Tracking Number -->        <div          *ngIf="order.trackingNumber"          class="mt-6 pt-6 border-t border-gray-200"        >          <div class="flex items-center justify-between">            <div>              <h3                class="text-sm font-medium text-gray-500 uppercase tracking-wide font-[\'DM_Sans\']"              >                {{ "orderDetails.trackingNumber" | translate }}              </h3>              <p                class="mt-1 text-lg font-medium text-gray-900 font-[\'DM_Sans\']"              >                {{ order.trackingNumber }}              </p>            </div>            <button              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-[\'DM_Sans\']"            >              {{ "orderDetails.trackPackage" | translate }}            </button>          </div>        </div>      </div>      <!-- Order Items -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <div class="flex items-center justify-between mb-6">          <h2 class="text-xl font-semibold text-gray-900 font-[\'Poppins\']">            {{ "orderDetails.orderItems" | translate }}          </h2>        </div>        <div          class="space-y-4"          *ngIf="order.items && order.items.length > 0; else noItems"        >          <div            *ngFor="let item of order.items"            class="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg"          >            <!-- Product Image -->            <div              class="w-20 h-20 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center"            >              <img                *ngIf="                  item.productImageUrl && !hasImageError(item.id);                  else productIcon                "                [src]="item.productImageUrl"                [alt]="item.productName"                class="w-full h-full object-cover"                (error)="onImageError(item.id)"                (load)="onImageLoad(item.id)"              />              <ng-template #productIcon>                <svg                  class="w-8 h-8 text-gray-400"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"                  />                </svg>              </ng-template>            </div>            <!-- Product Details -->            <div class="flex-1 min-w-0">              <h3 class="text-lg font-medium text-gray-900 font-[\'Poppins\']">                {{ item.productName }}              </h3>              <p                class="text-sm text-gray-500 font-[\'DM_Sans\']"                *ngIf="item.productSku"              >                SKU: {{ item.productSku }}              </p>              <div                class="mt-2 flex items-center space-x-4 text-sm text-gray-600 font-[\'DM_Sans\']"              >                <span                  >{{ "orderDetails.qty" | translate }}:                  {{ item.quantity }}</span                >                <span                  >{{ "orderDetails.unitPrice" | translate }}:                  {{                    item.unitPrice | currency: "EUR" : "symbol" : "1.2-2"                  }}</span                >                <span                  *ngIf="item.discountAmount && item.discountAmount > 0"                  class="text-red-600"                >                  {{ "orderDetails.itemDiscount" | translate }}: -{{                    item.discountAmount | currency: "EUR" : "symbol" : "1.2-2"                  }}                  <span                    *ngIf="                      item.discountPercentage && item.discountPercentage > 0                    "                    class="text-xs"                  >                    ({{ item.discountPercentage }}%)                  </span>                </span>              </div>              <div class="mt-2">                <a                  *ngIf="item.productId || item.productName; else disabledLink"                  [routerLink]="                    item.productId                      ? [\'/proizvodi\', item.productId]                      : [\'/proizvodi\']                  "                  [queryParams]="                    !item.productId && item.productName                      ? { search: item.productName }                      : null                  "                  class="inline-flex items-center text-xs text-blue-600 hover:text-blue-800 font-medium cursor-pointer transition-colors"                >                  {{                    item.productId                      ? ("orderDetails.viewDetails" | translate)                      : ("orderDetails.searchForProduct" | translate)                  }}                </a>                <ng-template #disabledLink>                  <span                    class="inline-flex items-center text-xs text-gray-400 font-medium"                  >                    {{ "orderDetails.productDetailsNotAvailable" | translate }}                  </span>                </ng-template>              </div>            </div>            <!-- Item Total -->            <div class="text-right">              <p class="text-lg font-semibold text-gray-900 font-[\'Poppins\']">                {{ item.totalPrice | currency: "EUR" : "symbol" : "1.2-2" }}              </p>            </div>          </div>        </div>        <ng-template #noItems>          <div class="text-center py-8">            <p class="text-gray-500 font-[\'DM_Sans\']">              {{ "orderDetails.noItemsFound" | translate }}            </p>          </div>        </ng-template>      </div>      <!-- Order Summary -->      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">        <h2 class="text-xl font-semibold text-gray-900 mb-6 font-[\'Poppins\']">          {{ "orderDetails.orderSummary" | translate }}        </h2>        <div class="space-y-3">          <div class="flex justify-between font-[\'DM_Sans\']">            <span class="text-gray-600">{{              "orderDetails.subtotal" | translate            }}</span>            <span class="text-gray-900">{{              order.subtotal | currency: "EUR" : "symbol" : "1.2-2"            }}</span>          </div>          <div            class="flex justify-between font-[\'DM_Sans\']"            *ngIf="order.discountAmount > 0"          >            <span class="text-gray-600">{{              "orderDetails.discount" | translate            }}</span>            <span class="text-red-600"              >-{{                order.discountAmount | currency: "EUR" : "symbol" : "1.2-2"              }}</span            >          </div>          <div class="border-t border-gray-200 pt-3">            <div              class="flex justify-between text-lg font-semibold text-gray-900 font-[\'Poppins\']"            >              <span>{{ "orderDetails.total" | translate }}</span>              <span>{{                order.subtotal | currency: "EUR" : "symbol" : "1.2-2"              }}</span>            </div>          </div>        </div>      </div>      <!-- Shipping Information -->      <div        *ngIf="order.shippingAddress"        class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"      >        <h2 class="text-xl font-semibold text-gray-900 mb-6 font-[\'Poppins\']">          {{ "orderDetails.shippingInformation" | translate }}        </h2>        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">          <!-- Shipping Address -->          <div>            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3 font-[\'DM_Sans\']"            >              {{ "orderDetails.shippingAddress" | translate }}            </h3>            <div class="space-y-1 text-gray-900 font-[\'DM_Sans\']">              <p class="font-medium">                {{ order.shippingAddress.firstName }}                {{ order.shippingAddress.lastName }}              </p>              <p>{{ order.shippingAddress.addressLine1 }}</p>              <p *ngIf="order.shippingAddress.addressLine2">                {{ order.shippingAddress.addressLine2 }}              </p>              <p>                {{ order.shippingAddress.city }},                {{ order.shippingAddress.state }}                {{ order.shippingAddress.postalCode }}              </p>              <p>{{ order.shippingAddress.country }}</p>              <p *ngIf="order.shippingAddress.phone">                {{ order.shippingAddress.phone }}              </p>            </div>          </div>          <!-- Billing Address -->          <div *ngIf="order.billingAddress">            <h3              class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3 font-[\'DM_Sans\']"            >              {{ "orderDetails.billingAddress" | translate }}            </h3>            <div class="space-y-1 text-gray-900 font-[\'DM_Sans\']">              <p class="font-medium">                {{ order.billingAddress.firstName }}                {{ order.billingAddress.lastName }}              </p>              <p>{{ order.billingAddress.addressLine1 }}</p>              <p *ngIf="order.billingAddress.addressLine2">                {{ order.billingAddress.addressLine2 }}              </p>              <p>                {{ order.billingAddress.city }},                {{ order.billingAddress.state }}                {{ order.billingAddress.postalCode }}              </p>              <p>{{ order.billingAddress.country }}</p>              <p *ngIf="order.billingAddress.phone">                {{ order.billingAddress.phone }}              </p>            </div>          </div>        </div>      </div>      <!-- Payment Method -->      <div        *ngIf="order.paymentMethod"        class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"      >        <h2 class="text-xl font-semibold text-gray-900 mb-4 font-[\'Poppins\']">          {{ "orderDetails.paymentMethod" | translate }}        </h2>        <div class="flex items-center space-x-3">          <svg            class="w-6 h-6 text-gray-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"            />          </svg>          <span class="text-gray-900 font-medium font-[\'DM_Sans\']">{{            getPaymentMethodTranslation(order.paymentMethod) | translate          }}</span>        </div>      </div>      <!-- Order Notes -->      <div        *ngIf="order.notes"        class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"      >        <h2 class="text-xl font-semibold text-gray-900 mb-4 font-[\'Poppins\']">          {{ "orderDetails.orderNotes" | translate }}        </h2>        <p class="text-gray-700 font-[\'DM_Sans\']">{{ order.notes }}</p>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'OrderDetailsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'OrderDetailsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

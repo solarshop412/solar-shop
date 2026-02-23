@@ -1,0 +1,873 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CompanyComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/company/company.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-company</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./company.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./company.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { TranslatePipe } from &#x27;../../../shared/pipes/translate.pipe&#x27;;
+
+@Component({
+  selector: &#x27;app-company&#x27;,
+  standalone: true,
+  imports: [CommonModule, TranslatePipe],
+  templateUrl: &#x27;./company.component.html&#x27;,
+  styleUrls: [&#x27;./company.component.scss&#x27;],
+})
+export class CompanyComponent {}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Hero Section with Video --&gt;
+&lt;section class&#x3D;&quot;relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden&quot;&gt;
+  &lt;video
+    autoplay
+    muted
+    loop
+    playsinline
+    poster&#x3D;&quot;assets/videos/hero-poster.jpg&quot;
+    class&#x3D;&quot;absolute inset-0 w-full h-full object-cover&quot;
+  &gt;
+    &lt;source src&#x3D;&quot;assets/videos/hero-video.mp4&quot; type&#x3D;&quot;video/mp4&quot; /&gt;
+  &lt;/video&gt;
+&lt;/section&gt;
+
+&lt;!-- About Us Section --&gt;
+&lt;section class&#x3D;&quot;py-16 px-4 md:px-8 lg:px-32 bg-white&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-6xl mx-auto&quot;&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-12 items-center&quot;&gt;
+      &lt;!-- Content --&gt;
+      &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+        &lt;h2
+          class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-3xl md:text-4xl text-gray-800 leading-tight&quot;
+        &gt;
+          {{ &quot;company.whoWeAre&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.whoWeAreText&quot; | translate }}
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.mission&quot; | translate }}
+        &lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Image --&gt;
+      &lt;div class&#x3D;&quot;lg:order-last&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;bg-gray-200 rounded-3xl h-96 flex items-center justify-center&quot;
+        &gt;
+          &lt;img
+            src&#x3D;&quot;assets/images/logo.png&quot;
+            alt&#x3D;&quot;Company Image&quot;
+            class&#x3D;&quot;w-full h-auto object-fit&quot;
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Team Section --&gt;
+&lt;section class&#x3D;&quot;py-16 px-4 md:px-8 lg:px-32 bg-gray-50&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-6xl mx-auto&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col lg:flex-row gap-12&quot;&gt;
+      &lt;!-- Team Info --&gt;
+      &lt;div class&#x3D;&quot;lg:w-full space-y-6&quot;&gt;
+        &lt;h2
+          class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-3xl md:text-4xl text-gray-800 text-center lg:text-left leading-tight&quot;
+        &gt;
+          {{ &quot;company.ourTeam&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.teamText1&quot; | translate }}
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.teamText2&quot; | translate }}
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.teamText3&quot; | translate }}
+        &lt;/p&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 leading-relaxed&quot;&gt;
+          {{ &quot;company.teamText4&quot; | translate }}
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Mission &amp; Values Section --&gt;
+&lt;section class&#x3D;&quot;relative py-16 px-4 md:px-8 lg:px-32 bg-solar-50&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-6xl mx-auto relative z-10&quot;&gt;
+    &lt;div class&#x3D;&quot;text-center mb-12&quot;&gt;
+      &lt;h2
+        class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-3xl md:text-4xl text-gray-800 mb-8 leading-tight&quot;
+      &gt;
+        {{ &quot;company.missionValues&quot; | translate }}
+      &lt;/h2&gt;
+
+      &lt;!-- Values Grid --&gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-8&quot;&gt;
+        &lt;!-- First Row --&gt;
+        &lt;div class&#x3D;&quot;flex items-start space-x-4 text-left&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-6 h-6 text-white&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+            &gt;
+              &lt;path d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-lg text-gray-800 mb-2&quot;
+            &gt;
+              {{ &quot;company.quality&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-sm text-gray-600 leading-relaxed&quot;&gt;
+              {{ &quot;company.qualityText&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;flex items-start space-x-4 text-left&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-6 h-6 text-white&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+            &gt;
+              &lt;path
+                d&#x3D;&quot;M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-lg text-gray-800 mb-2&quot;
+            &gt;
+              {{ &quot;company.innovation&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-sm text-gray-600 leading-relaxed&quot;&gt;
+              {{ &quot;company.innovationText&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Second Row --&gt;
+        &lt;div class&#x3D;&quot;flex items-start space-x-4 text-left&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-6 h-6 text-white&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+            &gt;
+              &lt;path
+                d&#x3D;&quot;M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012-2v-1a2 2 0 012-2h1.945M11 6.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-lg text-gray-800 mb-2&quot;
+            &gt;
+              {{ &quot;company.sustainability&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-sm text-gray-600 leading-relaxed&quot;&gt;
+              {{ &quot;company.sustainabilityText&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;flex items-start space-x-4 text-left&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-6 h-6 text-white&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+            &gt;
+              &lt;path
+                d&#x3D;&quot;M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;h3
+              class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-lg text-gray-800 mb-2&quot;
+            &gt;
+              {{ &quot;company.support&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-sm text-gray-600 leading-relaxed&quot;&gt;
+              {{ &quot;company.supportText&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;!-- Partners Section --&gt;
+&lt;!-- &lt;section class&#x3D;&quot;py-16 px-4 md:px-8 lg:px-32 bg-white&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-6xl mx-auto text-center&quot;&gt;
+    &lt;h2 class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-3xl md:text-4xl text-gray-800 mb-6 leading-tight&quot;&gt;
+        {{ &#x27;company.suppliersPartners&#x27; | translate }}
+    &lt;/h2&gt;
+    &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed&quot;&gt;
+        {{ &#x27;company.partnersText&#x27; | translate }}
+    &lt;/p&gt;
+    
+    
+    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 text-center&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-500 text-xs&quot;&gt;Logo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-sm text-gray-800 mb-2&quot;&gt;Company name&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-xs text-gray-600 leading-relaxed&quot;&gt;
+            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
+        &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 text-center&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-500 text-xs&quot;&gt;Logo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-sm text-gray-800 mb-2&quot;&gt;Company name&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-xs text-gray-600 leading-relaxed&quot;&gt;
+            Description dolor in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
+        &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 text-center&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-500 text-xs&quot;&gt;Logo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-sm text-gray-800 mb-2&quot;&gt;Company name&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-xs text-gray-600 leading-relaxed&quot;&gt;
+            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
+        &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 text-center&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-500 text-xs&quot;&gt;Logo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-sm text-gray-800 mb-2&quot;&gt;Company name&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-xs text-gray-600 leading-relaxed&quot;&gt;
+            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
+        &lt;/p&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 text-center&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center&quot;&gt;
+            &lt;span class&#x3D;&quot;text-gray-500 text-xs&quot;&gt;Logo&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;h3 class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] font-semibold text-sm text-gray-800 mb-2&quot;&gt;Company name&lt;/h3&gt;
+        &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-xs text-gray-600 leading-relaxed&quot;&gt;
+            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.
+        &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt; --&gt;
+
+&lt;!-- Our Mission &amp; Sustainability Section --&gt;
+&lt;section class&#x3D;&quot;py-16 px-4 md:px-8 lg:px-32 bg-gray-50&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-6xl mx-auto&quot;&gt;
+    &lt;div class&#x3D;&quot;text-center mb-16&quot;&gt;
+      &lt;h2
+        class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-3xl md:text-4xl text-gray-800 mb-8 leading-tight&quot;
+      &gt;
+        {{ &quot;mission.title&quot; | translate }}
+      &lt;/h2&gt;
+      &lt;p
+        class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base md:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed&quot;
+      &gt;
+        {{ &quot;mission.subtitle&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Our Philosophy --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16&quot;&gt;
+      &lt;!-- Image --&gt;
+      &lt;div class&#x3D;&quot;order-2 lg:order-1&quot;&gt;
+        &lt;img
+          src&#x3D;&quot;assets/images/about_1.jpeg&quot;
+          alt&#x3D;&quot;Sustainable Building&quot;
+          class&#x3D;&quot;w-full h-96 lg:h-[500px] object-cover rounded-[40px]&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Content --&gt;
+      &lt;div class&#x3D;&quot;order-1 lg:order-2&quot;&gt;
+        &lt;h3
+          class&#x3D;&quot;text-2xl lg:text-3xl font-bold text-[#222529] mb-8 font-[&#x27;Poppins&#x27;]&quot;
+        &gt;
+          {{ &quot;mission.ourPhilosophy&quot; | translate }}
+        &lt;/h3&gt;
+
+        &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+          &lt;!-- Environmental Responsibility --&gt;
+          &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 flex items-start gap-4&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-4 h-4 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M5 13l4 4L19 7&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.environmentalResponsibility&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.environmentalText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Quality and Durability --&gt;
+          &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 flex items-start gap-4&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-4 h-4 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.qualityDurability&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.qualityText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Technological Innovation --&gt;
+          &lt;div class&#x3D;&quot;bg-solar-50 rounded-2xl p-6 flex items-start gap-4&quot;&gt;
+            &lt;div
+              class&#x3D;&quot;w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-4 h-4 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z&quot;
+                /&gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M15 12a3 3 0 11-6 0 3 3 0 016 0z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.technologicalInnovation&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.innovationText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Our Commitment Beyond Product --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16&quot;&gt;
+      &lt;!-- Content --&gt;
+      &lt;div&gt;
+        &lt;h3
+          class&#x3D;&quot;text-2xl lg:text-3xl font-bold text-[#222529] mb-8 font-[&#x27;Poppins&#x27;]&quot;
+        &gt;
+          {{ &quot;mission.commitmentBeyond&quot; | translate }}
+        &lt;/h3&gt;
+
+        &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+          &lt;!-- Personalized Consulting --&gt;
+          &lt;div class&#x3D;&quot;flex items-start gap-4&quot;&gt;
+            &lt;div class&#x3D;&quot;w-6 h-6 flex-shrink-0 mt-1&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M5 13l4 4L19 7&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.personalizedConsulting&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.consultingText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Continuous Updates and Research --&gt;
+          &lt;div class&#x3D;&quot;flex items-start gap-4&quot;&gt;
+            &lt;div class&#x3D;&quot;w-6 h-6 flex-shrink-0 mt-1&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M5 13l4 4L19 7&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.continuousUpdates&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.updatesText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Awareness and Education --&gt;
+          &lt;div class&#x3D;&quot;flex items-start gap-4&quot;&gt;
+            &lt;div class&#x3D;&quot;w-6 h-6 flex-shrink-0 mt-1&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                  d&#x3D;&quot;M5 13l4 4L19 7&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h4
+                class&#x3D;&quot;text-lg font-semibold text-solar-700 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                {{ &quot;mission.awarenessEducation&quot; | translate }}
+              &lt;/h4&gt;
+              &lt;p class&#x3D;&quot;text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;mission.educationText&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Image --&gt;
+      &lt;div&gt;
+        &lt;img
+          src&#x3D;&quot;assets/images/about_2.jpeg&quot;
+          alt&#x3D;&quot;Sustainable Consulting&quot;
+          class&#x3D;&quot;w-full h-96 lg:h-[500px] object-cover rounded-[40px]&quot;
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./company.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Hero Section with Video --><section class="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden">  <video    autoplay    muted    loop    playsinline    poster="assets/videos/hero-poster.jpg"    class="absolute inset-0 w-full h-full object-cover"  >    <source src="assets/videos/hero-video.mp4" type="video/mp4" />  </video></section><!-- About Us Section --><section class="py-16 px-4 md:px-8 lg:px-32 bg-white">  <div class="max-w-6xl mx-auto">    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">      <!-- Content -->      <div class="space-y-6">        <h2          class="font-[\'Poppins\'] font-semibold text-3xl md:text-4xl text-gray-800 leading-tight"        >          {{ "company.whoWeAre" | translate }}        </h2>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.whoWeAreText" | translate }}        </p>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.mission" | translate }}        </p>      </div>      <!-- Image -->      <div class="lg:order-last">        <div          class="bg-gray-200 rounded-3xl h-96 flex items-center justify-center"        >          <img            src="assets/images/logo.png"            alt="Company Image"            class="w-full h-auto object-fit"          />        </div>      </div>    </div>  </div></section><!-- Team Section --><section class="py-16 px-4 md:px-8 lg:px-32 bg-gray-50">  <div class="max-w-6xl mx-auto">    <div class="flex flex-col lg:flex-row gap-12">      <!-- Team Info -->      <div class="lg:w-full space-y-6">        <h2          class="font-[\'Poppins\'] font-semibold text-3xl md:text-4xl text-gray-800 text-center lg:text-left leading-tight"        >          {{ "company.ourTeam" | translate }}        </h2>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.teamText1" | translate }}        </p>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.teamText2" | translate }}        </p>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.teamText3" | translate }}        </p>        <p class="font-[\'DM_Sans\'] text-base text-gray-600 leading-relaxed">          {{ "company.teamText4" | translate }}        </p>      </div>    </div>  </div></section><!-- Mission & Values Section --><section class="relative py-16 px-4 md:px-8 lg:px-32 bg-solar-50">  <div class="max-w-6xl mx-auto relative z-10">    <div class="text-center mb-12">      <h2        class="font-[\'Poppins\'] font-semibold text-3xl md:text-4xl text-gray-800 mb-8 leading-tight"      >        {{ "company.missionValues" | translate }}      </h2>      <!-- Values Grid -->      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">        <!-- First Row -->        <div class="flex items-start space-x-4 text-left">          <div            class="w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0"          >            <svg              class="w-6 h-6 text-white"              fill="currentColor"              viewBox="0 0 20 20"            >              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />            </svg>          </div>          <div>            <h3              class="font-[\'DM_Sans\'] font-semibold text-lg text-gray-800 mb-2"            >              {{ "company.quality" | translate }}            </h3>            <p class="font-[\'DM_Sans\'] text-sm text-gray-600 leading-relaxed">              {{ "company.qualityText" | translate }}            </p>          </div>        </div>        <div class="flex items-start space-x-4 text-left">          <div            class="w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0"          >            <svg              class="w-6 h-6 text-white"              fill="currentColor"              viewBox="0 0 20 20"            >              <path                d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"              />            </svg>          </div>          <div>            <h3              class="font-[\'DM_Sans\'] font-semibold text-lg text-gray-800 mb-2"            >              {{ "company.innovation" | translate }}            </h3>            <p class="font-[\'DM_Sans\'] text-sm text-gray-600 leading-relaxed">              {{ "company.innovationText" | translate }}            </p>          </div>        </div>        <!-- Second Row -->        <div class="flex items-start space-x-4 text-left">          <div            class="w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0"          >            <svg              class="w-6 h-6 text-white"              fill="currentColor"              viewBox="0 0 20 20"            >              <path                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012-2v-1a2 2 0 012-2h1.945M11 6.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"              />            </svg>          </div>          <div>            <h3              class="font-[\'DM_Sans\'] font-semibold text-lg text-gray-800 mb-2"            >              {{ "company.sustainability" | translate }}            </h3>            <p class="font-[\'DM_Sans\'] text-sm text-gray-600 leading-relaxed">              {{ "company.sustainabilityText" | translate }}            </p>          </div>        </div>        <div class="flex items-start space-x-4 text-left">          <div            class="w-10 h-10 bg-solar-500 rounded-lg flex items-center justify-center flex-shrink-0"          >            <svg              class="w-6 h-6 text-white"              fill="currentColor"              viewBox="0 0 20 20"            >              <path                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"              />            </svg>          </div>          <div>            <h3              class="font-[\'DM_Sans\'] font-semibold text-lg text-gray-800 mb-2"            >              {{ "company.support" | translate }}            </h3>            <p class="font-[\'DM_Sans\'] text-sm text-gray-600 leading-relaxed">              {{ "company.supportText" | translate }}            </p>          </div>        </div>      </div>    </div>  </div></section><!-- Partners Section --><!-- <section class="py-16 px-4 md:px-8 lg:px-32 bg-white">    <div class="max-w-6xl mx-auto text-center">    <h2 class="font-[\'Poppins\'] font-semibold text-3xl md:text-4xl text-gray-800 mb-6 leading-tight">        {{ \'company.suppliersPartners\' | translate }}    </h2>    <p class="font-[\'DM_Sans\'] text-base text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">        {{ \'company.partnersText\' | translate }}    </p>            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">        <div class="bg-solar-50 rounded-2xl p-6 text-center">        <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">            <span class="text-gray-500 text-xs">Logo</span>        </div>        <h3 class="font-[\'DM_Sans\'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>        <p class="font-[\'DM_Sans\'] text-xs text-gray-600 leading-relaxed">            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.        </p>        </div>                <div class="bg-solar-50 rounded-2xl p-6 text-center">        <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">            <span class="text-gray-500 text-xs">Logo</span>        </div>        <h3 class="font-[\'DM_Sans\'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>        <p class="font-[\'DM_Sans\'] text-xs text-gray-600 leading-relaxed">            Description dolor in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.        </p>        </div>                <div class="bg-solar-50 rounded-2xl p-6 text-center">        <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">            <span class="text-gray-500 text-xs">Logo</span>        </div>        <h3 class="font-[\'DM_Sans\'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>        <p class="font-[\'DM_Sans\'] text-xs text-gray-600 leading-relaxed">            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.        </p>        </div>                <div class="bg-solar-50 rounded-2xl p-6 text-center">        <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">            <span class="text-gray-500 text-xs">Logo</span>        </div>        <h3 class="font-[\'DM_Sans\'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>        <p class="font-[\'DM_Sans\'] text-xs text-gray-600 leading-relaxed">            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.        </p>        </div>                <div class="bg-solar-50 rounded-2xl p-6 text-center">        <div class="bg-gray-200 h-16 rounded-lg mb-4 flex items-center justify-center">            <span class="text-gray-500 text-xs">Logo</span>        </div>        <h3 class="font-[\'DM_Sans\'] font-semibold text-sm text-gray-800 mb-2">Company name</h3>        <p class="font-[\'DM_Sans\'] text-xs text-gray-600 leading-relaxed">            Description dolor in reprehenderit in voluptate velit esse fugiat nulla pariatur. Excepteur sint occaecat cupidatat nonproident.        </p>        </div>    </div>    </div></section> --><!-- Our Mission & Sustainability Section --><section class="py-16 px-4 md:px-8 lg:px-32 bg-gray-50">  <div class="max-w-6xl mx-auto">    <div class="text-center mb-16">      <h2        class="font-[\'Poppins\'] font-semibold text-3xl md:text-4xl text-gray-800 mb-8 leading-tight"      >        {{ "mission.title" | translate }}      </h2>      <p        class="font-[\'DM_Sans\'] text-base md:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed"      >        {{ "mission.subtitle" | translate }}      </p>    </div>    <!-- Our Philosophy -->    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">      <!-- Image -->      <div class="order-2 lg:order-1">        <img          src="assets/images/about_1.jpeg"          alt="Sustainable Building"          class="w-full h-96 lg:h-[500px] object-cover rounded-[40px]"        />      </div>      <!-- Content -->      <div class="order-1 lg:order-2">        <h3          class="text-2xl lg:text-3xl font-bold text-[#222529] mb-8 font-[\'Poppins\']"        >          {{ "mission.ourPhilosophy" | translate }}        </h3>        <div class="space-y-6">          <!-- Environmental Responsibility -->          <div class="bg-solar-50 rounded-2xl p-6 flex items-start gap-4">            <div              class="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1"            >              <svg                class="w-4 h-4 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M5 13l4 4L19 7"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.environmentalResponsibility" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.environmentalText" | translate }}              </p>            </div>          </div>          <!-- Quality and Durability -->          <div class="bg-solar-50 rounded-2xl p-6 flex items-start gap-4">            <div              class="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1"            >              <svg                class="w-4 h-4 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.qualityDurability" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.qualityText" | translate }}              </p>            </div>          </div>          <!-- Technological Innovation -->          <div class="bg-solar-50 rounded-2xl p-6 flex items-start gap-4">            <div              class="w-7 h-7 bg-white rounded-full flex items-center justify-center flex-shrink-0 mt-1"            >              <svg                class="w-4 h-4 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"                />                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.technologicalInnovation" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.innovationText" | translate }}              </p>            </div>          </div>        </div>      </div>    </div>    <!-- Our Commitment Beyond Product -->    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">      <!-- Content -->      <div>        <h3          class="text-2xl lg:text-3xl font-bold text-[#222529] mb-8 font-[\'Poppins\']"        >          {{ "mission.commitmentBeyond" | translate }}        </h3>        <div class="space-y-6">          <!-- Personalized Consulting -->          <div class="flex items-start gap-4">            <div class="w-6 h-6 flex-shrink-0 mt-1">              <svg                class="w-6 h-6 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M5 13l4 4L19 7"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.personalizedConsulting" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.consultingText" | translate }}              </p>            </div>          </div>          <!-- Continuous Updates and Research -->          <div class="flex items-start gap-4">            <div class="w-6 h-6 flex-shrink-0 mt-1">              <svg                class="w-6 h-6 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M5 13l4 4L19 7"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.continuousUpdates" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.updatesText" | translate }}              </p>            </div>          </div>          <!-- Awareness and Education -->          <div class="flex items-start gap-4">            <div class="w-6 h-6 flex-shrink-0 mt-1">              <svg                class="w-6 h-6 text-solar-600"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="1.5"                  d="M5 13l4 4L19 7"                />              </svg>            </div>            <div>              <h4                class="text-lg font-semibold text-solar-700 mb-2 font-[\'DM_Sans\']"              >                {{ "mission.awarenessEducation" | translate }}              </h4>              <p class="text-solar-600 font-[\'DM_Sans\']">                {{ "mission.educationText" | translate }}              </p>            </div>          </div>        </div>      </div>      <!-- Image -->      <div>        <img          src="assets/images/about_2.jpeg"          alt="Sustainable Consulting"          class="w-full h-96 lg:h-[500px] object-cover rounded-[40px]"        />      </div>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CompanyComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CompanyComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

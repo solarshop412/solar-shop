@@ -1,0 +1,3689 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProductInfoComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-product-info</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                            <code>TranslatePipe</code>
+                            <code>LucideAngularModule</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./product-info.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./product-info.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#averageRating$" >averageRating$</a>
+                            </li>
+                            <li>
+                                <a href="#certificatesOpen" >certificatesOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#COMPANY_DISCOUNT_PERCENTAGE" >COMPANY_DISCOUNT_PERCENTAGE</a>
+                            </li>
+                            <li>
+                                <a href="#descriptionOpen" >descriptionOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#featuresOpen" >featuresOpen</a>
+                            </li>
+                            <li>
+                                <a href="#filteredErpStock" >filteredErpStock</a>
+                            </li>
+                            <li>
+                                <a href="#productDetailsOpen" >productDetailsOpen</a>
+                            </li>
+                            <li>
+                                <a href="#quantity" >quantity</a>
+                            </li>
+                            <li>
+                                <a href="#reviewCount$" >reviewCount$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ShoppingCartIcon" >ShoppingCartIcon</a>
+                            </li>
+                            <li>
+                                <a href="#specificationsOpen" >specificationsOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#StarHalfIcon" >StarHalfIcon</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#StarIcon" >StarIcon</a>
+                            </li>
+                            <li>
+                                <a href="#stockInformationOpen" >stockInformationOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                <a href="#technicalSheetOpen" >technicalSheetOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                            <li>
+                                <a href="#wishlistState$" >wishlistState$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addToCart" >addToCart</a>
+                            </li>
+                            <li>
+                                <a href="#decreaseQuantity" >decreaseQuantity</a>
+                            </li>
+                            <li>
+                                <a href="#formatSpecificationKey" >formatSpecificationKey</a>
+                            </li>
+                            <li>
+                                <a href="#getAvailabilityText" >getAvailabilityText</a>
+                            </li>
+                            <li>
+                                <a href="#getCompanyPrice" >getCompanyPrice</a>
+                            </li>
+                            <li>
+                                <a href="#getCompanySavings" >getCompanySavings</a>
+                            </li>
+                            <li>
+                                <a href="#getFullTechnicalSheetUrl" >getFullTechnicalSheetUrl</a>
+                            </li>
+                            <li>
+                                <a href="#getSpecificationsArray" >getSpecificationsArray</a>
+                            </li>
+                            <li>
+                                <a href="#getStarArray" >getStarArray</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalStock" >getTotalStock</a>
+                            </li>
+                            <li>
+                                <a href="#hasCertifications" >hasCertifications</a>
+                            </li>
+                            <li>
+                                <a href="#hasFeatures" >hasFeatures</a>
+                            </li>
+                            <li>
+                                <a href="#hasSpecifications" >hasSpecifications</a>
+                            </li>
+                            <li>
+                                <a href="#hasTechnicalSheet" >hasTechnicalSheet</a>
+                            </li>
+                            <li>
+                                <a href="#increaseQuantity" >increaseQuantity</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToCategory" >navigateToCategory</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#scrollToReviews" >scrollToReviews</a>
+                            </li>
+                            <li>
+                                <a href="#toggleCertificates" >toggleCertificates</a>
+                            </li>
+                            <li>
+                                <a href="#toggleDescription" >toggleDescription</a>
+                            </li>
+                            <li>
+                                <a href="#toggleFeatures" >toggleFeatures</a>
+                            </li>
+                            <li>
+                                <a href="#toggleProductDetails" >toggleProductDetails</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSpecifications" >toggleSpecifications</a>
+                            </li>
+                            <li>
+                                <a href="#toggleStockInformation" >toggleStockInformation</a>
+                            </li>
+                            <li>
+                                <a href="#toggleTechnicalSheet" >toggleTechnicalSheet</a>
+                            </li>
+                            <li>
+                                <a href="#toggleWishlist" >toggleWishlist</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateFilteredStock" >updateFilteredStock</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#erpStock" >erpStock</a>
+                            </li>
+                            <li>
+                                <a href="#erpStockLoading" >erpStockLoading</a>
+                            </li>
+                            <li>
+                                <a href="#isCompanyPricing" >isCompanyPricing</a>
+                            </li>
+                            <li>
+                                <a href="#product" >product</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="erpStock"></a>
+                        <b>erpStock</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/StockItem.html" target="_self" >StockItem[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:53</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="erpStockLoading"></a>
+                        <b>erpStockLoading</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:54</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isCompanyPricing"></a>
+                        <b>isCompanyPricing</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:52</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="product"></a>
+                        <b>product</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Product.html" target="_self" >Product</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:51</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addToCart"></a>
+                    <span class="name">
+                        <span ><b>addToCart</b></span>
+                        <a href="#addToCart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addToCart()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="189"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="decreaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>decreaseQuantity</b></span>
+                        <a href="#decreaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>decreaseQuantity()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatSpecificationKey"></a>
+                    <span class="name">
+                        <span ><b>formatSpecificationKey</b></span>
+                        <a href="#formatSpecificationKey"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatSpecificationKey(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:251</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAvailabilityText"></a>
+                    <span class="name">
+                        <span ><b>getAvailabilityText</b></span>
+                        <a href="#getAvailabilityText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAvailabilityText(availability: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:164</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>availability</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCompanyPrice"></a>
+                    <span class="name">
+                        <span ><b>getCompanyPrice</b></span>
+                        <a href="#getCompanyPrice"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCompanyPrice()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCompanySavings"></a>
+                    <span class="name">
+                        <span ><b>getCompanySavings</b></span>
+                        <a href="#getCompanySavings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCompanySavings()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:237</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFullTechnicalSheetUrl"></a>
+                    <span class="name">
+                        <span ><b>getFullTechnicalSheetUrl</b></span>
+                        <a href="#getFullTechnicalSheetUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFullTechnicalSheetUrl(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="320"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:320</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>url</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSpecificationsArray"></a>
+                    <span class="name">
+                        <span ><b>getSpecificationsArray</b></span>
+                        <a href="#getSpecificationsArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSpecificationsArray()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="241"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:241</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>literal type[]</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStarArray"></a>
+                    <span class="name">
+                        <span ><b>getStarArray</b></span>
+                        <a href="#getStarArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStarArray(rating: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:140</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rating</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>number[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalStock"></a>
+                    <span class="name">
+                        <span ><b>getTotalStock</b></span>
+                        <a href="#getTotalStock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalStock()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get total stock across all filtered units</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasCertifications"></a>
+                    <span class="name">
+                        <span ><b>hasCertifications</b></span>
+                        <a href="#hasCertifications"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasCertifications()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="269"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:269</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasFeatures"></a>
+                    <span class="name">
+                        <span ><b>hasFeatures</b></span>
+                        <a href="#hasFeatures"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasFeatures()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="265"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasSpecifications"></a>
+                    <span class="name">
+                        <span ><b>hasSpecifications</b></span>
+                        <a href="#hasSpecifications"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasSpecifications()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="258"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:258</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hasTechnicalSheet"></a>
+                    <span class="name">
+                        <span ><b>hasTechnicalSheet</b></span>
+                        <a href="#hasTechnicalSheet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasTechnicalSheet()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:275</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="increaseQuantity"></a>
+                    <span class="name">
+                        <span ><b>increaseQuantity</b></span>
+                        <a href="#increaseQuantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>increaseQuantity()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToCategory"></a>
+                    <span class="name">
+                        <span ><b>navigateToCategory</b></span>
+                        <a href="#navigateToCategory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToCategory(categoryName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="342"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:342</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>categoryName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:135</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="scrollToReviews"></a>
+                    <span class="name">
+                        <span ><b>scrollToReviews</b></span>
+                        <a href="#scrollToReviews"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>scrollToReviews()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="310"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:310</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleCertificates"></a>
+                    <span class="name">
+                        <span ><b>toggleCertificates</b></span>
+                        <a href="#toggleCertificates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleCertificates()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleDescription"></a>
+                    <span class="name">
+                        <span ><b>toggleDescription</b></span>
+                        <a href="#toggleDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleDescription()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFeatures"></a>
+                    <span class="name">
+                        <span ><b>toggleFeatures</b></span>
+                        <a href="#toggleFeatures"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleFeatures()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="298"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:298</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleProductDetails"></a>
+                    <span class="name">
+                        <span ><b>toggleProductDetails</b></span>
+                        <a href="#toggleProductDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleProductDetails()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:286</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSpecifications"></a>
+                    <span class="name">
+                        <span ><b>toggleSpecifications</b></span>
+                        <a href="#toggleSpecifications"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSpecifications()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="294"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:294</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleStockInformation"></a>
+                    <span class="name">
+                        <span ><b>toggleStockInformation</b></span>
+                        <a href="#toggleStockInformation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleStockInformation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="306"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:306</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleTechnicalSheet"></a>
+                    <span class="name">
+                        <span ><b>toggleTechnicalSheet</b></span>
+                        <a href="#toggleTechnicalSheet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleTechnicalSheet()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="302"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:302</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleWishlist"></a>
+                    <span class="name">
+                        <span ><b>toggleWishlist</b></span>
+                        <a href="#toggleWishlist"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleWishlist()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateFilteredStock"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateFilteredStock</b></span>
+                        <a href="#updateFilteredStock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateFilteredStock()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="averageRating$"></a>
+                    <span class="name">
+                        <span ><b>averageRating$</b></span>
+                        <a href="#averageRating$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectAverageRating)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:83</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="certificatesOpen"></a>
+                    <span class="name">
+                        <span ><b>certificatesOpen</b></span>
+                        <a href="#certificatesOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="COMPANY_DISCOUNT_PERCENTAGE"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>COMPANY_DISCOUNT_PERCENTAGE</b></span>
+                        <a href="#COMPANY_DISCOUNT_PERCENTAGE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>15</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="descriptionOpen"></a>
+                    <span class="name">
+                        <span ><b>descriptionOpen</b></span>
+                        <a href="#descriptionOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="featuresOpen"></a>
+                    <span class="name">
+                        <span ><b>featuresOpen</b></span>
+                        <a href="#featuresOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredErpStock"></a>
+                    <span class="name">
+                        <span ><b>filteredErpStock</b></span>
+                        <a href="#filteredErpStock"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FilteredStockItem[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productDetailsOpen"></a>
+                    <span class="name">
+                        <span ><b>productDetailsOpen</b></span>
+                        <a href="#productDetailsOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="quantity"></a>
+                    <span class="name">
+                        <span ><b>quantity</b></span>
+                        <a href="#quantity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reviewCount$"></a>
+                    <span class="name">
+                        <span ><b>reviewCount$</b></span>
+                        <a href="#reviewCount$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.store.select(selectReviewCount)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ShoppingCartIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ShoppingCartIcon</b></span>
+                        <a href="#ShoppingCartIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>ShoppingCart</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="specificationsOpen"></a>
+                    <span class="name">
+                        <span ><b>specificationsOpen</b></span>
+                        <a href="#specificationsOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="StarHalfIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>StarHalfIcon</b></span>
+                        <a href="#StarHalfIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>StarHalf</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="StarIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>StarIcon</b></span>
+                        <a href="#StarIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Star</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stockInformationOpen"></a>
+                    <span class="name">
+                        <span ><b>stockInformationOpen</b></span>
+                        <a href="#stockInformationOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="technicalSheetOpen"></a>
+                    <span class="name">
+                        <span ><b>technicalSheetOpen</b></span>
+                        <a href="#technicalSheetOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:92</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="wishlistState$"></a>
+                    <span class="name">
+                        <span ><b>wishlistState$</b></span>
+                        <a href="#wishlistState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;literal type&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/features/b2c/products/product-details/components/product-info/product-info.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  Input,
+  inject,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+} from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Observable, Subject, combineLatest } from &#x27;rxjs&#x27;;
+import { takeUntil, map, take } from &#x27;rxjs/operators&#x27;;
+import { Product } from &#x27;../../../product-list/product-list.component&#x27;;
+import { TranslatePipe } from &#x27;../../../../../../shared/pipes/translate.pipe&#x27;;
+import { ToastService } from &#x27;../../../../../../shared/services/toast.service&#x27;;
+import { TranslationService } from &#x27;../../../../../../shared/services/translation.service&#x27;;
+import { StockItem } from &#x27;../../../../../../shared/services/erp-integration.service&#x27;;
+import {
+  filterAndCombineErpStock,
+  FilteredStockItem,
+} from &#x27;../../../../../../shared/utils/erp-unit-names&#x27;;
+import * as WishlistActions from &#x27;../../../../../b2c/wishlist/store/wishlist.actions&#x27;;
+import {
+  selectIsProductInWishlist,
+  selectAddingToWishlist,
+  selectRemovingFromWishlist,
+} from &#x27;../../../../../b2c/wishlist/store/wishlist.selectors&#x27;;
+import { selectCurrentUser } from &#x27;../../../../../../core/auth/store/auth.selectors&#x27;;
+import * as CartActions from &#x27;../../../../../b2c/cart/store/cart.actions&#x27;;
+import {
+  selectAverageRating,
+  selectReviewCount,
+} from &#x27;../../store/product-details.selectors&#x27;;
+import {
+  LucideAngularModule,
+  Star,
+  StarHalf,
+  ShoppingCart,
+} from &#x27;lucide-angular&#x27;;
+
+@Component({
+  selector: &#x27;app-product-info&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, TranslatePipe, LucideAngularModule],
+  templateUrl: &#x27;./product-info.component.html&#x27;,
+  styleUrls: [&#x27;./product-info.component.scss&#x27;],
+})
+export class ProductInfoComponent implements OnInit, OnDestroy, OnChanges {
+  @Input() product!: Product;
+  @Input() isCompanyPricing: boolean &#x3D; false;
+  @Input() erpStock: StockItem[] &#x3D; []; // Receive ERP stock from parent component
+  @Input() erpStockLoading: boolean &#x3D; false; // Receive loading state from parent
+
+  // Filtered and combined ERP stock (only mapped units, Buzin combined)
+  filteredErpStock: FilteredStockItem[] &#x3D; [];
+
+  quantity: number &#x3D; 1;
+
+  // Partner discount percentage (additional discount for company pricing)
+  readonly COMPANY_DISCOUNT_PERCENTAGE &#x3D; 15;
+
+  readonly StarIcon &#x3D; Star;
+  readonly StarHalfIcon &#x3D; StarHalf;
+  readonly ShoppingCartIcon &#x3D; ShoppingCart;
+
+  private store &#x3D; inject(Store);
+  private router &#x3D; inject(Router);
+  private toastService &#x3D; inject(ToastService);
+  private translationService &#x3D; inject(TranslationService);
+
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  // Combined wishlist state observable for template
+  wishlistState$!: Observable&lt;{
+    isInWishlist: boolean;
+    addingToWishlist: boolean;
+    removingFromWishlist: string | null;
+  }&gt;;
+
+  // Product reviews observables
+  averageRating$ &#x3D; this.store.select(selectAverageRating);
+  reviewCount$ &#x3D; this.store.select(selectReviewCount);
+
+  // Collapsible sections - all collapsed by default
+  descriptionOpen &#x3D; false;
+  productDetailsOpen &#x3D; false;
+  certificatesOpen &#x3D; false;
+  specificationsOpen &#x3D; false;
+  featuresOpen &#x3D; false;
+  technicalSheetOpen &#x3D; false;
+  stockInformationOpen &#x3D; false;
+
+  ngOnInit(): void {
+    // Create combined observable for template
+    this.wishlistState$ &#x3D; combineLatest([
+      this.store.select(selectIsProductInWishlist(this.product.id)),
+      this.store.select(selectAddingToWishlist),
+      this.store.select(selectRemovingFromWishlist),
+    ]).pipe(
+      map(([isInWishlist, addingToWishlist, removingFromWishlist]) &#x3D;&gt; ({
+        isInWishlist,
+        addingToWishlist,
+        removingFromWishlist,
+      })),
+    );
+
+    // Load wishlist data
+    this.store.dispatch(WishlistActions.loadWishlist());
+
+    // Filter and combine ERP stock
+    this.updateFilteredStock();
+  }
+
+  ngOnChanges(): void {
+    // Update filtered stock when erpStock input changes
+    this.updateFilteredStock();
+  }
+
+  private updateFilteredStock(): void {
+    this.filteredErpStock &#x3D; filterAndCombineErpStock(this.erpStock);
+  }
+
+  /**
+   * Get total stock across all filtered units
+   */
+  getTotalStock(): number {
+    return this.filteredErpStock.reduce(
+      (total, stock) &#x3D;&gt; total + stock.quantity,
+      0,
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  getStarArray(rating: number): number[] {
+    const stars &#x3D; [];
+    const fullStars &#x3D; Math.floor(rating);
+    const hasHalfStar &#x3D; rating % 1 &gt;&#x3D; 0.5;
+
+    // Add full stars
+    for (let i &#x3D; 0; i &lt; fullStars; i++) {
+      stars.push(1);
+    }
+
+    // Add half star if needed
+    if (hasHalfStar) {
+      stars.push(0.5);
+    }
+
+    // Add empty stars to complete 5 stars
+    const remainingStars &#x3D; 5 - stars.length;
+    for (let i &#x3D; 0; i &lt; remainingStars; i++) {
+      stars.push(0);
+    }
+
+    return stars;
+  }
+
+  getAvailabilityText(availability: string): string {
+    switch (availability) {
+      case &#x27;available&#x27;:
+        return &#x27;productDetails.inStock&#x27;;
+      case &#x27;limited&#x27;:
+        return &#x27;productDetails.limitedStock&#x27;;
+      case &#x27;out-of-stock&#x27;:
+        return &#x27;productDetails.outOfStock&#x27;;
+      default:
+        return &#x27;&#x27;;
+    }
+  }
+
+  increaseQuantity(): void {
+    if (this.quantity &lt; 99) {
+      this.quantity++;
+    }
+  }
+
+  decreaseQuantity(): void {
+    if (this.quantity &gt; 1) {
+      this.quantity--;
+    }
+  }
+
+  addToCart(): void {
+    this.store.dispatch(
+      CartActions.addToCart({
+        productId: this.product.id,
+        quantity: this.quantity,
+      }),
+    );
+  }
+
+  toggleWishlist(): void {
+    // Check authentication first
+    this.store
+      .select(selectCurrentUser)
+      .pipe(takeUntil(this.destroy$), take(1))
+      .subscribe((user) &#x3D;&gt; {
+        if (!user) {
+          this.toastService.showError(
+            this.translationService.translate(
+              &#x27;productDetails.loginRequiredForWishlist&#x27;,
+            ),
+          );
+          return;
+        }
+
+        // Get current wishlist state and toggle
+        this.store
+          .select(selectIsProductInWishlist(this.product.id))
+          .pipe(take(1))
+          .subscribe((isInWishlist) &#x3D;&gt; {
+            if (isInWishlist) {
+              this.store.dispatch(
+                WishlistActions.removeFromWishlist({
+                  productId: this.product.id,
+                }),
+              );
+            } else {
+              this.store.dispatch(
+                WishlistActions.addToWishlist({ productId: this.product.id }),
+              );
+            }
+          });
+      });
+  }
+
+  getCompanyPrice(): number {
+    return this.product.price * (1 - this.COMPANY_DISCOUNT_PERCENTAGE / 100);
+  }
+
+  getCompanySavings(): number {
+    return this.product.price - this.getCompanyPrice();
+  }
+
+  getSpecificationsArray(): { key: string; value: string }[] {
+    if (!this.product.specifications) {
+      return [];
+    }
+    return Object.entries(this.product.specifications).map(([key, value]) &#x3D;&gt; ({
+      key,
+      value: String(value),
+    }));
+  }
+
+  formatSpecificationKey(key: string): string {
+    return key
+      .replace(/([A-Z])/g, &#x27; $1&#x27;)
+      .replace(/_/g, &#x27; &#x27;)
+      .trim();
+  }
+
+  hasSpecifications(): boolean {
+    return !!(
+      this.product.specifications &amp;&amp;
+      Object.keys(this.product.specifications).length &gt; 0
+    );
+  }
+
+  hasFeatures(): boolean {
+    return !!(this.product.features &amp;&amp; this.product.features.length &gt; 0);
+  }
+
+  hasCertifications(): boolean {
+    return !!(
+      this.product.certificates &amp;&amp; this.product.certificates.length &gt; 0
+    );
+  }
+
+  hasTechnicalSheet(): boolean {
+    return !!(
+      this.product.technical_sheet &amp;&amp;
+      this.product.technical_sheet.trim().length &gt; 0
+    );
+  }
+
+  toggleDescription() {
+    this.descriptionOpen &#x3D; !this.descriptionOpen;
+  }
+
+  toggleProductDetails() {
+    this.productDetailsOpen &#x3D; !this.productDetailsOpen;
+  }
+
+  toggleCertificates() {
+    this.certificatesOpen &#x3D; !this.certificatesOpen;
+  }
+
+  toggleSpecifications() {
+    this.specificationsOpen &#x3D; !this.specificationsOpen;
+  }
+
+  toggleFeatures() {
+    this.featuresOpen &#x3D; !this.featuresOpen;
+  }
+
+  toggleTechnicalSheet() {
+    this.technicalSheetOpen &#x3D; !this.technicalSheetOpen;
+  }
+
+  toggleStockInformation() {
+    this.stockInformationOpen &#x3D; !this.stockInformationOpen;
+  }
+
+  scrollToReviews() {
+    const reviewsElement &#x3D; document.getElementById(&#x27;reviews&#x27;);
+    if (reviewsElement) {
+      reviewsElement.scrollIntoView({
+        behavior: &#x27;smooth&#x27;,
+        block: &#x27;start&#x27;,
+      });
+    }
+  }
+
+  getFullTechnicalSheetUrl(url: string): string {
+    if (!url) return &#x27;&#x27;;
+
+    // If URL already has protocol, return as is
+    if (url.startsWith(&#x27;http://&#x27;) || url.startsWith(&#x27;https://&#x27;)) {
+      return url;
+    }
+
+    // If URL starts with www., add https://
+    if (url.startsWith(&#x27;www.&#x27;)) {
+      return &#x60;https://${url}&#x60;;
+    }
+
+    // If it doesn&#x27;t start with www. or protocol, assume it needs https://www.
+    if (!url.includes(&#x27;.&#x27;)) {
+      // If it doesn&#x27;t contain a dot, it&#x27;s probably not a valid URL
+      return url;
+    }
+
+    return &#x60;https://${url}&#x60;;
+  }
+
+  navigateToCategory(categoryName: string) {
+    // Navigate to product list with category filter
+    // Use the category name to create a slug-like parameter
+    const categorySlug &#x3D; categoryName.toLowerCase().replace(/[^a-z0-9]+/g, &#x27;-&#x27;);
+
+    this.router.navigate([&#x27;/proizvodi&#x27;], {
+      queryParams: {
+        category: categorySlug,
+        categories: categoryName, // Pass the actual category name for filtering
+      },
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+  &lt;!-- Product Title and Rating --&gt;
+  &lt;div&gt;
+    &lt;div class&#x3D;&quot;flex items-center gap-3 mb-4&quot;&gt;
+      &lt;h1 class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ product.name }}
+      &lt;/h1&gt;
+      &lt;!-- On Sale Badge --&gt;
+      &lt;div
+        *ngIf&#x3D;&quot;product.isOnSale&quot;
+        class&#x3D;&quot;px-3 py-1 bg-red-500 text-white text-sm font-semibold rounded-full&quot;
+      &gt;
+        {{ &quot;productDetails.onSale&quot; | translate }}
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Rating and Reviews --&gt;
+    &lt;div class&#x3D;&quot;flex items-center mb-4&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+        &lt;div class&#x3D;&quot;flex&quot;&gt;
+          &lt;svg
+            *ngFor&#x3D;&quot;
+              let star of getStarArray((averageRating$ | async) || 0);
+              let i &#x3D; index
+            &quot;
+            class&#x3D;&quot;w-5 h-5&quot;
+            [class]&#x3D;&quot;
+              star &#x3D;&#x3D;&#x3D; 1
+                ? &#x27;text-yellow-400 fill-current&#x27;
+                : star &#x3D;&#x3D;&#x3D; 0.5
+                  ? &#x27;text-yellow-400&#x27;
+                  : &#x27;text-gray-300&#x27;
+            &quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+          &gt;
+            &lt;defs *ngIf&#x3D;&quot;star &#x3D;&#x3D;&#x3D; 0.5&quot;&gt;
+              &lt;linearGradient id&#x3D;&quot;half-star-{{ i }}&quot;&gt;
+                &lt;stop offset&#x3D;&quot;50%&quot; stop-color&#x3D;&quot;currentColor&quot; /&gt;
+                &lt;stop offset&#x3D;&quot;50%&quot; stop-color&#x3D;&quot;transparent&quot; /&gt;
+              &lt;/linearGradient&gt;
+            &lt;/defs&gt;
+            &lt;path
+              [attr.fill]&#x3D;&quot;
+                star &#x3D;&#x3D;&#x3D; 0.5 ? &#x27;url(#half-star-&#x27; + i + &#x27;)&#x27; : &#x27;currentColor&#x27;
+              &quot;
+              d&#x3D;&quot;M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;span class&#x3D;&quot;ml-2 text-sm font-medium text-gray-900&quot;&gt;{{
+          (averageRating$ | async) || 0
+        }}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;span class&#x3D;&quot;mx-2 text-gray-300&quot;&gt;|&lt;/span&gt;
+      &lt;button
+        (click)&#x3D;&quot;scrollToReviews()&quot;
+        class&#x3D;&quot;text-sm text-solar-500 hover:text-solar-600 font-[&#x27;DM_Sans&#x27;] cursor-pointer&quot;
+      &gt;
+        {{ (reviewCount$ | async) || 0 }}
+        {{ &quot;productList.reviews&quot; | translate }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Availability --&gt;
+    &lt;div class&#x3D;&quot;flex items-center mb-6&quot;&gt;
+      &lt;span class&#x3D;&quot;text-sm font-medium text-gray-700 mr-2 font-[&#x27;DM_Sans&#x27;]&quot;
+        &gt;{{ &quot;productDetails.availability&quot; | translate }}:&lt;/span
+      &gt;
+      &lt;span
+        class&#x3D;&quot;px-2 py-1 rounded-full text-xs font-semibold&quot;
+        [ngClass]&#x3D;&quot;{
+          &#x27;bg-green-100 text-green-800&#x27;: product.availability &#x3D;&#x3D;&#x3D; &#x27;available&#x27;,
+          &#x27;bg-yellow-100 text-yellow-800&#x27;: product.availability &#x3D;&#x3D;&#x3D; &#x27;limited&#x27;,
+          &#x27;bg-red-100 text-red-800&#x27;: product.availability &#x3D;&#x3D;&#x3D; &#x27;out-of-stock&#x27;,
+        }&quot;
+      &gt;
+        {{ getAvailabilityText(product.availability) | translate }}
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- ERP Stock Information (Collapsible) --&gt;
+    &lt;div *ngIf&#x3D;&quot;filteredErpStock &amp;&amp; filteredErpStock.length &gt; 0&quot; class&#x3D;&quot;mb-6&quot;&gt;
+      &lt;div class&#x3D;&quot;bg-blue-50 border border-blue-200 rounded-lg p-4&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;toggleStockInformation()&quot;
+          class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+          [attr.aria-expanded]&#x3D;&quot;stockInformationOpen&quot;
+          [attr.aria-controls]&#x3D;&quot;&#x27;stock-information-content&#x27;&quot;
+        &gt;
+          &lt;h4 class&#x3D;&quot;text-sm font-semibold text-blue-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.stockInformation&quot; | translate }}
+          &lt;/h4&gt;
+          &lt;svg
+            [ngClass]&#x3D;&quot;{
+              &#x27;rotate-180&#x27;: stockInformationOpen,
+              &#x27;rotate-0&#x27;: !stockInformationOpen,
+            }&quot;
+            class&#x3D;&quot;w-5 h-5 text-blue-600 transition-transform duration-200&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+            /&gt;
+          &lt;/svg&gt;
+        &lt;/button&gt;
+        &lt;div
+          id&#x3D;&quot;stock-information-content&quot;
+          *ngIf&#x3D;&quot;stockInformationOpen&quot;
+          class&#x3D;&quot;mt-3 space-y-2&quot;
+        &gt;
+          &lt;div
+            *ngFor&#x3D;&quot;let stock of filteredErpStock&quot;
+            class&#x3D;&quot;flex items-center justify-between text-sm&quot;
+          &gt;
+            &lt;span class&#x3D;&quot;text-blue-700 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ stock.displayName }}:
+            &lt;/span&gt;
+            &lt;span class&#x3D;&quot;font-medium text-blue-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ stock.quantity }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div
+            class&#x3D;&quot;pt-2 mt-2 border-t border-blue-200 flex items-center justify-between&quot;
+          &gt;
+            &lt;span class&#x3D;&quot;text-sm font-semibold text-blue-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ &quot;productDetails.totalStock&quot; | translate }}:
+            &lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-base font-bold text-blue-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ getTotalStock() }}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- ERP Stock Loading --&gt;
+    &lt;div *ngIf&#x3D;&quot;erpStockLoading&quot; class&#x3D;&quot;mb-6&quot;&gt;
+      &lt;div class&#x3D;&quot;bg-gray-50 border border-gray-200 rounded-lg p-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-center&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent mr-3&quot;
+          &gt;&lt;/div&gt;
+          &lt;span class&#x3D;&quot;text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.loadingStockInformation&quot; | translate }}
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Price --&gt;
+  &lt;div class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;!-- Company Pricing Badge --&gt;
+    &lt;div *ngIf&#x3D;&quot;isCompanyPricing&quot; class&#x3D;&quot;mb-4&quot;&gt;
+      &lt;span
+        class&#x3D;&quot;inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-solar-100 text-solar-800&quot;
+      &gt;
+        &lt;svg class&#x3D;&quot;w-4 h-4 mr-1&quot; fill&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;
+          &lt;path d&#x3D;&quot;M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z&quot; /&gt;
+        &lt;/svg&gt;
+        {{ &quot;b2b.products.partnerPrice&quot; | translate }}
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Regular Pricing --&gt;
+    &lt;div *ngIf&#x3D;&quot;!isCompanyPricing&quot; class&#x3D;&quot;flex items-center space-x-4 mb-4&quot;&gt;
+      &lt;span class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        €{{ product.price | number: &quot;1.2-2&quot; : &quot;de&quot; }}
+      &lt;/span&gt;
+      &lt;span
+        *ngIf&#x3D;&quot;product.originalPrice &amp;&amp; product.originalPrice !&#x3D;&#x3D; product.price&quot;
+        class&#x3D;&quot;text-xl text-gray-500 line-through font-[&#x27;DM_Sans&#x27;]&quot;
+      &gt;
+        €{{ product.originalPrice | number: &quot;1.2-2&quot; : &quot;de&quot; }}
+      &lt;/span&gt;
+      &lt;span
+        *ngIf&#x3D;&quot;product.discount&quot;
+        class&#x3D;&quot;bg-solar-500 text-white px-2 py-1 rounded-full text-sm font-semibold&quot;
+      &gt;
+        -{{ product.discount }}%
+      &lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Company Pricing --&gt;
+    &lt;div *ngIf&#x3D;&quot;isCompanyPricing&quot; class&#x3D;&quot;space-y-3 mb-4&quot;&gt;
+      &lt;!-- Retail Price --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between bg-gray-50 p-3 rounded-lg&quot;&gt;
+        &lt;span class&#x3D;&quot;text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;{{ &quot;b2b.products.retailPrice&quot; | translate }}:&lt;/span
+        &gt;
+        &lt;span class&#x3D;&quot;text-lg text-gray-500 line-through font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          €{{ product.price | number: &quot;1.2-2&quot; : &quot;de&quot; }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Company Price --&gt;
+      &lt;div
+        class&#x3D;&quot;flex items-center justify-between bg-solar-50 p-4 rounded-lg border-2 border-solar-200&quot;
+      &gt;
+        &lt;span class&#x3D;&quot;text-base font-semibold text-solar-700 font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;{{ &quot;b2b.products.partnerPrice&quot; | translate }}:&lt;/span
+        &gt;
+        &lt;span class&#x3D;&quot;text-3xl font-bold text-solar-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          €{{ getCompanyPrice() | number: &quot;1.2-2&quot; : &quot;de&quot; }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Savings --&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between bg-green-50 p-3 rounded-lg&quot;&gt;
+        &lt;span class&#x3D;&quot;text-sm font-medium text-green-700 font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;{{ &quot;b2b.products.savings&quot; | translate }}:&lt;/span
+        &gt;
+        &lt;span class&#x3D;&quot;text-lg font-bold text-green-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+          €{{ getCompanySavings() | number: &quot;1.2-2&quot; : &quot;de&quot; }} ({{
+            COMPANY_DISCOUNT_PERCENTAGE
+          }}% {{ &quot;hero.off&quot; | translate }})
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p class&#x3D;&quot;text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+      {{ &quot;productDetails.priceIncludesVat&quot; | translate }}
+    &lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Product Description --&gt;
+  &lt;div class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;toggleDescription()&quot;
+      class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+      [attr.aria-expanded]&#x3D;&quot;descriptionOpen&quot;
+      [attr.aria-controls]&#x3D;&quot;&#x27;description-content&#x27;&quot;
+    &gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;productDetails.description&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;svg
+        [ngClass]&#x3D;&quot;{
+          &#x27;rotate-180&#x27;: descriptionOpen,
+          &#x27;rotate-0&#x27;: !descriptionOpen,
+        }&quot;
+        class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div id&#x3D;&quot;description-content&quot; *ngIf&#x3D;&quot;descriptionOpen&quot; class&#x3D;&quot;mt-3&quot;&gt;
+      &lt;p
+        class&#x3D;&quot;text-gray-700 leading-relaxed font-[&#x27;DM_Sans&#x27;] whitespace-pre-line&quot;
+      &gt;
+        {{ product.description }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Product Details --&gt;
+  &lt;div class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;toggleProductDetails()&quot;
+      class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+      [attr.aria-expanded]&#x3D;&quot;productDetailsOpen&quot;
+      [attr.aria-controls]&#x3D;&quot;&#x27;product-details-content&#x27;&quot;
+    &gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;productDetails.productDetails&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;svg
+        [ngClass]&#x3D;&quot;{
+          &#x27;rotate-180&#x27;: productDetailsOpen,
+          &#x27;rotate-0&#x27;: !productDetailsOpen,
+        }&quot;
+        class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div id&#x3D;&quot;product-details-content&quot; *ngIf&#x3D;&quot;productDetailsOpen&quot; class&#x3D;&quot;mt-4&quot;&gt;
+      &lt;dl class&#x3D;&quot;grid grid-cols-1 gap-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productList.categories&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            &lt;div
+              *ngIf&#x3D;&quot;product.categories &amp;&amp; product.categories.length &gt; 0&quot;
+              class&#x3D;&quot;flex flex-wrap gap-1&quot;
+            &gt;
+              &lt;button
+                *ngFor&#x3D;&quot;let category of product.categories; let last &#x3D; last&quot;
+                (click)&#x3D;&quot;navigateToCategory(category.name)&quot;
+                class&#x3D;&quot;text-solar-500 hover:text-solar-600 hover:underline transition-colors&quot;
+                [class.font-semibold]&#x3D;&quot;category.isPrimary&quot;
+                [title]&#x3D;&quot;category.isPrimary ? &#x27;Primary category&#x27; : &#x27;&#x27;&quot;
+              &gt;
+                {{ category.name }}{{ !last ? &quot;,&quot; : &quot;&quot; }}
+              &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;!-- Fallback to single category for legacy products --&gt;
+            &lt;button
+              *ngIf&#x3D;&quot;
+                (!product.categories || product.categories.length &#x3D;&#x3D;&#x3D; 0) &amp;&amp;
+                product.category
+              &quot;
+              (click)&#x3D;&quot;navigateToCategory(product.category)&quot;
+              class&#x3D;&quot;text-solar-500 hover:text-solar-600 hover:underline transition-colors&quot;
+            &gt;
+              {{ product.category }}
+            &lt;/button&gt;
+            &lt;span
+              *ngIf&#x3D;&quot;
+                (!product.categories || product.categories.length &#x3D;&#x3D;&#x3D; 0) &amp;&amp;
+                !product.category
+              &quot;
+              class&#x3D;&quot;text-gray-500&quot;
+              &gt;-&lt;/span
+            &gt;
+          &lt;/dd&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.manufacturer&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ product.manufacturer }}
+          &lt;/dd&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.model&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ product.model || &quot;-&quot; }}
+          &lt;/dd&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.sku&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ product.sku }}
+          &lt;/dd&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot; *ngIf&#x3D;&quot;product.weight&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.weight&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ product.weight }} kg
+          &lt;/dd&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot; *ngIf&#x3D;&quot;product.dimensions&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.dimensions&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ product.dimensions }}
+          &lt;/dd&gt;
+        &lt;/div&gt;
+      &lt;/dl&gt;
+
+      &lt;!-- Specifications Subsection --&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;hasSpecifications()&quot;&gt;
+        &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-gray-100&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;toggleSpecifications()&quot;
+            class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+            [attr.aria-expanded]&#x3D;&quot;specificationsOpen&quot;
+            [attr.aria-controls]&#x3D;&quot;&#x27;specifications-content&#x27;&quot;
+          &gt;
+            &lt;h4
+              class&#x3D;&quot;text-base font-semibold text-gray-900 mb-3 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ &quot;productDetails.specifications&quot; | translate }}
+            &lt;/h4&gt;
+            &lt;svg
+              [ngClass]&#x3D;&quot;{
+                &#x27;rotate-180&#x27;: specificationsOpen,
+                &#x27;rotate-0&#x27;: !specificationsOpen,
+              }&quot;
+              class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+          &lt;div
+            id&#x3D;&quot;specifications-content&quot;
+            *ngIf&#x3D;&quot;specificationsOpen&quot;
+            class&#x3D;&quot;mt-2&quot;
+          &gt;
+            &lt;dl class&#x3D;&quot;grid grid-cols-1 gap-3&quot;&gt;
+              &lt;div
+                *ngFor&#x3D;&quot;let spec of getSpecificationsArray()&quot;
+                class&#x3D;&quot;flex justify-between py-2 px-3 bg-gray-50 rounded-lg&quot;
+              &gt;
+                &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                  {{ formatSpecificationKey(spec.key) }}:
+                &lt;/dt&gt;
+                &lt;dd
+                  class&#x3D;&quot;text-sm text-gray-900 font-semibold font-[&#x27;DM_Sans&#x27;]&quot;
+                &gt;
+                  {{ spec.value }}
+                &lt;/dd&gt;
+              &lt;/div&gt;
+            &lt;/dl&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+
+      &lt;!-- Features Subsection --&gt;
+      &lt;ng-container *ngIf&#x3D;&quot;hasFeatures()&quot;&gt;
+        &lt;div class&#x3D;&quot;mt-6 pt-6 border-t border-gray-100&quot;&gt;
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;toggleFeatures()&quot;
+            class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+            [attr.aria-expanded]&#x3D;&quot;featuresOpen&quot;
+            [attr.aria-controls]&#x3D;&quot;&#x27;features-content&#x27;&quot;
+          &gt;
+            &lt;h4
+              class&#x3D;&quot;text-base font-semibold text-gray-900 mb-3 font-[&#x27;Poppins&#x27;]&quot;
+            &gt;
+              {{ &quot;productDetails.features&quot; | translate }}
+            &lt;/h4&gt;
+            &lt;svg
+              [ngClass]&#x3D;&quot;{
+                &#x27;rotate-180&#x27;: featuresOpen,
+                &#x27;rotate-0&#x27;: !featuresOpen,
+              }&quot;
+              class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+          &lt;div id&#x3D;&quot;features-content&quot; *ngIf&#x3D;&quot;featuresOpen&quot; class&#x3D;&quot;mt-2&quot;&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 gap-2&quot;&gt;
+              &lt;div
+                *ngFor&#x3D;&quot;let feature of product.features&quot;
+                class&#x3D;&quot;flex items-center py-2 px-3 bg-blue-50 rounded-lg&quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;w-4 h-4 text-blue-600 mr-3 flex-shrink-0&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M5 13l4 4L19 7&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;span
+                  class&#x3D;&quot;text-sm text-blue-900 font-medium font-[&#x27;DM_Sans&#x27;]&quot;
+                  &gt;{{ feature }}&lt;/span
+                &gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/ng-container&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Certificates --&gt;
+  &lt;div *ngIf&#x3D;&quot;hasCertifications()&quot; class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;toggleCertificates()&quot;
+      class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+      [attr.aria-expanded]&#x3D;&quot;certificatesOpen&quot;
+      [attr.aria-controls]&#x3D;&quot;&#x27;certificates-content&#x27;&quot;
+    &gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;productDetails.certifications&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;svg
+        [ngClass]&#x3D;&quot;{
+          &#x27;rotate-180&#x27;: certificatesOpen,
+          &#x27;rotate-0&#x27;: !certificatesOpen,
+        }&quot;
+        class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div id&#x3D;&quot;certificates-content&quot; *ngIf&#x3D;&quot;certificatesOpen&quot; class&#x3D;&quot;mt-4&quot;&gt;
+      &lt;dl class&#x3D;&quot;grid grid-cols-1 gap-4&quot;&gt;
+        &lt;div class&#x3D;&quot;flex justify-between&quot;&gt;
+          &lt;dt class&#x3D;&quot;text-sm font-medium text-gray-500 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;productDetails.certifications&quot; | translate }}:
+          &lt;/dt&gt;
+          &lt;dd class&#x3D;&quot;text-sm text-gray-900 font-[&#x27;DM_Sans&#x27;] text-right&quot;&gt;
+            &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+              &lt;div
+                *ngFor&#x3D;&quot;let certificate of product.certificates&quot;
+                class&#x3D;&quot;text-sm&quot;
+              &gt;
+                {{ certificate }}
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/dd&gt;
+        &lt;/div&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Technical Sheet --&gt;
+  &lt;div *ngIf&#x3D;&quot;hasTechnicalSheet()&quot; class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;button
+      type&#x3D;&quot;button&quot;
+      (click)&#x3D;&quot;toggleTechnicalSheet()&quot;
+      class&#x3D;&quot;flex items-center w-full justify-between group focus:outline-none&quot;
+      [attr.aria-expanded]&#x3D;&quot;technicalSheetOpen&quot;
+      [attr.aria-controls]&#x3D;&quot;&#x27;technical-sheet-content&#x27;&quot;
+    &gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;admin.productTechnicalSheet&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;svg
+        [ngClass]&#x3D;&quot;{
+          &#x27;rotate-180&#x27;: technicalSheetOpen,
+          &#x27;rotate-0&#x27;: !technicalSheetOpen,
+        }&quot;
+        class&#x3D;&quot;w-5 h-5 text-gray-500 transition-transform duration-200&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M19 9l-7 7-7-7&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div id&#x3D;&quot;technical-sheet-content&quot; *ngIf&#x3D;&quot;technicalSheetOpen&quot; class&#x3D;&quot;mt-4&quot;&gt;
+      &lt;div class&#x3D;&quot;bg-blue-50 rounded-lg p-4 border border-blue-200&quot;&gt;
+        &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+            &lt;div&gt;
+              &lt;p class&#x3D;&quot;text-sm text-blue-700 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;admin.downloadTechnicalSheetHelp&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;a
+            [href]&#x3D;&quot;getFullTechnicalSheetUrl(product.technical_sheet || &#x27;&#x27;)&quot;
+            target&#x3D;&quot;_blank&quot;
+            rel&#x3D;&quot;noopener noreferrer&quot;
+            class&#x3D;&quot;inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-4 h-4 mr-2&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14&quot;
+              /&gt;
+            &lt;/svg&gt;
+            {{ &quot;admin.downloadTechnicalSheetHelp&quot; | translate }}
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Quantity and Add to Cart --&gt;
+  &lt;div class&#x3D;&quot;border-t border-gray-200 pt-6&quot;&gt;
+    &lt;div class&#x3D;&quot;flex items-center space-x-4 mb-6&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+        &lt;label class&#x3D;&quot;text-sm font-medium text-gray-700 mr-3 font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;{{ &quot;productDetails.quantity&quot; | translate }}:&lt;/label
+        &gt;
+        &lt;div class&#x3D;&quot;flex items-center border border-gray-300 rounded-md&quot;&gt;
+          &lt;button
+            (click)&#x3D;&quot;decreaseQuantity()&quot;
+            [disabled]&#x3D;&quot;quantity &lt;&#x3D; 1&quot;
+            class&#x3D;&quot;px-3 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+          &gt;
+            -
+          &lt;/button&gt;
+          &lt;input
+            type&#x3D;&quot;number&quot;
+            [(ngModel)]&#x3D;&quot;quantity&quot;
+            [min]&#x3D;&quot;1&quot;
+            [max]&#x3D;&quot;99&quot;
+            class&#x3D;&quot;w-16 px-2 py-2 text-center border-0 focus:ring-0 font-[&#x27;DM_Sans&#x27;]&quot;
+          /&gt;
+          &lt;button
+            (click)&#x3D;&quot;increaseQuantity()&quot;
+            [disabled]&#x3D;&quot;quantity &gt;&#x3D; 99&quot;
+            class&#x3D;&quot;px-3 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed&quot;
+          &gt;
+            +
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Action Buttons --&gt;
+    &lt;div class&#x3D;&quot;space-y-3&quot;&gt;
+      &lt;button
+        (click)&#x3D;&quot;addToCart()&quot;
+        [disabled]&#x3D;&quot;product.availability &#x3D;&#x3D;&#x3D; &#x27;out-of-stock&#x27;&quot;
+        class&#x3D;&quot;w-full px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-[&#x27;DM_Sans&#x27;]&quot;
+      &gt;
+        &lt;lucide-angular
+          name&#x3D;&quot;shopping-cart&quot;
+          class&#x3D;&quot;w-6 h-6 inline mr-2&quot;
+          [img]&#x3D;&quot;ShoppingCartIcon&quot;
+        &gt;
+        &lt;/lucide-angular&gt;
+        {{
+          product.availability &#x3D;&#x3D;&#x3D; &quot;out-of-stock&quot;
+            ? (&quot;productDetails.outOfStock&quot; | translate)
+            : (&quot;productDetails.addToCart&quot; | translate)
+        }}
+      &lt;/button&gt;
+
+      &lt;button
+        (click)&#x3D;&quot;toggleWishlist()&quot;
+        [disabled]&#x3D;&quot;
+          (wishlistState$ | async)?.addingToWishlist ||
+          (wishlistState$ | async)?.removingFromWishlist &#x3D;&#x3D;&#x3D; product.id
+        &quot;
+        class&#x3D;&quot;w-full px-6 py-3 font-semibold border rounded-lg transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+        [ngClass]&#x3D;&quot;{
+          &#x27;bg-red-50 text-red-700 border-red-300 hover:bg-red-100&#x27;: (
+            wishlistState$ | async
+          )?.isInWishlist,
+          &#x27;bg-white text-gray-700 border-gray-300 hover:bg-gray-50&#x27;: !(
+            wishlistState$ | async
+          )?.isInWishlist,
+          &#x27;opacity-50 cursor-not-allowed&#x27;:
+            (wishlistState$ | async)?.addingToWishlist ||
+            (wishlistState$ | async)?.removingFromWishlist &#x3D;&#x3D;&#x3D; product.id,
+        }&quot;
+      &gt;
+        &lt;!-- Loading spinner when adding/removing --&gt;
+        &lt;svg
+          *ngIf&#x3D;&quot;
+            (wishlistState$ | async)?.addingToWishlist ||
+            (wishlistState$ | async)?.removingFromWishlist &#x3D;&#x3D;&#x3D; product.id
+          &quot;
+          class&#x3D;&quot;w-5 h-5 inline mr-2 animate-spin&quot;
+          fill&#x3D;&quot;none&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;circle
+            class&#x3D;&quot;opacity-25&quot;
+            cx&#x3D;&quot;12&quot;
+            cy&#x3D;&quot;12&quot;
+            r&#x3D;&quot;10&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            stroke-width&#x3D;&quot;4&quot;
+          &gt;&lt;/circle&gt;
+          &lt;path
+            class&#x3D;&quot;opacity-75&quot;
+            fill&#x3D;&quot;currentColor&quot;
+            d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+          &gt;&lt;/path&gt;
+        &lt;/svg&gt;
+
+        &lt;!-- Heart icon --&gt;
+        &lt;svg
+          *ngIf&#x3D;&quot;
+            !(
+              (wishlistState$ | async)?.addingToWishlist ||
+              (wishlistState$ | async)?.removingFromWishlist &#x3D;&#x3D;&#x3D; product.id
+            )
+          &quot;
+          class&#x3D;&quot;w-5 h-5 inline mr-2&quot;
+          [class.fill-current]&#x3D;&quot;(wishlistState$ | async)?.isInWishlist&quot;
+          [class.text-red-500]&#x3D;&quot;(wishlistState$ | async)?.isInWishlist&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;
+          /&gt;
+        &lt;/svg&gt;
+
+        &lt;span *ngIf&#x3D;&quot;(wishlistState$ | async)?.isInWishlist&quot;&gt;{{
+          &quot;productDetails.removeFromWishlist&quot; | translate
+        }}&lt;/span&gt;
+        &lt;span *ngIf&#x3D;&quot;!(wishlistState$ | async)?.isInWishlist&quot;&gt;{{
+          &quot;productDetails.addToWishlist&quot; | translate
+        }}&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./product-info.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+.rotate-0 {
+  transform: rotate(0deg);
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="space-y-6">  <!-- Product Title and Rating -->  <div>    <div class="flex items-center gap-3 mb-4">      <h1 class="text-3xl font-bold text-gray-900 font-[\'Poppins\']">        {{ product.name }}      </h1>      <!-- On Sale Badge -->      <div        *ngIf="product.isOnSale"        class="px-3 py-1 bg-red-500 text-white text-sm font-semibold rounded-full"      >        {{ "productDetails.onSale" | translate }}      </div>    </div>    <!-- Rating and Reviews -->    <div class="flex items-center mb-4">      <div class="flex items-center">        <div class="flex">          <svg            *ngFor="              let star of getStarArray((averageRating$ | async) || 0);              let i = index            "            class="w-5 h-5"            [class]="              star === 1                ? \'text-yellow-400 fill-current\'                : star === 0.5                  ? \'text-yellow-400\'                  : \'text-gray-300\'            "            viewBox="0 0 20 20"          >            <defs *ngIf="star === 0.5">              <linearGradient id="half-star-{{ i }}">                <stop offset="50%" stop-color="currentColor" />                <stop offset="50%" stop-color="transparent" />              </linearGradient>            </defs>            <path              [attr.fill]="                star === 0.5 ? \'url(#half-star-\' + i + \')\' : \'currentColor\'              "              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"            />          </svg>        </div>        <span class="ml-2 text-sm font-medium text-gray-900">{{          (averageRating$ | async) || 0        }}</span>      </div>      <span class="mx-2 text-gray-300">|</span>      <button        (click)="scrollToReviews()"        class="text-sm text-solar-500 hover:text-solar-600 font-[\'DM_Sans\'] cursor-pointer"      >        {{ (reviewCount$ | async) || 0 }}        {{ "productList.reviews" | translate }}      </button>    </div>    <!-- Availability -->    <div class="flex items-center mb-6">      <span class="text-sm font-medium text-gray-700 mr-2 font-[\'DM_Sans\']"        >{{ "productDetails.availability" | translate }}:</span      >      <span        class="px-2 py-1 rounded-full text-xs font-semibold"        [ngClass]="{          \'bg-green-100 text-green-800\': product.availability === \'available\',          \'bg-yellow-100 text-yellow-800\': product.availability === \'limited\',          \'bg-red-100 text-red-800\': product.availability === \'out-of-stock\',        }"      >        {{ getAvailabilityText(product.availability) | translate }}      </span>    </div>    <!-- ERP Stock Information (Collapsible) -->    <div *ngIf="filteredErpStock && filteredErpStock.length > 0" class="mb-6">      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">        <button          type="button"          (click)="toggleStockInformation()"          class="flex items-center w-full justify-between group focus:outline-none"          [attr.aria-expanded]="stockInformationOpen"          [attr.aria-controls]="\'stock-information-content\'"        >          <h4 class="text-sm font-semibold text-blue-900 font-[\'DM_Sans\']">            {{ "productDetails.stockInformation" | translate }}          </h4>          <svg            [ngClass]="{              \'rotate-180\': stockInformationOpen,              \'rotate-0\': !stockInformationOpen,            }"            class="w-5 h-5 text-blue-600 transition-transform duration-200"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M19 9l-7 7-7-7"            />          </svg>        </button>        <div          id="stock-information-content"          *ngIf="stockInformationOpen"          class="mt-3 space-y-2"        >          <div            *ngFor="let stock of filteredErpStock"            class="flex items-center justify-between text-sm"          >            <span class="text-blue-700 font-[\'DM_Sans\']">              {{ stock.displayName }}:            </span>            <span class="font-medium text-blue-900 font-[\'DM_Sans\']">              {{ stock.quantity }}            </span>          </div>          <div            class="pt-2 mt-2 border-t border-blue-200 flex items-center justify-between"          >            <span class="text-sm font-semibold text-blue-900 font-[\'DM_Sans\']">              {{ "productDetails.totalStock" | translate }}:            </span>            <span class="text-base font-bold text-blue-900 font-[\'DM_Sans\']">              {{ getTotalStock() }}            </span>          </div>        </div>      </div>    </div>    <!-- ERP Stock Loading -->    <div *ngIf="erpStockLoading" class="mb-6">      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">        <div class="flex items-center justify-center">          <div            class="animate-spin rounded-full h-5 w-5 border-2 border-blue-600 border-t-transparent mr-3"          ></div>          <span class="text-sm text-gray-600 font-[\'DM_Sans\']">            {{ "productDetails.loadingStockInformation" | translate }}          </span>        </div>      </div>    </div>  </div>  <!-- Price -->  <div class="border-t border-gray-200 pt-6">    <!-- Company Pricing Badge -->    <div *ngIf="isCompanyPricing" class="mb-4">      <span        class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-solar-100 text-solar-800"      >        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />        </svg>        {{ "b2b.products.partnerPrice" | translate }}      </span>    </div>    <!-- Regular Pricing -->    <div *ngIf="!isCompanyPricing" class="flex items-center space-x-4 mb-4">      <span class="text-3xl font-bold text-gray-900 font-[\'DM_Sans\']">        €{{ product.price | number: "1.2-2" : "de" }}      </span>      <span        *ngIf="product.originalPrice && product.originalPrice !== product.price"        class="text-xl text-gray-500 line-through font-[\'DM_Sans\']"      >        €{{ product.originalPrice | number: "1.2-2" : "de" }}      </span>      <span        *ngIf="product.discount"        class="bg-solar-500 text-white px-2 py-1 rounded-full text-sm font-semibold"      >        -{{ product.discount }}%      </span>    </div>    <!-- Company Pricing -->    <div *ngIf="isCompanyPricing" class="space-y-3 mb-4">      <!-- Retail Price -->      <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">        <span class="text-sm text-gray-600 font-[\'DM_Sans\']"          >{{ "b2b.products.retailPrice" | translate }}:</span        >        <span class="text-lg text-gray-500 line-through font-[\'DM_Sans\']">          €{{ product.price | number: "1.2-2" : "de" }}        </span>      </div>      <!-- Company Price -->      <div        class="flex items-center justify-between bg-solar-50 p-4 rounded-lg border-2 border-solar-200"      >        <span class="text-base font-semibold text-solar-700 font-[\'DM_Sans\']"          >{{ "b2b.products.partnerPrice" | translate }}:</span        >        <span class="text-3xl font-bold text-solar-600 font-[\'DM_Sans\']">          €{{ getCompanyPrice() | number: "1.2-2" : "de" }}        </span>      </div>      <!-- Savings -->      <div class="flex items-center justify-between bg-green-50 p-3 rounded-lg">        <span class="text-sm font-medium text-green-700 font-[\'DM_Sans\']"          >{{ "b2b.products.savings" | translate }}:</span        >        <span class="text-lg font-bold text-green-600 font-[\'DM_Sans\']">          €{{ getCompanySavings() | number: "1.2-2" : "de" }} ({{            COMPANY_DISCOUNT_PERCENTAGE          }}% {{ "hero.off" | translate }})        </span>      </div>    </div>    <p class="text-sm text-gray-600 font-[\'DM_Sans\']">      {{ "productDetails.priceIncludesVat" | translate }}    </p>  </div>  <!-- Product Description -->  <div class="border-t border-gray-200 pt-6">    <button      type="button"      (click)="toggleDescription()"      class="flex items-center w-full justify-between group focus:outline-none"      [attr.aria-expanded]="descriptionOpen"      [attr.aria-controls]="\'description-content\'"    >      <h3 class="text-lg font-semibold text-gray-900 font-[\'Poppins\']">        {{ "productDetails.description" | translate }}      </h3>      <svg        [ngClass]="{          \'rotate-180\': descriptionOpen,          \'rotate-0\': !descriptionOpen,        }"        class="w-5 h-5 text-gray-500 transition-transform duration-200"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M19 9l-7 7-7-7"        />      </svg>    </button>    <div id="description-content" *ngIf="descriptionOpen" class="mt-3">      <p        class="text-gray-700 leading-relaxed font-[\'DM_Sans\'] whitespace-pre-line"      >        {{ product.description }}      </p>    </div>  </div>  <!-- Product Details -->  <div class="border-t border-gray-200 pt-6">    <button      type="button"      (click)="toggleProductDetails()"      class="flex items-center w-full justify-between group focus:outline-none"      [attr.aria-expanded]="productDetailsOpen"      [attr.aria-controls]="\'product-details-content\'"    >      <h3 class="text-lg font-semibold text-gray-900 font-[\'Poppins\']">        {{ "productDetails.productDetails" | translate }}      </h3>      <svg        [ngClass]="{          \'rotate-180\': productDetailsOpen,          \'rotate-0\': !productDetailsOpen,        }"        class="w-5 h-5 text-gray-500 transition-transform duration-200"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M19 9l-7 7-7-7"        />      </svg>    </button>    <div id="product-details-content" *ngIf="productDetailsOpen" class="mt-4">      <dl class="grid grid-cols-1 gap-4">        <div class="flex justify-between">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productList.categories" | translate }}:          </dt>          <dd class="text-sm font-[\'DM_Sans\']">            <div              *ngIf="product.categories && product.categories.length > 0"              class="flex flex-wrap gap-1"            >              <button                *ngFor="let category of product.categories; let last = last"                (click)="navigateToCategory(category.name)"                class="text-solar-500 hover:text-solar-600 hover:underline transition-colors"                [class.font-semibold]="category.isPrimary"                [title]="category.isPrimary ? \'Primary category\' : \'\'"              >                {{ category.name }}{{ !last ? "," : "" }}              </button>            </div>            <!-- Fallback to single category for legacy products -->            <button              *ngIf="                (!product.categories || product.categories.length === 0) &&                product.category              "              (click)="navigateToCategory(product.category)"              class="text-solar-500 hover:text-solar-600 hover:underline transition-colors"            >              {{ product.category }}            </button>            <span              *ngIf="                (!product.categories || product.categories.length === 0) &&                !product.category              "              class="text-gray-500"              >-</span            >          </dd>        </div>        <div class="flex justify-between">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.manufacturer" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\']">            {{ product.manufacturer }}          </dd>        </div>        <div class="flex justify-between">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.model" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\']">            {{ product.model || "-" }}          </dd>        </div>        <div class="flex justify-between">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.sku" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\']">            {{ product.sku }}          </dd>        </div>        <div class="flex justify-between" *ngIf="product.weight">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.weight" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\']">            {{ product.weight }} kg          </dd>        </div>        <div class="flex justify-between" *ngIf="product.dimensions">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.dimensions" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\']">            {{ product.dimensions }}          </dd>        </div>      </dl>      <!-- Specifications Subsection -->      <ng-container *ngIf="hasSpecifications()">        <div class="mt-6 pt-6 border-t border-gray-100">          <button            type="button"            (click)="toggleSpecifications()"            class="flex items-center w-full justify-between group focus:outline-none"            [attr.aria-expanded]="specificationsOpen"            [attr.aria-controls]="\'specifications-content\'"          >            <h4              class="text-base font-semibold text-gray-900 mb-3 font-[\'Poppins\']"            >              {{ "productDetails.specifications" | translate }}            </h4>            <svg              [ngClass]="{                \'rotate-180\': specificationsOpen,                \'rotate-0\': !specificationsOpen,              }"              class="w-5 h-5 text-gray-500 transition-transform duration-200"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M19 9l-7 7-7-7"              />            </svg>          </button>          <div            id="specifications-content"            *ngIf="specificationsOpen"            class="mt-2"          >            <dl class="grid grid-cols-1 gap-3">              <div                *ngFor="let spec of getSpecificationsArray()"                class="flex justify-between py-2 px-3 bg-gray-50 rounded-lg"              >                <dt class="text-sm font-medium text-gray-600 font-[\'DM_Sans\']">                  {{ formatSpecificationKey(spec.key) }}:                </dt>                <dd                  class="text-sm text-gray-900 font-semibold font-[\'DM_Sans\']"                >                  {{ spec.value }}                </dd>              </div>            </dl>          </div>        </div>      </ng-container>      <!-- Features Subsection -->      <ng-container *ngIf="hasFeatures()">        <div class="mt-6 pt-6 border-t border-gray-100">          <button            type="button"            (click)="toggleFeatures()"            class="flex items-center w-full justify-between group focus:outline-none"            [attr.aria-expanded]="featuresOpen"            [attr.aria-controls]="\'features-content\'"          >            <h4              class="text-base font-semibold text-gray-900 mb-3 font-[\'Poppins\']"            >              {{ "productDetails.features" | translate }}            </h4>            <svg              [ngClass]="{                \'rotate-180\': featuresOpen,                \'rotate-0\': !featuresOpen,              }"              class="w-5 h-5 text-gray-500 transition-transform duration-200"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M19 9l-7 7-7-7"              />            </svg>          </button>          <div id="features-content" *ngIf="featuresOpen" class="mt-2">            <div class="grid grid-cols-1 gap-2">              <div                *ngFor="let feature of product.features"                class="flex items-center py-2 px-3 bg-blue-50 rounded-lg"              >                <svg                  class="w-4 h-4 text-blue-600 mr-3 flex-shrink-0"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M5 13l4 4L19 7"                  />                </svg>                <span                  class="text-sm text-blue-900 font-medium font-[\'DM_Sans\']"                  >{{ feature }}</span                >              </div>            </div>          </div>        </div>      </ng-container>    </div>  </div>  <!-- Certificates -->  <div *ngIf="hasCertifications()" class="border-t border-gray-200 pt-6">    <button      type="button"      (click)="toggleCertificates()"      class="flex items-center w-full justify-between group focus:outline-none"      [attr.aria-expanded]="certificatesOpen"      [attr.aria-controls]="\'certificates-content\'"    >      <h3 class="text-lg font-semibold text-gray-900 font-[\'Poppins\']">        {{ "productDetails.certifications" | translate }}      </h3>      <svg        [ngClass]="{          \'rotate-180\': certificatesOpen,          \'rotate-0\': !certificatesOpen,        }"        class="w-5 h-5 text-gray-500 transition-transform duration-200"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M19 9l-7 7-7-7"        />      </svg>    </button>    <div id="certificates-content" *ngIf="certificatesOpen" class="mt-4">      <dl class="grid grid-cols-1 gap-4">        <div class="flex justify-between">          <dt class="text-sm font-medium text-gray-500 font-[\'DM_Sans\']">            {{ "productDetails.certifications" | translate }}:          </dt>          <dd class="text-sm text-gray-900 font-[\'DM_Sans\'] text-right">            <div class="space-y-1">              <div                *ngFor="let certificate of product.certificates"                class="text-sm"              >                {{ certificate }}              </div>            </div>          </dd>        </div>      </dl>    </div>  </div>  <!-- Technical Sheet -->  <div *ngIf="hasTechnicalSheet()" class="border-t border-gray-200 pt-6">    <button      type="button"      (click)="toggleTechnicalSheet()"      class="flex items-center w-full justify-between group focus:outline-none"      [attr.aria-expanded]="technicalSheetOpen"      [attr.aria-controls]="\'technical-sheet-content\'"    >      <h3 class="text-lg font-semibold text-gray-900 font-[\'Poppins\']">        {{ "admin.productTechnicalSheet" | translate }}      </h3>      <svg        [ngClass]="{          \'rotate-180\': technicalSheetOpen,          \'rotate-0\': !technicalSheetOpen,        }"        class="w-5 h-5 text-gray-500 transition-transform duration-200"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M19 9l-7 7-7-7"        />      </svg>    </button>    <div id="technical-sheet-content" *ngIf="technicalSheetOpen" class="mt-4">      <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">        <div class="flex items-center justify-between">          <div class="flex items-center">            <div>              <p class="text-sm text-blue-700 font-[\'DM_Sans\']">                {{ "admin.downloadTechnicalSheetHelp" | translate }}              </p>            </div>          </div>          <a            [href]="getFullTechnicalSheetUrl(product.technical_sheet || \'\')"            target="_blank"            rel="noopener noreferrer"            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-colors font-[\'DM_Sans\']"          >            <svg              class="w-4 h-4 mr-2"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"              />            </svg>            {{ "admin.downloadTechnicalSheetHelp" | translate }}          </a>        </div>      </div>    </div>  </div>  <!-- Quantity and Add to Cart -->  <div class="border-t border-gray-200 pt-6">    <div class="flex items-center space-x-4 mb-6">      <div class="flex items-center">        <label class="text-sm font-medium text-gray-700 mr-3 font-[\'DM_Sans\']"          >{{ "productDetails.quantity" | translate }}:</label        >        <div class="flex items-center border border-gray-300 rounded-md">          <button            (click)="decreaseQuantity()"            [disabled]="quantity <= 1"            class="px-3 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"          >            -          </button>          <input            type="number"            [(ngModel)]="quantity"            [min]="1"            [max]="99"            class="w-16 px-2 py-2 text-center border-0 focus:ring-0 font-[\'DM_Sans\']"          />          <button            (click)="increaseQuantity()"            [disabled]="quantity >= 99"            class="px-3 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"          >            +          </button>        </div>      </div>    </div>    <!-- Action Buttons -->    <div class="space-y-3">      <button        (click)="addToCart()"        [disabled]="product.availability === \'out-of-stock\'"        class="w-full px-6 py-3 bg-solar-500 text-white font-semibold rounded-lg hover:bg-solar-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed font-[\'DM_Sans\']"      >        <lucide-angular          name="shopping-cart"          class="w-6 h-6 inline mr-2"          [img]="ShoppingCartIcon"        >        </lucide-angular>        {{          product.availability === "out-of-stock"            ? ("productDetails.outOfStock" | translate)            : ("productDetails.addToCart" | translate)        }}      </button>      <button        (click)="toggleWishlist()"        [disabled]="          (wishlistState$ | async)?.addingToWishlist ||          (wishlistState$ | async)?.removingFromWishlist === product.id        "        class="w-full px-6 py-3 font-semibold border rounded-lg transition-colors font-[\'DM_Sans\']"        [ngClass]="{          \'bg-red-50 text-red-700 border-red-300 hover:bg-red-100\': (            wishlistState$ | async          )?.isInWishlist,          \'bg-white text-gray-700 border-gray-300 hover:bg-gray-50\': !(            wishlistState$ | async          )?.isInWishlist,          \'opacity-50 cursor-not-allowed\':            (wishlistState$ | async)?.addingToWishlist ||            (wishlistState$ | async)?.removingFromWishlist === product.id,        }"      >        <!-- Loading spinner when adding/removing -->        <svg          *ngIf="            (wishlistState$ | async)?.addingToWishlist ||            (wishlistState$ | async)?.removingFromWishlist === product.id          "          class="w-5 h-5 inline mr-2 animate-spin"          fill="none"          viewBox="0 0 24 24"        >          <circle            class="opacity-25"            cx="12"            cy="12"            r="10"            stroke="currentColor"            stroke-width="4"          ></circle>          <path            class="opacity-75"            fill="currentColor"            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"          ></path>        </svg>        <!-- Heart icon -->        <svg          *ngIf="            !(              (wishlistState$ | async)?.addingToWishlist ||              (wishlistState$ | async)?.removingFromWishlist === product.id            )          "          class="w-5 h-5 inline mr-2"          [class.fill-current]="(wishlistState$ | async)?.isInWishlist"          [class.text-red-500]="(wishlistState$ | async)?.isInWishlist"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"          />        </svg>        <span *ngIf="(wishlistState$ | async)?.isInWishlist">{{          "productDetails.removeFromWishlist" | translate        }}</span>        <span *ngIf="!(wishlistState$ | async)?.isInWishlist">{{          "productDetails.addToWishlist" | translate        }}</span>      </button>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProductInfoComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductInfoComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

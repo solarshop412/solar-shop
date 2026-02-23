@@ -1,0 +1,1750 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >SortOptionsService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/sort-options.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#enabledSortOptions$" >enabledSortOptions$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#loading$" >loading$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadingSubject" >loadingSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#sortOptions$" >sortOptions$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sortOptionsSubject" >sortOptionsSubject</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#createSortOption" >createSortOption</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteSortOption" >deleteSortOption</a>
+                            </li>
+                            <li>
+                                <a href="#getAllSortOptions" >getAllSortOptions</a>
+                            </li>
+                            <li>
+                                <a href="#getAvailableFields" >getAvailableFields</a>
+                            </li>
+                            <li>
+                                <a href="#getDefaultSortOptionCode" >getDefaultSortOptionCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getDefaultSortOptions" >getDefaultSortOptions</a>
+                            </li>
+                            <li>
+                                <a href="#getEnabledSortOptions" >getEnabledSortOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getEnabledSortOptionsWithLabels" >getEnabledSortOptionsWithLabels</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadSortOptions" >loadSortOptions</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#setDefaultSortOption" >setDefaultSortOption</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#toggleSortOptionEnabled" >toggleSortOptionEnabled</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateDisplayOrder" >updateDisplayOrder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateSortOption" >updateSortOption</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/services/sort-options.service.ts:51</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createSortOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>createSortOption</b></span>
+                        <a href="#createSortOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createSortOption(sortOption: <a href="../interfaces/SortOption.html" target="_self">Omit&lt;SortOption | &quot;id&quot; | &quot;created_at&quot; | &quot;updated_at&quot;&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Create a new sort option</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>sortOption</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >Omit&lt;SortOption | &quot;id&quot; | &quot;created_at&quot; | &quot;updated_at&quot;&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SortOption.html" target="_self" >Promise&lt;SortOption | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteSortOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteSortOption</b></span>
+                        <a href="#deleteSortOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteSortOption(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Delete a sort option</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllSortOptions"></a>
+                    <span class="name">
+                        <span ><b>getAllSortOptions</b></span>
+                        <a href="#getAllSortOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllSortOptions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get all sort options (including disabled)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SortOption.html" target="_self" >SortOption[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAvailableFields"></a>
+                    <span class="name">
+                        <span ><b>getAvailableFields</b></span>
+                        <a href="#getAvailableFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAvailableFields()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="373"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:373</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get available field options for creating sort options</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>literal type[]</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDefaultSortOptionCode"></a>
+                    <span class="name">
+                        <span ><b>getDefaultSortOptionCode</b></span>
+                        <a href="#getDefaultSortOptionCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDefaultSortOptionCode()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get the default sort option code</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDefaultSortOptions"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getDefaultSortOptions</b></span>
+                        <a href="#getDefaultSortOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDefaultSortOptions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="296"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:296</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get default sort options (fallback when database is unavailable)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SortOption.html" target="_self" >SortOption[]</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEnabledSortOptions"></a>
+                    <span class="name">
+                        <span ><b>getEnabledSortOptions</b></span>
+                        <a href="#getEnabledSortOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEnabledSortOptions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:141</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get enabled sort options with labels for the current language</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>SortOptionDisplay[]</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEnabledSortOptionsWithLabels"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getEnabledSortOptionsWithLabels</b></span>
+                        <a href="#getEnabledSortOptionsWithLabels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getEnabledSortOptionsWithLabels(options: <a href="../interfaces/SortOption.html" target="_self">SortOption[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get enabled sort options with translated labels</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>options</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >SortOption[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>SortOptionDisplay[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadSortOptions"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>loadSortOptions</b></span>
+                        <a href="#loadSortOptions"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadSortOptions()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Load all sort options from database</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setDefaultSortOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>setDefaultSortOption</b></span>
+                        <a href="#setDefaultSortOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setDefaultSortOption(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set a sort option as default</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSortOptionEnabled"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>toggleSortOptionEnabled</b></span>
+                        <a href="#toggleSortOptionEnabled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toggleSortOptionEnabled(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, enabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="258"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:258</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggle sort option enabled state</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>enabled</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateDisplayOrder"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateDisplayOrder</b></span>
+                        <a href="#updateDisplayOrder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateDisplayOrder(updates: literal type[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Update display order for multiple sort options</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>updates</td>
+                                            <td>
+                                                        <code>literal type[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateSortOption"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateSortOption</b></span>
+                        <a href="#updateSortOption"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateSortOption(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, updates: <a href="../interfaces/SortOption.html" target="_self">Partial&lt;SortOption&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/shared/services/sort-options.service.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Update an existing sort option</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updates</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SortOption.html" target="_self" >Partial&lt;SortOption&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enabledSortOptions$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>enabledSortOptions$</b></span>
+                        <a href="#enabledSortOptions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;SortOptionDisplay[]&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sortOptions$.pipe(
+      map((options) &#x3D;&gt; this.getEnabledSortOptionsWithLabels(options)),
+    )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/shared/services/sort-options.service.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>loading$</b></span>
+                        <a href="#loading$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.loadingSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/shared/services/sort-options.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadingSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadingSubject</b></span>
+                        <a href="#loadingSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/shared/services/sort-options.service.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortOptions$"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>sortOptions$</b></span>
+                        <a href="#sortOptions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.sortOptionsSubject.asObservable()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/shared/services/sort-options.service.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortOptionsSubject"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sortOptionsSubject</b></span>
+                        <a href="#sortOptionsSubject"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;SortOption[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/shared/services/sort-options.service.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/shared/services/sort-options.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/shared/services/sort-options.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { SupabaseService } from &#x27;../../services/supabase.service&#x27;;
+import { TranslationService } from &#x27;./translation.service&#x27;;
+
+export interface SortField {
+  field: string;
+  direction: &#x27;asc&#x27; | &#x27;desc&#x27;;
+}
+
+export interface SortOption {
+  id?: string;
+  code: string;
+  label_hr: string;
+  label_en: string;
+  field: string; // Legacy single field (kept for backwards compatibility)
+  direction: &#x27;asc&#x27; | &#x27;desc&#x27;; // Legacy single direction
+  sort_fields: SortField[]; // New multi-field sorting
+  is_default: boolean;
+  is_enabled: boolean;
+  display_order: number;
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface SortOptionDisplay {
+  code: string;
+  label: string;
+  sortFields: SortField[]; // Multiple sort fields
+  isDefault: boolean;
+}
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class SortOptionsService {
+  private supabaseService &#x3D; inject(SupabaseService);
+  private translationService &#x3D; inject(TranslationService);
+
+  private sortOptionsSubject &#x3D; new BehaviorSubject&lt;SortOption[]&gt;([]);
+  private loadingSubject &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+
+  public sortOptions$ &#x3D; this.sortOptionsSubject.asObservable();
+  public loading$ &#x3D; this.loadingSubject.asObservable();
+
+  // Observable that returns enabled sort options with translated labels
+  public enabledSortOptions$: Observable&lt;SortOptionDisplay[]&gt; &#x3D;
+    this.sortOptions$.pipe(
+      map((options) &#x3D;&gt; this.getEnabledSortOptionsWithLabels(options)),
+    );
+
+  constructor() {
+    // Load sort options on service initialization
+    this.loadSortOptions();
+
+    // Re-calculate labels when language changes
+    this.translationService.currentLanguage$.subscribe(() &#x3D;&gt; {
+      // Trigger re-emit to update labels
+      const currentOptions &#x3D; this.sortOptionsSubject.value;
+      this.sortOptionsSubject.next([...currentOptions]);
+    });
+  }
+
+  /**
+   * Load all sort options from database
+   */
+  async loadSortOptions(): Promise&lt;void&gt; {
+    this.loadingSubject.next(true);
+    try {
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;sort_options&#x27;)
+        .select(&#x27;*&#x27;)
+        .order(&#x27;display_order&#x27;, { ascending: true });
+
+      if (error) {
+        console.error(&#x27;[SortOptions] Error loading sort options:&#x27;, error);
+        // Use default options if database fails
+        this.sortOptionsSubject.next(this.getDefaultSortOptions());
+        return;
+      }
+
+      if (data &amp;&amp; data.length &gt; 0) {
+        this.sortOptionsSubject.next(data);
+        console.log(&#x27;[SortOptions] Loaded sort options:&#x27;, data);
+      } else {
+        // No options in database, use defaults
+        this.sortOptionsSubject.next(this.getDefaultSortOptions());
+        console.log(&#x27;[SortOptions] Using default sort options&#x27;);
+      }
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error loading sort options:&#x27;, error);
+      this.sortOptionsSubject.next(this.getDefaultSortOptions());
+    } finally {
+      this.loadingSubject.next(false);
+    }
+  }
+
+  /**
+   * Get enabled sort options with translated labels
+   */
+  private getEnabledSortOptionsWithLabels(
+    options: SortOption[],
+  ): SortOptionDisplay[] {
+    const currentLang &#x3D; this.translationService.getCurrentLanguage();
+    return options
+      .filter((opt) &#x3D;&gt; opt.is_enabled)
+      .sort((a, b) &#x3D;&gt; a.display_order - b.display_order)
+      .map((opt) &#x3D;&gt; ({
+        code: opt.code,
+        label: currentLang &#x3D;&#x3D;&#x3D; &#x27;en&#x27; ? opt.label_en : opt.label_hr,
+        sortFields:
+          opt.sort_fields &amp;&amp; opt.sort_fields.length &gt; 0
+            ? opt.sort_fields
+            : [{ field: opt.field, direction: opt.direction }], // Fallback to legacy single field
+        isDefault: opt.is_default,
+      }));
+  }
+
+  /**
+   * Get the default sort option code
+   */
+  getDefaultSortOptionCode(): string {
+    const options &#x3D; this.sortOptionsSubject.value;
+    const defaultOption &#x3D; options.find(
+      (opt) &#x3D;&gt; opt.is_default &amp;&amp; opt.is_enabled,
+    );
+    return defaultOption?.code || &#x27;featured&#x27;;
+  }
+
+  /**
+   * Get all sort options (including disabled)
+   */
+  getAllSortOptions(): SortOption[] {
+    return this.sortOptionsSubject.value;
+  }
+
+  /**
+   * Get enabled sort options with labels for the current language
+   */
+  getEnabledSortOptions(): SortOptionDisplay[] {
+    return this.getEnabledSortOptionsWithLabels(this.sortOptionsSubject.value);
+  }
+
+  /**
+   * Create a new sort option
+   */
+  async createSortOption(
+    sortOption: Omit&lt;SortOption, &#x27;id&#x27; | &#x27;created_at&#x27; | &#x27;updated_at&#x27;&gt;,
+  ): Promise&lt;SortOption | null&gt; {
+    try {
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;sort_options&#x27;)
+        .insert([sortOption])
+        .select()
+        .single();
+
+      if (error) {
+        console.error(&#x27;[SortOptions] Error creating sort option:&#x27;, error);
+        return null;
+      }
+
+      if (data) {
+        await this.loadSortOptions();
+        console.log(&#x27;[SortOptions] Created sort option:&#x27;, data);
+        return data;
+      }
+
+      return null;
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error creating sort option:&#x27;, error);
+      return null;
+    }
+  }
+
+  /**
+   * Update an existing sort option
+   */
+  async updateSortOption(
+    id: string,
+    updates: Partial&lt;SortOption&gt;,
+  ): Promise&lt;boolean&gt; {
+    try {
+      const { error } &#x3D; await this.supabaseService.client
+        .from(&#x27;sort_options&#x27;)
+        .update(updates)
+        .eq(&#x27;id&#x27;, id);
+
+      if (error) {
+        console.error(&#x27;[SortOptions] Error updating sort option:&#x27;, error);
+        return false;
+      }
+
+      await this.loadSortOptions();
+      console.log(&#x27;[SortOptions] Updated sort option:&#x27;, id);
+      return true;
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error updating sort option:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Delete a sort option
+   */
+  async deleteSortOption(id: string): Promise&lt;boolean&gt; {
+    try {
+      const { error } &#x3D; await this.supabaseService.client
+        .from(&#x27;sort_options&#x27;)
+        .delete()
+        .eq(&#x27;id&#x27;, id);
+
+      if (error) {
+        console.error(&#x27;[SortOptions] Error deleting sort option:&#x27;, error);
+        return false;
+      }
+
+      await this.loadSortOptions();
+      console.log(&#x27;[SortOptions] Deleted sort option:&#x27;, id);
+      return true;
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error deleting sort option:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Set a sort option as default
+   */
+  async setDefaultSortOption(id: string): Promise&lt;boolean&gt; {
+    try {
+      // The database trigger will handle unsetting other defaults
+      const { error } &#x3D; await this.supabaseService.client
+        .from(&#x27;sort_options&#x27;)
+        .update({ is_default: true })
+        .eq(&#x27;id&#x27;, id);
+
+      if (error) {
+        console.error(
+          &#x27;[SortOptions] Error setting default sort option:&#x27;,
+          error,
+        );
+        return false;
+      }
+
+      await this.loadSortOptions();
+      console.log(&#x27;[SortOptions] Set default sort option:&#x27;, id);
+      return true;
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error setting default sort option:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Toggle sort option enabled state
+   */
+  async toggleSortOptionEnabled(
+    id: string,
+    enabled: boolean,
+  ): Promise&lt;boolean&gt; {
+    return this.updateSortOption(id, { is_enabled: enabled });
+  }
+
+  /**
+   * Update display order for multiple sort options
+   */
+  async updateDisplayOrder(
+    updates: { id: string; display_order: number }[],
+  ): Promise&lt;boolean&gt; {
+    try {
+      for (const update of updates) {
+        const { error } &#x3D; await this.supabaseService.client
+          .from(&#x27;sort_options&#x27;)
+          .update({ display_order: update.display_order })
+          .eq(&#x27;id&#x27;, update.id);
+
+        if (error) {
+          console.error(&#x27;[SortOptions] Error updating display order:&#x27;, error);
+          return false;
+        }
+      }
+
+      await this.loadSortOptions();
+      console.log(&#x27;[SortOptions] Updated display order&#x27;);
+      return true;
+    } catch (error) {
+      console.error(&#x27;[SortOptions] Error updating display order:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Get default sort options (fallback when database is unavailable)
+   */
+  private getDefaultSortOptions(): SortOption[] {
+    return [
+      {
+        code: &#x27;featured&#x27;,
+        label_hr: &#x27;Istaknuto&#x27;,
+        label_en: &#x27;Featured&#x27;,
+        field: &#x27;is_featured&#x27;,
+        direction: &#x27;desc&#x27;,
+        sort_fields: [
+          { field: &#x27;is_featured&#x27;, direction: &#x27;desc&#x27; },
+          { field: &#x27;created_at&#x27;, direction: &#x27;desc&#x27; },
+        ],
+        is_default: true,
+        is_enabled: true,
+        display_order: 0,
+      },
+      {
+        code: &#x27;newest&#x27;,
+        label_hr: &#x27;Najnovije&#x27;,
+        label_en: &#x27;Newest Arrivals&#x27;,
+        field: &#x27;created_at&#x27;,
+        direction: &#x27;desc&#x27;,
+        sort_fields: [{ field: &#x27;created_at&#x27;, direction: &#x27;desc&#x27; }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 1,
+      },
+      {
+        code: &#x27;name-asc&#x27;,
+        label_hr: &#x27;Naziv A-Ž&#x27;,
+        label_en: &#x27;Name A-Z&#x27;,
+        field: &#x27;name&#x27;,
+        direction: &#x27;asc&#x27;,
+        sort_fields: [{ field: &#x27;name&#x27;, direction: &#x27;asc&#x27; }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 2,
+      },
+      {
+        code: &#x27;name-desc&#x27;,
+        label_hr: &#x27;Naziv Ž-A&#x27;,
+        label_en: &#x27;Name Z-A&#x27;,
+        field: &#x27;name&#x27;,
+        direction: &#x27;desc&#x27;,
+        sort_fields: [{ field: &#x27;name&#x27;, direction: &#x27;desc&#x27; }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 3,
+      },
+      {
+        code: &#x27;price-low&#x27;,
+        label_hr: &#x27;Cijena: od najniže&#x27;,
+        label_en: &#x27;Price: Low to High&#x27;,
+        field: &#x27;price&#x27;,
+        direction: &#x27;asc&#x27;,
+        sort_fields: [{ field: &#x27;price&#x27;, direction: &#x27;asc&#x27; }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 4,
+      },
+      {
+        code: &#x27;price-high&#x27;,
+        label_hr: &#x27;Cijena: od najviše&#x27;,
+        label_en: &#x27;Price: High to Low&#x27;,
+        field: &#x27;price&#x27;,
+        direction: &#x27;desc&#x27;,
+        sort_fields: [{ field: &#x27;price&#x27;, direction: &#x27;desc&#x27; }],
+        is_default: false,
+        is_enabled: true,
+        display_order: 5,
+      },
+    ];
+  }
+
+  /**
+   * Get available field options for creating sort options
+   */
+  getAvailableFields(): {
+    value: string;
+    label_hr: string;
+    label_en: string;
+  }[] {
+    return [
+      { value: &#x27;name&#x27;, label_hr: &#x27;Naziv&#x27;, label_en: &#x27;Name&#x27; },
+      { value: &#x27;price&#x27;, label_hr: &#x27;Cijena&#x27;, label_en: &#x27;Price&#x27; },
+      { value: &#x27;created_at&#x27;, label_hr: &#x27;Datum&#x27;, label_en: &#x27;Date&#x27; },
+      { value: &#x27;brand&#x27;, label_hr: &#x27;Proizvođač&#x27;, label_en: &#x27;Manufacturer&#x27; },
+      { value: &#x27;is_featured&#x27;, label_hr: &#x27;Istaknuto&#x27;, label_en: &#x27;Featured&#x27; },
+      { value: &#x27;stock_quantity&#x27;, label_hr: &#x27;Zalihe&#x27;, label_en: &#x27;Stock&#x27; },
+    ];
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'SortOptionsService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

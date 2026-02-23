@@ -1,0 +1,414 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content readme">
+                   <div class="content-data">
+
+
+<h1>Solar Shop - Angular 19 E-commerce Application</h1>
+<p>A modern, comprehensive solar energy e-commerce platform built with Angular 19, NgRx state management, and TailwindCSS.</p>
+<h2>🚀 Features</h2>
+<h3>✅ Implemented Features</h3>
+<h4>Core Application Structure</h4>
+<ul>
+<li><strong>Angular 19</strong> with standalone components</li>
+<li><strong>NgRx</strong> state management</li>
+<li><strong>TailwindCSS</strong> for styling</li>
+<li><strong>TypeScript</strong> with strict type checking</li>
+<li>Responsive design for all screen sizes</li>
+</ul>
+<h4>Navigation &amp; Routing</h4>
+<ul>
+<li>✅ <strong>Navbar Component</strong> with logo functionality<ul>
+<li>Logo links to home page</li>
+<li>Responsive navigation menu</li>
+<li>Mobile-friendly hamburger menu</li>
+<li>Proper RouterModule integration</li>
+</ul>
+</li>
+<li>✅ <strong>Routing System</strong><ul>
+<li>Home page (<code>/</code>)</li>
+<li>Products listing (<code>/products</code>)</li>
+<li>Product details (<code>/products/:id</code>)</li>
+<li>Offers page (<code>/offers</code>)</li>
+<li>Mission page (<code>/mission</code>)</li>
+<li>Company page (<code>/company</code>)</li>
+<li>Blog listing (<code>/blog</code>)</li>
+<li><strong>Blog detail page (<code>/blog/:id</code>)</strong> ✨ NEW</li>
+<li>Authentication routes</li>
+</ul>
+</li>
+</ul>
+<h4>Blog System</h4>
+<ul>
+<li>✅ <strong>Blog Component</strong> (fully translated to English)<ul>
+<li>Hero section with category filters</li>
+<li>Grid layout for blog posts</li>
+<li>Clickable blog cards with navigation</li>
+<li>Solar energy focused content</li>
+<li>Modern UI with hover effects</li>
+</ul>
+</li>
+<li>✅ <strong>Blog Detail Component</strong> ✨ NEW<ul>
+<li>Hero section with breadcrumb navigation</li>
+<li>Article content with featured image</li>
+<li>Author information display</li>
+<li>Tags and social sharing functionality</li>
+<li>Related posts section</li>
+<li>Newsletter signup section</li>
+<li>Social media sharing (Facebook, Twitter, LinkedIn)</li>
+<li>Comprehensive mock data</li>
+</ul>
+</li>
+</ul>
+<h4>Data Models</h4>
+<ul>
+<li>✅ <strong>Comprehensive TypeScript Models</strong><ul>
+<li><strong>Product Model</strong>: Complete e-commerce product interface with categories, images, specifications, availability, ratings, dimensions, warranty, energy efficiency, shipping info, SEO metadata</li>
+<li><strong>Blog Model</strong>: Full blog system with posts, authors, categories, tags, comments, social sharing, analytics, newsletters</li>
+<li><strong>User Model</strong>: Complete user management with roles, permissions, preferences, addresses, payment methods, social logins, sessions, activities</li>
+<li><strong>Cart Model</strong>: Full e-commerce cart with items, pricing, coupons, addresses, payment methods, shipping, validation, recommendations</li>
+<li><strong>Offers Model</strong>: Comprehensive promotional system with discounts, conditions, targeting, scheduling, usage tracking, analytics</li>
+<li><strong>Categories Model</strong>: Full categorization system with hierarchical structure, attributes, filters, SEO, analytics, import/export capabilities</li>
+</ul>
+</li>
+</ul>
+<h4>Pages &amp; Components</h4>
+<ul>
+<li>✅ Home page with hero section</li>
+<li>✅ Product listing and details</li>
+<li>✅ Offers and promotions page</li>
+<li>✅ Mission/sustainability page</li>
+<li>✅ Company information page</li>
+<li>✅ Authentication components (login, forgot password, reset password)</li>
+</ul>
+<h2>🛠 Technical Stack</h2>
+<ul>
+<li><strong>Frontend</strong>: Angular 19 (Standalone Components)</li>
+<li><strong>State Management</strong>: NgRx</li>
+<li><strong>Styling</strong>: TailwindCSS</li>
+<li><strong>Language</strong>: TypeScript</li>
+<li><strong>Build Tool</strong>: Angular CLI</li>
+<li><strong>Package Manager</strong>: npm</li>
+</ul>
+<h2>📁 Project Structure</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">src/
+├── app/
+│   ├── core/                    # Core functionality
+│   │   ├── auth/               # Authentication components &amp; guards
+│   │   └── page-layout/        # Main layout component
+│   ├── features/               # Feature modules
+│   │   ├── blog/              # Blog components ✨ Enhanced
+│   │   │   ├── blog.component.ts
+│   │   │   └── blog-detail.component.ts ✨ NEW
+│   │   ├── navbar/            # Navigation ✨ Enhanced
+│   │   ├── home/              # Home page
+│   │   ├── products/          # Product components
+│   │   ├── offers/            # Offers page
+│   │   ├── mission/           # Mission page
+│   │   └── company/           # Company page
+│   ├── shared/
+│   │   └── models/            # TypeScript interfaces ✨ NEW
+│   │       ├── product.model.ts
+│   │       ├── blog.model.ts
+│   │       ├── user.model.ts
+│   │       ├── cart.model.ts
+│   │       ├── offers.model.ts
+│   │       └── categories.model.ts
+│   ├── guards/                # Route guards
+│   └── app.routes.ts          # Route configuration ✨ Updated</code></pre></div><h2>🚀 Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js (v18 or higher)</li>
+<li>npm or yarn</li>
+<li>Angular CLI</li>
+</ul>
+<h3>Installation</h3>
+<ol>
+<li>Clone the repository</li>
+</ol>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">git clone &lt;repository-url&gt;
+cd solar-shop</code></pre></div><ol start="2">
+<li>Install dependencies</li>
+</ol>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div><ol start="3">
+<li>Start the development server</li>
+</ol>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng serve</code></pre></div><ol start="4">
+<li>Open your browser and navigate to <code>http://localhost:4200</code></li>
+</ol>
+<h3>Build for Production</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">ng build --configuration production</code></pre></div><h2>🎯 Recent Updates</h2>
+<h3>Blog System Enhancement ✨</h3>
+<ul>
+<li><strong>New Blog Detail Route</strong>: <code>/blog/:id</code> with comprehensive article view</li>
+<li><strong>Social Sharing</strong>: Facebook, Twitter, LinkedIn integration</li>
+<li><strong>Related Posts</strong>: Dynamic related content suggestions</li>
+<li><strong>Newsletter Signup</strong>: Email subscription functionality</li>
+<li><strong>Author Information</strong>: Detailed author profiles</li>
+<li><strong>SEO Optimization</strong>: Meta tags and structured data support</li>
+</ul>
+<h3>Navigation Improvements ✨</h3>
+<ul>
+<li><strong>Logo Functionality</strong>: Logo now navigates to home page</li>
+<li><strong>RouterModule Integration</strong>: Proper Angular routing throughout navbar</li>
+<li><strong>Consistent Styling</strong>: Updated hover states and color scheme</li>
+<li><strong>Mobile Responsiveness</strong>: Enhanced mobile navigation experience</li>
+</ul>
+<h3>Data Models ✨</h3>
+<ul>
+<li><strong>Comprehensive Interfaces</strong>: Complete TypeScript models for all entities</li>
+<li><strong>Type Safety</strong>: Strict typing throughout the application</li>
+<li><strong>Scalability</strong>: Models designed for future feature expansion</li>
+<li><strong>Documentation</strong>: Well-documented interfaces with clear property definitions</li>
+</ul>
+<h2>🔧 Configuration</h2>
+<h3>TailwindCSS</h3>
+<p>The application uses TailwindCSS for styling with custom color schemes:</p>
+<ul>
+<li>Primary green: <code>#10b981</code> (green-600)</li>
+<li>Secondary orange: <code>#f97316</code> (orange-500)</li>
+<li>Background grays: Various gray shades for layouts</li>
+</ul>
+<h3>NgRx State Management</h3>
+<p>State management is implemented for:</p>
+<ul>
+<li>Navbar state (mobile menu, language)</li>
+<li>Authentication state</li>
+<li>Ready for product, cart, and user state expansion</li>
+</ul>
+<h2>📱 Responsive Design</h2>
+<p>The application is fully responsive with breakpoints:</p>
+<ul>
+<li>Mobile: <code>&lt; 768px</code></li>
+<li>Tablet: <code>768px - 1024px</code></li>
+<li>Desktop: <code>&gt; 1024px</code></li>
+</ul>
+<h2>🔮 Future Enhancements</h2>
+<h3>Planned Features</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Product search and filtering</li>
+<li><input disabled="" type="checkbox"> Shopping cart functionality</li>
+<li><input disabled="" type="checkbox"> User authentication and profiles</li>
+<li><input disabled="" type="checkbox"> Payment integration</li>
+<li><input disabled="" type="checkbox"> Order management</li>
+<li><input disabled="" type="checkbox"> Admin dashboard</li>
+<li><input disabled="" type="checkbox"> Real-time chat support</li>
+<li><input disabled="" type="checkbox"> Product reviews and ratings</li>
+<li><input disabled="" type="checkbox"> Wishlist functionality</li>
+<li><input disabled="" type="checkbox"> Multi-language support</li>
+</ul>
+<h3>Technical Improvements</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Unit and integration tests</li>
+<li><input disabled="" type="checkbox"> E2E testing with Cypress</li>
+<li><input disabled="" type="checkbox"> Performance optimization</li>
+<li><input disabled="" type="checkbox"> PWA capabilities</li>
+<li><input disabled="" type="checkbox"> SEO enhancements</li>
+<li><input disabled="" type="checkbox"> Accessibility improvements (WCAG compliance)</li>
+</ul>
+<h2>🤝 Contributing</h2>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+<li>Commit your changes (<code>git commit -m &#39;Add some amazing feature&#39;</code>)</li>
+<li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<h2>📄 License</h2>
+<p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+<h2>📞 Support</h2>
+<p>For support and questions, please contact:</p>
+<ul>
+<li>Email: <a href="mailto:webshop@solarno.hr">webshop@solarno.hr</a></li>
+<li>Phone: +385 (1) 6407 715</li>
+</ul>
+<hr>
+<p><strong>Built with ❤️ for a sustainable future</strong> 🌱⚡</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1345 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ProductCategory</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/b2c/products/services/categories.service.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#createdAt" 
+>
+                                            createdAt
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#description" 
+>
+                                            description
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#imageUrl" 
+>
+                                            imageUrl
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#isActive" 
+>
+                                            isActive
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#name" 
+>
+                                            name
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#ownProductCount" 
+>
+                                            ownProductCount
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#parentId" 
+>
+                                            parentId
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#productCount" 
+>
+                                            productCount
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#slug" 
+>
+                                            slug
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#sortOrder" 
+>
+                                            sortOrder
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#subcategories" 
+>
+                                            subcategories
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#updatedAt" 
+>
+                                            updatedAt
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="createdAt"></a>
+                                        <span class="name "><b>createdAt</b>
+                                            <a href="#createdAt">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>createdAt:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="description"></a>
+                                        <span class="name "><b>description</b>
+                                            <a href="#description">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>description:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="imageUrl"></a>
+                                        <span class="name "><b>imageUrl</b>
+                                            <a href="#imageUrl">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>imageUrl:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="isActive"></a>
+                                        <span class="name "><b>isActive</b>
+                                            <a href="#isActive">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>isActive:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="name"></a>
+                                        <span class="name "><b>name</b>
+                                            <a href="#name">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ownProductCount"></a>
+                                        <span class="name "><b>ownProductCount</b>
+                                            <a href="#ownProductCount">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ownProductCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="parentId"></a>
+                                        <span class="name "><b>parentId</b>
+                                            <a href="#parentId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>parentId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="productCount"></a>
+                                        <span class="name "><b>productCount</b>
+                                            <a href="#productCount">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>productCount:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="slug"></a>
+                                        <span class="name "><b>slug</b>
+                                            <a href="#slug">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>slug:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sortOrder"></a>
+                                        <span class="name "><b>sortOrder</b>
+                                            <a href="#sortOrder">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sortOrder:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="subcategories"></a>
+                                        <span class="name "><b>subcategories</b>
+                                            <a href="#subcategories">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>subcategories:     <code>ProductCategory[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>ProductCategory[]</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="updatedAt"></a>
+                                        <span class="name "><b>updatedAt</b>
+                                            <a href="#updatedAt">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>updatedAt:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { Observable, from, catchError, of } from &#x27;rxjs&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+
+export interface ProductCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  imageUrl?: string;
+  parentId?: string;
+  isActive: boolean;
+  sortOrder: number;
+  productCount?: number;
+  ownProductCount?: number; // Products directly assigned to this category (not including subcategories)
+  createdAt: Date;
+  updatedAt: Date;
+  subcategories?: ProductCategory[];
+}
+
+export interface CategoryFilters {
+  parentId?: string;
+  isActive?: boolean;
+  limit?: number;
+  offset?: number;
+}
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class CategoriesService {
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  getCategories(filters?: CategoryFilters): Observable&lt;ProductCategory[]&gt; {
+    return from(this.fetchCategoriesFromSupabase(filters)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching categories:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getActiveCategories(): Observable&lt;ProductCategory[]&gt; {
+    return from(this.fetchActiveCategories()).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching active categories:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getCategoryById(id: string): Observable&lt;ProductCategory | null&gt; {
+    return from(this.fetchCategoryById(id)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching category:&#x27;, error);
+        return of(null);
+      }),
+    );
+  }
+
+  getCategoryBySlug(slug: string): Observable&lt;ProductCategory | null&gt; {
+    return from(this.fetchCategoryBySlug(slug)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching category by slug:&#x27;, error);
+        return of(null);
+      }),
+    );
+  }
+
+  getTopLevelCategories(): Observable&lt;ProductCategory[]&gt; {
+    return from(this.fetchTopLevelCategories()).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching top level categories:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getNestedCategories(): Observable&lt;ProductCategory[]&gt; {
+    return from(this.fetchNestedCategories()).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching nested categories:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getSubCategories(parentId: string): Observable&lt;ProductCategory[]&gt; {
+    return from(this.fetchSubCategories(parentId)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching subcategories:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  private async fetchCategoriesFromSupabase(
+    filters?: CategoryFilters,
+  ): Promise&lt;ProductCategory[]&gt; {
+    try {
+      const supabaseCategories &#x3D; await this.supabaseService.getCategories(
+        filters?.isActive ?? true,
+      );
+
+      let filteredCategories &#x3D; supabaseCategories;
+
+      if (filters?.parentId !&#x3D;&#x3D; undefined) {
+        filteredCategories &#x3D; filteredCategories.filter(
+          (category) &#x3D;&gt; category.parent_id &#x3D;&#x3D;&#x3D; filters.parentId,
+        );
+      }
+
+      if (filters?.limit) {
+        filteredCategories &#x3D; filteredCategories.slice(0, filters.limit);
+      }
+
+      return await this.convertSupabaseCategoriesToLocal(filteredCategories);
+    } catch (error) {
+      console.error(&#x27;Error in fetchCategoriesFromSupabase:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchActiveCategories(): Promise&lt;ProductCategory[]&gt; {
+    try {
+      const supabaseCategories &#x3D; await this.supabaseService.getCategories(true);
+      return await this.convertSupabaseCategoriesToLocal(supabaseCategories);
+    } catch (error) {
+      console.error(&#x27;Error in fetchActiveCategories:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchCategoryById(id: string): Promise&lt;ProductCategory | null&gt; {
+    try {
+      const category &#x3D; await this.supabaseService.getTableById(
+        &#x27;categories&#x27;,
+        id,
+      );
+      if (!category) return null;
+
+      return await this.convertSupabaseCategoryToLocal(category);
+    } catch (error) {
+      console.error(&#x27;Error in fetchCategoryById:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async fetchCategoryBySlug(
+    slug: string,
+  ): Promise&lt;ProductCategory | null&gt; {
+    try {
+      const categories &#x3D; await this.supabaseService.getCategories(true);
+      const category &#x3D; categories.find((c) &#x3D;&gt; c.slug &#x3D;&#x3D;&#x3D; slug);
+
+      if (!category) return null;
+
+      return await this.convertSupabaseCategoryToLocal(category);
+    } catch (error) {
+      console.error(&#x27;Error in fetchCategoryBySlug:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async fetchTopLevelCategories(): Promise&lt;ProductCategory[]&gt; {
+    try {
+      const supabaseCategories &#x3D; await this.supabaseService.getCategories(true);
+
+      const topLevelCategories &#x3D; supabaseCategories.filter(
+        (category) &#x3D;&gt; !category.parent_id &amp;&amp; category.is_active &#x3D;&#x3D;&#x3D; true,
+      );
+
+      const converted &#x3D;
+        await this.convertSupabaseCategoriesToLocal(topLevelCategories);
+
+      return converted;
+    } catch (error) {
+      console.error(&#x27;Error in fetchTopLevelCategories:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchNestedCategories(): Promise&lt;ProductCategory[]&gt; {
+    try {
+      const supabaseCategories &#x3D; await this.supabaseService.getCategories(true);
+
+      // Get all categories and organize them in hierarchical structure
+      const allCategories &#x3D;
+        await this.convertSupabaseCategoriesToLocal(supabaseCategories);
+
+      // Get top-level categories
+      const topLevelCategories &#x3D; allCategories.filter(
+        (category) &#x3D;&gt; !category.parentId,
+      );
+
+      // For each top-level category, find its subcategories and calculate hierarchical product counts
+      const nestedCategories &#x3D; await Promise.all(
+        topLevelCategories.map(async (parent) &#x3D;&gt; {
+          const subcategories &#x3D; allCategories.filter(
+            (category) &#x3D;&gt; category.parentId &#x3D;&#x3D;&#x3D; parent.id,
+          );
+
+          // For parent categories: show distinct count of products that would be returned when filtering
+          // This ensures display count matches exactly what users see when they click on the category
+          if (subcategories.length &gt; 0) {
+            // Get distinct count across parent + all subcategories (matches filtering logic)
+            const hierarchicalCount &#x3D; await this.getHierarchicalProductCount(
+              parent.id,
+              subcategories.map((sub) &#x3D;&gt; sub.id),
+            );
+
+            return {
+              ...parent,
+              productCount: hierarchicalCount, // Distinct count that matches filtering
+              ownProductCount: parent.productCount || 0, // Keep track of parent&#x27;s own products
+              subcategories: subcategories,
+            };
+          } else {
+            // For categories without subcategories, just use their own count
+            return {
+              ...parent,
+              productCount: parent.productCount || 0,
+              ownProductCount: parent.productCount || 0,
+              subcategories: undefined,
+            };
+          }
+        }),
+      );
+
+      return nestedCategories;
+    } catch (error) {
+      console.error(&#x27;Error in fetchNestedCategories:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async getHierarchicalProductCount(
+    parentCategoryId: string,
+    subcategoryIds: string[],
+  ): Promise&lt;number&gt; {
+    try {
+      // Get distinct product count for parent category + all its subcategories
+      // This matches the filtering logic used in the components
+      const { data: result, error } &#x3D; await this.supabaseService.client.rpc(
+        &#x27;get_hierarchical_product_count&#x27;,
+        {
+          parent_category_id: parentCategoryId,
+          subcategory_ids: subcategoryIds,
+        },
+      );
+
+      if (error) {
+        console.warn(
+          &#x27;Error getting hierarchical product count, falling back:&#x27;,
+          error,
+        );
+        return await this.getFallbackHierarchicalCount(
+          parentCategoryId,
+          subcategoryIds,
+        );
+      }
+
+      return result || 0;
+    } catch (error) {
+      console.warn(&#x27;Error in getHierarchicalProductCount:&#x27;, error);
+      return await this.getFallbackHierarchicalCount(
+        parentCategoryId,
+        subcategoryIds,
+      );
+    }
+  }
+
+  private async getFallbackHierarchicalCount(
+    parentCategoryId: string,
+    subcategoryIds: string[],
+  ): Promise&lt;number&gt; {
+    try {
+      const allCategoryIds &#x3D; [parentCategoryId, ...subcategoryIds];
+
+      // Get all products that match any of these categories (main or additional)
+      const { data: products, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;products&#x27;)
+        .select(
+          &#x60;
+                    id,
+                    category_id,
+                    product_categories!left(category_id)
+                &#x60;,
+        )
+        .eq(&#x27;is_active&#x27;, true);
+
+      if (error || !products) {
+        return 0;
+      }
+
+      // Use Set to ensure distinct product IDs
+      const distinctProductIds &#x3D; new Set&lt;string&gt;();
+
+      products.forEach((product: any) &#x3D;&gt; {
+        // Check if main category matches any target category
+        if (allCategoryIds.includes(product.category_id)) {
+          distinctProductIds.add(product.id);
+        }
+
+        // Check if any additional categories match
+        if (product.product_categories) {
+          const additionalCategories &#x3D; Array.isArray(product.product_categories)
+            ? product.product_categories
+            : [product.product_categories];
+
+          if (
+            additionalCategories.some((pc: any) &#x3D;&gt;
+              allCategoryIds.includes(pc.category_id),
+            )
+          ) {
+            distinctProductIds.add(product.id);
+          }
+        }
+      });
+
+      return distinctProductIds.size;
+    } catch (error) {
+      console.warn(&#x27;Error in getFallbackHierarchicalCount:&#x27;, error);
+      return 0;
+    }
+  }
+
+  private async fetchSubCategories(
+    parentId: string,
+  ): Promise&lt;ProductCategory[]&gt; {
+    try {
+      const supabaseCategories &#x3D; await this.supabaseService.getCategories(true);
+      const subCategories &#x3D; supabaseCategories.filter(
+        (category) &#x3D;&gt; category.parent_id &#x3D;&#x3D;&#x3D; parentId,
+      );
+
+      return await this.convertSupabaseCategoriesToLocal(subCategories);
+    } catch (error) {
+      console.error(&#x27;Error in fetchSubCategories:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async convertSupabaseCategoriesToLocal(
+    categories: any[],
+  ): Promise&lt;ProductCategory[]&gt; {
+    const convertedCategories: ProductCategory[] &#x3D; [];
+
+    // Get all product counts at once for better performance
+    const productCountsByCategory &#x3D; await this.getProductCountsForCategories(
+      categories.map((c) &#x3D;&gt; c.id),
+    );
+
+    for (const category of categories) {
+      const converted &#x3D; await this.convertSupabaseCategoryToLocal(
+        category,
+        productCountsByCategory[category.id] || 0,
+      );
+      if (converted) {
+        convertedCategories.push(converted);
+      }
+    }
+
+    return convertedCategories;
+  }
+
+  private async convertSupabaseCategoryToLocal(
+    category: any,
+    productCount: number &#x3D; 0,
+  ): Promise&lt;ProductCategory | null&gt; {
+    try {
+      const converted &#x3D; {
+        id: category.id,
+        name: category.name,
+        slug: category.slug,
+        description: category.description,
+        imageUrl:
+          category.image_url || this.getDefaultCategoryImage(category.slug),
+        parentId: category.parent_id,
+        isActive: category.is_active,
+        sortOrder: category.sort_order,
+        productCount,
+        createdAt: new Date(category.created_at),
+        updatedAt: new Date(category.updated_at),
+      };
+
+      return converted;
+    } catch (error) {
+      console.error(&#x27;Error converting category:&#x27;, category.name, error);
+      return null;
+    }
+  }
+
+  private async getProductCountsForCategories(
+    categoryIds: string[],
+  ): Promise&lt;{ [categoryId: string]: number }&gt; {
+    try {
+      const productCounts: { [categoryId: string]: number } &#x3D; {};
+
+      // Initialize all categories to 0
+      categoryIds.forEach((id) &#x3D;&gt; {
+        productCounts[id] &#x3D; 0;
+      });
+
+      // Use a single query with UNION to get DISTINCT product counts per category
+      // This avoids double-counting products that exist in both main category and additional categories
+      const { data: categoryProductCounts, error } &#x3D;
+        await this.supabaseService.client.rpc(
+          &#x27;get_distinct_product_counts_by_categories&#x27;,
+          {
+            category_ids: categoryIds,
+          },
+        );
+
+      if (error) {
+        console.warn(
+          &#x27;Error getting distinct product counts, falling back to legacy method:&#x27;,
+          error,
+        );
+        return await this.getFallbackProductCounts(categoryIds);
+      }
+
+      // Map the results
+      if (categoryProductCounts) {
+        categoryProductCounts.forEach((result: any) &#x3D;&gt; {
+          if (result.category_id &amp;&amp; categoryIds.includes(result.category_id)) {
+            productCounts[result.category_id] &#x3D; result.product_count || 0;
+          }
+        });
+      }
+
+      return productCounts;
+    } catch (error) {
+      console.error(&#x27;Error getting product counts for categories:&#x27;, error);
+      return await this.getFallbackProductCounts(categoryIds);
+    }
+  }
+
+  private async getFallbackProductCounts(
+    categoryIds: string[],
+  ): Promise&lt;{ [categoryId: string]: number }&gt; {
+    const productCounts: { [categoryId: string]: number } &#x3D; {};
+
+    // Initialize all categories to 0
+    categoryIds.forEach((id) &#x3D;&gt; {
+      productCounts[id] &#x3D; 0;
+    });
+
+    // For each category, get distinct product count using manual DISTINCT logic
+    for (const categoryId of categoryIds) {
+      try {
+        // Get all distinct product IDs for this category (both main and additional)
+        const { data: distinctProducts, error } &#x3D;
+          await this.supabaseService.client
+            .from(&#x27;products&#x27;)
+            .select(
+              &#x60;
+                        id,
+                        category_id,
+                        product_categories!left(category_id)
+                    &#x60;,
+            )
+            .eq(&#x27;is_active&#x27;, true)
+            .or(
+              &#x60;category_id.eq.${categoryId},product_categories.category_id.eq.${categoryId}&#x60;,
+            );
+
+        if (!error &amp;&amp; distinctProducts) {
+          // Use Set to ensure distinct product IDs
+          const distinctProductIds &#x3D; new Set&lt;string&gt;();
+
+          distinctProducts.forEach((product: any) &#x3D;&gt; {
+            // Add if main category matches
+            if (product.category_id &#x3D;&#x3D;&#x3D; categoryId) {
+              distinctProductIds.add(product.id);
+            }
+            // Add if additional category matches
+            if (product.product_categories) {
+              const additionalCategories &#x3D; Array.isArray(
+                product.product_categories,
+              )
+                ? product.product_categories
+                : [product.product_categories];
+
+              if (
+                additionalCategories.some(
+                  (pc: any) &#x3D;&gt; pc.category_id &#x3D;&#x3D;&#x3D; categoryId,
+                )
+              ) {
+                distinctProductIds.add(product.id);
+              }
+            }
+          });
+
+          productCounts[categoryId] &#x3D; distinctProductIds.size;
+        }
+      } catch (categoryError) {
+        console.warn(
+          &#x60;Error getting count for category ${categoryId}:&#x60;,
+          categoryError,
+        );
+        productCounts[categoryId] &#x3D; 0;
+      }
+    }
+
+    return productCounts;
+  }
+
+  private async getProductCountForCategory(
+    categoryId: string,
+  ): Promise&lt;number&gt; {
+    try {
+      const products &#x3D; await this.supabaseService.getProducts({ categoryId });
+      return products.length;
+    } catch (error) {
+      console.error(
+        &#x27;Error getting product count for category:&#x27;,
+        categoryId,
+        error,
+      );
+      return 0;
+    }
+  }
+
+  private getDefaultCategoryImage(slug: string): string {
+    const imageMap: { [key: string]: string } &#x3D; {
+      &#x27;solar-panels&#x27;:
+        &#x27;https://images.unsplash.com/photo-1509391366360-2e959784a276?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;,
+      inverters:
+        &#x27;https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;,
+      batteries:
+        &#x27;https://images.unsplash.com/photo-1581094794329-c8112a89af12?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;,
+      &#x27;mounting-systems&#x27;:
+        &#x27;https://images.unsplash.com/photo-1558002038-1055907df827?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;,
+      monitoring:
+        &#x27;https://images.unsplash.com/photo-1551288049-bebda4e38f71?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;,
+    };
+
+    return (
+      imageMap[slug] ||
+      &#x27;https://images.unsplash.com/photo-1509391366360-2e959784a276?w&#x3D;500&amp;h&#x3D;500&amp;fit&#x3D;crop&#x27;
+    );
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductCategory-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

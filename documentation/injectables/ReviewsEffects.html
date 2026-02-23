@@ -1,0 +1,1599 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ReviewsEffects</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/admin/reviews/store/reviews.effects.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#actions$" >actions$</a>
+                            </li>
+                            <li>
+                                <a href="#approveReview$" >approveReview$</a>
+                            </li>
+                            <li>
+                                <a href="#deleteReview$" >deleteReview$</a>
+                            </li>
+                            <li>
+                                <a href="#loadReview$" >loadReview$</a>
+                            </li>
+                            <li>
+                                <a href="#loadReviews$" >loadReviews$</a>
+                            </li>
+                            <li>
+                                <a href="#rejectReview$" >rejectReview$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toastService" >toastService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                            <li>
+                                <a href="#updateReview$" >updateReview$</a>
+                            </li>
+                            <li>
+                                <a href="#updateReviewStatus$" >updateReviewStatus$</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="actions$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>actions$</b></span>
+                        <a href="#actions$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Actions)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="approveReview$"></a>
+                    <span class="name">
+                        <span ><b>approveReview$</b></span>
+                        <a href="#approveReview$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.approveReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID and rating
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+            };
+          })
+          .then(({ reviewId, productId, rating }) &#x3D;&gt;
+            // Update the review to mark it as approved
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .update({ is_approved: true })
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating })),
+          )
+          .then(({ reviewId, productId, rating }) &#x3D;&gt;
+            // Get current product rating statistics
+            this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                return {
+                  reviewId,
+                  productId,
+                  rating,
+                  currentCount: product.rating_count || 0,
+                  currentAverage: product.rating_average || 0,
+                };
+              }),
+          )
+          .then(
+            ({ reviewId, productId, rating, currentCount, currentAverage }) &#x3D;&gt; {
+              // Calculate new average rating
+              const newCount &#x3D; currentCount + 1;
+              const newAverage &#x3D;
+                (currentAverage * currentCount + rating) / newCount;
+
+              // Update product rating statistics
+              return this.supabaseService.client
+                .from(&#x27;products&#x27;)
+                .update({
+                  rating_count: newCount,
+                  rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                })
+                .eq(&#x27;id&#x27;, productId)
+                .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+            },
+          ),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewApproved&#x27;),
+        );
+        return ReviewsActions.approveReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(
+          ReviewsActions.approveReviewFailure({ error: error.message }),
+        );
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteReview$"></a>
+                    <span class="name">
+                        <span ><b>deleteReview$</b></span>
+                        <a href="#deleteReview$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.deleteReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID, rating, and approval status
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating, is_approved&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+              wasApproved: review.is_approved,
+            };
+          })
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt;
+            // Delete the review
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .delete()
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating, wasApproved })),
+          )
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt; {
+            // Only update product statistics if the review was approved
+            if (!wasApproved) {
+              return { reviewId, productId, rating };
+            }
+
+            // Get current product rating statistics
+            return this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                const currentCount &#x3D; product.rating_count || 0;
+                const currentAverage &#x3D; product.rating_average || 0;
+
+                // Calculate new average rating (remove this review&#x27;s contribution)
+                const newCount &#x3D; Math.max(0, currentCount - 1);
+                let newAverage &#x3D; 0;
+
+                if (newCount &gt; 0) {
+                  newAverage &#x3D;
+                    (currentAverage * currentCount - rating) / newCount;
+                }
+
+                // Update product rating statistics
+                return this.supabaseService.client
+                  .from(&#x27;products&#x27;)
+                  .update({
+                    rating_count: newCount,
+                    rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                  })
+                  .eq(&#x27;id&#x27;, productId)
+                  .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+              });
+          }),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewDeleted&#x27;),
+        );
+        return ReviewsActions.deleteReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.deleteReviewFailure({ error: error.message }));
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="406" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:406</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadReview$"></a>
+                    <span class="name">
+                        <span ><b>loadReview$</b></span>
+                        <a href="#loadReview$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.loadReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(
+            &#x60;
+                        *,
+                        product:products(
+                            name,
+                            sku
+                        )
+                    &#x60;,
+          )
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            // Map database fields to Review model
+            const mappedReview: Review &#x3D; {
+              id: review.id,
+              userId: review.user_id,
+              productId: review.product_id,
+              orderId: review.order_id,
+              orderItemId: review.order_item_id,
+              rating: review.rating,
+              title: review.title || &#x27;&#x27;,
+              comment: review.comment || &#x27;&#x27;,
+              isVerifiedPurchase: review.is_verified_purchase,
+              isApproved: review.is_approved,
+              adminResponse: review.admin_response,
+              helpfulCount: review.helpful_count || 0,
+              reportedCount: review.reported_count || 0,
+              status: review.status,
+              createdAt: review.created_at,
+              updatedAt: review.updated_at,
+              user: {
+                firstName: &#x27;User&#x27;,
+                lastName: review.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+              },
+              product: {
+                name: review.product?.name || &#x27;Unknown Product&#x27;,
+              },
+            };
+
+            return mappedReview;
+          }),
+      ),
+      map((review: Review) &#x3D;&gt; ReviewsActions.loadReviewSuccess({ review })),
+      catchError((error: any) &#x3D;&gt;
+        of(ReviewsActions.loadReviewFailure({ error: error.message })),
+      ),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadReviews$"></a>
+                    <span class="name">
+                        <span ><b>loadReviews$</b></span>
+                        <a href="#loadReviews$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.loadReviews),
+      switchMap(() &#x3D;&gt; {
+        return this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(
+            &#x60;
+                        *,
+                        product:products(
+                            name,
+                            sku
+                        )
+                    &#x60;,
+          )
+          .order(&#x27;created_at&#x27;, { ascending: false })
+          .then(({ data: reviews, error }) &#x3D;&gt; {
+            if (error) {
+              throw error;
+            }
+
+            // Map database fields to Review model
+            const mappedReviews: Review[] &#x3D; (reviews || []).map(
+              (review: any) &#x3D;&gt; {
+                return {
+                  id: review.id,
+                  userId: review.user_id,
+                  productId: review.product_id,
+                  orderId: review.order_id,
+                  orderItemId: review.order_item_id,
+                  rating: review.rating,
+                  title: review.title || &#x27;&#x27;,
+                  comment: review.comment || &#x27;&#x27;,
+                  isVerifiedPurchase: review.is_verified_purchase,
+                  isApproved: review.is_approved,
+                  adminResponse: review.admin_response,
+                  helpfulCount: review.helpful_count || 0,
+                  reportedCount: review.reported_count || 0,
+                  status: review.status,
+                  createdAt: review.created_at,
+                  updatedAt: review.updated_at,
+                  user: {
+                    firstName: &#x27;User&#x27;,
+                    lastName: review.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+                  },
+                  product: {
+                    name: review.product?.name || &#x27;Unknown Product&#x27;,
+                  },
+                };
+              },
+            );
+            return mappedReviews;
+          });
+      }),
+      map((reviews: Review[]) &#x3D;&gt; {
+        return ReviewsActions.loadReviewsSuccess({ reviews });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        return of(ReviewsActions.loadReviewsFailure({ error: error.message }));
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rejectReview$"></a>
+                    <span class="name">
+                        <span ><b>rejectReview$</b></span>
+                        <a href="#rejectReview$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.rejectReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID, rating, and current approval status
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating, is_approved&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+              wasApproved: review.is_approved,
+            };
+          })
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt;
+            // Update the review to mark it as not approved
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .update({ is_approved: false })
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating, wasApproved })),
+          )
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt; {
+            // Only update product statistics if the review was previously approved
+            if (!wasApproved) {
+              return { reviewId, productId, rating };
+            }
+
+            // Get current product rating statistics
+            return this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                const currentCount &#x3D; product.rating_count || 0;
+                const currentAverage &#x3D; product.rating_average || 0;
+
+                // Calculate new average rating (remove this review&#x27;s contribution)
+                const newCount &#x3D; Math.max(0, currentCount - 1);
+                let newAverage &#x3D; 0;
+
+                if (newCount &gt; 0) {
+                  newAverage &#x3D;
+                    (currentAverage * currentCount - rating) / newCount;
+                }
+
+                // Update product rating statistics
+                return this.supabaseService.client
+                  .from(&#x27;products&#x27;)
+                  .update({
+                    rating_count: newCount,
+                    rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                  })
+                  .eq(&#x27;id&#x27;, productId)
+                  .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+              });
+          }),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewRejected&#x27;),
+        );
+        return ReviewsActions.rejectReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.rejectReviewFailure({ error: error.message }));
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="252" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:252</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toastService</b></span>
+                        <a href="#toastService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ToastService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateReview$"></a>
+                    <span class="name">
+                        <span ><b>updateReview$</b></span>
+                        <a href="#updateReview$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.updateReview),
+      switchMap(({ reviewId, review }) &#x3D;&gt; {
+        // Map Review model fields back to database fields
+        const updateData: any &#x3D; {};
+        if (review.rating !&#x3D;&#x3D; undefined) updateData.rating &#x3D; review.rating;
+        if (review.title !&#x3D;&#x3D; undefined) updateData.title &#x3D; review.title;
+        if (review.comment !&#x3D;&#x3D; undefined) updateData.comment &#x3D; review.comment;
+        if (review.adminResponse !&#x3D;&#x3D; undefined)
+          updateData.admin_response &#x3D; review.adminResponse;
+        updateData.updated_at &#x3D; new Date().toISOString();
+
+        return this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .update(updateData)
+          .eq(&#x27;id&#x27;, reviewId)
+          .select()
+          .single()
+          .then(({ data: updatedReview, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!updatedReview) throw new Error(&#x27;Review not found&#x27;);
+
+            // Map database fields back to Review model
+            const mappedReview: Review &#x3D; {
+              id: updatedReview.id,
+              userId: updatedReview.user_id,
+              productId: updatedReview.product_id,
+              orderId: updatedReview.order_id,
+              orderItemId: updatedReview.order_item_id,
+              rating: updatedReview.rating,
+              title: updatedReview.title || &#x27;&#x27;,
+              comment: updatedReview.comment || &#x27;&#x27;,
+              isVerifiedPurchase: updatedReview.is_verified_purchase,
+              isApproved: updatedReview.is_approved,
+              adminResponse: updatedReview.admin_response,
+              helpfulCount: updatedReview.helpful_count || 0,
+              reportedCount: updatedReview.reported_count || 0,
+              status: updatedReview.status,
+              createdAt: updatedReview.created_at,
+              updatedAt: updatedReview.updated_at,
+              user: {
+                firstName: &#x27;User&#x27;,
+                lastName: updatedReview.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+              },
+              product: {
+                name: &#x27;Unknown Product&#x27;, // We don&#x27;t have product data in this query
+              },
+            };
+
+            return mappedReview;
+          });
+      }),
+      map((review: Review) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewUpdated&#x27;),
+        );
+        return ReviewsActions.updateReviewSuccess({ review });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.updateReviewFailure({ error: error.message }));
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:337</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateReviewStatus$"></a>
+                    <span class="name">
+                        <span ><b>updateReviewStatus$</b></span>
+                        <a href="#updateReviewStatus$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.updateReviewStatus),
+      switchMap(({ reviewId, status }) &#x3D;&gt;
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .update({ status: status as any })
+          .eq(&#x27;id&#x27;, reviewId)
+          .then(() &#x3D;&gt; ({ reviewId, status })),
+      ),
+      map(({ reviewId, status }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewUpdated&#x27;),
+        );
+        return ReviewsActions.updateReviewStatusSuccess({ reviewId, status });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(
+          ReviewsActions.updateReviewStatusFailure({ error: error.message }),
+        );
+      }),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/features/admin/reviews/store/reviews.effects.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { Actions, createEffect, ofType } from &#x27;@ngrx/effects&#x27;;
+import { of } from &#x27;rxjs&#x27;;
+import { map, catchError, switchMap } from &#x27;rxjs/operators&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { ToastService } from &#x27;../../../../shared/services/toast.service&#x27;;
+import { TranslationService } from &#x27;../../../../shared/services/translation.service&#x27;;
+import * as ReviewsActions from &#x27;./reviews.actions&#x27;;
+import { Review } from &#x27;../../../../shared/models/review.model&#x27;;
+
+@Injectable()
+export class ReviewsEffects {
+  private actions$ &#x3D; inject(Actions);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private toastService &#x3D; inject(ToastService);
+  private translationService &#x3D; inject(TranslationService);
+
+  loadReviews$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.loadReviews),
+      switchMap(() &#x3D;&gt; {
+        return this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(
+            &#x60;
+                        *,
+                        product:products(
+                            name,
+                            sku
+                        )
+                    &#x60;,
+          )
+          .order(&#x27;created_at&#x27;, { ascending: false })
+          .then(({ data: reviews, error }) &#x3D;&gt; {
+            if (error) {
+              throw error;
+            }
+
+            // Map database fields to Review model
+            const mappedReviews: Review[] &#x3D; (reviews || []).map(
+              (review: any) &#x3D;&gt; {
+                return {
+                  id: review.id,
+                  userId: review.user_id,
+                  productId: review.product_id,
+                  orderId: review.order_id,
+                  orderItemId: review.order_item_id,
+                  rating: review.rating,
+                  title: review.title || &#x27;&#x27;,
+                  comment: review.comment || &#x27;&#x27;,
+                  isVerifiedPurchase: review.is_verified_purchase,
+                  isApproved: review.is_approved,
+                  adminResponse: review.admin_response,
+                  helpfulCount: review.helpful_count || 0,
+                  reportedCount: review.reported_count || 0,
+                  status: review.status,
+                  createdAt: review.created_at,
+                  updatedAt: review.updated_at,
+                  user: {
+                    firstName: &#x27;User&#x27;,
+                    lastName: review.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+                  },
+                  product: {
+                    name: review.product?.name || &#x27;Unknown Product&#x27;,
+                  },
+                };
+              },
+            );
+            return mappedReviews;
+          });
+      }),
+      map((reviews: Review[]) &#x3D;&gt; {
+        return ReviewsActions.loadReviewsSuccess({ reviews });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        return of(ReviewsActions.loadReviewsFailure({ error: error.message }));
+      }),
+    ),
+  );
+
+  loadReview$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.loadReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(
+            &#x60;
+                        *,
+                        product:products(
+                            name,
+                            sku
+                        )
+                    &#x60;,
+          )
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            // Map database fields to Review model
+            const mappedReview: Review &#x3D; {
+              id: review.id,
+              userId: review.user_id,
+              productId: review.product_id,
+              orderId: review.order_id,
+              orderItemId: review.order_item_id,
+              rating: review.rating,
+              title: review.title || &#x27;&#x27;,
+              comment: review.comment || &#x27;&#x27;,
+              isVerifiedPurchase: review.is_verified_purchase,
+              isApproved: review.is_approved,
+              adminResponse: review.admin_response,
+              helpfulCount: review.helpful_count || 0,
+              reportedCount: review.reported_count || 0,
+              status: review.status,
+              createdAt: review.created_at,
+              updatedAt: review.updated_at,
+              user: {
+                firstName: &#x27;User&#x27;,
+                lastName: review.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+              },
+              product: {
+                name: review.product?.name || &#x27;Unknown Product&#x27;,
+              },
+            };
+
+            return mappedReview;
+          }),
+      ),
+      map((review: Review) &#x3D;&gt; ReviewsActions.loadReviewSuccess({ review })),
+      catchError((error: any) &#x3D;&gt;
+        of(ReviewsActions.loadReviewFailure({ error: error.message })),
+      ),
+    ),
+  );
+
+  updateReviewStatus$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.updateReviewStatus),
+      switchMap(({ reviewId, status }) &#x3D;&gt;
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .update({ status: status as any })
+          .eq(&#x27;id&#x27;, reviewId)
+          .then(() &#x3D;&gt; ({ reviewId, status })),
+      ),
+      map(({ reviewId, status }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewUpdated&#x27;),
+        );
+        return ReviewsActions.updateReviewStatusSuccess({ reviewId, status });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(
+          ReviewsActions.updateReviewStatusFailure({ error: error.message }),
+        );
+      }),
+    ),
+  );
+
+  approveReview$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.approveReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID and rating
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+            };
+          })
+          .then(({ reviewId, productId, rating }) &#x3D;&gt;
+            // Update the review to mark it as approved
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .update({ is_approved: true })
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating })),
+          )
+          .then(({ reviewId, productId, rating }) &#x3D;&gt;
+            // Get current product rating statistics
+            this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                return {
+                  reviewId,
+                  productId,
+                  rating,
+                  currentCount: product.rating_count || 0,
+                  currentAverage: product.rating_average || 0,
+                };
+              }),
+          )
+          .then(
+            ({ reviewId, productId, rating, currentCount, currentAverage }) &#x3D;&gt; {
+              // Calculate new average rating
+              const newCount &#x3D; currentCount + 1;
+              const newAverage &#x3D;
+                (currentAverage * currentCount + rating) / newCount;
+
+              // Update product rating statistics
+              return this.supabaseService.client
+                .from(&#x27;products&#x27;)
+                .update({
+                  rating_count: newCount,
+                  rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                })
+                .eq(&#x27;id&#x27;, productId)
+                .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+            },
+          ),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewApproved&#x27;),
+        );
+        return ReviewsActions.approveReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(
+          ReviewsActions.approveReviewFailure({ error: error.message }),
+        );
+      }),
+    ),
+  );
+
+  rejectReview$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.rejectReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID, rating, and current approval status
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating, is_approved&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+              wasApproved: review.is_approved,
+            };
+          })
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt;
+            // Update the review to mark it as not approved
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .update({ is_approved: false })
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating, wasApproved })),
+          )
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt; {
+            // Only update product statistics if the review was previously approved
+            if (!wasApproved) {
+              return { reviewId, productId, rating };
+            }
+
+            // Get current product rating statistics
+            return this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                const currentCount &#x3D; product.rating_count || 0;
+                const currentAverage &#x3D; product.rating_average || 0;
+
+                // Calculate new average rating (remove this review&#x27;s contribution)
+                const newCount &#x3D; Math.max(0, currentCount - 1);
+                let newAverage &#x3D; 0;
+
+                if (newCount &gt; 0) {
+                  newAverage &#x3D;
+                    (currentAverage * currentCount - rating) / newCount;
+                }
+
+                // Update product rating statistics
+                return this.supabaseService.client
+                  .from(&#x27;products&#x27;)
+                  .update({
+                    rating_count: newCount,
+                    rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                  })
+                  .eq(&#x27;id&#x27;, productId)
+                  .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+              });
+          }),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewRejected&#x27;),
+        );
+        return ReviewsActions.rejectReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.rejectReviewFailure({ error: error.message }));
+      }),
+    ),
+  );
+
+  updateReview$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.updateReview),
+      switchMap(({ reviewId, review }) &#x3D;&gt; {
+        // Map Review model fields back to database fields
+        const updateData: any &#x3D; {};
+        if (review.rating !&#x3D;&#x3D; undefined) updateData.rating &#x3D; review.rating;
+        if (review.title !&#x3D;&#x3D; undefined) updateData.title &#x3D; review.title;
+        if (review.comment !&#x3D;&#x3D; undefined) updateData.comment &#x3D; review.comment;
+        if (review.adminResponse !&#x3D;&#x3D; undefined)
+          updateData.admin_response &#x3D; review.adminResponse;
+        updateData.updated_at &#x3D; new Date().toISOString();
+
+        return this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .update(updateData)
+          .eq(&#x27;id&#x27;, reviewId)
+          .select()
+          .single()
+          .then(({ data: updatedReview, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!updatedReview) throw new Error(&#x27;Review not found&#x27;);
+
+            // Map database fields back to Review model
+            const mappedReview: Review &#x3D; {
+              id: updatedReview.id,
+              userId: updatedReview.user_id,
+              productId: updatedReview.product_id,
+              orderId: updatedReview.order_id,
+              orderItemId: updatedReview.order_item_id,
+              rating: updatedReview.rating,
+              title: updatedReview.title || &#x27;&#x27;,
+              comment: updatedReview.comment || &#x27;&#x27;,
+              isVerifiedPurchase: updatedReview.is_verified_purchase,
+              isApproved: updatedReview.is_approved,
+              adminResponse: updatedReview.admin_response,
+              helpfulCount: updatedReview.helpful_count || 0,
+              reportedCount: updatedReview.reported_count || 0,
+              status: updatedReview.status,
+              createdAt: updatedReview.created_at,
+              updatedAt: updatedReview.updated_at,
+              user: {
+                firstName: &#x27;User&#x27;,
+                lastName: updatedReview.user_id?.substring(0, 8) || &#x27;Unknown&#x27;,
+              },
+              product: {
+                name: &#x27;Unknown Product&#x27;, // We don&#x27;t have product data in this query
+              },
+            };
+
+            return mappedReview;
+          });
+      }),
+      map((review: Review) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewUpdated&#x27;),
+        );
+        return ReviewsActions.updateReviewSuccess({ review });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.updateReviewFailure({ error: error.message }));
+      }),
+    ),
+  );
+
+  deleteReview$ &#x3D; createEffect(() &#x3D;&gt;
+    this.actions$.pipe(
+      ofType(ReviewsActions.deleteReview),
+      switchMap(({ reviewId }) &#x3D;&gt;
+        // First, get the review data to find product ID, rating, and approval status
+        this.supabaseService.client
+          .from(&#x27;reviews&#x27;)
+          .select(&#x27;product_id, rating, is_approved&#x27;)
+          .eq(&#x27;id&#x27;, reviewId)
+          .single()
+          .then(({ data: review, error }) &#x3D;&gt; {
+            if (error) throw error;
+            if (!review) throw new Error(&#x27;Review not found&#x27;);
+
+            return {
+              reviewId,
+              productId: review.product_id,
+              rating: review.rating,
+              wasApproved: review.is_approved,
+            };
+          })
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt;
+            // Delete the review
+            this.supabaseService.client
+              .from(&#x27;reviews&#x27;)
+              .delete()
+              .eq(&#x27;id&#x27;, reviewId)
+              .then(() &#x3D;&gt; ({ reviewId, productId, rating, wasApproved })),
+          )
+          .then(({ reviewId, productId, rating, wasApproved }) &#x3D;&gt; {
+            // Only update product statistics if the review was approved
+            if (!wasApproved) {
+              return { reviewId, productId, rating };
+            }
+
+            // Get current product rating statistics
+            return this.supabaseService.client
+              .from(&#x27;products&#x27;)
+              .select(&#x27;rating_count, rating_average&#x27;)
+              .eq(&#x27;id&#x27;, productId)
+              .single()
+              .then(({ data: product, error }) &#x3D;&gt; {
+                if (error) throw error;
+                if (!product) throw new Error(&#x27;Product not found&#x27;);
+
+                const currentCount &#x3D; product.rating_count || 0;
+                const currentAverage &#x3D; product.rating_average || 0;
+
+                // Calculate new average rating (remove this review&#x27;s contribution)
+                const newCount &#x3D; Math.max(0, currentCount - 1);
+                let newAverage &#x3D; 0;
+
+                if (newCount &gt; 0) {
+                  newAverage &#x3D;
+                    (currentAverage * currentCount - rating) / newCount;
+                }
+
+                // Update product rating statistics
+                return this.supabaseService.client
+                  .from(&#x27;products&#x27;)
+                  .update({
+                    rating_count: newCount,
+                    rating_average: Math.round(newAverage * 10) / 10, // Round to 1 decimal place
+                  })
+                  .eq(&#x27;id&#x27;, productId)
+                  .then(() &#x3D;&gt; ({ reviewId, productId, rating }));
+              });
+          }),
+      ),
+      map(({ reviewId }) &#x3D;&gt; {
+        this.toastService.showSuccess(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewDeleted&#x27;),
+        );
+        return ReviewsActions.deleteReviewSuccess({ reviewId });
+      }),
+      catchError((error: any) &#x3D;&gt; {
+        this.toastService.showError(
+          this.translationService.translate(&#x27;admin.reviewsForm.reviewError&#x27;),
+          error.message,
+        );
+        return of(ReviewsActions.deleteReviewFailure({ error: error.message }));
+      }),
+    ),
+  );
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ReviewsEffects.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

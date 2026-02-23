@@ -1,0 +1,1502 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >OffersService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/features/b2c/offers/services/offers.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#calculateOfferPricing" >calculateOfferPricing</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#convertSupabaseOffersToLocal" >convertSupabaseOffersToLocal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#convertSupabaseOfferToLocal" >convertSupabaseOfferToLocal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchActiveOffers" >fetchActiveOffers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchFeaturedOffers" >fetchFeaturedOffers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchOfferById" >fetchOfferById</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#fetchOffersFromSupabase" >fetchOffersFromSupabase</a>
+                            </li>
+                            <li>
+                                <a href="#getActiveOffers" >getActiveOffers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getDefaultOfferImage" >getDefaultOfferImage</a>
+                            </li>
+                            <li>
+                                <a href="#getFeaturedOffers" >getFeaturedOffers</a>
+                            </li>
+                            <li>
+                                <a href="#getOfferById" >getOfferById</a>
+                            </li>
+                            <li>
+                                <a href="#getOffers" >getOffers</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateOfferPricing"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>calculateOfferPricing</b></span>
+                        <a href="#calculateOfferPricing"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>calculateOfferPricing(offer: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertSupabaseOffersToLocal"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>convertSupabaseOffersToLocal</b></span>
+                        <a href="#convertSupabaseOffersToLocal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>convertSupabaseOffersToLocal(offers: any[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offers</td>
+                                            <td>
+                                                        <code>any[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="convertSupabaseOfferToLocal"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>convertSupabaseOfferToLocal</b></span>
+                        <a href="#convertSupabaseOfferToLocal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>convertSupabaseOfferToLocal(offer: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offer</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchActiveOffers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchActiveOffers</b></span>
+                        <a href="#fetchActiveOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchActiveOffers(limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>limit</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchFeaturedOffers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchFeaturedOffers</b></span>
+                        <a href="#fetchFeaturedOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchFeaturedOffers(limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>limit</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchOfferById"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchOfferById</b></span>
+                        <a href="#fetchOfferById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchOfferById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchOffersFromSupabase"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>fetchOffersFromSupabase</b></span>
+                        <a href="#fetchOffersFromSupabase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchOffersFromSupabase(filters?: <a href="../interfaces/OfferFilters.html" target="_self">OfferFilters</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filters</td>
+                                            <td>
+                                                            <code><a href="../interfaces/OfferFilters.html" target="_self" >OfferFilters</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Promise&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActiveOffers"></a>
+                    <span class="name">
+                        <span ><b>getActiveOffers</b></span>
+                        <a href="#getActiveOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getActiveOffers(limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>limit</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Observable&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDefaultOfferImage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getDefaultOfferImage</b></span>
+                        <a href="#getDefaultOfferImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDefaultOfferImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:331</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFeaturedOffers"></a>
+                    <span class="name">
+                        <span ><b>getFeaturedOffers</b></span>
+                        <a href="#getFeaturedOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFeaturedOffers(limit?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>limit</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Observable&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOfferById"></a>
+                    <span class="name">
+                        <span ><b>getOfferById</b></span>
+                        <a href="#getOfferById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getOfferById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Observable&lt;Offer | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOffers"></a>
+                    <span class="name">
+                        <span ><b>getOffers</b></span>
+                        <a href="#getOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getOffers(filters?: <a href="../interfaces/OfferFilters.html" target="_self">OfferFilters</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="11"
+                                    class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:11</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filters</td>
+                                            <td>
+                                                            <code><a href="../interfaces/OfferFilters.html" target="_self" >OfferFilters</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Offer.html" target="_self" >Observable&lt;Offer[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/features/b2c/offers/services/offers.service.ts:9</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
+import { Observable, from, catchError, of } from &#x27;rxjs&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import { OfferFilters, Offer } from &#x27;../../../../shared/models/offer.model&#x27;;
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class OffersService {
+  private supabaseService &#x3D; inject(SupabaseService);
+
+  getOffers(filters?: OfferFilters): Observable&lt;Offer[]&gt; {
+    return from(this.fetchOffersFromSupabase(filters)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching offers:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getActiveOffers(limit?: number): Observable&lt;Offer[]&gt; {
+    return from(this.fetchActiveOffers(limit)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching active offers:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getFeaturedOffers(limit?: number): Observable&lt;Offer[]&gt; {
+    return from(this.fetchFeaturedOffers(limit)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching featured offers:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  getOfferById(id: string): Observable&lt;Offer | null&gt; {
+    return from(this.fetchOfferById(id)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching offer:&#x27;, error);
+        return of(null);
+      }),
+    );
+  }
+
+  private async fetchOffersFromSupabase(
+    filters?: OfferFilters,
+  ): Promise&lt;Offer[]&gt; {
+    try {
+      const supabaseOffers &#x3D; await this.supabaseService.getActiveOffers();
+
+      let filteredOffers &#x3D; supabaseOffers.filter((offer) &#x3D;&gt; !offer.is_b2b); // Only B2C offers
+
+      if (filters?.featured !&#x3D;&#x3D; undefined) {
+        filteredOffers &#x3D; filteredOffers.filter(
+          (offer) &#x3D;&gt; offer.featured &#x3D;&#x3D;&#x3D; filters.featured,
+        );
+      }
+
+      if (filters?.limit) {
+        filteredOffers &#x3D; filteredOffers.slice(0, filters.limit);
+      }
+
+      return await this.convertSupabaseOffersToLocal(filteredOffers);
+    } catch (error) {
+      console.error(&#x27;Error in fetchOffersFromSupabase:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchActiveOffers(limit?: number): Promise&lt;Offer[]&gt; {
+    try {
+      const supabaseOffers &#x3D; await this.supabaseService.getActiveOffers();
+
+      let offers &#x3D; supabaseOffers.filter((offer) &#x3D;&gt; !offer.is_b2b); // Only B2C offers
+      if (limit) {
+        offers &#x3D; offers.slice(0, limit);
+      }
+
+      return await this.convertSupabaseOffersToLocal(offers);
+    } catch (error) {
+      console.error(&#x27;Error in fetchActiveOffers:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchFeaturedOffers(limit?: number): Promise&lt;Offer[]&gt; {
+    try {
+      const supabaseOffers &#x3D; await this.supabaseService.getActiveOffers();
+
+      let offers &#x3D; supabaseOffers.filter(
+        (offer) &#x3D;&gt; !offer.is_b2b &amp;&amp; offer.featured,
+      ); // Only B2C featured offers
+      if (limit) {
+        offers &#x3D; offers.slice(0, limit);
+      }
+
+      return await this.convertSupabaseOffersToLocal(offers);
+    } catch (error) {
+      console.error(&#x27;Error in fetchFeaturedOffers:&#x27;, error);
+      return [];
+    }
+  }
+
+  private async fetchOfferById(id: string): Promise&lt;Offer | null&gt; {
+    try {
+      const offer &#x3D; await this.supabaseService.getTableById(&#x27;offers&#x27;, id);
+      if (!offer || offer.is_b2b) return null; // Only return B2C offers
+
+      return await this.convertSupabaseOfferToLocal(offer);
+    } catch (error) {
+      console.error(&#x27;Error in fetchOfferById:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async convertSupabaseOffersToLocal(offers: any[]): Promise&lt;Offer[]&gt; {
+    const offerPromises &#x3D; offers.map((offer) &#x3D;&gt;
+      this.convertSupabaseOfferToLocal(offer),
+    );
+    const convertedOffers &#x3D; await Promise.all(offerPromises);
+    return convertedOffers.filter(Boolean) as Offer[];
+  }
+
+  private async convertSupabaseOfferToLocal(offer: any): Promise&lt;Offer | null&gt; {
+    try {
+      // Get offer products to calculate real pricing
+      const { originalPrice, discountedPrice } &#x3D;
+        await this.calculateOfferPricing(offer);
+      let discountPercentage &#x3D; 0;
+
+      console.log(&#x27;Offers Service - Converting offer:&#x27;, {
+        offerId: offer.id,
+        title: offer.title,
+        discount_type: offer.discount_type,
+        discount_value: offer.discount_value,
+        calculatedOriginal: originalPrice,
+        calculatedDiscounted: discountedPrice,
+        difference: originalPrice - discountedPrice,
+      });
+
+      if (originalPrice &gt; 0) {
+        if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;) {
+          discountPercentage &#x3D; offer.discount_value;
+        } else if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;) {
+          discountPercentage &#x3D; Math.round(
+            ((originalPrice - discountedPrice) / originalPrice) * 100,
+          );
+        }
+      }
+
+      return {
+        id: offer.id,
+        title: offer.title,
+        originalPrice: Math.round(originalPrice * 100) / 100,
+        discountedPrice: Math.round(discountedPrice * 100) / 100,
+        discountPercentage: Math.round(discountPercentage),
+        imageUrl: offer.image_url || this.getDefaultOfferImage(),
+        description: offer.description,
+        shortDescription: offer.short_description,
+        status: offer.status,
+        couponCode: offer.code,
+        startDate: offer.start_date,
+        endDate: offer.end_date,
+        featured: offer.featured,
+        discount_type: offer.discount_type,
+        discount_value: offer.discount_value,
+      };
+    } catch (error) {
+      console.error(&#x27;Error converting offer:&#x27;, error);
+      return null;
+    }
+  }
+
+  private async calculateOfferPricing(
+    offer: any,
+  ): Promise&lt;{ originalPrice: number; discountedPrice: number }&gt; {
+    try {
+      // Get products associated with this offer
+      const { data: offerProducts, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;offer_products&#x27;)
+        .select(
+          &#x60;
+                    *,
+                    products (
+                        id,
+                        name,
+                        price
+                    )
+                &#x60;,
+        )
+        .eq(&#x27;offer_id&#x27;, offer.id);
+
+      if (error || !offerProducts || offerProducts.length &#x3D;&#x3D;&#x3D; 0) {
+        // If no products, use placeholder values for general offers
+        const originalPrice &#x3D; 100;
+        let discountedPrice &#x3D; originalPrice;
+
+        console.log(
+          &#x27;calculateOfferPricing - No products, using placeholder logic:&#x27;,
+          {
+            offerId: offer.id,
+            discount_type: offer.discount_type,
+            discount_value: offer.discount_value,
+            originalPrice,
+          },
+        );
+
+        if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;) {
+          discountedPrice &#x3D; originalPrice * (1 - offer.discount_value / 100);
+          console.log(
+            &#x27;Applied percentage discount to placeholder:&#x27;,
+            discountedPrice,
+          );
+        } else if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;) {
+          discountedPrice &#x3D; Math.max(0, originalPrice - offer.discount_value);
+          console.log(
+            &#x27;Applied fixed amount discount to placeholder:&#x27;,
+            discountedPrice,
+          );
+        } else {
+          console.log(
+            &#x27;NO DISCOUNT APPLIED to placeholder - discount_type not recognized:&#x27;,
+            offer.discount_type,
+          );
+        }
+
+        return { originalPrice, discountedPrice };
+      }
+
+      // Calculate pricing based on specific product discounts or general offer discount
+      let totalOriginalPrice &#x3D; 0;
+      let totalDiscountAmount &#x3D; 0;
+
+      console.log(&#x27;calculateOfferPricing - analyzing offer products:&#x27;, {
+        offerId: offer.id,
+        offerProductsCount: offerProducts.length,
+        products: offerProducts.map((op) &#x3D;&gt; ({
+          productId: op.product_id,
+          productPrice: op.products?.price,
+          discountType: op.discount_type,
+          discountAmount: op.discount_amount,
+          discountPercentage: op.discount_percentage,
+        })),
+      });
+
+      // Calculate original price and total discount
+      for (const offerProduct of offerProducts) {
+        const productPrice &#x3D; offerProduct.products?.price || 0;
+        totalOriginalPrice +&#x3D; productPrice;
+
+        // Check if this product has individual discount settings
+        const hasIndividualDiscount &#x3D;
+          offerProduct.discount_amount &gt; 0 ||
+          offerProduct.discount_percentage &gt; 0;
+
+        if (hasIndividualDiscount) {
+          // Use individual product discount
+          if (
+            offerProduct.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27; &amp;&amp;
+            offerProduct.discount_amount &gt; 0
+          ) {
+            totalDiscountAmount +&#x3D; offerProduct.discount_amount;
+            console.log(
+              &#x60;Product ${offerProduct.product_id} has individual fixed discount: €${offerProduct.discount_amount}&#x60;,
+            );
+          } else if (
+            offerProduct.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; &amp;&amp;
+            offerProduct.discount_percentage &gt; 0
+          ) {
+            const productDiscount &#x3D;
+              productPrice * (offerProduct.discount_percentage / 100);
+            totalDiscountAmount +&#x3D; productDiscount;
+            console.log(
+              &#x60;Product ${offerProduct.product_id} has individual percentage discount: ${offerProduct.discount_percentage}% &#x3D; €${productDiscount}&#x60;,
+            );
+          }
+        } else {
+          // Use general offer discount
+          if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;) {
+            const productDiscount &#x3D; productPrice * (offer.discount_value / 100);
+            totalDiscountAmount +&#x3D; productDiscount;
+            console.log(
+              &#x60;Product ${offerProduct.product_id} uses general percentage discount: ${offer.discount_value}% &#x3D; €${productDiscount}&#x60;,
+            );
+          } else if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27;) {
+            // For fixed amount, divide equally among products (or could be applied differently based on business logic)
+            const discountPerProduct &#x3D;
+              offer.discount_value / offerProducts.length;
+            totalDiscountAmount +&#x3D; discountPerProduct;
+            console.log(
+              &#x60;Product ${offerProduct.product_id} uses general fixed discount: €${discountPerProduct} (€${offer.discount_value} / ${offerProducts.length} products)&#x60;,
+            );
+          }
+        }
+      }
+
+      const totalDiscountedPrice &#x3D; Math.max(
+        0,
+        totalOriginalPrice - totalDiscountAmount,
+      );
+
+      console.log(&#x27;calculateOfferPricing final calculation:&#x27;, {
+        offerId: offer.id,
+        totalOriginalPrice,
+        totalDiscountAmount,
+        totalDiscountedPrice,
+        discountType: offer.discount_type,
+        discountValue: offer.discount_value,
+      });
+
+      return {
+        originalPrice: totalOriginalPrice,
+        discountedPrice: totalDiscountedPrice,
+      };
+    } catch (error) {
+      console.error(&#x27;Error calculating offer pricing:&#x27;, error);
+      // Fallback to placeholder values
+      const originalPrice &#x3D; 100;
+      let discountedPrice &#x3D; originalPrice;
+
+      if (offer.discount_type &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27;) {
+        discountedPrice &#x3D; originalPrice * (1 - offer.discount_value / 100);
+      }
+
+      return { originalPrice, discountedPrice };
+    }
+  }
+
+  private getDefaultOfferImage(): string {
+    return &#x27;assets/images/placeholders/solar-panels-1.jpg&#x27;;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'OffersService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,3598 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PartnerProfileComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2b/partners/profile/partner-profile.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-partner-profile</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./partner-profile.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./partner-profile.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activatedRoute" >activatedRoute</a>
+                            </li>
+                            <li>
+                                <a href="#activeTab" >activeTab</a>
+                            </li>
+                            <li>
+                                <a href="#company" >company</a>
+                            </li>
+                            <li>
+                                <a href="#companyInfoForm" >companyInfoForm</a>
+                            </li>
+                            <li>
+                                <a href="#companyOrders" >companyOrders</a>
+                            </li>
+                            <li>
+                                <a href="#currentUser$" >currentUser$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <a href="#filteredOrders" >filteredOrders</a>
+                            </li>
+                            <li>
+                                <a href="#isCompanyContact" >isCompanyContact</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#ordersLoading" >ordersLoading</a>
+                            </li>
+                            <li>
+                                <a href="#orderStatusFilter" >orderStatusFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <a href="#showSuccessMessage" >showSuccessMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#store" >store</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                <a href="#updating" >updating</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactSupport" >contactSupport</a>
+                            </li>
+                            <li>
+                                <a href="#filterOrders" >filterOrders</a>
+                            </li>
+                            <li>
+                                <a href="#formatDate" >formatDate</a>
+                            </li>
+                            <li>
+                                <a href="#getActiveOrders" >getActiveOrders</a>
+                            </li>
+                            <li>
+                                <a href="#getDeliveredOrders" >getDeliveredOrders</a>
+                            </li>
+                            <li>
+                                <a href="#getOrderStatusClass" >getOrderStatusClass</a>
+                            </li>
+                            <li>
+                                <a href="#getOrderStatusLabel" >getOrderStatusLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getPaymentStatusLabel" >getPaymentStatusLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getStatusBannerClass" >getStatusBannerClass</a>
+                            </li>
+                            <li>
+                                <a href="#getStatusClass" >getStatusClass</a>
+                            </li>
+                            <li>
+                                <a href="#getStatusDescription" >getStatusDescription</a>
+                            </li>
+                            <li>
+                                <a href="#getStatusLabel" >getStatusLabel</a>
+                            </li>
+                            <li>
+                                <a href="#getTotalSpent" >getTotalSpent</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadCompanyOrders" >loadCompanyOrders</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#loadPartnerProfile" >loadPartnerProfile</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToHome" >navigateToHome</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToOffers" >navigateToOffers</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToProducts" >navigateToProducts</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#reorderItems" >reorderItems</a>
+                            </li>
+                            <li>
+                                <a href="#setActiveTab" >setActiveTab</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showOrderSuccessMessage" >showOrderSuccessMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#updateCompanyInfo" >updateCompanyInfo</a>
+                            </li>
+                            <li>
+                                <a href="#viewOrderDetails" >viewOrderDetails</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:56</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactSupport"></a>
+                    <span class="name">
+                        <span ><b>contactSupport</b></span>
+                        <a href="#contactSupport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>contactSupport()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="472"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:472</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterOrders"></a>
+                    <span class="name">
+                        <span ><b>filterOrders</b></span>
+                        <a href="#filterOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>filterOrders()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="345"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:345</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDate(date: Date | string)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="455"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:455</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>Date | string</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActiveOrders"></a>
+                    <span class="name">
+                        <span ><b>getActiveOrders</b></span>
+                        <a href="#getActiveOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getActiveOrders()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="444"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:444</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDeliveredOrders"></a>
+                    <span class="name">
+                        <span ><b>getDeliveredOrders</b></span>
+                        <a href="#getDeliveredOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDeliveredOrders()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="450"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:450</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOrderStatusClass"></a>
+                    <span class="name">
+                        <span ><b>getOrderStatusClass</b></span>
+                        <a href="#getOrderStatusClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getOrderStatusClass(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="400"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:400</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getOrderStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getOrderStatusLabel</b></span>
+                        <a href="#getOrderStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getOrderStatusLabel(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="417"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:417</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getPaymentStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getPaymentStatusLabel</b></span>
+                        <a href="#getPaymentStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getPaymentStatusLabel(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="428"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:428</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusBannerClass"></a>
+                    <span class="name">
+                        <span ><b>getStatusBannerClass</b></span>
+                        <a href="#getStatusBannerClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusBannerClass(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="368"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:368</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusClass"></a>
+                    <span class="name">
+                        <span ><b>getStatusClass</b></span>
+                        <a href="#getStatusClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusClass(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="355"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:355</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusDescription"></a>
+                    <span class="name">
+                        <span ><b>getStatusDescription</b></span>
+                        <a href="#getStatusDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusDescription(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="391"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:391</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getStatusLabel</b></span>
+                        <a href="#getStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusLabel(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="381"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:381</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>status</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTotalSpent"></a>
+                    <span class="name">
+                        <span ><b>getTotalSpent</b></span>
+                        <a href="#getTotalSpent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTotalSpent()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="437"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:437</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadCompanyOrders"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadCompanyOrders</b></span>
+                        <a href="#loadCompanyOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadCompanyOrders()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadPartnerProfile"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>loadPartnerProfile</b></span>
+                        <a href="#loadPartnerProfile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadPartnerProfile(currentUser: <a href="../interfaces/User.html" target="_self">User</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>currentUser</td>
+                                            <td>
+                                                            <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToHome"></a>
+                    <span class="name">
+                        <span ><b>navigateToHome</b></span>
+                        <a href="#navigateToHome"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToHome()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="484"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:484</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToOffers"></a>
+                    <span class="name">
+                        <span ><b>navigateToOffers</b></span>
+                        <a href="#navigateToOffers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToOffers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="480"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:480</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToProducts"></a>
+                    <span class="name">
+                        <span ><b>navigateToProducts</b></span>
+                        <a href="#navigateToProducts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToProducts()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="476"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:476</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reorderItems"></a>
+                    <span class="name">
+                        <span ><b>reorderItems</b></span>
+                        <a href="#reorderItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reorderItems(order: <a href="../interfaces/Order.html" target="_self">Order</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="467"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:467</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>order</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Order.html" target="_self" >Order</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setActiveTab"></a>
+                    <span class="name">
+                        <span ><b>setActiveTab</b></span>
+                        <a href="#setActiveTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setActiveTab(tab: "company-info" | "company-orders")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:293</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tab</td>
+                                            <td>
+                                                        <code>&quot;company-info&quot; | &quot;company-orders&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showOrderSuccessMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showOrderSuccessMessage</b></span>
+                        <a href="#showOrderSuccessMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showOrderSuccessMessage(orderNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="488"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:488</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>orderNumber</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateCompanyInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>updateCompanyInfo</b></span>
+                        <a href="#updateCompanyInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateCompanyInfo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="302"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:302</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewOrderDetails"></a>
+                    <span class="name">
+                        <span ><b>viewOrderDetails</b></span>
+                        <a href="#viewOrderDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewOrderDetails(order: <a href="../interfaces/Order.html" target="_self">Order</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="463"
+                                    class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:463</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>order</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Order.html" target="_self" >Order</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activatedRoute"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activatedRoute</b></span>
+                        <a href="#activatedRoute"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeTab"></a>
+                    <span class="name">
+                        <span ><b>activeTab</b></span>
+                        <a href="#activeTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;company-info&quot; | &quot;company-orders&quot; | &quot;company-pricing&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;company-info&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="company"></a>
+                    <span class="name">
+                        <span ><b>company</b></span>
+                        <a href="#company"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Company | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="companyInfoForm"></a>
+                    <span class="name">
+                        <span ><b>companyInfoForm</b></span>
+                        <a href="#companyInfoForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="companyOrders"></a>
+                    <span class="name">
+                        <span ><b>companyOrders</b></span>
+                        <a href="#companyOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Order.html" target="_self" >Order[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser$"></a>
+                    <span class="name">
+                        <span ><b>currentUser$</b></span>
+                        <a href="#currentUser$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >Observable&lt;User | null&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredOrders"></a>
+                    <span class="name">
+                        <span ><b>filteredOrders</b></span>
+                        <a href="#filteredOrders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Order.html" target="_self" >Order[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCompanyContact"></a>
+                    <span class="name">
+                        <span ><b>isCompanyContact</b></span>
+                        <a href="#isCompanyContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ordersLoading"></a>
+                    <span class="name">
+                        <span ><b>ordersLoading</b></span>
+                        <a href="#ordersLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="orderStatusFilter"></a>
+                    <span class="name">
+                        <span ><b>orderStatusFilter</b></span>
+                        <a href="#orderStatusFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showSuccessMessage"></a>
+                    <span class="name">
+                        <span ><b>showSuccessMessage</b></span>
+                        <a href="#showSuccessMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="store"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>store</b></span>
+                        <a href="#store"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Store)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updating"></a>
+                    <span class="name">
+                        <span ><b>updating</b></span>
+                        <a href="#updating"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/b2b/partners/profile/partner-profile.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { RouterModule, Router, ActivatedRoute } from &#x27;@angular/router&#x27;;
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { TranslatePipe } from &#x27;../../../../shared/pipes/translate.pipe&#x27;;
+import { selectCurrentUser } from &#x27;../../../../core/auth/store/auth.selectors&#x27;;
+import { User } from &#x27;../../../../shared/models/user.model&#x27;;
+import { Order } from &#x27;../../../../shared/models/order.model&#x27;;
+import { Company } from &#x27;../../../../shared/models/company.model&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+
+@Component({
+  selector: &#x27;app-partner-profile&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+  ],
+  templateUrl: &#x27;./partner-profile.component.html&#x27;,
+  styleUrls: [&#x27;./partner-profile.component.scss&#x27;],
+})
+export class PartnerProfileComponent implements OnInit, OnDestroy {
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+  private store &#x3D; inject(Store);
+  private router &#x3D; inject(Router);
+  private activatedRoute &#x3D; inject(ActivatedRoute);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private fb &#x3D; inject(FormBuilder);
+
+  currentUser$: Observable&lt;User | null&gt;;
+
+  loading &#x3D; true;
+  updating &#x3D; false;
+  ordersLoading &#x3D; false;
+  isCompanyContact &#x3D; false;
+  company: Company | null &#x3D; null;
+  companyOrders: Order[] &#x3D; [];
+  filteredOrders: Order[] &#x3D; [];
+  orderStatusFilter &#x3D; &#x27;&#x27;;
+  activeTab: &#x27;company-info&#x27; | &#x27;company-orders&#x27; | &#x27;company-pricing&#x27; &#x3D;
+    &#x27;company-info&#x27;;
+  showSuccessMessage &#x3D; false;
+
+  companyInfoForm: FormGroup;
+
+  constructor() {
+    this.currentUser$ &#x3D; this.store.select(selectCurrentUser);
+
+    this.companyInfoForm &#x3D; this.fb.group({
+      companyName: [&#x27;&#x27;, [Validators.required]],
+      businessType: [&#x27;&#x27;],
+      taxNumber: [&#x27;&#x27;, [Validators.required]],
+      website: [&#x27;&#x27;],
+      companyEmail: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      companyPhone: [&#x27;&#x27;, [Validators.required]],
+      companyAddress: [&#x27;&#x27;, [Validators.required]],
+    });
+  }
+
+  ngOnInit(): void {
+    // Check for order success query param
+    this.activatedRoute.queryParams.subscribe((params: any) &#x3D;&gt; {
+      if (params[&#x27;orderSuccess&#x27;] &amp;&amp; params[&#x27;orderNumber&#x27;]) {
+        this.showOrderSuccessMessage(params[&#x27;orderNumber&#x27;]);
+      }
+    });
+
+    // Subscribe to current user from NgRx store
+    this.currentUser$.pipe(takeUntil(this.destroy$)).subscribe((user) &#x3D;&gt; {
+      console.log(&#x27;NgRx user state changed:&#x27;, user);
+      if (user) {
+        this.loadPartnerProfile(user);
+      } else {
+        console.log(&#x27;No user in NgRx store, redirecting to login&#x27;);
+        this.loading &#x3D; false;
+        this.router.navigate([&#x27;/prijava&#x27;]);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private async loadPartnerProfile(currentUser: User): Promise&lt;void&gt; {
+    try {
+      this.loading &#x3D; true;
+      console.log(
+        &#x27;Starting to load partner profile for user:&#x27;,
+        currentUser.id,
+        currentUser.email,
+      );
+
+      // Check if user is a company contact person
+      const { data: companies, error: companyError } &#x3D;
+        await this.supabaseService.client
+          .from(&#x27;companies&#x27;)
+          .select(&#x27;*&#x27;)
+          .eq(&#x27;contact_person_id&#x27;, currentUser.id)
+          .eq(&#x27;status&#x27;, &#x27;approved&#x27;)
+          .single();
+
+      console.log(&#x27;Company query result:&#x27;, { companies, companyError });
+
+      if (companyError) {
+        if (companyError.code &#x3D;&#x3D;&#x3D; &#x27;PGRST116&#x27;) {
+          console.log(
+            &#x27;No approved company found for this user (this is normal if user is not a partner)&#x27;,
+          );
+        } else {
+          console.error(&#x27;Database error when checking company:&#x27;, companyError);
+        }
+        this.isCompanyContact &#x3D; false;
+        this.loading &#x3D; false;
+        return;
+      }
+
+      if (!companies) {
+        console.log(&#x27;User is not an approved company contact&#x27;);
+        this.isCompanyContact &#x3D; false;
+        this.loading &#x3D; false;
+        return;
+      }
+
+      console.log(
+        &#x27;Found approved company:&#x27;,
+        companies.company_name,
+        companies.id,
+      );
+
+      // Map database response to TypeScript model
+      this.company &#x3D; {
+        id: companies.id,
+        contactPersonId: companies.contact_person_id,
+        contactPersonName: companies.contact_person_name,
+        companyName: companies.company_name,
+        taxNumber: companies.tax_number,
+        companyAddress: companies.company_address,
+        companyPhone: companies.company_phone,
+        companyEmail: companies.company_email,
+        website: companies.website,
+        businessType: companies.business_type,
+        yearsInBusiness: companies.years_in_business,
+        annualRevenue: companies.annual_revenue,
+        numberOfEmployees: companies.number_of_employees,
+        description: companies.description,
+        status: companies.status,
+        approved: companies.approved,
+        approvedAt: companies.approved_at
+          ? new Date(companies.approved_at)
+          : undefined,
+        approvedBy: companies.approved_by,
+        rejectedAt: companies.rejected_at
+          ? new Date(companies.rejected_at)
+          : undefined,
+        rejectedBy: companies.rejected_by,
+        rejectionReason: companies.rejection_reason,
+        createdAt: new Date(companies.created_at),
+        updatedAt: new Date(companies.updated_at),
+      };
+
+      this.isCompanyContact &#x3D; true;
+
+      // Populate form with company data
+      this.companyInfoForm.patchValue({
+        companyName: this.company.companyName || &#x27;&#x27;,
+        businessType: this.company.businessType || &#x27;&#x27;,
+        taxNumber: this.company.taxNumber || &#x27;&#x27;,
+        website: this.company.website || &#x27;&#x27;,
+        companyEmail: this.company.companyEmail || &#x27;&#x27;,
+        companyPhone: this.company.companyPhone || &#x27;&#x27;,
+        companyAddress: this.company.companyAddress || &#x27;&#x27;,
+      });
+
+      // Load company orders
+      await this.loadCompanyOrders();
+    } catch (error) {
+      console.error(&#x27;Error loading partner profile:&#x27;, error);
+      this.isCompanyContact &#x3D; false;
+    } finally {
+      this.loading &#x3D; false;
+    }
+  }
+
+  private async loadCompanyOrders(): Promise&lt;void&gt; {
+    if (!this.company) {
+      console.log(&#x27;No company data available for loading orders&#x27;);
+      return;
+    }
+
+    try {
+      this.ordersLoading &#x3D; true;
+      console.log(
+        &#x27;Loading orders for company:&#x27;,
+        this.company.id,
+        &#x27;contactPersonId:&#x27;,
+        this.company.contactPersonId,
+      );
+
+      const { data: orders, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;orders&#x27;)
+        .select(
+          &#x60;
+          *,
+          order_items (
+            id,
+            product_id,
+            product_name,
+            quantity,
+            unit_price,
+            total_price
+          )
+        &#x60;,
+        )
+        .eq(&#x27;is_b2b&#x27;, true)
+        .eq(&#x27;user_id&#x27;, this.company.contactPersonId)
+        .order(&#x27;created_at&#x27;, { ascending: false });
+
+      console.log(&#x27;Orders query result:&#x27;, { data: orders, error });
+
+      if (error) {
+        console.error(&#x27;Error loading company orders:&#x27;, error);
+        return;
+      }
+
+      // Map database orders to TypeScript model
+      this.companyOrders &#x3D; (orders || []).map((order) &#x3D;&gt; ({
+        id: order.id,
+        orderNumber: order.order_number,
+        userId: order.user_id,
+        customerEmail: order.customer_email,
+        customerName: order.customer_name,
+        customerPhone: order.customer_phone,
+        totalAmount: order.total_amount,
+        subtotal: order.subtotal,
+        taxAmount: order.tax_amount,
+        shippingCost: order.shipping_cost,
+        discountAmount: order.discount_amount,
+        status: order.status,
+        paymentStatus: order.payment_status,
+        shippingStatus: order.shipping_status,
+        paymentMethod: order.payment_method,
+        orderDate: order.order_date,
+        shippingAddress: order.shipping_address,
+        billingAddress: order.billing_address,
+        trackingNumber: order.tracking_number,
+        notes: order.notes,
+        adminNotes: order.admin_notes,
+        items: (order.order_items || []).map((item: any) &#x3D;&gt; ({
+          id: item.id,
+          orderId: item.order_id,
+          productId: item.product_id,
+          productName: item.product_name,
+          productSku: item.product_sku,
+          quantity: item.quantity,
+          unitPrice: item.unit_price,
+          totalPrice: item.total_price,
+          productImageUrl: item.product_image_url,
+          productSpecifications: item.product_specifications,
+          createdAt: item.created_at,
+        })),
+        is_b2b: order.is_b2b,
+        createdAt: order.created_at,
+        updatedAt: order.updated_at,
+      }));
+
+      this.filteredOrders &#x3D; [...this.companyOrders];
+      console.log(
+        &#x27;Successfully loaded and mapped orders:&#x27;,
+        this.companyOrders.length,
+        &#x27;orders&#x27;,
+      );
+    } catch (error) {
+      console.error(&#x27;Error loading company orders:&#x27;, error);
+    } finally {
+      this.ordersLoading &#x3D; false;
+    }
+  }
+
+  setActiveTab(tab: &#x27;company-info&#x27; | &#x27;company-orders&#x27;): void {
+    this.activeTab &#x3D; tab;
+    this.showSuccessMessage &#x3D; false;
+
+    if (tab &#x3D;&#x3D;&#x3D; &#x27;company-orders&#x27; &amp;&amp; this.companyOrders.length &#x3D;&#x3D;&#x3D; 0) {
+      this.loadCompanyOrders();
+    }
+  }
+
+  async updateCompanyInfo(): Promise&lt;void&gt; {
+    if (this.companyInfoForm.invalid || !this.company) return;
+
+    try {
+      this.updating &#x3D; true;
+      const formData &#x3D; this.companyInfoForm.value;
+
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;companies&#x27;)
+        .update({
+          company_name: formData.companyName,
+          business_type: formData.businessType,
+          tax_number: formData.taxNumber,
+          website: formData.website,
+          company_email: formData.companyEmail,
+          company_phone: formData.companyPhone,
+          company_address: formData.companyAddress,
+          updated_at: new Date().toISOString(),
+        })
+        .eq(&#x27;id&#x27;, this.company.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error(&#x27;Error updating company:&#x27;, error);
+        return;
+      }
+
+      // Update local company data
+      this.company &#x3D; { ...this.company, ...formData };
+      this.showSuccessMessage &#x3D; true;
+
+      // Hide success message after 5 seconds
+      setTimeout(() &#x3D;&gt; {
+        this.showSuccessMessage &#x3D; false;
+      }, 5000);
+    } catch (error) {
+      console.error(&#x27;Error updating company info:&#x27;, error);
+    } finally {
+      this.updating &#x3D; false;
+    }
+  }
+
+  filterOrders(): void {
+    if (!this.orderStatusFilter) {
+      this.filteredOrders &#x3D; [...this.companyOrders];
+    } else {
+      this.filteredOrders &#x3D; this.companyOrders.filter(
+        (order) &#x3D;&gt; order.status &#x3D;&#x3D;&#x3D; this.orderStatusFilter,
+      );
+    }
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case &#x27;pending&#x27;:
+        return &#x27;bg-yellow-100 text-yellow-800&#x27;;
+      case &#x27;approved&#x27;:
+        return &#x27;bg-green-100 text-green-800&#x27;;
+      case &#x27;rejected&#x27;:
+        return &#x27;bg-red-100 text-red-800&#x27;;
+      default:
+        return &#x27;bg-gray-100 text-gray-800&#x27;;
+    }
+  }
+
+  getStatusBannerClass(status: string): string {
+    switch (status) {
+      case &#x27;pending&#x27;:
+        return &#x27;bg-yellow-50 border-yellow-200 text-yellow-800&#x27;;
+      case &#x27;approved&#x27;:
+        return &#x27;bg-green-50 border-green-200 text-green-800&#x27;;
+      case &#x27;rejected&#x27;:
+        return &#x27;bg-red-50 border-red-200 text-red-800&#x27;;
+      default:
+        return &#x27;bg-gray-50 border-gray-200 text-gray-800&#x27;;
+    }
+  }
+
+  getStatusLabel(status: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      pending: &#x27;b2b.profile.pendingApproval&#x27;,
+      approved: &#x27;b2b.profile.approvedPartner&#x27;,
+      rejected: &#x27;b2b.profile.applicationRejected&#x27;,
+    };
+
+    return statusMap[status] || status;
+  }
+
+  getStatusDescription(status: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      pending: &#x27;b2b.profile.pendingApprovalDescription&#x27;,
+      approved: &#x27;b2b.profile.approvedPartnerDescription&#x27;,
+      rejected: &#x27;b2b.profile.applicationRejectedDescription&#x27;,
+    };
+    return statusMap[status] || &#x27;&#x27;;
+  }
+
+  getOrderStatusClass(status: string): string {
+    switch (status) {
+      case &#x27;pending&#x27;:
+        return &#x27;bg-yellow-100 text-yellow-800&#x27;;
+      case &#x27;processing&#x27;:
+        return &#x27;bg-blue-100 text-blue-800&#x27;;
+      case &#x27;shipped&#x27;:
+        return &#x27;bg-purple-100 text-purple-800&#x27;;
+      case &#x27;delivered&#x27;:
+        return &#x27;bg-green-100 text-green-800&#x27;;
+      case &#x27;cancelled&#x27;:
+        return &#x27;bg-red-100 text-red-800&#x27;;
+      default:
+        return &#x27;bg-gray-100 text-gray-800&#x27;;
+    }
+  }
+
+  getOrderStatusLabel(status: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      pending: &#x27;b2b.orders.pending&#x27;,
+      processing: &#x27;b2b.orders.processing&#x27;,
+      shipped: &#x27;b2b.orders.shipped&#x27;,
+      delivered: &#x27;b2b.orders.delivered&#x27;,
+      cancelled: &#x27;b2b.orders.cancelled&#x27;,
+    };
+    return statusMap[status] || status;
+  }
+
+  getPaymentStatusLabel(status: string): string {
+    const statusMap: { [key: string]: string } &#x3D; {
+      paid: &#x27;b2b.orders.paid&#x27;,
+      pending: &#x27;b2b.orders.pending&#x27;,
+      failed: &#x27;b2b.orders.failed&#x27;,
+    };
+    return statusMap[status] || status;
+  }
+
+  getTotalSpent(): number {
+    return this.companyOrders.reduce(
+      (total, order) &#x3D;&gt; total + order.subtotal,
+      0,
+    );
+  }
+
+  getActiveOrders(): number {
+    return this.companyOrders.filter((order) &#x3D;&gt;
+      [&#x27;pending&#x27;, &#x27;processing&#x27;, &#x27;shipped&#x27;].includes(order.status),
+    ).length;
+  }
+
+  getDeliveredOrders(): number {
+    return this.companyOrders.filter((order) &#x3D;&gt; order.status &#x3D;&#x3D;&#x3D; &#x27;delivered&#x27;)
+      .length;
+  }
+
+  formatDate(date: Date | string): string {
+    return new Date(date).toLocaleDateString(&#x27;en-US&#x27;, {
+      year: &#x27;numeric&#x27;,
+      month: &#x27;short&#x27;,
+      day: &#x27;numeric&#x27;,
+    });
+  }
+
+  viewOrderDetails(order: Order): void {
+    this.router.navigate([&#x27;/partneri/detalji-narudzbe&#x27;, order.id]);
+  }
+
+  reorderItems(order: Order): void {
+    // TODO: Implement reorder functionality
+    console.log(&#x27;Reordering items from order:&#x27;, order.id);
+  }
+
+  contactSupport(): void {
+    this.router.navigate([&#x27;/partneri/kontakt&#x27;]);
+  }
+
+  navigateToProducts(): void {
+    this.router.navigate([&#x27;/partneri/proizvodi&#x27;]);
+  }
+
+  navigateToOffers(): void {
+    this.router.navigate([&#x27;/partneri/ponude&#x27;]);
+  }
+
+  navigateToHome(): void {
+    this.router.navigate([&#x27;/&#x27;]);
+  }
+
+  private showOrderSuccessMessage(orderNumber: string): void {
+    this.showSuccessMessage &#x3D; true;
+    // Hide success message after 5 seconds
+    setTimeout(() &#x3D;&gt; {
+      this.showSuccessMessage &#x3D; false;
+    }, 5000);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen bg-gray-50&quot;&gt;
+  &lt;!-- Header --&gt;
+  &lt;div class&#x3D;&quot;bg-white shadow-sm border-b border-gray-200&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6&quot;&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+        &lt;div&gt;
+          &lt;h1 class&#x3D;&quot;text-3xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;b2b.profile.title&quot; | translate }}
+          &lt;/h1&gt;
+          &lt;p class&#x3D;&quot;mt-2 text-lg text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+            {{ &quot;b2b.profile.subtitle&quot; | translate }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex space-x-4&quot;&gt;
+          &lt;button
+            (click)&#x3D;&quot;navigateToProducts()&quot;
+            class&#x3D;&quot;bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors&quot;
+          &gt;
+            {{ &quot;b2b.profile.viewProducts&quot; | translate }}
+          &lt;/button&gt;
+          &lt;button
+            (click)&#x3D;&quot;navigateToOffers()&quot;
+            class&#x3D;&quot;bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors&quot;
+          &gt;
+            {{ &quot;b2b.profile.viewOffers&quot; | translate }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Loading State --&gt;
+  &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex justify-center items-center py-12&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600&quot;
+    &gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Not Authorized State --&gt;
+  &lt;div
+    *ngIf&#x3D;&quot;!loading &amp;&amp; !isCompanyContact&quot;
+    class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;bg-red-50 border border-red-200 rounded-lg p-6 text-center&quot;&gt;
+      &lt;svg
+        class&#x3D;&quot;w-16 h-16 text-red-400 mx-auto mb-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;
+        /&gt;
+      &lt;/svg&gt;
+      &lt;h3 class&#x3D;&quot;text-lg font-medium text-red-900 mb-2&quot;&gt;
+        {{ &quot;b2b.profile.accessDenied&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;p class&#x3D;&quot;text-red-700 mb-4&quot;&gt;
+        {{ &quot;b2b.profile.accessDeniedMessage&quot; | translate }}
+      &lt;/p&gt;
+      &lt;button
+        (click)&#x3D;&quot;navigateToHome()&quot;
+        class&#x3D;&quot;bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors&quot;
+      &gt;
+        {{ &quot;b2b.profile.returnHome&quot; | translate }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Main Content --&gt;
+  &lt;div
+    *ngIf&#x3D;&quot;!loading &amp;&amp; isCompanyContact&quot;
+    class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;
+  &gt;
+    &lt;!-- Success Message --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;showSuccessMessage&quot;
+      class&#x3D;&quot;mb-6 bg-green-50 border border-green-200 rounded-lg p-4&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+        &lt;svg
+          class&#x3D;&quot;w-5 h-5 text-green-600 mr-3&quot;
+          fill&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 20 20&quot;
+        &gt;
+          &lt;path
+            fill-rule&#x3D;&quot;evenodd&quot;
+            d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z&quot;
+            clip-rule&#x3D;&quot;evenodd&quot;
+          /&gt;
+        &lt;/svg&gt;
+        &lt;span class&#x3D;&quot;text-green-800 font-[&#x27;DM_Sans&#x27;] font-medium&quot;&gt;{{
+          &quot;b2b.profile.companyInfoUpdated&quot; | translate
+        }}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-4 gap-8&quot;&gt;
+      &lt;!-- Sidebar Navigation --&gt;
+      &lt;div class&#x3D;&quot;lg:col-span-1&quot;&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;&gt;
+          &lt;nav class&#x3D;&quot;space-y-2&quot;&gt;
+            &lt;button
+              (click)&#x3D;&quot;setActiveTab(&#x27;company-info&#x27;)&quot;
+              [class]&#x3D;&quot;
+                activeTab &#x3D;&#x3D;&#x3D; &#x27;company-info&#x27;
+                  ? &#x27;bg-solar-500 text-white&#x27;
+                  : &#x27;text-gray-700 hover:bg-gray-50&#x27;
+              &quot;
+              class&#x3D;&quot;w-full text-left px-4 py-3 rounded-lg font-[&#x27;DM_Sans&#x27;] font-medium transition-colors duration-200 flex items-center space-x-3&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m11 0a2 2 0 01-2 2H7a2 2 0 01-2-2m2 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;b2b.profile.companyInfo&quot; | translate }}&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              (click)&#x3D;&quot;setActiveTab(&#x27;company-orders&#x27;)&quot;
+              [class]&#x3D;&quot;
+                activeTab &#x3D;&#x3D;&#x3D; &#x27;company-orders&#x27;
+                  ? &#x27;bg-solar-500 text-white&#x27;
+                  : &#x27;text-gray-700 hover:bg-gray-50&#x27;
+              &quot;
+              class&#x3D;&quot;w-full text-left px-4 py-3 rounded-lg font-[&#x27;DM_Sans&#x27;] font-medium transition-colors duration-200 flex items-center space-x-3&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;b2b.profile.companyOrders&quot; | translate }}&lt;/span&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              (click)&#x3D;&quot;contactSupport()&quot;
+              class&#x3D;&quot;w-full text-left px-4 py-3 rounded-lg font-[&#x27;DM_Sans&#x27;] font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center space-x-3&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;span&gt;{{ &quot;b2b.profile.contactSupport&quot; | translate }}&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/nav&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Main Content --&gt;
+      &lt;div class&#x3D;&quot;lg:col-span-3&quot;&gt;
+        &lt;!-- Company Info Tab --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;company-info&#x27;&quot;
+          class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+            &lt;h2
+              class&#x3D;&quot;text-2xl font-semibold text-gray-900 font-[&#x27;Poppins&#x27;] mb-2&quot;
+            &gt;
+              {{ &quot;b2b.profile.companyInformation&quot; | translate }}
+            &lt;/h2&gt;
+            &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ &quot;b2b.profile.updateCompanyDetails&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Company Status Banner --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;company&quot;
+            class&#x3D;&quot;mb-6 p-4 rounded-lg border&quot;
+            [class]&#x3D;&quot;getStatusBannerClass(company.status)&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5 mr-3&quot; fill&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 20 20&quot;&gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;div&gt;
+                &lt;div class&#x3D;&quot;font-medium&quot;&gt;
+                  {{ &quot;b2b.profile.companyStatus&quot; | translate }}:
+                  {{ getStatusLabel(company.status) | translate }}
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;text-sm opacity-75&quot;&gt;
+                  {{ getStatusDescription(company.status) | translate }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Company Form --&gt;
+          &lt;form
+            [formGroup]&#x3D;&quot;companyInfoForm&quot;
+            (ngSubmit)&#x3D;&quot;updateCompanyInfo()&quot;
+            class&#x3D;&quot;space-y-6&quot;
+          &gt;
+            &lt;!-- Basic Information --&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+              &lt;div&gt;
+                &lt;label
+                  class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                  &gt;{{ &quot;b2b.profile.companyName&quot; | translate }}*&lt;/label
+                &gt;
+                &lt;input
+                  formControlName&#x3D;&quot;companyName&quot;
+                  type&#x3D;&quot;text&quot;
+                  class&#x3D;&quot;w-full h-12 px-4 py-3 border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                  [class.border-red-500]&#x3D;&quot;
+                    companyInfoForm.get(&#x27;companyName&#x27;)?.invalid &amp;&amp;
+                    companyInfoForm.get(&#x27;companyName&#x27;)?.touched
+                  &quot;
+                  [class.border-gray-300]&#x3D;&quot;
+                    !companyInfoForm.get(&#x27;companyName&#x27;)?.invalid ||
+                    !companyInfoForm.get(&#x27;companyName&#x27;)?.touched
+                  &quot;
+                  [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterCompanyName&#x27; | translate&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+                &lt;label
+                  class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                  &gt;{{ &quot;b2b.profile.businessType&quot; | translate }}*&lt;/label
+                &gt;
+                &lt;select
+                  formControlName&#x3D;&quot;businessType&quot;
+                  class&#x3D;&quot;w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;&quot;&gt;
+                    {{ &quot;b2b.profile.selectBusinessType&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;retailer&quot;&gt;
+                    {{ &quot;b2b.profile.retailer&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;wholesaler&quot;&gt;
+                    {{ &quot;b2b.profile.wholesaler&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;installer&quot;&gt;
+                    {{ &quot;b2b.profile.installer&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;distributor&quot;&gt;
+                    {{ &quot;b2b.profile.distributor&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;other&quot;&gt;
+                    {{ &quot;b2b.profile.other&quot; | translate }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+              &lt;div&gt;
+                &lt;label
+                  class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                  &gt;{{ &quot;b2b.profile.taxNumber&quot; | translate }}*&lt;/label
+                &gt;
+                &lt;input
+                  formControlName&#x3D;&quot;taxNumber&quot;
+                  type&#x3D;&quot;text&quot;
+                  class&#x3D;&quot;w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                  [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterTaxNumber&#x27; | translate&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;div&gt;
+                &lt;label
+                  class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                  &gt;{{ &quot;b2b.profile.website&quot; | translate }}&lt;/label
+                &gt;
+                &lt;input
+                  formControlName&#x3D;&quot;website&quot;
+                  type&#x3D;&quot;url&quot;
+                  class&#x3D;&quot;w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                  [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterWebsite&#x27; | translate&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Contact Information --&gt;
+            &lt;div class&#x3D;&quot;border-t pt-6&quot;&gt;
+              &lt;h3
+                class&#x3D;&quot;text-lg font-medium text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;
+              &gt;
+                {{ &quot;b2b.profile.contactInformation&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+                &lt;div&gt;
+                  &lt;label
+                    class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                    &gt;{{ &quot;b2b.profile.email&quot; | translate }}*&lt;/label
+                  &gt;
+                  &lt;input
+                    formControlName&#x3D;&quot;companyEmail&quot;
+                    type&#x3D;&quot;email&quot;
+                    class&#x3D;&quot;w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                    [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterEmail&#x27; | translate&quot;
+                  /&gt;
+                &lt;/div&gt;
+
+                &lt;div&gt;
+                  &lt;label
+                    class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                    &gt;{{ &quot;b2b.profile.phone&quot; | translate }}*&lt;/label
+                  &gt;
+                  &lt;input
+                    formControlName&#x3D;&quot;companyPhone&quot;
+                    type&#x3D;&quot;tel&quot;
+                    class&#x3D;&quot;w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                    [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterPhone&#x27; | translate&quot;
+                  /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Address Information --&gt;
+            &lt;div class&#x3D;&quot;border-t pt-6&quot;&gt;
+              &lt;h3
+                class&#x3D;&quot;text-lg font-medium text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;
+              &gt;
+                {{ &quot;b2b.profile.addressInformation&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+                &lt;div&gt;
+                  &lt;label
+                    class&#x3D;&quot;block text-sm font-medium text-gray-900 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;
+                    &gt;{{ &quot;b2b.profile.address&quot; | translate }}*&lt;/label
+                  &gt;
+                  &lt;textarea
+                    formControlName&#x3D;&quot;companyAddress&quot;
+                    rows&#x3D;&quot;3&quot;
+                    class&#x3D;&quot;w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[&#x27;DM_Sans&#x27;]&quot;
+                    [placeholder]&#x3D;&quot;&#x27;b2b.profile.enterAddress&#x27; | translate&quot;
+                  &gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Quick Stats --&gt;
+            &lt;div class&#x3D;&quot;border-t pt-6&quot;&gt;
+              &lt;h3
+                class&#x3D;&quot;text-lg font-medium text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;
+              &gt;
+                {{ &quot;b2b.profile.quickStats&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;div class&#x3D;&quot;grid grid-cols-2 md:grid-cols-4 gap-4&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-gray-50 rounded-lg p-4 text-center&quot;&gt;
+                  &lt;div class&#x3D;&quot;text-2xl font-bold text-gray-900&quot;&gt;
+                    {{ companyOrders.length }}
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                    {{ &quot;b2b.profile.totalOrders&quot; | translate }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;bg-gray-50 rounded-lg p-4 text-center&quot;&gt;
+                  &lt;div class&#x3D;&quot;text-2xl font-bold text-solar-600&quot;&gt;
+                    {{ getTotalSpent() | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                    {{ &quot;b2b.profile.totalSpent&quot; | translate }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;bg-gray-50 rounded-lg p-4 text-center&quot;&gt;
+                  &lt;div class&#x3D;&quot;text-2xl font-bold text-blue-600&quot;&gt;
+                    {{ getActiveOrders() }}
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                    {{ &quot;b2b.profile.activeOrders&quot; | translate }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;bg-gray-50 rounded-lg p-4 text-center&quot;&gt;
+                  &lt;div class&#x3D;&quot;text-2xl font-bold text-green-600&quot;&gt;
+                    {{ getDeliveredOrders() }}
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                    {{ &quot;b2b.profile.deliveredOrders&quot; | translate }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Save Button --&gt;
+            &lt;div class&#x3D;&quot;flex justify-end pt-6 border-t border-gray-200&quot;&gt;
+              &lt;button
+                type&#x3D;&quot;submit&quot;
+                [disabled]&#x3D;&quot;companyInfoForm.invalid || updating&quot;
+                class&#x3D;&quot;px-6 py-3 bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;
+                &lt;span *ngIf&#x3D;&quot;!updating&quot;&gt;{{
+                  &quot;b2b.profile.saveChanges&quot; | translate
+                }}&lt;/span&gt;
+                &lt;span *ngIf&#x3D;&quot;updating&quot; class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+                  &lt;svg
+                    class&#x3D;&quot;animate-spin w-4 h-4&quot;
+                    fill&#x3D;&quot;none&quot;
+                    viewBox&#x3D;&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;circle
+                      class&#x3D;&quot;opacity-25&quot;
+                      cx&#x3D;&quot;12&quot;
+                      cy&#x3D;&quot;12&quot;
+                      r&#x3D;&quot;10&quot;
+                      stroke&#x3D;&quot;currentColor&quot;
+                      stroke-width&#x3D;&quot;4&quot;
+                    &gt;&lt;/circle&gt;
+                    &lt;path
+                      class&#x3D;&quot;opacity-75&quot;
+                      fill&#x3D;&quot;currentColor&quot;
+                      d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+                    &gt;&lt;/path&gt;
+                  &lt;/svg&gt;
+                  &lt;span&gt;{{ &quot;b2b.profile.saving&quot; | translate }}&lt;/span&gt;
+                &lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Company Orders Tab --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;activeTab &#x3D;&#x3D;&#x3D; &#x27;company-orders&#x27;&quot;
+          class&#x3D;&quot;bg-white rounded-lg shadow-sm border border-gray-200 p-6&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;mb-6&quot;&gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;div&gt;
+                &lt;h2
+                  class&#x3D;&quot;text-2xl font-semibold text-gray-900 font-[&#x27;Poppins&#x27;] mb-2&quot;
+                &gt;
+                  {{ &quot;b2b.profile.companyOrders&quot; | translate }}
+                &lt;/h2&gt;
+                &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                  {{ &quot;b2b.profile.viewOrderHistory&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex items-center space-x-2&quot;&gt;
+                &lt;select
+                  [(ngModel)]&#x3D;&quot;orderStatusFilter&quot;
+                  (ngModelChange)&#x3D;&quot;filterOrders()&quot;
+                  class&#x3D;&quot;px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;&quot;&gt;
+                    {{ &quot;b2b.profile.allOrders&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;pending&quot;&gt;
+                    {{ &quot;b2b.profile.pending&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;processing&quot;&gt;
+                    {{ &quot;b2b.profile.processing&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;shipped&quot;&gt;
+                    {{ &quot;b2b.profile.shipped&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;delivered&quot;&gt;
+                    {{ &quot;b2b.profile.delivered&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;cancelled&quot;&gt;
+                    {{ &quot;b2b.profile.cancelled&quot; | translate }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Loading State --&gt;
+          &lt;div *ngIf&#x3D;&quot;ordersLoading&quot; class&#x3D;&quot;flex justify-center py-8&quot;&gt;
+            &lt;svg
+              class&#x3D;&quot;animate-spin w-8 h-8 text-solar-600&quot;
+              fill&#x3D;&quot;none&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;circle
+                class&#x3D;&quot;opacity-25&quot;
+                cx&#x3D;&quot;12&quot;
+                cy&#x3D;&quot;12&quot;
+                r&#x3D;&quot;10&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                stroke-width&#x3D;&quot;4&quot;
+              &gt;&lt;/circle&gt;
+              &lt;path
+                class&#x3D;&quot;opacity-75&quot;
+                fill&#x3D;&quot;currentColor&quot;
+                d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+              &gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Orders List --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;!ordersLoading &amp;&amp; filteredOrders.length &gt; 0&quot;
+            class&#x3D;&quot;space-y-4&quot;
+          &gt;
+            &lt;div
+              *ngFor&#x3D;&quot;let order of filteredOrders&quot;
+              class&#x3D;&quot;border border-gray-200 rounded-lg p-6 hover:border-solar-600 transition-colors&quot;
+            &gt;
+              &lt;div class&#x3D;&quot;flex justify-between items-start mb-4&quot;&gt;
+                &lt;div&gt;
+                  &lt;h3
+                    class&#x3D;&quot;text-lg font-semibold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;
+                  &gt;
+                    {{ &quot;b2b.profile.orderNumber&quot; | translate }}:
+                    {{ order.orderNumber }}
+                  &lt;/h3&gt;
+                  &lt;p class&#x3D;&quot;text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                    {{ formatDate(order.createdAt) }}
+                  &lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;text-right&quot;&gt;
+                  &lt;span
+                    class&#x3D;&quot;inline-flex items-center px-2 py-1 rounded-full text-xs font-medium&quot;
+                    [class]&#x3D;&quot;getOrderStatusClass(order.status)&quot;
+                  &gt;
+                    {{ getOrderStatusLabel(order.status) | translate }}
+                  &lt;/span&gt;
+                  &lt;p class&#x3D;&quot;text-lg font-semibold text-gray-900 mt-1&quot;&gt;
+                    {{ order.subtotal | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot; }}
+                  &lt;/p&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Order Items Preview --&gt;
+              &lt;div class&#x3D;&quot;bg-gray-50 rounded-lg p-3 mb-3&quot;&gt;
+                &lt;div class&#x3D;&quot;text-xs font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;b2b.profile.orderItems&quot; | translate }}:
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+                  &lt;div
+                    *ngFor&#x3D;&quot;let item of order.items; let i &#x3D; index&quot;
+                    class&#x3D;&quot;flex justify-between text-xs text-gray-600&quot;
+                  &gt;
+                    &lt;span *ngIf&#x3D;&quot;i &lt; 3&quot;
+                      &gt;{{ item.productName }} ({{ item.quantity }}x)&lt;/span
+                    &gt;
+                    &lt;span *ngIf&#x3D;&quot;i &lt; 3&quot;&gt;{{
+                      item.unitPrice * item.quantity
+                        | currency: &quot;EUR&quot; : &quot;symbol&quot; : &quot;1.2-2&quot;
+                    }}&lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;div
+                    *ngIf&#x3D;&quot;order.items.length &gt; 3&quot;
+                    class&#x3D;&quot;text-xs text-gray-500 italic&quot;
+                  &gt;
+                    {{
+                      &quot;b2b.profile.andMoreItems&quot;
+                        | translate: { count: order.items.length - 3 }
+                    }}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Order Actions --&gt;
+              &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+                &lt;div class&#x3D;&quot;flex items-center space-x-4 text-xs text-gray-500&quot;&gt;
+                  &lt;span *ngIf&#x3D;&quot;order.paymentStatus&quot;&gt;
+                    {{ &quot;b2b.profile.payment&quot; | translate }}:
+                    &lt;span
+                      [class]&#x3D;&quot;
+                        order.paymentStatus &#x3D;&#x3D;&#x3D; &#x27;paid&#x27;
+                          ? &#x27;text-green-600&#x27;
+                          : &#x27;text-yellow-600&#x27;
+                      &quot;
+                    &gt;
+                      {{
+                        getPaymentStatusLabel(order.paymentStatus) | translate
+                      }}
+                    &lt;/span&gt;
+                  &lt;/span&gt;
+                  &lt;span *ngIf&#x3D;&quot;order.items.length&quot;&gt;
+                    {{ order.items.length }}
+                    {{ &quot;b2b.profile.items&quot; | translate }}
+                  &lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;flex space-x-2&quot;&gt;
+                  &lt;button
+                    (click)&#x3D;&quot;viewOrderDetails(order)&quot;
+                    class&#x3D;&quot;text-solar-500 hover:text-solar-600 text-xs font-medium&quot;
+                  &gt;
+                    {{ &quot;b2b.profile.viewDetails&quot; | translate }}
+                  &lt;/button&gt;
+                  &lt;button
+                    *ngIf&#x3D;&quot;order.status &#x3D;&#x3D;&#x3D; &#x27;delivered&#x27;&quot;
+                    (click)&#x3D;&quot;reorderItems(order)&quot;
+                    class&#x3D;&quot;text-blue-600 hover:text-blue-700 text-xs font-medium&quot;
+                  &gt;
+                    {{ &quot;b2b.profile.reorder&quot; | translate }}
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- No Orders State --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;!ordersLoading &amp;&amp; filteredOrders.length &#x3D;&#x3D;&#x3D; 0&quot;
+            class&#x3D;&quot;text-center py-12&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-16 h-16 text-gray-400 mx-auto mb-4&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2&quot;
+              /&gt;
+            &lt;/svg&gt;
+            &lt;h3 class&#x3D;&quot;text-lg font-medium text-gray-900 mb-2&quot;&gt;
+              {{ &quot;b2b.profile.noOrdersFound&quot; | translate }}
+            &lt;/h3&gt;
+            &lt;p class&#x3D;&quot;text-gray-600 mb-4&quot;&gt;
+              {{ &quot;b2b.profile.noOrdersFoundMessage&quot; | translate }}
+            &lt;/p&gt;
+            &lt;button
+              (click)&#x3D;&quot;navigateToProducts()&quot;
+              class&#x3D;&quot;bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors&quot;
+            &gt;
+              {{ &quot;b2b.profile.startShopping&quot; | translate }}
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./partner-profile.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen bg-gray-50">  <!-- Header -->  <div class="bg-white shadow-sm border-b border-gray-200">    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">      <div class="flex items-center justify-between">        <div>          <h1 class="text-3xl font-bold text-gray-900 font-[\'Poppins\']">            {{ "b2b.profile.title" | translate }}          </h1>          <p class="mt-2 text-lg text-gray-600 font-[\'DM_Sans\']">            {{ "b2b.profile.subtitle" | translate }}          </p>        </div>        <div class="flex space-x-4">          <button            (click)="navigateToProducts()"            class="bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors"          >            {{ "b2b.profile.viewProducts" | translate }}          </button>          <button            (click)="navigateToOffers()"            class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"          >            {{ "b2b.profile.viewOffers" | translate }}          </button>        </div>      </div>    </div>  </div>  <!-- Loading State -->  <div *ngIf="loading" class="flex justify-center items-center py-12">    <div      class="animate-spin rounded-full h-8 w-8 border-b-2 border-solar-600"    ></div>  </div>  <!-- Not Authorized State -->  <div    *ngIf="!loading && !isCompanyContact"    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"  >    <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">      <svg        class="w-16 h-16 text-red-400 mx-auto mb-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"        />      </svg>      <h3 class="text-lg font-medium text-red-900 mb-2">        {{ "b2b.profile.accessDenied" | translate }}      </h3>      <p class="text-red-700 mb-4">        {{ "b2b.profile.accessDeniedMessage" | translate }}      </p>      <button        (click)="navigateToHome()"        class="bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"      >        {{ "b2b.profile.returnHome" | translate }}      </button>    </div>  </div>  <!-- Main Content -->  <div    *ngIf="!loading && isCompanyContact"    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"  >    <!-- Success Message -->    <div      *ngIf="showSuccessMessage"      class="mb-6 bg-green-50 border border-green-200 rounded-lg p-4"    >      <div class="flex items-center">        <svg          class="w-5 h-5 text-green-600 mr-3"          fill="currentColor"          viewBox="0 0 20 20"        >          <path            fill-rule="evenodd"            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"            clip-rule="evenodd"          />        </svg>        <span class="text-green-800 font-[\'DM_Sans\'] font-medium">{{          "b2b.profile.companyInfoUpdated" | translate        }}</span>      </div>    </div>    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">      <!-- Sidebar Navigation -->      <div class="lg:col-span-1">        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">          <nav class="space-y-2">            <button              (click)="setActiveTab(\'company-info\')"              [class]="                activeTab === \'company-info\'                  ? \'bg-solar-500 text-white\'                  : \'text-gray-700 hover:bg-gray-50\'              "              class="w-full text-left px-4 py-3 rounded-lg font-[\'DM_Sans\'] font-medium transition-colors duration-200 flex items-center space-x-3"            >              <svg                class="w-5 h-5"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m11 0a2 2 0 01-2 2H7a2 2 0 01-2-2m2 0V9a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2H9a2 2 0 01-2-2"                />              </svg>              <span>{{ "b2b.profile.companyInfo" | translate }}</span>            </button>            <button              (click)="setActiveTab(\'company-orders\')"              [class]="                activeTab === \'company-orders\'                  ? \'bg-solar-500 text-white\'                  : \'text-gray-700 hover:bg-gray-50\'              "              class="w-full text-left px-4 py-3 rounded-lg font-[\'DM_Sans\'] font-medium transition-colors duration-200 flex items-center space-x-3"            >              <svg                class="w-5 h-5"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"                />              </svg>              <span>{{ "b2b.profile.companyOrders" | translate }}</span>            </button>            <button              (click)="contactSupport()"              class="w-full text-left px-4 py-3 rounded-lg font-[\'DM_Sans\'] font-medium text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center space-x-3"            >              <svg                class="w-5 h-5"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"                />              </svg>              <span>{{ "b2b.profile.contactSupport" | translate }}</span>            </button>          </nav>        </div>      </div>      <!-- Main Content -->      <div class="lg:col-span-3">        <!-- Company Info Tab -->        <div          *ngIf="activeTab === \'company-info\'"          class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"        >          <div class="mb-6">            <h2              class="text-2xl font-semibold text-gray-900 font-[\'Poppins\'] mb-2"            >              {{ "b2b.profile.companyInformation" | translate }}            </h2>            <p class="text-gray-600 font-[\'DM_Sans\']">              {{ "b2b.profile.updateCompanyDetails" | translate }}            </p>          </div>          <!-- Company Status Banner -->          <div            *ngIf="company"            class="mb-6 p-4 rounded-lg border"            [class]="getStatusBannerClass(company.status)"          >            <div class="flex items-center">              <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">                <path                  fill-rule="evenodd"                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"                  clip-rule="evenodd"                />              </svg>              <div>                <div class="font-medium">                  {{ "b2b.profile.companyStatus" | translate }}:                  {{ getStatusLabel(company.status) | translate }}                </div>                <div class="text-sm opacity-75">                  {{ getStatusDescription(company.status) | translate }}                </div>              </div>            </div>          </div>          <!-- Company Form -->          <form            [formGroup]="companyInfoForm"            (ngSubmit)="updateCompanyInfo()"            class="space-y-6"          >            <!-- Basic Information -->            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">              <div>                <label                  class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                  >{{ "b2b.profile.companyName" | translate }}*</label                >                <input                  formControlName="companyName"                  type="text"                  class="w-full h-12 px-4 py-3 border rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                  [class.border-red-500]="                    companyInfoForm.get(\'companyName\')?.invalid &&                    companyInfoForm.get(\'companyName\')?.touched                  "                  [class.border-gray-300]="                    !companyInfoForm.get(\'companyName\')?.invalid ||                    !companyInfoForm.get(\'companyName\')?.touched                  "                  [placeholder]="\'b2b.profile.enterCompanyName\' | translate"                />              </div>              <div>                <label                  class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                  >{{ "b2b.profile.businessType" | translate }}*</label                >                <select                  formControlName="businessType"                  class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                >                  <option value="">                    {{ "b2b.profile.selectBusinessType" | translate }}                  </option>                  <option value="retailer">                    {{ "b2b.profile.retailer" | translate }}                  </option>                  <option value="wholesaler">                    {{ "b2b.profile.wholesaler" | translate }}                  </option>                  <option value="installer">                    {{ "b2b.profile.installer" | translate }}                  </option>                  <option value="distributor">                    {{ "b2b.profile.distributor" | translate }}                  </option>                  <option value="other">                    {{ "b2b.profile.other" | translate }}                  </option>                </select>              </div>            </div>            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">              <div>                <label                  class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                  >{{ "b2b.profile.taxNumber" | translate }}*</label                >                <input                  formControlName="taxNumber"                  type="text"                  class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                  [placeholder]="\'b2b.profile.enterTaxNumber\' | translate"                />              </div>              <div>                <label                  class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                  >{{ "b2b.profile.website" | translate }}</label                >                <input                  formControlName="website"                  type="url"                  class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                  [placeholder]="\'b2b.profile.enterWebsite\' | translate"                />              </div>            </div>            <!-- Contact Information -->            <div class="border-t pt-6">              <h3                class="text-lg font-medium text-gray-900 mb-4 font-[\'Poppins\']"              >                {{ "b2b.profile.contactInformation" | translate }}              </h3>              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">                <div>                  <label                    class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                    >{{ "b2b.profile.email" | translate }}*</label                  >                  <input                    formControlName="companyEmail"                    type="email"                    class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                    [placeholder]="\'b2b.profile.enterEmail\' | translate"                  />                </div>                <div>                  <label                    class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                    >{{ "b2b.profile.phone" | translate }}*</label                  >                  <input                    formControlName="companyPhone"                    type="tel"                    class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                    [placeholder]="\'b2b.profile.enterPhone\' | translate"                  />                </div>              </div>            </div>            <!-- Address Information -->            <div class="border-t pt-6">              <h3                class="text-lg font-medium text-gray-900 mb-4 font-[\'Poppins\']"              >                {{ "b2b.profile.addressInformation" | translate }}              </h3>              <div class="space-y-4">                <div>                  <label                    class="block text-sm font-medium text-gray-900 mb-2 font-[\'DM_Sans\']"                    >{{ "b2b.profile.address" | translate }}*</label                  >                  <textarea                    formControlName="companyAddress"                    rows="3"                    class="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-[\'DM_Sans\']"                    [placeholder]="\'b2b.profile.enterAddress\' | translate"                  ></textarea>                </div>              </div>            </div>            <!-- Quick Stats -->            <div class="border-t pt-6">              <h3                class="text-lg font-medium text-gray-900 mb-4 font-[\'Poppins\']"              >                {{ "b2b.profile.quickStats" | translate }}              </h3>              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">                <div class="bg-gray-50 rounded-lg p-4 text-center">                  <div class="text-2xl font-bold text-gray-900">                    {{ companyOrders.length }}                  </div>                  <div class="text-sm text-gray-600">                    {{ "b2b.profile.totalOrders" | translate }}                  </div>                </div>                <div class="bg-gray-50 rounded-lg p-4 text-center">                  <div class="text-2xl font-bold text-solar-600">                    {{ getTotalSpent() | currency: "EUR" : "symbol" : "1.2-2" }}                  </div>                  <div class="text-sm text-gray-600">                    {{ "b2b.profile.totalSpent" | translate }}                  </div>                </div>                <div class="bg-gray-50 rounded-lg p-4 text-center">                  <div class="text-2xl font-bold text-blue-600">                    {{ getActiveOrders() }}                  </div>                  <div class="text-sm text-gray-600">                    {{ "b2b.profile.activeOrders" | translate }}                  </div>                </div>                <div class="bg-gray-50 rounded-lg p-4 text-center">                  <div class="text-2xl font-bold text-green-600">                    {{ getDeliveredOrders() }}                  </div>                  <div class="text-sm text-gray-600">                    {{ "b2b.profile.deliveredOrders" | translate }}                  </div>                </div>              </div>            </div>            <!-- Save Button -->            <div class="flex justify-end pt-6 border-t border-gray-200">              <button                type="submit"                [disabled]="companyInfoForm.invalid || updating"                class="px-6 py-3 bg-solar-500 hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:ring-offset-2 font-[\'DM_Sans\']"              >                <span *ngIf="!updating">{{                  "b2b.profile.saveChanges" | translate                }}</span>                <span *ngIf="updating" class="flex items-center space-x-2">                  <svg                    class="animate-spin w-4 h-4"                    fill="none"                    viewBox="0 0 24 24"                  >                    <circle                      class="opacity-25"                      cx="12"                      cy="12"                      r="10"                      stroke="currentColor"                      stroke-width="4"                    ></circle>                    <path                      class="opacity-75"                      fill="currentColor"                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                    ></path>                  </svg>                  <span>{{ "b2b.profile.saving" | translate }}</span>                </span>              </button>            </div>          </form>        </div>        <!-- Company Orders Tab -->        <div          *ngIf="activeTab === \'company-orders\'"          class="bg-white rounded-lg shadow-sm border border-gray-200 p-6"        >          <div class="mb-6">            <div class="flex items-center justify-between">              <div>                <h2                  class="text-2xl font-semibold text-gray-900 font-[\'Poppins\'] mb-2"                >                  {{ "b2b.profile.companyOrders" | translate }}                </h2>                <p class="text-gray-600 font-[\'DM_Sans\']">                  {{ "b2b.profile.viewOrderHistory" | translate }}                </p>              </div>              <div class="flex items-center space-x-2">                <select                  [(ngModel)]="orderStatusFilter"                  (ngModelChange)="filterOrders()"                  class="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500"                >                  <option value="">                    {{ "b2b.profile.allOrders" | translate }}                  </option>                  <option value="pending">                    {{ "b2b.profile.pending" | translate }}                  </option>                  <option value="processing">                    {{ "b2b.profile.processing" | translate }}                  </option>                  <option value="shipped">                    {{ "b2b.profile.shipped" | translate }}                  </option>                  <option value="delivered">                    {{ "b2b.profile.delivered" | translate }}                  </option>                  <option value="cancelled">                    {{ "b2b.profile.cancelled" | translate }}                  </option>                </select>              </div>            </div>          </div>          <!-- Loading State -->          <div *ngIf="ordersLoading" class="flex justify-center py-8">            <svg              class="animate-spin w-8 h-8 text-solar-600"              fill="none"              viewBox="0 0 24 24"            >              <circle                class="opacity-25"                cx="12"                cy="12"                r="10"                stroke="currentColor"                stroke-width="4"              ></circle>              <path                class="opacity-75"                fill="currentColor"                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"              ></path>            </svg>          </div>          <!-- Orders List -->          <div            *ngIf="!ordersLoading && filteredOrders.length > 0"            class="space-y-4"          >            <div              *ngFor="let order of filteredOrders"              class="border border-gray-200 rounded-lg p-6 hover:border-solar-600 transition-colors"            >              <div class="flex justify-between items-start mb-4">                <div>                  <h3                    class="text-lg font-semibold text-gray-900 font-[\'Poppins\']"                  >                    {{ "b2b.profile.orderNumber" | translate }}:                    {{ order.orderNumber }}                  </h3>                  <p class="text-sm text-gray-600 font-[\'DM_Sans\']">                    {{ formatDate(order.createdAt) }}                  </p>                </div>                <div class="text-right">                  <span                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"                    [class]="getOrderStatusClass(order.status)"                  >                    {{ getOrderStatusLabel(order.status) | translate }}                  </span>                  <p class="text-lg font-semibold text-gray-900 mt-1">                    {{ order.subtotal | currency: "EUR" : "symbol" : "1.2-2" }}                  </p>                </div>              </div>              <!-- Order Items Preview -->              <div class="bg-gray-50 rounded-lg p-3 mb-3">                <div class="text-xs font-medium text-gray-700 mb-2">                  {{ "b2b.profile.orderItems" | translate }}:                </div>                <div class="space-y-1">                  <div                    *ngFor="let item of order.items; let i = index"                    class="flex justify-between text-xs text-gray-600"                  >                    <span *ngIf="i < 3"                      >{{ item.productName }} ({{ item.quantity }}x)</span                    >                    <span *ngIf="i < 3">{{                      item.unitPrice * item.quantity                        | currency: "EUR" : "symbol" : "1.2-2"                    }}</span>                  </div>                  <div                    *ngIf="order.items.length > 3"                    class="text-xs text-gray-500 italic"                  >                    {{                      "b2b.profile.andMoreItems"                        | translate: { count: order.items.length - 3 }                    }}                  </div>                </div>              </div>              <!-- Order Actions -->              <div class="flex items-center justify-between">                <div class="flex items-center space-x-4 text-xs text-gray-500">                  <span *ngIf="order.paymentStatus">                    {{ "b2b.profile.payment" | translate }}:                    <span                      [class]="                        order.paymentStatus === \'paid\'                          ? \'text-green-600\'                          : \'text-yellow-600\'                      "                    >                      {{                        getPaymentStatusLabel(order.paymentStatus) | translate                      }}                    </span>                  </span>                  <span *ngIf="order.items.length">                    {{ order.items.length }}                    {{ "b2b.profile.items" | translate }}                  </span>                </div>                <div class="flex space-x-2">                  <button                    (click)="viewOrderDetails(order)"                    class="text-solar-500 hover:text-solar-600 text-xs font-medium"                  >                    {{ "b2b.profile.viewDetails" | translate }}                  </button>                  <button                    *ngIf="order.status === \'delivered\'"                    (click)="reorderItems(order)"                    class="text-blue-600 hover:text-blue-700 text-xs font-medium"                  >                    {{ "b2b.profile.reorder" | translate }}                  </button>                </div>              </div>            </div>          </div>          <!-- No Orders State -->          <div            *ngIf="!ordersLoading && filteredOrders.length === 0"            class="text-center py-12"          >            <svg              class="w-16 h-16 text-gray-400 mx-auto mb-4"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"              />            </svg>            <h3 class="text-lg font-medium text-gray-900 mb-2">              {{ "b2b.profile.noOrdersFound" | translate }}            </h3>            <p class="text-gray-600 mb-4">              {{ "b2b.profile.noOrdersFoundMessage" | translate }}            </p>            <button              (click)="navigateToProducts()"              class="bg-solar-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-solar-700 transition-colors"            >              {{ "b2b.profile.startShopping" | translate }}            </button>          </div>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PartnerProfileComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PartnerProfileComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,2735 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >CouponValidationService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/coupon-validation.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#usedCouponsInSession" >usedCouponsInSession</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#calculateDiscountAmount" >calculateDiscountAmount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#calculateIndividualProductDiscounts" >calculateIndividualProductDiscounts</a>
+                            </li>
+                            <li>
+                                <a href="#clearSessionCouponTracking" >clearSessionCouponTracking</a>
+                            </li>
+                            <li>
+                                <a href="#getAvailableCoupons" >getAvailableCoupons</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAvailableCouponsAsync" >getAvailableCouponsAsync</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getCouponByCode" >getCouponByCode</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getEligibleItems" >getEligibleItems</a>
+                            </li>
+                            <li>
+                                <a href="#incrementOfferUsage" >incrementOfferUsage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#incrementOfferUsageAsync" >incrementOfferUsageAsync</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isPotentiallyApplicable" >isPotentiallyApplicable</a>
+                            </li>
+                            <li>
+                                <a href="#markCouponAsUsedInSession" >markCouponAsUsedInSession</a>
+                            </li>
+                            <li>
+                                <a href="#removeCouponFromSession" >removeCouponFromSession</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validateBasicCouponRules" >validateBasicCouponRules</a>
+                            </li>
+                            <li>
+                                <a href="#validateCoupon" >validateCoupon</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateCouponAsync" >validateCouponAsync</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#validateOfferBasedRules" >validateOfferBasedRules</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#validateProductAndCategoryRules" >validateProductAndCategoryRules</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateDiscountAmount"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>calculateDiscountAmount</b></span>
+                        <a href="#calculateDiscountAmount"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>calculateDiscountAmount(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="492"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:492</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;number&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="calculateIndividualProductDiscounts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>calculateIndividualProductDiscounts</b></span>
+                        <a href="#calculateIndividualProductDiscounts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>calculateIndividualProductDiscounts(couponId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="630"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:630</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calculate individual product discounts for a coupon linked to an offer
+Returns both the total discount amount and details for individual application</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>couponId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;number&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearSessionCouponTracking"></a>
+                    <span class="name">
+                        <span ><b>clearSessionCouponTracking</b></span>
+                        <a href="#clearSessionCouponTracking"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearSessionCouponTracking()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="997"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:997</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clear all session coupon tracking (useful for cart clear or checkout completion)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAvailableCoupons"></a>
+                    <span class="name">
+                        <span ><b>getAvailableCoupons</b></span>
+                        <a href="#getAvailableCoupons"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAvailableCoupons(cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="786"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:786</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get available coupons for current cart</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Coupon.html" target="_self" >Observable&lt;Coupon[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAvailableCouponsAsync"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getAvailableCouponsAsync</b></span>
+                        <a href="#getAvailableCouponsAsync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAvailableCouponsAsync(cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="795"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:795</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Coupon.html" target="_self" >Promise&lt;Coupon[]&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCouponByCode"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getCouponByCode</b></span>
+                        <a href="#getCouponByCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getCouponByCode(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Coupon.html" target="_self" >Promise&lt;Coupon | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getEligibleItems"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getEligibleItems</b></span>
+                        <a href="#getEligibleItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getEligibleItems(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="551"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:551</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>CartItem[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="incrementOfferUsage"></a>
+                    <span class="name">
+                        <span ><b>incrementOfferUsage</b></span>
+                        <a href="#incrementOfferUsage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>incrementOfferUsage(offerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="900"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:900</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Increment the usage count for an offer when it&#39;s successfully used</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offerId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="incrementOfferUsageAsync"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>incrementOfferUsageAsync</b></span>
+                        <a href="#incrementOfferUsageAsync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>incrementOfferUsageAsync(offerId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="909"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:909</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>offerId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPotentiallyApplicable"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isPotentiallyApplicable</b></span>
+                        <a href="#isPotentiallyApplicable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isPotentiallyApplicable(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="857"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:857</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="markCouponAsUsedInSession"></a>
+                    <span class="name">
+                        <span ><b>markCouponAsUsedInSession</b></span>
+                        <a href="#markCouponAsUsedInSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>markCouponAsUsedInSession(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="981"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:981</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Mark a coupon as used in the current session</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeCouponFromSession"></a>
+                    <span class="name">
+                        <span ><b>removeCouponFromSession</b></span>
+                        <a href="#removeCouponFromSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeCouponFromSession(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="989"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:989</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Remove a coupon from the session tracking</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateBasicCouponRules"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validateBasicCouponRules</b></span>
+                        <a href="#validateBasicCouponRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateBasicCouponRules(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/CouponValidationResult.html" target="_self" >CouponValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateCoupon"></a>
+                    <span class="name">
+                        <span ><b>validateCoupon</b></span>
+                        <a href="#validateCoupon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateCoupon(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, cartItems: CartItem[], _userId?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validate if a coupon can be applied to the current cart items</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>_userId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;CouponValidationResult&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateCouponAsync"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>validateCouponAsync</b></span>
+                        <a href="#validateCouponAsync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateCouponAsync(code: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>code</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;CouponValidationResult&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateOfferBasedRules"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>validateOfferBasedRules</b></span>
+                        <a href="#validateOfferBasedRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateOfferBasedRules(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="326"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:326</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;CouponValidationResult&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateProductAndCategoryRules"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>validateProductAndCategoryRules</b></span>
+                        <a href="#validateProductAndCategoryRules"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>validateProductAndCategoryRules(coupon: <a href="../interfaces/Coupon.html" target="_self">Coupon</a>, cartItems: CartItem[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="415"
+                                    class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:415</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coupon</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Coupon.html" target="_self" >Coupon</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>cartItems</td>
+                                            <td>
+                                                        <code>CartItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/CouponValidationResult.html" target="_self" >CouponValidationResult</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:12</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usedCouponsInSession"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>usedCouponsInSession</b></span>
+                        <a href="#usedCouponsInSession"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Set&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shared/services/coupon-validation.service.ts:14</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Observable, from, catchError, of } from &#x27;rxjs&#x27;;
+import { SupabaseService } from &#x27;../../services/supabase.service&#x27;;
+import { Coupon, CouponValidationResult } from &#x27;../models/coupon.model&#x27;;
+import { CartItem } from &#x27;../models/cart.model&#x27;;
+import { TranslationService } from &#x27;./translation.service&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class CouponValidationService {
+  private supabaseService &#x3D; inject(SupabaseService);
+  private translationService &#x3D; inject(TranslationService);
+  private usedCouponsInSession &#x3D; new Set&lt;string&gt;(); // Track coupons used in current session
+
+  /**
+   * Validate if a coupon can be applied to the current cart items
+   */
+  validateCoupon(
+    code: string,
+    cartItems: CartItem[],
+    _userId?: string,
+  ): Observable&lt;CouponValidationResult&gt; {
+    return from(this.validateCouponAsync(code, cartItems)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error validating coupon:&#x27;, error);
+        return of({
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponValidationError&#x27;,
+          ),
+          discountAmount: undefined,
+          coupon: undefined,
+        } as CouponValidationResult);
+      }),
+    );
+  }
+
+  private async validateCouponAsync(
+    code: string,
+    cartItems: CartItem[],
+  ): Promise&lt;CouponValidationResult&gt; {
+    try {
+      // Step 1: Find the coupon by code
+      const coupon &#x3D; await this.getCouponByCode(code);
+
+      if (!coupon) {
+        return {
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponNotFound&#x27;,
+          ),
+          discountAmount: undefined,
+          coupon: undefined,
+        };
+      }
+
+      // Step 2: Basic coupon validation
+      const basicValidation &#x3D; this.validateBasicCouponRules(coupon, cartItems);
+      if (!basicValidation.isValid) {
+        return basicValidation;
+      }
+
+      // Step 3: Offer-based validation
+      const offerValidation &#x3D; await this.validateOfferBasedRules(
+        coupon,
+        cartItems,
+      );
+      if (!offerValidation.isValid) {
+        return offerValidation;
+      }
+
+      // Step 4: Product and category validation
+      const productValidation &#x3D; this.validateProductAndCategoryRules(
+        coupon,
+        cartItems,
+      );
+      if (!productValidation.isValid) {
+        return productValidation;
+      }
+
+      // Step 5: Calculate discount amount
+      const discountAmount &#x3D; await this.calculateDiscountAmount(
+        coupon,
+        cartItems,
+      );
+
+      return {
+        isValid: true,
+        discountAmount,
+        coupon,
+      };
+    } catch (error) {
+      console.error(&#x27;Error in coupon validation:&#x27;, error);
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(
+          &#x27;cart.couponValidationError&#x27;,
+        ),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+  }
+
+  private async getCouponByCode(code: string): Promise&lt;Coupon | null&gt; {
+    try {
+      console.log(&#x27;Looking for coupon with code:&#x27;, code);
+
+      // Fix the query syntax - Supabase expects each condition in the OR to be a full filter
+      // First, let&#x27;s check what columns exist by doing a simple query
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;offers&#x27;)
+        .select(&#x27;*&#x27;)
+        .or(
+          &#x60;code.eq.&quot;${code}&quot;,code.eq.&quot;${code.toUpperCase()}&quot;,code.eq.&quot;${code.toLowerCase()}&quot;&#x60;,
+        )
+        .not(&#x27;code&#x27;, &#x27;is&#x27;, null);
+
+      console.log(&#x27;Database query result:&#x27;, { data, error });
+
+      if (error) {
+        console.error(&#x27;Database error when fetching coupon:&#x27;, error);
+        return null;
+      }
+
+      if (!data || data.length &#x3D;&#x3D;&#x3D; 0) {
+        console.log(&#x27;No coupon found with code:&#x27;, code);
+
+        // Debug: Let&#x27;s see what coupon codes are available
+        const { data: allCoupons } &#x3D; await this.supabaseService.client
+          .from(&#x27;offers&#x27;)
+          .select(&#x27;code, title, *&#x27;)
+          .not(&#x27;code&#x27;, &#x27;is&#x27;, null)
+          .limit(10);
+
+        console.log(&#x27;Available coupon codes in database:&#x27;, allCoupons);
+        return null;
+      }
+
+      // Use the first matching coupon if multiple exist
+      const couponData &#x3D; Array.isArray(data) ? data[0] : data;
+
+      // Convert database format to Coupon interface
+      console.log(&#x27;Converting coupon data:&#x27;, couponData);
+      console.log(&#x27;Raw usage fields:&#x27;, {
+        max_usage: couponData.max_usage,
+        current_usage: couponData.current_usage,
+        usage_limit: couponData.usage_limit,
+        times_used: couponData.times_used,
+      });
+
+      const coupon &#x3D; {
+        id: couponData.id,
+        code: couponData.code,
+        title: couponData.title,
+        description: couponData.description,
+        discountType: couponData.discount_type,
+        discountValue: couponData.discount_value,
+        maxDiscountAmount: couponData.max_discount_amount,
+        minOrderAmount: couponData.min_order_amount,
+        maxOrderAmount: couponData.max_order_amount,
+        applicableProductIds: couponData.applicable_product_ids,
+        excludedProductIds: couponData.excluded_product_ids,
+        applicableOfferIds: [], // Not available in offers table
+        excludedOfferIds: [], // Not available in offers table
+        applicableCategories: couponData.applicable_category_ids || [],
+        excludedCategories: couponData.excluded_category_ids || [],
+        maxUsage:
+          couponData.max_usage !&#x3D;&#x3D; null &amp;&amp; couponData.max_usage !&#x3D;&#x3D; undefined
+            ? couponData.max_usage
+            : couponData.usage_limit !&#x3D;&#x3D; null &amp;&amp;
+                couponData.usage_limit !&#x3D;&#x3D; undefined
+              ? couponData.usage_limit
+              : null,
+        currentUsage: couponData.current_usage || couponData.times_used || 0,
+        maxUsagePerCustomer: couponData.max_usage_per_customer,
+        startDate: new Date(couponData.start_date),
+        endDate: couponData.end_date
+          ? new Date(couponData.end_date)
+          : undefined,
+        isActive: couponData.active !&#x3D;&#x3D; false, // Default to true if not specified
+        autoApply: couponData.auto_apply || false,
+        featured: couponData.featured || false,
+        createdAt: new Date(couponData.created_at),
+        updatedAt: new Date(couponData.updated_at),
+      };
+
+      console.log(&#x27;Converted coupon:&#x27;, coupon);
+      return coupon;
+    } catch (error) {
+      console.error(&#x27;Error fetching coupon:&#x27;, error);
+      return null;
+    }
+  }
+
+  private validateBasicCouponRules(
+    coupon: Coupon,
+    cartItems: CartItem[],
+  ): CouponValidationResult {
+    console.log(&#x27;Validating basic coupon rules for:&#x27;, coupon.code);
+
+    // Allow reapplying coupons - users can apply the same coupon multiple times
+    // to discount newly added products (for regular offers) or to complete bundles
+    // The cart service will handle ensuring products don&#x27;t get double-discounted
+    if (this.usedCouponsInSession.has(coupon.code.toLowerCase())) {
+      console.log(
+        &#x27;Coupon already applied - allowing reapplication for new products:&#x27;,
+        coupon.code,
+      );
+    }
+
+    // Check if coupon is active
+    if (!coupon.isActive) {
+      console.log(&#x27;Coupon is not active:&#x27;, coupon.isActive);
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(&#x27;cart.couponInactive&#x27;),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    // Check date validity
+    const now &#x3D; new Date();
+    console.log(
+      &#x27;Date validation - Now:&#x27;,
+      now,
+      &#x27;Start:&#x27;,
+      coupon.startDate,
+      &#x27;End:&#x27;,
+      coupon.endDate,
+    );
+
+    if (coupon.startDate &gt; now) {
+      console.log(&#x27;Coupon start date is in the future&#x27;);
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(
+          &#x27;cart.couponNotYetValid&#x27;,
+        ),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    if (coupon.endDate &amp;&amp; coupon.endDate &lt; now) {
+      console.log(&#x27;Coupon has expired&#x27;);
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(&#x27;cart.couponExpired&#x27;),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    // Check usage limits
+    // Note: maxUsage represents &quot;uses left&quot;, not total limit
+    // If maxUsage is null, the offer has unlimited usage
+    const usagesLeft &#x3D; coupon.maxUsage;
+    const currentUsage &#x3D; Number(coupon.currentUsage) || 0;
+
+    console.log(
+      &#x27;Usage validation - Uses left:&#x27;,
+      usagesLeft,
+      &#x27;Times used:&#x27;,
+      currentUsage,
+    );
+
+    // Check if there are any uses left (null means unlimited)
+    if (
+      usagesLeft !&#x3D;&#x3D; null &amp;&amp;
+      usagesLeft !&#x3D;&#x3D; undefined &amp;&amp;
+      Number(usagesLeft) &lt;&#x3D; 0
+    ) {
+      console.log(&#x27;Coupon has no uses left:&#x27;, { usagesLeft, currentUsage });
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(
+          &#x27;cart.couponUsageLimitReached&#x27;,
+        ),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    // Calculate cart total
+    const cartTotal &#x3D; cartItems.reduce(
+      (sum, item) &#x3D;&gt; sum + item.price * item.quantity,
+      0,
+    );
+
+    // Check minimum order amount
+    if (coupon.minOrderAmount &amp;&amp; cartTotal &lt; coupon.minOrderAmount) {
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(
+          &#x27;cart.couponMinOrderNotMet&#x27;,
+          {
+            amount: coupon.minOrderAmount.toFixed(2),
+          },
+        ),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    // Check maximum order amount
+    if (coupon.maxOrderAmount &amp;&amp; cartTotal &gt; coupon.maxOrderAmount) {
+      return {
+        isValid: false,
+        errorMessage: this.translationService.translate(
+          &#x27;cart.couponMaxOrderExceeded&#x27;,
+          {
+            amount: coupon.maxOrderAmount.toFixed(2),
+          },
+        ),
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    return { isValid: true };
+  }
+
+  private async validateOfferBasedRules(
+    coupon: Coupon,
+    cartItems: CartItem[],
+  ): Promise&lt;CouponValidationResult&gt; {
+    // Check if cart contains products that already have OTHER offer discounts applied
+    // Allow re-applying the same coupon (to newly added products)
+    const itemsWithOtherOffers &#x3D; cartItems.filter((item) &#x3D;&gt; {
+      const hasOffer &#x3D; item.offerId || item.offerName || item.offerSavings;
+      if (!hasOffer) return false;
+
+      // Allow if it&#x27;s the same coupon/offer being reapplied
+      const isSameCoupon &#x3D;
+        item.offerName &amp;&amp;
+        item.offerName.toLowerCase().includes(coupon.code.toLowerCase());
+      if (isSameCoupon) return false;
+
+      return true; // Different offer exists
+    });
+
+    if (itemsWithOtherOffers.length &gt; 0) {
+      console.log(
+        &#x27;Cart contains items with DIFFERENT offer discounts:&#x27;,
+        itemsWithOtherOffers.map((item) &#x3D;&gt; ({
+          name: item.name,
+          offerId: item.offerId,
+          offerName: item.offerName,
+          offerSavings: item.offerSavings,
+        })),
+      );
+
+      return {
+        isValid: false,
+        errorMessage:
+          this.translationService.translate(
+            &#x27;cart.couponCannotApplyToDiscountedProducts&#x27;,
+          ) ||
+          &#x27;Cannot apply coupon to products that already have offer discounts&#x27;,
+        discountAmount: undefined,
+        coupon: undefined,
+      };
+    }
+
+    // If coupon has offer restrictions, validate them
+    if (coupon.applicableOfferIds?.length || coupon.excludedOfferIds?.length) {
+      const cartOfferIds &#x3D; cartItems
+        .filter((item) &#x3D;&gt; item.offerId)
+        .map((item) &#x3D;&gt; item.offerId!)
+        .filter((offerId, index, array) &#x3D;&gt; array.indexOf(offerId) &#x3D;&#x3D;&#x3D; index); // Remove duplicates
+
+      // Check if cart has any products from applicable offers
+      if (coupon.applicableOfferIds?.length) {
+        const hasApplicableOffer &#x3D; cartOfferIds.some((offerId) &#x3D;&gt;
+          coupon.applicableOfferIds!.includes(offerId),
+        );
+
+        if (!hasApplicableOffer) {
+          return {
+            isValid: false,
+            errorMessage: this.translationService.translate(
+              &#x27;cart.couponNotApplicableToOffers&#x27;,
+            ),
+            discountAmount: undefined,
+            coupon: undefined,
+          };
+        }
+      }
+
+      // Check if cart has any products from excluded offers
+      if (coupon.excludedOfferIds?.length) {
+        const hasExcludedOffer &#x3D; cartOfferIds.some((offerId) &#x3D;&gt;
+          coupon.excludedOfferIds!.includes(offerId),
+        );
+
+        if (hasExcludedOffer) {
+          return {
+            isValid: false,
+            errorMessage: this.translationService.translate(
+              &#x27;cart.couponExcludedFromOffers&#x27;,
+            ),
+            discountAmount: undefined,
+            coupon: undefined,
+          };
+        }
+      }
+    }
+
+    return { isValid: true };
+  }
+
+  private validateProductAndCategoryRules(
+    coupon: Coupon,
+    cartItems: CartItem[],
+  ): CouponValidationResult {
+    // Check applicable products
+    if (coupon.applicableProductIds?.length) {
+      const hasApplicableProduct &#x3D; cartItems.some((item) &#x3D;&gt;
+        coupon.applicableProductIds!.includes(item.productId),
+      );
+
+      if (!hasApplicableProduct) {
+        return {
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponNotApplicableToProducts&#x27;,
+          ),
+          discountAmount: undefined,
+          coupon: undefined,
+        };
+      }
+    }
+
+    // Check excluded products
+    if (coupon.excludedProductIds?.length) {
+      const hasExcludedProduct &#x3D; cartItems.some((item) &#x3D;&gt;
+        coupon.excludedProductIds!.includes(item.productId),
+      );
+
+      if (hasExcludedProduct) {
+        return {
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponExcludedFromProducts&#x27;,
+          ),
+          discountAmount: undefined,
+          coupon: undefined,
+        };
+      }
+    }
+
+    // Check applicable categories
+    if (coupon.applicableCategories?.length) {
+      const hasApplicableCategory &#x3D; cartItems.some((item) &#x3D;&gt;
+        coupon.applicableCategories!.includes(item.category),
+      );
+
+      if (!hasApplicableCategory) {
+        return {
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponNotApplicableToCategories&#x27;,
+          ),
+          discountAmount: undefined,
+          coupon: undefined,
+        };
+      }
+    }
+
+    // Check excluded categories
+    if (coupon.excludedCategories?.length) {
+      const hasExcludedCategory &#x3D; cartItems.some((item) &#x3D;&gt;
+        coupon.excludedCategories!.includes(item.category),
+      );
+
+      if (hasExcludedCategory) {
+        return {
+          isValid: false,
+          errorMessage: this.translationService.translate(
+            &#x27;cart.couponExcludedFromCategories&#x27;,
+          ),
+        };
+      }
+    }
+
+    return { isValid: true };
+  }
+
+  private async calculateDiscountAmount(
+    coupon: Coupon,
+    cartItems: CartItem[],
+  ): Promise&lt;number&gt; {
+    // Calculate eligible items total (considering restrictions)
+    const eligibleItems &#x3D; this.getEligibleItems(coupon, cartItems);
+
+    let discountAmount &#x3D; 0;
+
+    // Priority 1: Check if this coupon has specific product discounts
+    const individualDiscountAmount &#x3D;
+      await this.calculateIndividualProductDiscounts(coupon.id, cartItems);
+    if (individualDiscountAmount &gt; 0) {
+      console.log(
+        &#x27;Applied individual product discounts:&#x27;,
+        individualDiscountAmount,
+      );
+      return individualDiscountAmount;
+    }
+
+    // Priority 2: Apply category-based or general discount to eligible items
+    console.log(
+      &#x27;No individual product discounts found, applying general discount to eligible items&#x27;,
+    );
+    const eligibleTotal &#x3D; eligibleItems.reduce(
+      (sum, item) &#x3D;&gt; sum + item.price * item.quantity,
+      0,
+    );
+
+    switch (coupon.discountType) {
+      case &#x27;percentage&#x27;:
+        discountAmount &#x3D; eligibleTotal * (coupon.discountValue / 100);
+        console.log(
+          &#x60;Percentage discount: ${coupon.discountValue}% of €${eligibleTotal} &#x3D; €${discountAmount}&#x60;,
+        );
+        break;
+      case &#x27;fixed_amount&#x27;:
+        discountAmount &#x3D; Math.min(coupon.discountValue, eligibleTotal);
+        console.log(
+          &#x60;Fixed amount discount: €${coupon.discountValue} (limited to total €${eligibleTotal}) &#x3D; €${discountAmount}&#x60;,
+        );
+        break;
+      case &#x27;free_shipping&#x27;:
+        discountAmount &#x3D; 0; // Shipping discount handled separately
+        console.log(&#x27;Free shipping discount applied&#x27;);
+        break;
+    }
+
+    // Apply maximum discount amount if specified
+    if (coupon.maxDiscountAmount &amp;&amp; discountAmount &gt; coupon.maxDiscountAmount) {
+      console.log(
+        &#x60;Discount capped at maximum: €${coupon.maxDiscountAmount} (was €${discountAmount})&#x60;,
+      );
+      discountAmount &#x3D; coupon.maxDiscountAmount;
+    }
+
+    return Math.round(discountAmount * 100) / 100; // Round to 2 decimal places
+  }
+
+  private getEligibleItems(coupon: Coupon, cartItems: CartItem[]): CartItem[] {
+    console.log(&#x27;Filtering eligible items for general discount application&#x27;);
+    console.log(&#x27;Coupon restrictions:&#x27;, {
+      applicableProductIds: coupon.applicableProductIds,
+      excludedProductIds: coupon.excludedProductIds,
+      applicableCategories: coupon.applicableCategories,
+      excludedCategories: coupon.excludedCategories,
+    });
+
+    const eligibleItems &#x3D; cartItems.filter((item) &#x3D;&gt; {
+      // Check product restrictions
+      if (
+        coupon.applicableProductIds?.length &amp;&amp;
+        !coupon.applicableProductIds.includes(item.productId)
+      ) {
+        console.log(&#x60;Item ${item.name} excluded: not in applicable products&#x60;);
+        return false;
+      }
+      if (
+        coupon.excludedProductIds?.length &amp;&amp;
+        coupon.excludedProductIds.includes(item.productId)
+      ) {
+        console.log(&#x60;Item ${item.name} excluded: in excluded products&#x60;);
+        return false;
+      }
+
+      // Check category restrictions
+      if (
+        coupon.applicableCategories?.length &amp;&amp;
+        !coupon.applicableCategories.includes(item.category)
+      ) {
+        console.log(
+          &#x60;Item ${item.name} excluded: category ${item.category} not in applicable categories&#x60;,
+        );
+        return false;
+      }
+      if (
+        coupon.excludedCategories?.length &amp;&amp;
+        coupon.excludedCategories.includes(item.category)
+      ) {
+        console.log(
+          &#x60;Item ${item.name} excluded: category ${item.category} in excluded categories&#x60;,
+        );
+        return false;
+      }
+
+      // Check offer restrictions
+      if (coupon.applicableOfferIds?.length) {
+        if (
+          !item.offerId ||
+          !coupon.applicableOfferIds.includes(item.offerId)
+        ) {
+          console.log(&#x60;Item ${item.name} excluded: not from applicable offers&#x60;);
+          return false;
+        }
+      }
+      if (
+        coupon.excludedOfferIds?.length &amp;&amp;
+        item.offerId &amp;&amp;
+        coupon.excludedOfferIds.includes(item.offerId)
+      ) {
+        console.log(&#x60;Item ${item.name} excluded: from excluded offers&#x60;);
+        return false;
+      }
+
+      console.log(&#x60;Item ${item.name} is eligible for general discount&#x60;);
+      return true;
+    });
+
+    console.log(
+      &#x60;Found ${eligibleItems.length} eligible items for general discount out of ${cartItems.length} total items&#x60;,
+    );
+    return eligibleItems;
+  }
+
+  /**
+   * Calculate individual product discounts for a coupon linked to an offer
+   * Returns both the total discount amount and details for individual application
+   */
+  private async calculateIndividualProductDiscounts(
+    couponId: string,
+    cartItems: CartItem[],
+  ): Promise&lt;number&gt; {
+    try {
+      console.log(&#x27;&#x3D;&#x3D;&#x3D; CALCULATING INDIVIDUAL PRODUCT DISCOUNTS &#x3D;&#x3D;&#x3D;&#x27;);
+      console.log(&#x27;Coupon ID:&#x27;, couponId);
+      console.log(
+        &#x27;Cart items:&#x27;,
+        cartItems.map((item) &#x3D;&gt; ({
+          id: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      );
+
+      // Query offer_products to get individual product discounts for this offer
+      // First try to get all columns to see what exists
+      const { data: offerProducts, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;offer_products&#x27;)
+        .select(&#x27;*&#x27;)
+        .eq(&#x27;offer_id&#x27;, couponId);
+
+      if (error) {
+        console.error(&#x27;Error fetching offer products:&#x27;, error);
+        return 0;
+      }
+
+      if (!offerProducts || offerProducts.length &#x3D;&#x3D;&#x3D; 0) {
+        console.log(
+          &#x27;✅ No specific product discounts found - will use category/general discount&#x27;,
+        );
+        return 0;
+      }
+
+      console.log(&#x27;📋 Raw offer_products data:&#x27;, offerProducts);
+      console.log(&#x27;📋 Available columns:&#x27;, Object.keys(offerProducts[0] || {}));
+
+      console.log(
+        &#x27;📋 Available product discounts in database:&#x27;,
+        offerProducts.map((op) &#x3D;&gt; ({
+          productId: op.product_id,
+          type: op.discount_type || op.type || &#x27;unknown&#x27;,
+          amount: op.discount_amount || op.amount,
+          percentage: op.discount_percentage || op.percentage,
+        })),
+      );
+
+      let totalDiscount &#x3D; 0;
+      let hasMatchingProducts &#x3D; false;
+
+      // Calculate discount ONLY for cart items that match specific product discounts
+      console.log(
+        &#x27;🔍 Checking which cart items match specific product discounts...&#x27;,
+      );
+
+      for (const cartItem of cartItems) {
+        const productDiscount &#x3D; offerProducts.find(
+          (op) &#x3D;&gt; op.product_id &#x3D;&#x3D;&#x3D; cartItem.productId,
+        );
+
+        if (productDiscount) {
+          hasMatchingProducts &#x3D; true;
+          let itemDiscount &#x3D; 0;
+
+          console.log(
+            &#x60;✅ MATCH FOUND: ${cartItem.name} (ID: ${cartItem.productId})&#x60;,
+          );
+          console.log(&#x60;   Discount data:&#x60;, {
+            type: productDiscount.discount_type,
+            amount: productDiscount.discount_amount,
+            percentage: productDiscount.discount_percentage,
+          });
+
+          // Handle discount types - if type is undefined, check amounts to determine type
+          const discountType &#x3D;
+            productDiscount.discount_type ||
+            productDiscount.type ||
+            (productDiscount.discount_amount &gt; 0
+              ? &#x27;fixed_amount&#x27;
+              : productDiscount.discount_percentage &gt; 0
+                ? &#x27;percentage&#x27;
+                : &#x27;unknown&#x27;);
+
+          const discountAmount &#x3D;
+            productDiscount.discount_amount || productDiscount.amount || 0;
+          const discountPercentage &#x3D;
+            productDiscount.discount_percentage ||
+            productDiscount.percentage ||
+            0;
+
+          console.log(
+            &#x60;   Determined type: ${discountType}, amount: ${discountAmount}, percentage: ${discountPercentage}&#x60;,
+          );
+
+          if (discountType &#x3D;&#x3D;&#x3D; &#x27;fixed_amount&#x27; &amp;&amp; discountAmount &gt; 0) {
+            // Fixed amount discount per unit - multiply by quantity
+            // If you have 4 units of a product with 50 EUR discount, total discount &#x3D; 4 × 50 EUR &#x3D; 200 EUR
+            itemDiscount &#x3D; discountAmount * cartItem.quantity;
+            console.log(
+              &#x60;   💰 Fixed discount: €${discountAmount} × ${cartItem.quantity} units &#x3D; €${itemDiscount}&#x60;,
+            );
+          } else if (discountType &#x3D;&#x3D;&#x3D; &#x27;percentage&#x27; &amp;&amp; discountPercentage &gt; 0) {
+            // Percentage discount on the item&#x27;s total price (quantity considered for percentage)
+            const itemTotal &#x3D; cartItem.price * cartItem.quantity;
+            itemDiscount &#x3D; itemTotal * (discountPercentage / 100);
+            console.log(
+              &#x60;   📊 Percentage discount: ${discountPercentage}% of €${itemTotal} &#x3D; €${itemDiscount}&#x60;,
+            );
+          } else {
+            console.log(
+              &#x60;   ❌ No valid discount found: type&#x3D;${discountType}, amount&#x3D;${discountAmount}, percentage&#x3D;${discountPercentage}&#x60;,
+            );
+          }
+
+          totalDiscount +&#x3D; itemDiscount;
+          console.log(
+            &#x60;   📈 Running total after ${cartItem.name}: €${totalDiscount}&#x60;,
+          );
+        } else {
+          console.log(
+            &#x60;❌ NO MATCH: ${cartItem.name} (ID: ${cartItem.productId}) - not in specific product discounts&#x60;,
+          );
+        }
+      }
+
+      if (hasMatchingProducts) {
+        const matchingCount &#x3D; cartItems.filter((item) &#x3D;&gt;
+          offerProducts.some((op) &#x3D;&gt; op.product_id &#x3D;&#x3D;&#x3D; item.productId),
+        ).length;
+
+        console.log(&#x60;🎯 FINAL RESULT: €${totalDiscount}&#x60;);
+        console.log(
+          &#x60;   Applied to ${matchingCount} out of ${cartItems.length} cart items&#x60;,
+        );
+        console.log(&#x60;   Discount source: SPECIFIC PRODUCT DISCOUNTS&#x60;);
+        console.log(&#x27;&#x3D;&#x3D;&#x3D; END INDIVIDUAL PRODUCT CALCULATION &#x3D;&#x3D;&#x3D;&#x27;);
+
+        return Math.round(totalDiscount * 100) / 100;
+      } else {
+        console.log(
+          &#x27;❌ No cart items match ANY specific products - will use category/general discount&#x27;,
+        );
+        console.log(&#x27;&#x3D;&#x3D;&#x3D; END INDIVIDUAL PRODUCT CALCULATION &#x3D;&#x3D;&#x3D;&#x27;);
+        return 0;
+      }
+    } catch (error) {
+      console.error(&#x27;Error calculating individual product discounts:&#x27;, error);
+      return 0;
+    }
+  }
+
+  /**
+   * Get available coupons for current cart
+   */
+  getAvailableCoupons(cartItems: CartItem[]): Observable&lt;Coupon[]&gt; {
+    return from(this.getAvailableCouponsAsync(cartItems)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error fetching available coupons:&#x27;, error);
+        return of([]);
+      }),
+    );
+  }
+
+  private async getAvailableCouponsAsync(
+    cartItems: CartItem[],
+  ): Promise&lt;Coupon[]&gt; {
+    try {
+      const now &#x3D; new Date().toISOString();
+
+      const { data, error } &#x3D; await this.supabaseService.client
+        .from(&#x27;offers&#x27;)
+        .select(&#x27;*&#x27;)
+        .not(&#x27;code&#x27;, &#x27;is&#x27;, null) // Only get offers with coupon codes
+        .lte(&#x27;start_date&#x27;, now)
+        .or(&#x60;end_date.is.null,end_date.gte.${now}&#x60;)
+        .order(&#x27;featured&#x27;, { ascending: false });
+
+      if (error || !data) {
+        return [];
+      }
+
+      // Convert and filter coupons based on cart compatibility
+      const coupons: Coupon[] &#x3D; data.map((item) &#x3D;&gt; ({
+        id: item.id,
+        code: item.code,
+        title: item.title,
+        description: item.description,
+        discountType: item.discount_type,
+        discountValue: item.discount_value,
+        maxDiscountAmount: item.max_discount_amount,
+        minOrderAmount: item.min_order_amount,
+        maxOrderAmount: item.max_order_amount,
+        applicableProductIds: item.applicable_product_ids,
+        excludedProductIds: item.excluded_product_ids,
+        applicableOfferIds: [], // Not available in offers table
+        excludedOfferIds: [], // Not available in offers table
+        applicableCategories: item.applicable_category_ids || [],
+        excludedCategories: item.excluded_category_ids || [],
+        maxUsage:
+          item.max_usage !&#x3D;&#x3D; null &amp;&amp; item.max_usage !&#x3D;&#x3D; undefined
+            ? item.max_usage
+            : item.usage_limit !&#x3D;&#x3D; null &amp;&amp; item.usage_limit !&#x3D;&#x3D; undefined
+              ? item.usage_limit
+              : null,
+        currentUsage: item.current_usage || item.times_used || 0,
+        maxUsagePerCustomer: item.max_usage_per_customer,
+        startDate: new Date(item.start_date),
+        endDate: item.end_date ? new Date(item.end_date) : undefined,
+        isActive: item.active !&#x3D;&#x3D; false, // Default to true if not specified
+        autoApply: item.auto_apply || false,
+        featured: item.featured || false,
+        createdAt: new Date(item.created_at),
+        updatedAt: new Date(item.updated_at),
+      }));
+
+      // Filter coupons that are potentially applicable to the current cart
+      return coupons.filter((coupon) &#x3D;&gt;
+        this.isPotentiallyApplicable(coupon, cartItems),
+      );
+    } catch (error) {
+      console.error(&#x27;Error fetching available coupons:&#x27;, error);
+      return [];
+    }
+  }
+
+  private isPotentiallyApplicable(
+    coupon: Coupon,
+    cartItems: CartItem[],
+  ): boolean {
+    // Quick check to see if coupon could potentially apply to cart items
+    const cartTotal &#x3D; cartItems.reduce(
+      (sum, item) &#x3D;&gt; sum + item.price * item.quantity,
+      0,
+    );
+
+    // Check minimum order amount
+    if (coupon.minOrderAmount &amp;&amp; cartTotal &lt; coupon.minOrderAmount) {
+      return false;
+    }
+
+    // Check if coupon has product restrictions and cart has compatible products
+    if (coupon.applicableProductIds?.length) {
+      const cartProductIds &#x3D; cartItems.map((item) &#x3D;&gt; item.productId);
+      const hasCompatibleProduct &#x3D; cartProductIds.some((productId) &#x3D;&gt;
+        coupon.applicableProductIds!.includes(productId),
+      );
+      if (!hasCompatibleProduct) {
+        return false;
+      }
+    }
+
+    // Check if coupon has category restrictions and cart has compatible categories
+    if (coupon.applicableCategories?.length) {
+      const cartCategories &#x3D; cartItems.map((item) &#x3D;&gt; item.category);
+      const hasCompatibleCategory &#x3D; cartCategories.some((category) &#x3D;&gt;
+        coupon.applicableCategories!.includes(category),
+      );
+      if (!hasCompatibleCategory) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Increment the usage count for an offer when it&#x27;s successfully used
+   */
+  incrementOfferUsage(offerId: string): Observable&lt;boolean&gt; {
+    return from(this.incrementOfferUsageAsync(offerId)).pipe(
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Error incrementing offer usage:&#x27;, error);
+        return of(false);
+      }),
+    );
+  }
+
+  private async incrementOfferUsageAsync(offerId: string): Promise&lt;boolean&gt; {
+    try {
+      console.log(&#x27;Using coupon for offer:&#x27;, offerId);
+
+      // First get current usage data
+      const { data: offerData, error: fetchError } &#x3D;
+        await this.supabaseService.client
+          .from(&#x27;offers&#x27;)
+          .select(&#x27;current_usage, max_usage&#x27;)
+          .eq(&#x27;id&#x27;, offerId)
+          .single();
+
+      if (fetchError) {
+        console.error(&#x27;Error fetching current offer usage:&#x27;, fetchError);
+        return false;
+      }
+
+      const currentUsage &#x3D; offerData.current_usage || 0;
+      const usagesLeft &#x3D; offerData.max_usage;
+
+      // Check if there are any uses left (null means unlimited)
+      if (
+        usagesLeft !&#x3D;&#x3D; null &amp;&amp;
+        usagesLeft !&#x3D;&#x3D; undefined &amp;&amp;
+        Number(usagesLeft) &lt;&#x3D; 0
+      ) {
+        console.warn(&#x27;No uses left for offer:&#x27;, { currentUsage, usagesLeft });
+        return false;
+      }
+
+      // Increment current_usage and decrement max_usage (uses left) only if not unlimited
+      const updateData: any &#x3D; {
+        current_usage: currentUsage + 1,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Only decrement max_usage if it&#x27;s not null (unlimited)
+      if (usagesLeft !&#x3D;&#x3D; null &amp;&amp; usagesLeft !&#x3D;&#x3D; undefined) {
+        updateData.max_usage &#x3D; Number(usagesLeft) - 1;
+      }
+
+      const { error: updateError } &#x3D; await this.supabaseService.client
+        .from(&#x27;offers&#x27;)
+        .update(updateData)
+        .eq(&#x27;id&#x27;, offerId);
+
+      if (updateError) {
+        console.error(&#x27;Error updating offer usage:&#x27;, updateError);
+        return false;
+      }
+
+      console.log(&#x27;Successfully used coupon:&#x27;, {
+        offerId,
+        oldCurrentUsage: currentUsage,
+        newCurrentUsage: currentUsage + 1,
+        oldUsagesLeft: usagesLeft,
+        newUsagesLeft:
+          usagesLeft !&#x3D;&#x3D; null &amp;&amp; usagesLeft !&#x3D;&#x3D; undefined
+            ? Number(usagesLeft) - 1
+            : &#x27;unlimited&#x27;,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(&#x27;Error in incrementOfferUsageAsync:&#x27;, error);
+      return false;
+    }
+  }
+
+  /**
+   * Mark a coupon as used in the current session
+   */
+  markCouponAsUsedInSession(code: string): void {
+    this.usedCouponsInSession.add(code.toLowerCase());
+    console.log(&#x27;Marked coupon as used in session:&#x27;, code);
+  }
+
+  /**
+   * Remove a coupon from the session tracking
+   */
+  removeCouponFromSession(code: string): void {
+    this.usedCouponsInSession.delete(code.toLowerCase());
+    console.log(&#x27;Removed coupon from session tracking:&#x27;, code);
+  }
+
+  /**
+   * Clear all session coupon tracking (useful for cart clear or checkout completion)
+   */
+  clearSessionCouponTracking(): void {
+    this.usedCouponsInSession.clear();
+    console.log(&#x27;Cleared all session coupon tracking&#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'CouponValidationService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

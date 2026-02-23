@@ -1,0 +1,1737 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  BlogDetailComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/blog/blog-detail/blog-detail.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-blog-detail</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./blog-detail.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./blog-detail.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#blogMapper" >blogMapper</a>
+                            </li>
+                            <li>
+                                <a href="#blogPost" >blogPost</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#destroy$" >destroy$</a>
+                            </li>
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                <a href="#imageVisible" >imageVisible</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#postId" >postId</a>
+                            </li>
+                            <li>
+                                <a href="#relatedPosts" >relatedPosts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#seoService" >seoService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#supabaseService" >supabaseService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#formatDate" >formatDate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadBlogPost" >loadBlogPost</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadRelatedPosts" >loadRelatedPosts</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToPost" >navigateToPost</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onImageError" >onImageError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setBlogPostSeo" >setBlogPostSeo</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#placeholderImage" >placeholderImage</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDate"></a>
+                    <span class="name">
+                        <span ><b>formatDate</b></span>
+                        <a href="#formatDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDate(date: string | Date, format: "full" | "short")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>string | Date</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>format</td>
+                                            <td>
+                                                        <code>&quot;full&quot; | &quot;short&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;full&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadBlogPost"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadBlogPost</b></span>
+                        <a href="#loadBlogPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadBlogPost(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadRelatedPosts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadRelatedPosts</b></span>
+                        <a href="#loadRelatedPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadRelatedPosts(categoryId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, excludeId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>categoryId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>excludeId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToPost"></a>
+                    <span class="name">
+                        <span ><b>navigateToPost</b></span>
+                        <a href="#navigateToPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToPost(postId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>postId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImageError"></a>
+                    <span class="name">
+                        <span ><b>onImageError</b></span>
+                        <a href="#onImageError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImageError(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:130</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setBlogPostSeo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setBlogPostSeo</b></span>
+                        <a href="#setBlogPostSeo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setBlogPostSeo(post: <a href="../interfaces/BlogPost.html" target="_self">BlogPost</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set SEO tags for the blog post page</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>post</td>
+                                            <td>
+                                                            <code><a href="../interfaces/BlogPost.html" target="_self" >BlogPost</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blogMapper"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>blogMapper</b></span>
+                        <a href="#blogMapper"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(BlogDataMapperService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blogPost"></a>
+                    <span class="name">
+                        <span ><b>blogPost</b></span>
+                        <a href="#blogPost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BlogPost | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroy$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>destroy$</b></span>
+                        <a href="#destroy$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageVisible"></a>
+                    <span class="name">
+                        <span ><b>imageVisible</b></span>
+                        <a href="#imageVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="postId"></a>
+                    <span class="name">
+                        <span ><b>postId</b></span>
+                        <a href="#postId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="relatedPosts"></a>
+                    <span class="name">
+                        <span ><b>relatedPosts</b></span>
+                        <a href="#relatedPosts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>BlogPost[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="seoService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>seoService</b></span>
+                        <a href="#seoService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SeoService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="supabaseService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>supabaseService</b></span>
+                        <a href="#supabaseService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(SupabaseService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="placeholderImage"></a>
+                        <span class="name"><b>placeholderImage</b><a href="#placeholderImage"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>placeholderImage()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/features/b2c/blog/blog-detail/blog-detail.component.ts:124</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, OnDestroy } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { Subject, catchError, finalize, of, takeUntil, from } from &#x27;rxjs&#x27;;
+import { BlogPost } from &#x27;../../../../shared/models/blog.model&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+import {
+  BlogDataMapperService,
+  SupabaseBlogPost,
+} from &#x27;../../../../services/blog-data-mapper.service&#x27;;
+import { TranslatePipe } from &#x27;../../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../../shared/services/translation.service&#x27;;
+import { SeoService } from &#x27;../../../../shared/services/seo.service&#x27;;
+import { ImagePlaceholders } from &#x27;../../../../core/data/image-placeholders.data&#x27;;
+
+@Component({
+  selector: &#x27;app-blog-detail&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslatePipe],
+  templateUrl: &#x27;./blog-detail.component.html&#x27;,
+  styleUrls: [&#x27;./blog-detail.component.scss&#x27;],
+})
+export class BlogDetailComponent implements OnInit, OnDestroy {
+  private route &#x3D; inject(ActivatedRoute);
+  public router &#x3D; inject(Router);
+  private supabaseService &#x3D; inject(SupabaseService);
+  private blogMapper &#x3D; inject(BlogDataMapperService);
+  private translationService &#x3D; inject(TranslationService);
+  private seoService &#x3D; inject(SeoService);
+  private destroy$ &#x3D; new Subject&lt;void&gt;();
+
+  blogPost: BlogPost | null &#x3D; null;
+  relatedPosts: BlogPost[] &#x3D; [];
+  postId: string | null &#x3D; null;
+  loading &#x3D; true;
+  error: string | null &#x3D; null;
+  imageVisible &#x3D; true;
+
+  ngOnInit() {
+    this.route.paramMap.pipe(takeUntil(this.destroy$)).subscribe((params) &#x3D;&gt; {
+      this.postId &#x3D; params.get(&#x27;id&#x27;);
+      if (this.postId) {
+        this.loadBlogPost(this.postId);
+        // Scroll to top when navigating to a new blog post
+        window.scrollTo(0, 0);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.seoService.resetToDefaults();
+  }
+
+  private loadBlogPost(id: string) {
+    this.loading &#x3D; true;
+    this.error &#x3D; null;
+
+    from(this.supabaseService.getBlogPostById(id))
+      .pipe(
+        catchError((error: any) &#x3D;&gt; {
+          console.error(&#x27;Error loading blog post:&#x27;, error);
+          this.error &#x3D; &#x27;Article not found or could not be loaded.&#x27;;
+          return of(null);
+        }),
+        finalize(() &#x3D;&gt; (this.loading &#x3D; false)),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: any) &#x3D;&gt; {
+        if (data) {
+          this.blogPost &#x3D; this.blogMapper.mapSupabaseToBlogPost(
+            data as SupabaseBlogPost,
+          );
+          this.loadRelatedPosts(this.blogPost.category.id, this.blogPost.id);
+
+          // Set SEO for blog post
+          this.setBlogPostSeo(this.blogPost);
+
+          // Increment view count
+          from(this.supabaseService.incrementBlogPostViews(id)).subscribe({
+            error: (error: any) &#x3D;&gt;
+              console.warn(&#x27;Failed to increment view count:&#x27;, error),
+          });
+        }
+      });
+  }
+
+  private loadRelatedPosts(categoryId: string, excludeId: string) {
+    from(this.supabaseService.getRelatedBlogPosts(categoryId, excludeId, 3))
+      .pipe(
+        catchError((error: any) &#x3D;&gt; {
+          console.error(&#x27;Error loading related posts:&#x27;, error);
+          return of([]);
+        }),
+        takeUntil(this.destroy$),
+      )
+      .subscribe((data: any[]) &#x3D;&gt; {
+        this.relatedPosts &#x3D; this.blogMapper.mapSupabaseToBlogPosts(
+          data as SupabaseBlogPost[],
+        );
+      });
+  }
+
+  navigateToPost(postId: string) {
+    this.router.navigate([&#x27;/blog&#x27;, postId]);
+  }
+
+  formatDate(date: string | Date, format: &#x27;full&#x27; | &#x27;short&#x27; &#x3D; &#x27;full&#x27;): string {
+    const dateObj &#x3D; typeof date &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? new Date(date) : date;
+    const currentLang &#x3D; this.translationService.getCurrentLanguage();
+
+    const options: Intl.DateTimeFormatOptions &#x3D;
+      format &#x3D;&#x3D;&#x3D; &#x27;short&#x27;
+        ? { month: &#x27;short&#x27;, day: &#x27;numeric&#x27; }
+        : { year: &#x27;numeric&#x27;, month: &#x27;short&#x27;, day: &#x27;numeric&#x27; };
+
+    return dateObj.toLocaleDateString(
+      currentLang &#x3D;&#x3D;&#x3D; &#x27;hr&#x27; ? &#x27;hr-HR&#x27; : &#x27;en-US&#x27;,
+      options,
+    );
+  }
+
+  get placeholderImage(): string {
+    const placeholder &#x3D; ImagePlaceholders.find(p &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; &#x27;news&#x27;);
+
+    return placeholder?.url || &#x27;&#x27;;
+  }
+
+  onImageError(event: Event): void {
+    this.imageVisible &#x3D; false;
+  }
+
+  /**
+   * Set SEO tags for the blog post page
+   */
+  private setBlogPostSeo(post: BlogPost): void {
+    // Set blog post page SEO
+    this.seoService.setBlogPostPage({
+      title: post.title,
+      description: post.excerpt || post.title,
+      image: post.imageUrl,
+      datePublished: post.publishedAt,
+      dateModified: post.updatedAt || undefined,
+      tags: post.tags?.map((tag) &#x3D;&gt; tag.name),
+    });
+
+    // Set breadcrumbs schema
+    this.seoService.setBreadcrumbs([
+      { name: &#x27;Početna&#x27;, url: &#x27;/&#x27; },
+      { name: &#x27;Blog&#x27;, url: &#x27;/blog&#x27; },
+      { name: post.title },
+    ]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;bg-white mb-20&quot;&gt;
+  &lt;!-- Loading State --&gt;
+  &lt;div *ngIf&#x3D;&quot;loading&quot; class&#x3D;&quot;flex justify-center items-center min-h-screen&quot;&gt;
+    &lt;div class&#x3D;&quot;flex flex-col items-center space-y-4&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600&quot;
+      &gt;&lt;/div&gt;
+      &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;blog.loadingArticle&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Error State --&gt;
+  &lt;div *ngIf&#x3D;&quot;error &amp;&amp; !loading&quot; class&#x3D;&quot;max-w-2xl mx-auto text-center py-20&quot;&gt;
+    &lt;div class&#x3D;&quot;text-gray-400 text-6xl mb-6&quot;&gt;📄&lt;/div&gt;
+    &lt;h2 class&#x3D;&quot;text-2xl font-bold text-gray-900 font-[&#x27;Poppins&#x27;]&quot;&gt;
+      {{ &quot;blog.articleNotFound&quot; | translate }}
+    &lt;/h2&gt;
+    &lt;p class&#x3D;&quot;text-gray-600 mt-4 mb-8 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{ error }}&lt;/p&gt;
+    &lt;button
+      (click)&#x3D;&quot;router.navigate([&#x27;/blog&#x27;])&quot;
+      class&#x3D;&quot;bg-solar-500 text-white px-6 py-3 rounded-lg hover:bg-solar-500 transition-colors font-[&#x27;DM_Sans&#x27;] font-medium&quot;
+    &gt;
+      {{ &quot;blog.backToBlog&quot; | translate }}
+    &lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Content --&gt;
+  &lt;div *ngIf&#x3D;&quot;blogPost &amp;&amp; !loading&quot;&gt;
+    &lt;!-- Hero Section --&gt;
+    &lt;section class&#x3D;&quot;relative bg-solar-500 text-white py-12&quot;&gt;
+      &lt;div class&#x3D;&quot;absolute inset-0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8&quot;&gt;
+        &lt;!-- Breadcrumb --&gt;
+        &lt;nav class&#x3D;&quot;mb-4&quot;&gt;
+          &lt;ol class&#x3D;&quot;flex items-center space-x-2 text-sm&quot;&gt;
+            &lt;li&gt;
+              &lt;a
+                routerLink&#x3D;&quot;/&quot;
+                class&#x3D;&quot;hover:text-solar-200 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+                &gt;{{ &quot;blog.home&quot; | translate }}&lt;/a
+              &gt;
+            &lt;/li&gt;
+            &lt;li class&#x3D;&quot;text-solar-200 font-[&#x27;DM_Sans&#x27;]&quot;&gt;/&lt;/li&gt;
+            &lt;li&gt;
+              &lt;a
+                routerLink&#x3D;&quot;/novosti&quot;
+                class&#x3D;&quot;hover:text-solar-200 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+                &gt;{{ &quot;blog.blog&quot; | translate }}&lt;/a
+              &gt;
+            &lt;/li&gt;
+            &lt;li class&#x3D;&quot;text-solar-200 font-[&#x27;DM_Sans&#x27;]&quot;&gt;/&lt;/li&gt;
+            &lt;li class&#x3D;&quot;text-solar-100 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+              {{ blogPost.title }}
+            &lt;/li&gt;
+          &lt;/ol&gt;
+        &lt;/nav&gt;
+
+        &lt;div class&#x3D;&quot;max-w-4xl&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center space-x-8 mb-8&quot;&gt;
+            &lt;span class&#x3D;&quot;text-solar-100 font-[&#x27;DM_Sans&#x27;]&quot;
+              &gt;{{ blogPost.readTime }}
+              {{ &quot;blog.minutesRead&quot; | translate }}&lt;/span
+            &gt;
+            &lt;span class&#x3D;&quot;text-solar-100 font-[&#x27;DM_Sans&#x27;]&quot;&gt;{{
+              formatDate(blogPost.publishedAt)
+            }}&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;h1
+            class&#x3D;&quot;text-4xl md:text-5xl font-bold font-[&#x27;Poppins&#x27;] mb-6 leading-tight&quot;
+          &gt;
+            {{ blogPost.title }}
+          &lt;/h1&gt;
+
+          &lt;p
+            class&#x3D;&quot;text-xl text-solar-100 mb-8 leading-relaxed font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;
+            {{ blogPost.excerpt }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Article Content --&gt;
+    &lt;article class&#x3D;&quot;max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12&quot;&gt;
+      &lt;!-- Featured Image --&gt;
+      &lt;div *ngIf&#x3D;&quot;imageVisible&quot; class&#x3D;&quot;mb-12&quot;&gt;
+        &lt;img
+          [src]&#x3D;&quot;blogPost.imageUrl || this.placeholderImage&quot;
+          [alt]&#x3D;&quot;blogPost.title&quot;
+          class&#x3D;&quot;w-full h-96 object-cover rounded-lg shadow-lg&quot;
+          (error)&#x3D;&quot;onImageError($event)&quot;
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Article Body --&gt;
+      &lt;div
+        class&#x3D;&quot;prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-[&#x27;Poppins&#x27;] prose-headings:font-semibold prose-headings:mt-8 prose-headings:mb-4 prose-p:text-gray-700 prose-p:font-[&#x27;DM_Sans&#x27;] prose-p:leading-relaxed prose-p:mb-6 prose-ul:mb-6 prose-ul:pl-6 prose-li:mb-2 prose-li:font-[&#x27;DM_Sans&#x27;] prose-blockquote:border-l-4 prose-blockquote:border-solar-500 prose-blockquote:pl-4 prose-blockquote:my-8 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:font-[&#x27;DM_Sans&#x27;] prose-img:rounded-lg prose-img:my-8 prose-a:text-solar-600 prose-a:underline hover:prose-a:text-solar-500&quot;
+      &gt;
+        &lt;div
+          [innerHTML]&#x3D;&quot;blogPost.htmlContent || blogPost.content&quot;
+          class&#x3D;&quot;text-gray-700 leading-relaxed font-[&#x27;DM_Sans&#x27;]&quot;
+        &gt;&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Tags --&gt;
+      &lt;div *ngIf&#x3D;&quot;blogPost.tags.length &gt; 0&quot;
+           class&#x3D;&quot;mt-12 pt-8 border-t border-gray-200&quot;&gt;
+        &lt;h3 class&#x3D;&quot;text-lg font-semibold mb-4 font-[&#x27;Poppins&#x27;] text-gray-900&quot;&gt;
+          {{ &quot;blog.tags&quot; | translate }}
+        &lt;/h3&gt;
+        &lt;div class&#x3D;&quot;flex flex-wrap gap-2&quot;&gt;
+          &lt;span
+            *ngFor&#x3D;&quot;let tag of blogPost.tags&quot;
+            class&#x3D;&quot;bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-[&#x27;DM_Sans&#x27;]&quot;
+          &gt;
+            {{ tag.name }}
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./blog-detail.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="bg-white mb-20">  <!-- Loading State -->  <div *ngIf="loading" class="flex justify-center items-center min-h-screen">    <div class="flex flex-col items-center space-y-4">      <div        class="animate-spin rounded-full h-12 w-12 border-b-2 border-solar-600"      ></div>      <p class="text-gray-600 font-[\'DM_Sans\']">        {{ "blog.loadingArticle" | translate }}      </p>    </div>  </div>  <!-- Error State -->  <div *ngIf="error && !loading" class="max-w-2xl mx-auto text-center py-20">    <div class="text-gray-400 text-6xl mb-6">📄</div>    <h2 class="text-2xl font-bold text-gray-900 font-[\'Poppins\']">      {{ "blog.articleNotFound" | translate }}    </h2>    <p class="text-gray-600 mt-4 mb-8 font-[\'DM_Sans\']">{{ error }}</p>    <button      (click)="router.navigate([\'/blog\'])"      class="bg-solar-500 text-white px-6 py-3 rounded-lg hover:bg-solar-500 transition-colors font-[\'DM_Sans\'] font-medium"    >      {{ "blog.backToBlog" | translate }}    </button>  </div>  <!-- Content -->  <div *ngIf="blogPost && !loading">    <!-- Hero Section -->    <section class="relative bg-solar-500 text-white py-12">      <div class="absolute inset-0"></div>      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">        <!-- Breadcrumb -->        <nav class="mb-4">          <ol class="flex items-center space-x-2 text-sm">            <li>              <a                routerLink="/"                class="hover:text-solar-200 transition-colors font-[\'DM_Sans\']"                >{{ "blog.home" | translate }}</a              >            </li>            <li class="text-solar-200 font-[\'DM_Sans\']">/</li>            <li>              <a                routerLink="/novosti"                class="hover:text-solar-200 transition-colors font-[\'DM_Sans\']"                >{{ "blog.blog" | translate }}</a              >            </li>            <li class="text-solar-200 font-[\'DM_Sans\']">/</li>            <li class="text-solar-100 font-[\'DM_Sans\']">              {{ blogPost.title }}            </li>          </ol>        </nav>        <div class="max-w-4xl">          <div class="flex items-center space-x-8 mb-8">            <span class="text-solar-100 font-[\'DM_Sans\']"              >{{ blogPost.readTime }}              {{ "blog.minutesRead" | translate }}</span            >            <span class="text-solar-100 font-[\'DM_Sans\']">{{              formatDate(blogPost.publishedAt)            }}</span>          </div>          <h1            class="text-4xl md:text-5xl font-bold font-[\'Poppins\'] mb-6 leading-tight"          >            {{ blogPost.title }}          </h1>          <p            class="text-xl text-solar-100 mb-8 leading-relaxed font-[\'DM_Sans\']"          >            {{ blogPost.excerpt }}          </p>        </div>      </div>    </section>    <!-- Article Content -->    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">      <!-- Featured Image -->      <div *ngIf="imageVisible" class="mb-12">        <img          [src]="blogPost.imageUrl || this.placeholderImage"          [alt]="blogPost.title"          class="w-full h-96 object-cover rounded-lg shadow-lg"          (error)="onImageError($event)"        />      </div>      <!-- Article Body -->      <div        class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-headings:font-[\'Poppins\'] prose-headings:font-semibold prose-headings:mt-8 prose-headings:mb-4 prose-p:text-gray-700 prose-p:font-[\'DM_Sans\'] prose-p:leading-relaxed prose-p:mb-6 prose-ul:mb-6 prose-ul:pl-6 prose-li:mb-2 prose-li:font-[\'DM_Sans\'] prose-blockquote:border-l-4 prose-blockquote:border-solar-500 prose-blockquote:pl-4 prose-blockquote:my-8 prose-blockquote:italic prose-blockquote:text-gray-600 prose-blockquote:font-[\'DM_Sans\'] prose-img:rounded-lg prose-img:my-8 prose-a:text-solar-600 prose-a:underline hover:prose-a:text-solar-500"      >        <div          [innerHTML]="blogPost.htmlContent || blogPost.content"          class="text-gray-700 leading-relaxed font-[\'DM_Sans\']"        ></div>      </div>      <!-- Tags -->      <div *ngIf="blogPost.tags.length > 0"           class="mt-12 pt-8 border-t border-gray-200">        <h3 class="text-lg font-semibold mb-4 font-[\'Poppins\'] text-gray-900">          {{ "blog.tags" | translate }}        </h3>        <div class="flex flex-wrap gap-2">          <span            *ngFor="let tag of blogPost.tags"            class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-[\'DM_Sans\']"          >            {{ tag.name }}          </span>        </div>      </div>    </article>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'BlogDetailComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'BlogDetailComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

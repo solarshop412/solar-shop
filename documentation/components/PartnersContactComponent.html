@@ -1,0 +1,1337 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PartnersContactComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2b/partners/contact/partners-contact.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-partners-contact</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./partners-contact.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./partners-contact.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#contactForm" >contactForm</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <a href="#messageSent" >messageSent</a>
+                            </li>
+                            <li>
+                                <a href="#productId" >productId</a>
+                            </li>
+                            <li>
+                                <a href="#productName" >productName</a>
+                            </li>
+                            <li>
+                                <a href="#productSku" >productSku</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#translationService" >translationService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#isFieldInvalid" >isFieldInvalid</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, supabase: <a href="../injectables/SupabaseService.html" target="_self">SupabaseService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>supabase</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/SupabaseService.html" target="_self" >SupabaseService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFieldInvalid"></a>
+                    <span class="name">
+                        <span ><b>isFieldInvalid</b></span>
+                        <a href="#isFieldInvalid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isFieldInvalid(fieldName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fieldName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contactForm"></a>
+                    <span class="name">
+                        <span ><b>contactForm</b></span>
+                        <a href="#contactForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageSent"></a>
+                    <span class="name">
+                        <span ><b>messageSent</b></span>
+                        <a href="#messageSent"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productId"></a>
+                    <span class="name">
+                        <span ><b>productId</b></span>
+                        <a href="#productId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productName"></a>
+                    <span class="name">
+                        <span ><b>productName</b></span>
+                        <a href="#productName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productSku"></a>
+                    <span class="name">
+                        <span ><b>productSku</b></span>
+                        <a href="#productSku"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>translationService</b></span>
+                        <a href="#translationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TranslationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/b2b/partners/contact/partners-contact.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from &#x27;@angular/forms&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { TranslatePipe } from &#x27;../../../../shared/pipes/translate.pipe&#x27;;
+import { TranslationService } from &#x27;../../../../shared/services/translation.service&#x27;;
+import { SupabaseService } from &#x27;../../../../services/supabase.service&#x27;;
+
+@Component({
+  selector: &#x27;app-partners-contact&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+  templateUrl: &#x27;./partners-contact.component.html&#x27;,
+  styleUrls: [&#x27;./partners-contact.component.scss&#x27;],
+})
+export class PartnersContactComponent implements OnInit {
+  contactForm: FormGroup;
+  isSubmitting &#x3D; false;
+  messageSent &#x3D; false;
+
+  // Properties for product quote requests
+  productId: string | null &#x3D; null;
+  productName: string | null &#x3D; null;
+  productSku: string | null &#x3D; null;
+
+  private translationService &#x3D; inject(TranslationService);
+
+  constructor(
+    private fb: FormBuilder,
+    private supabase: SupabaseService,
+    private route: ActivatedRoute,
+  ) {
+    this.contactForm &#x3D; this.fb.group({
+      firstName: [&#x27;&#x27;, [Validators.required]],
+      lastName: [&#x27;&#x27;, [Validators.required]],
+      email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      phone: [&#x27;&#x27;],
+      company: [&#x27;&#x27;],
+      subject: [&#x27;&#x27;, [Validators.required]],
+      message: [&#x27;&#x27;, [Validators.required]],
+    });
+  }
+
+  ngOnInit(): void {
+    // Check for query parameters from product quote requests
+    this.route.queryParams.subscribe((params) &#x3D;&gt; {
+      if (params[&#x27;subject&#x27;] &#x3D;&#x3D;&#x3D; &#x27;pricingInquiry&#x27;) {
+        this.contactForm.patchValue({
+          subject: &#x27;pricingInquiry&#x27;,
+        });
+
+        // Set product information
+        this.productId &#x3D; params[&#x27;productId&#x27;] || null;
+        this.productName &#x3D; params[&#x27;productName&#x27;] || null;
+        this.productSku &#x3D; params[&#x27;sku&#x27;] || null;
+
+        // Pre-fill the message with product details
+        if (this.productName &amp;&amp; this.productSku) {
+          const message &#x3D; this.translationService.translate(
+            &#x27;b2b.contact.pricingInquiryMessage&#x27;,
+            {
+              productName: this.productName,
+              productSku: this.productSku,
+            },
+          );
+          this.contactForm.patchValue({
+            message: message,
+          });
+        }
+      }
+    });
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const field &#x3D; this.contactForm.get(fieldName);
+    return !!(field &amp;&amp; field.invalid &amp;&amp; (field.dirty || field.touched));
+  }
+
+  onSubmit(): void {
+    if (this.contactForm.valid) {
+      this.isSubmitting &#x3D; true;
+      const value &#x3D; this.contactForm.value;
+      this.supabase
+        .createRecord(&#x27;contacts&#x27;, {
+          first_name: value.firstName,
+          last_name: value.lastName,
+          email: value.email,
+          phone: value.phone,
+          company: value.company,
+          subject: value.subject,
+          message: value.message,
+          is_newsletter: false,
+        })
+        .then(() &#x3D;&gt; {
+          this.isSubmitting &#x3D; false;
+          this.messageSent &#x3D; true;
+          this.contactForm.reset();
+          setTimeout(() &#x3D;&gt; {
+            this.messageSent &#x3D; false;
+          }, 5000);
+        })
+        .catch((error) &#x3D;&gt; {
+          console.error(&#x27;Error sending partner contact:&#x27;, error);
+          this.isSubmitting &#x3D; false;
+          alert(&#x27;Error sending message&#x27;);
+        });
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.contactForm.markAllAsTouched();
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;min-h-screen bg-gray-50&quot;&gt;
+  &lt;!-- Header --&gt;
+  &lt;div class&#x3D;&quot;relative bg-solar-500 text-white py-20 px-4 md:px-8 lg:px-32 text-center mb-8&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;&gt;
+      &lt;h1 class&#x3D;&quot;font-[&#x27;Poppins&#x27;] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight&quot;&gt;
+        {{ &quot;b2b.contact.title&quot; | translate }}
+      &lt;/h1&gt;
+      &lt;p class&#x3D;&quot;font-[&#x27;DM_Sans&#x27;] text-base md:text-lg max-w-4xl mx-auto opacity-80 leading-relaxed&quot;&gt;
+        {{ &quot;b2b.contact.subtitle&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12&quot;&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-2 gap-12&quot;&gt;
+      &lt;!-- Contact Information --&gt;
+      &lt;div&gt;
+        &lt;h2 class&#x3D;&quot;text-2xl font-bold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+          {{ &quot;b2b.contact.getInTouch&quot; | translate }}
+        &lt;/h2&gt;
+
+        &lt;div class&#x3D;&quot;space-y-6&quot;&gt;
+          &lt;!-- Partner Support --&gt;
+          &lt;div class&#x3D;&quot;flex items-start space-x-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex-shrink-0&quot;&gt;
+              &lt;div
+                class&#x3D;&quot;w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center&quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h3
+                class&#x3D;&quot;text-lg font-semibold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;
+              &gt;
+                {{ &quot;b2b.contact.partnerSupport&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-gray-600 mb-2 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;b2b.contact.partnerSupportText&quot; | translate }}
+              &lt;/p&gt;
+              &lt;div class&#x3D;&quot;space-y-1&quot;&gt;
+                &lt;p class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                  &lt;a
+                    href&#x3D;&quot;tel:+385 (1) 6407 715&quot;
+                    class&#x3D;&quot;text-solar-600 hover:text-solar-700&quot;
+                    &gt;{{ &quot;b2b.contact.phone&quot; | translate }}&lt;/a
+                  &gt;
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-sm text-gray-600&quot;&gt;
+                  &lt;span class&#x3D;&quot;font-medium&quot;
+                    &gt;{{ &quot;b2b.contact.email&quot; | translate }}:
+                  &lt;/span&gt;
+                  &lt;a
+                    href&#x3D;&quot;mailto:prodaja1@solarni-paneli.hr&quot;
+                    class&#x3D;&quot;text-solar-600 hover:text-solar-700&quot;
+                    &gt;{{ &quot;b2b.contact.supportEmail&quot; | translate }}&lt;/a
+                  &gt;
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Office Address --&gt;
+          &lt;div class&#x3D;&quot;flex items-start space-x-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex-shrink-0&quot;&gt;
+              &lt;div
+                class&#x3D;&quot;w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center&quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;w-6 h-6 text-solar-600&quot;
+                  fill&#x3D;&quot;none&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z&quot;
+                  /&gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M15 11a3 3 0 11-6 0 3 3 0 016 0z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+              &lt;h3
+                class&#x3D;&quot;text-lg font-semibold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;
+              &gt;
+                {{ &quot;b2b.contact.officeAddress&quot; | translate }}
+              &lt;/h3&gt;
+              &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;b2b.contact.address&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Business Hours --&gt;
+          &lt;!-- &lt;div class&#x3D;&quot;flex items-start space-x-4&quot;&gt;
+            &lt;div class&#x3D;&quot;flex-shrink-0&quot;&gt;
+                &lt;div class&#x3D;&quot;w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center&quot;&gt;
+                &lt;svg class&#x3D;&quot;w-6 h-6 text-solar-600&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                    &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z&quot;/&gt;
+                &lt;/svg&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;h3 class&#x3D;&quot;text-lg font-semibold text-gray-900 mb-2 font-[&#x27;Poppins&#x27;]&quot;&gt;
+                {{ &#x27;b2b.contact.businessHours&#x27; | translate }}
+                &lt;/h3&gt;
+                &lt;div class&#x3D;&quot;space-y-1 text-sm text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                &lt;p&gt;{{ &#x27;b2b.contact.mondayFriday&#x27; | translate }}: 8:00 - 18:00&lt;/p&gt;
+                &lt;p&gt;{{ &#x27;b2b.contact.saturday&#x27; | translate }}: 9:00 - 14:00&lt;/p&gt;
+                &lt;p&gt;{{ &#x27;b2b.contact.sunday&#x27; | translate }}: {{ &#x27;b2b.contact.closed&#x27; | translate }}&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;/div&gt; --&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Contact Form --&gt;
+      &lt;div&gt;
+        &lt;div class&#x3D;&quot;bg-white rounded-lg shadow-lg p-8&quot;&gt;
+          &lt;h2 class&#x3D;&quot;text-2xl font-bold text-gray-900 mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+            {{ &quot;b2b.contact.sendMessage&quot; | translate }}
+          &lt;/h2&gt;
+
+          &lt;!-- Success Message --&gt;
+          &lt;div
+            *ngIf&#x3D;&quot;messageSent&quot;
+            class&#x3D;&quot;mb-6 p-4 bg-green-50 border border-green-200 rounded-lg&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5 text-green-600 mr-2&quot;
+                fill&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              &lt;p class&#x3D;&quot;text-sm text-green-800 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                {{ &quot;b2b.contact.messageSent&quot; | translate }}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;form [formGroup]&#x3D;&quot;contactForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot;&gt;
+            &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;&gt;
+              &lt;!-- First Name --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;register.firstName&quot; | translate }}*
+                &lt;/label&gt;
+                &lt;input
+                  formControlName&#x3D;&quot;firstName&quot;
+                  type&#x3D;&quot;text&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                  [placeholder]&#x3D;&quot;&#x27;register.enterFirstName&#x27; | translate&quot;
+                /&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;isFieldInvalid(&#x27;firstName&#x27;)&quot;
+                  class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+                &gt;
+                  {{ &quot;register.firstNameRequired&quot; | translate }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Last Name --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;register.lastName&quot; | translate }}*
+                &lt;/label&gt;
+                &lt;input
+                  formControlName&#x3D;&quot;lastName&quot;
+                  type&#x3D;&quot;text&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                  [placeholder]&#x3D;&quot;&#x27;register.enterLastName&#x27; | translate&quot;
+                /&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;isFieldInvalid(&#x27;lastName&#x27;)&quot;
+                  class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+                &gt;
+                  {{ &quot;register.lastNameRequired&quot; | translate }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Email --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;register.email&quot; | translate }}*
+                &lt;/label&gt;
+                &lt;input
+                  formControlName&#x3D;&quot;email&quot;
+                  type&#x3D;&quot;email&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                  [placeholder]&#x3D;&quot;&#x27;register.enterEmail&#x27; | translate&quot;
+                /&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;isFieldInvalid(&#x27;email&#x27;)&quot;
+                  class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+                &gt;
+                  {{ &quot;register.emailRequired&quot; | translate }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Phone --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;register.phoneNumber&quot; | translate }}
+                &lt;/label&gt;
+                &lt;input
+                  formControlName&#x3D;&quot;phone&quot;
+                  type&#x3D;&quot;tel&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                  [placeholder]&#x3D;&quot;&#x27;register.enterPhone&#x27; | translate&quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Company --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;partnersRegister.companyName&quot; | translate }}
+                &lt;/label&gt;
+                &lt;input
+                  formControlName&#x3D;&quot;company&quot;
+                  type&#x3D;&quot;text&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                  [placeholder]&#x3D;&quot;
+                    &#x27;partnersRegister.enterCompanyName&#x27; | translate
+                  &quot;
+                /&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Subject --&gt;
+              &lt;div&gt;
+                &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                  {{ &quot;b2b.contact.subject&quot; | translate }}*
+                &lt;/label&gt;
+                &lt;select
+                  formControlName&#x3D;&quot;subject&quot;
+                  class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                &gt;
+                  &lt;option value&#x3D;&quot;&quot;&gt;
+                    {{ &quot;b2b.contact.selectSubject&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;partnership&quot;&gt;
+                    {{ &quot;b2b.contact.partnershipInquiry&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;pricing&quot;&gt;
+                    {{ &quot;b2b.contact.pricingInquiry&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;pricingInquiry&quot;&gt;
+                    {{ &quot;b2b.contact.productPricingInquiry&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;technical&quot;&gt;
+                    {{ &quot;b2b.contact.technicalSupport&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;sales&quot;&gt;
+                    {{ &quot;b2b.contact.salesInquiry&quot; | translate }}
+                  &lt;/option&gt;
+                  &lt;option value&#x3D;&quot;other&quot;&gt;
+                    {{ &quot;partnersRegister.other&quot; | translate }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;isFieldInvalid(&#x27;subject&#x27;)&quot;
+                  class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+                &gt;
+                  {{ &quot;b2b.contact.subjectRequired&quot; | translate }}
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Product Information (shown for pricing inquiries) --&gt;
+              &lt;div
+                *ngIf&#x3D;&quot;contactForm.get(&#x27;subject&#x27;)?.value &#x3D;&#x3D;&#x3D; &#x27;pricingInquiry&#x27;&quot;
+                class&#x3D;&quot;col-span-1 md:col-span-2&quot;
+              &gt;
+                &lt;div
+                  class&#x3D;&quot;bg-yellow-50 border border-yellow-200 rounded-lg p-4&quot;
+                &gt;
+                  &lt;h4 class&#x3D;&quot;text-sm font-medium text-yellow-800 mb-2&quot;&gt;
+                    {{ &quot;b2bCheckout.additionalInfo&quot; | translate }}
+                  &lt;/h4&gt;
+                  &lt;div
+                    class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-yellow-700&quot;
+                  &gt;
+                    &lt;div *ngIf&#x3D;&quot;productName&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-medium&quot;
+                        &gt;{{ &quot;b2b.products.product&quot; | translate }}:&lt;/span
+                      &gt;
+                      {{ productName }}
+                    &lt;/div&gt;
+                    &lt;div *ngIf&#x3D;&quot;productSku&quot;&gt;
+                      &lt;span class&#x3D;&quot;font-medium&quot;&gt;SKU:&lt;/span&gt; {{ productSku }}
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Message --&gt;
+            &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+              &lt;label class&#x3D;&quot;block text-sm font-medium text-gray-700 mb-2&quot;&gt;
+                {{ &quot;b2b.contact.message&quot; | translate }}*
+              &lt;/label&gt;
+              &lt;textarea
+                formControlName&#x3D;&quot;message&quot;
+                rows&#x3D;&quot;6&quot;
+                class&#x3D;&quot;w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent&quot;
+                [placeholder]&#x3D;&quot;&#x27;b2b.contact.messagePlaceholder&#x27; | translate&quot;
+              &gt;&lt;/textarea&gt;
+              &lt;div
+                *ngIf&#x3D;&quot;isFieldInvalid(&#x27;message&#x27;)&quot;
+                class&#x3D;&quot;mt-1 text-sm text-red-600&quot;
+              &gt;
+                {{ &quot;b2b.contact.messageRequired&quot; | translate }}
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Submit Button --&gt;
+            &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+              &lt;button
+                type&#x3D;&quot;submit&quot;
+                [disabled]&#x3D;&quot;contactForm.invalid || isSubmitting&quot;
+                class&#x3D;&quot;w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors&quot;
+              &gt;
+                &lt;span *ngIf&#x3D;&quot;!isSubmitting&quot;&gt;{{
+                  &quot;b2b.contact.sendMessage&quot; | translate
+                }}&lt;/span&gt;
+                &lt;span *ngIf&#x3D;&quot;isSubmitting&quot;&gt;{{
+                  &quot;b2b.contact.sendingMessage&quot; | translate
+                }}&lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./partners-contact.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="min-h-screen bg-gray-50">  <!-- Header -->  <div class="relative bg-solar-500 text-white py-20 px-4 md:px-8 lg:px-32 text-center mb-8">    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">      <h1 class="font-[\'Poppins\'] font-semibold text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight">        {{ "b2b.contact.title" | translate }}      </h1>      <p class="font-[\'DM_Sans\'] text-base md:text-lg max-w-4xl mx-auto opacity-80 leading-relaxed">        {{ "b2b.contact.subtitle" | translate }}      </p>    </div>  </div>  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">      <!-- Contact Information -->      <div>        <h2 class="text-2xl font-bold text-gray-900 mb-6 font-[\'Poppins\']">          {{ "b2b.contact.getInTouch" | translate }}        </h2>        <div class="space-y-6">          <!-- Partner Support -->          <div class="flex items-start space-x-4">            <div class="flex-shrink-0">              <div                class="w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center"              >                <svg                  class="w-6 h-6 text-solar-600"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"                  />                </svg>              </div>            </div>            <div>              <h3                class="text-lg font-semibold text-gray-900 mb-2 font-[\'Poppins\']"              >                {{ "b2b.contact.partnerSupport" | translate }}              </h3>              <p class="text-gray-600 mb-2 font-[\'DM_Sans\']">                {{ "b2b.contact.partnerSupportText" | translate }}              </p>              <div class="space-y-1">                <p class="text-sm text-gray-600">                  <a                    href="tel:+385 (1) 6407 715"                    class="text-solar-600 hover:text-solar-700"                    >{{ "b2b.contact.phone" | translate }}</a                  >                </p>                <p class="text-sm text-gray-600">                  <span class="font-medium"                    >{{ "b2b.contact.email" | translate }}:                  </span>                  <a                    href="mailto:prodaja1@solarni-paneli.hr"                    class="text-solar-600 hover:text-solar-700"                    >{{ "b2b.contact.supportEmail" | translate }}</a                  >                </p>              </div>            </div>          </div>          <!-- Office Address -->          <div class="flex items-start space-x-4">            <div class="flex-shrink-0">              <div                class="w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center"              >                <svg                  class="w-6 h-6 text-solar-600"                  fill="none"                  stroke="currentColor"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"                  />                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"                  />                </svg>              </div>            </div>            <div>              <h3                class="text-lg font-semibold text-gray-900 mb-2 font-[\'Poppins\']"              >                {{ "b2b.contact.officeAddress" | translate }}              </h3>              <p class="text-gray-600 font-[\'DM_Sans\']">                {{ "b2b.contact.address" | translate }}              </p>            </div>          </div>          <!-- Business Hours -->          <!-- <div class="flex items-start space-x-4">            <div class="flex-shrink-0">                <div class="w-12 h-12 bg-solar-100 rounded-lg flex items-center justify-center">                <svg class="w-6 h-6 text-solar-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>                </svg>                </div>            </div>            <div>                <h3 class="text-lg font-semibold text-gray-900 mb-2 font-[\'Poppins\']">                {{ \'b2b.contact.businessHours\' | translate }}                </h3>                <div class="space-y-1 text-sm text-gray-600 font-[\'DM_Sans\']">                <p>{{ \'b2b.contact.mondayFriday\' | translate }}: 8:00 - 18:00</p>                <p>{{ \'b2b.contact.saturday\' | translate }}: 9:00 - 14:00</p>                <p>{{ \'b2b.contact.sunday\' | translate }}: {{ \'b2b.contact.closed\' | translate }}</p>                </div>            </div>            </div> -->        </div>      </div>      <!-- Contact Form -->      <div>        <div class="bg-white rounded-lg shadow-lg p-8">          <h2 class="text-2xl font-bold text-gray-900 mb-6 font-[\'Poppins\']">            {{ "b2b.contact.sendMessage" | translate }}          </h2>          <!-- Success Message -->          <div            *ngIf="messageSent"            class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"          >            <div class="flex items-center">              <svg                class="w-5 h-5 text-green-600 mr-2"                fill="currentColor"                viewBox="0 0 20 20"              >                <path                  fill-rule="evenodd"                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"                  clip-rule="evenodd"                />              </svg>              <p class="text-sm text-green-800 font-[\'DM_Sans\']">                {{ "b2b.contact.messageSent" | translate }}              </p>            </div>          </div>          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">              <!-- First Name -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "register.firstName" | translate }}*                </label>                <input                  formControlName="firstName"                  type="text"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                  [placeholder]="\'register.enterFirstName\' | translate"                />                <div                  *ngIf="isFieldInvalid(\'firstName\')"                  class="mt-1 text-sm text-red-600"                >                  {{ "register.firstNameRequired" | translate }}                </div>              </div>              <!-- Last Name -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "register.lastName" | translate }}*                </label>                <input                  formControlName="lastName"                  type="text"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                  [placeholder]="\'register.enterLastName\' | translate"                />                <div                  *ngIf="isFieldInvalid(\'lastName\')"                  class="mt-1 text-sm text-red-600"                >                  {{ "register.lastNameRequired" | translate }}                </div>              </div>              <!-- Email -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "register.email" | translate }}*                </label>                <input                  formControlName="email"                  type="email"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                  [placeholder]="\'register.enterEmail\' | translate"                />                <div                  *ngIf="isFieldInvalid(\'email\')"                  class="mt-1 text-sm text-red-600"                >                  {{ "register.emailRequired" | translate }}                </div>              </div>              <!-- Phone -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "register.phoneNumber" | translate }}                </label>                <input                  formControlName="phone"                  type="tel"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                  [placeholder]="\'register.enterPhone\' | translate"                />              </div>              <!-- Company -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "partnersRegister.companyName" | translate }}                </label>                <input                  formControlName="company"                  type="text"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                  [placeholder]="                    \'partnersRegister.enterCompanyName\' | translate                  "                />              </div>              <!-- Subject -->              <div>                <label class="block text-sm font-medium text-gray-700 mb-2">                  {{ "b2b.contact.subject" | translate }}*                </label>                <select                  formControlName="subject"                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                >                  <option value="">                    {{ "b2b.contact.selectSubject" | translate }}                  </option>                  <option value="partnership">                    {{ "b2b.contact.partnershipInquiry" | translate }}                  </option>                  <option value="pricing">                    {{ "b2b.contact.pricingInquiry" | translate }}                  </option>                  <option value="pricingInquiry">                    {{ "b2b.contact.productPricingInquiry" | translate }}                  </option>                  <option value="technical">                    {{ "b2b.contact.technicalSupport" | translate }}                  </option>                  <option value="sales">                    {{ "b2b.contact.salesInquiry" | translate }}                  </option>                  <option value="other">                    {{ "partnersRegister.other" | translate }}                  </option>                </select>                <div                  *ngIf="isFieldInvalid(\'subject\')"                  class="mt-1 text-sm text-red-600"                >                  {{ "b2b.contact.subjectRequired" | translate }}                </div>              </div>              <!-- Product Information (shown for pricing inquiries) -->              <div                *ngIf="contactForm.get(\'subject\')?.value === \'pricingInquiry\'"                class="col-span-1 md:col-span-2"              >                <div                  class="bg-yellow-50 border border-yellow-200 rounded-lg p-4"                >                  <h4 class="text-sm font-medium text-yellow-800 mb-2">                    {{ "b2bCheckout.additionalInfo" | translate }}                  </h4>                  <div                    class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-yellow-700"                  >                    <div *ngIf="productName">                      <span class="font-medium"                        >{{ "b2b.products.product" | translate }}:</span                      >                      {{ productName }}                    </div>                    <div *ngIf="productSku">                      <span class="font-medium">SKU:</span> {{ productSku }}                    </div>                  </div>                </div>              </div>            </div>            <!-- Message -->            <div class="mt-6">              <label class="block text-sm font-medium text-gray-700 mb-2">                {{ "b2b.contact.message" | translate }}*              </label>              <textarea                formControlName="message"                rows="6"                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"                [placeholder]="\'b2b.contact.messagePlaceholder\' | translate"              ></textarea>              <div                *ngIf="isFieldInvalid(\'message\')"                class="mt-1 text-sm text-red-600"              >                {{ "b2b.contact.messageRequired" | translate }}              </div>            </div>            <!-- Submit Button -->            <div class="mt-6">              <button                type="submit"                [disabled]="contactForm.invalid || isSubmitting"                class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"              >                <span *ngIf="!isSubmitting">{{                  "b2b.contact.sendMessage" | translate                }}</span>                <span *ngIf="isSubmitting">{{                  "b2b.contact.sendingMessage" | translate                }}</span>              </button>            </div>          </form>        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PartnersContactComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PartnersContactComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

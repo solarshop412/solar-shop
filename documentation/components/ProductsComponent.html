@@ -1,0 +1,1095 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>solar-shop documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">solar-shop documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProductsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/b2c/products/products.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-products</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                            <code>TranslatePipe</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./products.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./products.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#categoriesService" >categoriesService</a>
+                            </li>
+                            <li>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <a href="#productCategories$" >productCategories$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadCategories" >loadCategories</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToContact" >navigateToContact</a>
+                            </li>
+                            <li>
+                                <a href="#navigateToProductList" >navigateToProductList</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#trackByCategoryId" >trackByCategoryId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadCategories"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadCategories</b></span>
+                        <a href="#loadCategories"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadCategories()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">src/app/features/b2c/products/products.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToContact"></a>
+                    <span class="name">
+                        <span ><b>navigateToContact</b></span>
+                        <a href="#navigateToContact"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToContact()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/b2c/products/products.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToProductList"></a>
+                    <span class="name">
+                        <span ><b>navigateToProductList</b></span>
+                        <a href="#navigateToProductList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateToProductList(category: <a href="../interfaces/ProductCategory.html" target="_self">ProductCategory</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/features/b2c/products/products.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>category</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProductCategory.html" target="_self" >ProductCategory</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/app/features/b2c/products/products.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="trackByCategoryId"></a>
+                    <span class="name">
+                        <span ><b>trackByCategoryId</b></span>
+                        <a href="#trackByCategoryId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>trackByCategoryId(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, category: <a href="../interfaces/ProductCategory.html" target="_self">ProductCategory</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/features/b2c/products/products.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>category</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ProductCategory.html" target="_self" >ProductCategory</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoriesService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>categoriesService</b></span>
+                        <a href="#categoriesService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CategoriesService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/b2c/products/products.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/b2c/products/products.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productCategories$"></a>
+                    <span class="name">
+                        <span ><b>productCategories$</b></span>
+                        <a href="#productCategories$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;ProductCategory[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/b2c/products/products.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/b2c/products/products.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import {
+  CategoriesService,
+  ProductCategory,
+} from &#x27;./services/categories.service&#x27;;
+import { TranslatePipe } from &#x27;../../../shared/pipes/translate.pipe&#x27;;
+
+@Component({
+  selector: &#x27;app-products&#x27;,
+  standalone: true,
+  imports: [CommonModule, TranslatePipe],
+  templateUrl: &#x27;./products.component.html&#x27;,
+  styleUrls: [&#x27;./products.component.scss&#x27;],
+})
+export class ProductsComponent implements OnInit {
+  productCategories$!: Observable&lt;ProductCategory[]&gt;;
+  isLoading &#x3D; false;
+
+  private router &#x3D; inject(Router);
+  private categoriesService &#x3D; inject(CategoriesService);
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  private loadCategories(): void {
+    this.isLoading &#x3D; true;
+    this.productCategories$ &#x3D; this.categoriesService.getNestedCategories();
+
+    // Subscribe to handle loading state
+    this.productCategories$.subscribe({
+      next: (categories) &#x3D;&gt; {
+        this.isLoading &#x3D; false;
+      },
+      error: (error) &#x3D;&gt; {
+        console.error(&#x27;Error loading categories:&#x27;, error);
+        this.isLoading &#x3D; false;
+      },
+    });
+  }
+
+  trackByCategoryId(index: number, category: ProductCategory): string {
+    return category.id;
+  }
+
+  navigateToProductList(category: ProductCategory): void {
+    // Navigate to product list with category filter
+    // Use slug first, then fallback to name (URL-friendly)
+    const categoryParam &#x3D;
+      category.slug || category.name.toLowerCase().replace(/[^a-z0-9]+/g, &#x27;-&#x27;);
+
+    // Build category filter array - include parent and all subcategories
+    let categoryNames: string[] &#x3D; [category.name];
+
+    // If this category has subcategories, include them all for comprehensive filtering
+    if (category.subcategories &amp;&amp; category.subcategories.length &gt; 0) {
+      const subCategoryNames &#x3D; category.subcategories.map((sub) &#x3D;&gt; sub.name);
+      categoryNames &#x3D; categoryNames.concat(subCategoryNames);
+    }
+
+    this.router.navigate([&#x27;/proizvodi&#x27;], {
+      queryParams: {
+        category: categoryParam,
+        categories: categoryNames.join(&#x27;,&#x27;), // Pass parent + subcategories
+      },
+    });
+  }
+
+  navigateToContact(): void {
+    this.router.navigate([&#x27;/kontakt&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- Products Section --&gt;
+&lt;section class&#x3D;&quot;py-20 px-4 sm:px-6 lg:px-8 bg-gray-50&quot;&gt;
+  &lt;div class&#x3D;&quot;max-w-7xl mx-auto&quot;&gt;
+    &lt;!-- Section Header --&gt;
+    &lt;div class&#x3D;&quot;text-center mb-16&quot;&gt;
+      &lt;h2
+        class&#x3D;&quot;text-4xl lg:text-5xl font-bold text-heyhome-dark-green font-[&#x27;Poppins&#x27;] mb-4&quot;
+      &gt;
+        {{ &quot;products.title&quot; | translate }}
+      &lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xl text-gray-600 max-w-3xl mx-auto font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;products.subtitle&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Products Grid --&gt;
+    &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8&quot;&gt;
+      &lt;div
+        *ngFor&#x3D;&quot;
+          let category of productCategories$ | async;
+          trackBy: trackByCategoryId
+        &quot;
+        class&#x3D;&quot;flex flex-col gap-4&quot;
+      &gt;
+        &lt;!-- Main Category Card --&gt;
+        &lt;div
+          class&#x3D;&quot;relative h-[500px] rounded-3xl overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl transition-shadow duration-500 transform hover:-translate-y-2&quot;
+          (click)&#x3D;&quot;navigateToProductList(category)&quot;
+          (keydown.enter)&#x3D;&quot;navigateToProductList(category)&quot;
+          (keydown.space)&#x3D;&quot;navigateToProductList(category)&quot;
+        &gt;
+          &lt;!-- Background Image --&gt;
+          &lt;div class&#x3D;&quot;absolute inset-0&quot;&gt;
+            &lt;img
+              [src]&#x3D;&quot;category.imageUrl&quot;
+              [alt]&#x3D;&quot;category.name&quot;
+              class&#x3D;&quot;w-full h-full object-cover group-hover:scale-110 transition-transform duration-700&quot;
+            /&gt;
+            &lt;!-- Gradient Overlay --&gt;
+            &lt;div
+              class&#x3D;&quot;absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent&quot;
+            &gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Content --&gt;
+          &lt;div class&#x3D;&quot;relative z-10 h-full flex flex-col justify-end p-8&quot;&gt;
+            &lt;div class&#x3D;&quot;text-white&quot;&gt;
+              &lt;h3
+                class&#x3D;&quot;text-3xl font-bold mb-4 font-[&#x27;Poppins&#x27;] group-hover:text-solar-300 transition-colors duration-300&quot;
+              &gt;
+                {{ category.name }}
+              &lt;/h3&gt;
+
+              &lt;!-- Product Count Badge --&gt;
+              &lt;div class&#x3D;&quot;mb-4&quot;&gt;
+                &lt;span
+                  class&#x3D;&quot;inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full&quot;
+                &gt;
+                  {{
+                    &quot;products.productsCount&quot;
+                      | translate: { count: category.productCount || 0 }
+                  }}
+                &lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;!-- Learn More Button --&gt;
+              &lt;button
+                class&#x3D;&quot;inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-solar-500 transition-all duration-300 group-hover:bg-solar-500 border border-white/30&quot;
+                (click)&#x3D;&quot;
+                  navigateToProductList(category); $event.stopPropagation()
+                &quot;
+                (keydown.enter)&#x3D;&quot;
+                  navigateToProductList(category); $event.stopPropagation()
+                &quot;
+                (keydown.space)&#x3D;&quot;
+                  navigateToProductList(category); $event.stopPropagation()
+                &quot;
+              &gt;
+                &lt;span&gt;{{ &quot;products.exploreProducts&quot; | translate }}&lt;/span&gt;
+                &lt;svg
+                  class&#x3D;&quot;w-5 h-5 transform group-hover:translate-x-1 transition-transform&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  fill&#x3D;&quot;none&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;2&quot;
+                    d&#x3D;&quot;M9 5l7 7-7 7&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Subcategories --&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;category.subcategories &amp;&amp; category.subcategories.length &gt; 0&quot;
+          class&#x3D;&quot;grid grid-cols-1 gap-2&quot;
+        &gt;
+          &lt;div
+            *ngFor&#x3D;&quot;
+              let subcategory of category.subcategories;
+              trackBy: trackByCategoryId
+            &quot;
+            class&#x3D;&quot;bg-white rounded-xl p-4 border border-gray-200 hover:border-solar-300 hover:shadow-md transition-all duration-300 cursor-pointer group&quot;
+            (click)&#x3D;&quot;navigateToProductList(subcategory)&quot;
+            (keydown.enter)&#x3D;&quot;navigateToProductList(subcategory)&quot;
+            (keydown.space)&#x3D;&quot;navigateToProductList(subcategory)&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center justify-between&quot;&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;h4
+                  class&#x3D;&quot;text-lg font-semibold text-gray-900 group-hover:text-solar-600 transition-colors font-[&#x27;Poppins&#x27;]&quot;
+                &gt;
+                  {{ subcategory.name }}
+                &lt;/h4&gt;
+                &lt;p class&#x3D;&quot;text-sm text-gray-600 mt-1 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+                  {{
+                    &quot;products.productsCount&quot;
+                      | translate: { count: subcategory.productCount || 0 }
+                  }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                class&#x3D;&quot;w-5 h-5 text-gray-400 group-hover:text-solar-600 transition-colors&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M9 5l7 7-7 7&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Loading State --&gt;
+    &lt;div *ngIf&#x3D;&quot;isLoading&quot; class&#x3D;&quot;flex justify-center items-center py-12&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;animate-spin rounded-full h-12 w-12 border-4 border-solar-500 border-t-transparent&quot;
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Empty State --&gt;
+    &lt;div
+      *ngIf&#x3D;&quot;!isLoading &amp;&amp; (productCategories$ | async)?.length &#x3D;&#x3D;&#x3D; 0&quot;
+      class&#x3D;&quot;text-center py-20&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;text-gray-400 mb-6&quot;&gt;
+        &lt;svg
+          class&#x3D;&quot;w-24 h-24 mx-auto&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5&quot;
+          /&gt;
+        &lt;/svg&gt;
+      &lt;/div&gt;
+      &lt;h3 class&#x3D;&quot;text-2xl font-bold text-gray-900 mb-4 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;products.noCategories&quot; | translate }}
+      &lt;/h3&gt;
+      &lt;p class&#x3D;&quot;text-gray-600 font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;products.noCategoriesText&quot; | translate }}
+      &lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Call to Action --&gt;
+    &lt;div class&#x3D;&quot;mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-3xl lg:text-4xl font-bold mb-6 font-[&#x27;Poppins&#x27;]&quot;&gt;
+        {{ &quot;products.needHelp&quot; | translate }}
+      &lt;/h2&gt;
+      &lt;p class&#x3D;&quot;text-xl mb-8 max-w-2xl mx-auto font-[&#x27;DM_Sans&#x27;]&quot;&gt;
+        {{ &quot;products.needHelpText&quot; | translate }}
+      &lt;/p&gt;
+      &lt;button
+        (click)&#x3D;&quot;navigateToContact()&quot;
+        class&#x3D;&quot;px-8 py-3 bg-white text-solar-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors font-[&#x27;DM_Sans&#x27;]&quot;
+      &gt;
+        {{ &quot;products.contactExperts&quot; | translate }}
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./products.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- Products Section --><section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">  <div class="max-w-7xl mx-auto">    <!-- Section Header -->    <div class="text-center mb-16">      <h2        class="text-4xl lg:text-5xl font-bold text-heyhome-dark-green font-[\'Poppins\'] mb-4"      >        {{ "products.title" | translate }}      </h2>      <p class="text-xl text-gray-600 max-w-3xl mx-auto font-[\'DM_Sans\']">        {{ "products.subtitle" | translate }}      </p>    </div>    <!-- Products Grid -->    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">      <div        *ngFor="          let category of productCategories$ | async;          trackBy: trackByCategoryId        "        class="flex flex-col gap-4"      >        <!-- Main Category Card -->        <div          class="relative h-[500px] rounded-3xl overflow-hidden group cursor-pointer shadow-xl hover:shadow-2xl transition-shadow duration-500 transform hover:-translate-y-2"          (click)="navigateToProductList(category)"          (keydown.enter)="navigateToProductList(category)"          (keydown.space)="navigateToProductList(category)"        >          <!-- Background Image -->          <div class="absolute inset-0">            <img              [src]="category.imageUrl"              [alt]="category.name"              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"            />            <!-- Gradient Overlay -->            <div              class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"            ></div>          </div>          <!-- Content -->          <div class="relative z-10 h-full flex flex-col justify-end p-8">            <div class="text-white">              <h3                class="text-3xl font-bold mb-4 font-[\'Poppins\'] group-hover:text-solar-300 transition-colors duration-300"              >                {{ category.name }}              </h3>              <!-- Product Count Badge -->              <div class="mb-4">                <span                  class="inline-block bg-white/20 backdrop-blur-sm text-white text-sm font-medium px-3 py-1 rounded-full"                >                  {{                    "products.productsCount"                      | translate: { count: category.productCount || 0 }                  }}                </span>              </div>              <!-- Learn More Button -->              <button                class="inline-flex items-center gap-3 bg-white/20 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-xl hover:bg-solar-500 transition-all duration-300 group-hover:bg-solar-500 border border-white/30"                (click)="                  navigateToProductList(category); $event.stopPropagation()                "                (keydown.enter)="                  navigateToProductList(category); $event.stopPropagation()                "                (keydown.space)="                  navigateToProductList(category); $event.stopPropagation()                "              >                <span>{{ "products.exploreProducts" | translate }}</span>                <svg                  class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"                  stroke="currentColor"                  fill="none"                  viewBox="0 0 24 24"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="2"                    d="M9 5l7 7-7 7"                  />                </svg>              </button>            </div>          </div>        </div>        <!-- Subcategories -->        <div          *ngIf="category.subcategories && category.subcategories.length > 0"          class="grid grid-cols-1 gap-2"        >          <div            *ngFor="              let subcategory of category.subcategories;              trackBy: trackByCategoryId            "            class="bg-white rounded-xl p-4 border border-gray-200 hover:border-solar-300 hover:shadow-md transition-all duration-300 cursor-pointer group"            (click)="navigateToProductList(subcategory)"            (keydown.enter)="navigateToProductList(subcategory)"            (keydown.space)="navigateToProductList(subcategory)"          >            <div class="flex items-center justify-between">              <div class="flex-1">                <h4                  class="text-lg font-semibold text-gray-900 group-hover:text-solar-600 transition-colors font-[\'Poppins\']"                >                  {{ subcategory.name }}                </h4>                <p class="text-sm text-gray-600 mt-1 font-[\'DM_Sans\']">                  {{                    "products.productsCount"                      | translate: { count: subcategory.productCount || 0 }                  }}                </p>              </div>              <svg                class="w-5 h-5 text-gray-400 group-hover:text-solar-600 transition-colors"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M9 5l7 7-7 7"                />              </svg>            </div>          </div>        </div>      </div>    </div>    <!-- Loading State -->    <div *ngIf="isLoading" class="flex justify-center items-center py-12">      <div        class="animate-spin rounded-full h-12 w-12 border-4 border-solar-500 border-t-transparent"      ></div>    </div>    <!-- Empty State -->    <div      *ngIf="!isLoading && (productCategories$ | async)?.length === 0"      class="text-center py-20"    >      <div class="text-gray-400 mb-6">        <svg          class="w-24 h-24 mx-auto"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"          />        </svg>      </div>      <h3 class="text-2xl font-bold text-gray-900 mb-4 font-[\'Poppins\']">        {{ "products.noCategories" | translate }}      </h3>      <p class="text-gray-600 font-[\'DM_Sans\']">        {{ "products.noCategoriesText" | translate }}      </p>    </div>    <!-- Call to Action -->    <div class="mt-20 bg-solar-500 rounded-3xl p-12 text-center text-white">      <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-[\'Poppins\']">        {{ "products.needHelp" | translate }}      </h2>      <p class="text-xl mb-8 max-w-2xl mx-auto font-[\'DM_Sans\']">        {{ "products.needHelpText" | translate }}      </p>      <button        (click)="navigateToContact()"        class="px-8 py-3 bg-white text-solar-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors font-[\'DM_Sans\']"      >        {{ "products.contactExperts" | translate }}      </button>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AddToCartButtonComponent', 'selector': 'app-add-to-cart-button'},{'name': 'AdminBlogComponent', 'selector': 'app-admin-blog'},{'name': 'AdminCategoriesComponent', 'selector': 'app-admin-categories'},{'name': 'AdminCompaniesComponent', 'selector': 'app-admin-companies'},{'name': 'AdminCompanyEditComponent', 'selector': 'app-admin-company-edit'},{'name': 'AdminCompanyPricingComponent', 'selector': 'app-admin-company-pricing'},{'name': 'AdminContactsComponent', 'selector': 'app-admin-contacts'},{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'AdminFormComponent', 'selector': 'app-admin-form'},{'name': 'AdminLayoutComponent', 'selector': 'app-admin-layout'},{'name': 'AdminOffersComponent', 'selector': 'app-admin-offers'},{'name': 'AdminOrdersComponent', 'selector': 'app-admin-orders'},{'name': 'AdminOrdersPartnersComponent', 'selector': 'app-admin-orders-partners'},{'name': 'AdminProductsComponent', 'selector': 'app-admin-products'},{'name': 'AdminReviewsComponent', 'selector': 'app-admin-reviews'},{'name': 'AdminUsersComponent', 'selector': 'app-admin-users'},{'name': 'AdminWishlistComponent', 'selector': 'app-admin-wishlist'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthCallbackComponent', 'selector': 'app-auth-callback'},{'name': 'B2BCartSidebarComponent', 'selector': 'app-b2b-cart-sidebar'},{'name': 'B2bCheckoutComponent', 'selector': 'app-b2b-checkout'},{'name': 'B2bLayoutComponent', 'selector': 'app-b2b-layout'},{'name': 'B2bNavbarComponent', 'selector': 'app-b2b-navbar'},{'name': 'B2bOrderDetailsComponent', 'selector': 'app-b2b-order-details'},{'name': 'B2bOrderReviewComponent', 'selector': 'app-b2b-order-review'},{'name': 'B2bPaymentComponent', 'selector': 'app-b2b-payment'},{'name': 'B2bShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'B2BShippingComponent', 'selector': 'app-b2b-shipping'},{'name': 'BlogComponent', 'selector': 'app-blog'},{'name': 'BlogDetailComponent', 'selector': 'app-blog-detail'},{'name': 'BlogFormComponent', 'selector': 'app-blog-form'},{'name': 'BlogHomeComponent', 'selector': 'app-blog-home'},{'name': 'CartButtonComponent', 'selector': 'app-cart-button'},{'name': 'CartNotificationComponent', 'selector': 'app-cart-notification'},{'name': 'CartSidebarComponent', 'selector': 'app-cart-sidebar'},{'name': 'CategoryFormComponent', 'selector': 'app-category-form'},{'name': 'CheckoutComponent', 'selector': 'app-checkout'},{'name': 'CompanyApprovalModalComponent', 'selector': 'app-company-approval-modal'},{'name': 'CompanyComponent', 'selector': 'app-company'},{'name': 'CompanyPricingFormComponent', 'selector': 'app-company-pricing-form'},{'name': 'ComplaintsComponent', 'selector': 'app-complaints'},{'name': 'ConfirmationComponent', 'selector': 'app-confirmation'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CookieBannerComponent', 'selector': 'app-cookie-banner'},{'name': 'CookiePolicyComponent', 'selector': 'app-cookie-policy'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DeleteConfirmationModalComponent', 'selector': 'app-delete-confirmation-modal'},{'name': 'EmailTestComponent', 'selector': 'app-email-test'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'ForgotPasswordComponent', 'selector': 'app-forgot-password'},{'name': 'HeroComponent', 'selector': 'app-hero'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MissionComponent', 'selector': 'app-mission'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferDetailsComponent', 'selector': 'app-offer-details'},{'name': 'OfferFormComponent', 'selector': 'app-offer-form'},{'name': 'OffersComponent', 'selector': 'app-offers'},{'name': 'OffersPageComponent', 'selector': 'app-offers-page'},{'name': 'OrderConfirmationComponent', 'selector': 'app-order-confirmation'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderDetailsComponent', 'selector': 'app-order-details'},{'name': 'OrderFormComponent', 'selector': 'app-order-form'},{'name': 'OrderReviewComponent', 'selector': 'app-order-review'},{'name': 'PageLayoutComponent', 'selector': 'app-page-layout'},{'name': 'PartnerProfileComponent', 'selector': 'app-partner-profile'},{'name': 'PartnersAboutComponent', 'selector': 'app-partners-about'},{'name': 'PartnersBrandsComponent', 'selector': 'app-partners-brands'},{'name': 'PartnersCategoriesComponent', 'selector': 'app-partners-categories'},{'name': 'PartnersComponent', 'selector': 'app-partners'},{'name': 'PartnersContactComponent', 'selector': 'app-partners-contact'},{'name': 'PartnersCtaComponent', 'selector': 'app-partners-cta'},{'name': 'PartnersFooterComponent', 'selector': 'app-partners-footer'},{'name': 'PartnersHeroComponent', 'selector': 'app-partners-hero'},{'name': 'PartnersHighlightsComponent', 'selector': 'app-partners-highlights'},{'name': 'PartnersOfferDetailsComponent', 'selector': 'app-partners-offer-details'},{'name': 'PartnersOffersComponent', 'selector': 'app-partners-offers'},{'name': 'PartnersProductDetailsComponent', 'selector': 'app-partners-product-details'},{'name': 'PartnersProductsComponent', 'selector': 'app-partners-products'},{'name': 'PartnersRegisterComponent', 'selector': 'app-partners-register'},{'name': 'PaymentCallbackComponent', 'selector': 'app-payment-callback'},{'name': 'PaymentComponent', 'selector': 'app-payment'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ProductDetailsComponent', 'selector': 'app-product-details'},{'name': 'ProductFormComponent', 'selector': 'app-product-form'},{'name': 'ProductInfoComponent', 'selector': 'app-product-info'},{'name': 'ProductListComponent', 'selector': 'app-product-list'},{'name': 'ProductPhotosComponent', 'selector': 'app-product-photos'},{'name': 'ProductReviewsComponent', 'selector': 'app-product-reviews'},{'name': 'ProductsComponent', 'selector': 'app-products'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ResetPasswordComponent', 'selector': 'app-reset-password'},{'name': 'SafetyPaymentComponent', 'selector': 'app-safety-payment'},{'name': 'ShippingComponent', 'selector': 'app-shipping'},{'name': 'SortOptionsManagementComponent', 'selector': 'app-sort-options-management'},{'name': 'SuccessModalComponent', 'selector': 'app-success-modal'},{'name': 'SustainabilityComponent', 'selector': 'app-sustainability'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'UserFormComponent', 'selector': 'app-user-form'},{'name': 'WriteReviewModalComponent', 'selector': 'app-write-review-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ProductsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
