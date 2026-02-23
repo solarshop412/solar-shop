@@ -34,13 +34,6 @@
           {{ "b2bNav.products" | translate }}
         </a>
         <a
-          routerLink="/partneri/ponude"
-          routerLinkActive="text-solar-600 border-b-2 border-solar-600"
-          class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
-        >
-          {{ "b2bNav.offers" | translate }}
-        </a>
-        <a
           routerLink="/partneri/o-nama"
           routerLinkActive="text-solar-600 border-b-2 border-solar-600"
           class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
@@ -63,12 +56,6 @@
           *ngIf="!isAuthenticated || !isCompanyContact"
           class="flex items-center space-x-2"
         >
-          <a
-            routerLink="/prijava"
-            class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium"
-          >
-            {{ "b2bNav.signIn" | translate }}
-          </a>
           <a
             routerLink="/partneri/registracija"
             class="bg-solar-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-solar-700 transition-colors"
@@ -283,14 +270,6 @@
           {{ "b2bNav.products" | translate }}
         </a>
         <a
-          routerLink="/partneri/ponude"
-          routerLinkActive="bg-solar-50 text-solar-600"
-          (click)="closeMobileMenu()"
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-solar-600 hover:bg-gray-50 rounded-md"
-        >
-          {{ "b2bNav.offers" | translate }}
-        </a>
-        <a
           routerLink="/partneri/o-nama"
           routerLinkActive="bg-solar-50 text-solar-600"
           (click)="closeMobileMenu()"
@@ -310,20 +289,6 @@
         <!-- Mobile Auth Section -->
         <div class="border-t border-gray-200 pt-4 mt-4">
           <div *ngIf="!isAuthenticated || !isCompanyContact" class="space-y-2">
-            <a
-              routerLink="/prijava"
-              (click)="closeMobileMenu()"
-              class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-solar-600 hover:bg-gray-50 rounded-md"
-            >
-              {{ "b2bNav.signIn" | translate }}
-            </a>
-            <a
-              routerLink="/partneri/registracija"
-              (click)="closeMobileMenu()"
-              class="block px-3 py-2 text-base font-medium bg-solar-500 text-white rounded-md hover:bg-solar-700"
-            >
-              {{ "b2bNav.getStarted" | translate }}
-            </a>
             <a
               routerLink="/"
               (click)="closeMobileMenu()"

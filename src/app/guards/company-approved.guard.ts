@@ -43,12 +43,12 @@ export class CompanyApprovedGuard implements CanActivate {
           );
         } else {
           // No session, redirect to login
-          return of(this.router.createUrlTree(['/prijava']));
+          return of(this.router.createUrlTree(['/partneri/registracija']));
         }
       }),
       catchError(() => {
         // Error getting session, redirect to login
-        return of(this.router.createUrlTree(['/prijava']));
+        return of(this.router.createUrlTree(['/partneri/registracija']));
       }),
     );
   }

@@ -6,8 +6,8 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
@@ -41,7 +41,7 @@ export class LoginComponent {
   constructor(
     private store: Store,
     private fb: FormBuilder,
-    private router: Router,
+    private _location: Location,
     private translationService: TranslationService,
   ) {
     this.loading$ = this.store.select(selectAuthLoading);
@@ -104,5 +104,9 @@ export class LoginComponent {
   private getFieldDisplayName(fieldName: string): string {
     const translationKey = `auth.${fieldName}`;
     return this.translationService.translate(translationKey);
+  }
+
+  goBack() {
+    this._location.back();
   }
 }

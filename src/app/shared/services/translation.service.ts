@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { login } from '../../core/auth/store/auth.actions';
 
 export type SupportedLanguage = 'hr' | 'en';
 
@@ -142,7 +143,7 @@ export class TranslationService {
       // Partners Register
       partnersRegister: {
         title: 'Registracija partnera',
-        subtitle: 'Pridružite se našoj mreži partnera',
+        subtitle: 'Pridružite se našoj mreži partnera i zajedno s nama gradite uspješne projekte, proširite svoje poslovne prilike i ostvarite dugoročnu suradnju.',
         step1: 'Osobni podaci',
         step2: 'Podaci o tvrtki',
         personalInfo: 'Osobne informacije',
@@ -198,6 +199,7 @@ export class TranslationService {
             'Pridružite se našoj mreži partnera i otkrijte ekskluzivne prednosti, posebne cijene i podršku za vaš biznis.',
           getStarted: 'Počnite',
           learnMore: 'Saznajte više',
+          login: 'Prijavite se'
         },
         about: {
           title: 'O partnerstvu',
@@ -3179,7 +3181,7 @@ export class TranslationService {
         email: 'Email',
         helpCenter: 'Centar pomoći',
         quickAccess: 'Brzi pristup',
-        backToB2C: 'Nazad na korisnički portal',
+        backToB2C: 'Korisnički portal',
         becomePartner: 'Postani partner',
         readyToPartner: 'Spremni ste postati dio mreže naših partnera?',
         joinThousands:
@@ -3315,7 +3317,7 @@ export class TranslationService {
       },
       // Partners Register
       partnersRegister: {
-        title: 'Partner Registration',
+        title: 'Join our partner network and build successful projects with us, expand your business opportunities, and create long-term collaboration.',
         subtitle:
           'Join our partner network and discover exclusive benefits, special offers and professional support for your business.',
         step1: 'Personal Information',
@@ -3374,6 +3376,7 @@ export class TranslationService {
             'Join our partner network and discover exclusive benefits, special offers and professional support for your business.',
           getStarted: 'Get Started',
           learnMore: 'Learn More',
+          login: 'Log in'
         },
         about: {
           title: 'About Partnership',
@@ -6313,7 +6316,7 @@ export class TranslationService {
         email: 'Email',
         helpCenter: 'Help Center',
         quickAccess: 'Quick Access',
-        backToB2C: 'Back to User Portal',
+        backToB2C: 'User Portal',
         becomePartner: 'Become a Partner',
         readyToPartner: 'Ready to partner with us?',
         joinThousands:

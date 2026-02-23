@@ -157,4 +157,12 @@ export class PartnersRegisterComponent {
       this.registrationForm.markAllAsTouched();
     }
   }
+
+  navigateToLogin(): void {
+    this.router.navigate(['/prijava']);
+  }
+
+  navigateToAbout(): void {
+    this.router.navigate(['/partneri/o-nama']);
+  }
 }
