@@ -3185,7 +3185,7 @@ export class TranslationService {
         becomePartner: 'Postani partner',
         readyToPartner: 'Spremni ste postati dio mreže naših partnera?',
         joinThousands:
-          'Pridružite se tisućama naših partnera i povećajte svoj solarnu efikasnost.',
+          'Pridružite se tisućama partnera i unaprijedite svoju solarnu učinkovitost uz stručnu podršku i napredna rješenja.',
         contactSales: 'Kontaktirajte prodaju',
       },
       // Cookie Banner
@@ -6320,7 +6320,7 @@ export class TranslationService {
         becomePartner: 'Become a Partner',
         readyToPartner: 'Ready to partner with us?',
         joinThousands:
-          'Join thousands of partners worldwide and grow your solar business with IBC SOLAR',
+          'Join thousands of partners and enhance your solar efficiency with expert support and advanced solutions.',
         contactSales: 'Contact Sales',
       },
       // Cookie Banner
