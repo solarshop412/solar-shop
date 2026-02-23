@@ -10,7 +10,9 @@ import { selectCurrentUser } from '../../../../core/auth/store/auth.selectors';
 import { selectB2BCartTotalItems } from '../../cart/store/b2b-cart.selectors';
 import * as B2BCartActions from '../../cart/store/b2b-cart.actions';
 import { Subject, takeUntil, switchMap, from, catchError, of } from 'rxjs';
-import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
+import { LucideAngularModule, Mail, Phone, ShoppingCart } from 'lucide-angular';
+import { NavbarActions } from '../../../b2c/navbar/store/navbar.actions';
+import { selectCurrentLanguage } from '../../../b2c/navbar/store/navbar.selectors';
 
 @Component({
   selector: 'app-b2b-navbar',
@@ -35,13 +37,17 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
 
   currentUser$: Observable<any>;
   cartItemsCount$: Observable<number>;
+  currentLanguage$: Observable<string>;
 
   // Lucide Icons
   readonly ShoppingCartIcon = ShoppingCart;
+  readonly PhoneIcon = Phone;
+  readonly MailIcon = Mail;
 
   constructor() {
     this.currentUser$ = this.store.select(selectCurrentUser);
     this.cartItemsCount$ = this.store.select(selectB2BCartTotalItems);
+    this.currentLanguage$ = this.store.select(selectCurrentLanguage);    
   }
 
   ngOnInit(): void {
@@ -123,5 +129,9 @@ export class B2bNavbarComponent implements OnInit, OnDestroy {
 
   closeMobileMenu(): void {
     this.showMobileMenu = false;
+  }
+
+  toggleLanguage(): void {
+    this.store.dispatch(NavbarActions.toggleLanguage());
   }
 }
