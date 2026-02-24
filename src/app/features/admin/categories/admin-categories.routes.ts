@@ -2,28 +2,28 @@ import { Routes } from "@angular/router";
 
 export const ADMIN_CATEGORIES_ROUTES: Routes = [
     {
-        path: 'kategorije',
+        path: '',
         loadComponent: () =>
             import('./admin-categories.component').then(
             (m) => m.AdminCategoriesComponent,
             ),
     },
     {
-        path: 'kategorije/kreiraj',
+        path: 'kreiraj',
         loadComponent: () =>
             import('./category-form/category-form.component').then(
             (m) => m.CategoryFormComponent,
             ),
     },
     {
-        path: 'kategorije/uredi/:id',
+        path: 'uredi/:id',
         loadComponent: () =>
             import('./category-form/category-form.component').then(
             (m) => m.CategoryFormComponent,
             ),
     },
     {
-        path: 'kategorije/detalji/:id',
+        path: 'detalji/:id',
         loadComponent: () =>
             import('./category-form/category-form.component').then(
             (m) => m.CategoryFormComponent,

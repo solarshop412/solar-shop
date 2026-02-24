@@ -2,28 +2,28 @@ import { Routes } from "@angular/router";
 
 export const ADMIN_COMPANIES_ROUTES: Routes = [
     {
-        path: 'tvrtke',
+        path: '',
         loadComponent: () =>
             import('./admin-companies/admin-companies.component').then(
             (m) => m.AdminCompaniesComponent,
             ),
     },
     {
-        path: 'tvrtke/kreiraj',
+        path: 'kreiraj',
         loadComponent: () =>
             import('./admin-company-edit/admin-company-edit.component').then(
             (m) => m.AdminCompanyEditComponent,
             ),
     },
     {
-        path: 'tvrtke/uredi/:id',
+        path: 'uredi/:id',
         loadComponent: () =>
             import('./admin-company-edit/admin-company-edit.component').then(
             (m) => m.AdminCompanyEditComponent,
             ),
     },
     {
-        path: 'tvrtke/detalji/:id',
+        path: 'detalji/:id',
         loadComponent: () =>
             import('./admin-company-edit/admin-company-edit.component').then(
             (m) => m.AdminCompanyEditComponent,

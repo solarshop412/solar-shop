@@ -2,28 +2,28 @@ import { Routes } from "@angular/router";
 
 export const ADMIN_PRODUCTS_ROUTES: Routes = [
     {
-        path: 'proizvodi',
+        path: '',
         loadComponent: () =>
             import('./admin-products.component').then(
             (m) => m.AdminProductsComponent,
             ),
     },
     {
-        path: 'proizvodi/kreiraj',
+        path: 'kreiraj',
         loadComponent: () =>
             import('./product-form/product-form.component').then(
             (m) => m.ProductFormComponent,
             ),
     },
     {
-        path: 'proizvodi/uredi/:id',
+        path: 'uredi/:id',
         loadComponent: () =>
             import('./product-form/product-form.component').then(
             (m) => m.ProductFormComponent,
             ),
     },
     {
-        path: 'proizvodi/detalji/:id',
+        path: 'detalji/:id',
         loadComponent: () =>
             import('./product-form/product-form.component').then(
             (m) => m.ProductFormComponent,

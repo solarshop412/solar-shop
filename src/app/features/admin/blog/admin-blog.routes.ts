@@ -2,28 +2,28 @@ import { Routes } from "@angular/router";
 
 export const ADMIN_BLOG_ROUTES: Routes = [
     {
-        path: 'blog',
+        path: '',
         loadComponent: () =>
             import('./admin-blog.component').then(
             (m) => m.AdminBlogComponent,
             ),
     },
     {
-        path: 'blog/kreiraj',
+        path: 'kreiraj',
         loadComponent: () =>
             import('./blog-form/blog-form.component').then(
             (m) => m.BlogFormComponent,
             ),
     },
     {
-        path: 'blog/uredi/:id',
+        path: 'uredi/:id',
         loadComponent: () =>
             import('./blog-form/blog-form.component').then(
             (m) => m.BlogFormComponent,
             ),
     },
     {
-        path: 'blog/detalji/:id',
+        path: 'detalji/:id',
         loadComponent: () =>
             import('./blog-form/blog-form.component').then(
             (m) => m.BlogFormComponent,

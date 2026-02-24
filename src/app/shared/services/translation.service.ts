@@ -3317,9 +3317,9 @@ export class TranslationService {
       },
       // Partners Register
       partnersRegister: {
-        title: 'Join our partner network and build successful projects with us, expand your business opportunities, and create long-term collaboration.',
+        title: 'Partner registration',
         subtitle:
-          'Join our partner network and discover exclusive benefits, special offers and professional support for your business.',
+          'Join our partner network and build successful projects with us, expand your business opportunities, and create long-term collaboration.',
         step1: 'Personal Information',
         step2: 'Company Information',
         personalInfo: 'Personal Information',

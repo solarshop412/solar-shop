@@ -2,28 +2,28 @@ import { Routes } from "@angular/router";
 
 export const ADMIN_USERS_ROUTES: Routes = [
     {
-        path: 'korisnici',
+        path: '',
         loadComponent: () =>
             import('./admin-users.component').then(
             (m) => m.AdminUsersComponent,
             ),
     },
     {
-        path: 'korisnici/kreiraj',
+        path: 'kreiraj',
         loadComponent: () =>
             import('./user-form/user-form.component').then(
             (m) => m.UserFormComponent,
             ),
     },
     {
-        path: 'korisnici/uredi/:id',
+        path: 'uredi/:id',
         loadComponent: () =>
             import('./user-form/user-form.component').then(
             (m) => m.UserFormComponent,
             ),
     },
     {
-        path: 'korisnici/detalji/:id',
+        path: 'detalji/:id',
         loadComponent: () =>
             import('./user-form/user-form.component').then(
             (m) => m.UserFormComponent,
