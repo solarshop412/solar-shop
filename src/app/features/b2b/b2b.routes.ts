@@ -38,13 +38,21 @@ export const B2B_ROUTES: Routes = [
         canActivate: [CompanyApprovedGuard],
       },
       {
+        path: 'proizvodi/zatrazi-ponudu',
+        loadComponent: () =>
+            import('./partners/products/product-offer/product-offer.component').then(
+              (m) => m.ProductOfferComponent
+            ),
+        canActivate: [CompanyApprovedGuard]
+      },
+      {
         path: 'proizvodi/:id',
         loadComponent: () =>
           import('./partners/products/partners-product-details/partners-product-details.component').then(
             (m) => m.PartnersProductDetailsComponent,
           ),
         canActivate: [CompanyApprovedGuard],
-      },
+      },      
       {
         path: 'ponude',
         loadComponent: () =>

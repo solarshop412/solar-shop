@@ -247,13 +247,12 @@ export class PartnersProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   requestQuote(product: ProductWithPricing): void {
-    this.router.navigate(['/partneri/kontakt'], {
+    this.router.navigate(['/partneri/proizvodi/zatrazi-ponudu'], {
       queryParams: {
-        subject: 'pricingInquiry',
         productId: product.id,
         productName: product.name,
-        sku: product.sku,
-      },
+        productImg: product.image_url
+      }
     });
   }
 

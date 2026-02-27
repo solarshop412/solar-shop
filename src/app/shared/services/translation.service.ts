@@ -438,6 +438,18 @@ export class TranslationService {
           stockAvailability: 'Dostupnost zaliha',
           showStoreAvailability: 'Prikaži dostupnost u poslovnicama',
           hideStoreAvailability: 'Sakrij dostupnost u poslovnicama',
+          offer: {
+            title: 'Zatražite ponudu za proizvod',
+            subtitle: 'Ispunite obrazac za upit, a naš tim će vas kontaktirati u najkraćem mogućem roku putem navedene e-mail adrese.',
+            productInfoTitle: 'Informacije o proizvodu',
+            productInquery: 'Pošalji upit',
+            inqueryProduct: 'Proizvod',
+            inqueryMessage: 'Poruka',
+            inqueryMessagePlaceholder: 'Ukoliko imate dodatnih upita i / ili informacija, napišite ovdje...',
+            sendMessage: 'Pošalji upit',
+            sendingMessage: 'Slanje upita...',
+            productIdTitle: 'Šifra proizvoda'
+          }
         },
         orders: {
           pending: 'Na čekanju',
@@ -3615,6 +3627,18 @@ export class TranslationService {
           stockAvailability: 'Stock Availability',
           showStoreAvailability: 'Show availability in stores',
           hideStoreAvailability: 'Hide availability in stores',
+          offer: {
+            title: 'Product Quote Request',
+            subtitle: 'Submit your inquiry and our team will get back to you as soon as possible using your contact email address.',
+            productInfoTitle: 'Product Information',
+            productInquery: 'Send Inquiry',
+            inqueryProduct: 'Product',
+            inqueryMessage: 'Message',
+            inqueryMessagePlaceholder: 'If you have additional questions and/or information, write here...',
+            sendMessage: 'Send Inquiry',
+            sendingMessage: 'Sending Inquiry...',
+            productIdTitle: 'Product ID'
+          }
         },
         orders: {
           pending: 'Pending',

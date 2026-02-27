@@ -1,0 +1,128 @@
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <div class="relative bg-solar-500 text-white py-4 px-4 md:px-8 lg:px-32 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <h1 class="font-['Poppins'] font-semibold text-4xl md:text-4xl lg:text-5xl mb-6 leading-tight">
+        {{ "b2b.products.offer.title" | translate }}
+      </h1>
+      <p class="font-['DM_Sans'] text-base md:text-lg max-w-4xl mx-auto opacity-90 leading-relaxed">
+        {{ "b2b.products.offer.subtitle" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Product Information -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-2 font-['Poppins']">
+          {{ "b2b.products.offer.productInfoTitle" | translate }}
+        </h2>
+        
+        <div class="space-y-6">
+          <div class="flex-1 overflow-y-auto p-4 min-h-0">
+            <div class="flex items-start space-x-3 p-3 rounded-lg cart-item">
+              <!-- Product Image -->
+              <div class="flex-shrink-0">
+                <img
+                  [src]="getImageSrc(productImg)"
+                  [alt]="productName"
+                  class="w-24 h-24 object-cover rounded-lg bg-gray-100"
+                  (error)="onImageError($event, productId)"
+                  loading="lazy"/>
+              </div>
+
+              <!-- Product Details -->
+              <div class="flex-1 min-w-0">
+                <a
+                  [routerLink]="['/partneri/proizvodi', productId]"
+                  class="text-lg font-medium text-gray-900 hover:text-solar-600 block cursor-pointer mb-2"
+                >
+                  {{ productName }}
+                </a>
+
+                <p class="text-gray-600 text-sm">{{ "b2b.products.offer.productIdTitle" | translate }}: {{ productId }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div>
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 font-['Poppins']">
+            {{ "b2b.products.offer.productInquery" | translate }}
+          </h2>
+
+          <!-- Success Message -->
+          <div
+            *ngIf="messageSent"
+            class="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
+          >
+            <div class="flex items-center">
+              <svg
+                class="w-5 h-5 text-green-600 mr-2"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <p class="text-sm text-green-800 font-['DM_Sans']">
+                {{ "b2b.products.offer.inquerySent" | translate }}
+              </p>
+            </div>
+          </div>
+
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div class="mt-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  {{ "b2b.products.offer.inqueryProduct" | translate }}*
+                </label>
+                <input
+                  formControlName="product"
+                  type="text"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="mt-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                {{ "b2b.products.offer.inqueryMessage" | translate }}
+              </label>
+              <textarea
+                formControlName="message"
+                rows="6"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-solar-500 focus:border-transparent"
+                [placeholder]="'b2b.products.offer.inqueryMessagePlaceholder' | translate"
+              ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-6">
+              <button
+                type="submit"
+                [disabled]="contactForm.invalid || isSubmitting"
+                class="w-full bg-solar-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-solar-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              >
+                <span *ngIf="!isSubmitting">{{
+                  "b2b.products.offer.sendMessage" | translate
+                }}</span>
+                <span *ngIf="isSubmitting">{{
+                  "b2b.products.offer.sendingMessage" | translate
+                }}</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
