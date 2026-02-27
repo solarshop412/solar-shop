@@ -67,7 +67,11 @@ export class AdminLayoutComponent {
   }
 
   viewSite(): void {
-    this.router.navigate(['/']);
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/'])
+    );
+    
+    window.open(url, '_blank');
   }
 
   logout(): void {
