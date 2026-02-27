@@ -3,7 +3,15 @@
   <header class="bg-white shadow-sm border-b border-gray-200">
     <div class="flex items-center justify-between px-6 py-4">
       <div class="flex items-center space-x-4">
-        <h1 class="text-2xl font-bold text-gray-900">Solar Shop Admin</h1>
+        <img
+          src="assets/images/logo.png"
+          alt="SolarShop"
+          class="h-8 w-auto sm:h-10 lg:h-10 object-contain group-hover:scale-105 transition-transform duration-300 filter drop-shadow-sm"
+          onerror="
+            console.error('Logo failed to load:', this.src);
+            this.src = 'assets/images/logo.png';
+          "
+        />
       </div>
 
       <!-- User Info & Actions -->
@@ -14,26 +22,6 @@
             (currentUser$ | async)?.firstName
           }}</span>
         </div>
-        <button
-          (click)="refreshNotifications()"
-          class="px-3 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
-          title="Refresh notifications"
-        >
-          <svg
-            class="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-            />
-          </svg>
-          <span>{{ "admin.refreshData" | translate }}</span>
-        </button>
         <button
           (click)="viewSite()"
           class="px-4 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -53,16 +41,16 @@
   <div class="flex">
     <!-- Sidebar Navigation -->
     <nav
-      class="w-64 min-w-64 max-w-64 bg-white shadow-sm h-screen sticky top-0 overflow-y-auto flex-shrink-0"
+      class="w-64 min-w-64 max-w-64 bg-solar-500 shadow-sm h-screen sticky top-0 overflow-y-auto flex-shrink-0"
     >
       <div class="p-6">
-        <div class="space-y-2">
+        <div class="space-y-2 text-white">
           <!-- Dashboard -->
           <a
             routerLink="/admin"
-            routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
+            routerLinkActive="bg-solar-700 text-white"
             [routerLinkActiveOptions]="{ exact: true }"
-            class="flex items-center space-x-3 px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+            class="flex items-center space-x-3 px-4 py-3 text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
           >
             <svg
               class="w-5 h-5"
@@ -87,17 +75,17 @@
           </a>
 
           <!-- Content Management -->
-          <div class="pt-4">
+          <div class="pt-4 text-white">
             <h3
-              class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+              class="px-4 text-xs font-semibold text-white uppercase tracking-wider mb-2"
             >
               {{ "admin.contentManagement" | translate }}
             </h3>
 
             <a
               routerLink="/admin/proizvodi"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center space-x-3 px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <svg
                 class="w-4 h-4"
@@ -117,8 +105,8 @@
 
             <a
               routerLink="/admin/kategorije"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center space-x-3 px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <svg
                 class="w-4 h-4"
@@ -138,8 +126,8 @@
 
             <a
               routerLink="/admin/blog"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center space-x-3 px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <svg
                 class="w-4 h-4"
@@ -161,15 +149,15 @@
           <!-- System Management -->
           <div class="pt-4">
             <h3
-              class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+              class="px-4 text-xs font-semibold text-white uppercase tracking-wider mb-2"
             >
               {{ "admin.systemManagement" | translate }}
             </h3>
 
             <a
               routerLink="/admin/narudzbe"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -200,8 +188,8 @@
 
             <a
               routerLink="/admin/korisnici"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -232,8 +220,8 @@
 
             <a
               routerLink="/admin/recenzije"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -264,8 +252,8 @@
 
             <a
               routerLink="/admin/kontakti"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -297,8 +285,8 @@
             <a
               *ngIf="showEmailTest"
               routerLink="/admin/email-test"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center space-x-3 px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <svg
                 class="w-4 h-4"
@@ -320,15 +308,15 @@
           <!-- Company Management -->
           <div class="pt-4">
             <h3
-              class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+              class="px-4 text-xs font-semibold text-white uppercase tracking-wider mb-2"
             >
               {{ "admin.companyManagement" | translate }}
             </h3>
 
             <a
               routerLink="/admin/narudzbe-partneri"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -359,8 +347,8 @@
 
             <a
               routerLink="/admin/tvrtke"
-              routerLinkActive="bg-blue-50 text-blue-700 border-blue-300"
-              class="flex items-center justify-between px-4 py-2 text-sm text-gray-700 rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
+              routerLinkActive="bg-solar-700 text-white"
+              class="flex items-center justify-between px-4 py-2 text-sm text-white rounded-lg hover:bg-gray-50 transition-colors border border-transparent"
             >
               <div class="flex items-center space-x-3">
                 <svg
@@ -394,15 +382,15 @@
           <div class="pt-4 border-t border-gray-200">
             <div class="px-4">
               <label
-                class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+                class="block text-xs font-semibold text-white uppercase tracking-wider mb-2"
                 >{{ "admin.shopSettings" | translate }}</label
               >
 
               <!-- Ordering Toggle -->
               <div
-                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg mb-2"
+                class="flex items-center justify-between p-3 bg-solar-700 rounded-lg mb-2"
               >
-                <span class="text-sm text-gray-700">{{
+                <span class="text-sm text-white">{{
                   "admin.orderingEnabled" | translate
                 }}</span>
                 <button
@@ -421,9 +409,9 @@
 
               <!-- Credit Card Payment Toggle -->
               <div
-                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                class="flex items-center justify-between p-3 bg-solar-700 rounded-lg"
               >
-                <span class="text-sm text-gray-700">{{
+                <span class="text-sm text-white">{{
                   "admin.creditCardPayment" | translate
                 }}</span>
                 <button
@@ -450,13 +438,13 @@
           <div class="pt-4 border-t border-gray-200">
             <div class="px-4">
               <label
-                class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2"
+                class="block text-xs font-semibold text-white uppercase tracking-wider mb-2"
                 >{{ "admin.language" | translate }}</label
               >
               <select
                 [value]="currentLanguage"
                 (change)="onLanguageChange($event)"
-                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-solar-700"
               >
                 <option value="hr">Hrvatski</option>
                 <option value="en">English</option>
