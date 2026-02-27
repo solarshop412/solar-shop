@@ -107,7 +107,7 @@ export class UserFormComponent implements OnInit {
         alert('User created successfully');
       }
 
-      this.router.navigate(['/admin/users']);
+      this.router.navigate(['/admin/korisnici']);
     } catch (error) {
       console.error('Error saving user:', error);
       alert('Error saving user');
