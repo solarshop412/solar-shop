@@ -49,7 +49,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
   companyOrders: Order[] = [];
   filteredOrders: Order[] = [];
   orderStatusFilter = '';
-  activeTab: 'company-info' | 'company-orders' | 'company-pricing' =
+  activeTab: 'company-info' | 'support' | 'company-orders' | 'company-pricing' =
     'company-info';
   showSuccessMessage = false;
 
@@ -290,7 +290,7 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  setActiveTab(tab: 'company-info' | 'company-orders'): void {
+  setActiveTab(tab: 'company-info' | 'company-orders' | 'support'): void {
     this.activeTab = tab;
     this.showSuccessMessage = false;
 

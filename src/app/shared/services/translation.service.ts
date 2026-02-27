@@ -632,6 +632,8 @@ export class TranslationService {
             'Imate puni pristup partnerskim pogodnostima',
           applicationRejectedDescription:
             'Kontaktirajte podršku za više informacija',
+          supportTitle: 'Kontaktirajte podršku',
+          supportSubtitle: 'Imate pitanja? Kontaktirajte nas.'
         },
       },
       // B2B Cart translations
@@ -3823,6 +3825,8 @@ export class TranslationService {
             'You have full access to partner benefits',
           applicationRejectedDescription:
             'Contact support for more information',
+          supportTitle: 'Contact support',
+          supportSubtitle: 'Have questions? Contact us.'
         },
       },
       b2bCart: {
