@@ -56,8 +56,4 @@ export class PartnersHeroComponent {
   navigateToProducts(): void {
     this.router.navigate(['/partneri/proizvodi']);
   }
-
-  navigateToOffers(): void {
-    this.router.navigate(['/partneri/ponude']);
-  }
 }
