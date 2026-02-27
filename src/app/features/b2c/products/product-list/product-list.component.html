@@ -211,7 +211,7 @@
             <h4 class="text-sm font-medium text-gray-900 mb-3 font-['DM_Sans']">
               {{ "productList.manufacturer" | translate }}
             </h4>
-            <div class="space-y-2">
+            <div class="space-y-2 max-h-48 overflow-y-auto">
               <div *ngFor="let manufacturer of allManufacturers$ | async">
                 <label
                   *ngIf="
