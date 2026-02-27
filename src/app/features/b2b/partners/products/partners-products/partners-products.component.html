@@ -1,15 +1,15 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
-  <div class="bg-white shadow-sm border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 class="text-3xl font-bold text-gray-900 font-['Poppins']">
+  <div class="bg-solar-600 shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="text-3xl font-bold text-white font-['Poppins']">
         {{ "b2b.products.title" | translate }}
       </h1>
-      <p class="mt-2 text-lg text-gray-600 font-['DM_Sans']">
+      <p class="mt-2 text-lg text-white font-['DM_Sans']">
         {{ "b2b.products.subtitle" | translate }}
       </p>
       <div *ngIf="company" class="mt-3 flex items-center space-x-2">
-        <span class="text-sm font-medium text-gray-600"
+        <span class="text-sm font-medium text-white"
           >{{ "b2b.products.companyAccount" | translate }}:</span
         >
         <span class="text-sm font-bold text-solar-600">{{
@@ -554,89 +554,6 @@
                     <span class="line-clamp-3">{{ product.description }}</span>
                   </p>
 
-                  <!-- Pricing Section -->
-                  <div class="mb-3 h-[100px] flex flex-col justify-center">
-                    <div
-                      *ngIf="!isAuthenticated"
-                      class="text-center py-2 bg-gray-50 rounded-lg"
-                    >
-                      <svg
-                        class="w-6 h-6 text-gray-400 mx-auto mb-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                        />
-                      </svg>
-                      <p class="text-xs text-gray-500 font-medium">
-                        {{ "b2b.products.loginToViewPrices" | translate }}
-                      </p>
-                    </div>
-
-                    <div *ngIf="isAuthenticated" class="space-y-1">
-                      <!-- Company Specific Price -->
-                      <div
-                        *ngIf="product.company_price && isCompanyContact"
-                        class="flex items-center justify-between"
-                      >
-                        <span class="text-xs font-medium text-green-700"
-                          >{{ "b2b.products.yourPrice" | translate }}:</span
-                        >
-                        <span class="text-sm font-bold text-green-600"
-                          >€{{
-                            product.company_price | number: "1.2-2" : "de"
-                          }}</span
-                        >
-                      </div>
-
-                      <!-- Partner Price -->
-                      <div
-                        *ngIf="
-                          product.partner_price &&
-                          (!product.company_price || !isCompanyContact)
-                        "
-                        class="flex items-center justify-between"
-                      >
-                        <span class="text-xs font-medium text-solar-700"
-                          >{{ "b2b.products.partnerPrice" | translate }}:</span
-                        >
-                        <span class="text-sm font-bold text-solar-600"
-                          >€{{
-                            product.partner_price | number: "1.2-2" : "de"
-                          }}</span
-                        >
-                      </div>
-
-                      <!-- Retail Price -->
-                      <div class="flex items-center justify-between">
-                        <span class="text-xs text-gray-500"
-                          >{{ "b2b.products.retailPrice" | translate }}:</span
-                        >
-                        <span class="text-xs text-gray-500 line-through"
-                          >€{{ product.price | number: "1.2-2" : "de" }}</span
-                        >
-                      </div>
-
-                      <!-- Savings -->
-                      <div
-                        *ngIf="product.savings"
-                        class="flex items-center justify-between"
-                      >
-                        <span class="text-xs font-medium text-green-700"
-                          >{{ "b2b.products.savings" | translate }}:</span
-                        >
-                        <span class="text-xs font-bold text-green-600"
-                          >€{{ product.savings | number: "1.2-2" : "de" }}</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-
                   <!-- Minimum Order -->
                   <div class="mb-2 h-[20px] flex items-center">
                     <div
@@ -699,18 +616,6 @@
                         </lucide-angular>
                         <span>{{ "b2b.products.addToCart" | translate }}</span>
                       </span>
-                    </button>
-
-                    <!-- Request Quote Button - only show if no B2B price OR out of stock -->
-                    <button
-                      *ngIf="
-                        isCompanyContact &&
-                        (!hasB2BPrice(product) || !product.in_stock)
-                      "
-                      (click)="requestQuote(product, $event)"
-                      class="w-full bg-accent-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-accent-700 transition-colors"
-                    >
-                      {{ "b2b.products.requestQuote" | translate }}
                     </button>
 
                     <!-- Sign In Button -->
@@ -842,16 +747,6 @@
                               "b2b.products.addToCart" | translate
                             }}</span>
                           </span>
-                        </button>
-                        <button
-                          *ngIf="
-                            isCompanyContact &&
-                            (!hasB2BPrice(product) || !product.in_stock)
-                          "
-                          (click)="requestQuote(product)"
-                          class="px-3 py-1 bg-accent-600 text-white rounded text-sm hover:bg-accent-700"
-                        >
-                          {{ "b2b.products.requestQuote" | translate }}
                         </button>
                       </div>
                     </div>
