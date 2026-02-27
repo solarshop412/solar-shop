@@ -477,10 +477,6 @@ export class PartnerProfileComponent implements OnInit, OnDestroy {
     this.router.navigate(['/partneri/proizvodi']);
   }
 
-  navigateToOffers(): void {
-    this.router.navigate(['/partneri/ponude']);
-  }
-
   navigateToHome(): void {
     this.router.navigate(['/']);
   }
