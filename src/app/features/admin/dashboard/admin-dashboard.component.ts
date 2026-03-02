@@ -6,6 +6,8 @@ import { SupabaseService } from '../../../services/supabase.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { Observable, from } from 'rxjs';
 import { DashboardStats } from '../../../shared/models/dashboard-stats.model';
+import { Store } from '@ngrx/store';
+import { selectPendingCompanies } from '../companies/store/companies.selectors';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -21,7 +23,7 @@ export class AdminDashboardComponent implements OnInit {
 
   stats$: Observable<DashboardStats>;
 
-  constructor() {
+  constructor(private store: Store) {
     this.stats$ = this.loadStats();
   }
 
@@ -52,43 +54,38 @@ export class AdminDashboardComponent implements OnInit {
   private loadStats(): Observable<DashboardStats> {
     const loadStatsAsync = async () => {
       try {
-        const [products, categories, blogPosts, offers, users] =
+        const [products, orders, complaints, pendingCompanies, productsInquiry] =
           await Promise.all([
-            this.supabaseService.getTable('products'),
-            this.supabaseService.getTable('categories'),
-            this.supabaseService.getTable('blog_posts'),
-            this.supabaseService.getTable('offers'),
-            this.supabaseService.getTable('profiles'),
+            this.supabaseService.getTableCount('products'),
+            this.supabaseService.getTableCount('orders'),
+            this.supabaseService.getTableCount('complaints'),
+            this.supabaseService.getTableCount('companies', {
+              eq: {
+                status: 'pending'
+              }
+            }),
+            this.supabaseService.getTableCount('products_inquiry', {
+              eq: {
+                status: 'pending'
+              }
+            }) 
           ]);
 
-        const orders = await this.supabaseService.getTable('orders');
-        const recentOrders = (orders || [])
-          .sort(
-            (a: any, b: any) =>
-              new Date(b.created_at).getTime() -
-              new Date(a.created_at).getTime(),
-          )
-          .slice(0, 5);
-
         return {
-          totalProducts: products?.length || 0,
-          totalCategories: categories?.length || 0,
-          totalBlogPosts: blogPosts?.length || 0,
-          totalOffers: offers?.length || 0,
-          totalUsers: users?.length || 0,
-          totalOrders: orders?.length || 0,
-          recentOrders: recentOrders,
+          totalProducts: products || 0,
+          totalOrders: orders || 0,
+          totalComplaints: complaints || 0,
+          pendingCompanies: pendingCompanies || 0,
+          productsInquiry: productsInquiry || 0
         };
       } catch (error) {
         console.error('Error loading dashboard stats:', error);
         return {
           totalProducts: 0,
-          totalCategories: 0,
-          totalBlogPosts: 0,
-          totalOffers: 0,
-          totalUsers: 0,
           totalOrders: 0,
-          recentOrders: [],
+          totalComplaints: 0,
+          pendingCompanies: 0,
+          productsInquiry: 0
         };
       }
     };

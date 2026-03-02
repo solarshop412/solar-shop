@@ -9,9 +9,7 @@ import { filter, take } from 'rxjs/operators';
 export interface NotificationCounts {
   orders: number;
   partnerOrders: number;
-  contacts: number;
   users: number;
-  wishlists: number;
   companies: number;
   reviews: number;
 }
@@ -27,9 +25,7 @@ export class AdminNotificationsService {
   private notificationCounts$ = new BehaviorSubject<NotificationCounts>({
     orders: 0,
     partnerOrders: 0,
-    contacts: 0,
     users: 0,
-    wishlists: 0,
     companies: 0,
     reviews: 0,
   });
@@ -47,7 +43,7 @@ export class AdminNotificationsService {
       });
 
     // Refresh counts every 30 seconds
-    timer(0, 30000)
+    timer(0)
       .pipe(
         switchMap(() => this.fetchAllCounts()),
         catchError((error) => {
@@ -80,10 +76,8 @@ export class AdminNotificationsService {
     section:
       | 'orders'
       | 'partner_orders'
-      | 'contacts'
       | 'users'
       | 'companies'
-      | 'wishlists'
       | 'reviews',
   ): Promise<void> {
     if (!this.currentAdminId) return;
@@ -133,17 +127,13 @@ export class AdminNotificationsService {
       const [
         orders,
         partnerOrders,
-        contacts,
         users,
-        wishlists,
         companies,
         reviews,
       ] = await Promise.all([
         this.getOrdersCount(),
         this.getPartnerOrdersCount(),
-        this.getContactsCount(),
         this.getUsersCount(),
-        this.getWishlistsCount(),
         this.getCompaniesCount(),
         this.getReviewsCount(),
       ]);
@@ -151,9 +141,7 @@ export class AdminNotificationsService {
       return {
         orders,
         partnerOrders,
-        contacts,
         users,
-        wishlists,
         companies,
         reviews,
       };
@@ -162,9 +150,7 @@ export class AdminNotificationsService {
       return {
         orders: 0,
         partnerOrders: 0,
-        contacts: 0,
         users: 0,
-        wishlists: 0,
         companies: 0,
         reviews: 0,
       };
@@ -219,29 +205,6 @@ export class AdminNotificationsService {
     }
   }
 
-  private async getContactsCount(): Promise<number> {
-    try {
-      if (!this.currentAdminId) return 0;
-
-      const lastViewed = await this.getLastViewedTimestamp('contacts');
-
-      const query = this.supabaseService.client
-        .from('contact_messages')
-        .select('*', { count: 'exact', head: true })
-        .eq('status', 'unread');
-
-      if (lastViewed) {
-        query.gt('created_at', lastViewed);
-      }
-
-      const { count } = await query;
-      return count || 0;
-    } catch (error) {
-      console.error('Error fetching contacts count:', error);
-      return 0;
-    }
-  }
-
   private async getUsersCount(): Promise<number> {
     try {
       if (!this.currentAdminId) return 0;
@@ -265,28 +228,6 @@ export class AdminNotificationsService {
       return count || 0;
     } catch (error) {
       console.error('Error fetching users count:', error);
-      return 0;
-    }
-  }
-
-  private async getWishlistsCount(): Promise<number> {
-    try {
-      if (!this.currentAdminId) return 0;
-
-      const lastViewed = await this.getLastViewedTimestamp('wishlists');
-
-      const query = this.supabaseService.client
-        .from('wishlist_items')
-        .select('*', { count: 'exact', head: true });
-
-      if (lastViewed) {
-        query.gt('created_at', lastViewed);
-      }
-
-      const { count } = await query;
-      return count || 0;
-    } catch (error) {
-      console.error('Error fetching wishlists count:', error);
       return 0;
     }
   }

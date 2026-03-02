@@ -50,8 +50,8 @@
     <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-sm font-medium text-gray-600">Total Users</p>
-          <p class="text-3xl font-bold text-gray-900">{{ stats.totalUsers }}</p>
+          <p class="text-sm font-medium text-gray-600">Total Orders</p>
+          <p class="text-3xl font-bold text-gray-900">{{ stats.totalOrders }}</p>
         </div>
         <div class="p-3 bg-indigo-100 rounded-lg">
           <svg
@@ -71,10 +71,10 @@
       </div>
       <div class="mt-4">
         <a
-          routerLink="/admin/korisnici"
+          routerLink="/admin/narudzbe"
           class="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
         >
-          Manage Users →
+          Manage orders →
         </a>
       </div>
     </div>
@@ -82,9 +82,9 @@
     <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-sm font-medium text-gray-600">Total Orders</p>
+          <p class="text-sm font-medium text-gray-600">Total complaints</p>
           <p class="text-3xl font-bold text-gray-900">
-            {{ stats.totalOrders }}
+            {{ stats.totalComplaints }}
           </p>
         </div>
         <div class="p-3 bg-orange-100 rounded-lg">
@@ -105,10 +105,78 @@
       </div>
       <div class="mt-4">
         <a
-          routerLink="/admin/narudzbe"
+          routerLink="/admin/kontakti"
           class="text-orange-600 hover:text-orange-800 text-sm font-medium"
         >
-          Manage Orders →
+          Manage Complaints →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600">Pending partner requests</p>
+          <p class="text-3xl font-bold text-gray-900">
+            {{ stats.pendingCompanies }}
+          </p>
+        </div>
+        <div class="p-3 bg-orange-100 rounded-lg">
+          <svg
+            class="w-6 h-6 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <a
+          routerLink="/admin/tvrtke"
+          class="text-orange-600 hover:text-orange-800 text-sm font-medium"
+        >
+          Manage partners →
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-gray-600">Pending partner requests</p>
+          <p class="text-3xl font-bold text-gray-900">
+            {{ stats.productsInquiry }}
+          </p>
+        </div>
+        <div class="p-3 bg-orange-100 rounded-lg">
+          <svg
+            class="w-6 h-6 text-orange-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="mt-4">
+        <a
+          routerLink="/admin/tvrtke"
+          class="text-orange-600 hover:text-orange-800 text-sm font-medium"
+        >
+          Manage product inquirys →
         </a>
       </div>
     </div>

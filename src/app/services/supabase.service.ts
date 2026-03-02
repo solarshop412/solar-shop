@@ -12,6 +12,9 @@ import {
   ResetPasswordRequest,
   UserProfile,
 } from '../shared/models/auth.model';
+import moment from 'moment';
+import { COMPLAINT_STATUS } from '../shared/data/complaint-status.data';
+import { Complaints } from '../shared/models/complaints.model';
 
 @Injectable({
   providedIn: 'root',
@@ -234,6 +237,41 @@ export class SupabaseService {
     const { data, error } = await query;
     if (error) throw error;
     return data as Database['public']['Tables'][T]['Row'][];
+  }
+
+  async getTableCount<T extends keyof Database['public']['Tables']>(
+    tableName: T,
+    options?: {
+      eq?: Partial<Database['public']['Tables'][T]['Row']>;
+      filters?: Record<string, any>;
+    }
+  ): Promise<number> {
+
+    let query = this.supabase
+      .from(tableName)
+      .select('*', { count: 'exact', head: true });
+
+    // ✅ simple equality filters
+    if (options?.eq) {
+      Object.entries(options.eq).forEach(([key, value]) => {
+        query = query.eq(key, value as any);
+      });
+    }
+
+    // ✅ advanced filters
+    if (options?.filters) {
+      Object.entries(options.filters).forEach(([key, value]) => {
+        if (typeof value === 'object' && value !== null && 'in' in value) {
+          query = query.in(key, value.in as readonly any[]);
+        }
+      });
+    }
+
+    const { count, error } = await query;
+
+    if (error) throw error;
+
+    return count ?? 0;
   }
 
   async getTableById<T extends keyof Database['public']['Tables']>(
@@ -1187,5 +1225,39 @@ export class SupabaseService {
     } else {
       return 'in_stock';
     }
+  }
+
+  async getActiveComplaintsCount(): Promise<number> {
+    try {
+      const { count, error } = await this.supabase
+        .from('complaints')
+        .select('id', { count: 'exact', head: true })
+        .neq('status', 4); // status != 4 (not done)
+
+      if (error) {
+        throw error;
+      }
+
+      return count ?? 0;
+    } catch (error) {
+      console.error('Error fetching active complaints count:', error);
+      return 0;
+    }
+  }
+
+  public mapComplaintFromDb(row: any): Complaints {
+    return {
+      id: row.id,
+      createdAt: row.created_at ? moment(row.created_at) : undefined,
+      fullNameOrCompany: row.full_name_or_company,
+      address: row.address,
+      email: row.email,
+      phone: row.phone,
+      invoiceNumber: row.invoice_number,
+      invoiceDate: row.invoice_date ? moment(row.invoice_date) : undefined,
+      itemOrService: row.item_or_service,
+      description: row.description,
+      status: COMPLAINT_STATUS.find(s => s.id === row.status)
+    };
   }
 }

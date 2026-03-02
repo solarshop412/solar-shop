@@ -2690,6 +2690,12 @@ export class TranslationService {
             'Prodavatelj nije odgovoran za eventualna oštećenja i ostale obveze koje se nalaze u domeni dostavljača (firma koja obavlja poslove dostave proizvoda).',
           downloadIssues:
             'Ako kupac odabere opciju downloada proizvoda te kupac ne bude u mogućnosti obaviti download zbog tehničkih problema uzrokovanih na serveru prodavatelja prodavatelj se obvezuje poslati elektronsku poštu sa novom mogućnosti za download za što kupac ne snosi nikakve troškove.',
+          status: {
+            new: 'Novo',
+            seen: 'Viđeno',
+            inprogress: 'U obradi',
+            done: 'Zatvoren'
+          }
         },
         contact: {
           title: 'Trebate pomoć?',
@@ -5750,6 +5756,12 @@ export class TranslationService {
             'The seller is not responsible for possible damages and other obligations that are in the domain of the deliverer (company that performs product delivery services).',
           downloadIssues:
             "If the customer chooses the product download option and the customer is not able to perform the download due to technical problems caused on the seller's server, the seller undertakes to send an e-mail with a new download option for which the customer bears no costs.",
+          status: {
+            new: 'New',
+            seen: 'Seen',
+            inprogress: 'In progress',
+            done: 'Done'
+          }
         },
         contact: {
           title: 'Need help?',
