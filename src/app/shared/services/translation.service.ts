@@ -2067,10 +2067,10 @@ export class TranslationService {
       },
       // Hero Section
       hero: {
-        mainTitle: 'Solarne Elektrane, Solarni Paneli, Hibridni Sustavi',
-        subtitle: 'Fronius, Huawei, GoodWe - vrhunski brendovi solarne opreme.',
+        mainTitle: 'Vaš partner za zelenu budućnost',
+        subtitle: 'Duga tradicija u izgradnji solarnih elektrana',
         exploreProducts: 'Istražite proizvode',
-        exploreOffers: 'Istražite ponude',
+        ourStores: 'Naše poslovnice',
         loading: 'Učitavanje...',
         noOffersAvailable: 'Trenutno nema dostupnih ponuda',
         primeDeal: 'Hit Ponuda',

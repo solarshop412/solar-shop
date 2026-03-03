@@ -1,12 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import {
-  CategoriesService,
-  ProductCategory,
-} from './services/categories.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { SupabaseService } from '../../../services/supabase.service';
+import { CategoryItem } from '../../../shared/models/category-item.model';
 
 @Component({
   selector: 'app-products',
@@ -16,60 +14,147 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  productCategories$!: Observable<ProductCategory[]>;
-  isLoading = false;
-
+  private supabase = inject(SupabaseService);
   private router = inject(Router);
-  private categoriesService = inject(CategoriesService);
 
-  ngOnInit(): void {
-    this.loadCategories();
-  }
+  categories: CategoryItem[] = [];
 
-  private loadCategories(): void {
-    this.isLoading = true;
-    this.productCategories$ = this.categoriesService.getNestedCategories();
+  private sanitizer = inject(DomSanitizer);
 
-    // Subscribe to handle loading state
-    this.productCategories$.subscribe({
-      next: (categories) => {
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading categories:', error);
-        this.isLoading = false;
-      },
-    });
-  }
+  async ngOnInit() {
+    try {
+      const cats = await this.supabase.getCategories();
 
-  trackByCategoryId(index: number, category: ProductCategory): string {
-    return category.id;
-  }
-
-  navigateToProductList(category: ProductCategory): void {
-    // Navigate to product list with category filter
-    // Use slug first, then fallback to name (URL-friendly)
-    const categoryParam =
-      category.slug || category.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-
-    // Build category filter array - include parent and all subcategories
-    let categoryNames: string[] = [category.name];
-
-    // If this category has subcategories, include them all for comprehensive filtering
-    if (category.subcategories && category.subcategories.length > 0) {
-      const subCategoryNames = category.subcategories.map((sub) => sub.name);
-      categoryNames = categoryNames.concat(subCategoryNames);
+      this.categories = (cats ?? []).map((c) => ({
+        id: c.id,
+        name: c.name,
+        slug: c.slug || this.createSlug(c.name),
+        imageUrl: c.image_url || '',
+        icon: this.getIconForCategory(c.name),
+        productCount: 0, // (optional) later you can fetch counts
+      }));
+    } catch (e) {
+      console.error('Failed to load categories:', e);
+      this.categories = [];
     }
+  }
 
+  navigateToProducts(categorySlug: string): void {
     this.router.navigate(['/proizvodi'], {
-      queryParams: {
-        category: categoryParam,
-        categories: categoryNames.join(','), // Pass parent + subcategories
-      },
+      queryParams: { category: categorySlug },
     });
   }
 
-  navigateToContact(): void {
-    this.router.navigate(['/kontakt']);
+  getCategoryIcon(iconType: string): SafeHtml {
+    const icons: { [key: string]: string } = {
+      'solar-panel': `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="2" stroke-width="2"/>
+          <rect x="4" y="4" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="10" y="4" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="16" y="4" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="4" y="10" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="10" y="10" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="16" y="10" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="4" y="16" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="10" y="16" width="4" height="4" rx="0.5" fill="currentColor"/>
+          <rect x="16" y="16" width="4" height="4" rx="0.5" fill="currentColor"/>
+        </svg>
+      `,
+      inverter: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="3" y="5" width="18" height="14" rx="2" stroke-width="2"/>
+          <circle cx="7" cy="9" r="1" fill="currentColor"/>
+          <circle cx="7" cy="15" r="1" fill="currentColor"/>
+          <rect x="11" y="8" width="8" height="2" rx="1" fill="currentColor"/>
+          <rect x="11" y="14" width="6" height="2" rx="1" fill="currentColor"/>
+          <path d="M9 12l2-2v4l-2-2z" stroke-width="2"/>
+        </svg>
+      `,
+      battery: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="3" y="7" width="12" height="10" rx="2" stroke-width="2"/>
+          <path d="M17 9v6" stroke-width="2"/>
+          <path d="M7 10v4" stroke-width="2"/>
+          <path d="M10 10v4" stroke-width="2"/>
+        </svg>
+      `,
+      mounting: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M3 21h18" stroke-width="2"/>
+          <path d="M5 21V7l5-4 5 4v14" stroke-width="2"/>
+          <path d="M9 9h6" stroke-width="2"/>
+          <path d="M9 12h6" stroke-width="2"/>
+          <path d="M9 15h6" stroke-width="2"/>
+        </svg>
+      `,
+      monitoring: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="2" y="3" width="20" height="14" rx="2" stroke-width="2"/>
+          <path d="M8 21h8" stroke-width="2"/>
+          <path d="M12 17v4" stroke-width="2"/>
+          <path d="M7 8l3 3 3-3 3 3" stroke-width="2"/>
+        </svg>
+      `,
+      cables: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M4 6h16" stroke-width="2"/>
+          <path d="M4 10h16" stroke-width="2"/>
+          <path d="M4 14h16" stroke-width="2"/>
+          <path d="M4 18h16" stroke-width="2"/>
+          <circle cx="6" cy="8" r="1" fill="currentColor"/>
+          <circle cx="6" cy="12" r="1" fill="currentColor"/>
+          <circle cx="6" cy="16" r="1" fill="currentColor"/>
+          <circle cx="18" cy="8" r="1" fill="currentColor"/>
+          <circle cx="18" cy="12" r="1" fill="currentColor"/>
+          <circle cx="18" cy="16" r="1" fill="currentColor"/>
+        </svg>
+      `,
+      tools: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-width="2"/>
+        </svg>
+      `,
+      safety: `
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="2"/>
+          <path d="M9 12l2 2 4-4" stroke-width="2"/>
+        </svg>
+      `,
+    };
+
+    const iconSvg = icons[iconType] || icons['solar-panel'];
+    return this.sanitizer.bypassSecurityTrustHtml(iconSvg);
+  }
+
+  private createSlug(name: string): string {
+    return name
+      .toLowerCase()
+      .replace(/[^a-z0-9 -]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  }
+
+  private getIconForCategory(categoryName: string): string {
+    const name = categoryName.toLowerCase();
+    if (name.includes('solar') || name.includes('panel')) return 'solar-panel';
+    if (name.includes('inverter')) return 'inverter';
+    if (name.includes('battery') || name.includes('storage')) return 'battery';
+    if (name.includes('mount') || name.includes('rack')) return 'mounting';
+    if (name.includes('monitor') || name.includes('accessory'))
+      return 'monitoring';
+    if (name.includes('cable') || name.includes('wire')) return 'cables';
+    if (name.includes('tool') || name.includes('equipment')) return 'tools';
+    if (name.includes('safety') || name.includes('protection')) return 'safety';
+    return 'solar-panel';
+  }
+
+  trackByCategoryId(_: number, item: CategoryItem) {
+    return item.id;
+  }
+
+  onCategoryImgError(cat: CategoryItem) {
+    cat.imageUrl = ''; // triggers fallback icon
   }
 }

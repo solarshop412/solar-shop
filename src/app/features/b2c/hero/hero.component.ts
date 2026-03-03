@@ -271,7 +271,7 @@ export class HeroComponent implements OnInit, OnDestroy {
     });
   }
 
-  onExploreOffers(): void {
-    this.router.navigate(['/ponude']);
+  onExploreStores(): void {
+    this.router.navigate(['/kontakt']);
   }
 }

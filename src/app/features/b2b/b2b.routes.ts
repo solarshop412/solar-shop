@@ -10,10 +10,8 @@ export const B2B_ROUTES: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () =>
-          import('./partners/partners.component').then(
-            (m) => m.PartnersComponent,
-          ),
+        redirectTo: 'o-nama',
+        pathMatch: 'full'
       },
       {
         path: 'o-nama',

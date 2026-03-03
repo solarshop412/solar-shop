@@ -16,6 +16,12 @@ import moment from 'moment';
 import { COMPLAINT_STATUS } from '../shared/data/complaint-status.data';
 import { Complaints } from '../shared/models/complaints.model';
 
+export type CategoriesQuery = {
+  isActive?: boolean; // only if column exists
+  limit?: number;
+  offset?: number;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -568,18 +574,28 @@ export class SupabaseService {
     return data;
   }
 
-  async getCategories(activeOnly: boolean = true) {
-    let query = this.supabase.from('categories').select('*');
+  async getCategories(filters?: CategoriesQuery) {
+    let q = this.supabase
+      .from('categories')
+      .select('id, name, slug, description, image_url')
+      .order('name', { ascending: true });
 
-    if (activeOnly) {
-      query = query.eq('is_active', true);
+    // ✅ Only enable this if your DB truly has is_active column.
+    // If it doesn't exist (your screenshot suggests it doesn't), comment this out
+    // or remove isActive from the query type.
+    if (filters?.isActive !== undefined) {
+      q = q.eq('is_active', filters.isActive);
     }
 
-    const { data, error } = await query.order('sort_order', {
-      ascending: true,
-    });
+    if (filters?.offset) {
+      q = q.range(filters.offset, (filters.offset + (filters.limit ?? 100)) - 1);
+    } else if (filters?.limit) {
+      q = q.limit(filters.limit);
+    }
+
+    const { data, error } = await q;
     if (error) throw error;
-    return data;
+    return data ?? [];
   }
 
   async getActiveOffers() {

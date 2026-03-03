@@ -67,7 +67,7 @@ export class BlogFormComponent implements OnInit {
 
   private async loadCategories(): Promise<void> {
     try {
-      this.categories = await this.supabaseService.getCategories(false);
+      this.categories = await this.supabaseService.getCategories();
     } catch (error) {
       console.error('Error loading categories:', error);
     }

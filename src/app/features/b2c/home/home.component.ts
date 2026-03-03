@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeroComponent } from '../hero/hero.component';
 import { ProductsComponent } from '../products/products.component';
 import { SustainabilityComponent } from '../sustainability/sustainability.component';
-import { BlogHomeComponent } from '../blog/blog-home/blog-home.component';
 import { SeoService } from '../../../shared/services/seo.service';
+import { B2cBrandsComponent } from "../brands/b2c-brands.component";
 
 @Component({
   selector: 'app-home',
@@ -14,8 +14,8 @@ import { SeoService } from '../../../shared/services/seo.service';
     HeroComponent,
     SustainabilityComponent,
     ProductsComponent,
-    BlogHomeComponent,
-  ],
+    B2cBrandsComponent
+],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
