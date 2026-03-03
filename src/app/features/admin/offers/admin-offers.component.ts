@@ -125,12 +125,6 @@ export class AdminOffersComponent implements OnInit {
     ],
     actions: [
       {
-        label: this.translationService.translate('common.edit'),
-        icon: 'edit',
-        action: 'edit',
-        class: 'text-blue-600 hover:text-blue-900',
-      },
-      {
         label: this.translationService.translate('common.view'),
         icon: 'eye',
         action: 'details',
@@ -147,8 +141,8 @@ export class AdminOffersComponent implements OnInit {
     sortable: true,
     paginated: true,
     pageSize: 20,
-    allowCsvImport: true,
-    allowExport: true,
+    allowCsvImport: false,
+    allowExport: false,
     rowClickable: true,
   };
 
@@ -178,73 +172,6 @@ export class AdminOffersComponent implements OnInit {
 
   onRowClick(item: any): void {
     this.router.navigate(['/admin/ponude/detalji', item.id]);
-  }
-
-  onAddOffer(): void {
-    this.router.navigate(['/admin/ponude/kreiraj']);
-  }
-
-  async onCsvImported(csvData: any[]): Promise<void> {
-    if (!csvData || csvData.length === 0) {
-      alert(this.translationService.translate('common.noResults'));
-      return;
-    }
-
-    this.loadingSubject.next(true);
-
-    try {
-      // Map CSV data to offer format
-      const offers = csvData.map((row) => ({
-        title: row.title || row.Title || '',
-        description: row.description || row.Description || '',
-        short_description:
-          row.short_description || row['Short Description'] || '',
-        status: (row.status || row['Status'] || 'active') as any,
-        featured:
-          (row.featured || row['Featured'] || 'false').toLowerCase() === 'true',
-        discount_type: (row.discount_type ||
-          row['Discount Type'] ||
-          'percentage') as any,
-        discount_value: parseFloat(
-          row.discount_value || row['Discount Value'] || '0',
-        ),
-        min_order_amount: row.min_order_amount
-          ? parseFloat(row.min_order_amount)
-          : undefined,
-        max_order_amount: row.max_order_amount
-          ? parseFloat(row.max_order_amount)
-          : undefined,
-        start_date: row.start_date || row['Start Date'] || undefined,
-        end_date: row.end_date || row['End Date'] || undefined,
-        image_url: row.image_url || row['Image URL'] || undefined,
-      }));
-
-      // Import offers one by one
-      for (const offer of offers) {
-        // Check if offer already exists based on the title
-        const existingOffer = await this.supabaseService.getTable('offers', {
-          title: offer.title,
-        });
-        if (existingOffer.length > 0) {
-          alert(
-            this.translationService.translate(
-              'admin.offersForm.offerAlreadyExists',
-              { title: offer.title },
-            ),
-          );
-          continue;
-        }
-        await this.supabaseService.createRecord('offers', offer);
-      }
-
-      alert(this.translationService.translate('admin.offersForm.offerCreated'));
-      this.loadOffers();
-    } catch (error) {
-      console.error('Error importing offers:', error);
-      alert(this.translationService.translate('admin.offersForm.offerError'));
-    } finally {
-      this.loadingSubject.next(false);
-    }
   }
 
   private async loadOffers(): Promise<void> {

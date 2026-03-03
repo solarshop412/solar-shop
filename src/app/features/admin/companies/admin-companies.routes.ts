@@ -28,6 +28,6 @@ export const ADMIN_COMPANIES_ROUTES: Routes = [
             import('./admin-company-edit/admin-company-edit.component').then(
             (m) => m.AdminCompanyEditComponent,
             ),
-    },
+    }
 
 ];

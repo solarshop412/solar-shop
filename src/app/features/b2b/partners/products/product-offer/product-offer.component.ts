@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SupabaseService } from '../../../../../services/supabase.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
+import { AuthService } from '../../../../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-product-offer',
@@ -21,19 +22,20 @@ export class ProductOfferComponent implements OnInit {
   productName: string = "";
   productImg: string = "";
   private imageErrors = new Set<string>();
-
+  userId: string = "";
 
   constructor(
     private fb: FormBuilder,
     private supabase: SupabaseService,
     private route: ActivatedRoute,
     private _location: Location,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.contactForm = this.fb.group({
       message: [''],
       product: [''],
-      productId: ['', [Validators.required]]
+      productId: ['']
     });
   }
 
@@ -54,10 +56,39 @@ export class ProductOfferComponent implements OnInit {
 
       this.contactForm.get('product')?.disable();
     });
+
+    this.auth.getCurrentUser().subscribe((data) => {
+      this.userId = data?.id || "";
+    });
   }
 
   onSubmit(): void {
-
+    if (this.contactForm.valid) {
+      this.isSubmitting = true;
+      const value = this.contactForm.value;
+      this.supabase
+        .createRecord('products_inquiry', {
+          product_id: this.productId,
+          user_id: this.userId,
+          message: this.contactForm.get('message')?.value || ""
+        })
+        .then(() => {
+          this.isSubmitting = false;
+          this.messageSent = true;
+          this.contactForm.reset();
+          setTimeout(() => {
+            this.messageSent = false;
+          }, 5000);
+        })
+        .catch((error) => {
+          console.error('Error sending partner contact:', error);
+          this.isSubmitting = false;
+          alert('Error sending message');
+        });
+    } else {
+      // Mark all fields as touched to show validation errors
+      this.contactForm.markAllAsTouched();
+    }
   }
 
   isFieldInvalid(fieldName: string): boolean {

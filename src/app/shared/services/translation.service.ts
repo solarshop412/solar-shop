@@ -448,7 +448,8 @@ export class TranslationService {
             inqueryMessagePlaceholder: 'Ukoliko imate dodatnih upita i / ili informacija, napišite ovdje...',
             sendMessage: 'Pošalji upit',
             sendingMessage: 'Slanje upita...',
-            productIdTitle: 'Šifra proizvoda'
+            productIdTitle: 'Šifra proizvoda',
+            inquerySent: 'Ponuda poslana, javit ćemo Vam se u najkračem mogućem roku'
           }
         },
         orders: {
@@ -845,6 +846,7 @@ export class TranslationService {
         reviews: 'Recenzije',
         companyPricing: 'Cjenik za partnere',
         companies: 'Partneri',
+        product_inquiry: 'Zatražene ponude',
         contacts: 'Reklamacije',
         wishlist: 'Lista želja',
         paymentSettings: 'Postavke plaćanja',
@@ -3645,7 +3647,8 @@ export class TranslationService {
             inqueryMessagePlaceholder: 'If you have additional questions and/or information, write here...',
             sendMessage: 'Send Inquiry',
             sendingMessage: 'Sending Inquiry...',
-            productIdTitle: 'Product ID'
+            productIdTitle: 'Product ID',
+            inquerySent: 'Inquiry sent, our team will get back to you as soon as possible'
           }
         },
         orders: {
@@ -3934,9 +3937,10 @@ export class TranslationService {
         refreshData: 'Refresh Data',
         dashboard: 'Admin panel',
         products: 'Products',
+        product_inquiry: 'Quote Request',
         categories: 'Categories',
         blog: 'News',
-        offers: 'Offers',
+        offers: 'Quote Request',
         users: 'Users',
         orders: 'Orders',
         reviews: 'Reviews',
@@ -4393,14 +4397,14 @@ export class TranslationService {
           no: 'No',
         },
         offersForm: {
-          title: 'Offers',
-          subtitle: 'Manage offers and discounts',
-          editOffer: 'Edit offer',
-          createOffer: 'Add offer',
-          updateOfferInformation: 'Update offer information',
-          createNewOffer: 'Add new offer',
-          offerTitle: 'Offer title',
-          offerTitleRequired: 'Offer title is required',
+          title: 'Quote Request',
+          subtitle: 'Manage Quote Request',
+          editOffer: 'Edit Quote Request',
+          createOffer: 'Add Quote Request',
+          updateOfferInformation: 'Update Quote Request information',
+          createNewOffer: 'Add new Quote Request',
+          offerTitle: 'Quote Request title',
+          offerTitleRequired: 'Quote Request title is required',
           offerName: 'Offer name',
           offerNameRequired: 'Offer name is required',
           offerType: 'Offer type',

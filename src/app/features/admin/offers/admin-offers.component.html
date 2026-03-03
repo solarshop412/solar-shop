@@ -24,9 +24,7 @@
         [config]="tableConfig"
         [loading]="(loading$ | async) || false"
         (actionClicked)="onTableAction($event)"
-        (addClicked)="onAddOffer()"
         (rowClicked)="onRowClick($event)"
-        (csvImported)="onCsvImported($event)"
       >
       </app-data-table>
     </div>
