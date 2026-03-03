@@ -839,6 +839,32 @@ export interface Database {
           updated_at?: string;
         };
       };
+      products_inquiry: {
+        Row: {
+          id: string;
+          product_id: string;
+          user_id: string;
+          message: string;
+          status: string;
+          created_at: string;
+        },
+        Insert: {
+          id?: string;
+          product_id: string;
+          user_id: string;
+          message?: string;
+          status?: string;
+          created_at?: string;
+        },
+        Update: {
+          id?: string;
+          product_id?: string;
+          user_id?: string;
+          message?: string;
+          status?: string;
+          created_at?: string;
+        }
+      }
     };
     Views: {
       [_ in never]: never;

@@ -109,9 +109,6 @@ export class AdminContactsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadContacts();
-
-    // Mark contacts section as viewed to clear notification badge
-    this.notificationsService.markSectionAsViewed('contacts');
   }
 
   onTableAction(event: { action: string; item: any }): void {
