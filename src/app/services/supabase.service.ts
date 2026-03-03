@@ -288,6 +288,21 @@ export class SupabaseService {
     return data as Database['public']['Tables'][T]['Row'];
   }
 
+  async getTableByNameId<T extends keyof Database['public']['Tables']>(
+    tableName: T,
+    key: string,
+    id: string,
+  ): Promise<Database['public']['Tables'][T]['Row'] | null> {
+    const { data, error } = await this.supabase
+      .from(tableName)
+      .select('*')
+      .eq(key, id)
+      .single();
+
+    if (error) throw error;
+    return data as Database['public']['Tables'][T]['Row'];
+  }
+
   async createRecord<T extends keyof Database['public']['Tables']>(
     tableName: T,
     record: Database['public']['Tables'][T]['Insert'],
@@ -1259,5 +1274,30 @@ export class SupabaseService {
       description: row.description,
       status: COMPLAINT_STATUS.find(s => s.id === row.status)
     };
+  }
+
+  async getProductsInquiryWithJoins() {
+    const { data, error } = await this.supabase
+      .from('products_inquiry')
+      .select(`
+        id,
+        message,
+        status,
+        created_at,
+        product:products (
+          id,
+          name,
+          images
+        ),
+        user:profiles (
+          id,
+          full_name,
+          phone
+        )
+      `)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    return data ?? [];
   }
 }

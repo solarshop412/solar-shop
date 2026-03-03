@@ -10,7 +10,8 @@ import {
   DataTableComponent,
   TableConfig,
 } from '../shared/data-table/data-table.component';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { mapInquiriesToOfferRowsVM, OfferRowVM } from './admin-offers.mapper';
 
 @Component({
   selector: 'app-admin-offers',
@@ -28,13 +29,13 @@ export class AdminOffersComponent implements OnInit {
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
   private title = inject(Title);
-  private fb = inject(FormBuilder);
   private translationService = inject(TranslationService);
 
-  private offersSubject = new BehaviorSubject<any[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(true);
 
+  private offersSubject = new BehaviorSubject<OfferRowVM[]>([]);
   offers$ = this.offersSubject.asObservable();
+
   loading$ = this.loadingSubject.asObservable();
 
   tableConfig: TableConfig = {
@@ -59,54 +60,26 @@ export class AdminOffersComponent implements OnInit {
         maxWidth: '300px',
       },
       {
-        key: 'code',
-        label: this.translationService.translate('admin.offersForm.couponCode'),
+        key: 'user',
+        label: this.translationService.translate('admin.offersForm.user'),
         type: 'text',
         sortable: true,
         searchable: true,
-        width: '15%',
-        minWidth: '120px',
-      },
-      {
-        key: 'discount_type',
-        label: this.translationService.translate(
-          'admin.offersForm.discountType',
-        ),
-        type: 'status',
-        sortable: true,
-        searchable: true,
         width: '12%',
-        minWidth: '100px',
+        minWidth: '100px'
       },
       {
-        key: 'discount_value',
-        label: this.translationService.translate(
-          'admin.offersForm.discountValue',
-        ),
-        type: 'number',
+        key: 'created_at',
+        label: this.translationService.translate('admin.offersForm.createdAt'),
+        type: 'text',
         sortable: true,
-        format: (value: any, item: any) => {
-          if (!value) return '';
-          if (item?.discount_type === 'fixed_amount') {
-            return `€${value}`;
-          }
-          return `${value}%`;
+        searchable: false,
+        width: '14%',
+        minWidth: '140px',
+        format: (value) => {
+          if (!value) return '—';
+          return new Date(value).toLocaleString('hr-HR'); // or dynamic locale
         },
-        width: '10%',
-        minWidth: '90px',
-      },
-      {
-        key: 'is_b2b',
-        label: this.translationService.translate('admin.offersForm.b2bOffer'),
-        type: 'boolean',
-        sortable: true,
-        searchable: true,
-        format: (value) =>
-          value
-            ? this.translationService.translate('admin.contactsForm.yes')
-            : this.translationService.translate('admin.contactsForm.no'),
-        width: '10%',
-        minWidth: '80px',
       },
       {
         key: 'status',
@@ -152,6 +125,10 @@ export class AdminOffersComponent implements OnInit {
         ' - Solar Shop Admin',
     );
     this.loadOffers();
+
+    this.offers$.subscribe((offer) => {
+      console.log("offer", offer);
+    });
   }
 
   onTableAction(event: { action: string; item: any }): void {
@@ -177,10 +154,10 @@ export class AdminOffersComponent implements OnInit {
   private async loadOffers(): Promise<void> {
     this.loadingSubject.next(true);
     try {
-      const offers = await this.supabaseService.getTable('offers');
-      this.offersSubject.next(offers || []);
-    } catch (error) {
-      console.error('Error loading offers:', error);
+      const offers = await this.supabaseService.getProductsInquiryWithJoins();
+      this.offersSubject.next(mapInquiriesToOfferRowsVM(offers));
+    } catch (e) {
+      console.error('Error loading offers:', e);
       this.offersSubject.next([]);
     } finally {
       this.loadingSubject.next(false);
@@ -189,7 +166,7 @@ export class AdminOffersComponent implements OnInit {
 
   private async deleteOffer(offer: any): Promise<void> {
     try {
-      await this.supabaseService.deleteRecord('offers', offer.id);
+      await this.supabaseService.deleteRecord('products_inquiry', offer.id);
       this.loadOffers();
     } catch (error) {
       console.error('Error deleting offer:', error);

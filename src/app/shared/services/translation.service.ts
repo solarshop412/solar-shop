@@ -1418,6 +1418,11 @@ export class TranslationService {
             'Popust se primjenjuje samo kada su svi proizvodi u košarici',
           bundleCanBeDisabledForB2C: 'Može se onemogućiti za B2C kupce',
           requiredForB2B: 'Obavezno za B2B',
+          pending: 'Na čekanju',
+          createdAt: 'Datum',
+          user: 'Korisnik',
+          contact: 'Kontakt',
+          message: 'Sadržaj poruke'
         },
         reviewsForm: {
           title: 'Recenzije',
@@ -4510,6 +4515,8 @@ export class TranslationService {
             'Discount applies only when all products are in cart',
           bundleCanBeDisabledForB2C: 'Can be disabled for B2C customers',
           requiredForB2B: 'Required for B2B',
+          pending: 'Pending',
+          createdAt: 'Date requested'
         },
         reviewsForm: {
           title: 'Reviews',

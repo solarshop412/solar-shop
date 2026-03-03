@@ -22,6 +22,8 @@ export class OfferDetailsComponent implements OnInit {
   offerProducts: any[] = [];
   offerCategory: any = null;
   error: string | null = null;
+  user: any = null;
+  product: any = null;
 
   ngOnInit(): void {
     const offerId = this.route.snapshot.paramMap.get('id');
@@ -34,13 +36,19 @@ export class OfferDetailsComponent implements OnInit {
 
   private async loadOfferDetails(offerId: string): Promise<void> {
     try {
-      this.offer = await this.supabaseService.getTableById('offers', offerId);
+      this.offer = await this.supabaseService.getTableById('products_inquiry', offerId);
+      console.log("offer", this.offer);
+
       if (this.offer) {
         this.title.setTitle(
           `${this.offer.title} - Offer Details - Solar Shop Admin`,
         );
-        await this.loadOfferProducts(offerId);
-        await this.loadOfferCategory();
+        
+        this.user = await this.supabaseService.getTableByNameId('profiles', 'user_id', this.offer.user_id);
+        this.product = await this.supabaseService.getTableById('products', this.offer.product_id);
+
+        console.log("user", this.user);
+        console.log("product", this.product);
       } else {
         this.error = 'Offer not found';
       }
