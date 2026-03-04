@@ -27,7 +27,7 @@
           <!-- Image if exists -->
           <img
             *ngIf="category.imageUrl; else mediaFallback"
-            [src]="'./assets/images/categories/' + category.imageUrl"
+            [src]="'/assets/images/categories/' + category.imageUrl"
             [alt]="category.name"
             loading="lazy"
             class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"

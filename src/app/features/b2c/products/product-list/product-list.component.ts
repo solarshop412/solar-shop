@@ -153,6 +153,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   totalPages$: Observable<number>;
   itemsPerPageOptions = [12, 30, 60];
 
+  filtersOpen = window.innerWidth >= 1024;
+
   private searchSubject = new Subject<string>();
 
   constructor(
@@ -237,6 +239,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     // Setup URL state synchronization
     this.setupUrlStateSynchronization();
+  }
+
+  toggleFilters(): void {
+    this.filtersOpen = !this.filtersOpen;
   }
 
   private loadNestedCategories(): void {
