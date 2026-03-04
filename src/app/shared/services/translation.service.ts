@@ -2089,6 +2089,8 @@ export class TranslationService {
         contactExperts: 'Kontaktirajte naše stručnjake',
         noCategories: 'Nema dostupnih kategorija proizvoda',
         noCategoriesText: 'Provjerite kasnije za naše kategorije proizvoda.',
+        browseByCategory: 'Pretraži po kategoriji proizvoda',
+        viewProducts: 'Pogledaj proizvode'
       },
       // Offers
       offers: {

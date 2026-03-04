@@ -7,7 +7,7 @@
 
       <!-- optional: small hint text -->
       <p class="hidden md:block text-sm text-b2b-gray-600">
-        {{ 'b2b.products.browseByCategory' | translate }}
+        {{ 'products.browseByCategory' | translate }}
       </p>
     </div>
 
@@ -27,11 +27,11 @@
           <!-- Image if exists -->
           <img
             *ngIf="category.imageUrl; else mediaFallback"
-            [src]="category.imageUrl"
+            [src]="'./assets/images/categories/' + category.imageUrl"
             [alt]="category.name"
             loading="lazy"
             class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
-            (error)="onCategoryImgError(category)"
+            
           />
 
           <!-- Fallback media (icon) -->
@@ -75,15 +75,9 @@
           <!-- CTA row -->
           <div class="mt-4 flex items-center justify-between">
             <span class="text-sm text-b2b-gray-600">
-              {{ 'b2b.products.viewProducts' | translate }}
+              {{ 'products.viewProducts' | translate }}
             </span>
-
-            <span
-              class="inline-flex items-center gap-2 text-sm font-semibold text-solar-700 group-hover:text-solar-800 transition-colors"
-            >
-              {{ 'common.open' | translate }}
-              <span class="translate-x-0 group-hover:translate-x-0.5 transition-transform">→</span>
-            </span>
+            <span class="translate-x-0 group-hover:translate-x-0.5 transition-transform">→</span>
           </div>
         </div>
       </div>

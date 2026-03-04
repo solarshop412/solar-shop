@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
 
   navigateToProducts(categorySlug: string): void {
     this.router.navigate(['/proizvodi'], {
-      queryParams: { category: categorySlug },
+      queryParams: { categories: categorySlug },
     });
   }
 
