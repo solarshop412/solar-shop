@@ -5,6 +5,8 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SupabaseService } from '../../../services/supabase.service';
 import { CategoryItem } from '../../../shared/models/category-item.model';
+import { CategoriesService } from './services/categories.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -16,6 +18,7 @@ import { CategoryItem } from '../../../shared/models/category-item.model';
 export class ProductsComponent implements OnInit {
   private supabase = inject(SupabaseService);
   private router = inject(Router);
+  private categoriesService = inject(CategoriesService);
 
   categories: CategoryItem[] = [];
 
@@ -40,9 +43,25 @@ export class ProductsComponent implements OnInit {
   }
 
   navigateToProducts(categorySlug: string): void {
-    this.router.navigate(['/proizvodi'], {
-      queryParams: { categories: categorySlug },
-    });
+    this.categoriesService
+      .getCategoryBySlug(categorySlug)
+      .pipe(take(1))
+      .subscribe((cat) => {
+        // fallback: ako ne nađe kategoriju po slugu, barem proslijedi slug
+        if (!cat) {
+          this.router.navigate(['/proizvodi'], {
+            queryParams: { category: categorySlug },
+          });
+          return;
+        }
+
+        this.router.navigate(['/proizvodi'], {
+          queryParams: {
+            category: categorySlug,      // za title/SEO ili breadcrumb ako koristiš
+            categories: cat.name,        // ProductList već očekuje names string (csv)
+          },
+        });
+      });
   }
 
   getCategoryIcon(iconType: string): SafeHtml {
