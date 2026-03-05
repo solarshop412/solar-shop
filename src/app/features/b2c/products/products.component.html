@@ -11,7 +11,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
       <div
         *ngFor="let category of categories; trackBy: trackByCategoryId"
         role="button"
@@ -23,7 +23,7 @@
         class="group cursor-pointer rounded-2xl bg-white border border-b2b-gray-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 overflow-hidden focus:outline-none focus:ring-2 focus:ring-solar-500/40"
       >
         <!-- Media header -->
-        <div class="relative aspect-[16/10] bg-gradient-to-br from-solar-100 to-solar-200 overflow-hidden">
+        <div class="relative aspect-[4/3] sm:aspect-[16/10] bg-gradient-to-br from-solar-100 to-solar-200 overflow-hidden">
           <!-- Image if exists -->
           <img
             *ngIf="category.imageUrl; else mediaFallback"
@@ -59,22 +59,15 @@
         <!-- Content -->
         <div class="p-4">
           <h3
-            class="font-semibold text-b2b-gray-900 group-hover:text-solar-700 transition-colors duration-200 font-['Poppins'] line-clamp-2"
+            class="text-sm sm:text-base font-semibold text-b2b-gray-900 group-hover:text-solar-700 transition-colors duration-200 font-['Poppins'] line-clamp-2"
             [title]="category.name"
           >
             {{ category.name }}
           </h3>
 
-          <!-- optional: description (only if you add it to CategoryItem) -->
-          <!--
-          <p class="text-sm text-b2b-gray-600 mt-1 line-clamp-2">
-            {{ category.description }}
-          </p>
-          -->
-
           <!-- CTA row -->
           <div class="mt-4 flex items-center justify-between">
-            <span class="text-sm text-b2b-gray-600">
+            <span class="text-xs sm:text-sm text-b2b-gray-600">
               {{ 'products.viewProducts' | translate }}
             </span>
             <span class="translate-x-0 group-hover:translate-x-0.5 transition-transform">→</span>
