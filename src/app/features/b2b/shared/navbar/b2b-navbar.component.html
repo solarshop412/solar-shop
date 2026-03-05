@@ -158,9 +158,9 @@
   </div>
 </div>
 
-<nav class="bg-white shadow-lg border-b border-gray-200">
+<nav class="bg-white shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
+    <div class="flex justify-between items-center h-16">
       <!-- Logo and Brand -->
       <div class="flex items-center">
         <a routerLink="/partneri" class="flex items-center space-x-3">
@@ -180,32 +180,44 @@
       <div class="hidden md:flex items-center space-x-8">
         <a
           routerLink="/"
-          routerLinkActive="text-solar-600 border-b-2 border-solar-600"
+          routerLinkActive="text-solar-600 font-semibold"
           [routerLinkActiveOptions]="{ exact: true }"
-          class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
+          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 group"
         >
-          {{ "b2bNav.home" | translate }}
+          <span>{{ "b2bNav.home" | translate }}</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
+          ></div>
         </a>
         <a
           routerLink="/partneri/proizvodi"
-          routerLinkActive="text-solar-600 border-b-2 border-solar-600"
-          class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-solar-600 font-semibold"
+          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 group"
         >
-          {{ "b2bNav.products" | translate }}
+          <span>{{ "b2bNav.products" | translate }}</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
+          ></div>
         </a>
         <a
           routerLink="/partneri/o-nama"
-          routerLinkActive="text-solar-600 border-b-2 border-solar-600"
-          class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-solar-600 font-semibold"
+          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 group"
         >
-          {{ "b2bNav.partners" | translate }}
+          <span>{{ "b2bNav.partners" | translate }}</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
+          ></div>
         </a>
         <a
           routerLink="/partneri/kontakt"
-          routerLinkActive="text-solar-600 border-b-2 border-solar-600"
-          class="text-gray-700 hover:text-solar-600 px-3 py-2 text-sm font-medium transition-colors"
+          routerLinkActive="text-solar-600 font-semibold"
+          class="relative text-gray-900 hover:text-solar-600 font-medium transition-all duration-300 group"
         >
-          {{ "b2bNav.contact" | translate }}
+          <span>{{ "b2bNav.contact" | translate }}</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-solar-500 transition-all duration-300 group-hover:w-full"
+          ></div>
         </a>
       </div>
 
