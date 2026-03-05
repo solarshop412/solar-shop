@@ -13,18 +13,39 @@ export class B2cBrandsComponent {
   brands = [
     {
       name: 'FRONIUS',
-      descriptionKey: 'b2b.products.premiumInverterSolutions',
-      image: 'assets/images/fronius.jpeg',
+      image: 'fronius-logo.webp',
     },
     {
-      name: 'GOODWE',
-      descriptionKey: 'b2b.products.reliableSolarTechnology',
-      image: 'assets/images/goodwe.jpeg',
+      name: 'FUJI SOLAR',
+      image: 'fuji.webp',
     },
     {
-      name: 'HUAWEI',
-      descriptionKey: 'b2b.products.smartEnergySolutions',
-      image: 'assets/images/huawei.jpeg',
+      name: 'GROWATT',
+      image: 'growatt-logo.png',
     },
+    {
+      name: 'LONGI SOLAR',
+      image: 'longi.webp'
+    },
+    {
+      name: 'RISEN',
+      image: 'risen.webp'
+    },
+    {
+      name: 'SMA',
+      image: 'sma-logo.webp'
+    },
+    {
+      name: 'SOLIS',
+      image: 'solis-logo.png'
+    },
+    {
+      name: 'Tongwei',
+      image: 'tongwei.webp'
+    }, 
+    {
+      name: 'Trina Solar',
+      image: 'trina-solar-logo.webp'
+    }
   ];
 }

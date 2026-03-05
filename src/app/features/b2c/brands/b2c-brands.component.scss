@@ -1,0 +1,60 @@
+.brand-slider{
+    --gap: 42px;
+    --speed: 26s;            /* lower = faster */
+    --logo-h: 34px;
+
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 22px;
+  }
+
+  .brand-track{
+    display: flex;
+    width: max-content;
+    gap: var(--gap);
+    will-change: transform;
+    animation: brand-scroll var(--speed) linear infinite;
+  }
+
+  .brand-set{
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+  }
+
+  .brand-slider img{
+    height: var(--logo-h);
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+    filter: grayscale(0);
+    opacity: .95;
+    transition: opacity .2s ease;
+  }
+
+  .brand-slider img:hover{
+    opacity: 1;
+  }
+
+  /* Pause on hover (nice for UX) */
+  .brand-slider:hover .brand-track{
+    animation-play-state: paused;
+  }
+
+  /* Seamless loop: move exactly one set width to the left */
+  @keyframes brand-scroll{
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Accessibility: respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    .brand-track{ animation: none; }
+  }
+
+  /* Optional: tune for small screens */
+  @media (max-width: 600px){
+    .brand-slider{ --gap: 26px; --logo-h: 28px; --speed: 22s; padding: 14px 16px; }
+  }
