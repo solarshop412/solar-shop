@@ -13,6 +13,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.000339126187583,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/Huco28ifaAuj22g9A',
+    image: 'solarshop-buzin.webp'
   },
   {
     id: 'cakovec',
@@ -26,6 +27,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.397300257022263,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/N8uEyHMqE3gNFsKSA',
+    image: 'solarshop-cakovec.webp'
   },
   {
     id: 'zadar',
@@ -40,6 +42,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 15.24548113988031,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/wQaupusqXwsSKhVBA',
+    image: 'solarshop-zadar.webp'
   },
   {
     id: 'zadar2',
@@ -53,6 +56,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 15.25450900000269,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/QBKF7uXgAEUWFnXt5',
+    image: 'solarshop-zadar2.webp'
   },
   {
     id: 'rijeka',
@@ -67,6 +71,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 14.5043404720233,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/xEJ9p6hbXB82phi69',
+    image: 'solarshop-rijeka.webp'
   },
   {
     id: 'split',
@@ -81,6 +86,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.48438132827455,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/r4H2Y8quxo1nUSyQ6',
+    image: 'solarshop-split.webp'
   },
   {
     id: 'vinkovci',
@@ -95,6 +101,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 18.82279535465716,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/H7ocwJXgy6uxHiKC7',
+    image: 'solarshop-vinkovci.webp'
   },
   {
     id: 'jastrebarsko',
@@ -108,7 +115,8 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     latitude: 45.669638140997606,
     longitude: 15.648653262481549,
     isFranchise: false,
-    mapRedirect: 'https://maps.app.goo.gl/Tgx3ZLpXYBnUFzR8A',
+    mapRedirect: 'https://maps.app.goo.gl/167fZ1TRfoYDZEf56',
+    image: 'solarshop-jastrebarsko.webp'
   },
   {
     id: 'pozega',
@@ -122,6 +130,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 17.674627135021957,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/4Fh1BEAa7k8KE7cv7',
+    image: 'solarshop-pozega.webp'
   },
   {
     id: 'vukovarska',
@@ -136,6 +145,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 15.992057426017094,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/jDBNyVGAh2FbyZRQ8',
+    image: 'solarshop-zagreb-vukovarska.webp'
   },
   {
     id: 'zagreb-centar',
@@ -150,6 +160,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 15.983652099913593,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/DkRVn3PUgmzHAeeQA',
+    image: 'solarshop-zagreb-sredisce.webp'
   },
   {
     id: 'sesvete',
@@ -164,6 +175,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.138620475752692,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/B4wmGHeDUeb95JGy8',
+    image: 'solarshop-sesvete.webp'
   },
   {
     id: 'velika-gorica',
@@ -177,6 +189,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.063331326462137,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/EZGbr5HXdVCQ2cAv6',
+    image: 'solarshop-velika-gorica.webp'
   },
   {
     id: 'dubrovnik',
@@ -190,6 +203,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 18.07568950011369,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/X7XZ1LY9DmBv4xD5A',
+    image: 'solarshop-dubrovnik.webp'
   },
   {
     id: 'sibenik',
@@ -204,6 +218,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 15.883857029305762,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/xutEaXV2f6z8dkmZ6',
+    image: 'solarshop-sibenik.webp'
   },
   {
     id: 'pula',
@@ -218,6 +233,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 13.871455050682288,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/vfZuS1Xq5jvWDBBQ6',
+    image: 'solarshop-pula.webp'
   },
   {
     id: 'osijek',
@@ -231,6 +247,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 18.642983994078506,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/A2z6TweQb8fgN8R6A',
+    image: 'solarshop-osijek.webp'
   },
   {
     id: 'varazdin',
@@ -245,6 +262,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.335185274408307,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/22WGXd4mDmCnNouq7',
+    image: 'solarshop-varazdin.webp'
   },
   {
     id: 'posusje',
@@ -258,6 +276,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 17.290031815860104,
     isFranchise: false,
     mapRedirect: 'https://maps.app.goo.gl/8TNkP7b7C6xeiXF86',
+    image: 'solarshop-posusje.webp'
   },
   {
     id: 'vela-luka',
@@ -271,6 +290,7 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 16.7174783829205,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/2DQD92drTRJeeNbN6',
+    image: 'solarshop-vela-luka.webp'
   },
   {
     id: 'ljubljana',
@@ -284,5 +304,6 @@ export const SHOP_LOCATIONS: ShopLocation[] = [
     longitude: 14.539274873819013,
     isFranchise: true,
     mapRedirect: 'https://maps.app.goo.gl/twKGofQaXePzPkbJ7',
+    image: 'solarshop-ljubljana.webp'
   },
 ];

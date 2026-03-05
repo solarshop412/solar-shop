@@ -68,17 +68,14 @@
           *ngFor="let location of locations"
           class="bg-gray-50 rounded-3xl shadow-sm overflow-hidden flex flex-col"
         >
-          <div class="relative h-64 bg-gray-100">
-            <iframe
-              [src]="getMapEmbedUrl(location)"
-              class="w-full h-full"
+          <div class="relative h-64 sm:h-72 lg:h-80 bg-gray-100 overflow-hidden group">
+            <img
+              [src]="'/assets/images/stores/' + location.image"
+              [alt]="location.name"
+              [title]="location.name"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              style="border: 0"
-              [title]="location.name + ' - Map'"
-              allowfullscreen
-            >
-            </iframe>
+            />
           </div>
 
           <div class="p-5 space-y-3 flex-1 flex flex-col justify-between">

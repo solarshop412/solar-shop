@@ -11,4 +11,5 @@ export interface ShopLocation {
   longitude: number;
   isFranchise: boolean;
   mapRedirect: string;
+  image: string;
 }
