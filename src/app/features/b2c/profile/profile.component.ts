@@ -107,9 +107,7 @@ export class ProfileComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: [''],
-      dateOfBirth: [''],
-      gender: [''],
+      phone: ['']
     });
 
     this.passwordForm = this.fb.group(
@@ -180,9 +178,7 @@ export class ProfileComponent implements OnInit {
           firstName: user.firstName || '',
           lastName: user.lastName || '',
           email: user.email || '',
-          phone: user.phone || '',
-          dateOfBirth: user.dateOfBirth || '',
-          gender: user.gender || '',
+          phone: user.phone || ''
         });
       }
     });

@@ -88,35 +88,6 @@
                     </div>
                 </div>
 
-                <!-- Broj računa + Datum računa -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                    <label for="invoiceNumber" class="block text-sm font-medium text-gray-900 mb-2 font-['DM_Sans'] uppercase tracking-wide">
-                        {{ 'complaints.invoiceNumber' | translate }}<span class="text-red-600">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="invoiceNumber"
-                        formControlName="invoiceNumber"
-                        [placeholder]="'complaints.invoiceNumber' | translate"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-solar-500 focus:border-solar-500 transition-colors font-['DM_Sans']"
-                    />
-                    </div>
-
-                    <div>
-                    <label for="invoiceDate" class="block text-sm font-medium text-gray-900 mb-2 font-['DM_Sans'] uppercase tracking-wide">
-                        {{ 'complaints.invoiceDate' | translate }}<span class="text-red-600">*</span>
-                    </label>
-                    <input
-                        type="date"
-                        id="invoiceDate"
-                        formControlName="invoiceDate"
-                        class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-md focus:ring-2 focus:ring-solar-500 focus:border-solar-500 transition-colors font-['DM_Sans']"
-                    />
-                    <!-- If you want placeholder like "dd.mm.gggg", you'd use text + pattern, but date input is best UX -->
-                    </div>
-                </div>
-
                 <!-- Naziv artikla ili usluge -->
                 <div>
                     <label for="itemOrService" class="block text-sm font-medium text-gray-900 mb-2 font-['DM_Sans'] uppercase tracking-wide">

@@ -352,46 +352,6 @@
               </div>
             </div>
 
-            <!-- Date of Birth and Gender -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  class="block text-sm font-medium text-gray-900 mb-2 font-['DM_Sans']"
-                  >{{ "profile.dateOfBirth" | translate }}</label
-                >
-                <input
-                  formControlName="dateOfBirth"
-                  type="date"
-                  class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-sm font-medium text-gray-900 mb-2 font-['DM_Sans']"
-                  >{{ "profile.gender" | translate }}</label
-                >
-                <select
-                  formControlName="gender"
-                  class="w-full h-12 px-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-solar-600 focus:border-transparent transition-all duration-200 font-['DM_Sans']"
-                >
-                  <option value="">
-                    {{ "profile.selectGender" | translate }}
-                  </option>
-                  <option value="male">{{ "profile.male" | translate }}</option>
-                  <option value="female">
-                    {{ "profile.female" | translate }}
-                  </option>
-                  <option value="other">
-                    {{ "profile.other" | translate }}
-                  </option>
-                  <option value="prefer_not_to_say">
-                    {{ "profile.preferNotToSay" | translate }}
-                  </option>
-                </select>
-              </div>
-            </div>
-
             <!-- Save Button -->
             <div class="flex justify-end pt-6 border-t border-gray-200">
               <button

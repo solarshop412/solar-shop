@@ -42,8 +42,6 @@ export class ComplaintsComponent {
       address: [''],
       email: ['', [Validators.required, Validators.email]],
       phone: [''],
-      invoiceNumber: ['', [Validators.required]],
-      invoiceDate: ['', [Validators.required]],
       itemOrService: [''],
       description: ['', [Validators.required, Validators.minLength(10)]],
       // attachments are handled via selectedFiles (not inside FormGroup)
