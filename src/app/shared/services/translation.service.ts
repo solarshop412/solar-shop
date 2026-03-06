@@ -2075,6 +2075,10 @@ export class TranslationService {
         noOffersAvailable: 'Trenutno nema dostupnih ponuda',
         primeDeal: 'Hit Ponuda',
         off: 'SNIŽENJE',
+        sub: {
+          title: 'SolarShop u medijima',
+          subtitle: 'Pogledajte kako mediji i stručnjaci govore o SolarShopu i našem doprinosu razvoju solarne energije.'
+        }
       },
       // Products
       products: {
@@ -5146,6 +5150,10 @@ export class TranslationService {
         noOffersAvailable: 'No offers available at the moment',
         primeDeal: 'Prime Deal',
         off: 'OFF',
+        sub: {
+          title: 'SolarShop in the Media',
+          subtitle: 'See how media and industry experts talk about SolarShop and our contribution to the growth of solar energy.'
+        }
       },
       // Products
       products: {

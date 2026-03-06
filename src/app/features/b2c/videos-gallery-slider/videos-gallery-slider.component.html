@@ -1,0 +1,104 @@
+<!-- Hero Section -->
+<section
+  class="relative min-h-screen lg:min-h-[60vh] xl:min-h-[65vh] overflow-hidden -mt-4"
+>
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-solar-400 to-solar-900">
+    <img
+      src="/assets/images/sub-cover-image.webp"
+      alt="Sustainable Building Materials"
+      class="w-full h-full object-cover opacity-20"
+    />
+  </div>
+
+  <!-- Content -->
+  <div
+    class="relative z-10 flex flex-col min-h-screen lg:min-h-[60vh] xl:min-h-[65vh] justify-center items-center px-4 sm:px-6 lg:px-8 pt-12 lg:pt-20 pb-28 lg:pb-36 text-center"
+  >
+
+    <!-- Title -->
+    <div class="max-w-3xl mb-10">
+
+      <h1
+        class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white font-['Poppins'] leading-tight drop-shadow-lg"
+      >
+        {{ "hero.sub.title" | translate }}
+      </h1>
+
+      <p
+        class="mt-4 text-lg sm:text-xl text-white/90 font-['DM_Sans'] drop-shadow-md"
+      >
+        {{ "hero.sub.subtitle" | translate }}
+      </p>
+
+    </div>
+
+    <!-- Video Slider -->
+    <div class="w-full max-w-4xl mx-auto relative">
+
+      <!-- Shadow glow -->
+      <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[85%] h-20 bg-black/40 blur-3xl rounded-full"></div>
+
+      <!-- Slides -->
+      <div class="relative overflow-hidden rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.6)]">
+
+        <div
+          class="flex transition-transform duration-500 ease-in-out"
+          [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+        >
+
+          <!-- Video 1 -->
+          <div class="min-w-full aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/aPM2dyDOgxw"
+              title="Solar Video 1"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="min-w-full aspect-video">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/Fn2J8MmoAfs"
+              title="Solar Video 2"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <button
+        (click)="prevSlide()"
+        class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur"
+      >
+        ‹
+      </button>
+
+      <button
+        (click)="nextSlide()"
+        class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg backdrop-blur"
+      >
+        ›
+      </button>
+
+      <!-- Dots -->
+      <div class="flex justify-center mt-6 gap-2">
+        <button
+          *ngFor="let slide of [0,1]; let i = index"
+          (click)="goToSlide(i)"
+          class="w-3 h-3 rounded-full transition-all"
+          [ngClass]="i === currentSlide ? 'bg-white scale-110' : 'bg-white/40'"
+        ></button>
+      </div>
+
+    </div>
+  </div>
+</section>

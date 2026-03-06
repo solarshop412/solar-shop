@@ -5,6 +5,7 @@ import { ProductsComponent } from '../products/products.component';
 import { SustainabilityComponent } from '../sustainability/sustainability.component';
 import { SeoService } from '../../../shared/services/seo.service';
 import { B2cBrandsComponent } from "../brands/b2c-brands.component";
+import { VideosGallerySliderComponent } from "../videos-gallery-slider/videos-gallery-slider.component";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ import { B2cBrandsComponent } from "../brands/b2c-brands.component";
     HeroComponent,
     SustainabilityComponent,
     ProductsComponent,
-    B2cBrandsComponent
+    B2cBrandsComponent,
+    VideosGallerySliderComponent
 ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],

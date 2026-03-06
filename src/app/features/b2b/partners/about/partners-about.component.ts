@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
+import { VideosGallerySliderComponent } from "../../../b2c/videos-gallery-slider/videos-gallery-slider.component";
 
 @Component({
   selector: 'app-partners-about',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslatePipe],
+  imports: [CommonModule, RouterModule, TranslatePipe, VideosGallerySliderComponent],
   templateUrl: './partners-about.component.html',
   styleUrls: ['./partners-about.component.scss'],
 })
